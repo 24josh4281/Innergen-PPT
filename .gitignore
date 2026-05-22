@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.vite/
+*.log
+*.tmp
+*.pptx
+docs/generated/
+docs/backups/
+.env
+.env.*
+!.env.example

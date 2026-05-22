@@ -1,0 +1,23 @@
+{
+  "name": "innergen-ppt",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "qa:pptx-render": "powershell -ExecutionPolicy Bypass -File scripts/render-pptx-qa.ps1",
+    "samples:layout": "powershell -ExecutionPolicy Bypass -File scripts/build-layout-sample-deck.ps1"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1",
+    "pdfjs-dist": "^5.7.284",
+    "pptxgenjs": "^4.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^6.4.2"
+  }
+}
