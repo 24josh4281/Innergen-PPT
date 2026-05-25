@@ -31,6 +31,7 @@ The workflow is designed for non-developers:
 git clone https://github.com/24josh4281/Innergen-PPT.git
 cd Innergen-PPT
 npm install
+npm run verify:setup
 npm run dev
 ```
 
@@ -53,6 +54,16 @@ npm run build
 ```
 
 This checks TypeScript and creates the production bundle in `dist/`.
+
+## Reproducible Setup Check
+
+For new users, run this once after `npm install`:
+
+```powershell
+npm run verify:setup
+```
+
+This verifies Node/npm availability, required onboarding documents, `.gitignore` safety rules, and a production build. It is the fastest way to check whether another user's Codex workspace is ready to reproduce the same PPT automation workflow.
 
 ## Recommended User Flow
 

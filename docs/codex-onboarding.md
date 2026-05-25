@@ -33,7 +33,10 @@ AGENTS.md와 README.md를 먼저 읽고, 이 repo의 PPT 자동화 워크플로�
 
 ```powershell
 npm install
+npm run verify:setup
 ```
+
+`verify:setup`은 Node/npm, 필수 문서, ignore 규칙, build 가능 여부를 한 번에 확인합니다.
 
 ## 4. 실행
 
@@ -85,6 +88,7 @@ PPTX 생성 전후로 ChatGPT에서 더 정교하게 다듬고 싶으면:
 일반 검증:
 
 ```powershell
+npm run verify:setup
 npm run build
 ```
 

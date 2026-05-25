@@ -93,6 +93,7 @@ Use these commands for routine checks:
 
 ```powershell
 npm install
+npm run verify:setup
 npm run build
 npm run dev
 ```
