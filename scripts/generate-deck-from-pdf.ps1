@@ -95,10 +95,10 @@ for (let pageNo = 1; pageNo <= maxPages; pageNo += 1) {
     .map((item) => `- ${item}`);
 
   pageBlocks.push([`Slide ${pageNo}: ${title}`, ...bullets].join("\n"));
-  extractedPages.push({ pageNo, title, textLength: [...text].length, bulletCount: bullets.length });
+  extractedPages.push({ pageNo, title, text, textLength: [...text].length, bulletCount: bullets.length });
 }
 
-const input = pageBlocks.join("\n\n---\n");
+const input = buildConsultingDeckInput(extractedPages) || pageBlocks.join("\n\n---\n");
 const now = new Date();
 const dateLabel = `${now.getFullYear()}. ${String(now.getMonth() + 1).padStart(2, "0")}. ${String(now.getDate()).padStart(2, "0")}`;
 const meta = { clientName, projectTitle, documentType, dateLabel, purpose, audience, tone };
@@ -176,6 +176,172 @@ function compactTexts(values, dedupe = true) {
 
 function safeFileName(name) {
   return name.replace(/[\\/:*?"<>|]/g, "_").replace(/\s+/g, "_").slice(0, 130);
+}
+
+function buildConsultingDeckInput(pages) {
+  if (!pages.length) return "";
+  const topics = [
+    {
+      title: "Kickoff Key Messages",
+      archetype: "consulting-executive-summary",
+      queries: ["2026.02", "2026.12.15", "Risk", "Scope"],
+      fallback: [8, 14, 16, 18]
+    },
+    {
+      title: "Consultant Capability",
+      archetype: "why-what-how-logic",
+      queries: ["Scope 1", "Scope 2", "Scope 3", "LCA", "CDP", "SBTi"],
+      fallback: [4, 5, 6, 13]
+    },
+    {
+      title: "Scope and Deliverables",
+      archetype: "proposal-scope-integrated",
+      queries: ["2026.02", "2026.12.15", "NGMS", "ORS", "ETRS"],
+      fallback: [8, 16, 18, 21]
+    },
+    {
+      title: "Regulatory Context",
+      archetype: "regulatory-timeline-radar",
+      queries: ["125,000", "50,000", "25,000", "15,000", "2015", "2010"],
+      fallback: [9, 10, 19]
+    },
+    {
+      title: "Statement Preparation Method",
+      archetype: "method-chevron",
+      queries: ["2025", "3.31", "Scope 1", "Scope 2"],
+      fallback: [16]
+    },
+    {
+      title: "Facility Change and Boundary Flow",
+      archetype: "inventory-boundary-flow",
+      queries: ["15%", "Boundary", "Baseline"],
+      fallback: [17, 18]
+    },
+    {
+      title: "Allocation Change Criteria",
+      archetype: "comparison-matrix",
+      queries: ["15%", "2025", "KAU25"],
+      fallback: [19, 20]
+    },
+    {
+      title: "Allowance Market Risk",
+      archetype: "impact-factoid-big-number",
+      queries: ["KAU25", "2025", "2026"],
+      fallback: [20]
+    },
+    {
+      title: "NGMS ORS ETRS System Response",
+      archetype: "disclosure-taxonomy-map",
+      queries: ["NGMS", "ORS", "ETRS"],
+      fallback: [21]
+    },
+    {
+      title: "Data Request and Evidence Control",
+      archetype: "data-request-tracker",
+      queries: ["NGMS", "ORS", "ETRS", "2025"],
+      fallback: [16, 17, 18, 21]
+    },
+    {
+      title: "Assurance Readiness",
+      archetype: "assurance-evidence-pack",
+      queries: ["3.31", "10.31", "2026"],
+      fallback: [8, 16, 18]
+    },
+    {
+      title: "Workplan Milestones",
+      archetype: "report-production-workflow",
+      queries: ["2026.02", "2026.12.15", "3.31", "10.31"],
+      fallback: [8, 16, 18]
+    },
+    {
+      title: "Governance and Communication",
+      archetype: "communication-management",
+      queries: ["NGMS", "ORS", "ETRS", "Scope"],
+      fallback: [8, 21]
+    },
+    {
+      title: "Immediate Next Actions",
+      archetype: "evidence-to-action-strip",
+      queries: ["Risk", "15%", "2025", "2026"],
+      fallback: [10, 14, 16, 19]
+    }
+  ];
+
+  const slides = topics
+    .map((topic, index) => makeTopicSlide(topic, pages, index + 1))
+    .filter(Boolean);
+  return slides.join("\n\n---\n");
+}
+
+function makeTopicSlide(topic, pages, index) {
+  const matched = findTopicPages(topic, pages);
+  const sourceText = matched.map((page) => page.text).join(" ");
+  const bullets = extractTopicBullets(sourceText, topic.queries, 4);
+  if (!bullets.length) return "";
+
+  const sourcePages = matched.map((page) => page.pageNo).join(", ");
+  return [
+    `Slide ${index} [archetype:${topic.archetype}]: ${topic.title}`,
+    ...bullets.map((bullet) => `- ${bullet}`),
+    `- Source pages: ${sourcePages}`
+  ].join("\n");
+}
+
+function findTopicPages(topic, pages) {
+  const scored = pages
+    .map((page) => ({
+      page,
+      score: topic.queries.reduce((sum, query) => sum + (page.text.includes(query) || page.title.includes(query) ? query.length : 0), 0)
+    }))
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .map((item) => item.page);
+
+  if (scored.length) return scored.slice(0, 3);
+  return topic.fallback
+    .map((pageNo) => pages.find((page) => page.pageNo === pageNo))
+    .filter(Boolean)
+    .slice(0, 3);
+}
+
+function extractTopicBullets(text, queries, maxItems) {
+  const cleaned = text.replace(/\s+/g, " ").trim();
+  const candidates = [];
+
+  for (const query of queries) {
+    const idx = cleaned.indexOf(query);
+    if (idx < 0) continue;
+    const start = Math.max(0, idx - 35);
+    const end = Math.min(cleaned.length, idx + 155);
+    candidates.push(compactBullet(cleaned.slice(start, end)));
+  }
+
+  for (const sentence of sentenceChunks(cleaned)) {
+    if (queries.some((query) => sentence.includes(query))) candidates.push(compactBullet(sentence));
+  }
+
+  const seen = new Set();
+  return candidates
+    .map((item) => item.replace(/^Source pages?:.*$/i, "").trim())
+    .filter((item) => item.length >= 12)
+    .filter((item) => {
+      const key = item.slice(0, 32);
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, maxItems);
+}
+
+function compactBullet(text) {
+  const value = text
+    .replace(/\s+/g, " ")
+    .replace(/^[,.;:)\]]+/, "")
+    .trim();
+  if (value.length <= 60) return value;
+  const sliced = value.slice(0, 59);
+  const cut = Math.max(sliced.lastIndexOf(" "), sliced.lastIndexOf(","), sliced.lastIndexOf("/"));
+  return `${sliced.slice(0, cut > 34 ? cut : 59).trim()}...`;
 }
 
 function sanitizePdfText(text, pageNo) {
