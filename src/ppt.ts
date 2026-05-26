@@ -430,7 +430,7 @@ function addHeader(slide: Slide, pptx: pptxgen, title: string) {
   rect(slide, 0, 0, W, 0.72, INNGEN_COLORS.navy, INNGEN_COLORS.navy);
   for (let x = 0.2; x < W; x += 0.3) line(slide, x, 0, 0, "1A3A5B", 0.35, 60, 0.72);
   for (let y = 0.14; y < 0.72; y += 0.18) line(slide, 0, y, W, "1A3A5B", 0.35, 60);
-  addText(slide, singleLine(title, 54), 0.55, 0.17, 12.2, 0.32, { size: 21, bold: true, color: INNGEN_COLORS.white });
+  addText(slide, singleLine(title, 38), 0.55, 0.18, 12.2, 0.28, { size: 19.2, bold: true, color: INNGEN_COLORS.white });
 }
 
 function addGoverningMessage(slide: Slide, item: PlannedSlide) {

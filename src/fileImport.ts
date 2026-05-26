@@ -89,7 +89,7 @@ async function extractPdf(file: File): Promise<FileImportResult & { fileName: st
   for (let pageNo = 1; pageNo <= maxPages; pageNo += 1) {
     const page = await doc.getPage(pageNo);
     const content = await page.getTextContent();
-    const text = compactTexts((content.items as TextContentItem[]).map((item) => item.str ?? "")).join(" ");
+    const text = compactTexts((content.items as TextContentItem[]).map((item) => item.str ?? ""), false).join(" ");
     if (!text) continue;
     const title = firstSentence(text, `원문 ${pageNo}페이지`);
     const bullets = sentenceChunks(text)
@@ -107,12 +107,13 @@ function extractXmlText(xml: string, pattern: RegExp) {
   return [...xml.matchAll(pattern)].map((match) => decodeXml(match[1] ?? ""));
 }
 
-function compactTexts(values: string[]) {
+function compactTexts(values: string[], dedupe = true) {
   const seen = new Set<string>();
   return values
     .map((value) => value.replace(/\s+/g, " ").trim())
     .filter((value) => value.length > 1)
     .filter((value) => {
+      if (!dedupe) return true;
       if (seen.has(value)) return false;
       seen.add(value);
       return true;

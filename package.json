@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "verify:setup": "powershell -ExecutionPolicy Bypass -File scripts/verify-reproducible-setup.ps1",
     "qa:pptx-render": "powershell -ExecutionPolicy Bypass -File scripts/render-pptx-qa.ps1",
-    "samples:layout": "powershell -ExecutionPolicy Bypass -File scripts/build-layout-sample-deck.ps1"
+    "samples:layout": "powershell -ExecutionPolicy Bypass -File scripts/build-layout-sample-deck.ps1",
+    "generate:pdf": "powershell -ExecutionPolicy Bypass -File scripts/generate-deck-from-pdf.ps1"
   },
   "dependencies": {
     "jszip": "^3.10.1",
