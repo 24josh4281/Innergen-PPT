@@ -55,6 +55,8 @@ export interface DeckMeta {
   projectTitle: string;
   documentType: string;
   dateLabel: string;
+  businessType?: string;
+  meetingType?: string;
   purpose?: string;
   audience?: string;
   tone?: string;

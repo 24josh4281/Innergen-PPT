@@ -7,7 +7,7 @@ import { buildPptxWithIterativeQa, type IterativePptxQaResult } from "./iterativ
 import { oneShotBriefTemplate, oneShotQaRules, oneShotStructureRules } from "./oneShotQuality";
 import { qualityImprovementCycles } from "./qualityPolicy";
 import { analyzeDeckQuality, type DeckQaReport, type QaStatus } from "./qa";
-import { getTemplateProfile } from "./templates";
+import { businessTypeOptions, getBusinessMeetingProfile, getTemplateProfile, meetingTypeOptions } from "./templates";
 import { getUseCase, productUseCases } from "./useCases";
 import { buildGptPptPrompt, buildGptPromptSummary, promptModes, type PromptMode } from "./promptGenerator";
 import type { ArchetypeId, ArchetypeRule, DeckMeta, PlannedSlide } from "./types";
@@ -85,6 +85,20 @@ app.innerHTML = `
           <label>
             날짜
             <input id="dateLabel" value="${formatLocalDate()}" />
+          </label>
+        </div>
+        <div class="two">
+          <label>
+            사업 유형
+            <select id="businessType">
+              ${businessTypeOptions.map((item) => `<option>${item.label}</option>`).join("")}
+            </select>
+          </label>
+          <label>
+            회의 유형
+            <select id="meetingType">
+              ${meetingTypeOptions.map((item) => `<option>${item.label}</option>`).join("")}
+            </select>
           </label>
         </div>
         <div class="three">
@@ -245,6 +259,8 @@ sampleBtn.addEventListener("click", () => {
   slideInput.value = getSampleInput();
   valueInto("projectTitle", "SBTi 검증, CDP 평가 및 기후리스크 통합 자문");
   selectValue("documentType", "컨설팅 제안서");
+  selectValue("businessType", "CDP·기후공시사업");
+  selectValue("meetingType", "착수회의");
   selectValue("purpose", "제안·입찰 대응");
   runAnalyze();
 });
@@ -259,6 +275,8 @@ allSampleBtn.addEventListener("click", () => {
   slideInput.value = getAllStructureSampleInput();
   valueInto("projectTitle", "이너젠 컨설팅 장표 구조 샘플북");
   selectValue("documentType", "컨설팅 제안서");
+  selectValue("businessType", "CDP·기후공시사업");
+  selectValue("meetingType", "검토 회의");
   selectValue("purpose", "의사결정 보고");
   runAnalyze();
 });
@@ -267,6 +285,8 @@ layoutSampleBtn.addEventListener("click", () => {
   slideInput.value = getLayoutFamilySampleInput();
   valueInto("projectTitle", "이너젠 레이아웃 렌더링 샘플북");
   selectValue("documentType", "컨설팅 제안서");
+  selectValue("businessType", "감축사업");
+  selectValue("meetingType", "최종보고");
   selectValue("purpose", "의사결정 보고");
   runAnalyze();
 });
@@ -317,7 +337,7 @@ result.addEventListener("input", (event) => {
   if (target.closest(".slide-card")) setStoryboardApproved(false);
 });
 
-for (const id of ["documentType", "purpose", "audience", "tone"]) {
+for (const id of ["documentType", "businessType", "meetingType", "purpose", "audience", "tone"]) {
   document.querySelector<HTMLSelectElement>(`#${id}`)?.addEventListener("change", () => {
     updateTemplateInfo();
     setStoryboardApproved(false);
@@ -385,6 +405,8 @@ function readMeta(): DeckMeta {
     projectTitle: valueOf("projectTitle"),
     documentType: valueOf("documentType"),
     dateLabel: valueOf("dateLabel"),
+    businessType: valueOf("businessType"),
+    meetingType: valueOf("meetingType"),
     purpose: valueOf("purpose"),
     audience: valueOf("audience"),
     tone: valueOf("tone")
@@ -417,11 +439,16 @@ function updateExportState() {
 }
 
 function updateTemplateInfo() {
-  const profile = getTemplateProfile(readMeta());
+  const meta = readMeta();
+  const matrixProfile = getBusinessMeetingProfile(meta);
+  const profile = getTemplateProfile(meta);
+  const activeLabel = matrixProfile?.label ?? profile.label;
+  const activeDescription = matrixProfile?.description ?? profile.description;
+  const activeSequence = matrixProfile?.sequence ?? profile.sequence;
   templateInfo.innerHTML = `
-    <strong>${escapeHtml(profile.label)} 템플릿 적용</strong>
-    <span>${escapeHtml(profile.description)}</span>
-    <em>${escapeHtml(profile.sequence.slice(0, 5).map((id) => getRule(id).label).join(" → "))}</em>
+    <strong>${escapeHtml(activeLabel)} 템플릿 적용</strong>
+    <span>${escapeHtml(activeDescription)}</span>
+    <em>${escapeHtml(activeSequence.slice(0, 6).map((id) => getRule(id).label).join(" → "))}</em>
   `;
 }
 
@@ -429,6 +456,8 @@ function applyUseCase(id: string) {
   const useCase = getUseCase(id);
   valueInto("projectTitle", useCase.projectTitle);
   selectValue("documentType", useCase.documentType);
+  if (useCase.businessType) selectValue("businessType", useCase.businessType);
+  if (useCase.meetingType) selectValue("meetingType", useCase.meetingType);
   selectValue("purpose", useCase.purpose);
   selectValue("audience", useCase.audience);
   selectValue("tone", useCase.tone);

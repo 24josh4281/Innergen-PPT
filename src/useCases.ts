@@ -3,6 +3,8 @@ export interface ProductUseCase {
   label: string;
   shortLabel: string;
   documentType: string;
+  businessType?: string;
+  meetingType?: string;
   purpose: string;
   audience: string;
   tone: string;
@@ -14,10 +16,72 @@ export interface ProductUseCase {
 
 export const productUseCases: ProductUseCase[] = [
   {
+    id: "reduction-kickoff",
+    label: "감축사업 착수회의",
+    shortLabel: "감축착수",
+    documentType: "착수보고",
+    businessType: "감축사업",
+    meetingType: "착수회의",
+    purpose: "프로젝트 착수",
+    audience: "고객사 실무진",
+    tone: "실무 보고서",
+    projectTitle: "온실가스 감축사업 방법론 개발 착수보고",
+    workflow: ["감축사업 개요 입력", "경계·베이스라인·MRV 쟁점 정리", "자료요청과 검증 일정 매칭", "착수회의 PPTX 생성"],
+    outputs: ["감축사업 목표", "Boundary/Baseline", "MRV 방법론", "자료요청 및 일정"],
+    sampleInput: `감축사업 착수회의
+프로젝트 목적은 신규 감축사업의 방법론 개발 가능성과 감축량 산정 체계를 검토하는 것입니다.
+핵심 쟁점은 사업 경계, 베이스라인, 누출 가능성, 모니터링 데이터, 검증 가능성입니다.
+초기 자료는 설비 사양, 운전 데이터, 기준연도 활동자료, 계측 위치, 기존 배출량 산정 근거입니다.
+수행 절차는 경계 설정, 베이스라인 검토, 감축량 산정식 설계, MRV 계획, 검증 대응 순서입니다.
+착수 후 우선 과제는 자료 요청 확정, 데이터 소유자 지정, 산정 가정 검토 일정 합의입니다.`
+  },
+  {
+    id: "regulatory-review",
+    label: "규제대응 검토 회의",
+    shortLabel: "규제검토",
+    documentType: "중간보고",
+    businessType: "규제대응사업",
+    meetingType: "검토 회의",
+    purpose: "현황 진단",
+    audience: "고객사 실무진",
+    tone: "실무 보고서",
+    projectTitle: "배출권거래제 명세서 검토 회의",
+    workflow: ["명세서/산정계획서 쟁점 입력", "오류·증빙·보완 요청 분리", "검토회의용 의사결정 표 정리", "PPTX 생성"],
+    outputs: ["검토 쟁점", "보완 자료", "제출 리스크", "후속 조치"],
+    sampleInput: `규제대응 검토 회의
+현재 명세서 작성본에서 일부 사업장의 월별 활동자료와 원천 증빙 연결이 부족합니다.
+검토 쟁점은 배출계수 적용 기준, 신설·폐쇄시설 처리, 단위 변환, 내부 승인 이력입니다.
+보완 요청은 원천자료 링크 재확인, 담당자 승인 메일 확보, 산정 파일 버전 고정입니다.
+제출 리스크는 검증기관 질의 증가, 보완 기간 부족, 자료 재제출 가능성입니다.
+회의에서 결정할 사항은 보완 책임자, 제출 기한, 최종 검토 기준입니다.`
+  },
+  {
+    id: "disclosure-interim",
+    label: "CDP·기후공시 중간보고",
+    shortLabel: "공시중간",
+    documentType: "중간보고",
+    businessType: "CDP·기후공시사업",
+    meetingType: "중간보고",
+    purpose: "현황 진단",
+    audience: "고객사 임원",
+    tone: "임원 요약",
+    projectTitle: "CDP 및 기후공시 대응 중간보고",
+    workflow: ["문항별 진척 입력", "Gap·증빙·답변 품질 점검", "우선 보완 레버 도출", "중간보고 PPTX 생성"],
+    outputs: ["진척 대시보드", "문항 Gap", "증빙 현황", "우선 보완 과제"],
+    sampleInput: `CDP 기후공시 중간보고
+현재 CDP 문항별 답변 초안은 작성되었으나 Scope 3 산정 근거와 기후리스크 재무영향 설명이 부족합니다.
+주요 Gap은 지표 목표, 리스크 관리 절차, 공급망 데이터, 내부 검토 이력입니다.
+증빙은 이사회 보고자료, 에너지 사용량, 배출량 산정표, 리스크 평가 결과, 정책 문서로 구성됩니다.
+우선 보완 과제는 점수 영향이 큰 문항의 증빙 연결, 답변 논리 강화, 누락 자료 재요청입니다.
+다음 단계는 고위험 문항 리뷰, 답변본 QA, 제출 전 경영진 검토입니다.`
+  },
+  {
     id: "rfp-proposal",
     label: "입찰/RFP 제안서 자동화",
     shortLabel: "제안서",
     documentType: "컨설팅 제안서",
+    businessType: "CDP·기후공시사업",
+    meetingType: "착수회의",
     purpose: "제안·입찰 대응",
     audience: "고객사 임원",
     tone: "고급 컨설팅 제안서",
@@ -36,6 +100,8 @@ export const productUseCases: ProductUseCase[] = [
     label: "착수보고 자동화",
     shortLabel: "착수",
     documentType: "착수보고",
+    businessType: "규제대응사업",
+    meetingType: "착수회의",
     purpose: "프로젝트 착수",
     audience: "고객사 실무진",
     tone: "실무 보고서",
@@ -54,6 +120,8 @@ export const productUseCases: ProductUseCase[] = [
     label: "중간보고·이슈 관리",
     shortLabel: "중간",
     documentType: "중간보고",
+    businessType: "규제대응사업",
+    meetingType: "중간보고",
     purpose: "현황 진단",
     audience: "고객사 실무진",
     tone: "실무 보고서",
@@ -72,6 +140,8 @@ export const productUseCases: ProductUseCase[] = [
     label: "최종보고 자동화",
     shortLabel: "최종",
     documentType: "최종보고",
+    businessType: "CDP·기후공시사업",
+    meetingType: "최종보고",
     purpose: "의사결정 보고",
     audience: "고객사 임원",
     tone: "임원 요약",
@@ -90,6 +160,8 @@ export const productUseCases: ProductUseCase[] = [
     label: "검증·증빙 대응팩",
     shortLabel: "증빙",
     documentType: "중간보고",
+    businessType: "규제대응사업",
+    meetingType: "검토 회의",
     purpose: "실행계획 수립",
     audience: "검증기관",
     tone: "실무 보고서",
@@ -108,6 +180,8 @@ export const productUseCases: ProductUseCase[] = [
     label: "교육·워크숍 자료",
     shortLabel: "교육",
     documentType: "교육자료",
+    businessType: "CDP·기후공시사업",
+    meetingType: "검토 회의",
     purpose: "실행계획 수립",
     audience: "고객사 실무진",
     tone: "워크숍 자료",

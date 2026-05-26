@@ -1,6 +1,8 @@
 import type { ArchetypeId, DeckMeta } from "./types";
 
 export type TemplateId = "proposal" | "kickoff" | "interim" | "final" | "executive" | "training";
+export type BusinessTypeId = "reduction" | "regulatory" | "disclosure";
+export type MeetingTypeId = "kickoff" | "interim" | "final" | "review";
 
 export interface TemplateProfile {
   id: TemplateId;
@@ -9,6 +11,148 @@ export interface TemplateProfile {
   match: string[];
   sequence: ArchetypeId[];
   qualityRules: string[];
+}
+
+export interface BusinessMeetingProfile {
+  id: string;
+  label: string;
+  businessType: BusinessTypeId;
+  meetingType: MeetingTypeId;
+  description: string;
+  sequence: ArchetypeId[];
+  qualityRules: string[];
+}
+
+export const businessTypeOptions: { id: BusinessTypeId; label: string; description: string }[] = [
+  { id: "reduction", label: "감축사업", description: "감축량 산정, 방법론, MRV, 인증/검증, 사업화 가능성을 중심으로 구성합니다." },
+  { id: "regulatory", label: "규제대응사업", description: "배출권거래제, 목표관리제, 명세서, 산정계획서, 검증 대응을 중심으로 구성합니다." },
+  { id: "disclosure", label: "CDP·기후공시사업", description: "CDP, ISSB/TCFD, 기후리스크, 공시 데이터, 답변·증빙 체계를 중심으로 구성합니다." }
+];
+
+export const meetingTypeOptions: { id: MeetingTypeId; label: string; description: string }[] = [
+  { id: "kickoff", label: "착수회의", description: "목표, 범위, 일정, 자료 요청, 협업 방식을 정렬합니다." },
+  { id: "interim", label: "중간보고", description: "진행 현황, 이슈, 의사결정, 다음 조치를 압축합니다." },
+  { id: "final", label: "최종보고", description: "결과, 근거, 시사점, 로드맵을 완결 구조로 정리합니다." },
+  { id: "review", label: "검토 회의", description: "검토 쟁점, 보완 요청, 의사결정 사항, 후속 조치를 정리합니다." }
+];
+
+const businessMeetingProfiles: BusinessMeetingProfile[] = [
+  profile("reduction-kickoff", "감축사업 착수회의", "reduction", "kickoff", "감축사업의 경계, 방법론, MRV, 자료 요청을 초기에 고정합니다.", [
+    "consulting-executive-summary",
+    "inventory-boundary-flow",
+    "integrated-process-map",
+    "reduction-roadmap-analysis",
+    "data-request-tracker",
+    "assurance-evidence-pack",
+    "schedule-gantt",
+    "communication-management"
+  ]),
+  profile("reduction-interim", "감축사업 중간보고", "reduction", "interim", "감축량 산정 가정, 데이터 이슈, 방법론 보완사항을 의사결정 중심으로 정리합니다.", [
+    "dashboard-kpi-takeaway",
+    "waterfall-bridge-analysis",
+    "issue-tree-to-workplan",
+    "comparison-matrix",
+    "assurance-evidence-pack",
+    "evidence-to-action-strip"
+  ]),
+  profile("reduction-final", "감축사업 최종보고", "reduction", "final", "최종 감축량, 산정 논리, 인증 가능성, 사업화 로드맵을 제시합니다.", [
+    "consulting-executive-summary",
+    "impact-factoid-big-number",
+    "waterfall-bridge-analysis",
+    "integrated-process-map",
+    "reduction-roadmap-analysis",
+    "evidence-to-action-strip"
+  ]),
+  profile("reduction-review", "감축사업 검토 회의", "reduction", "review", "산정식, 경계, 보수성, 증빙 쟁점을 빠르게 검토하고 보완 조치를 확정합니다.", [
+    "consulting-one-page-memo",
+    "inventory-boundary-flow",
+    "comparison-matrix",
+    "assurance-evidence-pack",
+    "evidence-to-action-strip"
+  ]),
+  profile("regulatory-kickoff", "규제대응 착수회의", "regulatory", "kickoff", "명세서·산정계획서·검증 대응을 일정, 자료, 책임 기준으로 정렬합니다.", [
+    "consulting-executive-summary",
+    "regulatory-timeline-radar",
+    "proposal-scope-integrated",
+    "data-request-tracker",
+    "assurance-evidence-pack",
+    "schedule-gantt",
+    "communication-management"
+  ]),
+  profile("regulatory-interim", "규제대응 중간보고", "regulatory", "interim", "자료 취합 현황, 오류 유형, 검증 리스크, 제출 준비도를 점검합니다.", [
+    "traffic-light-scorecard",
+    "data-request-tracker",
+    "issue-tree-to-workplan",
+    "assurance-evidence-pack",
+    "communication-management",
+    "evidence-to-action-strip"
+  ]),
+  profile("regulatory-final", "규제대응 최종보고", "regulatory", "final", "제출본, 검증 결과, 잔여 리스크, 차기 대응 과제를 정리합니다.", [
+    "consulting-executive-summary",
+    "traffic-light-scorecard",
+    "before-after-delta-bridge",
+    "assurance-evidence-pack",
+    "report-production-workflow",
+    "evidence-to-action-strip"
+  ]),
+  profile("regulatory-review", "규제대응 검토 회의", "regulatory", "review", "명세서/산정계획서의 쟁점, 보완자료, 제출 리스크를 검토합니다.", [
+    "consulting-one-page-memo",
+    "data-request-tracker",
+    "assurance-evidence-pack",
+    "comparison-matrix",
+    "evidence-to-action-strip"
+  ]),
+  profile("disclosure-kickoff", "CDP·기후공시 착수회의", "disclosure", "kickoff", "공시 범위, 문항, 데이터 소유자, 증빙 체계를 초기에 설계합니다.", [
+    "consulting-executive-summary",
+    "disclosure-taxonomy-map",
+    "cdp-response-strategy",
+    "data-request-tracker",
+    "tcfd-pillar-diagnosis",
+    "schedule-gantt",
+    "communication-management"
+  ]),
+  profile("disclosure-interim", "CDP·기후공시 중간보고", "disclosure", "interim", "문항별 진척, Gap, 증빙 부족, 답변 품질을 점검합니다.", [
+    "dashboard-kpi-takeaway",
+    "tcfd-pillar-diagnosis",
+    "score-improvement-levers",
+    "evidence-grid",
+    "issue-tree-to-workplan",
+    "evidence-to-action-strip"
+  ]),
+  profile("disclosure-final", "CDP·기후공시 최종보고", "disclosure", "final", "최종 답변, 공시 메시지, 개선 과제, 차년도 운영 체계를 정리합니다.", [
+    "consulting-executive-summary",
+    "score-improvement-levers",
+    "before-after-delta-bridge",
+    "disclosure-taxonomy-map",
+    "asis-tobe-gap-roadmap",
+    "evidence-to-action-strip"
+  ]),
+  profile("disclosure-review", "CDP·기후공시 검토 회의", "disclosure", "review", "문항 해석, 답변 논리, 증빙 적합성, 보완 조치를 빠르게 확정합니다.", [
+    "consulting-one-page-memo",
+    "cdp-response-strategy",
+    "evidence-grid",
+    "comparison-matrix",
+    "evidence-to-action-strip"
+  ])
+];
+
+function profile(
+  id: string,
+  label: string,
+  businessType: BusinessTypeId,
+  meetingType: MeetingTypeId,
+  description: string,
+  sequence: ArchetypeId[]
+): BusinessMeetingProfile {
+  return {
+    id,
+    label,
+    businessType,
+    meetingType,
+    description,
+    sequence,
+    qualityRules: ["사업 유형과 회의 목적에 맞는 구조 사용", "동일 카드 반복 금지", "의사결정 메시지와 실행 조치 연결"]
+  };
 }
 
 export const templateProfiles: TemplateProfile[] = [
@@ -118,6 +262,33 @@ export function getTemplateProfile(meta: DeckMeta): TemplateProfile {
 }
 
 export function getTemplateArchetype(meta: DeckMeta, slideIndex: number): ArchetypeId | undefined {
+  const businessMeetingProfile = getBusinessMeetingProfile(meta);
+  if (businessMeetingProfile) return businessMeetingProfile.sequence[slideIndex - 1] ?? businessMeetingProfile.sequence.at(-1);
+
   const profile = getTemplateProfile(meta);
   return profile.sequence[slideIndex - 1] ?? profile.sequence.at(-1);
+}
+
+export function getBusinessMeetingProfile(meta: DeckMeta): BusinessMeetingProfile | undefined {
+  const businessType = normalizeBusinessType(meta.businessType);
+  const meetingType = normalizeMeetingType(meta.meetingType ?? meta.documentType);
+  if (!businessType || !meetingType) return undefined;
+  return businessMeetingProfiles.find((profile) => profile.businessType === businessType && profile.meetingType === meetingType);
+}
+
+export function normalizeBusinessType(value?: string): BusinessTypeId | undefined {
+  const text = (value ?? "").toLowerCase();
+  if (/감축|reduction|mrv|방법론|carbon project/.test(text)) return "reduction";
+  if (/규제|ets|배출권|명세서|산정계획|regulatory|allowance/.test(text)) return "regulatory";
+  if (/cdp|공시|tcfd|issb|기후공시|disclosure|climate/.test(text)) return "disclosure";
+  return undefined;
+}
+
+export function normalizeMeetingType(value?: string): MeetingTypeId | undefined {
+  const text = (value ?? "").toLowerCase();
+  if (/착수|kickoff|kick-off|개시/.test(text)) return "kickoff";
+  if (/중간|interim|progress|현황/.test(text)) return "interim";
+  if (/최종|final|완료|결과/.test(text)) return "final";
+  if (/검토|review|회의|쟁점/.test(text)) return "review";
+  return undefined;
 }

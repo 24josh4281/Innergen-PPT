@@ -76,6 +76,8 @@ export function buildGptPptPrompt(meta: DeckMeta, slides: PlannedSlide[], mode: 
     `- 고객사: ${safe(meta.clientName)}`,
     `- 프로젝트명: ${safe(meta.projectTitle)}`,
     `- 문서 유형: ${safe(meta.documentType)}`,
+    `- 사업 유형: ${safe(meta.businessType ?? "")}`,
+    `- 회의 유형: ${safe(meta.meetingType ?? "")}`,
     `- 목적: ${safe(meta.purpose ?? "")}`,
     `- 대상 독자: ${safe(meta.audience ?? "")}`,
     `- 톤: ${safe(meta.tone ?? "")}`,
