@@ -1,9 +1,9 @@
 import "./style.css";
-import { buildPptxBlob, downloadBlob } from "./ppt";
+import { downloadBlob } from "./ppt";
 import { archetypeRules, getRule } from "./patterns";
 import { extractTextFromFiles } from "./fileImport";
 import { getAllStructureSampleInput, getLayoutFamilySampleInput, getSampleInput, planDeck } from "./planner";
-import { analyzePptxPackage, type PptxLayoutQaReport } from "./pptxQa";
+import { buildPptxWithIterativeQa, type IterativePptxQaResult } from "./iterativePptxQa";
 import { oneShotBriefTemplate, oneShotQaRules, oneShotStructureRules } from "./oneShotQuality";
 import { qualityImprovementCycles } from "./qualityPolicy";
 import { analyzeDeckQuality, type DeckQaReport, type QaStatus } from "./qa";
@@ -332,10 +332,11 @@ exportBtn.addEventListener("click", async () => {
   exportBtn.textContent = "생성 중...";
   try {
     const meta = readMeta();
-    const { blob, fileName } = await buildPptxBlob(meta, plannedSlides);
-    const pptxQa = await analyzePptxPackage(blob);
+    const qaResult = await buildPptxWithIterativeQa(meta, plannedSlides, 3);
+    const { blob, fileName } = qaResult;
+    plannedSlides = qaResult.slides;
     const serverExport = await exportPptxToServer(meta, plannedSlides);
-    showDownloadLink(blob, fileName, pptxQa, serverExport);
+    showDownloadLink(blob, fileName, qaResult, serverExport);
     if (serverExport) {
       tryServerDownload(serverExport.url);
     } else {
@@ -676,18 +677,26 @@ async function exportPptxToServer(meta: DeckMeta, slides: PlannedSlide[]): Promi
   }
 }
 
-function showDownloadLink(blob: Blob, fileName: string, pptxQa: PptxLayoutQaReport, serverExport: ServerPptxExportResult | null) {
+function showDownloadLink(blob: Blob, fileName: string, qaResult: IterativePptxQaResult, serverExport: ServerPptxExportResult | null) {
+  const pptxQa = qaResult.qa;
   if (currentDownloadUrl) URL.revokeObjectURL(currentDownloadUrl);
   currentDownloadUrl = URL.createObjectURL(blob);
   const downloadUrl = serverExport?.url ?? currentDownloadUrl;
   const downloadName = serverExport?.savedName ?? fileName;
+  const attemptRows = qaResult.attempts
+    .map(
+      (attempt) =>
+        `<small>QA ${attempt.pass}차 · ${escapeHtml(attempt.action)} · ${attempt.qa.score}점/${statusText(attempt.qa.status)} · 넘침 ${attempt.qa.overflowRiskCount} · 겹침 ${attempt.qa.overlapRiskCount} · 단어깨짐 ${attempt.qa.narrowTextRiskCount}</small>`
+    )
+    .join("");
   downloadArea.hidden = false;
   downloadArea.className = "download-area";
   downloadArea.innerHTML = `
     <div>
       <strong>PPTX 생성 완료</strong>
-      <span>PPTX QA ${pptxQa.score}점 / ${pptxQa.status === "pass" ? "통과" : pptxQa.status === "warn" ? "주의" : "수정 필요"} · ${(serverExport?.bytes ?? blob.size).toLocaleString()} bytes</span>
+      <span>PPTX QA ${qaResult.attempts.length}회 수행 · 최종 ${pptxQa.score}점 / ${statusText(pptxQa.status)} · ${(serverExport?.bytes ?? blob.size).toLocaleString()} bytes</span>
       <small>슬라이드 ${pptxQa.slideCount}장 · 최소 폰트 ${pptxQa.minFontSize ?? "-"}pt · 넘침 위험 ${pptxQa.overflowRiskCount}건 · 겹침 위험 ${pptxQa.overlapRiskCount}건 · 단어 깨짐 위험 ${pptxQa.narrowTextRiskCount}건</small>
+      ${attemptRows}
       <small>${serverExport ? `실제 파일 저장 완료: ${escapeHtml(serverExport.localPath)}` : "서버 저장을 사용할 수 없어 브라우저 다운로드 방식으로 전환했습니다."}</small>
     </div>
     <div class="download-buttons">
