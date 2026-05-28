@@ -1,5 +1,9 @@
 import { oneShotQaRules, oneShotStructureRules } from "./oneShotQuality";
 import { getQualityRecommendations, qualityImprovementCycles } from "./qualityPolicy";
+import { summarizeReferenceTopNProfileForPrompt } from "./referenceTopN";
+import { summarizeReferenceProfileForPrompt } from "./referenceStructureDb";
+import { summarizeStandardDeckFlowForPrompt } from "./standardDeckFlow";
+import { getReferenceStructureProfileForMeta, getReferenceTopNProfileForMeta, getStandardDeckFlowForMeta } from "./templates";
 import type { DeckMeta, PlannedSlide } from "./types";
 
 export type PromptMode = "one-shot-deck" | "storyboard-upgrade" | "qa-review" | "pptxgenjs-code";
@@ -56,6 +60,12 @@ export function buildGptPptPrompt(meta: DeckMeta, slides: PlannedSlide[], mode: 
   const storylineRule = matchStorylineRule(meta.documentType);
   const structureMix = summarizeStructureMix(slides);
   const profile = getPromptMode(mode);
+  const standardFlow = getStandardDeckFlowForMeta(meta);
+  const topNProfile = getReferenceTopNProfileForMeta(meta);
+  const referenceProfile = getReferenceStructureProfileForMeta(meta);
+  const standardFlowLines = summarizeStandardDeckFlowForPrompt(standardFlow);
+  const topNProfileLines = summarizeReferenceTopNProfileForPrompt(topNProfile);
+  const referenceProfileLines = summarizeReferenceProfileForPrompt(meta, referenceProfile);
 
   return [
     `# ${profile.label} 프롬프트`,
@@ -100,6 +110,15 @@ export function buildGptPptPrompt(meta: DeckMeta, slides: PlannedSlide[], mode: 
     "- 본문 최소 글자 크기는 11pt 이상입니다. 가능하면 14pt 이상으로 키웁니다.",
     "- 제목, governing message, 본문, 캡션의 위계를 명확히 둡니다.",
     "- 슬라이드 제목은 상단에 따로 두고, governing message는 제목 아래 흰색 영역에 검은색 한 줄 주장으로 둡니다.",
+    "",
+    "## 5-A. 표준 Deck Flow 적용",
+    ...standardFlowLines,
+    "",
+    "## 5-B. 승인 샘플 Top N 구조 적용",
+    ...topNProfileLines,
+    "",
+    "## 5-C. 레퍼런스 구조 DB 적용",
+    ...referenceProfileLines,
     "",
     "## 6. 좋은 컨설팅 PPT 판정 기준",
     ...consultingQualityRules(),

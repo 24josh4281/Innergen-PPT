@@ -1,0 +1,5031 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-05-28T07:47:09.841Z",
+  "sourceIndex": "B:\\CODEX\\Old\\PPT Automation\\Innergen-PPT\\docs\\reference-source-index.json",
+  "sourceSummary": {
+    "files": 57,
+    "existingFiles": 52,
+    "missingFiles": 5,
+    "extractedSlides": 1779,
+    "extractionFailed": 0
+  },
+  "policy": {
+    "usesApprovedSamplesOnly": true,
+    "topN": 10,
+    "sequenceLength": 12,
+    "excludesNonInnergenLogos": true,
+    "allowedBrandIdentity": "INNerGEN only",
+    "learnsFromReferences": [
+      "slide structure",
+      "layout pattern",
+      "logic flow",
+      "storyline",
+      "proof-object placement",
+      "information hierarchy"
+    ],
+    "doesNotLearnFromReferences": [
+      "external company logos",
+      "external brand marks",
+      "client-specific identity systems"
+    ]
+  },
+  "profiles": [
+    {
+      "id": "benchmark-benchmark-approved-topn",
+      "label": "벤치마크 / 구조 벤치마크 대표 구조 Top 10",
+      "businessType": "benchmark",
+      "meetingType": "benchmark",
+      "totalFiles": 5,
+      "totalSlides": 156,
+      "sourceFileIds": [
+        "ey_ces_2025_preview",
+        "kpmg_digital_finance_2025",
+        "kpmg_esg_reference",
+        "kpmg_hotel_business_trend_20250720",
+        "mckinsey_metaverse_value_creation"
+      ],
+      "categoryPaths": [],
+      "sourceRootTypes": [
+        "structure-benchmark"
+      ],
+      "representativeSequence": [
+        "cover-kickoff",
+        "contents-isometric",
+        "why-what-how-logic",
+        "reduction-roadmap-analysis",
+        "integrated-process-map",
+        "schedule-gantt"
+      ],
+      "topArchetypes": [
+        {
+          "id": "why-what-how-logic",
+          "count": 89,
+          "fileSpread": 4,
+          "averageConfidence": 0.55,
+          "score": 56.95,
+          "topTags": [
+            "benchmark",
+            "thought-leadership",
+            "auto-default"
+          ],
+          "examples": [
+            {
+              "fileId": "kpmg_hotel_business_trend_20250720",
+              "slideNo": 1,
+              "title": "Slide 1"
+            },
+            {
+              "fileId": "kpmg_hotel_business_trend_20250720",
+              "slideNo": 2,
+              "title": "Slide 2"
+            },
+            {
+              "fileId": "kpmg_hotel_business_trend_20250720",
+              "slideNo": 3,
+              "title": "Slide 3"
+            },
+            {
+              "fileId": "kpmg_hotel_business_trend_20250720",
+              "slideNo": 4,
+              "title": "Slide 4"
+            },
+            {
+              "fileId": "kpmg_hotel_business_trend_20250720",
+              "slideNo": 5,
+              "title": "Slide 5"
+            }
+          ]
+        },
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 20,
+          "fileSpread": 3,
+          "averageConfidence": 0.86,
+          "score": 23.2,
+          "topTags": [
+            "benchmark",
+            "thought-leadership",
+            "er",
+            "be",
+            "pe",
+            "le"
+          ],
+          "examples": [
+            {
+              "fileId": "ey_ces_2025_preview",
+              "slideNo": 9,
+              "title": "December"
+            },
+            {
+              "fileId": "ey_ces_2025_preview",
+              "slideNo": 10,
+              "title": "December"
+            },
+            {
+              "fileId": "ey_ces_2025_preview",
+              "slideNo": 13,
+              "title": "December"
+            },
+            {
+              "fileId": "ey_ces_2025_preview",
+              "slideNo": 16,
+              "title": "December"
+            },
+            {
+              "fileId": "ey_ces_2025_preview",
+              "slideNo": 17,
+              "title": "December"
+            }
+          ]
+        },
+        {
+          "id": "integrated-process-map",
+          "count": 16,
+          "fileSpread": 3,
+          "averageConfidence": 0.86,
+          "score": 19.76,
+          "topTags": [
+            "benchmark",
+            "thought-leadership",
+            "단계",
+            "프로세스"
+          ],
+          "examples": [
+            {
+              "fileId": "mckinsey_metaverse_value_creation",
+              "slideNo": 2,
+              "title": "- 2 -"
+            },
+            {
+              "fileId": "mckinsey_metaverse_value_creation",
+              "slideNo": 3,
+              "title": "- 3 -"
+            },
+            {
+              "fileId": "ey_ces_2025_preview",
+              "slideNo": 12,
+              "title": "December"
+            },
+            {
+              "fileId": "ey_ces_2025_preview",
+              "slideNo": 14,
+              "title": "December"
+            },
+            {
+              "fileId": "kpmg_digital_finance_2025",
+              "slideNo": 6,
+              "title": "© 2025 KPMG"
+            }
+          ]
+        },
+        {
+          "id": "schedule-gantt",
+          "count": 17,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 18.62,
+          "topTags": [
+            "benchmark",
+            "thought-leadership",
+            "월",
+            "기간",
+            "일정"
+          ],
+          "examples": [
+            {
+              "fileId": "ey_ces_2025_preview",
+              "slideNo": 3,
+              "title": "December"
+            },
+            {
+              "fileId": "ey_ces_2025_preview",
+              "slideNo": 4,
+              "title": "December"
+            },
+            {
+              "fileId": "ey_ces_2025_preview",
+              "slideNo": 5,
+              "title": "December"
+            },
+            {
+              "fileId": "ey_ces_2025_preview",
+              "slideNo": 6,
+              "title": "December"
+            },
+            {
+              "fileId": "ey_ces_2025_preview",
+              "slideNo": 7,
+              "title": "December"
+            }
+          ]
+        },
+        {
+          "id": "cover-kickoff",
+          "count": 9,
+          "fileSpread": 2,
+          "averageConfidence": 0.75,
+          "score": 10.75,
+          "topTags": [
+            "benchmark",
+            "thought-leadership",
+            "보고"
+          ],
+          "examples": [
+            {
+              "fileId": "mckinsey_metaverse_value_creation",
+              "slideNo": 1,
+              "title": "- 1 -"
+            },
+            {
+              "fileId": "kpmg_digital_finance_2025",
+              "slideNo": 2,
+              "title": "Contacts"
+            },
+            {
+              "fileId": "kpmg_digital_finance_2025",
+              "slideNo": 15,
+              "title": "© 2025 KPMG"
+            },
+            {
+              "fileId": "kpmg_digital_finance_2025",
+              "slideNo": 17,
+              "title": "© 2025 KPMG"
+            },
+            {
+              "fileId": "kpmg_digital_finance_2025",
+              "slideNo": 23,
+              "title": "© 2025 KPMG"
+            }
+          ]
+        },
+        {
+          "id": "contents-isometric",
+          "count": 5,
+          "fileSpread": 2,
+          "averageConfidence": 0.88,
+          "score": 8.4,
+          "topTags": [
+            "benchmark",
+            "thought-leadership",
+            "contents"
+          ],
+          "examples": [
+            {
+              "fileId": "ey_ces_2025_preview",
+              "slideNo": 2,
+              "title": "December"
+            },
+            {
+              "fileId": "ey_ces_2025_preview",
+              "slideNo": 11,
+              "title": "December"
+            },
+            {
+              "fileId": "kpmg_digital_finance_2025",
+              "slideNo": 3,
+              "title": "© 2025 KPMG"
+            },
+            {
+              "fileId": "kpmg_digital_finance_2025",
+              "slideNo": 11,
+              "title": "© 2025 KPMG"
+            },
+            {
+              "fileId": "kpmg_digital_finance_2025",
+              "slideNo": 38,
+              "title": "© 2025 KPMG"
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    },
+    {
+      "id": "design-template-design-template-approved-topn",
+      "label": "디자인 템플릿 / 디자인 템플릿 대표 구조 Top 10",
+      "businessType": "design-template",
+      "meetingType": "design-template",
+      "totalFiles": 1,
+      "totalSlides": 27,
+      "sourceFileIds": [
+        "innergen_design_template"
+      ],
+      "categoryPaths": [],
+      "sourceRootTypes": [
+        "conversation-source"
+      ],
+      "representativeSequence": [
+        "cover-kickoff",
+        "contents-isometric",
+        "inventory-boundary-flow",
+        "integrated-process-map",
+        "reduction-roadmap-analysis"
+      ],
+      "topArchetypes": [
+        {
+          "id": "cover-kickoff",
+          "count": 15,
+          "fileSpread": 1,
+          "averageConfidence": 0.75,
+          "score": 13.25,
+          "topTags": [
+            "design-template",
+            "보고",
+            "title"
+          ],
+          "examples": [
+            {
+              "fileId": "innergen_design_template",
+              "slideNo": 1,
+              "title": "한화에어로스페이스"
+            },
+            {
+              "fileId": "innergen_design_template",
+              "slideNo": 3,
+              "title": "1. ESG"
+            },
+            {
+              "fileId": "innergen_design_template",
+              "slideNo": 6,
+              "title": "한화에어로스페이스의"
+            },
+            {
+              "fileId": "innergen_design_template",
+              "slideNo": 8,
+              "title": "1."
+            },
+            {
+              "fileId": "innergen_design_template",
+              "slideNo": 11,
+              "title": "참고"
+            }
+          ]
+        },
+        {
+          "id": "integrated-process-map",
+          "count": 7,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 8.02,
+          "topTags": [
+            "design-template",
+            "프로세스",
+            "방법론"
+          ],
+          "examples": [
+            {
+              "fileId": "innergen_design_template",
+              "slideNo": 5,
+              "title": "3. 2026"
+            },
+            {
+              "fileId": "innergen_design_template",
+              "slideNo": 9,
+              "title": "이너젠은"
+            },
+            {
+              "fileId": "innergen_design_template",
+              "slideNo": 10,
+              "title": "3. CDP"
+            },
+            {
+              "fileId": "innergen_design_template",
+              "slideNo": 17,
+              "title": "3. CDP"
+            },
+            {
+              "fileId": "innergen_design_template",
+              "slideNo": 19,
+              "title": "이너젠은"
+            }
+          ]
+        },
+        {
+          "id": "contents-isometric",
+          "count": 3,
+          "fileSpread": 1,
+          "averageConfidence": 0.88,
+          "score": 4.64,
+          "topTags": [
+            "design-template",
+            "contents"
+          ],
+          "examples": [
+            {
+              "fileId": "innergen_design_template",
+              "slideNo": 2,
+              "title": "Contents"
+            },
+            {
+              "fileId": "innergen_design_template",
+              "slideNo": 7,
+              "title": "Contents"
+            },
+            {
+              "fileId": "innergen_design_template",
+              "slideNo": 23,
+              "title": "Contents"
+            }
+          ]
+        },
+        {
+          "id": "inventory-boundary-flow",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 2.86,
+          "topTags": [
+            "design-template",
+            "baseline"
+          ],
+          "examples": [
+            {
+              "fileId": "innergen_design_template",
+              "slideNo": 4,
+              "title": "2. CDP"
+            }
+          ]
+        },
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 2.86,
+          "topTags": [
+            "design-template",
+            "er",
+            "pe",
+            "le"
+          ],
+          "examples": [
+            {
+              "fileId": "innergen_design_template",
+              "slideNo": 27,
+              "title": "hank"
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    },
+    {
+      "id": "disclosure-benchmark-approved-topn",
+      "label": "CDP·기후공시 / 구조 벤치마크 대표 구조 Top 10",
+      "businessType": "disclosure",
+      "meetingType": "benchmark",
+      "totalFiles": 4,
+      "totalSlides": 82,
+      "sourceFileIds": [
+        "deloitte_esg_reference",
+        "deloitte_insurance_csrd_benchmark_2024",
+        "ey_hanyoung_reference",
+        "pwc_tnfd_standard_strategy"
+      ],
+      "categoryPaths": [],
+      "sourceRootTypes": [
+        "structure-benchmark"
+      ],
+      "representativeSequence": [
+        "cover-kickoff",
+        "contents-isometric",
+        "integrated-process-map",
+        "schedule-gantt",
+        "regulatory-timeline-radar",
+        "reduction-roadmap-analysis",
+        "work-scope-table",
+        "consulting-one-page-memo",
+        "why-what-how-logic",
+        "double-materiality-or-risk-map"
+      ],
+      "topArchetypes": [
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 23,
+          "fileSpread": 4,
+          "averageConfidence": 0.86,
+          "score": 27.78,
+          "topTags": [
+            "disclosure",
+            "benchmark",
+            "er",
+            "pe",
+            "thought-leadership",
+            "be"
+          ],
+          "examples": [
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 1,
+              "title": "TNFD"
+            },
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 6,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 16,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 17,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 21,
+              "title": "Thank"
+            }
+          ]
+        },
+        {
+          "id": "integrated-process-map",
+          "count": 20,
+          "fileSpread": 4,
+          "averageConfidence": 0.86,
+          "score": 25.2,
+          "topTags": [
+            "disclosure",
+            "benchmark",
+            "thought-leadership",
+            "프로세스",
+            "단계",
+            "방법론"
+          ],
+          "examples": [
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 8,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 15,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 18,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 20,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "deloitte_esg_reference",
+              "slideNo": 2,
+              "title": "I."
+            }
+          ]
+        },
+        {
+          "id": "cover-kickoff",
+          "count": 22,
+          "fileSpread": 3,
+          "averageConfidence": 0.75,
+          "score": 22.5,
+          "topTags": [
+            "disclosure",
+            "benchmark",
+            "thought-leadership",
+            "보고"
+          ],
+          "examples": [
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 9,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 11,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 12,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 19,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "deloitte_esg_reference",
+              "slideNo": 1,
+              "title": "한국환경산업기술원"
+            }
+          ]
+        },
+        {
+          "id": "contents-isometric",
+          "count": 4,
+          "fileSpread": 3,
+          "averageConfidence": 0.88,
+          "score": 9.52,
+          "topTags": [
+            "disclosure",
+            "benchmark",
+            "contents",
+            "thought-leadership"
+          ],
+          "examples": [
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 2,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "deloitte_insurance_csrd_benchmark_2024",
+              "slideNo": 3,
+              "title": "Contents"
+            },
+            {
+              "fileId": "deloitte_insurance_csrd_benchmark_2024",
+              "slideNo": 14,
+              "title": "ain"
+            },
+            {
+              "fileId": "ey_hanyoung_reference",
+              "slideNo": 3,
+              "title": "한국회계학회"
+            }
+          ]
+        },
+        {
+          "id": "work-scope-table",
+          "count": 2,
+          "fileSpread": 2,
+          "averageConfidence": 0.82,
+          "score": 5.64,
+          "topTags": [
+            "disclosure",
+            "benchmark",
+            "thought-leadership",
+            "범위",
+            "과업"
+          ],
+          "examples": [
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 4,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "deloitte_esg_reference",
+              "slideNo": 3,
+              "title": "Ⅰ."
+            }
+          ]
+        },
+        {
+          "id": "regulatory-timeline-radar",
+          "count": 2,
+          "fileSpread": 2,
+          "averageConfidence": 0.8,
+          "score": 5.6,
+          "topTags": [
+            "disclosure",
+            "benchmark",
+            "thought-leadership",
+            "규제",
+            "제도"
+          ],
+          "examples": [
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 13,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "ey_hanyoung_reference",
+              "slideNo": 22,
+              "title": "ESG"
+            }
+          ]
+        },
+        {
+          "id": "schedule-gantt",
+          "count": 3,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 4.58,
+          "topTags": [
+            "disclosure",
+            "benchmark",
+            "thought-leadership",
+            "월",
+            "기간",
+            "일정"
+          ],
+          "examples": [
+            {
+              "fileId": "ey_hanyoung_reference",
+              "slideNo": 5,
+              "title": "글로벌"
+            },
+            {
+              "fileId": "ey_hanyoung_reference",
+              "slideNo": 6,
+              "title": "COP28"
+            },
+            {
+              "fileId": "ey_hanyoung_reference",
+              "slideNo": 23,
+              "title": "Why"
+            }
+          ]
+        },
+        {
+          "id": "why-what-how-logic",
+          "count": 3,
+          "fileSpread": 1,
+          "averageConfidence": 0.55,
+          "score": 3.65,
+          "topTags": [
+            "disclosure",
+            "benchmark",
+            "thought-leadership",
+            "auto-default"
+          ],
+          "examples": [
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 3,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 7,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 14,
+              "title": "Samil PwC"
+            }
+          ]
+        },
+        {
+          "id": "double-materiality-or-risk-map",
+          "count": 2,
+          "fileSpread": 1,
+          "averageConfidence": 0.8,
+          "score": 3.6,
+          "topTags": [
+            "disclosure",
+            "benchmark",
+            "thought-leadership",
+            "risk",
+            "위험",
+            "기회"
+          ],
+          "examples": [
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 5,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_tnfd_standard_strategy",
+              "slideNo": 10,
+              "title": "Samil PwC"
+            }
+          ]
+        },
+        {
+          "id": "consulting-one-page-memo",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.68,
+          "score": 2.68,
+          "topTags": [
+            "disclosure",
+            "benchmark",
+            "thought-leadership",
+            "리스크"
+          ],
+          "examples": [
+            {
+              "fileId": "deloitte_esg_reference",
+              "slideNo": 10,
+              "title": "Ⅲ."
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    },
+    {
+      "id": "disclosure-final-approved-topn",
+      "label": "CDP·기후공시 / 최종보고 대표 구조 Top 10",
+      "businessType": "disclosure",
+      "meetingType": "final",
+      "totalFiles": 5,
+      "totalSlides": 303,
+      "sourceFileIds": [
+        "cdp_final",
+        "cdp_final_2",
+        "ey_sk_chemical_tcfd",
+        "sk_gas_tcfd_draft_220818",
+        "sk_telecom_annual_report_2021"
+      ],
+      "categoryPaths": [
+        "CDP/최종보고",
+        "CDP/최종보고 2"
+      ],
+      "sourceRootTypes": [
+        "business-report-reference",
+        "structure-benchmark"
+      ],
+      "representativeSequence": [
+        "cover-kickoff",
+        "contents-isometric",
+        "integrated-process-map",
+        "inventory-boundary-flow",
+        "reduction-roadmap-analysis",
+        "schedule-gantt",
+        "data-request-tracker",
+        "tcfd-pillar-diagnosis",
+        "double-materiality-or-risk-map",
+        "regulatory-timeline-radar"
+      ],
+      "topArchetypes": [
+        {
+          "id": "cover-kickoff",
+          "count": 106,
+          "fileSpread": 5,
+          "averageConfidence": 0.75,
+          "score": 89.5,
+          "topTags": [
+            "disclosure",
+            "final",
+            "보고",
+            "benchmark",
+            "primary-reference",
+            "제안"
+          ],
+          "examples": [
+            {
+              "fileId": "cdp_final_2",
+              "slideNo": 1,
+              "title": "현대트랜시스"
+            },
+            {
+              "fileId": "cdp_final_2",
+              "slideNo": 2,
+              "title": "1. CDP"
+            },
+            {
+              "fileId": "cdp_final_2",
+              "slideNo": 3,
+              "title": "1. CDP"
+            },
+            {
+              "fileId": "cdp_final_2",
+              "slideNo": 4,
+              "title": "1. CDP"
+            },
+            {
+              "fileId": "cdp_final_2",
+              "slideNo": 5,
+              "title": "2. CDP"
+            }
+          ]
+        },
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 79,
+          "fileSpread": 4,
+          "averageConfidence": 0.86,
+          "score": 75.94,
+          "topTags": [
+            "disclosure",
+            "final",
+            "er",
+            "benchmark",
+            "pe",
+            "le"
+          ],
+          "examples": [
+            {
+              "fileId": "cdp_final_2",
+              "slideNo": 16,
+              "title": "3. CDP"
+            },
+            {
+              "fileId": "cdp_final_2",
+              "slideNo": 21,
+              "title": "hank"
+            },
+            {
+              "fileId": "ey_sk_chemical_tcfd",
+              "slideNo": 12,
+              "title": "완제"
+            },
+            {
+              "fileId": "ey_sk_chemical_tcfd",
+              "slideNo": 14,
+              "title": "2. Strategy_"
+            },
+            {
+              "fileId": "ey_sk_chemical_tcfd",
+              "slideNo": 16,
+              "title": "2. Strategy_"
+            }
+          ]
+        },
+        {
+          "id": "schedule-gantt",
+          "count": 55,
+          "fileSpread": 3,
+          "averageConfidence": 0.86,
+          "score": 53.3,
+          "topTags": [
+            "disclosure",
+            "final",
+            "benchmark",
+            "월",
+            "기간",
+            "일정"
+          ],
+          "examples": [
+            {
+              "fileId": "ey_sk_chemical_tcfd",
+              "slideNo": 11,
+              "title": "2. Strategy_"
+            },
+            {
+              "fileId": "ey_sk_chemical_tcfd",
+              "slideNo": 13,
+              "title": "2. Strategy_"
+            },
+            {
+              "fileId": "ey_sk_chemical_tcfd",
+              "slideNo": 18,
+              "title": "2. Strategy_"
+            },
+            {
+              "fileId": "ey_sk_chemical_tcfd",
+              "slideNo": 22,
+              "title": "2. Strategy_"
+            },
+            {
+              "fileId": "ey_sk_chemical_tcfd",
+              "slideNo": 24,
+              "title": "2. Strategy_"
+            }
+          ]
+        },
+        {
+          "id": "integrated-process-map",
+          "count": 47,
+          "fileSpread": 5,
+          "averageConfidence": 0.86,
+          "score": 50.42,
+          "topTags": [
+            "disclosure",
+            "final",
+            "benchmark",
+            "프로세스",
+            "방법론",
+            "단계"
+          ],
+          "examples": [
+            {
+              "fileId": "cdp_final_2",
+              "slideNo": 10,
+              "title": "2. CDP"
+            },
+            {
+              "fileId": "cdp_final_2",
+              "slideNo": 11,
+              "title": "2. CDP"
+            },
+            {
+              "fileId": "cdp_final_2",
+              "slideNo": 20,
+              "title": "향후"
+            },
+            {
+              "fileId": "cdp_final",
+              "slideNo": 11,
+              "title": "2. 2024"
+            },
+            {
+              "fileId": "cdp_final",
+              "slideNo": 15,
+              "title": "3."
+            }
+          ]
+        },
+        {
+          "id": "contents-isometric",
+          "count": 5,
+          "fileSpread": 3,
+          "averageConfidence": 0.88,
+          "score": 10.4,
+          "topTags": [
+            "disclosure",
+            "final",
+            "benchmark",
+            "contents",
+            "agenda"
+          ],
+          "examples": [
+            {
+              "fileId": "ey_sk_chemical_tcfd",
+              "slideNo": 5,
+              "title": "1."
+            },
+            {
+              "fileId": "sk_gas_tcfd_draft_220818",
+              "slideNo": 2,
+              "title": "Contents"
+            },
+            {
+              "fileId": "sk_telecom_annual_report_2021",
+              "slideNo": 3,
+              "title": "Dimension 3."
+            },
+            {
+              "fileId": "sk_telecom_annual_report_2021",
+              "slideNo": 108,
+              "title": "ESG위원회(구 기업시민위원회)"
+            },
+            {
+              "fileId": "sk_telecom_annual_report_2021",
+              "slideNo": 121,
+              "title": "컴플라이언스"
+            }
+          ]
+        },
+        {
+          "id": "inventory-boundary-flow",
+          "count": 4,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 7.44,
+          "topTags": [
+            "disclosure",
+            "final",
+            "primary-reference",
+            "baseline",
+            "benchmark",
+            "사업 전"
+          ],
+          "examples": [
+            {
+              "fileId": "cdp_final",
+              "slideNo": 22,
+              "title": "4."
+            },
+            {
+              "fileId": "cdp_final",
+              "slideNo": 23,
+              "title": "4."
+            },
+            {
+              "fileId": "cdp_final",
+              "slideNo": 26,
+              "title": "hank"
+            },
+            {
+              "fileId": "sk_telecom_annual_report_2021",
+              "slideNo": 21,
+              "title": "비즈니스 모델"
+            }
+          ]
+        },
+        {
+          "id": "tcfd-pillar-diagnosis",
+          "count": 2,
+          "fileSpread": 2,
+          "averageConfidence": 0.84,
+          "score": 5.68,
+          "topTags": [
+            "disclosure",
+            "final",
+            "benchmark",
+            "tcfd",
+            "strategy"
+          ],
+          "examples": [
+            {
+              "fileId": "ey_sk_chemical_tcfd",
+              "slideNo": 1,
+              "title": "SK"
+            },
+            {
+              "fileId": "sk_gas_tcfd_draft_220818",
+              "slideNo": 1,
+              "title": "8/17/2022"
+            }
+          ]
+        },
+        {
+          "id": "double-materiality-or-risk-map",
+          "count": 2,
+          "fileSpread": 1,
+          "averageConfidence": 0.8,
+          "score": 3.6,
+          "topTags": [
+            "disclosure",
+            "final",
+            "benchmark",
+            "risk",
+            "기회",
+            "위험"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_gas_tcfd_draft_220818",
+              "slideNo": 11,
+              "title": "Climate Change"
+            },
+            {
+              "fileId": "sk_gas_tcfd_draft_220818",
+              "slideNo": 15,
+              "title": "3.1"
+            }
+          ]
+        },
+        {
+          "id": "data-request-tracker",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.84,
+          "score": 2.84,
+          "topTags": [
+            "disclosure",
+            "final",
+            "benchmark",
+            "담당"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_telecom_annual_report_2021",
+              "slideNo": 104,
+              "title": "이사회"
+            }
+          ]
+        },
+        {
+          "id": "regulatory-timeline-radar",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.8,
+          "score": 2.8,
+          "topTags": [
+            "disclosure",
+            "final",
+            "benchmark",
+            "규제",
+            "제도"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_gas_tcfd_draft_220818",
+              "slideNo": 16,
+              "title": "리스크"
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    },
+    {
+      "id": "disclosure-interim-approved-topn",
+      "label": "CDP·기후공시 / 중간보고 대표 구조 Top 10",
+      "businessType": "disclosure",
+      "meetingType": "interim",
+      "totalFiles": 2,
+      "totalSlides": 114,
+      "sourceFileIds": [
+        "sk_tcfd_biweekly_220817",
+        "sk_tcfd_monthly_220729"
+      ],
+      "categoryPaths": [],
+      "sourceRootTypes": [
+        "structure-benchmark"
+      ],
+      "representativeSequence": [
+        "cover-kickoff",
+        "contents-isometric",
+        "tcfd-pillar-diagnosis",
+        "why-what-how-logic",
+        "integrated-process-map",
+        "reduction-roadmap-analysis",
+        "data-request-tracker",
+        "schedule-gantt",
+        "double-materiality-or-risk-map",
+        "inventory-boundary-flow"
+      ],
+      "topArchetypes": [
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 51,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 47.86,
+          "topTags": [
+            "disclosure",
+            "interim",
+            "benchmark",
+            "er",
+            "le",
+            "배출량"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_monthly_220729",
+              "slideNo": 3,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_monthly_220729",
+              "slideNo": 5,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_monthly_220729",
+              "slideNo": 6,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_monthly_220729",
+              "slideNo": 7,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_monthly_220729",
+              "slideNo": 8,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            }
+          ]
+        },
+        {
+          "id": "tcfd-pillar-diagnosis",
+          "count": 17,
+          "fileSpread": 2,
+          "averageConfidence": 0.84,
+          "score": 18.28,
+          "topTags": [
+            "disclosure",
+            "interim",
+            "benchmark",
+            "strategy",
+            "metrics",
+            "tcfd"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_monthly_220729",
+              "slideNo": 1,
+              "title": "SK"
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 1,
+              "title": "SK"
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 37,
+              "title": "Task Force on Climate"
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 47,
+              "title": "구성원"
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 48,
+              "title": "기후변화"
+            }
+          ]
+        },
+        {
+          "id": "integrated-process-map",
+          "count": 13,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 15.18,
+          "topTags": [
+            "disclosure",
+            "interim",
+            "benchmark",
+            "프로세스",
+            "방법론",
+            "process"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_monthly_220729",
+              "slideNo": 30,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 7,
+              "title": "기후"
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 12,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 13,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 14,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            }
+          ]
+        },
+        {
+          "id": "cover-kickoff",
+          "count": 12,
+          "fileSpread": 2,
+          "averageConfidence": 0.75,
+          "score": 13,
+          "topTags": [
+            "disclosure",
+            "interim",
+            "benchmark",
+            "보고"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_monthly_220729",
+              "slideNo": 4,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_monthly_220729",
+              "slideNo": 25,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_monthly_220729",
+              "slideNo": 32,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_monthly_220729",
+              "slideNo": 33,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 3,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            }
+          ]
+        },
+        {
+          "id": "contents-isometric",
+          "count": 10,
+          "fileSpread": 2,
+          "averageConfidence": 0.88,
+          "score": 12.8,
+          "topTags": [
+            "disclosure",
+            "interim",
+            "benchmark",
+            "agenda",
+            "목차",
+            "contents"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_monthly_220729",
+              "slideNo": 26,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 2,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 5,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 6,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 9,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            }
+          ]
+        },
+        {
+          "id": "data-request-tracker",
+          "count": 3,
+          "fileSpread": 1,
+          "averageConfidence": 0.84,
+          "score": 4.52,
+          "topTags": [
+            "disclosure",
+            "interim",
+            "benchmark",
+            "담당"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 18,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 22,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 26,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            }
+          ]
+        },
+        {
+          "id": "why-what-how-logic",
+          "count": 4,
+          "fileSpread": 1,
+          "averageConfidence": 0.55,
+          "score": 4.2,
+          "topTags": [
+            "disclosure",
+            "interim",
+            "benchmark",
+            "auto-default"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 4,
+              "title": "첨부"
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 39,
+              "title": "Our commitment"
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 40,
+              "title": "Our Journey for climate action"
+            },
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 41,
+              "title": "SK"
+            }
+          ]
+        },
+        {
+          "id": "inventory-boundary-flow",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 2.86,
+          "topTags": [
+            "disclosure",
+            "interim",
+            "benchmark",
+            "베이스라인"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_monthly_220729",
+              "slideNo": 31,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            }
+          ]
+        },
+        {
+          "id": "schedule-gantt",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 2.86,
+          "topTags": [
+            "disclosure",
+            "interim",
+            "benchmark",
+            "기간"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_biweekly_220817",
+              "slideNo": 27,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            }
+          ]
+        },
+        {
+          "id": "double-materiality-or-risk-map",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.8,
+          "score": 2.8,
+          "topTags": [
+            "disclosure",
+            "interim",
+            "benchmark",
+            "기회"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_monthly_220729",
+              "slideNo": 24,
+              "title": "II."
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    },
+    {
+      "id": "disclosure-kickoff-approved-topn",
+      "label": "CDP·기후공시 / 착수보고 대표 구조 Top 10",
+      "businessType": "disclosure",
+      "meetingType": "kickoff",
+      "totalFiles": 1,
+      "totalSlides": 24,
+      "sourceFileIds": [
+        "cdp_kickoff"
+      ],
+      "categoryPaths": [
+        "CDP/착수보고"
+      ],
+      "sourceRootTypes": [
+        "business-report-reference"
+      ],
+      "representativeSequence": [
+        "cover-kickoff",
+        "contents-isometric",
+        "inventory-boundary-flow",
+        "integrated-process-map",
+        "schedule-gantt",
+        "reduction-roadmap-analysis"
+      ],
+      "topArchetypes": [
+        {
+          "id": "cover-kickoff",
+          "count": 13,
+          "fileSpread": 1,
+          "averageConfidence": 0.75,
+          "score": 11.75,
+          "topTags": [
+            "disclosure",
+            "kickoff",
+            "primary-reference",
+            "보고",
+            "제안"
+          ],
+          "examples": [
+            {
+              "fileId": "cdp_kickoff",
+              "slideNo": 1,
+              "title": "한화에어로스페이스"
+            },
+            {
+              "fileId": "cdp_kickoff",
+              "slideNo": 3,
+              "title": "1. ESG"
+            },
+            {
+              "fileId": "cdp_kickoff",
+              "slideNo": 5,
+              "title": "한화에어로스페이스의"
+            },
+            {
+              "fileId": "cdp_kickoff",
+              "slideNo": 7,
+              "title": "1."
+            },
+            {
+              "fileId": "cdp_kickoff",
+              "slideNo": 9,
+              "title": "3. CDP"
+            }
+          ]
+        },
+        {
+          "id": "integrated-process-map",
+          "count": 5,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 6.3,
+          "topTags": [
+            "disclosure",
+            "kickoff",
+            "primary-reference",
+            "프로세스",
+            "방법론"
+          ],
+          "examples": [
+            {
+              "fileId": "cdp_kickoff",
+              "slideNo": 8,
+              "title": "3. CDP"
+            },
+            {
+              "fileId": "cdp_kickoff",
+              "slideNo": 11,
+              "title": "한화에어로스페이스의"
+            },
+            {
+              "fileId": "cdp_kickoff",
+              "slideNo": 14,
+              "title": "3. CDP"
+            },
+            {
+              "fileId": "cdp_kickoff",
+              "slideNo": 17,
+              "title": "운영 현황 확인"
+            },
+            {
+              "fileId": "cdp_kickoff",
+              "slideNo": 22,
+              "title": "3."
+            }
+          ]
+        },
+        {
+          "id": "contents-isometric",
+          "count": 3,
+          "fileSpread": 1,
+          "averageConfidence": 0.88,
+          "score": 4.64,
+          "topTags": [
+            "disclosure",
+            "kickoff",
+            "primary-reference",
+            "contents"
+          ],
+          "examples": [
+            {
+              "fileId": "cdp_kickoff",
+              "slideNo": 2,
+              "title": "Contents"
+            },
+            {
+              "fileId": "cdp_kickoff",
+              "slideNo": 6,
+              "title": "Contents"
+            },
+            {
+              "fileId": "cdp_kickoff",
+              "slideNo": 19,
+              "title": "Contents"
+            }
+          ]
+        },
+        {
+          "id": "inventory-boundary-flow",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 2.86,
+          "topTags": [
+            "disclosure",
+            "kickoff",
+            "primary-reference",
+            "baseline"
+          ],
+          "examples": [
+            {
+              "fileId": "cdp_kickoff",
+              "slideNo": 4,
+              "title": "2. CDP"
+            }
+          ]
+        },
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 2.86,
+          "topTags": [
+            "disclosure",
+            "kickoff",
+            "primary-reference",
+            "er",
+            "pe",
+            "le"
+          ],
+          "examples": [
+            {
+              "fileId": "cdp_kickoff",
+              "slideNo": 24,
+              "title": "hank"
+            }
+          ]
+        },
+        {
+          "id": "schedule-gantt",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 2.86,
+          "topTags": [
+            "disclosure",
+            "kickoff",
+            "primary-reference",
+            "일정"
+          ],
+          "examples": [
+            {
+              "fileId": "cdp_kickoff",
+              "slideNo": 21,
+              "title": "2."
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    },
+    {
+      "id": "disclosure-proposal-approved-topn",
+      "label": "CDP·기후공시 / 제안서 대표 구조 Top 10",
+      "businessType": "disclosure",
+      "meetingType": "proposal",
+      "totalFiles": 8,
+      "totalSlides": 333,
+      "sourceFileIds": [
+        "cdp_proposal",
+        "cdp_proposal_2",
+        "cdp_proposal_3",
+        "deloitte_daewoo_sustainability_cdp_proposal",
+        "ecovadis_esg_proposal",
+        "hyundai_transys_sbti_cdp_climate_risk_proposal",
+        "kakao_cdp_scope3_proposal",
+        "keiti_esg_disclosure_support"
+      ],
+      "categoryPaths": [
+        "CDP/제안서",
+        "CDP/제안서 2",
+        "CDP/제안서 3"
+      ],
+      "sourceRootTypes": [
+        "business-report-reference",
+        "conversation-source",
+        "structure-benchmark"
+      ],
+      "representativeSequence": [
+        "cover-kickoff",
+        "contents-isometric",
+        "reduction-roadmap-analysis",
+        "integrated-process-map",
+        "why-what-how-logic",
+        "inventory-boundary-flow",
+        "schedule-gantt",
+        "cdp-response-strategy",
+        "data-request-tracker",
+        "work-scope-table"
+      ],
+      "topArchetypes": [
+        {
+          "id": "cover-kickoff",
+          "count": 140,
+          "fileSpread": 8,
+          "averageConfidence": 0.75,
+          "score": 121,
+          "topTags": [
+            "disclosure",
+            "proposal",
+            "proposal-reference",
+            "보고",
+            "제안",
+            "title"
+          ],
+          "examples": [
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 1,
+              "title": "EcoVadis"
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 3,
+              "title": "이너젠"
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 11,
+              "title": "제안사의 장점"
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 17,
+              "title": "ESG"
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 22,
+              "title": "IV."
+            }
+          ]
+        },
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 65,
+          "fileSpread": 8,
+          "averageConfidence": 0.86,
+          "score": 71.9,
+          "topTags": [
+            "disclosure",
+            "proposal",
+            "proposal-reference",
+            "pe",
+            "er",
+            "le"
+          ],
+          "examples": [
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 4,
+              "title": "1,109"
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 5,
+              "title": "주요인력"
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 14,
+              "title": "II."
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 15,
+              "title": "II."
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 25,
+              "title": "IV."
+            }
+          ]
+        },
+        {
+          "id": "integrated-process-map",
+          "count": 50,
+          "fileSpread": 7,
+          "averageConfidence": 0.86,
+          "score": 57,
+          "topTags": [
+            "disclosure",
+            "proposal",
+            "proposal-reference",
+            "방법론",
+            "프로세스",
+            "단계"
+          ],
+          "examples": [
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 7,
+              "title": "플랫폼 서비스"
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 8,
+              "title": "1."
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 9,
+              "title": "국가별"
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 19,
+              "title": "IV."
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 20,
+              "title": "2."
+            }
+          ]
+        },
+        {
+          "id": "contents-isometric",
+          "count": 32,
+          "fileSpread": 6,
+          "averageConfidence": 0.88,
+          "score": 40.16,
+          "topTags": [
+            "disclosure",
+            "proposal",
+            "proposal-reference",
+            "contents",
+            "순서",
+            "목차"
+          ],
+          "examples": [
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 2,
+              "title": "Contents"
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 12,
+              "title": "Contents"
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 16,
+              "title": "II."
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 18,
+              "title": "Contents"
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 29,
+              "title": "Contents"
+            }
+          ]
+        },
+        {
+          "id": "schedule-gantt",
+          "count": 19,
+          "fileSpread": 6,
+          "averageConfidence": 0.86,
+          "score": 28.34,
+          "topTags": [
+            "disclosure",
+            "proposal",
+            "proposal-reference",
+            "월",
+            "일정",
+            "기간"
+          ],
+          "examples": [
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 6,
+              "title": "주요성과"
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 10,
+              "title": "31,000"
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 13,
+              "title": "II."
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 31,
+              "title": "V."
+            },
+            {
+              "fileId": "deloitte_daewoo_sustainability_cdp_proposal",
+              "slideNo": 26,
+              "title": "문서는"
+            }
+          ]
+        },
+        {
+          "id": "inventory-boundary-flow",
+          "count": 17,
+          "fileSpread": 4,
+          "averageConfidence": 0.86,
+          "score": 22.62,
+          "topTags": [
+            "disclosure",
+            "proposal",
+            "proposal-reference",
+            "baseline"
+          ],
+          "examples": [
+            {
+              "fileId": "cdp_proposal_2",
+              "slideNo": 23,
+              "title": "참고"
+            },
+            {
+              "fileId": "cdp_proposal_3",
+              "slideNo": 7,
+              "title": "이너젠"
+            },
+            {
+              "fileId": "cdp_proposal_3",
+              "slideNo": 34,
+              "title": "대응 컨설팅 계약"
+            },
+            {
+              "fileId": "cdp_proposal_3",
+              "slideNo": 35,
+              "title": "CDP Climate Change"
+            },
+            {
+              "fileId": "cdp_proposal_3",
+              "slideNo": 36,
+              "title": "년 탄소정보공개에 관한 자문"
+            }
+          ]
+        },
+        {
+          "id": "why-what-how-logic",
+          "count": 5,
+          "fileSpread": 5,
+          "averageConfidence": 0.55,
+          "score": 12.75,
+          "topTags": [
+            "disclosure",
+            "proposal",
+            "proposal-reference",
+            "auto-default"
+          ],
+          "examples": [
+            {
+              "fileId": "deloitte_daewoo_sustainability_cdp_proposal",
+              "slideNo": 16,
+              "title": "© 2025 For information, contact Deloitte"
+            },
+            {
+              "fileId": "kakao_cdp_scope3_proposal",
+              "slideNo": 3,
+              "title": "참고"
+            },
+            {
+              "fileId": "cdp_proposal_3",
+              "slideNo": 22,
+              "title": "참고"
+            },
+            {
+              "fileId": "cdp_proposal",
+              "slideNo": 11,
+              "title": "이너젠은"
+            },
+            {
+              "fileId": "hyundai_transys_sbti_cdp_climate_risk_proposal",
+              "slideNo": 11,
+              "title": "이너젠은"
+            }
+          ]
+        },
+        {
+          "id": "data-request-tracker",
+          "count": 2,
+          "fileSpread": 1,
+          "averageConfidence": 0.84,
+          "score": 3.68,
+          "topTags": [
+            "disclosure",
+            "proposal",
+            "proposal-reference",
+            "담당"
+          ],
+          "examples": [
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 21,
+              "title": "IV."
+            },
+            {
+              "fileId": "ecovadis_esg_proposal",
+              "slideNo": 24,
+              "title": "IV."
+            }
+          ]
+        },
+        {
+          "id": "cdp-response-strategy",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.82,
+          "score": 2.82,
+          "topTags": [
+            "disclosure",
+            "proposal",
+            "proposal-reference",
+            "cdp"
+          ],
+          "examples": [
+            {
+              "fileId": "deloitte_daewoo_sustainability_cdp_proposal",
+              "slideNo": 44,
+              "title": "© 2025 For information, contact Deloitte"
+            }
+          ]
+        },
+        {
+          "id": "work-scope-table",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.82,
+          "score": 2.82,
+          "topTags": [
+            "disclosure",
+            "proposal",
+            "benchmark",
+            "과업"
+          ],
+          "examples": [
+            {
+              "fileId": "keiti_esg_disclosure_support",
+              "slideNo": 3,
+              "title": "Ⅰ."
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    },
+    {
+      "id": "disclosure-review-approved-topn",
+      "label": "CDP·기후공시 / 검토회의/방법론 보고 대표 구조 Top 10",
+      "businessType": "disclosure",
+      "meetingType": "review",
+      "totalFiles": 1,
+      "totalSlides": 51,
+      "sourceFileIds": [
+        "sk_tcfd_response_diagnosis_220811"
+      ],
+      "categoryPaths": [],
+      "sourceRootTypes": [
+        "structure-benchmark"
+      ],
+      "representativeSequence": [
+        "cover-kickoff",
+        "contents-isometric",
+        "tcfd-pillar-diagnosis",
+        "integrated-process-map",
+        "reduction-roadmap-analysis",
+        "data-request-tracker",
+        "schedule-gantt"
+      ],
+      "topArchetypes": [
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 22,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 20.92,
+          "topTags": [
+            "disclosure",
+            "review",
+            "benchmark",
+            "er",
+            "배출량",
+            "le"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 12,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 13,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 18,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 21,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 22,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            }
+          ]
+        },
+        {
+          "id": "integrated-process-map",
+          "count": 11,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 11.46,
+          "topTags": [
+            "disclosure",
+            "review",
+            "benchmark",
+            "프로세스",
+            "방법론",
+            "process"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 4,
+              "title": "기후"
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 9,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 10,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 11,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 16,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            }
+          ]
+        },
+        {
+          "id": "contents-isometric",
+          "count": 6,
+          "fileSpread": 1,
+          "averageConfidence": 0.88,
+          "score": 7.28,
+          "topTags": [
+            "disclosure",
+            "review",
+            "benchmark",
+            "agenda"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 2,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 3,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 6,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 8,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 14,
+              "title": "중대"
+            }
+          ]
+        },
+        {
+          "id": "schedule-gantt",
+          "count": 5,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 6.3,
+          "topTags": [
+            "disclosure",
+            "review",
+            "benchmark",
+            "기간"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 24,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 37,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 38,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 39,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 50,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            }
+          ]
+        },
+        {
+          "id": "data-request-tracker",
+          "count": 3,
+          "fileSpread": 1,
+          "averageConfidence": 0.84,
+          "score": 4.52,
+          "topTags": [
+            "disclosure",
+            "review",
+            "benchmark",
+            "담당"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 15,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 19,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 23,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            }
+          ]
+        },
+        {
+          "id": "cover-kickoff",
+          "count": 3,
+          "fileSpread": 1,
+          "averageConfidence": 0.75,
+          "score": 4.25,
+          "topTags": [
+            "disclosure",
+            "review",
+            "benchmark",
+            "보고"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 5,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 7,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 47,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            }
+          ]
+        },
+        {
+          "id": "tcfd-pillar-diagnosis",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.84,
+          "score": 2.84,
+          "topTags": [
+            "disclosure",
+            "review",
+            "benchmark",
+            "tcfd"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_response_diagnosis_220811",
+              "slideNo": 1,
+              "title": "SK"
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    },
+    {
+      "id": "disclosure-training-approved-topn",
+      "label": "CDP·기후공시 / 교육/세미나 대표 구조 Top 10",
+      "businessType": "disclosure",
+      "meetingType": "training",
+      "totalFiles": 3,
+      "totalSlides": 142,
+      "sourceFileIds": [
+        "pwc_csrd_disclosure_response",
+        "sk_tcfd_project_share_220603",
+        "sk_tcfd_training_220603"
+      ],
+      "categoryPaths": [],
+      "sourceRootTypes": [
+        "structure-benchmark"
+      ],
+      "representativeSequence": [
+        "cover-kickoff",
+        "contents-isometric",
+        "tcfd-pillar-diagnosis",
+        "reduction-roadmap-analysis",
+        "integrated-process-map",
+        "schedule-gantt",
+        "score-improvement-levers",
+        "why-what-how-logic"
+      ],
+      "topArchetypes": [
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 46,
+          "fileSpread": 3,
+          "averageConfidence": 0.86,
+          "score": 45.56,
+          "topTags": [
+            "disclosure",
+            "training",
+            "er",
+            "thought-leadership",
+            "le",
+            "pe"
+          ],
+          "examples": [
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 1,
+              "title": "Partner"
+            },
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 2,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 4,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 6,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 7,
+              "title": "Samil PwC"
+            }
+          ]
+        },
+        {
+          "id": "cover-kickoff",
+          "count": 52,
+          "fileSpread": 3,
+          "averageConfidence": 0.75,
+          "score": 45,
+          "topTags": [
+            "disclosure",
+            "training",
+            "보고",
+            "thought-leadership",
+            "제안"
+          ],
+          "examples": [
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 19,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 20,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 21,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 27,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "sk_tcfd_project_share_220603",
+              "slideNo": 3,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            }
+          ]
+        },
+        {
+          "id": "integrated-process-map",
+          "count": 21,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 22.06,
+          "topTags": [
+            "disclosure",
+            "training",
+            "프로세스",
+            "방법론",
+            "thought-leadership",
+            "단계"
+          ],
+          "examples": [
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 5,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 23,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "sk_tcfd_training_220603",
+              "slideNo": 10,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_training_220603",
+              "slideNo": 11,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_training_220603",
+              "slideNo": 17,
+              "title": "© 2021 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            }
+          ]
+        },
+        {
+          "id": "contents-isometric",
+          "count": 14,
+          "fileSpread": 3,
+          "averageConfidence": 0.88,
+          "score": 18.32,
+          "topTags": [
+            "disclosure",
+            "training",
+            "contents",
+            "agenda",
+            "thought-leadership"
+          ],
+          "examples": [
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 15,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "sk_tcfd_project_share_220603",
+              "slideNo": 2,
+              "title": "I."
+            },
+            {
+              "fileId": "sk_tcfd_project_share_220603",
+              "slideNo": 6,
+              "title": "I."
+            },
+            {
+              "fileId": "sk_tcfd_project_share_220603",
+              "slideNo": 7,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_training_220603",
+              "slideNo": 2,
+              "title": "I."
+            }
+          ]
+        },
+        {
+          "id": "tcfd-pillar-diagnosis",
+          "count": 2,
+          "fileSpread": 2,
+          "averageConfidence": 0.84,
+          "score": 5.68,
+          "topTags": [
+            "disclosure",
+            "training",
+            "tcfd"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_project_share_220603",
+              "slideNo": 1,
+              "title": "SK"
+            },
+            {
+              "fileId": "sk_tcfd_training_220603",
+              "slideNo": 1,
+              "title": "SK"
+            }
+          ]
+        },
+        {
+          "id": "why-what-how-logic",
+          "count": 4,
+          "fileSpread": 1,
+          "averageConfidence": 0.55,
+          "score": 4.2,
+          "topTags": [
+            "disclosure",
+            "training",
+            "thought-leadership",
+            "auto-default"
+          ],
+          "examples": [
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 8,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 11,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 16,
+              "title": "Samil PwC"
+            },
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 26,
+              "title": "Samil PwC"
+            }
+          ]
+        },
+        {
+          "id": "schedule-gantt",
+          "count": 2,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 3.72,
+          "topTags": [
+            "disclosure",
+            "training",
+            "월"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_tcfd_training_220603",
+              "slideNo": 20,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            },
+            {
+              "fileId": "sk_tcfd_training_220603",
+              "slideNo": 39,
+              "title": "© 2022 ECONETWORK Inc. All rights reserved. Printed in Korea."
+            }
+          ]
+        },
+        {
+          "id": "score-improvement-levers",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.8,
+          "score": 2.8,
+          "topTags": [
+            "disclosure",
+            "training",
+            "thought-leadership",
+            "등급"
+          ],
+          "examples": [
+            {
+              "fileId": "pwc_csrd_disclosure_response",
+              "slideNo": 3,
+              "title": "Samil PwC"
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    },
+    {
+      "id": "reduction-benchmark-approved-topn",
+      "label": "감축사업 / 구조 벤치마크 대표 구조 Top 10",
+      "businessType": "reduction",
+      "meetingType": "benchmark",
+      "totalFiles": 1,
+      "totalSlides": 18,
+      "sourceFileIds": [
+        "renewable_energy_new_business"
+      ],
+      "categoryPaths": [],
+      "sourceRootTypes": [
+        "structure-benchmark"
+      ],
+      "representativeSequence": [
+        "reduction-roadmap-analysis",
+        "why-what-how-logic",
+        "regulatory-timeline-radar",
+        "schedule-gantt",
+        "consulting-executive-summary"
+      ],
+      "topArchetypes": [
+        {
+          "id": "why-what-how-logic",
+          "count": 10,
+          "fileSpread": 1,
+          "averageConfidence": 0.55,
+          "score": 7.5,
+          "topTags": [
+            "reduction",
+            "benchmark",
+            "auto-default"
+          ],
+          "examples": [
+            {
+              "fileId": "renewable_energy_new_business",
+              "slideNo": 2,
+              "title": "전력시장의 변화"
+            },
+            {
+              "fileId": "renewable_energy_new_business",
+              "slideNo": 4,
+              "title": "재생에너지 확대를 위한 에너지 신사업의 역할. 2025 대한민국 탄소포럼"
+            },
+            {
+              "fileId": "renewable_energy_new_business",
+              "slideNo": 5,
+              "title": "재생에너지 확대를 위한 에너지 신사업의 역할. 2025 대한민국 탄소포럼"
+            },
+            {
+              "fileId": "renewable_energy_new_business",
+              "slideNo": 6,
+              "title": "에너지 신사업"
+            },
+            {
+              "fileId": "renewable_energy_new_business",
+              "slideNo": 9,
+              "title": "재생에너지 확대를 위한 에너지 신사업의 역할. 2025 대한민국 탄소포럼"
+            }
+          ]
+        },
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 3,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 4.58,
+          "topTags": [
+            "reduction",
+            "benchmark",
+            "er",
+            "le"
+          ],
+          "examples": [
+            {
+              "fileId": "renewable_energy_new_business",
+              "slideNo": 1,
+              "title": "재생에너지 확대를 위한 에너지 신사업의 역할"
+            },
+            {
+              "fileId": "renewable_energy_new_business",
+              "slideNo": 16,
+              "title": "마무리"
+            },
+            {
+              "fileId": "renewable_energy_new_business",
+              "slideNo": 18,
+              "title": "(주)인코어드 테크놀로지스"
+            }
+          ]
+        },
+        {
+          "id": "schedule-gantt",
+          "count": 2,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 3.72,
+          "topTags": [
+            "reduction",
+            "benchmark",
+            "schedule",
+            "월"
+          ],
+          "examples": [
+            {
+              "fileId": "renewable_energy_new_business",
+              "slideNo": 7,
+              "title": "재생에너지 확대를 위한 에너지 신사업의 역할. 2025 대한민국 탄소포럼"
+            },
+            {
+              "fileId": "renewable_energy_new_business",
+              "slideNo": 13,
+              "title": "재생에너지 확대를 위한 에너지 신사업의 역할. 2025 대한민국 탄소포럼"
+            }
+          ]
+        },
+        {
+          "id": "regulatory-timeline-radar",
+          "count": 2,
+          "fileSpread": 1,
+          "averageConfidence": 0.8,
+          "score": 3.6,
+          "topTags": [
+            "reduction",
+            "benchmark",
+            "제도"
+          ],
+          "examples": [
+            {
+              "fileId": "renewable_energy_new_business",
+              "slideNo": 3,
+              "title": "재생에너지 확대를 위한 에너지 신사업의 역할. 2025 대한민국 탄소포럼"
+            },
+            {
+              "fileId": "renewable_energy_new_business",
+              "slideNo": 8,
+              "title": "재생에너지 확대를 위한 에너지 신사업의 역할. 2025 대한민국 탄소포럼"
+            }
+          ]
+        },
+        {
+          "id": "consulting-executive-summary",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.78,
+          "score": 2.78,
+          "topTags": [
+            "reduction",
+            "benchmark",
+            "요약"
+          ],
+          "examples": [
+            {
+              "fileId": "renewable_energy_new_business",
+              "slideNo": 17,
+              "title": "재생에너지 확대를 위한 에너지 신사업의 역할. 2025 대한민국 탄소포럼"
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    },
+    {
+      "id": "reduction-final-approved-topn",
+      "label": "감축사업 / 최종보고 대표 구조 Top 10",
+      "businessType": "reduction",
+      "meetingType": "final",
+      "totalFiles": 2,
+      "totalSlides": 24,
+      "sourceFileIds": [
+        "research_evaluation_report",
+        "research_final_report_public"
+      ],
+      "categoryPaths": [],
+      "sourceRootTypes": [
+        "structure-benchmark"
+      ],
+      "representativeSequence": [
+        "cover-kickoff",
+        "integrated-process-map",
+        "work-scope-table",
+        "reduction-roadmap-analysis",
+        "consulting-one-page-memo",
+        "why-what-how-logic"
+      ],
+      "topArchetypes": [
+        {
+          "id": "cover-kickoff",
+          "count": 9,
+          "fileSpread": 1,
+          "averageConfidence": 0.75,
+          "score": 8.75,
+          "topTags": [
+            "reduction",
+            "final",
+            "benchmark",
+            "보고"
+          ],
+          "examples": [
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 1,
+              "title": "한국환경산업기술원"
+            },
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 7,
+              "title": "1. Scope 3"
+            },
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 9,
+              "title": "2. Scope 3"
+            },
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 11,
+              "title": "기후변화"
+            },
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 12,
+              "title": "[Back"
+            }
+          ]
+        },
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 7,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 8.02,
+          "topTags": [
+            "reduction",
+            "final",
+            "benchmark",
+            "er",
+            "pe",
+            "배출량"
+          ],
+          "examples": [
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 5,
+              "title": "2."
+            },
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 6,
+              "title": "Ⅱ."
+            },
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 13,
+              "title": "[Back"
+            },
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 16,
+              "title": "개년도"
+            },
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 21,
+              "title": "산업"
+            }
+          ]
+        },
+        {
+          "id": "integrated-process-map",
+          "count": 5,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 6.3,
+          "topTags": [
+            "reduction",
+            "final",
+            "benchmark",
+            "방법론",
+            "단계",
+            "프로세스"
+          ],
+          "examples": [
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 2,
+              "title": "I."
+            },
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 4,
+              "title": "1."
+            },
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 8,
+              "title": "Product Environmental Footprint Category Rules"
+            },
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 17,
+              "title": "산업별"
+            },
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 18,
+              "title": "BM"
+            }
+          ]
+        },
+        {
+          "id": "work-scope-table",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.82,
+          "score": 2.82,
+          "topTags": [
+            "reduction",
+            "final",
+            "benchmark",
+            "과업"
+          ],
+          "examples": [
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 3,
+              "title": "Ⅰ."
+            }
+          ]
+        },
+        {
+          "id": "consulting-one-page-memo",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.68,
+          "score": 2.68,
+          "topTags": [
+            "reduction",
+            "final",
+            "benchmark",
+            "리스크"
+          ],
+          "examples": [
+            {
+              "fileId": "research_final_report_public",
+              "slideNo": 10,
+              "title": "Ⅲ."
+            }
+          ]
+        },
+        {
+          "id": "why-what-how-logic",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.55,
+          "score": 2.55,
+          "topTags": [
+            "reduction",
+            "final",
+            "benchmark",
+            "auto-default"
+          ],
+          "examples": [
+            {
+              "fileId": "research_evaluation_report",
+              "slideNo": 1,
+              "title": "Slide 1"
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    },
+    {
+      "id": "reduction-kickoff-approved-topn",
+      "label": "감축사업 / 착수보고 대표 구조 Top 10",
+      "businessType": "reduction",
+      "meetingType": "kickoff",
+      "totalFiles": 4,
+      "totalSlides": 121,
+      "sourceFileIds": [
+        "jb_re100_kickoff",
+        "reduction_kickoff",
+        "reduction_kickoff_2",
+        "starstech_methodology_260410"
+      ],
+      "categoryPaths": [
+        "감축사업/착수보고",
+        "감축사업/착수보고 2"
+      ],
+      "sourceRootTypes": [
+        "business-report-reference",
+        "conversation-source",
+        "structure-benchmark"
+      ],
+      "representativeSequence": [
+        "cover-kickoff",
+        "contents-isometric",
+        "inventory-boundary-flow",
+        "reduction-roadmap-analysis",
+        "integrated-process-map",
+        "schedule-gantt",
+        "data-request-tracker"
+      ],
+      "topArchetypes": [
+        {
+          "id": "cover-kickoff",
+          "count": 64,
+          "fileSpread": 4,
+          "averageConfidence": 0.75,
+          "score": 56,
+          "topTags": [
+            "reduction",
+            "kickoff",
+            "primary-reference",
+            "title",
+            "보고",
+            "제안"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 1,
+              "title": "Durafiltex"
+            },
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 4,
+              "title": ", NDC"
+            },
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 5,
+              "title": "전기택시"
+            },
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 6,
+              "title": "대상사업"
+            },
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 9,
+              "title": "대한상의"
+            }
+          ]
+        },
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 17,
+          "fileSpread": 4,
+          "averageConfidence": 0.86,
+          "score": 22.62,
+          "topTags": [
+            "reduction",
+            "kickoff",
+            "primary-reference",
+            "pe",
+            "er",
+            "le"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 7,
+              "title": "자발적 시장 인증"
+            },
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 8,
+              "title": "규제 영역"
+            },
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 32,
+              "title": "hank"
+            },
+            {
+              "fileId": "reduction_kickoff",
+              "slideNo": 8,
+              "title": ", VCM"
+            },
+            {
+              "fileId": "reduction_kickoff",
+              "slideNo": 10,
+              "title": "(Scope1+2)"
+            }
+          ]
+        },
+        {
+          "id": "contents-isometric",
+          "count": 13,
+          "fileSpread": 4,
+          "averageConfidence": 0.88,
+          "score": 19.44,
+          "topTags": [
+            "reduction",
+            "kickoff",
+            "primary-reference",
+            "contents",
+            "순서"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 2,
+              "title": "Contents"
+            },
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 11,
+              "title": "Contents"
+            },
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 20,
+              "title": "감축량"
+            },
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 27,
+              "title": "Contents"
+            },
+            {
+              "fileId": "reduction_kickoff",
+              "slideNo": 2,
+              "title": "Contents"
+            }
+          ]
+        },
+        {
+          "id": "integrated-process-map",
+          "count": 15,
+          "fileSpread": 3,
+          "averageConfidence": 0.86,
+          "score": 18.9,
+          "topTags": [
+            "reduction",
+            "kickoff",
+            "primary-reference",
+            "방법론",
+            "단계",
+            "프로세스"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 14,
+              "title": "단계"
+            },
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 19,
+              "title": "출처"
+            },
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 28,
+              "title": "뉴라이즌"
+            },
+            {
+              "fileId": "reduction_kickoff",
+              "slideNo": 9,
+              "title": "등록"
+            },
+            {
+              "fileId": "reduction_kickoff",
+              "slideNo": 17,
+              "title": "플랫폼 서비스"
+            }
+          ]
+        },
+        {
+          "id": "inventory-boundary-flow",
+          "count": 5,
+          "fileSpread": 3,
+          "averageConfidence": 0.86,
+          "score": 10.3,
+          "topTags": [
+            "reduction",
+            "kickoff",
+            "primary-reference",
+            "baseline",
+            "사업 전",
+            "사업 후"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 3,
+              "title": "I."
+            },
+            {
+              "fileId": "reduction_kickoff",
+              "slideNo": 3,
+              "title": "I."
+            },
+            {
+              "fileId": "starstech_methodology_260410",
+              "slideNo": 13,
+              "title": "II."
+            },
+            {
+              "fileId": "starstech_methodology_260410",
+              "slideNo": 15,
+              "title": "참고"
+            },
+            {
+              "fileId": "starstech_methodology_260410",
+              "slideNo": 16,
+              "title": "참고"
+            }
+          ]
+        },
+        {
+          "id": "schedule-gantt",
+          "count": 6,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 9.16,
+          "topTags": [
+            "reduction",
+            "kickoff",
+            "primary-reference",
+            "월",
+            "기간"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_kickoff",
+              "slideNo": 14,
+              "title": "플랫폼"
+            },
+            {
+              "fileId": "reduction_kickoff",
+              "slideNo": 21,
+              "title": "31,000"
+            },
+            {
+              "fileId": "jb_re100_kickoff",
+              "slideNo": 3,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "jb_re100_kickoff",
+              "slideNo": 7,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "jb_re100_kickoff",
+              "slideNo": 16,
+              "title": "Innovative Ideas"
+            }
+          ]
+        },
+        {
+          "id": "data-request-tracker",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.84,
+          "score": 2.84,
+          "topTags": [
+            "reduction",
+            "kickoff",
+            "primary-reference",
+            "요청 자료"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_kickoff_2",
+              "slideNo": 31,
+              "title": "타당성 검토를 위한 요청 자료"
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    },
+    {
+      "id": "reduction-proposal-approved-topn",
+      "label": "감축사업 / 제안서 대표 구조 Top 10",
+      "businessType": "reduction",
+      "meetingType": "proposal",
+      "totalFiles": 3,
+      "totalSlides": 93,
+      "sourceFileIds": [
+        "mbi_selangor_tender_briefing_carbon",
+        "reduction_proposal",
+        "reduction_proposal_pdf"
+      ],
+      "categoryPaths": [
+        "감축사업/제안서"
+      ],
+      "sourceRootTypes": [
+        "business-report-reference",
+        "conversation-source"
+      ],
+      "representativeSequence": [
+        "cover-kickoff",
+        "contents-isometric",
+        "reduction-roadmap-analysis",
+        "integrated-process-map",
+        "schedule-gantt",
+        "inventory-boundary-flow",
+        "why-what-how-logic"
+      ],
+      "topArchetypes": [
+        {
+          "id": "cover-kickoff",
+          "count": 29,
+          "fileSpread": 2,
+          "averageConfidence": 0.75,
+          "score": 25.75,
+          "topTags": [
+            "reduction",
+            "proposal",
+            "proposal-reference",
+            "제안",
+            "보고",
+            "title"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 1,
+              "title": "Durafiltex"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 12,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 13,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 14,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 15,
+              "title": "Innovative Ideas"
+            }
+          ]
+        },
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 21,
+          "fileSpread": 3,
+          "averageConfidence": 0.86,
+          "score": 24.06,
+          "topTags": [
+            "reduction",
+            "proposal",
+            "er",
+            "pe",
+            "be",
+            "proposal-reference"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 4,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 5,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 9,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 17,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 18,
+              "title": "Innovative Ideas"
+            }
+          ]
+        },
+        {
+          "id": "integrated-process-map",
+          "count": 23,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 23.78,
+          "topTags": [
+            "reduction",
+            "proposal",
+            "proposal-reference",
+            "방법론",
+            "단계",
+            "프로세스"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 6,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 7,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 10,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 20,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 25,
+              "title": "Innovative Ideas"
+            }
+          ]
+        },
+        {
+          "id": "contents-isometric",
+          "count": 10,
+          "fileSpread": 3,
+          "averageConfidence": 0.88,
+          "score": 14.8,
+          "topTags": [
+            "reduction",
+            "proposal",
+            "proposal-reference",
+            "contents",
+            "순서",
+            "tender-source"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 2,
+              "title": "Contents"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 16,
+              "title": "Contents"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 23,
+              "title": "Contents"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 36,
+              "title": "Contents"
+            },
+            {
+              "fileId": "reduction_proposal",
+              "slideNo": 2,
+              "title": "Contents"
+            }
+          ]
+        },
+        {
+          "id": "schedule-gantt",
+          "count": 5,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 8.3,
+          "topTags": [
+            "reduction",
+            "proposal",
+            "proposal-reference",
+            "월"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 3,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 8,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "reduction_proposal_pdf",
+              "slideNo": 11,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "reduction_proposal",
+              "slideNo": 8,
+              "title": "I."
+            },
+            {
+              "fileId": "reduction_proposal",
+              "slideNo": 11,
+              "title": "31,000"
+            }
+          ]
+        },
+        {
+          "id": "inventory-boundary-flow",
+          "count": 3,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 6.58,
+          "topTags": [
+            "reduction",
+            "proposal",
+            "baseline",
+            "tender-source",
+            "proposal-reference",
+            "사업 전"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_proposal",
+              "slideNo": 17,
+              "title": "II."
+            },
+            {
+              "fileId": "mbi_selangor_tender_briefing_carbon",
+              "slideNo": 9,
+              "title": "Deliverables"
+            },
+            {
+              "fileId": "mbi_selangor_tender_briefing_carbon",
+              "slideNo": 10,
+              "title": "Scope of Services"
+            }
+          ]
+        },
+        {
+          "id": "why-what-how-logic",
+          "count": 2,
+          "fileSpread": 1,
+          "averageConfidence": 0.55,
+          "score": 3.1,
+          "topTags": [
+            "reduction",
+            "proposal",
+            "tender-source",
+            "auto-default"
+          ],
+          "examples": [
+            {
+              "fileId": "mbi_selangor_tender_briefing_carbon",
+              "slideNo": 11,
+              "title": "Vendor Registration"
+            },
+            {
+              "fileId": "mbi_selangor_tender_briefing_carbon",
+              "slideNo": 12,
+              "title": "Vendor Registration Platform"
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    },
+    {
+      "id": "reduction-review-approved-topn",
+      "label": "감축사업 / 검토회의/방법론 보고 대표 구조 Top 10",
+      "businessType": "reduction",
+      "meetingType": "review",
+      "totalFiles": 4,
+      "totalSlides": 88,
+      "sourceFileIds": [
+        "jb_re100_w2",
+        "reduction_methodology_report",
+        "reduction_methodology_report_2",
+        "reduction_methodology_report_3"
+      ],
+      "categoryPaths": [
+        "감축사업/방법론 개발 보고",
+        "감축사업/방법론 개발 보고 2",
+        "감축사업/방법론 개발 보고 3"
+      ],
+      "sourceRootTypes": [
+        "business-report-reference",
+        "structure-benchmark"
+      ],
+      "representativeSequence": [
+        "cover-kickoff",
+        "contents-isometric",
+        "inventory-boundary-flow",
+        "reduction-roadmap-analysis",
+        "integrated-process-map",
+        "why-what-how-logic",
+        "schedule-gantt",
+        "data-request-tracker"
+      ],
+      "topArchetypes": [
+        {
+          "id": "cover-kickoff",
+          "count": 42,
+          "fileSpread": 4,
+          "averageConfidence": 0.75,
+          "score": 39.5,
+          "topTags": [
+            "reduction",
+            "review",
+            "primary-reference",
+            "title",
+            "보고",
+            "회의 자료"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_methodology_report_2",
+              "slideNo": 1,
+              "title": "Durafiltex"
+            },
+            {
+              "fileId": "reduction_methodology_report_2",
+              "slideNo": 2,
+              "title": "요약"
+            },
+            {
+              "fileId": "reduction_methodology_report_2",
+              "slideNo": 4,
+              "title": "필터"
+            },
+            {
+              "fileId": "reduction_methodology_report_2",
+              "slideNo": 5,
+              "title": "산업시설 등의 공조계통 또는 기타 팬"
+            },
+            {
+              "fileId": "reduction_methodology_report_2",
+              "slideNo": 7,
+              "title": "송풍기"
+            }
+          ]
+        },
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 14,
+          "fileSpread": 4,
+          "averageConfidence": 0.86,
+          "score": 20.04,
+          "topTags": [
+            "reduction",
+            "review",
+            "primary-reference",
+            "er",
+            "le",
+            "be"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_methodology_report_2",
+              "slideNo": 10,
+              "title": "참고"
+            },
+            {
+              "fileId": "reduction_methodology_report_2",
+              "slideNo": 20,
+              "title": "hank"
+            },
+            {
+              "fileId": "reduction_methodology_report_3",
+              "slideNo": 8,
+              "title": "화학"
+            },
+            {
+              "fileId": "reduction_methodology_report_3",
+              "slideNo": 21,
+              "title": "참고"
+            },
+            {
+              "fileId": "reduction_methodology_report_3",
+              "slideNo": 24,
+              "title": "hank"
+            }
+          ]
+        },
+        {
+          "id": "contents-isometric",
+          "count": 10,
+          "fileSpread": 4,
+          "averageConfidence": 0.88,
+          "score": 16.8,
+          "topTags": [
+            "reduction",
+            "review",
+            "primary-reference",
+            "contents"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_methodology_report_2",
+              "slideNo": 3,
+              "title": "Contents"
+            },
+            {
+              "fileId": "reduction_methodology_report_2",
+              "slideNo": 11,
+              "title": "Contents"
+            },
+            {
+              "fileId": "reduction_methodology_report_2",
+              "slideNo": 17,
+              "title": "Contents"
+            },
+            {
+              "fileId": "reduction_methodology_report_3",
+              "slideNo": 4,
+              "title": "Contents"
+            },
+            {
+              "fileId": "reduction_methodology_report_3",
+              "slideNo": 16,
+              "title": "Contents"
+            }
+          ]
+        },
+        {
+          "id": "inventory-boundary-flow",
+          "count": 7,
+          "fileSpread": 3,
+          "averageConfidence": 0.86,
+          "score": 12.02,
+          "topTags": [
+            "reduction",
+            "review",
+            "primary-reference",
+            "베이스라인",
+            "경계",
+            "baseline"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_methodology_report_2",
+              "slideNo": 14,
+              "title": "II."
+            },
+            {
+              "fileId": "reduction_methodology_report_3",
+              "slideNo": 9,
+              "title": "평가경계"
+            },
+            {
+              "fileId": "reduction_methodology_report_3",
+              "slideNo": 10,
+              "title": "참고"
+            },
+            {
+              "fileId": "reduction_methodology_report_3",
+              "slideNo": 13,
+              "title": "열교환기 전기 사용량"
+            },
+            {
+              "fileId": "reduction_methodology_report",
+              "slideNo": 13,
+              "title": "II."
+            }
+          ]
+        },
+        {
+          "id": "schedule-gantt",
+          "count": 8,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 10.88,
+          "topTags": [
+            "reduction",
+            "review",
+            "primary-reference",
+            "월",
+            "기간",
+            "일정"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_methodology_report_2",
+              "slideNo": 15,
+              "title": "II."
+            },
+            {
+              "fileId": "reduction_methodology_report_2",
+              "slideNo": 16,
+              "title": "II."
+            },
+            {
+              "fileId": "jb_re100_w2",
+              "slideNo": 5,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "jb_re100_w2",
+              "slideNo": 8,
+              "title": "Innovative Ideas"
+            },
+            {
+              "fileId": "jb_re100_w2",
+              "slideNo": 10,
+              "title": "Innovative Ideas"
+            }
+          ]
+        },
+        {
+          "id": "integrated-process-map",
+          "count": 5,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 8.3,
+          "topTags": [
+            "reduction",
+            "review",
+            "primary-reference",
+            "방법론",
+            "단계"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_methodology_report_2",
+              "slideNo": 9,
+              "title": "참고"
+            },
+            {
+              "fileId": "reduction_methodology_report_3",
+              "slideNo": 1,
+              "title": "Durafiltex"
+            },
+            {
+              "fileId": "reduction_methodology_report_3",
+              "slideNo": 11,
+              "title": "평가경계"
+            },
+            {
+              "fileId": "reduction_methodology_report_3",
+              "slideNo": 15,
+              "title": "앞서의 지점에서 실제"
+            },
+            {
+              "fileId": "reduction_methodology_report_3",
+              "slideNo": 20,
+              "title": "차 검토 결론"
+            }
+          ]
+        },
+        {
+          "id": "data-request-tracker",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.84,
+          "score": 2.84,
+          "topTags": [
+            "reduction",
+            "review",
+            "primary-reference",
+            "요청 자료"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_methodology_report_2",
+              "slideNo": 19,
+              "title": "타당성 검토를 위한 요청 자료"
+            }
+          ]
+        },
+        {
+          "id": "why-what-how-logic",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.55,
+          "score": 2.55,
+          "topTags": [
+            "reduction",
+            "review",
+            "primary-reference",
+            "auto-default"
+          ],
+          "examples": [
+            {
+              "fileId": "reduction_methodology_report_2",
+              "slideNo": 6,
+              "title": "참고"
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    },
+    {
+      "id": "regulatory-final-approved-topn",
+      "label": "규제대응/인벤토리 / 최종보고 대표 구조 Top 10",
+      "businessType": "regulatory",
+      "meetingType": "final",
+      "totalFiles": 3,
+      "totalSlides": 85,
+      "sourceFileIds": [
+        "ghg_inventory_final",
+        "ghg_inventory_final_2",
+        "regulatory_final"
+      ],
+      "categoryPaths": [
+        "규제대응사업/최종보고",
+        "온실가스 인벤토리/최종보고",
+        "온실가스 인벤토리/최종보고 2"
+      ],
+      "sourceRootTypes": [
+        "business-report-reference"
+      ],
+      "representativeSequence": [
+        "cover-kickoff",
+        "contents-isometric",
+        "reduction-roadmap-analysis",
+        "integrated-process-map",
+        "inventory-boundary-flow",
+        "data-request-tracker",
+        "schedule-gantt",
+        "why-what-how-logic"
+      ],
+      "topArchetypes": [
+        {
+          "id": "cover-kickoff",
+          "count": 42,
+          "fileSpread": 3,
+          "averageConfidence": 0.75,
+          "score": 37.5,
+          "topTags": [
+            "regulatory",
+            "final",
+            "primary-reference",
+            "보고",
+            "title"
+          ],
+          "examples": [
+            {
+              "fileId": "regulatory_final",
+              "slideNo": 1,
+              "title": "GS"
+            },
+            {
+              "fileId": "regulatory_final",
+              "slideNo": 3,
+              "title": "리테일은 ’"
+            },
+            {
+              "fileId": "regulatory_final",
+              "slideNo": 7,
+              "title": "II."
+            },
+            {
+              "fileId": "regulatory_final",
+              "slideNo": 8,
+              "title": "II."
+            },
+            {
+              "fileId": "regulatory_final",
+              "slideNo": 9,
+              "title": "II."
+            }
+          ]
+        },
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 16,
+          "fileSpread": 3,
+          "averageConfidence": 0.86,
+          "score": 19.76,
+          "topTags": [
+            "regulatory",
+            "final",
+            "primary-reference",
+            "pe",
+            "le",
+            "배출량"
+          ],
+          "examples": [
+            {
+              "fileId": "regulatory_final",
+              "slideNo": 17,
+              "title": "hank"
+            },
+            {
+              "fileId": "ghg_inventory_final_2",
+              "slideNo": 3,
+              "title": "1."
+            },
+            {
+              "fileId": "ghg_inventory_final_2",
+              "slideNo": 11,
+              "title": "Scope1,2,3"
+            },
+            {
+              "fileId": "ghg_inventory_final_2",
+              "slideNo": 12,
+              "title": "2. Scope1,2,3"
+            },
+            {
+              "fileId": "ghg_inventory_final_2",
+              "slideNo": 28,
+              "title": "2."
+            }
+          ]
+        },
+        {
+          "id": "integrated-process-map",
+          "count": 11,
+          "fileSpread": 3,
+          "averageConfidence": 0.86,
+          "score": 15.46,
+          "topTags": [
+            "regulatory",
+            "final",
+            "primary-reference",
+            "프로세스",
+            "방법론",
+            "단계"
+          ],
+          "examples": [
+            {
+              "fileId": "regulatory_final",
+              "slideNo": 6,
+              "title": "II."
+            },
+            {
+              "fileId": "ghg_inventory_final_2",
+              "slideNo": 9,
+              "title": "Scope1,2,3"
+            },
+            {
+              "fileId": "ghg_inventory_final_2",
+              "slideNo": 21,
+              "title": "예상 평가 등급"
+            },
+            {
+              "fileId": "ghg_inventory_final_2",
+              "slideNo": 24,
+              "title": "향후"
+            },
+            {
+              "fileId": "ghg_inventory_final_2",
+              "slideNo": 29,
+              "title": "2."
+            }
+          ]
+        },
+        {
+          "id": "contents-isometric",
+          "count": 8,
+          "fileSpread": 3,
+          "averageConfidence": 0.88,
+          "score": 13.04,
+          "topTags": [
+            "regulatory",
+            "final",
+            "primary-reference",
+            "contents"
+          ],
+          "examples": [
+            {
+              "fileId": "regulatory_final",
+              "slideNo": 2,
+              "title": "Contents"
+            },
+            {
+              "fileId": "regulatory_final",
+              "slideNo": 5,
+              "title": "Contents"
+            },
+            {
+              "fileId": "regulatory_final",
+              "slideNo": 13,
+              "title": "Contents"
+            },
+            {
+              "fileId": "ghg_inventory_final_2",
+              "slideNo": 2,
+              "title": "Contents"
+            },
+            {
+              "fileId": "ghg_inventory_final_2",
+              "slideNo": 6,
+              "title": "Contents"
+            }
+          ]
+        },
+        {
+          "id": "inventory-boundary-flow",
+          "count": 3,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 6.58,
+          "topTags": [
+            "regulatory",
+            "final",
+            "primary-reference",
+            "baseline",
+            "경계"
+          ],
+          "examples": [
+            {
+              "fileId": "regulatory_final",
+              "slideNo": 10,
+              "title": "참고"
+            },
+            {
+              "fileId": "ghg_inventory_final_2",
+              "slideNo": 10,
+              "title": "Scope1,2"
+            },
+            {
+              "fileId": "ghg_inventory_final_2",
+              "slideNo": 32,
+              "title": "현실적인"
+            }
+          ]
+        },
+        {
+          "id": "schedule-gantt",
+          "count": 3,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 6.58,
+          "topTags": [
+            "regulatory",
+            "final",
+            "primary-reference",
+            "월",
+            "일정",
+            "기간"
+          ],
+          "examples": [
+            {
+              "fileId": "regulatory_final",
+              "slideNo": 4,
+              "title": "I."
+            },
+            {
+              "fileId": "ghg_inventory_final",
+              "slideNo": 8,
+              "title": "국내 생산공장"
+            },
+            {
+              "fileId": "ghg_inventory_final",
+              "slideNo": 25,
+              "title": "유럽연합"
+            }
+          ]
+        },
+        {
+          "id": "data-request-tracker",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.84,
+          "score": 2.84,
+          "topTags": [
+            "regulatory",
+            "final",
+            "primary-reference",
+            "담당"
+          ],
+          "examples": [
+            {
+              "fileId": "ghg_inventory_final_2",
+              "slideNo": 26,
+              "title": "1."
+            }
+          ]
+        },
+        {
+          "id": "why-what-how-logic",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.55,
+          "score": 2.55,
+          "topTags": [
+            "regulatory",
+            "final",
+            "primary-reference",
+            "auto-default"
+          ],
+          "examples": [
+            {
+              "fileId": "ghg_inventory_final",
+              "slideNo": 30,
+              "title": "감사합니다"
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    },
+    {
+      "id": "regulatory-kickoff-approved-topn",
+      "label": "규제대응/인벤토리 / 착수보고 대표 구조 Top 10",
+      "businessType": "regulatory",
+      "meetingType": "kickoff",
+      "totalFiles": 3,
+      "totalSlides": 73,
+      "sourceFileIds": [
+        "ghg_inventory_kickoff",
+        "regulatory_kickoff",
+        "sk_siltron_ghg_inventory_kickoff"
+      ],
+      "categoryPaths": [
+        "규제대응사업/착수보고",
+        "온실가스 인벤토리/착수보고"
+      ],
+      "sourceRootTypes": [
+        "business-report-reference",
+        "conversation-source"
+      ],
+      "representativeSequence": [
+        "cover-kickoff",
+        "contents-isometric",
+        "reduction-roadmap-analysis",
+        "schedule-gantt",
+        "inventory-boundary-flow",
+        "integrated-process-map",
+        "why-what-how-logic"
+      ],
+      "topArchetypes": [
+        {
+          "id": "cover-kickoff",
+          "count": 37,
+          "fileSpread": 3,
+          "averageConfidence": 0.75,
+          "score": 33.75,
+          "topTags": [
+            "regulatory",
+            "kickoff",
+            "primary-reference",
+            "보고",
+            "title",
+            "제안"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 8,
+              "title": "II."
+            },
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 9,
+              "title": "II."
+            },
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 10,
+              "title": "II."
+            },
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 12,
+              "title": "Scope 1, 2, 3"
+            },
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 14,
+              "title": "II."
+            }
+          ]
+        },
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 9,
+          "fileSpread": 3,
+          "averageConfidence": 0.86,
+          "score": 13.74,
+          "topTags": [
+            "regulatory",
+            "kickoff",
+            "primary-reference",
+            "er",
+            "pe",
+            "le"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 1,
+              "title": "’26"
+            },
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 5,
+              "title": "기후변화 및 온실가스 분야의 풍부한 경험을 보유한 경력자"
+            },
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 20,
+              "title": "III."
+            },
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 28,
+              "title": "hank"
+            },
+            {
+              "fileId": "regulatory_kickoff",
+              "slideNo": 1,
+              "title": "’26"
+            }
+          ]
+        },
+        {
+          "id": "integrated-process-map",
+          "count": 8,
+          "fileSpread": 3,
+          "averageConfidence": 0.86,
+          "score": 12.88,
+          "topTags": [
+            "regulatory",
+            "kickoff",
+            "primary-reference",
+            "방법론",
+            "프로세스",
+            "단계"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 13,
+              "title": "II."
+            },
+            {
+              "fileId": "regulatory_kickoff",
+              "slideNo": 13,
+              "title": "II."
+            },
+            {
+              "fileId": "ghg_inventory_kickoff",
+              "slideNo": 6,
+              "title": "3."
+            },
+            {
+              "fileId": "ghg_inventory_kickoff",
+              "slideNo": 8,
+              "title": "참고"
+            },
+            {
+              "fileId": "ghg_inventory_kickoff",
+              "slideNo": 9,
+              "title": "CBAM"
+            }
+          ]
+        },
+        {
+          "id": "contents-isometric",
+          "count": 8,
+          "fileSpread": 2,
+          "averageConfidence": 0.88,
+          "score": 11.04,
+          "topTags": [
+            "regulatory",
+            "kickoff",
+            "primary-reference",
+            "contents"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 2,
+              "title": "Contents"
+            },
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 7,
+              "title": "Contents"
+            },
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 15,
+              "title": "Contents"
+            },
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 22,
+              "title": "Contents"
+            },
+            {
+              "fileId": "regulatory_kickoff",
+              "slideNo": 2,
+              "title": "Contents"
+            }
+          ]
+        },
+        {
+          "id": "schedule-gantt",
+          "count": 6,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 9.16,
+          "topTags": [
+            "regulatory",
+            "kickoff",
+            "primary-reference",
+            "월",
+            "기간",
+            "일정"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 3,
+              "title": "I."
+            },
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 6,
+              "title": "I."
+            },
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 26,
+              "title": "IV."
+            },
+            {
+              "fileId": "regulatory_kickoff",
+              "slideNo": 3,
+              "title": "I."
+            },
+            {
+              "fileId": "regulatory_kickoff",
+              "slideNo": 6,
+              "title": "I."
+            }
+          ]
+        },
+        {
+          "id": "inventory-boundary-flow",
+          "count": 4,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 7.44,
+          "topTags": [
+            "regulatory",
+            "kickoff",
+            "primary-reference",
+            "baseline"
+          ],
+          "examples": [
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 4,
+              "title": "I."
+            },
+            {
+              "fileId": "sk_siltron_ghg_inventory_kickoff",
+              "slideNo": 11,
+              "title": "온실가스 규제"
+            },
+            {
+              "fileId": "regulatory_kickoff",
+              "slideNo": 4,
+              "title": "I."
+            },
+            {
+              "fileId": "regulatory_kickoff",
+              "slideNo": 11,
+              "title": "온실가스 규제"
+            }
+          ]
+        },
+        {
+          "id": "why-what-how-logic",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.55,
+          "score": 2.55,
+          "topTags": [
+            "regulatory",
+            "kickoff",
+            "primary-reference",
+            "auto-default"
+          ],
+          "examples": [
+            {
+              "fileId": "ghg_inventory_kickoff",
+              "slideNo": 17,
+              "title": "감사합니다"
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    },
+    {
+      "id": "regulatory-proposal-approved-topn",
+      "label": "규제대응/인벤토리 / 제안서 대표 구조 Top 10",
+      "businessType": "regulatory",
+      "meetingType": "proposal",
+      "totalFiles": 2,
+      "totalSlides": 45,
+      "sourceFileIds": [
+        "ghg_inventory_proposal",
+        "ghg_inventory_proposal_v2"
+      ],
+      "categoryPaths": [
+        "온실가스 인벤토리/제안서",
+        "온실가스 인벤토리/제안서_V2"
+      ],
+      "sourceRootTypes": [
+        "business-report-reference"
+      ],
+      "representativeSequence": [
+        "cover-kickoff",
+        "contents-isometric",
+        "reduction-roadmap-analysis",
+        "schedule-gantt",
+        "why-what-how-logic",
+        "integrated-process-map",
+        "evidence-grid"
+      ],
+      "topArchetypes": [
+        {
+          "id": "cover-kickoff",
+          "count": 27,
+          "fileSpread": 2,
+          "averageConfidence": 0.75,
+          "score": 24.25,
+          "topTags": [
+            "regulatory",
+            "proposal",
+            "proposal-reference",
+            "보고",
+            "제안",
+            "title"
+          ],
+          "examples": [
+            {
+              "fileId": "ghg_inventory_proposal_v2",
+              "slideNo": 1,
+              "title": "SK"
+            },
+            {
+              "fileId": "ghg_inventory_proposal_v2",
+              "slideNo": 3,
+              "title": "지속가능성 의무공시에 대한 초안"
+            },
+            {
+              "fileId": "ghg_inventory_proposal_v2",
+              "slideNo": 4,
+              "title": "1."
+            },
+            {
+              "fileId": "ghg_inventory_proposal_v2",
+              "slideNo": 6,
+              "title": "2."
+            },
+            {
+              "fileId": "ghg_inventory_proposal_v2",
+              "slideNo": 7,
+              "title": "2."
+            }
+          ]
+        },
+        {
+          "id": "reduction-roadmap-analysis",
+          "count": 8,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 10.88,
+          "topTags": [
+            "regulatory",
+            "proposal",
+            "proposal-reference",
+            "pe",
+            "le",
+            "be"
+          ],
+          "examples": [
+            {
+              "fileId": "ghg_inventory_proposal_v2",
+              "slideNo": 8,
+              "title": "2."
+            },
+            {
+              "fileId": "ghg_inventory_proposal_v2",
+              "slideNo": 9,
+              "title": "2."
+            },
+            {
+              "fileId": "ghg_inventory_proposal",
+              "slideNo": 2,
+              "title": "1."
+            },
+            {
+              "fileId": "ghg_inventory_proposal",
+              "slideNo": 4,
+              "title": "엔무브의"
+            },
+            {
+              "fileId": "ghg_inventory_proposal",
+              "slideNo": 11,
+              "title": "활동자료"
+            }
+          ]
+        },
+        {
+          "id": "integrated-process-map",
+          "count": 2,
+          "fileSpread": 2,
+          "averageConfidence": 0.86,
+          "score": 5.72,
+          "topTags": [
+            "regulatory",
+            "proposal",
+            "proposal-reference",
+            "방법론",
+            "process"
+          ],
+          "examples": [
+            {
+              "fileId": "ghg_inventory_proposal_v2",
+              "slideNo": 12,
+              "title": "2."
+            },
+            {
+              "fileId": "ghg_inventory_proposal",
+              "slideNo": 18,
+              "title": "직접 배출"
+            }
+          ]
+        },
+        {
+          "id": "why-what-how-logic",
+          "count": 3,
+          "fileSpread": 2,
+          "averageConfidence": 0.55,
+          "score": 5.65,
+          "topTags": [
+            "regulatory",
+            "proposal",
+            "proposal-reference",
+            "auto-default"
+          ],
+          "examples": [
+            {
+              "fileId": "ghg_inventory_proposal_v2",
+              "slideNo": 22,
+              "title": "감사합니다"
+            },
+            {
+              "fileId": "ghg_inventory_proposal",
+              "slideNo": 13,
+              "title": "활동자료 모니터링"
+            },
+            {
+              "fileId": "ghg_inventory_proposal",
+              "slideNo": 16,
+              "title": "참고"
+            }
+          ]
+        },
+        {
+          "id": "contents-isometric",
+          "count": 3,
+          "fileSpread": 1,
+          "averageConfidence": 0.88,
+          "score": 4.64,
+          "topTags": [
+            "regulatory",
+            "proposal",
+            "proposal-reference",
+            "contents"
+          ],
+          "examples": [
+            {
+              "fileId": "ghg_inventory_proposal_v2",
+              "slideNo": 2,
+              "title": "CONTENTS"
+            },
+            {
+              "fileId": "ghg_inventory_proposal_v2",
+              "slideNo": 5,
+              "title": "CONTENTS"
+            },
+            {
+              "fileId": "ghg_inventory_proposal_v2",
+              "slideNo": 16,
+              "title": "CONTENTS"
+            }
+          ]
+        },
+        {
+          "id": "schedule-gantt",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.86,
+          "score": 2.86,
+          "topTags": [
+            "regulatory",
+            "proposal",
+            "proposal-reference",
+            "일정",
+            "월"
+          ],
+          "examples": [
+            {
+              "fileId": "ghg_inventory_proposal",
+              "slideNo": 5,
+              "title": "3."
+            }
+          ]
+        },
+        {
+          "id": "evidence-grid",
+          "count": 1,
+          "fileSpread": 1,
+          "averageConfidence": 0.72,
+          "score": 2.72,
+          "topTags": [
+            "regulatory",
+            "proposal",
+            "proposal-reference",
+            "근거"
+          ],
+          "examples": [
+            {
+              "fileId": "ghg_inventory_proposal_v2",
+              "slideNo": 19,
+              "title": "참고"
+            }
+          ]
+        }
+      ],
+      "generationRules": [
+        "approved-sample 구조를 우선 적용합니다.",
+        "INNerGEN 외 기업/컨설팅사/고객사 로고와 브랜드 마크는 복제하지 않습니다.",
+        "동일한 카드형 구조가 반복되면 Top N 내 표, 프로세스, 산정식, 일정표, scorecard 구조로 교차 적용합니다.",
+        "사용자 원문 수치와 의미는 보존하고, 레퍼런스에서는 논리 구조와 정보 배치 방식만 차용합니다.",
+        "표 장표는 approved-sample의 compact rhythm을 따릅니다: 본문 12~14pt, 행 높이 0.55~0.95in, 내부 padding 최소화, category/evidence/judgment 열 폭 균형.",
+        "번호형 행은 고정 번호 칼럼, 세로 중앙 정렬, 본문 wrap을 고려한 row height를 사용합니다.",
+        "칩, 라벨, 배지, 요약바는 도형과 텍스트박스의 y/h를 맞춰 기준선이 흔들리지 않게 합니다.",
+        "한 장 안에서 내용량이 부족하면 박스만 키우지 말고 judgment, evidence, implication, owner/status 중 하나를 추가합니다."
+      ]
+    }
+  ]
+}

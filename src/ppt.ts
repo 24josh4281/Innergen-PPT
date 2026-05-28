@@ -239,11 +239,12 @@ function renderProcess(slide: Slide, pptx: pptxgen, item: PlannedSlide) {
   pairs.forEach(([label, value], idx) => {
     const x = BODY_X + idx * (stepW + gap);
     rect(slide, x, BODY_TOP, stepW, 0.62, idx === 0 ? INNGEN_COLORS.sky : INNGEN_COLORS.navy, idx === 0 ? INNGEN_COLORS.sky : INNGEN_COLORS.navy);
-    addText(slide, singleLine(label, 12), x + 0.08, BODY_TOP + 0.19, stepW - 0.16, 0.16, {
+    addText(slide, singleLine(label, 12), x + 0.08, BODY_TOP, stepW - 0.16, 0.62, {
       size: 12.3,
       bold: true,
       color: INNGEN_COLORS.white,
-      align: "center"
+      align: "center",
+      valign: "middle"
     });
     rect(slide, x, BODY_TOP + 0.9, stepW, 3.58, INNGEN_COLORS.white, INNGEN_COLORS.line);
     addText(slide, `STEP ${idx + 1}`, x + 0.16, BODY_TOP + 1.12, stepW - 0.32, 0.18, {
@@ -303,11 +304,11 @@ function renderMatrix(slide: Slide, pptx: pptxgen, item: PlannedSlide) {
   const pairs = sectionPairs(item, 4);
   rect(slide, BODY_X, BODY_TOP, 7.75, 4.55, INNGEN_COLORS.white, INNGEN_COLORS.line);
   rect(slide, BODY_X, BODY_TOP, 7.75, 0.48, INNGEN_COLORS.navy, INNGEN_COLORS.navy);
-  addText(slide, "평가 구조", BODY_X + 0.24, BODY_TOP + 0.15, 2.0, 0.16, { size: 12.5, bold: true, color: INNGEN_COLORS.white });
+  addText(slide, "평가 구조", BODY_X + 0.24, BODY_TOP, 2.0, 0.48, { size: 12.5, bold: true, color: INNGEN_COLORS.white, valign: "middle" });
   pairs.forEach(([label, value], idx) => {
     const y = BODY_TOP + 0.85 + idx * 0.82;
     rect(slide, BODY_X + 0.28, y, 1.95, 0.55, idx === 0 ? INNGEN_COLORS.paleBlue : INNGEN_COLORS.gray, INNGEN_COLORS.line);
-    addText(slide, singleLine(label, 13), BODY_X + 0.44, y + 0.18, 1.63, 0.14, { size: 11.8, bold: true, color: INNGEN_COLORS.navy, align: "center" });
+    addText(slide, singleLine(label, 13), BODY_X + 0.44, y, 1.63, 0.55, { size: 11.8, bold: true, color: INNGEN_COLORS.navy, align: "center", valign: "middle" });
     addText(slide, sentence(value, 54), BODY_X + 2.55, y + 0.1, 4.65, 0.28, { size: 12.2, bold: idx === 0, color: INNGEN_COLORS.text });
     rect(slide, BODY_X + 2.55, y + 0.46, Math.min(4.3, 1.6 + idx * 0.7), 0.07, idx === 0 ? INNGEN_COLORS.sky : INNGEN_COLORS.blue, idx === 0 ? INNGEN_COLORS.sky : INNGEN_COLORS.blue);
   });
@@ -323,7 +324,7 @@ function renderFlow(slide: Slide, pptx: pptxgen, item: PlannedSlide) {
   pairs.forEach(([label, value], idx) => {
     const x = BODY_X + idx * (boxW + gap);
     rect(slide, x, BODY_TOP + 0.86, boxW, 2.18, idx === 0 ? INNGEN_COLORS.paleBlue : INNGEN_COLORS.white, idx === 0 ? INNGEN_COLORS.sky : INNGEN_COLORS.line);
-    addText(slide, singleLine(label, 13), x + 0.12, BODY_TOP + 1.12, boxW - 0.24, 0.2, { size: 12.5, bold: true, color: INNGEN_COLORS.navy, align: "center" });
+    addText(slide, singleLine(label, 13), x + 0.12, BODY_TOP + 0.9, boxW - 0.24, 0.56, { size: 12.5, bold: true, color: INNGEN_COLORS.navy, align: "center", valign: "middle" });
     addBoxBodyText(slide, value, x + 0.18, BODY_TOP + 1.54, boxW - 0.36, 0.88, {
       size: 11.8,
       maxChars: 38,
@@ -396,12 +397,12 @@ function renderStaircase(slide: Slide, pptx: pptxgen, item: PlannedSlide) {
 function renderIssueTree(slide: Slide, pptx: pptxgen, item: PlannedSlide) {
   const pairs = sectionPairs(item, 4);
   rect(slide, BODY_X, BODY_TOP + 1.65, 2.45, 0.76, INNGEN_COLORS.navy, INNGEN_COLORS.navy);
-  addText(slide, singleLine(item.claimTitle, 18), BODY_X + 0.18, BODY_TOP + 1.9, 2.09, 0.16, { size: 12, bold: true, color: INNGEN_COLORS.white, align: "center" });
+  addText(slide, singleLine(item.claimTitle, 18), BODY_X + 0.18, BODY_TOP + 1.65, 2.09, 0.76, { size: 12, bold: true, color: INNGEN_COLORS.white, align: "center", valign: "middle" });
   pairs.forEach(([label, value], idx) => {
     const y = BODY_TOP + 0.35 + idx * 0.88;
     line(slide, BODY_X + 2.45, y + 0.36, 0.82, INNGEN_COLORS.line, 1);
     rect(slide, BODY_X + 3.27, y, 2.25, 0.72, idx === 0 ? INNGEN_COLORS.paleBlue : INNGEN_COLORS.white, idx === 0 ? INNGEN_COLORS.sky : INNGEN_COLORS.line);
-    addText(slide, singleLine(label, 13), BODY_X + 3.45, y + 0.25, 1.89, 0.14, { size: 11.8, bold: true, color: INNGEN_COLORS.navy, align: "center" });
+    addText(slide, singleLine(label, 13), BODY_X + 3.45, y, 1.89, 0.72, { size: 11.8, bold: true, color: INNGEN_COLORS.navy, align: "center", valign: "middle" });
     rect(slide, BODY_X + 6.1, y - 0.04, 6.15, 0.8, INNGEN_COLORS.white, INNGEN_COLORS.line);
     addBoxBodyText(slide, value, BODY_X + 6.35, y + 0.1, 5.65, 0.48, { size: 12.1, maxChars: 72, maxItems: 2 });
   });
@@ -412,9 +413,15 @@ function renderMetric(slide: Slide, pptx: pptxgen, item: PlannedSlide) {
   const metric = extractMetric(item.bullets.join(" ") || item.governingMessage);
   rect(slide, BODY_X, BODY_TOP, 4.25, 4.55, INNGEN_COLORS.paleBlue, INNGEN_COLORS.sky);
   addText(slide, metric.value, BODY_X + 0.35, BODY_TOP + 1.3, 3.55, 0.72, { size: 38, bold: true, color: INNGEN_COLORS.navy, align: "center" });
-  addText(slide, sentence(metric.context, 54), BODY_X + 0.45, BODY_TOP + 2.35, 3.35, 0.72, { size: 14, bold: true, color: INNGEN_COLORS.text, align: "center" });
+  addText(slide, metricCaption(item, metric.context), BODY_X + 0.45, BODY_TOP + 2.25, 3.35, 0.95, { size: 14, bold: true, color: INNGEN_COLORS.text, align: "center", valign: "middle" });
   drawSidePanel(slide, pptx, 5.25, BODY_TOP, 7.47, 4.55, "관리 해석", item.bullets.slice(0, 5));
   addImplication(slide, item);
+}
+
+function metricCaption(item: PlannedSlide, fallback: string) {
+  if (item.archetype.id === "impact-factoid-big-number") return "산정 경계와 활동자료 완전성 검토를 전제로 확정";
+  if (item.archetype.id === "dashboard-kpi-takeaway") return "핵심 KPI를 한 장에서 추적하고 후속 조치를 연결";
+  return clean(fallback).split(/[,.]/)[0] || "핵심 수치와 관리 방향을 함께 제시";
 }
 
 function renderEvidenceAction(slide: Slide, pptx: pptxgen, item: PlannedSlide) {
@@ -439,14 +446,45 @@ function addGoverningMessage(slide: Slide, item: PlannedSlide) {
     bold: true,
     color: INNGEN_COLORS.black
   });
-  rect(slide, 10.08, 0.86, 2.64, 0.36, INNGEN_COLORS.paleBlue, INNGEN_COLORS.sky);
-  addText(slide, singleLine(item.archetype.label, 20), 10.2, 0.96, 2.4, 0.12, {
+  const badge = archetypeBadgeLabel(item.archetype.id, item.archetype.label);
+  rect(slide, 9.82, 0.86, 2.9, 0.36, INNGEN_COLORS.paleBlue, INNGEN_COLORS.sky);
+  addText(slide, singleLine(badge, 26), 9.96, 0.86, 2.62, 0.36, {
     size: 11.5,
     bold: true,
     color: INNGEN_COLORS.blue,
-    align: "center"
+    align: "center",
+    valign: "middle"
   });
   line(slide, BODY_X, 1.28, BODY_W, INNGEN_COLORS.line, 0.8);
+}
+
+function archetypeBadgeLabel(id: string, fallback: string) {
+  const labels: Record<string, string> = {
+    "consulting-executive-summary": "Executive Summary",
+    "why-what-how-logic": "Why/What/How",
+    "inventory-boundary-flow": "Boundary",
+    "comparison-matrix": "Comparison",
+    "integrated-process-map": "Process",
+    "reduction-roadmap-analysis": "Roadmap",
+    "work-scope-table": "Scope",
+    "data-request-tracker": "Data Request",
+    "schedule-gantt": "Schedule",
+    "evidence-to-action-strip": "Action",
+    "benchmark-readiness-summary": "Readiness",
+    "cdp-response-strategy": "CDP Strategy",
+    "disclosure-taxonomy-map": "Taxonomy",
+    "score-improvement-levers": "Score Levers",
+    "issue-tree-to-workplan": "Issue Tree",
+    "proposal-scope-integrated": "Proposal Scope",
+    "report-production-workflow": "Workflow",
+    "impact-factoid-big-number": "Impact",
+    "waterfall-bridge-analysis": "Waterfall",
+    "dashboard-kpi-takeaway": "KPI Dashboard",
+    "assurance-evidence-pack": "Evidence",
+    "traffic-light-scorecard": "Traffic Light",
+    "regulatory-timeline-radar": "Timeline"
+  };
+  return labels[id] ?? fallback.replace(/\b(Flow|Analysis|Matrix|Framework|Summary|Workflow)\b/g, "").trim();
 }
 
 function addFooter(slide: Slide, pageNo: number) {
@@ -458,20 +496,22 @@ function addFooter(slide: Slide, pageNo: number) {
 
 function addImplication(slide: Slide, item: PlannedSlide) {
   rect(slide, BODY_X, 6.32, BODY_W, 0.44, INNGEN_COLORS.paleBlue, INNGEN_COLORS.sky);
-  addText(slide, `→ ${singleLine(item.bullets.at(-1) ?? item.governingMessage, 82)}`, BODY_X + 0.24, 6.45, BODY_W - 0.48, 0.16, {
+  addText(slide, `→ ${singleLine(item.bullets.at(-1) ?? item.governingMessage, 82)}`, BODY_X + 0.24, 6.32, BODY_W - 0.48, 0.44, {
     size: 12.8,
     bold: true,
-    color: INNGEN_COLORS.red
+    color: INNGEN_COLORS.red,
+    valign: "middle"
   });
 }
 
 function addMiniRow(slide: Slide, pptx: pptxgen, x: number, y: number, w: number, label: string, value: string, active: boolean) {
   rect(slide, x, y, w, 0.38, active ? INNGEN_COLORS.paleBlue : INNGEN_COLORS.gray, active ? INNGEN_COLORS.sky : INNGEN_COLORS.line);
-  addText(slide, `${label}: ${singleLine(value, 10)}`, x + 0.08, y + 0.11, w - 0.16, 0.14, {
+  addText(slide, `${label}: ${singleLine(value, 10)}`, x + 0.08, y, w - 0.16, 0.38, {
     size: 11.2,
     bold: true,
     color: active ? INNGEN_COLORS.blue : INNGEN_COLORS.text,
-    align: "center"
+    align: "center",
+    valign: "middle"
   });
 }
 

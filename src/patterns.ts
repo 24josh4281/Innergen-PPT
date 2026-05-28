@@ -30,6 +30,8 @@ function rule(
 }
 
 export const archetypeRules: ArchetypeRule[] = [
+  rule("cover-kickoff", "Reference Cover", ["고객/프로젝트명", "회의 목적", "날짜", "INNerGEN BI"], ["cover", "표지", "kickoff", "착수", "보고"], "레퍼런스형 네이비 표지 + 좌측 정보 블록 + 우측 여백/심볼", "표지는 본문 규칙을 적용하지 않고 제목을 크게 유지"),
+  rule("contents-isometric", "Contents / Roadmap", ["섹션 1", "섹션 2", "섹션 3", "진행 흐름"], ["contents", "목차", "agenda", "순서", "로드맵"], "목차를 단순 목록이 아니라 아이콘/일러스트/단계 흐름으로 구성", "목차 항목은 한 줄 유지, 세부 설명은 넣지 않음"),
   rule("consulting-executive-summary", "Executive Summary", ["핵심 주장", "근거", "영향", "우선 실행"], ["요약", "summary", "executive", "결론", "핵심"], "상단 주장 + 3개 메시지 카드 + 하단 implication", "각 메시지는 1문장, 세부 근거는 본문 또는 Appendix로 분리"),
   rule("why-what-how-logic", "Why / What / How", ["Why", "What", "Who", "How", "So what"], ["why", "what", "how", "배경", "필요", "목적", "요구"], "5개 논리 버킷 + 결론 배너", "단순 정의가 아니라 의사결정 메시지로 작성"),
   rule("proposal-need-three-cards", "3 Reasons", ["규제 요구", "이해관계자 요구", "내부 대응", "결론"], ["필요", "목적", "제안", "대응", "추진"], "3개 이유 카드 + 하단 제안 메시지", "카드 제목은 짧게, 본문은 2줄 이하"),

@@ -93,3 +93,16 @@
 3. Storyboard QA에서 한큐 준비도 점수와 경고를 확인한다.
 4. 경고가 있으면 생성 전 수정한다.
 5. PPTX 생성 후 렌더링 QA를 통과한 파일만 최종 사용한다.
+
+## Visual Density And Alignment QA Addendum
+
+- Table cells must not look empty. If a body cell has only one or two short lines inside a tall row, lower row height, increase font size to 12.5-14pt, or add a judgment/evidence/meaning/status column.
+- A table row should read as a designed row, not as text floating inside a large box. Body rows need consistent vertical rhythm and compact internal padding.
+- Numbered process rows must reserve a fixed number column. The number and body text must share the same rowY/rowH and use vertical middle alignment.
+- If long text wraps, the row height must be increased before export. Do not let the number stay centered while the body text wraps from a different top position.
+- Badges, chips, and small labels must place the text box on the exact same y/h as the shape and use `valign=middle`.
+- Boundary, scenario, and before/after slides should use dense row structures with aligned dividers, not loosely placed text boxes.
+- `alignmentRiskCount` must be zero. If it is non-zero, regenerate the slide with fixed number columns, shared rowY/rowH, and middle-aligned labels/chips.
+- Render QA must also write `issues[]`. Each issue must include the failed slide number, object id/name, coordinates (`x/y/w/h`), related object coordinates when applicable, reason, and remediation.
+- If `issues[]` is non-empty, the deck is not final. Use the issue coordinates to adjust the exact object instead of guessing from the whole slide.
+- Use the approved reference samples as the balance target: table body 12-14pt, compact rows 0.55-0.95in, narrow category/status columns, and a wider evidence/content column.

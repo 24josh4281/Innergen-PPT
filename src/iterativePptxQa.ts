@@ -53,6 +53,22 @@ export async function buildPptxWithIterativeQa(
 }
 
 function applyPptxQaRemediation(slides: PlannedSlide[], qa: PptxLayoutQaReport, pass: number): PlannedSlide[] {
+  const visualDensityOnly =
+    (qa.sparseContainerCount > 0 || qa.tableWhitespaceRiskCount > 0 || qa.alignmentRiskCount > 0) &&
+    !qa.belowMinFontCount &&
+    !qa.rawHyphenCount &&
+    !qa.ellipsisCount &&
+    !qa.overflowRiskCount &&
+    !qa.overlapRiskCount;
+
+  if (visualDensityOnly) {
+    return cloneSlides(slides).map((slide) => ({
+      ...slide,
+      density: "high",
+      rationale: `${slide.rationale} / PPTX QA visual remediation ${pass}: 밀도·표 여백·정렬 위험 감지, 본문 축약 없이 high-density 구조로 전환`
+    }));
+  }
+
   const aggressive = pass >= 2 || qa.status === "fail" || qa.overflowRiskCount + qa.overlapRiskCount > 2;
   const sectionLimit = aggressive ? 4 : 5;
   const sectionValueMax = aggressive ? 68 : 82;

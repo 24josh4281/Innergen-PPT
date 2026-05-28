@@ -7,7 +7,10 @@ import { buildPptxWithIterativeQa, type IterativePptxQaResult } from "./iterativ
 import { oneShotBriefTemplate, oneShotQaRules, oneShotStructureRules } from "./oneShotQuality";
 import { qualityImprovementCycles } from "./qualityPolicy";
 import { analyzeDeckQuality, type DeckQaReport, type QaStatus } from "./qa";
-import { businessTypeOptions, getBusinessMeetingProfile, getTemplateProfile, meetingTypeOptions } from "./templates";
+import { describeReferenceTopNProfile } from "./referenceTopN";
+import { slideMapToString } from "./referenceStructureDb";
+import { describeStandardDeckFlow } from "./standardDeckFlow";
+import { businessTypeOptions, getBusinessMeetingProfile, getReferenceStructureProfileForMeta, getReferenceTopNProfileForMeta, getStandardDeckFlowForMeta, getTemplateProfile, meetingTypeOptions } from "./templates";
 import { getUseCase, productUseCases } from "./useCases";
 import { buildGptPptPrompt, buildGptPromptSummary, promptModes, type PromptMode } from "./promptGenerator";
 import type { ArchetypeId, ArchetypeRule, DeckMeta, PlannedSlide } from "./types";
@@ -441,14 +444,30 @@ function updateExportState() {
 function updateTemplateInfo() {
   const meta = readMeta();
   const matrixProfile = getBusinessMeetingProfile(meta);
+  const standardFlow = getStandardDeckFlowForMeta(meta);
+  const topNProfile = getReferenceTopNProfileForMeta(meta);
+  const referenceProfile = getReferenceStructureProfileForMeta(meta);
   const profile = getTemplateProfile(meta);
   const activeLabel = matrixProfile?.label ?? profile.label;
   const activeDescription = matrixProfile?.description ?? profile.description;
   const activeSequence = matrixProfile?.sequence ?? profile.sequence;
+  const referenceNote = referenceProfile
+    ? `<em>Reference QA DB: ${escapeHtml(referenceProfile.referenceDeck)} / ${escapeHtml(slideMapToString(referenceProfile))}</em>
+       <em>Reference sources: ${escapeHtml(referenceProfile.sourceFileIds.slice(0, 5).join(", "))}${referenceProfile.sourceFileIds.length > 5 ? "..." : ""}</em>`
+    : "";
+  const topNNote = topNProfile
+    ? `<em>Approved Top N: ${escapeHtml(describeReferenceTopNProfile(topNProfile).join(" / "))}</em>`
+    : "";
+  const standardFlowNote = standardFlow
+    ? `<em>Standard Flow: ${escapeHtml(describeStandardDeckFlow(standardFlow).join(" / "))}</em>`
+    : "";
   templateInfo.innerHTML = `
     <strong>${escapeHtml(activeLabel)} 템플릿 적용</strong>
     <span>${escapeHtml(activeDescription)}</span>
     <em>${escapeHtml(activeSequence.slice(0, 6).map((id) => getRule(id).label).join(" → "))}</em>
+    ${standardFlowNote}
+    ${topNNote}
+    ${referenceNote}
   `;
 }
 

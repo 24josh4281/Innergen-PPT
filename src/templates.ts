@@ -1,8 +1,11 @@
 import type { ArchetypeId, DeckMeta } from "./types";
+import { findStandardDeckFlow, getStandardDeckFlowArchetype, type StandardDeckFlowProfile } from "./standardDeckFlow";
+import { findReferenceTopNProfile, getReferenceTopNArchetype, type ReferenceTopNProfile } from "./referenceTopN";
+import { findReferenceStructureProfile, type ReferenceStructureProfile } from "./referenceStructureDb";
 
 export type TemplateId = "proposal" | "kickoff" | "interim" | "final" | "executive" | "training";
 export type BusinessTypeId = "reduction" | "regulatory" | "disclosure";
-export type MeetingTypeId = "kickoff" | "interim" | "final" | "review";
+export type MeetingTypeId = "proposal" | "kickoff" | "interim" | "final" | "review" | "benchmark" | "training" | "design-template";
 
 export interface TemplateProfile {
   id: TemplateId;
@@ -30,6 +33,7 @@ export const businessTypeOptions: { id: BusinessTypeId; label: string; descripti
 ];
 
 export const meetingTypeOptions: { id: MeetingTypeId; label: string; description: string }[] = [
+  { id: "proposal", label: "제안서", description: "입찰, 제안, 과업 범위, 차별화 포인트, 산출물을 설득형 흐름으로 구성합니다." },
   { id: "kickoff", label: "착수회의", description: "목표, 범위, 일정, 자료 요청, 협업 방식을 정렬합니다." },
   { id: "interim", label: "중간보고", description: "진행 현황, 이슈, 의사결정, 다음 조치를 압축합니다." },
   { id: "final", label: "최종보고", description: "결과, 근거, 시사점, 로드맵을 완결 구조로 정리합니다." },
@@ -262,6 +266,17 @@ export function getTemplateProfile(meta: DeckMeta): TemplateProfile {
 }
 
 export function getTemplateArchetype(meta: DeckMeta, slideIndex: number): ArchetypeId | undefined {
+  const standardFlow = getStandardDeckFlowForMeta(meta);
+  const standardArchetype = getStandardDeckFlowArchetype(standardFlow, slideIndex);
+  if (standardArchetype) return standardArchetype;
+
+  const topNProfile = getReferenceTopNProfileForMeta(meta);
+  const topNArchetype = getReferenceTopNArchetype(topNProfile, slideIndex);
+  if (topNArchetype) return topNArchetype;
+
+  const referenceProfile = getReferenceStructureProfileForMeta(meta);
+  if (referenceProfile) return referenceProfile.sequence[slideIndex - 1] ?? referenceProfile.sequence.at(-1);
+
   const businessMeetingProfile = getBusinessMeetingProfile(meta);
   if (businessMeetingProfile) return businessMeetingProfile.sequence[slideIndex - 1] ?? businessMeetingProfile.sequence.at(-1);
 
@@ -273,22 +288,79 @@ export function getBusinessMeetingProfile(meta: DeckMeta): BusinessMeetingProfil
   const businessType = normalizeBusinessType(meta.businessType);
   const meetingType = normalizeMeetingType(meta.meetingType ?? meta.documentType);
   if (!businessType || !meetingType) return undefined;
+  const standardFlow = findStandardDeckFlow(businessType, meetingType);
+  if (standardFlow) {
+    return {
+      id: standardFlow.id,
+      label: standardFlow.label,
+      businessType,
+      meetingType,
+      description: `${standardFlow.recommendedSlideCount}장 권장 표준 흐름입니다: ${standardFlow.rhythm}`,
+      sequence: standardFlow.standardSequence,
+      qualityRules: standardFlow.generationRules
+    };
+  }
+  const topNProfile = findReferenceTopNProfile(businessType, meetingType);
+  if (topNProfile) {
+    return {
+      id: topNProfile.id,
+      label: topNProfile.label,
+      businessType,
+      meetingType,
+      description: `${topNProfile.totalFiles}개 승인 레퍼런스 파일과 ${topNProfile.totalSlides}개 승인 샘플 슬라이드에서 도출한 대표 구조입니다.`,
+      sequence: topNProfile.representativeSequence,
+      qualityRules: topNProfile.generationRules
+    };
+  }
+  const referenceProfile = findReferenceStructureProfile(businessType, meetingType);
+  if (referenceProfile) {
+    return {
+      id: referenceProfile.id,
+      label: referenceProfile.label,
+      businessType,
+      meetingType,
+      description: referenceProfile.description,
+      sequence: referenceProfile.sequence,
+      qualityRules: referenceProfile.qaRules
+    };
+  }
   return businessMeetingProfiles.find((profile) => profile.businessType === businessType && profile.meetingType === meetingType);
+}
+
+export function getReferenceStructureProfileForMeta(meta: DeckMeta): ReferenceStructureProfile | undefined {
+  const businessType = normalizeBusinessType(meta.businessType);
+  const meetingType = normalizeMeetingType(meta.meetingType ?? meta.documentType);
+  return findReferenceStructureProfile(businessType, meetingType);
+}
+
+export function getReferenceTopNProfileForMeta(meta: DeckMeta): ReferenceTopNProfile | undefined {
+  const businessType = normalizeBusinessType(meta.businessType);
+  const meetingType = normalizeMeetingType(meta.meetingType ?? meta.documentType);
+  return findReferenceTopNProfile(businessType, meetingType);
+}
+
+export function getStandardDeckFlowForMeta(meta: DeckMeta): StandardDeckFlowProfile | undefined {
+  const businessType = normalizeBusinessType(meta.businessType);
+  const meetingType = normalizeMeetingType(meta.meetingType ?? meta.documentType);
+  return findStandardDeckFlow(businessType, meetingType);
 }
 
 export function normalizeBusinessType(value?: string): BusinessTypeId | undefined {
   const text = (value ?? "").toLowerCase();
   if (/감축|reduction|mrv|방법론|carbon project/.test(text)) return "reduction";
-  if (/규제|ets|배출권|명세서|산정계획|regulatory|allowance/.test(text)) return "regulatory";
+  if (/규제|ets|배출권|명세서|산정계획|인벤토리|inventory|regulatory|allowance/.test(text)) return "regulatory";
   if (/cdp|공시|tcfd|issb|기후공시|disclosure|climate/.test(text)) return "disclosure";
   return undefined;
 }
 
 export function normalizeMeetingType(value?: string): MeetingTypeId | undefined {
   const text = (value ?? "").toLowerCase();
+  if (/제안|proposal|입찰|tender|rfp/.test(text)) return "proposal";
   if (/착수|kickoff|kick-off|개시/.test(text)) return "kickoff";
   if (/중간|interim|progress|현황/.test(text)) return "interim";
   if (/최종|final|완료|결과/.test(text)) return "final";
   if (/검토|review|회의|쟁점/.test(text)) return "review";
+  if (/교육|training|세미나|seminar/.test(text)) return "training";
+  if (/benchmark|벤치마크|참고|레퍼런스/.test(text)) return "benchmark";
   return undefined;
 }

@@ -127,6 +127,54 @@ Every deck should satisfy these rules:
 - Arrows and connectors stay behind text
 - Internal production notes are excluded from body slides
 
+## Reference Structure DB
+
+The app now stores consulting deck structures by business type and meeting type.
+
+Current profile examples:
+
+- `reduction + kickoff` -> `reduction-kickoff-starstech`
+- `reduction + final` -> `reduction-final-methodology`
+- `regulatory + review` -> `regulatory-review-evidence`
+- `disclosure + interim` -> `disclosure-interim-score`
+
+This prevents the generator from copying the same layout repeatedly. The planner first chooses the profile, then applies the matching slide archetype sequence and QA rules.
+
+Reference source files can be indexed without copying originals. The index includes both:
+
+- `INPUTS/PPT 장표 레퍼런스`: business/report-specific references such as CDP, reduction projects, regulatory response, and GHG inventory
+- `INPUTS/PPT 장표 참고(구조화)`: consulting benchmark and structure references
+
+```powershell
+npm run references:index
+npm run references:topn
+npm run references:refresh
+node scripts\build-reference-slide-index.mjs --dry-run
+```
+
+The generated index is stored at `docs/reference-source-index.json`. It keeps file paths, classification, slide titles, inferred archetypes, confidence, tags, and review status only. Full slide body text is not stored. All accessible INPUT references are treated as `approved-sample` structure references.
+
+`docs/reference-structure-topn.json` summarizes approved samples into representative Top N structures by business type and report type. The generator uses these approved Top N profiles before falling back to generic template sequences.
+
+`docs/standard-deck-flows.json` locks the first production-ready rhythms:
+
+- `reduction/kickoff`: 감축사업 착수보고
+- `disclosure/proposal`: CDP·기후공시 제안서
+- `regulatory/final`: 온실가스 인벤토리/규제대응 최종보고
+
+These standard flows are used before Top N. They define the fixed sequence from cover and contents through body proof objects, conclusion, and schedule/action slides.
+
+Logo policy: references are used only for structure, slide format, logic flow, storyline, layout pattern, proof-object placement, and information hierarchy. Logos and brand marks from companies other than INNerGEN are excluded from learning and must not be copied into generated decks.
+
+Reference-style QA can be run with a profile ID:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\reference-style-qa.ps1 `
+  -CandidateImageDir "docs\generated\starstech\starstech_phase1_carbon_methodology_report_innergen-render-qa\slides" `
+  -ReferenceImageDir "C:\Users\24jos\Downloads\(회의) 스타스테크 폐산 재활용 기술에 대한 온실가스 감축 방법론 개발_260410_ver1.3-render-qa\slides" `
+  -ProfileId reduction-kickoff-starstech
+```
+
 ## Useful Docs
 
 - [Codex Onboarding](docs/codex-onboarding.md)
@@ -134,6 +182,11 @@ Every deck should satisfy these rules:
 - [One-shot Structure and QA Rules](docs/one-shot-structure-qa-rules.md)
 - [10 PDCA Improvement Report](docs/10-pdca-improvement-report.md)
 - [Quality Improvement Plan](docs/innergen-ppt-quality-improvement-plan.md)
+- [Reference Structure DB](docs/reference-structure-db.json)
+- [Reference Source Index](docs/reference-source-index.json)
+- [Reference Structure Top N](docs/reference-structure-topn.json)
+- [Standard Deck Flows](docs/standard-deck-flows.json)
+- [Starstech Reference Gap Analysis](docs/starstech-reference-gap-analysis.md)
 
 ## Important Safety Note
 

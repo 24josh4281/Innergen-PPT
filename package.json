@@ -10,8 +10,16 @@
     "typecheck": "tsc --noEmit",
     "verify:setup": "powershell -ExecutionPolicy Bypass -File scripts/verify-reproducible-setup.ps1",
     "qa:pptx-render": "powershell -ExecutionPolicy Bypass -File scripts/render-pptx-qa.ps1",
+    "qa:reference-style": "powershell -ExecutionPolicy Bypass -File scripts/reference-style-qa.ps1",
     "samples:layout": "powershell -ExecutionPolicy Bypass -File scripts/build-layout-sample-deck.ps1",
-    "generate:pdf": "powershell -ExecutionPolicy Bypass -File scripts/generate-deck-from-pdf.ps1"
+    "samples:standard-flows": "node scripts/build-standard-flow-sample-decks.mjs",
+    "samples:user-input-starstech": "node scripts/build-starstech-user-input-sample.mjs",
+    "samples:user-input-starstech:record": "node scripts/record-starstech-user-input-validation.mjs",
+    "samples:user-input-cycle": "node scripts/run-user-input-flow-cycle.mjs",
+    "generate:pdf": "powershell -ExecutionPolicy Bypass -File scripts/generate-deck-from-pdf.ps1",
+    "references:index": "node scripts/build-reference-slide-index.mjs",
+    "references:topn": "node scripts/build-reference-topn.mjs",
+    "references:refresh": "npm run references:index && npm run references:topn"
   },
   "dependencies": {
     "jszip": "^3.10.1",

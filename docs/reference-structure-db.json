@@ -1,0 +1,190 @@
+{
+  "learningPolicy": {
+    "learn": ["structure", "slideFormat", "logicFlow", "storyline", "layoutPattern", "proofObjectPlacement", "informationHierarchy"],
+    "exclude": ["externalCompanyLogo", "externalBrandMark", "externalCorporateIdentity", "clientLogo"],
+    "keep": ["innergenLogo", "innergenBI", "innergenFontPolicy", "innergenColorPolicy"]
+  },
+  "profiles": [
+    {
+      "id": "reduction-kickoff-starstech",
+      "label": "감축사업 착수/방법론 보고형",
+      "businessType": "reduction",
+      "meetingType": "kickoff",
+      "referenceDeck": "starstech-methodology-reference",
+      "sourceFileIds": [
+        "starstech_methodology_260410",
+        "newrizen_filter_methodology_260203",
+        "newrizen_filter_methodology_260406",
+        "samsung_ds_reduction_methodology_240909",
+        "innergen_semiconductor_scope3_methodology_240724",
+        "jb_re100_kickoff",
+        "jb_re100_w2",
+        "renewable_energy_new_business",
+        "reduction_kickoff",
+        "reduction_kickoff_2",
+        "reduction_methodology_report",
+        "reduction_methodology_report_2",
+        "reduction_methodology_report_3"
+      ],
+      "referenceSlideMap": {
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 7,
+        "7": 8,
+        "8": 12,
+        "9": 12,
+        "10": 13,
+        "11": 20,
+        "12": 9
+      },
+      "sequence": [
+        "cover-kickoff",
+        "integrated-process-map",
+        "contents-isometric",
+        "comparison-matrix",
+        "work-scope-table",
+        "consulting-one-page-memo",
+        "comparison-matrix",
+        "inventory-boundary-flow",
+        "reduction-roadmap-analysis",
+        "impact-factoid-big-number",
+        "data-request-tracker",
+        "schedule-gantt"
+      ],
+      "qaRules": [
+        "상단 네이비 격자 헤더와 하단 네이비 격자 푸터를 유지합니다.",
+        "표/도형은 본문 영역의 70% 이상을 사용합니다.",
+        "요약형 카드가 비어 보이면 단계 카드, 비교표, 산정식 블록, 결론 밴드 중 하나로 전환합니다."
+      ]
+    },
+    {
+      "id": "reduction-final-methodology",
+      "label": "감축사업 최종보고형",
+      "businessType": "reduction",
+      "meetingType": "final",
+      "referenceDeck": "starstech-methodology-reference",
+      "sourceFileIds": [
+        "starstech_methodology_260410",
+        "research_final_report_public",
+        "research_evaluation_report",
+        "mbi_selangor_tender_briefing_carbon",
+        "reduction_methodology_report",
+        "reduction_methodology_report_2",
+        "reduction_methodology_report_3",
+        "reduction_proposal",
+        "reduction_proposal_pdf"
+      ],
+      "referenceSlideMap": {
+        "1": 1,
+        "2": 4,
+        "3": 9,
+        "4": 12,
+        "5": 13,
+        "6": 20,
+        "7": 22,
+        "8": 24
+      },
+      "sequence": [
+        "cover-kickoff",
+        "consulting-executive-summary",
+        "impact-factoid-big-number",
+        "reduction-roadmap-analysis",
+        "assurance-evidence-pack",
+        "schedule-gantt",
+        "evidence-to-action-strip"
+      ],
+      "qaRules": [
+        "최종 결론을 앞쪽에 배치합니다.",
+        "수치에는 단위와 기준기간을 함께 표기합니다.",
+        "검증/등록 잔여 리스크를 action table로 정리합니다."
+      ]
+    },
+    {
+      "id": "regulatory-review-evidence",
+      "label": "규제대응 검토회의형",
+      "businessType": "regulatory",
+      "meetingType": "review",
+      "referenceDeck": "innergen-regulatory-review",
+      "sourceFileIds": [
+        "sk_siltron_ghg_inventory_kickoff",
+        "sk_tcfd_project_share_220603",
+        "sk_tcfd_training_220603",
+        "regulatory_kickoff",
+        "regulatory_final",
+        "ghg_inventory_kickoff",
+        "ghg_inventory_final",
+        "ghg_inventory_final_2",
+        "ghg_inventory_proposal",
+        "ghg_inventory_proposal_v2"
+      ],
+      "referenceSlideMap": {
+        "1": 1,
+        "2": 2,
+        "3": 4,
+        "4": 6,
+        "5": 9,
+        "6": 12
+      },
+      "sequence": [
+        "consulting-one-page-memo",
+        "traffic-light-scorecard",
+        "data-request-tracker",
+        "assurance-evidence-pack",
+        "comparison-matrix",
+        "evidence-to-action-strip"
+      ],
+      "qaRules": [
+        "검토/산출/관리 같은 단어형 라벨은 한 줄로 유지합니다.",
+        "상태표 셀 내부 텍스트는 중앙 정렬하고 충분한 폭을 확보합니다.",
+        "오류·누락·보완 조치는 색상만이 아니라 텍스트로도 설명합니다."
+      ]
+    },
+    {
+      "id": "disclosure-interim-score",
+      "label": "CDP·기후공시 중간보고형",
+      "businessType": "disclosure",
+      "meetingType": "interim",
+      "referenceDeck": "consulting-disclosure-reference",
+      "sourceFileIds": [
+        "hyundai_transys_sbti_cdp_climate_risk_proposal",
+        "deloitte_daewoo_sustainability_cdp_proposal",
+        "ecovadis_esg_proposal",
+        "kakao_cdp_scope3_proposal",
+        "ey_sk_chemical_tcfd",
+        "pwc_tnfd_standard_strategy",
+        "pwc_csrd_disclosure_response",
+        "deloitte_insurance_csrd_benchmark_2024",
+        "cdp_proposal",
+        "cdp_proposal_2",
+        "cdp_proposal_3",
+        "cdp_kickoff",
+        "cdp_final",
+        "cdp_final_2"
+      ],
+      "referenceSlideMap": {
+        "1": 1,
+        "2": 3,
+        "3": 5,
+        "4": 8,
+        "5": 10,
+        "6": 12
+      },
+      "sequence": [
+        "dashboard-kpi-takeaway",
+        "tcfd-pillar-diagnosis",
+        "score-improvement-levers",
+        "evidence-grid",
+        "issue-tree-to-workplan",
+        "evidence-to-action-strip"
+      ],
+      "qaRules": [
+        "governing message는 점수 영향 또는 의사결정 포인트로 씁니다.",
+        "문항 설명은 짧게, 증빙/담당/기한은 표로 정리합니다.",
+        "동일 카드 레이아웃을 2장 이상 연속 사용하지 않습니다."
+      ]
+    }
+  ]
+}
