@@ -1,0 +1,2032 @@
+{
+  "profile_format": "innergen_body_rule_catalog.v12",
+  "version": "12.0",
+  "updated": "2026-10-03",
+  "language": "ko-KR",
+  "purpose": "이너젠 본문 가공·구조화·도식화의 작성 참고규칙",
+  "not_runtime_schema_or_renderer": true,
+  "scope": {
+    "new_or_restructured_body": true,
+    "existing_deck_preservation": "현재 사용자 요청과 선택 실행 경로 우선",
+    "visual_tokens": "선택한 이너젠 프로필·현재 확정값 유지",
+    "external_actions_authorized": false
+  },
+  "references": {
+    "rules": "design-body-v12.md",
+    "prompt": "prompt-body-v12.md",
+    "examples": "body-examples-v12.md",
+    "precedence": "design-rules.md",
+    "governing": "design-governing-v11.md",
+    "v42_education_visual": "design-readability-v10.md"
+  },
+  "provenance": {
+    "source_package_version": "1.0.0",
+    "source_files": [
+      {
+        "file": "atlas.html",
+        "source_path": "C:\\Users\\24jos\\Downloads\\atlas.html",
+        "sha256": "dd18dbd2fbb0e66a21389eba00d952654872cc17dbeb3505e0471c6556a4aafd"
+      },
+      {
+        "file": "TEST_REPORT.md",
+        "source_path": "C:\\Users\\24jos\\Downloads\\TEST_REPORT.md",
+        "sha256": "9a466919fbfb411bbd5c5e929070c0208feaf063f15b20f1afa6671ce51e6c97"
+      },
+      {
+        "file": "MASTER_PROMPT.md",
+        "source_path": "C:\\Users\\24jos\\Downloads\\MASTER_PROMPT.md",
+        "sha256": "dca57cfcc7eb4900df4a5ccbb3c1611b53ff80f3af53aff29eb40e249d0b0638"
+      },
+      {
+        "file": "CONTENT_PLAYBOOK_KO.md",
+        "source_path": "C:\\Users\\24jos\\Downloads\\CONTENT_PLAYBOOK_KO.md",
+        "sha256": "4e225624633fca55f7fc5076d1a5e67d75a6b4f7d014a9fc129aa090395b78a6"
+      },
+      {
+        "file": "consulting_slide_prompt_system.json",
+        "source_path": "C:\\Users\\24jos\\Downloads\\consulting_slide_prompt_system.json",
+        "sha256": "37a14c1227b0777f0e433e459fe29390785944a935d0a20ac04f99dbffd70000"
+      },
+      {
+        "file": "consulting_slide_design_guide.md",
+        "source_path": "C:\\Users\\24jos\\Downloads\\consulting_slide_design_guide.md",
+        "sha256": "23cfa3c1400d01f27e345be10cdfeb269a0c5ff3f30aefa7f801fba9f4bda385"
+      }
+    ],
+    "source_pdf_files_included_in_package": false,
+    "taxonomy_origin": "첨부 패키지의 자체 제안 48개 유형을 이너젠에 적용. 공식 법인 매뉴얼 아님.",
+    "local_adaptations": [
+      "A03 context, A05 basis, D03 owner, D04 condition, D06 output, E05 basis를 완성 구조의 필수 슬롯으로 보완",
+      "G03 milestone은 근거가 있는 경우에만 추가하는 선택 슬롯",
+      "G05 target의 도착 노드 표기를 목표로 교정. 첨부 스키마·원본은 변경하지 않음",
+      "H계열의 지표·단위·기간·범위·방법과 유형별 추가 근거를 별도 점검",
+      "일반 테마·글자수·점수 임계값·HTML 구현 의존성은 가져오지 않음"
+    ]
+  },
+  "source_implementation_boundary": {
+    "taxonomy_templates": 48,
+    "source_implemented_html_templates": 14,
+    "source_reported_unit_tests": 36,
+    "source_test_results_reexecuted_here": false,
+    "source_llm_api_connected": false,
+    "source_pptx_export_implemented": false,
+    "local_auto_router_or_48_template_renderer_added": false,
+    "interpretation": "source_html_renderer_status는 첨부 구현 범위이며 이 저장소의 PPTX 지원 상태가 아님"
+  },
+  "claim_record": {
+    "fields": [
+      "claim_id",
+      "source_document",
+      "source_location",
+      "original_text",
+      "subject",
+      "predicate",
+      "state",
+      "basis_type",
+      "value_context",
+      "conditions",
+      "authority",
+      "output_location"
+    ],
+    "states": [
+      "사실 진술",
+      "관찰",
+      "계획",
+      "목표",
+      "가정",
+      "실무 제안"
+    ],
+    "basis_types": [
+      "명시적 원문",
+      "조건부 원문",
+      "기준·증빙에서 도출한 판단"
+    ],
+    "missing_labels": [
+      "확인 필요",
+      "자료 미제시",
+      "해당 없음"
+    ],
+    "fact_claim_is_not_independent_verification": true,
+    "numeric_changes": "본문 편집은 원시값·단위 보존. 별도 허용된 계산만 식·단위·결과 기록과 검산",
+    "critical_conflicts": "양쪽 원문 보존, 해당 확정 결론 보류 또는 확인 필요로 표시"
+  },
+  "selection": {
+    "order": [
+      "독자 질문",
+      "원문 진술·상태·조건",
+      "같은 축 묶음·행키",
+      "관계 근거로 부적합 구조 제외",
+      "최대3개 후보 비교",
+      "슬롯 배정·문구 편집",
+      "본문 기반 거버닝·하단",
+      "근거·손실·화면 점검"
+    ],
+    "max_candidates": 3,
+    "criteria": [
+      "독자 질문 적합성",
+      "중요 근거 보존",
+      "밀도",
+      "편집 가능성"
+    ],
+    "never_invent_scores": true,
+    "missing_core_relation": "확인 필요 셀만으로 필수 관계 충족을 선언하지 않음. 확인 현황표로 전환",
+    "missing_optional_detail": "미확인 표시 또는 슬롯 생략; 사실 창작 금지",
+    "fallback": "근거가 있는 동일 수준의 표·병렬 관찰. 원인·조건·권한이 빠졌는데 원래 도식을 강제하지 않음"
+  },
+  "edge_record": {
+    "fields": [
+      "from_node",
+      "to_node",
+      "relation",
+      "claim_ids",
+      "conditions",
+      "state"
+    ],
+    "relations": [
+      "순서",
+      "인과",
+      "포함·분류",
+      "보고",
+      "승인",
+      "인계",
+      "대응·기여",
+      "환류"
+    ],
+    "reporting_direction": "보고자→수신자; 승인·감독은 실제 행위 방향에 따라 별도 라벨",
+    "evidence_required": true,
+    "dashed_line_without_evidence_allowed": false,
+    "non_directional_mapping": "필요 없으면 화살촉 없이 표현"
+  },
+  "wording": {
+    "title": "번호를 포함한 분류형 명사구",
+    "governing": "명시적 주어+근거 있는 핵심 판단+필요한 조건, 합니다 체 한 문장",
+    "body": "같은 슬롯·같은 추상도, 명사형 종결과 상태·조건 유지",
+    "final": "증빙·실행 점검, 제안이면 실무 제안 표시",
+    "same_sentence_governing_and_final": false,
+    "numeric_and_word_boundary_wrap": true,
+    "important_exception_only_in_notes_allowed": false,
+    "table_alignment": {
+      "horizontal": "center",
+      "vertical": "middle"
+    },
+    "long_diagram_paragraph_alignment": "left"
+  },
+  "density_advice": {
+    "origin": "이너젠 캔버스의 초안용 제안. 하드게이트·측정 결과 아님",
+    "primary_structure": 1,
+    "secondary_panel_max_initial": 1,
+    "parallel_topics_initial": [
+      2,
+      4
+    ],
+    "horizontal_stages_initial": [
+      3,
+      5
+    ],
+    "table_body_rows_initial": [
+      3,
+      6
+    ],
+    "table_semantic_columns_initial": [
+      3,
+      5
+    ],
+    "diagram_nodes_initial": [
+      4,
+      7
+    ],
+    "overview_detail_review_at": {
+      "nodes": 9,
+      "edges": 12
+    },
+    "emphasis_phrases_per_panel_initial": [
+      1,
+      2
+    ],
+    "repair_order": [
+      "중복 정리",
+      "공통 정보 머리글 이동",
+      "폭·여백·줄바꿈",
+      "가로·세로 구조 전환",
+      "핵심·상세 분리",
+      "페이지 분할"
+    ],
+    "split_preserve": [
+      "헤더",
+      "단위",
+      "범위",
+      "행키",
+      "조건",
+      "상태",
+      "계속 표시",
+      "이동 claim 목적지"
+    ]
+  },
+  "visual_application": {
+    "do_not_import_source_design_tokens": true,
+    "confirmed_project_px_values_win": true,
+    "v42_education": {
+      "font": "IBM Plex Sans KR",
+      "ppt_pt": {
+        "title": 24,
+        "governing": 20,
+        "body": 14,
+        "table": 14,
+        "final": 14,
+        "subheading": 16.5,
+        "source": 10
+      },
+      "svg_px": {
+        "title": 32,
+        "governing": 26.666667,
+        "body": 18.666667,
+        "table": 18.666667,
+        "final": 18.666667,
+        "subheading": 22,
+        "source": 13.333333
+      },
+      "applies_to_other_profiles_automatically": false
+    }
+  },
+  "qa": {
+    "layers": [
+      "근거 참조·수치 대조",
+      "원문과 문구·관계의 의미 검토",
+      "선택 실행 경로의 실제 화면·출력 검사"
+    ],
+    "results": [
+      "pass",
+      "fail",
+      "not_checked"
+    ],
+    "source_id_integrity_is_not_semantic_entailment": true,
+    "unmeasured_render_is_not_pass": true,
+    "adds_execution_gate_or_approval_ui": false
+  },
+  "families": [
+    {
+      "id": "A",
+      "name_ko": "개요·핵심 설명"
+    },
+    {
+      "id": "B",
+      "name_ko": "비교·대안"
+    },
+    {
+      "id": "C",
+      "name_ko": "진단·평가·선정"
+    },
+    {
+      "id": "D",
+      "name_ko": "절차·운영 흐름"
+    },
+    {
+      "id": "E",
+      "name_ko": "구성·조직·책임"
+    },
+    {
+      "id": "F",
+      "name_ko": "인과·영향·전략 연결"
+    },
+    {
+      "id": "G",
+      "name_ko": "시간·전환·이행"
+    },
+    {
+      "id": "H",
+      "name_ko": "정량 분석"
+    }
+  ],
+  "template_count": 48,
+  "templates": [
+    {
+      "id": "A01",
+      "name_ko": "병렬 주제 카드",
+      "family_id": "A",
+      "primary_relation": "parallel",
+      "reader_question": "무엇을 알아야 하는가?",
+      "required_evidence": "동일 분류축의 독립 주제",
+      "slot_policy": [
+        {
+          "key": "theme",
+          "label_ko": "주제",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "detail",
+          "label_ko": "핵심 설명",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "순서·인과가 있는 항목을 독립 카드로 분리",
+      "innergen_adaptation": "같은 질문에 답하는 독립 주제. 관계가 한 문장으로 충분하면 카드 없이 표·문장 사용.",
+      "source_html_renderer_status": "implemented"
+    },
+    {
+      "id": "A02",
+      "name_ko": "근거 본문 + 시사점 레일",
+      "family_id": "A",
+      "primary_relation": "evidence_insight",
+      "reader_question": "근거에서 무엇을 읽어야 하는가?",
+      "required_evidence": "시사점을 지지하는 근거와 연결 ID",
+      "slot_policy": [
+        {
+          "key": "evidence",
+          "label_ko": "근거/확인 현황",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "insight",
+          "label_ko": "시사점",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "근거와 무관한 우측 결론을 추가",
+      "innergen_adaptation": "우측 시사점마다 지지 근거를 연결. 편집자가 제안한 행동은 실무 제안 표시.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "A03",
+      "name_ko": "핵심 지표 + 맥락",
+      "family_id": "A",
+      "primary_relation": "metric_context",
+      "reader_question": "가장 중요한 수치와 의미는?",
+      "required_evidence": "수치·단위·범위·기간·비교기준",
+      "slot_policy": [
+        {
+          "key": "metric",
+          "label_ko": "지표",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "value",
+          "label_ko": "값",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "context",
+          "label_ko": "범위·기간·비교기준",
+          "required_for_complete_structure": true,
+          "source_required": false
+        }
+      ],
+      "additional_context_to_check": [
+        "단위",
+        "기간",
+        "범위",
+        "방법",
+        "비교기준"
+      ],
+      "do_not_use_when": "분모·기간 없는 숫자를 크게 강조",
+      "innergen_adaptation": "값을 크게 쓰기 전에 지표·단위·기간·범위·방법·비교기준을 함께 표시.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "A04",
+      "name_ko": "용어·정의·적용범위 표",
+      "family_id": "A",
+      "primary_relation": "definition",
+      "reader_question": "각 개념은 무엇을 의미하는가?",
+      "required_evidence": "용어와 정의의 출처",
+      "slot_policy": [
+        {
+          "key": "term",
+          "label_ko": "용어",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "definition",
+          "label_ko": "정의",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "scope",
+          "label_ko": "적용 범위",
+          "required_for_complete_structure": false,
+          "source_required": false
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "확정되지 않은 범위를 정의로 단정",
+      "innergen_adaptation": "정의·적용범위·예외 분리. 고유한 법률·Scope 용어는 임의 통일하지 않음.",
+      "source_html_renderer_status": "implemented"
+    },
+    {
+      "id": "A05",
+      "name_ko": "포함·제외 범위도",
+      "family_id": "A",
+      "primary_relation": "boundary",
+      "reader_question": "어디까지 포함하는가?",
+      "required_evidence": "경계 기준·각 항목 포함 여부",
+      "slot_policy": [
+        {
+          "key": "item",
+          "label_ko": "항목",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "inclusion",
+          "label_ko": "포함 여부",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "basis",
+          "label_ko": "근거",
+          "required_for_complete_structure": true,
+          "source_required": false
+        }
+      ],
+      "additional_context_to_check": [
+        "조직/운영 경계 기준",
+        "각 포함·제외의 근거"
+      ],
+      "do_not_use_when": "가까이 배치했다는 이유로 조직경계에 포함",
+      "innergen_adaptation": "조직경계·운영경계·Scope 분류를 혼동하지 않음. 포함·제외별 판정 근거 필요.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "B01",
+      "name_ko": "동일 기준 비교표",
+      "family_id": "B",
+      "primary_relation": "comparison",
+      "reader_question": "A와 B는 어떤 기준에서 다른가?",
+      "required_evidence": "최소 2개 대상과 공통 비교기준",
+      "slot_policy": [
+        {
+          "key": "entity",
+          "label_ko": "대상",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "criterion",
+          "label_ko": "비교·판정 기준",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "value",
+          "label_ko": "값",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "대상마다 다른 평가축을 같은 행에 혼합",
+      "innergen_adaptation": "행=공통 비교기준, 열=대상. 같은 기준의 차이만 해석하고 미확인은 미확인으로 유지.",
+      "source_html_renderer_status": "implemented"
+    },
+    {
+      "id": "B02",
+      "name_ko": "As-is / To-be 대조표",
+      "family_id": "B",
+      "primary_relation": "contrast",
+      "reader_question": "현재와 지향 상태의 차이는?",
+      "required_evidence": "동일 차원의 현재·미래 상태 및 미래의 지위",
+      "slot_policy": [
+        {
+          "key": "dimension",
+          "label_ko": "구분 축",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "current",
+          "label_ko": "현재 상태",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "future",
+          "label_ko": "지향 상태",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "개선안을 이미 구현된 현황으로 표현",
+      "innergen_adaptation": "행의 공통 차원 유지. 지향 상태에 계획·목표·제안 표시. 조치와 미래 상태 구분.",
+      "source_html_renderer_status": "implemented"
+    },
+    {
+      "id": "B03",
+      "name_ko": "대안·효익·제약 표",
+      "family_id": "B",
+      "primary_relation": "alternatives",
+      "reader_question": "어떤 대안을 선택할 것인가?",
+      "required_evidence": "대안별 공통 판단 기준·조건",
+      "slot_policy": [
+        {
+          "key": "option",
+          "label_ko": "대안",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "benefit",
+          "label_ko": "효익",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "tradeoff",
+          "label_ko": "비용·제약",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "condition",
+          "label_ko": "적용 조건",
+          "required_for_complete_structure": false,
+          "source_required": false
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "근거 없이 최적안이나 순위를 결정",
+      "innergen_adaptation": "효익·비용·제약의 근거 상태를 표시. 평가기준·우열 근거 없이 최적안 선정 금지.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "B04",
+      "name_ko": "벤치마크 히트맵",
+      "family_id": "B",
+      "primary_relation": "benchmark",
+      "reader_question": "비교대상 중 어디가 앞서는가?",
+      "required_evidence": "공통 척도·평가근거·기준시점",
+      "slot_policy": [
+        {
+          "key": "entity",
+          "label_ko": "대상",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "criterion",
+          "label_ko": "비교·판정 기준",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "rating",
+          "label_ko": "평가값",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "평가척도",
+        "기준시점",
+        "항목별 판정근거"
+      ],
+      "do_not_use_when": "빈칸을 0점 처리하거나 임의 점수 부여",
+      "innergen_adaptation": "척도·기준시점·판정근거를 범례로 표시. 미확인과 저점 구분; 색만으로 판정하지 않음.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "B05",
+      "name_ko": "시나리오별 가정·결과 비교",
+      "family_id": "B",
+      "primary_relation": "scenario",
+      "reader_question": "어떤 가정에서 결과가 바뀌는가?",
+      "required_evidence": "공통 범위·기간 및 시나리오별 가정",
+      "slot_policy": [
+        {
+          "key": "scenario",
+          "label_ko": "시나리오",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "assumption",
+          "label_ko": "가정",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "result",
+          "label_ko": "결과",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "limitation",
+          "label_ko": "한계",
+          "required_for_complete_structure": false,
+          "source_required": false
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "시나리오를 예측확률·확정 미래로 제시",
+      "innergen_adaptation": "공통 기간·범위에서 가정과 결과 비교. 시나리오는 발생확률·확정 미래가 아님.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "B06",
+      "name_ko": "공통사항 + 예외사항",
+      "family_id": "B",
+      "primary_relation": "common_exception",
+      "reader_question": "공통 기준과 예외는 무엇인가?",
+      "required_evidence": "공통 적용 범위와 예외 사유",
+      "slot_policy": [
+        {
+          "key": "common",
+          "label_ko": "공통사항",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "exception",
+          "label_ko": "예외사항",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "basis",
+          "label_ko": "근거",
+          "required_for_complete_structure": false,
+          "source_required": false
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "예외를 일반 원칙으로 확대",
+      "innergen_adaptation": "공통 원칙·예외 대상·기간·조건과 예외 후 잔여 사항을 같은 장표에서 표시.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "B07",
+      "name_ko": "동일 포맷 사례 비교",
+      "family_id": "B",
+      "primary_relation": "cases",
+      "reader_question": "각 사례의 차별점은 무엇인가?",
+      "required_evidence": "사례별 공통 서술항목과 출처",
+      "slot_policy": [
+        {
+          "key": "case",
+          "label_ko": "사례",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "context",
+          "label_ko": "범위·기간·비교기준",
+          "required_for_complete_structure": false,
+          "source_required": false
+        },
+        {
+          "key": "approach",
+          "label_ko": "접근 방식",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "evidence",
+          "label_ko": "근거/확인 현황",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "브랜드 사진만 나열하고 성과 차이 추정",
+      "innergen_adaptation": "사례마다 같은 필드·범위·출처 사용. 타사 성과를 자사 효익으로 일반화하지 않음.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "C01",
+      "name_ko": "문제·원인·영향·조치 표",
+      "family_id": "C",
+      "primary_relation": "diagnosis",
+      "reader_question": "문제를 무엇으로 해결할 것인가?",
+      "required_evidence": "문제별 원인·영향·조치의 연결 근거",
+      "slot_policy": [
+        {
+          "key": "issue",
+          "label_ko": "문제",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "cause",
+          "label_ko": "원인",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "impact",
+          "label_ko": "영향",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "action",
+          "label_ko": "조치/추진 내용",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "추정 원인을 확정하거나 여러 문제를 임의로 결합",
+      "innergen_adaptation": "한 행은 한 문제. 원인·영향은 해당 문제에 연결; 조치 상태와 추정 원인 구분.",
+      "source_html_renderer_status": "implemented"
+    },
+    {
+      "id": "C02",
+      "name_ko": "요구사항·현황·격차·과제 표",
+      "family_id": "C",
+      "primary_relation": "gap",
+      "reader_question": "무엇이 부족하고 무엇을 해야 하는가?",
+      "required_evidence": "요구사항과 현황의 대응 및 기준 버전",
+      "slot_policy": [
+        {
+          "key": "requirement",
+          "label_ko": "요구사항",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "evidence",
+          "label_ko": "근거/확인 현황",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "gap",
+          "label_ko": "격차",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "action",
+          "label_ko": "조치/추진 내용",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "기준 버전",
+        "적용대상",
+        "의무/내부방침/권고 구분"
+      ],
+      "do_not_use_when": "자료 미제시를 제도 미운영으로 단정",
+      "innergen_adaptation": "기준 버전·적용대상·권위를 기록. 격차 판단은 기준+증빙으로 도출. 미제시≠미운영.",
+      "source_html_renderer_status": "implemented"
+    },
+    {
+      "id": "C03",
+      "name_ko": "리스크 등록부",
+      "family_id": "C",
+      "primary_relation": "risk_register",
+      "reader_question": "어떤 위험을 어떻게 관리하는가?",
+      "required_evidence": "위험 정의·영향 범위·관리정보",
+      "slot_policy": [
+        {
+          "key": "risk",
+          "label_ko": "위험",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "driver",
+          "label_ko": "외부 동인",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "impact",
+          "label_ko": "영향",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "response",
+          "label_ko": "대응",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "owner",
+          "label_ko": "담당",
+          "required_for_complete_structure": false,
+          "source_required": false
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "모든 리스크를 동일 확률이나 금액으로 정량화",
+      "innergen_adaptation": "위험 정의·동인·영향·대응을 분리. 담당·확률·금액은 원문 근거가 있을 때만 표시.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "C04",
+      "name_ko": "우선순위 2×2",
+      "family_id": "C",
+      "primary_relation": "priority",
+      "reader_question": "무엇을 먼저 실행할 것인가?",
+      "required_evidence": "독립적인 두 축 정의·등급 기준·항목별 값",
+      "slot_policy": [
+        {
+          "key": "item",
+          "label_ko": "항목",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "x",
+          "label_ko": "가로축 값",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "y",
+          "label_ko": "세로축 값",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "rationale",
+          "label_ko": "판정 근거",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "두 축 정의",
+        "등급·좌표 기준",
+        "항목별 두 값",
+        "판정근거"
+      ],
+      "do_not_use_when": "중요/시급 같은 형용사만으로 좌표 생성",
+      "innergen_adaptation": "두 축의 정의·등급·항목별 값 필요. 정성 평가이면 정성 척도 표시; 임의 좌표 금지.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "C05",
+      "name_ko": "성숙도·평가 루브릭",
+      "family_id": "C",
+      "primary_relation": "maturity",
+      "reader_question": "고도화 수준을 어떻게 판단하는가?",
+      "required_evidence": "각 단계의 관측 가능한 판정 기준",
+      "slot_policy": [
+        {
+          "key": "dimension",
+          "label_ko": "구분 축",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "level",
+          "label_ko": "수준",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "criterion",
+          "label_ko": "비교·판정 기준",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "단계명이 있다는 이유로 모든 조직에 점수 부여",
+      "innergen_adaptation": "수준별 관측 가능한 기준과 평가 근거 필요. 단계명을 조직 점수로 자동 변환하지 않음.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "C06",
+      "name_ko": "근거·선정기준·선정결과",
+      "family_id": "C",
+      "primary_relation": "selection",
+      "reader_question": "왜 이 대상을 골랐는가?",
+      "required_evidence": "후보군·필터 기준·결과의 추적 관계",
+      "slot_policy": [
+        {
+          "key": "pool",
+          "label_ko": "후보군",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "criterion",
+          "label_ko": "비교·판정 기준",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "result",
+          "label_ko": "결과",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "결과를 정해 놓고 근거를 끼워 맞춤",
+      "innergen_adaptation": "후보군→적용 필터→선정결과를 추적. 결과의 기준·예외를 보존.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "D01",
+      "name_ko": "가로 단계 프로세스",
+      "family_id": "D",
+      "primary_relation": "sequence",
+      "reader_question": "어떤 순서로 진행하는가?",
+      "required_evidence": "단계 간 선후관계가 명시됨",
+      "slot_policy": [
+        {
+          "key": "stage",
+          "label_ko": "단계",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "activity",
+          "label_ko": "수행 내용",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "output",
+          "label_ko": "산출물",
+          "required_for_complete_structure": false,
+          "source_required": false
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "단순 열거·분류·부서 목록을 화살표로 연결",
+      "innergen_adaptation": "실제 선후관계 필요. 단계=동작+대상, 상세=원문 활동. 긴 설명은 D02 검토.",
+      "source_html_renderer_status": "implemented"
+    },
+    {
+      "id": "D02",
+      "name_ko": "세로 단계·활동·산출물 표",
+      "family_id": "D",
+      "primary_relation": "sequence",
+      "reader_question": "각 단계에서 무엇을 수행하는가?",
+      "required_evidence": "확인된 절차 및 단계별 세부 활동",
+      "slot_policy": [
+        {
+          "key": "stage",
+          "label_ko": "단계",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "activity",
+          "label_ko": "수행 내용",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "output",
+          "label_ko": "산출물",
+          "required_for_complete_structure": false,
+          "source_required": false
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "가로 폭이 좁은데 긴 본문을 5단 화살표에 압축",
+      "innergen_adaptation": "단계·활동·산출물의 공통 열 반복. 산출물·담당 미확인은 창작하지 않음.",
+      "source_html_renderer_status": "implemented"
+    },
+    {
+      "id": "D03",
+      "name_ko": "역할별 스윔레인",
+      "family_id": "D",
+      "primary_relation": "handoff",
+      "reader_question": "누가 언제 누구에게 넘기는가?",
+      "required_evidence": "담당 역할·활동 순서·인계 관계",
+      "slot_policy": [
+        {
+          "key": "stage",
+          "label_ko": "단계",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "owner",
+          "label_ko": "담당",
+          "required_for_complete_structure": true,
+          "source_required": false
+        },
+        {
+          "key": "activity",
+          "label_ko": "수행 내용",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "handoff",
+          "label_ko": "인계",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "실제 역할",
+        "활동 순서",
+        "인계 대상과 내용"
+      ],
+      "do_not_use_when": "부서 소속만 보고 인계 순서를 생성",
+      "innergen_adaptation": "역할별 레인에 확인된 활동 배치. 인계 정보·수신자·순서 근거가 없으면 역할표.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "D04",
+      "name_ko": "조건 분기 의사결정도",
+      "family_id": "D",
+      "primary_relation": "branching",
+      "reader_question": "어떤 조건에서 경로가 갈리는가?",
+      "required_evidence": "판정 질문·분기 조건·각 결과",
+      "slot_policy": [
+        {
+          "key": "decision",
+          "label_ko": "판정 질문",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "condition",
+          "label_ko": "적용 조건",
+          "required_for_complete_structure": true,
+          "source_required": false
+        },
+        {
+          "key": "yes",
+          "label_ko": "조건 충족 경로",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "no",
+          "label_ko": "미충족 경로",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "조건 AND/OR",
+        "미충족 경로",
+        "공통 잔여 사항이 있는지 확인"
+      ],
+      "do_not_use_when": "연속적인 중요도를 예/아니오 분기로 강제",
+      "innergen_adaptation": "판정 조건·AND/OR·부정 경로·각 결과를 보존. 예외 후 잔여 사항을 공통 패널로 표시.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "D05",
+      "name_ko": "피드백 순환 구조",
+      "family_id": "D",
+      "primary_relation": "feedback",
+      "reader_question": "어떻게 점검하고 개선하는가?",
+      "required_evidence": "실제 반복·환류 또는 재검토 관계",
+      "slot_policy": [
+        {
+          "key": "stage",
+          "label_ko": "단계",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "activity",
+          "label_ko": "수행 내용",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "feedback",
+          "label_ko": "환류",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "마지막 단계가 끝나는데 원형으로 장식",
+      "innergen_adaptation": "점검→변경→다음 수행의 실제 환류 필요. 일회성 절차를 원으로 장식하지 않음.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "D06",
+      "name_ko": "Input–Activity–Output–Outcome",
+      "family_id": "D",
+      "primary_relation": "logic_model",
+      "reader_question": "투입이 어떤 산출과 성과로 이어지는가?",
+      "required_evidence": "산출과 성과의 구분 및 기대 여부",
+      "slot_policy": [
+        {
+          "key": "input",
+          "label_ko": "투입",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "activity",
+          "label_ko": "수행 내용",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "output",
+          "label_ko": "산출물",
+          "required_for_complete_structure": true,
+          "source_required": false
+        },
+        {
+          "key": "outcome",
+          "label_ko": "성과",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "교육 횟수 같은 산출을 사업성과로 간주",
+      "innergen_adaptation": "투입·활동·산출·성과는 별개. 기대성과는 기대·목표 표시. 성과 근거 부족 시 활동표.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "D07",
+      "name_ko": "가치사슬·라이프사이클",
+      "family_id": "D",
+      "primary_relation": "value_chain",
+      "reader_question": "활동이 가치사슬 어디에 위치하는가?",
+      "required_evidence": "가치사슬 단계 및 해당 활동 매핑",
+      "slot_policy": [
+        {
+          "key": "stage",
+          "label_ko": "단계",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "activity",
+          "label_ko": "수행 내용",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "issue",
+          "label_ko": "문제",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "Upstream/Downstream·자사 경계를 임의 변경",
+      "innergen_adaptation": "가치사슬 단계와 활동의 대응·자사 범위 보존. 경계 포함은 별도 근거 필요.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "E01",
+      "name_ko": "분류 트리",
+      "family_id": "E",
+      "primary_relation": "hierarchy",
+      "reader_question": "전체는 어떤 하위 구성으로 나뉘는가?",
+      "required_evidence": "상하위 포함관계·분류 기준",
+      "slot_policy": [
+        {
+          "key": "item",
+          "label_ko": "항목",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "parent",
+          "label_ko": "상위 항목",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "definition",
+          "label_ko": "정의",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "분류 관계를 보고·승인 권한으로 표시",
+      "innergen_adaptation": "같은 분류축의 부모·자식만 연결. 상하 분류는 조직 권한이 아님.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "E02",
+      "name_ko": "조직·보고 체계도",
+      "family_id": "E",
+      "primary_relation": "reporting",
+      "reader_question": "누가 누구에게 보고·승인받는가?",
+      "required_evidence": "공식 보고·감독·승인 관계",
+      "slot_policy": [
+        {
+          "key": "entity",
+          "label_ko": "대상",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "role",
+          "label_ko": "역할",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "보고·승인 행위",
+        "방향",
+        "관계별 근거"
+      ],
+      "do_not_use_when": "단순 협업을 상하 보고선으로 변환",
+      "innergen_adaptation": "보고자→수신자에 행위 라벨. 승인·감독 방향은 실제 근거로 별도 표시.",
+      "source_html_renderer_status": "implemented"
+    },
+    {
+      "id": "E03",
+      "name_ko": "허브 앤드 스포크 운영모델",
+      "family_id": "E",
+      "primary_relation": "hub",
+      "reader_question": "중앙 기능과 분산 기능은 어떻게 연결되는가?",
+      "required_evidence": "중앙 기능 및 참여자별 교환 관계",
+      "slot_policy": [
+        {
+          "key": "hub",
+          "label_ko": "중앙 기능",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "participant",
+          "label_ko": "참여자",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "exchange",
+          "label_ko": "교환/연계",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "모든 조직도를 중앙 허브 모델로 해석",
+      "innergen_adaptation": "중앙 기능과 각 주체의 교환 내용을 표시. 중앙 배치 자체는 최종 권한의 근거가 아님.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "E04",
+      "name_ko": "계층형 아키텍처",
+      "family_id": "E",
+      "primary_relation": "layers",
+      "reader_question": "각 계층이 어떤 역할을 하는가?",
+      "required_evidence": "추상화·의존 계층 및 인터페이스",
+      "slot_policy": [
+        {
+          "key": "layer",
+          "label_ko": "계층",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "function",
+          "label_ko": "기능",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "interface",
+          "label_ko": "인터페이스",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "높게 그렸다는 이유로 조직적 권한 암시",
+      "innergen_adaptation": "기능·의존 계층·인터페이스를 표시. 위쪽 배치를 승인권한으로 해석하지 않음.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "E05",
+      "name_ko": "항목 간 매핑 매트릭스",
+      "family_id": "E",
+      "primary_relation": "mapping",
+      "reader_question": "A의 어떤 항목이 B와 연결되는가?",
+      "required_evidence": "대응 관계 및 근거·공통 행키",
+      "slot_policy": [
+        {
+          "key": "source_item",
+          "label_ko": "원천 항목",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "target_item",
+          "label_ko": "대응 항목",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "mapping",
+          "label_ko": "대응 관계",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "basis",
+          "label_ko": "근거",
+          "required_for_complete_structure": true,
+          "source_required": false
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "공통 키 없는 표를 시각적으로만 이어 붙임",
+      "innergen_adaptation": "공통 행키·대응 관계·근거를 유지. 다대다 연결을 보기 좋게 일대일로 축소하지 않음.",
+      "source_html_renderer_status": "implemented"
+    },
+    {
+      "id": "E06",
+      "name_ko": "RACI 책임 매트릭스",
+      "family_id": "E",
+      "primary_relation": "responsibility",
+      "reader_question": "누가 실행·최종책임·자문·공유를 맡는가?",
+      "required_evidence": "업무·역할·RACI 정의와 배정 근거",
+      "slot_policy": [
+        {
+          "key": "task",
+          "label_ko": "업무",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "role",
+          "label_ko": "역할",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "raci",
+          "label_ko": "책임 구분",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "R/A/C/I 정의",
+        "업무별 실제 배정",
+        "내부 책임정책"
+      ],
+      "do_not_use_when": "조직도만으로 R·A를 자동 추정",
+      "innergen_adaptation": "R/A/C/I 정의와 실제 배정 근거 필요. 단일 A는 해당 조직의 내부 방침이 있을 때만 검사.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "F01",
+      "name_ko": "단일 인과 사슬",
+      "family_id": "F",
+      "primary_relation": "causal",
+      "reader_question": "무엇이 어떤 결과를 초래하는가?",
+      "required_evidence": "각 인과 연결이 원문에서 주장되거나 검증됨",
+      "slot_policy": [
+        {
+          "key": "event",
+          "label_ko": "사건",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "mechanism",
+          "label_ko": "작용 경로",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "effect",
+          "label_ko": "결과 영향",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "각 연결 근거",
+        "원문 주장/가정/검증 상태"
+      ],
+      "do_not_use_when": "동시 발생·시계열·상관을 인과로 표시",
+      "innergen_adaptation": "연결마다 원문이 주장·분석한 인과 근거 필요. 원문 주장·가정·독립 검증 상태 구분.",
+      "source_html_renderer_status": "implemented"
+    },
+    {
+      "id": "F02",
+      "name_ko": "외부동인·사업영향·재무영향",
+      "family_id": "F",
+      "primary_relation": "financial_pathway",
+      "reader_question": "외부변화가 어떤 재무항목에 영향을 주는가?",
+      "required_evidence": "사업경로·재무항목·증감 방향 및 가정",
+      "slot_policy": [
+        {
+          "key": "driver",
+          "label_ko": "외부 동인",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "business_effect",
+          "label_ko": "사업 영향",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "financial_effect",
+          "label_ko": "재무 영향",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "작용경로",
+        "적용조건",
+        "정성/정량",
+        "금액·계정의 근거 상태"
+      ],
+      "do_not_use_when": "매출 감소와 현금 감소를 동일 금액·시점으로 처리",
+      "innergen_adaptation": "동인·사업경로·재무 결과의 적용 조건·가능성 보존. 계정·금액·현금시점 임의 특정 금지.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "F03",
+      "name_ko": "다대다 영향 네트워크",
+      "family_id": "F",
+      "primary_relation": "many_to_many",
+      "reader_question": "여러 원인과 결과는 어떻게 교차 연결되는가?",
+      "required_evidence": "각 연결선별 의미와 출처",
+      "slot_policy": [
+        {
+          "key": "source",
+          "label_ko": "출발 노드",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "target",
+          "label_ko": "도착 노드",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "effect",
+          "label_ko": "결과 영향",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "교차선을 단순화하려고 연결을 임의 삭제",
+      "innergen_adaptation": "모든 실제 연결의 의미·근거 보존. 복잡하면 개요+상세로 분할하고 교차선은 재배치.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "F04",
+      "name_ko": "문제·목표·과제·KPI 연결",
+      "family_id": "F",
+      "primary_relation": "strategy_link",
+      "reader_question": "어떤 과제가 어떤 목표에 기여하는가?",
+      "required_evidence": "목표·과제·측정지표의 대응",
+      "slot_policy": [
+        {
+          "key": "problem",
+          "label_ko": "문제",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "objective",
+          "label_ko": "목표",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "action",
+          "label_ko": "조치/추진 내용",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "kpi",
+          "label_ko": "측정지표",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "추상적 과제에 측정 불가 KPI나 임의 목표치 생성",
+      "innergen_adaptation": "문제·목표·과제·KPI 대응 보존. 지표 정의와 목표값·기여효과는 별도 근거 필요.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "G01",
+      "name_ko": "시점별 사건 타임라인",
+      "family_id": "G",
+      "primary_relation": "chronology",
+      "reader_question": "언제 무엇이 일어났는가?",
+      "required_evidence": "사건별 명시적인 시점",
+      "slot_policy": [
+        {
+          "key": "date",
+          "label_ko": "시점",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "event",
+          "label_ko": "사건",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "status",
+          "label_ko": "상태",
+          "required_for_complete_structure": false,
+          "source_required": false
+        }
+      ],
+      "additional_context_to_check": [
+        "시점 기준",
+        "사건 확정/계획 상태",
+        "실제 간격 여부"
+      ],
+      "do_not_use_when": "연도 숫자만 추출해 사건이나 법적 확정성 추정",
+      "innergen_adaptation": "사건별 명시 시점·확정/계획 상태 유지. 균등 간격이면 간격 비례 아님 표시.",
+      "source_html_renderer_status": "implemented"
+    },
+    {
+      "id": "G02",
+      "name_ko": "단계별 추진 로드맵",
+      "family_id": "G",
+      "primary_relation": "roadmap",
+      "reader_question": "언제까지 무엇을 구축하는가?",
+      "required_evidence": "기간·단계·계획 산출물",
+      "slot_policy": [
+        {
+          "key": "phase",
+          "label_ko": "추진 단계",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "period",
+          "label_ko": "기간",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "action",
+          "label_ko": "조치/추진 내용",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "deliverable",
+          "label_ko": "완료 증빙",
+          "required_for_complete_structure": false,
+          "source_required": false
+        }
+      ],
+      "additional_context_to_check": [
+        "기간 정의",
+        "계획/목표 상태"
+      ],
+      "do_not_use_when": "달성 목표를 확정된 실적처럼 제시",
+      "innergen_adaptation": "기간·단계·활동·원문 산출물 표시. 중기·장기의 연수는 정의가 있을 때만 부여.",
+      "source_html_renderer_status": "implemented"
+    },
+    {
+      "id": "G03",
+      "name_ko": "업무축×기간 간트",
+      "family_id": "G",
+      "primary_relation": "schedule",
+      "reader_question": "여러 과업은 언제 병행되는가?",
+      "required_evidence": "시작·종료일·작업축과 실제 의존관계",
+      "slot_policy": [
+        {
+          "key": "workstream",
+          "label_ko": "과업축",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "start",
+          "label_ko": "시작",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "end",
+          "label_ko": "종료",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "milestone",
+          "label_ko": "마일스톤",
+          "required_for_complete_structure": false,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "일정 기준",
+        "시작·종료",
+        "실제 의존관계가 있는지 확인"
+      ],
+      "do_not_use_when": "없는 기간·진척률을 임의로 채움",
+      "innergen_adaptation": "과업별 시작·종료·일정 기준 유지. 의존선·진척률·마일스톤은 확인된 것만 표시.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "G04",
+      "name_ko": "As-is→전환과제→To-be",
+      "family_id": "G",
+      "primary_relation": "transition",
+      "reader_question": "현 상태를 어떻게 목표 상태로 바꾸는가?",
+      "required_evidence": "현재·전환수단·지향 상태 및 근거",
+      "slot_policy": [
+        {
+          "key": "current",
+          "label_ko": "현재 상태",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "bridge",
+          "label_ko": "전환수단",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "future",
+          "label_ko": "지향 상태",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [],
+      "do_not_use_when": "수단이 없는데 화살표만으로 달성 가능성 암시",
+      "innergen_adaptation": "현재 상태·전환수단·미래의 지위를 구분. 화살표가 달성 보장을 암시하지 않도록 상태 표시.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "G05",
+      "name_ko": "실적·목표·격차 궤적",
+      "family_id": "G",
+      "primary_relation": "trajectory",
+      "reader_question": "목표 경로와 얼마나 차이가 나는가?",
+      "required_evidence": "같은 지표·범위·기간의 실적과 목표",
+      "slot_policy": [
+        {
+          "key": "period",
+          "label_ko": "기간",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "actual",
+          "label_ko": "실적",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "target",
+          "label_ko": "목표",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "gap",
+          "label_ko": "격차",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "지표",
+        "단위",
+        "기간",
+        "범위",
+        "방법",
+        "실적/목표 구분",
+        "계산 허용 범위"
+      ],
+      "do_not_use_when": "조직경계나 기준연도가 다른 값을 연결",
+      "innergen_adaptation": "같은 지표·단위·기간·경계·방법의 실적과 목표. 격차 계산은 허용된 계산 범위에서만 수행.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "H01",
+      "name_ko": "순위·규모 막대",
+      "family_id": "H",
+      "primary_relation": "ranking",
+      "reader_question": "어느 항목이 더 크거나 작은가?",
+      "required_evidence": "동일 지표·단위·기간·범위의 수치",
+      "slot_policy": [
+        {
+          "key": "category",
+          "label_ko": "범주",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "value",
+          "label_ko": "값",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "지표",
+        "단위",
+        "기간",
+        "범위",
+        "방법",
+        "비교 가능성"
+      ],
+      "do_not_use_when": "다른 지표나 연도 숫자를 같은 막대로 비교",
+      "innergen_adaptation": "지표·단위·기간·범위·방법 비교 가능성 필요. 연도만으로 높이 생성 금지. 영점·음수 표시 검토.",
+      "source_html_renderer_status": "implemented"
+    },
+    {
+      "id": "H02",
+      "name_ko": "시계열 추이 선",
+      "family_id": "H",
+      "primary_relation": "timeseries",
+      "reader_question": "같은 지표가 시간에 따라 어떻게 변하는가?",
+      "required_evidence": "반복 측정된 같은 지표·단위·범위",
+      "slot_policy": [
+        {
+          "key": "period",
+          "label_ko": "기간",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "value",
+          "label_ko": "값",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "지표",
+        "단위",
+        "기간",
+        "범위",
+        "방법",
+        "결측·경계 변경"
+      ],
+      "do_not_use_when": "범주별 차이를 시간 흐름으로 연결",
+      "innergen_adaptation": "반복 측정된 동일 지표·범위·방법. 경계 변경·결측·추정 구분. 범주 차이를 시계열로 연결 금지.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "H03",
+      "name_ko": "전체 대비 구성비",
+      "family_id": "H",
+      "primary_relation": "composition",
+      "reader_question": "전체를 무엇이 얼마나 구성하는가?",
+      "required_evidence": "공통 분모·배타적 구성·합계 정합성",
+      "slot_policy": [
+        {
+          "key": "part",
+          "label_ko": "구성항목",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "value",
+          "label_ko": "값",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "total",
+          "label_ko": "전체/분모",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "단위",
+        "기간",
+        "범위",
+        "공통 분모",
+        "배타성",
+        "합계"
+      ],
+      "do_not_use_when": "합계가 겹치는 항목·음수값을 파이로 표현",
+      "innergen_adaptation": "공통 분모·배타성·합계·항목 범위 검사. 중첩·음수는 구성비 구조로 표현하지 않음.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "H04",
+      "name_ko": "시작·증감·종료 워터폴",
+      "family_id": "H",
+      "primary_relation": "bridge",
+      "reader_question": "총변화가 어떤 요인으로 설명되는가?",
+      "required_evidence": "동일 단위·가산관계·시작+증감=종료",
+      "slot_policy": [
+        {
+          "key": "start",
+          "label_ko": "시작",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "change",
+          "label_ko": "증감분",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "end",
+          "label_ko": "종료",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "단위",
+        "기간",
+        "범위",
+        "가산관계",
+        "중복효과",
+        "총계 대사"
+      ],
+      "do_not_use_when": "독립 범주 값이나 중복 효과를 증감 기여로 표시",
+      "innergen_adaptation": "동일 단위·가산관계·시작+증감=종료 검사. 중복효과·독립 값은 기여 증감으로 사용하지 않음.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "H05",
+      "name_ko": "분포·편차 히스토그램",
+      "family_id": "H",
+      "primary_relation": "distribution",
+      "reader_question": "값은 어디에 모여 있고 얼마나 흩어져 있는가?",
+      "required_evidence": "원시 관측치 또는 구간별 도수·모집단",
+      "slot_policy": [
+        {
+          "key": "observation",
+          "label_ko": "관측치",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "value",
+          "label_ko": "값",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "bin",
+          "label_ko": "구간",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "단위",
+        "모집단·범위",
+        "관측치 또는 구간도수"
+      ],
+      "do_not_use_when": "평균 몇 개만으로 분포를 만들어냄",
+      "innergen_adaptation": "원시 관측치 또는 근거 있는 구간별 도수·모집단 필요. 평균만으로 분포 생성 금지.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "H06",
+      "name_ko": "두 변수 산점도",
+      "family_id": "H",
+      "primary_relation": "association",
+      "reader_question": "두 변수는 어떤 관계를 보이는가?",
+      "required_evidence": "동일 관측대상의 쌍을 이룬 두 값",
+      "slot_policy": [
+        {
+          "key": "entity",
+          "label_ko": "대상",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "x",
+          "label_ko": "가로축 값",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "y",
+          "label_ko": "세로축 값",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "동일 관측대상",
+        "두 축 지표·단위",
+        "값 쌍"
+      ],
+      "do_not_use_when": "산점도만으로 인과관계 또는 예측력을 주장",
+      "innergen_adaptation": "같은 관측대상의 값 쌍·두 축 단위 필요. 상관·인과·통계적 유의성의 추가 근거 구분.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "H07",
+      "name_ko": "민감도 토네이도",
+      "family_id": "H",
+      "primary_relation": "sensitivity",
+      "reader_question": "어떤 가정이 결과를 가장 크게 바꾸는가?",
+      "required_evidence": "같은 기준모형·변수별 변화 범위·재계산 결과",
+      "slot_policy": [
+        {
+          "key": "parameter",
+          "label_ko": "변수",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "low",
+          "label_ko": "하한 가정",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "base",
+          "label_ko": "기준 가정",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "high",
+          "label_ko": "상한 가정",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "result",
+          "label_ko": "결과",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "기준모형",
+        "변수별 변화 범위",
+        "같은 모형 재계산 근거"
+      ],
+      "do_not_use_when": "임의 평점을 민감도로 표현",
+      "innergen_adaptation": "같은 기준모형에서 변수별 범위·재계산 결과 필요. 임의 중요도 점수를 민감도로 표시 금지.",
+      "source_html_renderer_status": "specification_only"
+    },
+    {
+      "id": "H08",
+      "name_ko": "정성 시나리오 경로",
+      "family_id": "H",
+      "primary_relation": "qualitative_scenarios",
+      "reader_question": "불확실성에 따라 가능한 경로는?",
+      "required_evidence": "명시적인 대안 가정·정성 결과",
+      "slot_policy": [
+        {
+          "key": "scenario",
+          "label_ko": "시나리오",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "assumption",
+          "label_ko": "가정",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "pathway",
+          "label_ko": "전개 경로",
+          "required_for_complete_structure": true,
+          "source_required": true
+        },
+        {
+          "key": "implication",
+          "label_ko": "시사점",
+          "required_for_complete_structure": true,
+          "source_required": true
+        }
+      ],
+      "additional_context_to_check": [
+        "명시된 가정",
+        "정성 표시",
+        "예측확률과 구분"
+      ],
+      "do_not_use_when": "숫자가 없는데 차트 높이로 강도를 암시",
+      "innergen_adaptation": "가정·경로·정성 결과를 문자로 표시. 임의 수치 높이·확률·선 기울기로 강도 표현 금지.",
+      "source_html_renderer_status": "specification_only"
+    }
+  ]
+}

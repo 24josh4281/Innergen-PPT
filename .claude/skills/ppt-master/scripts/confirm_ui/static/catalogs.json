@@ -16,6 +16,20 @@
       "use_ko": "최신 프로젝터 / 온라인 발표"
     },
     {
+      "id": "ppt139",
+      "label": "PPT 13:9 (INNerGEN)",
+      "label_zh": "PPT 13:9（INNerGEN）",
+      "label_en": "PPT 13:9 (INNerGEN)",
+      "label_ja": "PPT 13:9（INNerGEN）",
+      "label_ko": "PPT 13:9 (이너젠)",
+      "dim": "1040×720",
+      "viewbox": "0 0 1040 720",
+      "use_zh": "INNerGEN 原始比例的报告与培训资料",
+      "use_en": "Reports and training in the original INNerGEN format",
+      "use_ja": "INNerGENの元の比率による報告・研修資料",
+      "use_ko": "이너젠 원본 비율의 보고·교육 자료"
+    },
+    {
       "id": "ppt43",
       "label": "PPT 4:3",
       "label_zh": "PPT 4:3",
@@ -685,6 +699,29 @@
       "desc_ko": "모든 페이지를 템플릿 SVG 로스터에 매핑하고 명시된 Master/Layout/Placeholder 계약을 그대로 유지합니다."
     }
   ],
+  "innergen_business_types": [
+    {"id":"cdp_disclosure","label_ko":"CDP·기후공시","label_en":"CDP / climate disclosure","label_ja":"CDP・気候開示","label_zh":"CDP／气候披露","desc_ko":"공시 문항·근거·답변 현황","desc_en":"Questions, evidence, response status","desc_ja":"設問・根拠・回答状況","desc_zh":"问题、证据与答复进度"},
+    {"id":"reduction","label_ko":"온실가스 감축","label_en":"GHG reduction","label_ja":"温室効果ガス削減","label_zh":"温室气体减排","desc_ko":"기준선·방법론·MRV","desc_en":"Baseline, method, MRV","desc_ja":"ベースライン・方法論・MRV","desc_zh":"基准线、方法与MRV"},
+    {"id":"regulatory","label_ko":"규제 대응","label_en":"Regulatory response","label_ja":"規制対応","label_zh":"法规应对","desc_ko":"적용 의무·제출·검증","desc_en":"Obligations, filing, verification","desc_ja":"義務・提出・検証","desc_zh":"义务、提交与核查"},
+    {"id":"inventory","label_ko":"온실가스 인벤토리","label_en":"GHG inventory","label_ja":"温室効果ガスインベントリ","label_zh":"温室气体清单","desc_ko":"경계·활동자료·산정 품질","desc_en":"Boundary, activity data, QA","desc_ja":"境界・活動量・品質管理","desc_zh":"边界、活动数据与质量管理"}
+  ],
+  "innergen_report_types": [
+    {"id":"proposal","label_ko":"제안서형","label_en":"Proposal","label_ja":"提案書","label_zh":"提案书","desc_ko":"과제→범위→접근→산출물","desc_en":"Challenge → scope → approach → outputs","desc_ja":"課題→範囲→方法→成果物","desc_zh":"问题→范围→方法→成果"},
+    {"id":"kickoff","label_ko":"착수보고형","label_en":"Kickoff","label_ja":"着手報告","label_zh":"启动报告","desc_ko":"목적→계획→자료요청→일정","desc_en":"Purpose → plan → data request → milestones","desc_ja":"目的→計画→資料依頼→日程","desc_zh":"目标→计划→资料请求→日程"},
+    {"id":"interim","label_ko":"중간보고형","label_en":"Interim report","label_ja":"中間報告","label_zh":"中期报告","desc_ko":"진행→잠정 결과→이슈→다음 단계","desc_en":"Progress → findings → issues → next steps","desc_ja":"進捗→暫定結果→課題→次の段階","desc_zh":"进度→阶段成果→问题→下一步"},
+    {"id":"final","label_ko":"최종보고형","label_en":"Final report","label_ja":"最終報告","label_zh":"最终报告","desc_ko":"결론→근거→검증→인계","desc_en":"Conclusion → evidence → validation → handover","desc_ja":"結論→根拠→検証→引き継ぎ","desc_zh":"结论→证据→核验→移交"}
+  ],
+  "innergen_variants": [
+    {"id":"classic_grid","label_ko":"격자형","label_en":"Classic grid","label_ja":"グリッド型","label_zh":"网格型","desc_ko":"격자 남색 헤더·푸터","desc_en":"Gridded navy header and footer","desc_ja":"格子柄の紺色ヘッダー・フッター","desc_zh":"网格海军蓝页眉和页脚"},
+    {"id":"solid_navy","label_ko":"단색 남색형","label_en":"Solid navy","label_ja":"紺色単色型","label_zh":"纯海军蓝型","desc_ko":"격자 없는 남색 구조","desc_en":"Solid navy framing","desc_ja":"無地の紺色フレーム","desc_zh":"纯色海军蓝框架"},
+    {"id":"slim_line","label_ko":"슬림라인형","label_en":"Slim line","label_ja":"細線型","label_zh":"细线型","desc_ko":"흰 바탕·가는 남색 선","desc_en":"White canvas and slim navy rule","desc_ja":"白地に細い紺色の線","desc_zh":"白底与细海军蓝线"}
+  ],
+  "innergen_reference_counts": {
+    "cdp_disclosure": {"proposal":3,"kickoff":1,"interim":0,"final":2},
+    "reduction": {"proposal":1,"kickoff":2,"interim":0,"final":0},
+    "regulatory": {"proposal":0,"kickoff":1,"interim":0,"final":1},
+    "inventory": {"proposal":2,"kickoff":1,"interim":0,"final":2}
+  },
   "templates": [
     {
       "id": "free",

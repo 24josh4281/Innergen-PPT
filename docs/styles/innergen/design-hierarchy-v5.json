@@ -1,0 +1,38 @@
+{
+  "version": "5.0",
+  "extends": "design-hierarchy-v4.json",
+  "priority": "latest_user_feedback_for_governing_spacing_and_contents_numbering",
+  "numbering": {
+    "main_title": "chapter. main title",
+    "subtitle": "chapter-subsection. subtitle",
+    "example": "3. 필수 항목 / 3-1. 거버넌스",
+    "exclude": ["cover", "toc"],
+    "sequence": "semantic_chapters_in_body_order",
+    "contents_body_match": "one_to_one"
+  },
+  "contents": {
+    "training_default_page": 2,
+    "show": ["chapter_numbers", "subsection_numbers", "titles", "actual_slide_pages"],
+    "continued_column_label": "계속",
+    "update_footer_pages_after_insertion": true,
+    "never_reuse_current_deck_counts_as_defaults": true
+  },
+  "detailed_training_typography": {
+    "body_pt": 14,
+    "body_svg_px": 18.666667,
+    "title_pt": 24,
+    "governing_pt": 20,
+    "governing_svg_px": 26.666667,
+    "apply_to_other_purposes_automatically": false
+  },
+  "governing_spacing": {
+    "basis": "actual_glyph_bounds_between_header_bottom_and_first_body_top",
+    "target_top_bottom_gap_difference_svg_px": 4,
+    "recompute_for_each_body_start": true,
+    "multi_line": "center_entire_paragraph_and_reflow_body",
+    "unframed_body": "use_actual_first_heading_top",
+    "support_message": "relocate_into_body_when_it_conflicts"
+  },
+  "preserve": ["v4_information_roles", "formal_governing_and_final", "nominal_body", "word_boundary_wrap", "centered_tables", "conditions", "numbers", "units", "source_pages"],
+  "qa": ["toc_number_title_page_parity", "header_logo_clearance", "actual_powerpoint_spacing", "native_font_sizes", "body_and_source_preservation"]
+}

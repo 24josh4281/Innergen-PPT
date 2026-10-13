@@ -1,0 +1,88 @@
+[
+  {
+    "role": "cover-blue",
+    "path": ".preview\\innergen-analysis\\assets\\innergen-logo-cover-blue.png",
+    "source": "INPUTS\\이너젠 PPT 장표 레퍼런스\\CDP\\제안서 2.pptx",
+    "source_sha256": "9d12036471032259fb66f5dcf25060d549ead78436de8b1668be3bae3695ed40",
+    "source_slide": 1,
+    "container_part": "/ppt/slideLayouts/slideLayout1.xml",
+    "shape_id": 3,
+    "relation_id": "rId2",
+    "image_part": "/ppt/media/image1.png",
+    "image_sha256": "36809cb0561f7d966f1132b71fa971ab61d6fbf9b97505156c7b218efd91f27d",
+    "pixel_size": [
+      709,
+      709
+    ],
+    "bbox_in": [
+      4.0526,
+      4.2147,
+      2.3878,
+      2.2163
+    ],
+    "visual_verification": "Image read and visually confirmed as INNerGEN own-company logo, not client logo.",
+    "dominant_opaque_rgb": [
+      {
+        "rgb": "13387B",
+        "pixels": 38558
+      },
+      {
+        "rgb": "286CB5",
+        "pixels": 8585
+      },
+      {
+        "rgb": "80BFD7",
+        "pixels": 6111
+      }
+    ]
+  },
+  {
+    "role": "footer-white",
+    "path": ".preview\\innergen-analysis\\assets\\innergen-logo-footer-white.png",
+    "source": "INPUTS\\이너젠 PPT 장표 레퍼런스\\CDP\\제안서 2.pptx",
+    "source_sha256": "9d12036471032259fb66f5dcf25060d549ead78436de8b1668be3bae3695ed40",
+    "source_slide": 7,
+    "container_part": "/ppt/slideLayouts/slideLayout2.xml",
+    "shape_id": 128,
+    "relation_id": "rId3",
+    "image_part": "/ppt/media/image4.png",
+    "image_sha256": "f9b95479168262c5041163991213175d974034983d0f9ba30f2175d2b446e6dc",
+    "pixel_size": [
+      160,
+      101
+    ],
+    "bbox_in": [
+      0.2013,
+      7.0042,
+      0.7267,
+      0.4589
+    ],
+    "visual_verification": "Image read and visually confirmed as INNerGEN own-company logo, not client logo.",
+    "dominant_opaque_rgb": [
+      {
+        "rgb": "FFFFFF",
+        "pixels": 3176
+      },
+      {
+        "rgb": "FDFDFD",
+        "pixels": 58
+      },
+      {
+        "rgb": "FCFCFC",
+        "pixels": 29
+      },
+      {
+        "rgb": "FEFEFE",
+        "pixels": 22
+      },
+      {
+        "rgb": "FBFBFB",
+        "pixels": 20
+      },
+      {
+        "rgb": "F4F4F4",
+        "pixels": 20
+      }
+    ]
+  }
+]

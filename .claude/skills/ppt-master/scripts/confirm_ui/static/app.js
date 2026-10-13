@@ -32,6 +32,11 @@
             sec_style: "Style objective",
             sec_template: "Template",
             template_locked_note: "Installed at Step 3 — shown for reference; not changeable here",
+            innergen_business: "INNerGEN · business type",
+            innergen_report: "Report type",
+            innergen_frame: "Visual frame",
+            innergen_source_count: "Direct reference decks: {count}",
+            innergen_proposed: "Structure proposal · no directly matching reference deck",
             sec_color: "Color scheme",
             sec_icons: "Icon usage",
             sec_type: "Typography",
@@ -147,6 +152,11 @@
             sec_style: "スタイルの狙い",
             sec_template: "テンプレート",
             template_locked_note: "Step 3でインストール済み — 参考表示のためここでは変更できません",
+            innergen_business: "INNerGEN · 事業タイプ",
+            innergen_report: "報告タイプ",
+            innergen_frame: "画面形式",
+            innergen_source_count: "直接確認した参考資料：{count}件",
+            innergen_proposed: "構成案 · 直接該当する参考資料なし",
             sec_color: "配色",
             sec_icons: "アイコンの使用",
             sec_type: "タイポグラフィ",
@@ -262,6 +272,11 @@
             sec_style: "스타일 목표",
             sec_template: "템플릿",
             template_locked_note: "Step 3에서 설치됨 — 참고용 표시이며 여기서 변경할 수 없습니다",
+            innergen_business: "이너젠 · 사업 성격",
+            innergen_report: "보고 성격",
+            innergen_frame: "화면 형식",
+            innergen_source_count: "직접 확인된 원본: {count}개",
+            innergen_proposed: "구성 제안 · 직접 해당하는 원본 없음",
             sec_color: "색상 구성",
             sec_icons: "아이콘 사용",
             sec_type: "타이포그래피",
@@ -377,6 +392,11 @@
             sec_style: "风格目标",
             sec_template: "模板",
             template_locked_note: "已在 Step 3 安装 — 仅供参考，此处不可更改",
+            innergen_business: "INNerGEN · 业务类型",
+            innergen_report: "报告类型",
+            innergen_frame: "页面形式",
+            innergen_source_count: "直接参考资料：{count}份",
+            innergen_proposed: "结构建议 · 无直接对应的参考资料",
             sec_color: "色彩方案",
             sec_icons: "图标使用",
             sec_type: "字体方案",
@@ -1205,6 +1225,71 @@
         return (REC && REC._template_field) || { mode: "selector" };
     }
 
+    function isInnergenSelection() {
+        return STATE.template === "innergen" ||
+            (templateFieldState().mode === "locked" && recId("template") === "innergen");
+    }
+
+    function initInnergenStudio() {
+        var data = CAT.style_standard;
+        if (!data || !window.InnergenStudio) return;
+        var family = recId("style_family") || (isInnergenSelection() ? "innergen_basic" : "");
+        if (!data.profiles[family]) return;
+        STATE.style_family = family;
+        STATE.style_delivery_mode = recId("style_delivery_mode") || "report_reading";
+        STATE.innergen_business_type = recId("innergen_business_type") || "cdp_disclosure";
+        STATE.innergen_report_type = recId("innergen_report_type") || "kickoff";
+        STATE.media_mode = recId("media_mode") || "diagram";
+        STATE.layout_choice = recId("layout_choice") || window.InnergenStudio.recommended(data, STATE)[0];
+        STATE.design_standard_version = data.version;
+        if (!data.modes[STATE.style_delivery_mode]) STATE.style_delivery_mode = "report_reading";
+        if (!data.media_modes[STATE.media_mode]) STATE.media_mode = "diagram";
+        if (!data.layouts[STATE.layout_choice]) STATE.layout_choice = "evidence";
+        if (templateFieldState().mode !== "locked" && !REC._already_confirmed && (STAGE === 1 || STAGE === "all")) {
+            window.InnergenStudio.apply(data, STATE, "style_family", family);
+            window.InnergenStudio.apply(data, STATE, "media_mode", STATE.media_mode);
+        }
+    }
+
+    function studioPayload(payload) {
+        if (!STATE.style_family) return payload;
+        ["style_family", "style_delivery_mode", "innergen_business_type", "innergen_report_type",
+            "layout_choice", "media_mode", "design_standard_version"].forEach(function (key) {
+            payload[key] = STATE[key];
+        });
+        // The quick chooser already applied these visible defaults. Preserve the
+        // snapshot across stage changes and browser refreshes, including overrides.
+        ["color", "typography", "image_usage", "image_notes"].forEach(function (key) {
+            if (STATE[key] != null) payload[key] = JSON.parse(JSON.stringify(STATE[key]));
+        });
+        return payload;
+    }
+
+    function renderInnergenStudio(host, stage) {
+        if (!STATE.style_family || !CAT.style_standard || !window.InnergenStudio || (stage !== 1 && stage !== "all")) return;
+        var details = document.createElement("details"); details.className = "ig-advanced";
+        var summary = document.createElement("summary"); summary.textContent = "세부 설정 · 전체 선택지와 현재 값 확인";
+        details.appendChild(summary);
+        while (host.firstChild) details.appendChild(host.firstChild);
+        window.InnergenStudio.mount(host, { data: CAT.style_standard, state: STATE,
+            locked: templateFieldState().mode === "locked",
+            onChange: function (field, value) {
+                var focused = document.activeElement && document.activeElement.getAttribute("aria-label");
+                if (field === "style_family" && templateFieldState().mode !== "locked") {
+                    STATE.template = "free"; delete STATE.template_adherence; TEMPLATE_OVERLAY = {};
+                }
+                window.InnergenStudio.apply(CAT.style_standard, STATE, field, value);
+                if (field === "style_family" || field === "style_delivery_mode") SIZE_RATIO_MEM = {};
+                renderAll();
+                if (focused) {
+                    var controls = host.querySelectorAll("select[aria-label]");
+                    Array.prototype.forEach.call(controls, function (n) { if (n.getAttribute("aria-label") === focused) n.focus(); });
+                }
+            }
+        });
+        host.appendChild(details);
+    }
+
     function templateCatalog() {
         return (CAT && CAT.templates) || [];
     }
@@ -1220,7 +1305,7 @@
             '</svg>';
     }
 
-    function templatePreviewNode(entry) {
+    function templatePreviewNode(entry, variant) {
         var node = el("div", "option-preview option-preview-template");
         node.setAttribute("aria-hidden", "true");
         if (!entry || entry.id === "free") {
@@ -1231,7 +1316,8 @@
         img.alt = "";
         img.loading = "lazy";
         img.src = "/api/template_preview/" + encodeURIComponent(entry.id) +
-            "?lang=" + encodeURIComponent(LANG);
+            "?lang=" + encodeURIComponent(LANG) +
+            (variant ? "&variant=" + encodeURIComponent(variant) : "");
         img.onerror = function () { node.innerHTML = freeDesignPreview(); };
         node.appendChild(img);
         return node;
@@ -1298,6 +1384,18 @@
     function setTemplateSelection(id) {
         STATE.template = id;
         applyTemplateDefaults(id);
+        if (id === "innergen") {
+            STATE.innergen_business_type = recOrFirst("innergen_business_type", CAT.innergen_business_types);
+            STATE.innergen_report_type = recOrFirst("innergen_report_type", CAT.innergen_report_types);
+            STATE.innergen_variant = recOrFirst("innergen_variant", CAT.innergen_variants);
+        } else if (id !== "free" || !STATE.style_family) {
+            delete STATE.innergen_business_type;
+            delete STATE.innergen_report_type;
+            delete STATE.innergen_variant;
+        }
+        if (id !== "free" && id !== "innergen") {
+            ["style_family", "style_delivery_mode", "layout_choice", "media_mode", "design_standard_version"].forEach(function (key) { delete STATE[key]; });
+        }
         if (id && id !== "free") {
             if (!STATE.template_adherence) {
                 STATE.template_adherence = recOrFirst("template_adherence", CAT.template_adherence);
@@ -1348,6 +1446,45 @@
                 row.appendChild(card);
             });
             sec.appendChild(row);
+        }
+        if (isInnergenSelection()) {
+            var business = el("div", "subfield");
+            business.appendChild(el("div", "subfield-label", t("innergen_business")));
+            enumField(business, CAT.innergen_business_types,
+                recOrFirst("innergen_business_type", CAT.innergen_business_types),
+                function () { return STATE.innergen_business_type; },
+                function (v) { STATE.innergen_business_type = v; renderAll(); });
+            sec.appendChild(business);
+
+            var report = el("div", "subfield");
+            report.appendChild(el("div", "subfield-label", t("innergen_report")));
+            enumField(report, CAT.innergen_report_types,
+                recOrFirst("innergen_report_type", CAT.innergen_report_types),
+                function () { return STATE.innergen_report_type; },
+                function (v) { STATE.innergen_report_type = v; renderAll(); });
+            sec.appendChild(report);
+            var counts = CAT.innergen_reference_counts || {};
+            var count = (counts[STATE.innergen_business_type] || {})[STATE.innergen_report_type] || 0;
+            report.appendChild(el("div", "innergen-evidence", count
+                ? t("innergen_source_count").replace("{count}", count)
+                : t("innergen_proposed")));
+
+            var frame = el("div", "subfield");
+            frame.appendChild(el("div", "subfield-label", t("innergen_frame")));
+            var frameCards = el("div", "innergen-frame-cards");
+            (CAT.innergen_variants || []).forEach(function (entry) {
+                var card = el("div", "template-card innergen-frame-card");
+                if (STATE.innergen_variant === entry.id) card.classList.add("selected");
+                card.appendChild(templatePreviewNode({ id: "innergen" }, entry.id));
+                var copy = el("div", "template-card-copy");
+                copy.appendChild(el("div", "template-card-name", optionLabel(entry)));
+                copy.appendChild(el("div", "template-card-desc", optionDesc(entry)));
+                card.appendChild(copy);
+                card.addEventListener("click", function () { STATE.innergen_variant = entry.id; renderAll(); });
+                frameCards.appendChild(card);
+            });
+            frame.appendChild(frameCards);
+            sec.appendChild(frame);
         }
         if (adherenceVisible()) {
             var adherenceField = el("div", "subfield");
@@ -1447,20 +1584,20 @@
         (CAT.canvas || []).forEach(function (o) { if (o.id === canvasVal) dim = o.dim; });
         var raw = String(dim || canvasVal || "");
         var id = String(canvasVal || "").toLowerCase();
-        var isPpt = id === "ppt169" || id === "ppt43" ||
+        var isPpt = id === "ppt169" || id === "ppt43" || id === "ppt139" ||
             /1280\s*[×xX*]\s*720/.test(raw) ||
             /1024\s*[×xX*]\s*768/.test(raw);
         return isPpt ? { lo: 0.031, hi: 0.047 } : { lo: 0.025, hi: 0.033 };
     }
 
-    // PPT canvases (16:9 / 4:3) take the fixed per-delivery-purpose body px;
+    // PPT canvases (16:9 / 4:3 / INNerGEN 13:9) take the per-delivery-purpose body px;
     // social / print canvases scale the body px by canvas height instead.
     function isPptCanvas(canvasVal) {
         var dim = null;
         (CAT.canvas || []).forEach(function (o) { if (o.id === canvasVal) dim = o.dim; });
         var raw = String(dim || canvasVal || "");
         var id = String(canvasVal || "").toLowerCase();
-        return id === "ppt169" || id === "ppt43" ||
+        return id === "ppt169" || id === "ppt43" || id === "ppt139" ||
             /1280\s*[×xX*]\s*720/.test(raw) ||
             /1024\s*[×xX*]\s*768/.test(raw);
     }
@@ -1771,6 +1908,8 @@
                 SIZE_ROLES.forEach(function (role) {
                     var ratio = SIZE_RATIO_MEM[role] || SIZE_RATIO[role];
                     STATE.typography.sizes[role] = deriveSize(role, body, ratio);
+                    if (role === "subtitle" && STATE.style_family) STATE.typography.sizes.governing = STATE.typography.sizes[role];
+                    if (role === "annotation" && STATE.style_family) STATE.typography.sizes.note = STATE.typography.sizes[role];
                 });
                 refreshSizeInputs();   // reflect the rescaled values + pt hints
             }
@@ -1854,6 +1993,8 @@
                 // ratio-to-body, so later body edits rescale it proportionally
                 // from the user's own value, not the default ramp.
                 STATE.typography.sizes[role] = inp.value;
+                if (role === "subtitle" && STATE.style_family) STATE.typography.sizes.governing = inp.value;
+                if (role === "annotation" && STATE.style_family) STATE.typography.sizes.note = inp.value;
                 var v = parseFloat(inp.value);
                 if (isFinite(v) && v > 0) SIZE_RATIO_MEM[role] = v / bodyAnchor();
                 refreshRolePtHint(role);
@@ -2408,6 +2549,7 @@
             renderMode(host);
             renderRefine(host);
         }
+        renderInnergenStudio(host, stage);
         updateActionBar(stage);
     }
 
@@ -2460,6 +2602,11 @@
             applyTemplateDefaults(STATE.template);
         } else {
             TEMPLATE_OVERLAY = {};
+        }
+        if (isInnergenSelection()) {
+            STATE.innergen_business_type = recOrFirst("innergen_business_type", CAT.innergen_business_types);
+            STATE.innergen_report_type = recOrFirst("innergen_report_type", CAT.innergen_report_types);
+            STATE.innergen_variant = recOrFirst("innergen_variant", CAT.innergen_variants);
         }
     }
 
@@ -2514,6 +2661,7 @@
         initStage1State();
         initStage2State();
         initStage3State();
+        initInnergenStudio();
     }
 
     // ---- confirm + close -------------------------------------------------
@@ -2536,9 +2684,14 @@
         };
         if (STATE.template) payload.template = STATE.template;
         if (STATE.template_adherence) payload.template_adherence = STATE.template_adherence;
+        if (isInnergenSelection()) {
+            payload.innergen_business_type = STATE.innergen_business_type;
+            payload.innergen_report_type = STATE.innergen_report_type;
+            payload.innergen_variant = STATE.innergen_variant;
+        }
         // Delivery purpose is PPT-only and rendered only on PPT canvases (§c).
         if (isPptCanvas(STATE.canvas)) payload.delivery_purpose = STATE.delivery_purpose;
-        return payload;
+        return studioPayload(payload);
     }
 
     function stage2Payload() {
@@ -2557,9 +2710,14 @@
         };
         if (STATE.template) payload.template = STATE.template;
         if (STATE.template_adherence) payload.template_adherence = STATE.template_adherence;
+        if (isInnergenSelection()) {
+            payload.innergen_business_type = STATE.innergen_business_type;
+            payload.innergen_report_type = STATE.innergen_report_type;
+            payload.innergen_variant = STATE.innergen_variant;
+        }
         if (isPptCanvas(STATE.canvas)) payload.delivery_purpose = STATE.delivery_purpose;
         normalizeTypographyForSubmit(payload);
-        return payload;
+        return studioPayload(payload);
     }
 
     function submitStage(payload, nextStage) {
@@ -2807,9 +2965,9 @@
                 try { hasStored = !!window.localStorage.getItem("ppt_lang"); } catch (e) { /* ignore */ }
                 if (!hasStored) { LANG = REC.lang; applyStaticTranslations(); refreshLangToggle(toggleBtn); }
             }
-            initState();
             // stage 1 / 2 / 3 from the recommendations; absent → legacy single-pass.
             STAGE = stageNumber(REC);
+            initState();
             document.getElementById("loading").style.display = "none";
             document.getElementById("sections").style.display = "block";
             document.getElementById("actionbar").style.display = "flex";

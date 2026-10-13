@@ -1,0 +1,527 @@
+{
+  "version": "18",
+  "date": "2026-10-13",
+  "purpose": "Structured-slide catalog distilled from Samil PwC, Samjong KPMG and Deloitte references (structure only; no source text, numbers, logos or brand colors).",
+  "references": "INPUTS/PPT 장표 참고(구조화)/",
+  "doc": "docs/styles/innergen/structured-slides-v18.md",
+  "min_text_px": 16,
+  "typography_px": {
+    "lecture_presentation": {
+      "rail": 20,
+      "header": 20,
+      "cell": 18,
+      "dense_cell": 16,
+      "insight_lead": 20,
+      "conclusion_bar": 21,
+      "note": 16
+    },
+    "report_handout": {
+      "rail": 18.67,
+      "header": 18.67,
+      "cell": 16,
+      "dense_cell": 14.67,
+      "insight_lead": 18.67,
+      "conclusion_bar": 18.67,
+      "note": 13.33
+    }
+  },
+  "density_limits": {
+    "lecture_presentation": {
+      "cards": 4,
+      "matrix": [
+        4,
+        4
+      ],
+      "table": [
+        6,
+        5
+      ],
+      "bullets_per_block": 3,
+      "steps": 5,
+      "timeline_years": 5
+    },
+    "report_handout": {
+      "cards": 5,
+      "matrix": [
+        5,
+        6
+      ],
+      "table": [
+        11,
+        8
+      ],
+      "bullets_per_block": 5,
+      "steps": 7,
+      "timeline_years": 6
+    }
+  },
+  "sequential_blue_scale": [
+    "#DFE7FF",
+    "#B8CBF9",
+    "#7B9BF7",
+    "#2F62F0",
+    "#0B1739"
+  ],
+  "structures": {
+    "exec_summary": {
+      "label": "핵심 요약 카드 + 종합",
+      "reader_question": "결론적으로 핵심 몇 가지는?",
+      "pattern": "evidence",
+      "slots": [
+        "발견 1",
+        "발견 2",
+        "발견 3",
+        "종합"
+      ],
+      "reference_patterns": [
+        "KPMG-01",
+        "DLT-02"
+      ],
+      "contract_ids": [
+        "RCP01"
+      ],
+      "lecture_template_layout": "s01_exec_summary.svg"
+    },
+    "findings_insights": {
+      "label": "발견 ↔ 시사점 2단",
+      "reader_question": "무엇을 발견했고 각각 그래서 무엇인가?",
+      "pattern": "evidence",
+      "slots": [
+        "발견",
+        "같은 번호의 시사점",
+        "대응 관계"
+      ],
+      "reference_patterns": [
+        "DLT-02"
+      ],
+      "contract_ids": [
+        "RCP17"
+      ],
+      "lecture_template_layout": "s02_findings_insights.svg"
+    },
+    "chart_insight": {
+      "label": "차트 + 시사점 열",
+      "reader_question": "이 숫자에서 무엇을 읽어야 하나?",
+      "pattern": "evidence",
+      "slots": [
+        "차트(단위·n)",
+        "시사점 첫 문장",
+        "해석 근거"
+      ],
+      "reference_patterns": [
+        "KPMG-06",
+        "PWC-09",
+        "DLT-06",
+        "DLT-08"
+      ],
+      "contract_ids": [
+        "RCP09",
+        "CH01",
+        "CH05",
+        "CH06",
+        "CH19"
+      ],
+      "lecture_template_layout": "s03_chart_insight.svg"
+    },
+    "chart_table": {
+      "label": "차트 + 원자료 표 + 해설",
+      "reader_question": "규모·구성과 항목별 수치는?",
+      "pattern": "compare",
+      "slots": [
+        "차트",
+        "원자료 표",
+        "해설 띠"
+      ],
+      "reference_patterns": [
+        "KPMG-07"
+      ],
+      "contract_ids": [
+        "RCP09",
+        "CH04"
+      ],
+      "lecture_template_layout": "s04_chart_table_strip.svg"
+    },
+    "entity_matrix": {
+      "label": "대상 비교 매트릭스",
+      "reader_question": "제도·기준·동종사는 무엇이 다른가?",
+      "pattern": "table",
+      "slots": [
+        "속성",
+        "대상 A",
+        "대상 B",
+        "대상 C"
+      ],
+      "reference_patterns": [
+        "KPMG-14"
+      ],
+      "contract_ids": [
+        "RCP05",
+        "RCP22",
+        "RCP20"
+      ],
+      "lecture_template_layout": "s05_entity_matrix.svg"
+    },
+    "principle_matrix": {
+      "label": "원칙 + 기준 매트릭스",
+      "reader_question": "판단 기준과 보완 사항은?",
+      "pattern": "table",
+      "slots": [
+        "기준",
+        "현황·평가",
+        "보완 과제"
+      ],
+      "reference_patterns": [
+        "KPMG-12",
+        "PWC-07"
+      ],
+      "contract_ids": [
+        "RCP23",
+        "RCP02"
+      ],
+      "lecture_template_layout": "s06_principle_matrix.svg"
+    },
+    "asis_tobe": {
+      "label": "현행 → 개선 → 기대효과",
+      "reader_question": "무엇이 바뀌고 어떤 효과가 나는가?",
+      "pattern": "compare",
+      "slots": [
+        "현행",
+        "개선",
+        "기대효과"
+      ],
+      "reference_patterns": [
+        "KPMG-10",
+        "KPMG-13",
+        "PWC-11"
+      ],
+      "contract_ids": [
+        "RCP17"
+      ],
+      "lecture_template_layout": "s07_asis_tobe_effect.svg"
+    },
+    "phase_roadmap": {
+      "label": "단계별 추진 로드맵",
+      "reader_question": "어떤 과제가 언제 추진되나?",
+      "pattern": "timeline",
+      "slots": [
+        "1단계",
+        "2단계",
+        "3단계"
+      ],
+      "reference_patterns": [
+        "KPMG-11",
+        "PWC-14"
+      ],
+      "contract_ids": [
+        "RCP16",
+        "RCP21"
+      ],
+      "lecture_template_layout": "s08_phase_roadmap.svg"
+    },
+    "year_timeline": {
+      "label": "연도별 제도 연혁",
+      "reader_question": "제도는 어떤 순서로 정비됐나?",
+      "pattern": "timeline",
+      "slots": [
+        "과거",
+        "현재",
+        "예정"
+      ],
+      "reference_patterns": [
+        "KPMG-08",
+        "PWC-08"
+      ],
+      "contract_ids": [
+        "RCP06",
+        "RCP16"
+      ],
+      "lecture_template_layout": "s09_year_timeline.svg"
+    },
+    "maturity_heatmap": {
+      "label": "단계별 성숙도 히트맵",
+      "reader_question": "전체 이행 단계에서 어디까지 왔나?",
+      "pattern": "table",
+      "slots": [
+        "단계",
+        "활동",
+        "완료 수준(n)"
+      ],
+      "reference_patterns": [
+        "DLT-03",
+        "DLT-06",
+        "DLT-07"
+      ],
+      "contract_ids": [
+        "CH18"
+      ],
+      "lecture_template_layout": "s10_maturity_heatmap.svg"
+    },
+    "list_zoom": {
+      "label": "목록 → 상세 확대",
+      "reader_question": "전체 중 어느 항목을 어떻게 다루나?",
+      "pattern": "evidence",
+      "slots": [
+        "전체 목록",
+        "중점 항목",
+        "상세 방법"
+      ],
+      "reference_patterns": [
+        "DLT-12",
+        "PWC-16"
+      ],
+      "contract_ids": [
+        "RCP08"
+      ],
+      "lecture_template_layout": "s11_list_zoom.svg"
+    },
+    "actor_checklist": {
+      "label": "주체별 실행 체크",
+      "reader_question": "각 주체는 무엇을 해야 하나?",
+      "pattern": "lanes",
+      "slots": [
+        "본사",
+        "사업장",
+        "협력사"
+      ],
+      "reference_patterns": [
+        "KPMG-04"
+      ],
+      "contract_ids": [
+        "RCP11",
+        "RCP21"
+      ],
+      "lecture_template_layout": "s12_actor_checklist.svg"
+    },
+    "key_takeaways": {
+      "label": "질문 + 전략 방향",
+      "reader_question": "그래서 무엇을 해야 하나?",
+      "pattern": "evidence",
+      "slots": [
+        "방향 1",
+        "방향 2",
+        "방향 3"
+      ],
+      "reference_patterns": [
+        "KPMG-03",
+        "PWC-11"
+      ],
+      "contract_ids": [
+        "RCP14"
+      ],
+      "lecture_template_layout": "s13_key_takeaways.svg"
+    },
+    "task_structure": {
+      "label": "과업 구조도",
+      "reader_question": "과업은 어떻게 나뉘고 이번 보고는 어디인가?",
+      "pattern": "flow",
+      "slots": [
+        "과업 1",
+        "과업 2",
+        "과업 3",
+        "산출물"
+      ],
+      "reference_patterns": [
+        "DLT-10",
+        "PWC-07"
+      ],
+      "contract_ids": [
+        "RCP04",
+        "RCP11"
+      ],
+      "lecture_template_layout": "s14_task_structure.svg"
+    },
+    "vertical_flow": {
+      "label": "세로 단계 흐름",
+      "reader_question": "몇 단계로, 단계별로 무엇을 하나?",
+      "pattern": "flow",
+      "slots": [
+        "경계 설정",
+        "자료 수집",
+        "산정",
+        "검증",
+        "보고"
+      ],
+      "reference_patterns": [
+        "DLT-13",
+        "PWC-11"
+      ],
+      "contract_ids": [
+        "RCP13"
+      ],
+      "lecture_template_layout": "s15_vertical_chevron.svg"
+    },
+    "period_applicability": {
+      "label": "대상별 적용 시기표",
+      "reader_question": "우리 유형은 언제부터 무엇을 하나?",
+      "pattern": "timeline",
+      "slots": [
+        "대상",
+        "적용 시작",
+        "결과"
+      ],
+      "reference_patterns": [
+        "PWC-03"
+      ],
+      "contract_ids": [
+        "RCP16"
+      ],
+      "lecture_template_layout": "s16_period_applicability.svg"
+    },
+    "decision_tree": {
+      "label": "판단 트리",
+      "reader_question": "이 조건이면 결과는? 예외는?",
+      "pattern": "flow",
+      "slots": [
+        "판단",
+        "조건",
+        "결과",
+        "예외"
+      ],
+      "reference_patterns": [
+        "PWC-05",
+        "PWC-04"
+      ],
+      "contract_ids": [
+        "RCP03"
+      ],
+      "lecture_template_layout": "s17_decision_tree.svg"
+    },
+    "keyword_map": {
+      "label": "질문형 키워드 지도",
+      "reader_question": "이 제도를 한 장으로 보면?",
+      "pattern": "evidence",
+      "slots": [
+        "왜",
+        "무엇을",
+        "누가",
+        "언제",
+        "어떻게"
+      ],
+      "reference_patterns": [
+        "PWC-01"
+      ],
+      "contract_ids": [
+        "RCP08"
+      ],
+      "lecture_template_layout": "s18_keyword_grid.svg"
+    },
+    "compare_implication": {
+      "label": "기준 비교 + 시사점",
+      "reader_question": "두 기준은 무엇이 다르고 무엇을 조정하나?",
+      "pattern": "table",
+      "slots": [
+        "항목",
+        "현행 기준",
+        "목표 기준",
+        "시사점"
+      ],
+      "reference_patterns": [
+        "PWC-15",
+        "PWC-02"
+      ],
+      "contract_ids": [
+        "RCP07",
+        "RCP24",
+        "RCP02"
+      ],
+      "lecture_template_layout": "s19_compare_implication.svg"
+    },
+    "self_check": {
+      "label": "자가진단 + 다음 행동",
+      "reader_question": "우리 회사는 갖추고 있나? 무엇부터?",
+      "pattern": "table",
+      "slots": [
+        "영역",
+        "점검 포인트",
+        "질문"
+      ],
+      "reference_patterns": [
+        "PWC-13"
+      ],
+      "contract_ids": [
+        "RCP14",
+        "RCP17"
+      ],
+      "lecture_template_layout": "s20_self_check.svg"
+    }
+  },
+  "recommended_by_report": {
+    "proposal": [
+      "task_structure",
+      "phase_roadmap",
+      "evidence"
+    ],
+    "kickoff": [
+      "task_structure",
+      "vertical_flow",
+      "actor_checklist"
+    ],
+    "interim": [
+      "status",
+      "maturity_heatmap",
+      "actor_checklist"
+    ],
+    "final": [
+      "exec_summary",
+      "chart_insight",
+      "key_takeaways"
+    ],
+    "education": [
+      "keyword_map",
+      "year_timeline",
+      "self_check"
+    ],
+    "briefing": [
+      "exec_summary",
+      "compare_implication",
+      "key_takeaways"
+    ]
+  },
+  "recommended_by_business": {
+    "cdp_disclosure": [
+      "maturity_heatmap",
+      "principle_matrix",
+      "compare_implication"
+    ],
+    "regulatory": [
+      "period_applicability",
+      "decision_tree",
+      "entity_matrix"
+    ],
+    "reduction": [
+      "chart_insight",
+      "asis_tobe",
+      "phase_roadmap"
+    ],
+    "inventory": [
+      "list_zoom",
+      "chart_table",
+      "vertical_flow"
+    ],
+    "lca_product": [
+      "chart_table",
+      "vertical_flow",
+      "compare"
+    ],
+    "climate_risk": [
+      "maturity_heatmap",
+      "chart_insight",
+      "entity_matrix"
+    ],
+    "esg_rating": [
+      "self_check",
+      "principle_matrix",
+      "asis_tobe"
+    ],
+    "climate_education": [
+      "keyword_map",
+      "year_timeline",
+      "findings_insights"
+    ],
+    "climate_tech": [
+      "chart_insight",
+      "entity_matrix",
+      "exec_summary"
+    ]
+  }
+}

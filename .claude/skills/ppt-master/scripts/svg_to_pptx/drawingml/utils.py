@@ -69,6 +69,13 @@ SYSTEM_FONTS = {'system-ui', '-apple-system', 'BlinkMacSystemFont'}
 # latin and ea typeface slots so mixed-script runs stay in one family.
 # Pretendard: Korean + Latin (bundled at assets/fonts/Pretendard/, SIL OFL).
 DUAL_SCRIPT_FONTS = {
+    # INNerGEN source families cover both Korean and Latin. Keep both
+    # DrawingML typeface slots in the selected installed family.
+    'Malgun Gothic', '맑은 고딕',
+    'IBM Plex Sans KR', 'IBM Plex Sans KR Thin',
+    'IBM Plex Sans KR ExtraLight', 'IBM Plex Sans KR Light',
+    'IBM Plex Sans KR Medium', 'IBM Plex Sans KR SemiBold',
+    'IBM Plex Sans KR Bold',
     'Pretendard', 'Pretendard Thin', 'Pretendard ExtraLight', 'Pretendard Light',
     'Pretendard Medium', 'Pretendard SemiBold', 'Pretendard ExtraBold',
     'Pretendard Black', 'Pretendard JP', 'Pretendard GOV',

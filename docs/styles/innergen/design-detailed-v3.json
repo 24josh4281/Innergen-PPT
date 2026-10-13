@@ -1,0 +1,22 @@
+{
+  "schema_version": "3.0",
+  "style_name": "INNerGEN detailed training",
+  "updated": "2026-10-01",
+  "scope": "장표 자체로 학습하는 상세 교육자료",
+  "inherits": ["design.json", "design-v2.json"],
+  "canvas": {"format": "ppt139", "svg_px": [1040, 720], "ppt_pt": [780, 540]},
+  "typography": {
+    "family": "IBM Plex Sans KR",
+    "body": {"ppt_pt": 14, "svg_px": 18.666667},
+    "title": {"ppt_pt": 24, "svg_px": 32},
+    "lead": {"ppt_pt": 18, "svg_px": 24},
+    "subheading": {"ppt_pt": 16.5, "svg_px": 22},
+    "source": {"ppt_pt": 10, "svg_px": 13.333333},
+    "body_baseline_spacing_svg_px": [26, 28]
+  },
+  "on_slide_content": ["구체적 요구사항", "필수·선택·예외·기간·대상", "예외 후에도 남는 공시", "실무 확인자료·판단 근거", "구분된 교육용 사례"],
+  "source_format": {"fields": ["document_name", "pdf_file_pages"], "omit": ["paragraph_number", "manuscript_number"]},
+  "native_export": {"editable": true, "preserve_authored_line_breaks": true, "argument": "--no-merge"},
+  "checks": ["native_body_size_1400_centipoints", "full_pdf_text_preservation", "no_text_outside_pages", "title_safe_area", "source_format", "source_integrity", "topic_coverage", "visual_render_review"],
+  "preserve": ["raw_sources", "previous_versions", "source_values_units_and_conditions"]
+}

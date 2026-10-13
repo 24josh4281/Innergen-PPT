@@ -30,6 +30,7 @@ Dependencies:
 
 import argparse
 import atexit
+import base64
 import json
 import logging
 import os
@@ -54,6 +55,7 @@ if str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
 
 from console_encoding import configure_utf8_stdio  # noqa: E402
+from style_standard import load_standard, validate_selection  # noqa: E402
 from server_common import (  # noqa: E402
     claim_lock as _claim_lock,
     clear_lock as _clear_lock,
@@ -518,6 +520,14 @@ _ANCHOR_RECOMMEND_KEYS = (
     'delivery_purpose',
     'template',
     'template_adherence',
+    'innergen_business_type',
+    'innergen_report_type',
+    'innergen_variant',
+    'style_family',
+    'style_delivery_mode',
+    'layout_choice',
+    'media_mode',
+    'design_standard_version',
 )
 _ANCHOR_VALUE_KEYS = ('audience', 'content_divergence')
 _DESIGN_RECOMMEND_KEYS = ('icons', 'formula_policy')
@@ -591,7 +601,14 @@ def _merge_confirmed_choices(data: dict, result_file: Path) -> None:
     for key in _ANCHOR_VALUE_KEYS:
         if key in res:
             data[key] = {'value': res.get(key) or ''}
-    if _recommendation_stage(data) < 3:
+    named_style = bool(res.get('style_family'))
+    if named_style:
+        for key in ('image_usage', 'image_notes'):
+            if key in res:
+                recommend[key] = res[key]
+                if key == 'image_notes':
+                    data[key] = {'value': res[key]}
+    if _recommendation_stage(data) < 3 and not named_style:
         return
     for key in _DESIGN_RECOMMEND_KEYS:
         if res.get(key) not in (None, ''):
@@ -723,7 +740,7 @@ def _template_catalog_entries() -> list[dict]:
              if k in _TEMPLATE_DEFAULT_FIELDS and isinstance(v, str)}
             if isinstance(raw_defaults, dict) else {}
         )
-        entries.append({
+        entry = {
             'id': deck_id,
             'label': deck_id,
             'desc': info.get('summary', ''),
@@ -731,7 +748,16 @@ def _template_catalog_entries() -> list[dict]:
             'page_count': info.get('page_count'),
             'primary_color': info.get('primary_color', ''),
             'defaults': defaults,
-        })
+        }
+        if deck_id == 'innergen':
+            entry.update({
+                'label': 'INNerGEN',
+                'label_en': 'INNerGEN',
+                'label_ja': 'INNerGEN',
+                'label_zh': 'INNerGEN',
+                'label_ko': '이너젠 (INNerGEN)',
+            })
+        entries.append(entry)
     return entries
 
 
@@ -761,15 +787,36 @@ def _preview_token_text(token: str, texts: dict) -> str:
     return texts['generic']
 
 
-def _render_template_preview(deck_id: str, lang: str) -> Optional[str]:
+def _render_template_preview(deck_id: str, lang: str, variant: str = '') -> Optional[str]:
     """Serve a deck's first roster shell with tokens substituted, or None."""
     if deck_id not in _read_decks_index():
         return None
     shells = sorted((_DECKS_DIR / deck_id / 'templates').glob('*.svg'))
     if not shells:
         return None
+    if deck_id == 'innergen' and variant:
+        cover_by_variant = {
+            'classic_grid': '01a_cover_classic.svg',
+            'solid_navy': '01b_cover_solid_navy.svg',
+            'slim_line': '01c_cover_slim_line.svg',
+        }
+        selected = cover_by_variant.get(variant)
+        if selected is None:
+            return None
+        shells = [(_DECKS_DIR / deck_id / 'templates' / selected)]
+        if not shells[0].is_file():
+            return None
     texts = _TEMPLATE_PREVIEW_TEXT.get(lang, _TEMPLATE_PREVIEW_TEXT['en'])
     raw = shells[0].read_text(encoding='utf-8')
+    if deck_id == 'innergen':
+        # The preview is served at /api/template_preview/, so SVG-relative
+        # ../images paths would not resolve to the library workspace.
+        for name in ('innergen-logo-cover-blue.png', 'innergen-logo-footer-white.png'):
+            relative = f'../images/{name}'
+            if relative in raw:
+                asset = _DECKS_DIR / deck_id / 'images' / name
+                data = base64.b64encode(asset.read_bytes()).decode('ascii')
+                raw = raw.replace(relative, f'data:image/png;base64,{data}')
     return _TEMPLATE_TOKEN_RE.sub(lambda m: _preview_token_text(m.group(1), texts), raw)
 
 
@@ -788,6 +835,7 @@ def _build_catalogs() -> dict:
         if isinstance(t, dict) and t.get('id') == 'free'
     ]
     data['templates'] = static_templates + _template_catalog_entries()
+    data['style_standard'] = load_standard()
     try:
         import config  # scripts/ is on sys.path (injected at import time)
         formats = config.CANVAS_FORMATS
@@ -999,7 +1047,7 @@ def create_app(
         already rejects path separators), so no path traversal is possible.
         """
         lang = request.args.get('lang') or 'en'
-        svg = _render_template_preview(deck_id, lang)
+        svg = _render_template_preview(deck_id, lang, request.args.get('variant') or '')
         if svg is None:
             return jsonify({'error': 'unknown deck or empty roster'}), 404
         resp = app.response_class(svg, mimetype='image/svg+xml')
@@ -1041,8 +1089,14 @@ def create_app(
         # Later stages render only downstream sections, so fold earlier confirmed
         # choices from result.json back in. A refresh / reopen then re-inits from
         # the user's choices instead of catalog defaults.
-        if _recommendation_stage(data) >= 2 and result_file.exists():
-            _merge_confirmed_choices(data, result_file)
+        if result_file.exists():
+            # Named styles expose design/media choices on the first screen too.
+            try:
+                previous = _read_json_object(result_file)
+            except (OSError, ValueError):
+                previous = {}
+            if _recommendation_stage(data) >= 2 or previous.get('style_family'):
+                _merge_confirmed_choices(data, result_file)
         template_adherence_enabled = _template_adherence_enabled(project_path)
         data['_template_adherence_enabled'] = template_adherence_enabled
         installed = _installed_template_info(project_path)
@@ -1072,6 +1126,9 @@ def create_app(
         payload = request.get_json(silent=True)
         if not isinstance(payload, dict):
             return jsonify({'error': 'invalid payload'}), 400
+        selection_errors = validate_selection(payload)
+        if selection_errors:
+            return jsonify({'error': '; '.join(selection_errors)}), 400
         confirm_dir.mkdir(parents=True, exist_ok=True)
         result = dict(payload)
         # Staged flow: stage-1 / stage-2 submits record intermediate choices but do

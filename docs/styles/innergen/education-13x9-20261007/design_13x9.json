@@ -1,0 +1,22 @@
+{
+  "profile": "innergen-education-13x9",
+  "version": "2026-10-07",
+  "scope": "User-selected 13:9 educational template for the seven KSSB guide decks; current project confirmation takes precedence",
+  "canvas": {"width_px": 1040, "height_px": 720, "ratio": "13:9", "safe_margin_px": 48},
+  "colors": {"background": "#FFFFFF", "navy": "#0B1739", "blue": "#2F62F0", "pale_panel": "#EEF2FF", "body": "#475569", "border": "#CBD5E1", "underline": "#FF0000"},
+  "fonts": {"primary": "IBM Plex Sans KR", "fallback": "Malgun Gothic", "fallback_requires_layout_review": true},
+  "sizes_px": {"title": 30, "governing": 22, "body_table_final": 18, "source": 12, "page": 14, "cover_title": 56, "cover_subtitle": 40},
+  "sizes_pt": {"title": 22.5, "governing": 16.5, "body_table_final": 13.5, "source": 9, "page": 10.5, "cover_title": 42, "cover_subtitle": 30},
+  "zones": {"title": [48,20,944,46], "governing_panel": [48,98,944,60], "body": [48,174,944,386], "final_panel": [48,576,944,60], "source_baseline_y": 654, "page_baseline_y": 696},
+  "spacing": {"main_panel_gap_px": 16, "text_panel_padding_x_px": 24, "table_cell_padding_x_px": 12, "governing_two_line_baselines": [120,148], "final_two_line_baselines": [597,621]},
+  "titles": {"form": "04. 연결 조정 / 04.2 측정 방법 혼재의 중복", "semantic_role": "numbered main topic and subtopic", "toc_page": 2, "toc_fields": ["number","learning_scope","page_range"]},
+  "governing": {"explicit_subject_required": true, "subject_examples": ["기업은","담당자는","검토자는","산정 담당자는"], "structure": ["subject","supported judgment","applicable conditions","preparation action"], "endings": ["확인해야 합니다","준비해야 합니다","기억해야 합니다"], "max_lines": 2, "pale_box": true, "bold": true},
+  "body": {"noun_endings": ["포함","제외","공시","검토","세분화","연결","변경"], "preserve_conditional_language": true, "table_horizontal_alignment": "center", "table_vertical_alignment": "middle", "semantic_grouping_panels": true},
+  "final_message": {"explicit_subject_required": true, "max_lines": 2, "polite_instructional_sentence": true, "focus": ["evidence to prepare","misconception to avoid","condition to remember"]},
+  "emphasis": {"key_terms": "bold or blue bold", "critical_condition": "selective red underline", "avoid_full_paragraph_highlighting": true},
+  "wrapping": {"measure_actual_font_and_usable_width_first": true, "minimum_required_lines": true, "word_boundary_only": true, "avoid_orphan_last_word": true, "independent_body_text_lines": true, "placeholder_first_tspan_dy": 0, "placeholder_next_tspan_dy": {"governing": 28, "final": 24}},
+  "sources": {"visible_format": "문서명, PDF 페이지", "page_system": "physical PDF page including cover and contents", "preserve_original_values_units_and_conditions": true, "record_notation_conversions": true},
+  "education": {"include": ["concept relationships","conditions and exceptions","source-based examples","practical evidence","question-answer checks"], "prohibit": ["invented client facts","new unsupported disclosure obligations","historical factors presented as current recommendations","method adjustments described as actual emission reductions"]},
+  "quality": ["per-page text fit","actual font width","complete SVG quality check","table metadata and visible text match","explicit governing subjects","PPTX structure verification","PowerPoint PNG and PDF render","whole-deck visual scan","source hash preservation"],
+  "execution_owner": "Selected repository presentation workflow; this profile supplies design inputs only"
+}

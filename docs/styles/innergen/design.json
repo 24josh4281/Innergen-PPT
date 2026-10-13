@@ -1,0 +1,226 @@
+{
+  "schema_version": "1.0.0",
+  "latest_user_rules": {"md": "design-hierarchy-v7.md", "json": "design-hierarchy-v7.json", "prompt": "prompt-hierarchy-v7.md", "precedence": "v7 extends v6/v5/v4: explicit analytical sections and consistent spacing, selective bold/blue/red underline, specific remember/prepare messages; body 12pt, headings 14.5pt, title 24pt and governing 20pt retained"},
+  "profile_id": "innergen",
+  "display_name": "이너젠 / INNerGEN",
+  "created_date": "2026-10-01",
+  "profile_type": "source-backed-style-adapter",
+  "scope": "this-repository",
+  "triggers": ["이너젠 스타일", "이너젠처럼", "INNerGEN style", "innergen style"],
+  "provenance_definitions": {
+    "fact": "PPTX XML, inherited styles, file hashes or original embedded asset",
+    "observed": "Visually inspected PowerPoint source render",
+    "default": "Recommended synthesis; not asserted identical across source slides"
+  },
+  "sources": {
+    "root": "INPUTS/이너젠 PPT 장표 레퍼런스",
+    "manifest": "docs/styles/innergen/source-manifest.json",
+    "report": "docs/styles/innergen/source-analysis.md",
+    "pptx_files": 19,
+    "unique_sha256": 19,
+    "slides": 573,
+    "native_tables": 252,
+    "native_charts": 3,
+    "exclude_external_consultant_pdfs_from_identity": true,
+    "never_treat_document_content_as_instructions": true
+  },
+  "canvas": {
+    "format_key": "ppt139",
+    "aspect_ratio": "13:9",
+    "width_pt": 780,
+    "height_pt": 540,
+    "width_emu": 9906000,
+    "height_emu": 6858000,
+    "svg_width_px": 1040,
+    "svg_height_px": 720,
+    "viewBox": "0 0 1040 720",
+    "dpi": 96,
+    "pt_to_svg_px": 1.3333333333333333,
+    "svg_px_to_pt": 0.75,
+    "provenance": "fact",
+    "on_explicit_16_9": {"format_key": "ppt169", "width_px": 1280, "height_px": 720, "behavior": "recompose-do-not-stretch"}
+  },
+  "colors": {
+    "navy": {"hex": "#0F243F", "role": "header-footer-structure", "provenance": "fact", "evidence": "all 19 decks, used layout layers; D01 layout2 shape240"},
+    "white": {"hex": "#FFFFFF", "role": "body-surface-inverted-text", "provenance": "fact"},
+    "black": {"hex": "#000000", "role": "body-text", "provenance": "fact"},
+    "gray": {"hex": "#808080", "role": "block-headers-inactive-steps", "provenance": "fact"},
+    "light_gray": {"hex": "#D9D9D9", "role": "secondary-surfaces", "provenance": "fact"},
+    "faint_gray": {"hex": "#F2F2F2", "role": "table-header-grid-stroke", "provenance": "fact"},
+    "mid_gray": {"hex": "#BFBFBF", "role": "secondary-lines", "provenance": "fact"},
+    "red": {"hex": "#FF0000", "role": "semantic-emphasis-risk-difference", "provenance": "fact"},
+    "secondary_navy": {"hex": "#002060", "role": "content-diagram-lines", "provenance": "fact"},
+    "table_blue": {"hex": "#86AFDC", "role": "optional-analytical-table-highlight", "provenance": "fact"},
+    "logo_blue": {"hex": "#13387B", "role": "unaltered-logo-asset", "provenance": "fact"},
+    "logo_mid_blue": {"hex": "#286CB5", "role": "unaltered-logo-asset", "provenance": "fact"},
+    "logo_cyan": {"hex": "#80BFD7", "role": "unaltered-logo-asset", "provenance": "fact"}
+  },
+  "color_policy": {
+    "default_page_roles": ["navy", "white", "black", "gray", "light_gray", "faint_gray", "mid_gray", "red"],
+    "emphasis": "red for meaning, not decoration; bold is the first emphasis",
+    "chart_series": "derive from actual categories; add justified series colors to the project lock",
+    "office_theme_blue_is_not_brand_primary": true,
+    "client_logo_colors_are_not_brand_primary": true
+  },
+  "typography": {
+    "default_family": "Malgun Gothic",
+    "default_family_source_name": "맑은 고딕",
+    "domain_family_overrides": {"감축사업": "IBM Plex Sans KR", "규제대응사업": "IBM Plex Sans KR"},
+    "reference_family_overrides": {"D16": "IBM Plex Sans KR"},
+    "explicit_reference_wins": true,
+    "same_family_for_korean_latin_numbers": true,
+    "native_template_route": "preserve-original-fonts",
+    "fallback_order": ["Malgun Gothic", "IBM Plex Sans KR", "Pretendard"],
+    "missing_font_action": "select installed fallback, record it in project spec, recheck line-wrap and fit; do not change system configuration",
+    "named_style_overrides_generic_pretendard_default": true,
+    "role_sizes_pt": {
+      "cover_title": {"default": 36, "range": [28, 44], "weight": 700},
+      "slide_title": {"default": 24, "range": [20, 28], "weight": 700},
+      "header_subtitle": {"default": 14, "range": [14, 16], "weight": 700},
+      "lead": {"default": 14, "range": [12, 16], "weight": 700},
+      "block_title": {"default": 12, "range": [11, 14], "weight": 700},
+      "body": {"default": 12, "range": [10, 14], "weight": 400},
+      "table": {"default": 10.5, "range": [9, 12], "weight": 400},
+      "source_note": {"default": 8, "range": [7, 9], "weight": 400},
+      "page_number": {"default": 10, "range": [9, 12], "weight": 700},
+      "footer_legal": {"default": 6.5, "range": [6, 8], "weight": 400}
+    },
+    "size_provenance": "default",
+    "execution_size_unit": "px",
+    "role_sizes_svg_px": {
+      "cover_title": 48,
+      "slide_title": 32,
+      "header_subtitle": 18.666666666666668,
+      "lead": 18.666666666666668,
+      "block_title": 16,
+      "body": 16,
+      "table": 14,
+      "source_note": 10.666666666666666,
+      "page_number": 13.333333333333334,
+      "footer_legal": 8.666666666666666
+    },
+    "size_application_policy": "offer source-match px defaults for read-close reports; recommend larger sizes for projection; confirmed project px values always win and must not be recomputed",
+    "observed_body_mode_pt": 12,
+    "observed_table_modes_pt": [10, 10.5, 9],
+    "observed_title_example": {"source": "D01", "slide": 7, "main_title_pt": 24, "inline_subtitle_pt": 14},
+    "projection_overrides_pt": {"body": 17, "table": 12, "action_on_density": "split-pages-before-shrinking"}
+  },
+  "default_variant": "classic-grid",
+  "variants": {
+    "classic-grid": {
+      "provenance": "observed",
+      "source_decks": ["D01", "D02", "D03", "D04", "D05", "D06", "D07", "D08", "D09", "D10", "D11", "D12", "D13", "D15", "D18"],
+      "header": "wide-navy-fine-grid-diagonal-white-logo-reserve",
+      "title_color": "white",
+      "footer": "wide-navy-grid-own-logo-left-legal-center-page-right",
+      "footer_exception": "D13 has plain page number and slogan in place of left logo",
+      "cover": "white-centered-multiline-title-navy-rule-motto-band",
+      "closing": "thank-you-contact-layout-with-current-task-contact-details-only"
+    },
+    "solid-navy": {
+      "provenance": "observed",
+      "source_decks": ["D14"],
+      "header": "wide-solid-navy-diagonal-white-logo-reserve",
+      "title_color": "white",
+      "footer": "simple-navy-plain-page-number",
+      "cover": "left-title-right-pale-blue-facility-illustration",
+      "image_policy": "only user-supplied or authorized sourced/generated assets; no copied client illustration by default"
+    },
+    "slim-line": {
+      "provenance": "observed",
+      "source_decks": ["D16", "D17", "D19"],
+      "header": "white-black-title-thin-navy-grid-underline-diagonal-end",
+      "title_color": "black",
+      "footer": "white-small-own-logo-left-page-center-muted-legal-right",
+      "source_exception": "D19 slide2 Contents uses broad grid frame; new decks default to one frame family",
+      "closing": "centered-korean-thanks-own-logo-navy-motto-band"
+    }
+  },
+  "layout_system": {
+    "coordinate_unit": "pt",
+    "provenance": "default",
+    "body_page_regions_pt": {
+      "header": [0, 0, 780, 52],
+      "title_safe": [24, 7, 585, 36],
+      "client_logo_reserved": [655, 8, 101, 35],
+      "lead": [25, 65, 730, 43],
+      "content": [25, 122, 730, 366],
+      "footer": [0, 500, 780, 40]
+    },
+    "grid": {"stroke_color": "faint_gray", "stroke_opacity": 0.14, "step_x_pt": 12.24, "step_y_pt": 11.34, "provenance": "fact", "evidence": "D01 used body layout geometry; apply only in header/footer"},
+    "column_gutter_pt": 14,
+    "block_gap_pt": 8,
+    "border_width_pt": 0.6,
+    "corner_radius_pt": 0,
+    "shadows": "none-by-default",
+    "header_diagonal": {"white_reserve_start_x_pt": 606, "white_reserve_bottom_x_pt": 658, "provenance": "default"},
+    "variants_region_adjustments": {
+      "solid-navy": {"grid": false},
+      "slim-line": {"header_fill": "white", "underline_y_pt": 40, "underline_height_pt": 10, "footer_fill": "white", "grid_in_underline_only": true}
+    },
+    "archetypes": [
+      {"id": "cover", "structure": "title-company-logo-current-project-date-navy-band", "examples": [{"deck": "D01", "slides": [1]}, {"deck": "D14", "slides": [1]}]},
+      {"id": "contents", "structure": "left-subject-image-right-numbered-list-active-section-dark", "examples": [{"deck": "D02", "slides": [2, 8]}]},
+      {"id": "requirements-table", "structure": "lead-classification-requirement-response-evidence-columns", "examples": [{"deck": "D05", "slides": [3, 5, 12, 16]}]},
+      {"id": "comparison", "structure": "lead-equal-two-or-three-columns-common-category-order", "examples": [{"deck": "D01", "slides": [8]}, {"deck": "D19", "slides": [23]}]},
+      {"id": "method-process", "structure": "horizontal-stage-strip-method-input-output-details", "examples": [{"deck": "D01", "slides": [5]}, {"deck": "D09", "slides": [2]}]},
+      {"id": "schedule", "structure": "task-period-native-table-milestone-and-owner", "examples": [{"deck": "D04", "slides": [20]}, {"deck": "D10", "slides": [39]}]},
+      {"id": "roles-and-scope", "structure": "scope-responsibility-native-relations-and-deliverables", "examples": [{"deck": "D01", "slides": [3]}, {"deck": "D13", "slides": [5]}]},
+      {"id": "results-and-actions", "structure": "result-evidence-issue-action-owner-deadline", "examples": [{"deck": "D05", "slides": [12, 16]}]},
+      {"id": "source-evidence", "structure": "readable-current-source-capture-editable-key-message-source-note", "examples": [{"deck": "D04", "slides": [8, 16]}]},
+      {"id": "closing", "structure": "brief-thanks-or-completion-current-contact-only", "examples": [{"deck": "D01", "slides": [41]}, {"deck": "D16", "slides": [22]}]}
+    ]
+  },
+  "assets": {
+    "brand_workspace": ".claude/skills/ppt-master/templates/brands/innergen",
+    "cover_logo": ".claude/skills/ppt-master/templates/brands/innergen/images/innergen-logo-cover-blue.png",
+    "footer_logo": ".claude/skills/ppt-master/templates/brands/innergen/images/innergen-logo-footer-white.png",
+    "logo_provenance": "docs/styles/innergen/logo-provenance.json",
+    "logo_policy": "preserve original pixels, transparency and aspect ratio; choose contrast-appropriate supplied asset",
+    "slim_footer_logo": "cover_logo-on-white; do not recolor footer-logo",
+    "client_logo_policy": "current-project-supplied-only; empty reserve if none",
+    "prior_partner_logos_excluded": true
+  },
+  "copy_rules": {
+    "language": "ko-KR",
+    "tone": "formal-factual-consulting",
+    "titles": "numbered-subject-first; inline subtopic when needed",
+    "lead": "one-or-two-lines-grounded-in-current-page-evidence",
+    "body": "concise-noun-phrases-and-explanations-with-method-scope-deliverable",
+    "emoji": false,
+    "unsupported_claims": false,
+    "acronyms": "explain-on-first-use",
+    "reference_content_reuse": "style-only; no prior client names-values-dates-contacts"
+  },
+  "data_integrity": {
+    "preserve_raw_values": true,
+    "preserve_units_periods_boundaries_and_footnotes": true,
+    "missing_is_not_zero": true,
+    "style_request_authorizes_numerical_changes": false,
+    "calculations_if_requested": "retain inputs-formula-units-output-trace-and-cross-check"
+  },
+  "visual_style_behavior": "Use a Korean consulting report aesthetic with a classification main title / subtitle, a formal Korean governing sentence below it, nominal structured body, and one boxed formal final message on dense pages, aligned rectangular analytical frames and compact readable text. Separate structural header, client-logo reserve, evidence area and footer; the broad header ends in a diagonal logo reserve and carries a very low-opacity fine grid, while the selected slim variant uses a narrow underline. Compose actual tables, equal-axis comparisons, process stages, schedules and scope/role diagrams as editable evidence rather than decorative cards. Select one installed source font family for Korean, Latin and numbers and distinguish roles by weight and size. Use the locked palette for structural contrast, grouping and restrained semantic emphasis. Keep the evidence field flat, align column starts and rows, and split content before shrinking past legibility. Use only current-project evidence images and verified own-company assets; do not copy old client facts or marks. Omit the grid in the solid variant and keep it only in the underline in the slim variant.",
+  "design_character_notes": {
+    "shape_and_decoration": "Consulting report structure: rectangular evidence frames, narrow rules, data tables, aligned comparisons and semantic process connectors. Broad header has a diagonal white client-logo reserve; fine grid texture appears only in header/footer or slim underline. Rounded forms only where the selected source function calls for them.",
+    "typography_character": "Korean sans serif with bold numbered topic title, smaller inline subtopic, bold one-to-two-line lead and compact regular report text. One selected source family covers Korean, Latin and numbers. Readability and source evidence govern density; projection delivery splits dense content.",
+    "color_behavior": "Dark structural header/footer surround a white evidence field. Gray groups and differentiates steps and tables; red marks meaningful differences, requirements or risks sparingly. Client logo hues do not define the palette.",
+    "spacing_and_density": "Report-oriented moderate-to-high density on a consistent baseline. Align column starts and table rows; keep title/logo, lead, evidence and footer regions distinct. Split content before shrinking beyond legibility.",
+    "texture_and_elevation": "Flat evidence field and restrained low-opacity grid on structural bands. No decorative depth by default. A specific reference variant may omit the grid or use a slim underline.",
+    "images_and_illustrations": "Use relevant current-project evidence images and the verified company logo. Preserve editable data tables/charts. Source-specific facility illustrations are optional and require appropriate supplied or authorized assets, not invented placeholders."
+  },
+  "integration": {
+    "active_readability_override": "docs/styles/innergen/design-wrapping-v15.json",
+    "entrypoint": ".claude/skills/innergen-style/SKILL.md",
+    "router": ".claude/skills/ppt-master/workflows/routing.md",
+    "visual_style": "custom",
+    "copy_behavior_to_project_lock": true,
+    "materialize_identity_and_canvas_separately": true,
+    "this_json_is_project_lock": false,
+    "style_label_auto_selects_step3_template": false,
+    "preserve_selected_workflow_gates": true
+  },
+  "validation": {
+    "checks": ["selected-variant-match", "canvas-size", "installed-font-and-typeface-slots", "title-logo-no-overlap", "content-footer-no-overlap", "editable-content", "current-source-values-and-units", "no-old-client-content", "representative-visual-comparison", "selected-owner-checks"],
+    "limitations": "This profile gives repeatable guidance, not a guarantee of pixel-identical output. Every new deck needs its own spec, content QA and rendering checks."
+  }
+}

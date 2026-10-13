@@ -167,6 +167,15 @@ def load_prefixed_env_file(
 # ============================================================
 
 CANVAS_FORMATS = {
+    'ppt139': {
+        'name': 'PPT 13:9 (INNerGEN)',
+        'dimensions': '1040×720',
+        'viewbox': '0 0 1040 720',
+        'width': 1040,
+        'height': 720,
+        'aspect_ratio': '13:9',
+        'use_case': 'INNerGEN reference decks, 780×540 pt at 96 DPI'
+    },
     'ppt169': {
         'name': 'PPT 16:9',
         'dimensions': '1280×720',

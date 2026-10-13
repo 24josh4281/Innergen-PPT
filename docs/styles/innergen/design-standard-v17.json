@@ -1,0 +1,1520 @@
+{
+  "version": "17",
+  "date": "2026-10-13",
+  "status": "production-standard; source renders and output checks reported separately",
+  "precedence": [
+    "current_user",
+    "confirmed_project_values",
+    "explicit_legacy_education_13x9",
+    "design_standard_v17",
+    "v16_semantics",
+    "v12_v15_semantics",
+    "source_observations"
+  ],
+  "unit_contract": {
+    "pt_per_svg_px": 0.75,
+    "emu_per_pt": 12700,
+    "emu_per_svg_px": 9525,
+    "mm_per_pt": 0.35277777777777775,
+    "geometry_order": [
+      "x",
+      "y",
+      "width",
+      "height"
+    ]
+  },
+  "profiles": {
+    "innergen_basic": {
+      "label": "이너젠 기본",
+      "font": "Malgun Gothic",
+      "fallback": "IBM Plex Sans KR",
+      "canvas": "ppt139",
+      "canvas_pt": [
+        780,
+        540
+      ],
+      "canvas_px": [
+        1040,
+        720
+      ],
+      "source_ids": [
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S18",
+        "S19",
+        "S20",
+        "S21"
+      ],
+      "colors": {
+        "primary": "#0F243F",
+        "accent": "#0F243F",
+        "background": "#FFFFFF",
+        "text": "#000000",
+        "muted": "#595959",
+        "panel": "#F2F2F2",
+        "border": "#BFBFBF",
+        "alert": "#FF0000"
+      },
+      "frame": "classic_grid",
+      "safe_margin_pt": 25,
+      "cover_title_pt": 36,
+      "zones_pt": {
+        "title": [
+          25,
+          7,
+          585,
+          36
+        ],
+        "governing": [
+          25,
+          65,
+          730,
+          60
+        ],
+        "body": [
+          25,
+          137,
+          730,
+          339
+        ],
+        "source": [
+          25,
+          484,
+          680,
+          12
+        ],
+        "page": [
+          718,
+          514,
+          37,
+          14
+        ]
+      },
+      "decoration_pt": {
+        "header": [
+          0,
+          0,
+          780,
+          52
+        ],
+        "footer": [
+          0,
+          500,
+          780,
+          40
+        ]
+      },
+      "source_geometry": "원본 780×540pt, 제목24pt, 상단52pt/하단40pt. 새 본문·거버닝 공간은 가독성을 위해 재배분.",
+      "template_note": "기존 innergen 15개 셸은 별도 명시 경로로 선택. v17 이름만으로 복사하지 않음.",
+      "zones_px": {
+        "title": [
+          33.3333,
+          9.3333,
+          780.0,
+          48.0
+        ],
+        "governing": [
+          33.3333,
+          86.6667,
+          973.3333,
+          80.0
+        ],
+        "body": [
+          33.3333,
+          182.6667,
+          973.3333,
+          452.0
+        ],
+        "source": [
+          33.3333,
+          645.3333,
+          906.6667,
+          16.0
+        ],
+        "page": [
+          957.3333,
+          685.3333,
+          49.3333,
+          18.6667
+        ]
+      },
+      "text_colors": {
+        "title": "#FFFFFF",
+        "page": "#FFFFFF",
+        "governing": "#000000",
+        "body": "#000000",
+        "table": "#000000",
+        "source": "#595959"
+      }
+    },
+    "innergen_business": {
+      "label": "이너젠 사업소개서",
+      "font": "IBM Plex Sans KR",
+      "fallback": "Malgun Gothic",
+      "canvas": "ppt169",
+      "canvas_pt": [
+        960,
+        540
+      ],
+      "canvas_px": [
+        1280,
+        720
+      ],
+      "source_ids": [
+        "S23"
+      ],
+      "colors": {
+        "primary": "#518FFF",
+        "accent": "#61D835",
+        "background": "#FFFFFF",
+        "text": "#000000",
+        "muted": "#595959",
+        "panel": "#D9E7FD",
+        "border": "#D9D9D9",
+        "alert": "#FF0000"
+      },
+      "frame": "business_line",
+      "safe_margin_pt": 36,
+      "cover_title_pt": 42,
+      "zones_pt": {
+        "title": [
+          36,
+          28,
+          810,
+          38
+        ],
+        "governing": [
+          36,
+          80,
+          888,
+          60
+        ],
+        "body": [
+          36,
+          152,
+          888,
+          318
+        ],
+        "source": [
+          36,
+          489,
+          840,
+          14
+        ],
+        "page": [
+          884,
+          511,
+          40,
+          14
+        ]
+      },
+      "decoration_pt": {
+        "top_rule": [
+          36,
+          15,
+          888,
+          1.5
+        ]
+      },
+      "source_geometry": "원본720×405pt(16:9), 제목12pt, 소개문10–10.5pt, 제목상자27.76/17.49/394.25/14.55pt. 신규960×540pt는 비율 유지 후 재배치.",
+      "template_note": "260929 업데이트가 현재 사업소개서 근거. 과거 v4.2 교육자료 셸을 이 디자인으로 오인하지 않음.",
+      "zones_px": {
+        "title": [
+          48.0,
+          37.3333,
+          1080.0,
+          50.6667
+        ],
+        "governing": [
+          48.0,
+          106.6667,
+          1184.0,
+          80.0
+        ],
+        "body": [
+          48.0,
+          202.6667,
+          1184.0,
+          424.0
+        ],
+        "source": [
+          48.0,
+          652.0,
+          1120.0,
+          18.6667
+        ],
+        "page": [
+          1178.6667,
+          681.3333,
+          53.3333,
+          18.6667
+        ]
+      },
+      "text_colors": {
+        "title": "#000000",
+        "page": "#595959",
+        "governing": "#000000",
+        "body": "#000000",
+        "table": "#000000",
+        "source": "#595959"
+      }
+    },
+    "innergen_lecture": {
+      "label": "이너젠 교육·강의(블루)",
+      "aliases": [
+        "이너젠 소개자료 스타일(2026-10 서강대 특강 자료)",
+        "이너젠 강의자료",
+        "이너젠 교육자료",
+        "v4.2 블루 교육"
+      ],
+      "font": "Pretendard",
+      "fallback": "Malgun Gothic",
+      "canvas": "ppt139",
+      "canvas_pt": [
+        780,
+        540
+      ],
+      "canvas_px": [
+        1040,
+        720
+      ],
+      "source_ids": [
+        "projects/20261007_sogang_climatetech_innergen (사용자 확정 56장 덱)"
+      ],
+      "colors": {
+        "primary": "#0B1739",
+        "accent": "#2F62F0",
+        "background": "#FFFFFF",
+        "text": "#475569",
+        "muted": "#64748B",
+        "panel": "#EEF2FF",
+        "border": "#E2E8F0",
+        "alert": "#FF0000"
+      },
+      "extra_colors": {
+        "light_accent": "#7B9BF7",
+        "governing_fill": "#F3F6FF",
+        "governing_stroke": "#DFE7FF",
+        "neutral_series": "#94A3B8",
+        "navy_panel": "#152959",
+        "on_navy": "#B8CBF9"
+      },
+      "frame": "lecture_blue",
+      "safe_margin_pt": 36,
+      "cover_title_pt": 42,
+      "zones_pt": {
+        "title": [
+          36.0,
+          13.5,
+          624.0,
+          33.0
+        ],
+        "governing": [
+          36.0,
+          52.5,
+          708.0,
+          60.0
+        ],
+        "body": [
+          36.0,
+          123.0,
+          708.0,
+          330.0
+        ],
+        "source": [
+          36.0,
+          459.0,
+          708.0,
+          19.5
+        ],
+        "page": [
+          684.0,
+          502.5,
+          60.0,
+          19.5
+        ]
+      },
+      "decoration_pt": {
+        "top_rule": [
+          0,
+          0,
+          780,
+          2.25
+        ],
+        "governing_box": [
+          36,
+          52.5,
+          708,
+          60
+        ],
+        "footer_rule": [
+          36,
+          486,
+          708,
+          0.75
+        ],
+        "footer_logo": [
+          36,
+          495,
+          30,
+          30
+        ]
+      },
+      "source_geometry": "2026-10-07 서강대 특강 56장(사용자 확정)에서 확정한 13:9 1040×720px 좌표. 제목 32px·거버닝 24px(18pt)·본문 24px.",
+      "template": ".claude/skills/ppt-master/templates/decks/innergen_lecture/",
+      "template_note": "사용자가 '이너젠 소개자료 스타일(지금 자료)'로 지정한 v4.2 블루 교육·강의 계열. 260929 사업소개서(innergen_business)와 다른 계열이며 서로 대체하지 않음. 템플릿은 이 계열을 명시적으로 고른 경우에만 Step 3에서 경로를 지정해 사용.",
+      "zones_px": {
+        "title": [
+          48.0,
+          18.0,
+          832.0,
+          44.0
+        ],
+        "governing": [
+          48.0,
+          70.0,
+          944.0,
+          80.0
+        ],
+        "body": [
+          48.0,
+          164.0,
+          944.0,
+          440.0
+        ],
+        "source": [
+          48.0,
+          612.0,
+          944.0,
+          26.0
+        ],
+        "page": [
+          912.0,
+          670.0,
+          80.0,
+          26.0
+        ]
+      },
+      "text_colors": {
+        "title": "#0B1739",
+        "page": "#64748B",
+        "governing": "#2F62F0",
+        "body": "#475569",
+        "table": "#475569",
+        "source": "#64748B"
+      },
+      "typography_pt_overrides": {
+        "education_lecture": {
+          "title": 24,
+          "table": 15
+        }
+      },
+      "font_note": "사용자가 확정한 덱이 Pretendard로 제작됨. 이 계열은 Pretendard 유지(저장소 기본 잠금과 동일)."
+    },
+    "innercarry": {
+      "label": "이너캐리",
+      "font": "IBM Plex Sans KR",
+      "fallback": "Malgun Gothic",
+      "canvas": "ppt43",
+      "canvas_pt": [
+        768,
+        576
+      ],
+      "canvas_px": [
+        1024,
+        768
+      ],
+      "source_ids": [
+        "S22"
+      ],
+      "colors": {
+        "primary": "#0B1739",
+        "accent": "#2F62F0",
+        "background": "#FFFFFF",
+        "text": "#475569",
+        "muted": "#64748B",
+        "panel": "#EEF2FF",
+        "border": "#E2E8F0",
+        "alert": "#991B1B"
+      },
+      "frame": "product_story",
+      "safe_margin_pt": 42,
+      "cover_title_pt": 46,
+      "zones_pt": {
+        "section_label": [
+          42,
+          32,
+          500,
+          16
+        ],
+        "title": [
+          42,
+          60,
+          684,
+          66
+        ],
+        "governing": [
+          42,
+          138,
+          684,
+          60
+        ],
+        "body": [
+          42,
+          210,
+          684,
+          314
+        ],
+        "source": [
+          42,
+          542,
+          620,
+          12
+        ],
+        "page": [
+          690,
+          542,
+          36,
+          14
+        ]
+      },
+      "decoration_pt": {
+        "top_rule": [
+          0,
+          0,
+          768,
+          3
+        ]
+      },
+      "source_geometry": "v4.1 원본1080×810pt(4:3), 좌측59.98pt, 제목33–39pt, 설명14pt. 신규768×576pt는 글씨를 단순 축소하지 않고 다시 배치.",
+      "template_note": "v4.1 제품 부분을 우선. 홈페이지 시각 검토는 브라우저 접근 거절로 미완료. 과거 제품 실적·화면은 새 사실로 복사하지 않음.",
+      "zones_px": {
+        "section_label": [
+          56.0,
+          42.6667,
+          666.6667,
+          21.3333
+        ],
+        "title": [
+          56.0,
+          80.0,
+          912.0,
+          88.0
+        ],
+        "governing": [
+          56.0,
+          184.0,
+          912.0,
+          80.0
+        ],
+        "body": [
+          56.0,
+          280.0,
+          912.0,
+          418.6667
+        ],
+        "source": [
+          56.0,
+          722.6667,
+          826.6667,
+          16.0
+        ],
+        "page": [
+          920.0,
+          722.6667,
+          48.0,
+          18.6667
+        ]
+      },
+      "text_colors": {
+        "title": "#0B1739",
+        "page": "#64748B",
+        "governing": "#475569",
+        "body": "#475569",
+        "table": "#475569",
+        "source": "#64748B"
+      }
+    }
+  },
+  "modes": {
+    "report_reading": {
+      "label": "보고·읽기",
+      "pt": {
+        "title": 24,
+        "governing": 16.5,
+        "body": 14,
+        "table": 14,
+        "subheading": 16.5,
+        "note": 11,
+        "source": 9,
+        "page": 10.5
+      },
+      "px": {
+        "title": 32.0,
+        "governing": 22.0,
+        "body": 18.6667,
+        "table": 18.6667,
+        "subheading": 22.0,
+        "note": 14.6667,
+        "source": 12.0,
+        "page": 14.0
+      }
+    },
+    "presentation": {
+      "label": "발표",
+      "pt": {
+        "title": 26,
+        "governing": 20,
+        "body": 18,
+        "table": 16,
+        "subheading": 20,
+        "note": 12,
+        "source": 10,
+        "page": 10.5
+      },
+      "px": {
+        "title": 34.6667,
+        "governing": 26.6667,
+        "body": 24.0,
+        "table": 21.3333,
+        "subheading": 26.6667,
+        "note": 16.0,
+        "source": 13.3333,
+        "page": 14.0
+      }
+    },
+    "education_lecture": {
+      "label": "교육·강의",
+      "pt": {
+        "title": 26,
+        "governing": 18,
+        "body": 18,
+        "table": 16,
+        "subheading": 20,
+        "note": 13.5,
+        "source": 12,
+        "page": 10.5
+      },
+      "px": {
+        "title": 34.6667,
+        "governing": 24.0,
+        "body": 24.0,
+        "table": 21.3333,
+        "subheading": 26.6667,
+        "note": 18.0,
+        "source": 16.0,
+        "page": 14.0
+      }
+    },
+    "education_handout": {
+      "label": "교육·배포",
+      "pt": {
+        "title": 24,
+        "governing": 16.5,
+        "body": 14,
+        "table": 14,
+        "subheading": 16.5,
+        "note": 11,
+        "source": 10,
+        "page": 10.5
+      },
+      "px": {
+        "title": 32.0,
+        "governing": 22.0,
+        "body": 18.6667,
+        "table": 18.6667,
+        "subheading": 22.0,
+        "note": 14.6667,
+        "source": 13.3333,
+        "page": 14.0
+      }
+    },
+    "proposal": {
+      "label": "제안 설명",
+      "pt": {
+        "title": 24,
+        "governing": 18,
+        "body": 16,
+        "table": 14,
+        "subheading": 18,
+        "note": 12,
+        "source": 10,
+        "page": 10.5
+      },
+      "px": {
+        "title": 32.0,
+        "governing": 24.0,
+        "body": 21.3333,
+        "table": 18.6667,
+        "subheading": 24.0,
+        "note": 16.0,
+        "source": 13.3333,
+        "page": 14.0
+      }
+    }
+  },
+  "business_types": {
+    "cdp_disclosure": {
+      "label_ko": "CDP·기후공시",
+      "required": [
+        "적용 기준·연도",
+        "요구사항 지도",
+        "현황 진단표",
+        "점수 추이",
+        "보완 과제·일정"
+      ],
+      "charts": [
+        "RCP17",
+        "RCP22",
+        "CH18",
+        "CH06",
+        "harvey_balls_table"
+      ],
+      "sources": [
+        "CDP",
+        "IFRS S2",
+        "KSSB",
+        "금융위원회",
+        "EFRAG"
+      ]
+    },
+    "regulatory": {
+      "label_ko": "규제 대응",
+      "required": [
+        "적용 대상·기준값",
+        "의무 시점표",
+        "산정·보고·검증 절차",
+        "비용·가격 영향",
+        "대응 체크리스트"
+      ],
+      "charts": [
+        "RCP16",
+        "RCP02",
+        "RCP03",
+        "timeline",
+        "gantt_chart",
+        "CH06"
+      ],
+      "sources": [
+        "기후에너지환경부",
+        "GIR",
+        "KRX",
+        "국가법령정보센터",
+        "EU 집행위원회",
+        "ICAP"
+      ]
+    },
+    "reduction": {
+      "label_ko": "감축사업·상쇄",
+      "required": [
+        "기준선·경계",
+        "수단별 감축량",
+        "로드맵 경로",
+        "한계감축비용",
+        "방법론·MRV",
+        "인정·리스크"
+      ],
+      "charts": [
+        "CH10",
+        "CH17",
+        "CH01",
+        "CH15",
+        "RCP19",
+        "RCP12"
+      ],
+      "sources": [
+        "UNFCCC 6.4",
+        "Verra",
+        "Gold Standard",
+        "ICVCM",
+        "GIR",
+        "IEA"
+      ]
+    },
+    "inventory": {
+      "label_ko": "온실가스 인벤토리",
+      "required": [
+        "조직·운영 경계",
+        "배출원 목록",
+        "Scope별 배출량",
+        "증감 요인",
+        "배출계수·데이터 품질",
+        "데이터 요청"
+      ],
+      "charts": [
+        "CH04",
+        "CH10",
+        "sankey_chart",
+        "RCP07",
+        "RCP11"
+      ],
+      "sources": [
+        "GHG Protocol",
+        "ISO 14064-1",
+        "GIR 배출계수",
+        "IPCC 2006/2019"
+      ]
+    },
+    "lca_product": {
+      "label_ko": "LCA·제품 탄소발자국",
+      "required": [
+        "기능단위·시스템 경계",
+        "단계별 배출",
+        "핫스팟",
+        "민감도",
+        "인증·검증 경로"
+      ],
+      "charts": [
+        "CH05",
+        "CH16",
+        "sankey_chart",
+        "RCP07"
+      ],
+      "sources": [
+        "ISO 14067",
+        "ISO 14040/44",
+        "EU PEF",
+        "환경성적표지",
+        "ecoinvent"
+      ]
+    },
+    "climate_risk": {
+      "label_ko": "기후리스크·시나리오 분석",
+      "required": [
+        "시나리오 정의",
+        "리스크 목록·평가 기준",
+        "영향 히트맵",
+        "재무 영향 범위",
+        "대응 전략"
+      ],
+      "charts": [
+        "CH17",
+        "CH18",
+        "matrix_2x2",
+        "CH11",
+        "RCP06"
+      ],
+      "sources": [
+        "NGFS",
+        "IPCC AR6",
+        "IEA WEO",
+        "기상청"
+      ]
+    },
+    "esg_rating": {
+      "label_ko": "ESG 평가 대응",
+      "required": [
+        "평가 체계",
+        "항목별 근거 매핑",
+        "갭 진단",
+        "개선 우선순위",
+        "일정"
+      ],
+      "charts": [
+        "RCP23",
+        "harvey_balls_table",
+        "CH03",
+        "radar_chart"
+      ],
+      "sources": [
+        "EcoVadis",
+        "SBTi",
+        "한국ESG기준원",
+        "MSCI"
+      ]
+    },
+    "climate_education": {
+      "label_ko": "기후·ESG 교육",
+      "required": [
+        "관측 사실",
+        "국제 합의",
+        "국가 목표",
+        "제도 흐름",
+        "산업·직무 연결",
+        "질문·정리"
+      ],
+      "charts": [
+        "CH06",
+        "CH04",
+        "timeline",
+        "RCP01",
+        "RCP14"
+      ],
+      "sources": [
+        "WMO",
+        "NOAA",
+        "Copernicus",
+        "IPCC",
+        "UNEP",
+        "World Bank"
+      ]
+    },
+    "climate_tech": {
+      "label_ko": "기후테크·소셜벤처",
+      "required": [
+        "정의·분류",
+        "투자 추이",
+        "분야별 비중",
+        "국내 지원 제도",
+        "사례",
+        "리스크"
+      ],
+      "charts": [
+        "CH02",
+        "CH06",
+        "CH09",
+        "treemap_chart",
+        "matrix_2x2",
+        "RCP05"
+      ],
+      "sources": [
+        "BNEF",
+        "IEA WEI",
+        "중소벤처기업부",
+        "사회적기업진흥원"
+      ]
+    }
+  },
+  "report_types": {
+    "proposal": {
+      "label_ko": "제안",
+      "pages": "12-18",
+      "sequence": [
+        "01",
+        "03b",
+        "03e",
+        "03d",
+        "03g",
+        "03a",
+        "03e",
+        "03a",
+        "03d",
+        "03f",
+        "04"
+      ],
+      "must_have": [
+        "고객 과제 1문장",
+        "범위 안/밖",
+        "산출물",
+        "일정",
+        "필요 협조"
+      ]
+    },
+    "kickoff": {
+      "label_ko": "착수",
+      "pages": "10-15",
+      "sequence": [
+        "01",
+        "02",
+        "03b",
+        "03g",
+        "03e",
+        "03d",
+        "03a",
+        "03b",
+        "04"
+      ],
+      "must_have": [
+        "기준연도·경계·기준",
+        "자료 요청과 기한",
+        "담당자",
+        "의사결정 안건"
+      ]
+    },
+    "interim": {
+      "label_ko": "중간",
+      "pages": "10-18",
+      "sequence": [
+        "01",
+        "03f",
+        "03a",
+        "03e",
+        "03d",
+        "03b",
+        "03b",
+        "03g",
+        "04"
+      ],
+      "must_have": [
+        "진행률 근거",
+        "잠정 수치 상태 표기",
+        "결정 요청"
+      ],
+      "source_status": "구성 제안(원본 레퍼런스 없음)"
+    },
+    "final": {
+      "label_ko": "최종",
+      "pages": "20-40",
+      "sequence": [
+        "01",
+        "03f",
+        "02",
+        "03g",
+        "03e",
+        "03c",
+        "03b",
+        "03a",
+        "03e",
+        "appendix",
+        "04"
+      ],
+      "must_have": [
+        "결론 먼저",
+        "결과별 출처·단위",
+        "한계",
+        "잔여 과제와 담당"
+      ]
+    },
+    "education": {
+      "label_ko": "교육·워크숍",
+      "pages": "20-60",
+      "sequence": [
+        "01",
+        "02",
+        "02(chapter)",
+        "03c",
+        "03e",
+        "03f",
+        "03g",
+        "03d",
+        "03b",
+        "04"
+      ],
+      "must_have": [
+        "학습 목표",
+        "장별 핵심 정리",
+        "최신 수치 기준일",
+        "질문 장표"
+      ]
+    },
+    "briefing": {
+      "label_ko": "경영진 브리핑",
+      "pages": "5-8",
+      "sequence": [
+        "01",
+        "03f",
+        "03e",
+        "03d",
+        "03b",
+        "03b",
+        "appendix"
+      ],
+      "must_have": [
+        "결정 사항 1문장",
+        "선택지별 비용·효과·리스크",
+        "권고"
+      ]
+    }
+  },
+  "layouts": {
+    "evidence": {
+      "label": "결론 + 근거",
+      "purpose": "한 문장 결론과 이를 뒷받침하는 자료",
+      "pattern": "evidence",
+      "slots": [
+        "핵심 판단",
+        "확인한 근거",
+        "필요한 조치"
+      ]
+    },
+    "matrix": {
+      "label": "요구사항·진단표",
+      "purpose": "같은 기준으로 현황·차이·조치 비교",
+      "pattern": "table",
+      "slots": [
+        "요구사항",
+        "현재 상태",
+        "보완·담당"
+      ]
+    },
+    "compare": {
+      "label": "대안 비교",
+      "purpose": "동일한 비교 축으로 두 대안 비교",
+      "pattern": "compare",
+      "slots": [
+        "현재 방식",
+        "개선 방식",
+        "공통 비교 기준"
+      ]
+    },
+    "process": {
+      "label": "단계별 절차",
+      "purpose": "실제 선후관계가 있는 업무 흐름",
+      "pattern": "flow",
+      "slots": [
+        "자료 수집",
+        "자료 점검",
+        "검토·확정",
+        "제출·인계"
+      ]
+    },
+    "swimlane": {
+      "label": "주체별 역할",
+      "purpose": "회사·현장·컨설턴트 간 책임 구분",
+      "pattern": "lanes",
+      "slots": [
+        "현장 담당",
+        "본사 관리자",
+        "검토 담당"
+      ]
+    },
+    "timeline": {
+      "label": "일정·로드맵",
+      "purpose": "확정된 기간과 이정표 표시",
+      "pattern": "timeline",
+      "slots": [
+        "착수",
+        "자료 취합",
+        "검토",
+        "최종 보고"
+      ]
+    },
+    "status": {
+      "label": "진행·이슈·조치",
+      "purpose": "완료/진행/미확정과 결정 요청 구분",
+      "pattern": "status",
+      "slots": [
+        "완료 항목",
+        "진행 항목",
+        "결정 필요"
+      ]
+    },
+    "screen": {
+      "label": "화면·그림 + 설명",
+      "purpose": "실제 화면이나 출처 있는 그림으로 기능 설명",
+      "pattern": "screen",
+      "slots": [
+        "자료·화면 배치 영역",
+        "핵심 위치 설명",
+        "출처·촬영일"
+      ]
+    },
+    "exec_summary": {
+      "label": "핵심 요약 카드 + 종합",
+      "purpose": "결론적으로 핵심 몇 가지는?",
+      "pattern": "evidence",
+      "slots": [
+        "발견 1",
+        "발견 2",
+        "발견 3",
+        "종합"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s01_exec_summary.svg"
+    },
+    "findings_insights": {
+      "label": "발견 ↔ 시사점 2단",
+      "purpose": "무엇을 발견했고 각각 그래서 무엇인가?",
+      "pattern": "evidence",
+      "slots": [
+        "발견",
+        "같은 번호의 시사점",
+        "대응 관계"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s02_findings_insights.svg"
+    },
+    "chart_insight": {
+      "label": "차트 + 시사점 열",
+      "purpose": "이 숫자에서 무엇을 읽어야 하나?",
+      "pattern": "evidence",
+      "slots": [
+        "차트(단위·n)",
+        "시사점 첫 문장",
+        "해석 근거"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s03_chart_insight.svg"
+    },
+    "chart_table": {
+      "label": "차트 + 원자료 표 + 해설",
+      "purpose": "규모·구성과 항목별 수치는?",
+      "pattern": "compare",
+      "slots": [
+        "차트",
+        "원자료 표",
+        "해설 띠"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s04_chart_table_strip.svg"
+    },
+    "entity_matrix": {
+      "label": "대상 비교 매트릭스",
+      "purpose": "제도·기준·동종사는 무엇이 다른가?",
+      "pattern": "table",
+      "slots": [
+        "속성",
+        "대상 A",
+        "대상 B",
+        "대상 C"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s05_entity_matrix.svg"
+    },
+    "principle_matrix": {
+      "label": "원칙 + 기준 매트릭스",
+      "purpose": "판단 기준과 보완 사항은?",
+      "pattern": "table",
+      "slots": [
+        "기준",
+        "현황·평가",
+        "보완 과제"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s06_principle_matrix.svg"
+    },
+    "asis_tobe": {
+      "label": "현행 → 개선 → 기대효과",
+      "purpose": "무엇이 바뀌고 어떤 효과가 나는가?",
+      "pattern": "compare",
+      "slots": [
+        "현행",
+        "개선",
+        "기대효과"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s07_asis_tobe_effect.svg"
+    },
+    "phase_roadmap": {
+      "label": "단계별 추진 로드맵",
+      "purpose": "어떤 과제가 언제 추진되나?",
+      "pattern": "timeline",
+      "slots": [
+        "1단계",
+        "2단계",
+        "3단계"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s08_phase_roadmap.svg"
+    },
+    "year_timeline": {
+      "label": "연도별 제도 연혁",
+      "purpose": "제도는 어떤 순서로 정비됐나?",
+      "pattern": "timeline",
+      "slots": [
+        "과거",
+        "현재",
+        "예정"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s09_year_timeline.svg"
+    },
+    "maturity_heatmap": {
+      "label": "단계별 성숙도 히트맵",
+      "purpose": "전체 이행 단계에서 어디까지 왔나?",
+      "pattern": "table",
+      "slots": [
+        "단계",
+        "활동",
+        "완료 수준(n)"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s10_maturity_heatmap.svg"
+    },
+    "list_zoom": {
+      "label": "목록 → 상세 확대",
+      "purpose": "전체 중 어느 항목을 어떻게 다루나?",
+      "pattern": "evidence",
+      "slots": [
+        "전체 목록",
+        "중점 항목",
+        "상세 방법"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s11_list_zoom.svg"
+    },
+    "actor_checklist": {
+      "label": "주체별 실행 체크",
+      "purpose": "각 주체는 무엇을 해야 하나?",
+      "pattern": "lanes",
+      "slots": [
+        "본사",
+        "사업장",
+        "협력사"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s12_actor_checklist.svg"
+    },
+    "key_takeaways": {
+      "label": "질문 + 전략 방향",
+      "purpose": "그래서 무엇을 해야 하나?",
+      "pattern": "evidence",
+      "slots": [
+        "방향 1",
+        "방향 2",
+        "방향 3"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s13_key_takeaways.svg"
+    },
+    "task_structure": {
+      "label": "과업 구조도",
+      "purpose": "과업은 어떻게 나뉘고 이번 보고는 어디인가?",
+      "pattern": "flow",
+      "slots": [
+        "과업 1",
+        "과업 2",
+        "과업 3",
+        "산출물"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s14_task_structure.svg"
+    },
+    "vertical_flow": {
+      "label": "세로 단계 흐름",
+      "purpose": "몇 단계로, 단계별로 무엇을 하나?",
+      "pattern": "flow",
+      "slots": [
+        "경계 설정",
+        "자료 수집",
+        "산정",
+        "검증",
+        "보고"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s15_vertical_chevron.svg"
+    },
+    "period_applicability": {
+      "label": "대상별 적용 시기표",
+      "purpose": "우리 유형은 언제부터 무엇을 하나?",
+      "pattern": "timeline",
+      "slots": [
+        "대상",
+        "적용 시작",
+        "결과"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s16_period_applicability.svg"
+    },
+    "decision_tree": {
+      "label": "판단 트리",
+      "purpose": "이 조건이면 결과는? 예외는?",
+      "pattern": "flow",
+      "slots": [
+        "판단",
+        "조건",
+        "결과",
+        "예외"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s17_decision_tree.svg"
+    },
+    "keyword_map": {
+      "label": "질문형 키워드 지도",
+      "purpose": "이 제도를 한 장으로 보면?",
+      "pattern": "evidence",
+      "slots": [
+        "왜",
+        "무엇을",
+        "누가",
+        "언제",
+        "어떻게"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s18_keyword_grid.svg"
+    },
+    "compare_implication": {
+      "label": "기준 비교 + 시사점",
+      "purpose": "두 기준은 무엇이 다르고 무엇을 조정하나?",
+      "pattern": "table",
+      "slots": [
+        "항목",
+        "현행 기준",
+        "목표 기준",
+        "시사점"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s19_compare_implication.svg"
+    },
+    "self_check": {
+      "label": "자가진단 + 다음 행동",
+      "purpose": "우리 회사는 갖추고 있나? 무엇부터?",
+      "pattern": "table",
+      "slots": [
+        "영역",
+        "점검 포인트",
+        "질문"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s20_self_check.svg"
+    }
+  },
+  "recommended_by_report": {
+    "proposal": [
+      "task_structure",
+      "phase_roadmap",
+      "evidence"
+    ],
+    "kickoff": [
+      "task_structure",
+      "vertical_flow",
+      "actor_checklist"
+    ],
+    "interim": [
+      "status",
+      "maturity_heatmap",
+      "actor_checklist"
+    ],
+    "final": [
+      "exec_summary",
+      "chart_insight",
+      "key_takeaways"
+    ],
+    "education": [
+      "keyword_map",
+      "year_timeline",
+      "self_check"
+    ],
+    "briefing": [
+      "exec_summary",
+      "compare_implication",
+      "key_takeaways"
+    ]
+  },
+  "recommended_by_business": {
+    "cdp_disclosure": [
+      "maturity_heatmap",
+      "principle_matrix",
+      "compare_implication"
+    ],
+    "regulatory": [
+      "period_applicability",
+      "decision_tree",
+      "entity_matrix"
+    ],
+    "reduction": [
+      "chart_insight",
+      "asis_tobe",
+      "phase_roadmap"
+    ],
+    "inventory": [
+      "list_zoom",
+      "chart_table",
+      "vertical_flow"
+    ],
+    "lca_product": [
+      "chart_table",
+      "vertical_flow",
+      "compare"
+    ],
+    "climate_risk": [
+      "maturity_heatmap",
+      "chart_insight",
+      "entity_matrix"
+    ],
+    "esg_rating": [
+      "self_check",
+      "principle_matrix",
+      "asis_tobe"
+    ],
+    "climate_education": [
+      "keyword_map",
+      "year_timeline",
+      "findings_insights"
+    ],
+    "climate_tech": [
+      "chart_insight",
+      "entity_matrix",
+      "exec_summary"
+    ]
+  },
+  "spacing_pt": {
+    "column_gap": 12,
+    "block_gap": 12,
+    "panel_padding_x": 18,
+    "panel_padding_y": 6,
+    "table_padding_x": 9,
+    "table_padding_y": 6,
+    "line_width": 0.75,
+    "connector_width": 1.25,
+    "corner_radius": 0
+  },
+  "text": {
+    "line_height_ratio": 1.2,
+    "paragraph_after_pt": 6,
+    "character_spacing_pt": 0,
+    "governing_max_lines": 2,
+    "regular_weight": 400,
+    "heading_weight": 700,
+    "auto_shrink": false,
+    "table_horizontal_alignment": "center",
+    "table_vertical_alignment": "middle",
+    "wrap": "measure actual font and usable cell width; retain protected phrases; no orphan tail"
+  },
+  "media_modes": {
+    "diagram": {
+      "label": "도식 중심",
+      "image_usage": [
+        "none"
+      ],
+      "description": "근거 관계를 편집 가능한 도형·선으로 표현"
+    },
+    "search": {
+      "label": "자료·이미지 찾기",
+      "image_usage": [
+        "web"
+      ],
+      "description": "공식 자료·실제 화면 우선 검색, 출처와 사용 조건 기록"
+    },
+    "mixed": {
+      "label": "도식 + 자료 이미지",
+      "image_usage": [
+        "web"
+      ],
+      "description": "도식으로 구조를 설명하고 확인한 그림·화면을 함께 배치"
+    },
+    "ai": {
+      "label": "설명용 이미지 생성",
+      "image_usage": [
+        "ai"
+      ],
+      "description": "개념 설명용 삽화. 실제 제품 화면·실적·증빙을 대신하지 않음"
+    }
+  },
+  "media_rules": {
+    "search_query": "사업 성격 + 장표 주장 + 필요한 그림 종류",
+    "required_fields": [
+      "source_url",
+      "publisher",
+      "retrieved_on",
+      "license_or_permission",
+      "caption",
+      "alt_text",
+      "placement",
+      "verification_status"
+    ],
+    "failure": "mark Needs-Manual; do not silently substitute",
+    "source_screenshots": "use only current, user-authorized product evidence",
+    "asset_aspect": "contain; never stretch logos or evidence",
+    "image_min_ppi": 150
+  },
+  "legacy": {
+    "innergen_report": "innergen_basic",
+    "innergen_intro": "v4.2 블루 교육·강의 = profile innergen_lecture (template innergen_lecture). 260929 사업소개서(innergen_business)로 별칭 처리하지 않음.",
+    "education_13x9": "docs/styles/innergen/education-13x9-20261007/design_13x9.json",
+    "font_exception": "User-authorized INNerGEN/Carry font preference overrides generic Pretendard for named styles; native PPTX keeps source fonts."
+  },
+  "validation": {
+    "position_tolerance_pt": 0.75,
+    "font_size_tolerance_pt": 0.1,
+    "palette_exact_match": true,
+    "text_bounds_tolerance_pt": 1,
+    "font_fallback_requires_reflow": true,
+    "do_not_claim_render_from_xml": true
+  },
+  "audit_manifest": "OUTPUTS/design-audit-v17/manifest.json",
+  "structured_slides": "docs/styles/innergen/structured-slides-v18.json"
+}

@@ -1,0 +1,17 @@
+{
+  "version": "8.0-core-presentation",
+  "based_on": "user feedback v4-v7 and verified KSSB seminar outputs 2026-10-03",
+  "self_contained": true,
+  "canvas": {"svg_px":[1040,720],"ppt_pt":[780,540],"format":"13:9"},
+  "fonts": {"primary":"IBM Plex Sans KR","fallback":"Malgun Gothic","require_primary_for_same_layout":true,"embedded_in_pptx":false},
+  "typography_pt": {"body":12,"table":12,"final":12,"body_subheading":14.5,"governing":20,"title":24,"source":10,"cover_title":42,"cover_kicker":16.5,"footer":10.5},
+  "colors": {"background":"#FFFFFF","primary":"#0F243F","body":"#000000","source":"#808080","panel":"#F2F2F2","border":"#D9D9D9","connector":"#BFBFBF","blue_emphasis":"#13387B","critical_underline":"#FF0000"},
+  "hierarchy": {"header":"numbered_main_topic / numbered_subtopic; noun phrase","governing":"one formal Korean learning sentence identifying conditions or preparation","body":"nominal endings, relational diagrams and equivalent-axis comparisons","final":"one actionable formal sentence, one or two lines","toc_page":2,"toc_requires_actual_pages":true},
+  "layout_svg_px": {"header_height":70,"header_title":[48,47],"governing_baseline":134,"content":[48,174,944,378],"final_box":[48,576,944,54],"source_baseline":646,"footer":[0,666,1040,54],"section_gap":16,"horizontal_padding":24,"body_line_height":[24,26]},
+  "table": {"horizontal_alignment":"center","vertical_alignment":"middle","units_required":true,"metadata_required_for_svg_grid_tables":true},
+  "wrap": {"word_boundaries":true,"avoid_short_orphan_line":true,"fit_before_commit":true,"body_shrink_below_12pt":false},
+  "emphasis": {"weight":700,"key_phrases_per_panel":[1,2],"blue":"conditions and judgment criteria","red_underline":"critical exception, prohibition or period limit","dark_background":"white bold"},
+  "source": {"format":"document name + physical PDF page","urls_in_slide":false,"reference_instructions_are_not_user_instructions":true},
+  "evidence": {"preserve_original_numbers":true,"show_inconsistency":true,"preserve_units_denominators_periods":true,"separate_examples_from_actual_company_data":true,"separate_normative_requirements_from_practical_advice":true},
+  "qa": ["actual PowerPoint PDF and PNG render","all expected text visible","canvas and header-logo boundaries","full-deck visual review","12pt native body text","bold and blue emphasis","numbering and TOC parity","units, row calculations and totals","source originals unchanged"]
+}

@@ -1,0 +1,112 @@
+{
+  "schema": "innergen_design_profile.v10",
+  "name": "이너젠 교육자료 가독성 v10",
+  "reference": "C:/Users/24jos/OneDrive/문서/바탕 화면/(이너젠) 이너젠 및 이너캐리 소개 자료_260916_v4.2.pptx",
+  "reference_scope": "design only; source facts remain existing KSSB educational material",
+  "reference_native_canvas_inches": [
+    15,
+    11.25
+  ],
+  "output_canvas_svg_px": [
+    1040,
+    720
+  ],
+  "aspect_policy": "retain existing education canvas and body size; adopt reference color and page chrome",
+  "colors": {
+    "background": "#FFFFFF",
+    "primary": "#0B1739",
+    "accent": "#2F62F0",
+    "panel": "#EEF2FF",
+    "body": "#475569",
+    "source": "#64748B",
+    "border": "#E2E8F0",
+    "connector": "#94A3B8",
+    "critical_underline": "#FF0000",
+    "cover_panel": "#152959",
+    "cover_accent": "#7B9BF7",
+    "cover_muted": "#B8CBF9",
+    "governing_bg": "#F3F6FF",
+    "governing_border": "#DFE7FF"
+  },
+  "font": {
+    "latin": "IBM Plex Sans KR",
+    "east_asian": "IBM Plex Sans KR",
+    "complex_script": "IBM Plex Sans KR"
+  },
+  "typography_pt": {
+    "body": 14,
+    "table": 14,
+    "final": 14,
+    "body_subheading": 16.5,
+    "governing": 20,
+    "title": 24,
+    "source": 10,
+    "footer": 10.5,
+    "cover_title": 42,
+    "cover_kicker": 16.5
+  },
+  "preservation": {
+    "main_title": "verbatim",
+    "governing_message": "verbatim",
+    "all_existing_wording": "verbatim except renderer line-break padding",
+    "page_count": "unchanged",
+    "page_order": "unchanged",
+    "numbers_units_sources": "unchanged",
+    "toc_page": 2
+  },
+  "layout_svg_px": {
+    "margins": 48,
+    "header_rule_height": 3,
+    "header_title_baseline": 47,
+    "governing_baseline": 134,
+    "content": [
+      48,
+      174,
+      944,
+      378
+    ],
+    "section_gap": 16,
+    "panel_padding": 24,
+    "panel_radius": 5,
+    "panel_border": 0.8,
+    "final_box": [
+      48,
+      576,
+      944,
+      60
+    ],
+    "source_baseline": 654,
+    "footer_divider_baseline": 666,
+    "governing_box": [
+      48,
+      98,
+      944,
+      60
+    ]
+  },
+  "language": {
+    "title": "numbered nominal phrase",
+    "governing": "formal Korean learning/preparation sentence",
+    "body": "nominal endings",
+    "final": "formal Korean actionable sentence, 1–2 lines"
+  },
+  "source_format": "document name + physical PDF page",
+  "native_editable": true,
+  "qa": [
+    "all title/governing text exact comparison",
+    "all original native text comparison",
+    "font-size distribution unchanged",
+    "12pt body",
+    "actual PowerPoint PNG/PDF rendering",
+    "all expected text visible in PDF",
+    "no out-of-canvas text",
+    "no broken OOXML relationships",
+    "original SHA256 unchanged",
+    "full contact sheet review",
+    "actual font-width measurement",
+    "role-by-role +2pt verification",
+    "57 native governing shade boxes"
+  ],
+  "revision": "pale governing shade; body/table/final +2pt; subheading +2pt",
+  "fitting_policy": "Preserve wording and 14pt minimum body; adjust padding, column widths and word-boundary breaks."
+}

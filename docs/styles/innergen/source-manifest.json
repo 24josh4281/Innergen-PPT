@@ -1,0 +1,6604 @@
+{
+  "schema_version": 1,
+  "analysis_date": "2026-10-01",
+  "scope": "19 PPTX source files, all slides. Original files are preserved; no source text/numbers are copied into this manifest.",
+  "totals": {
+    "files": 19,
+    "unique_sha256": 19,
+    "slides": 573
+  },
+  "duplicates": [],
+  "decks": [
+    {
+      "id": "D01",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/CDP/제안서 2.pptx",
+      "sha256": "9d12036471032259fb66f5dcf25060d549ead78436de8b1668be3bae3695ed40",
+      "file_bytes": 23668808,
+      "slide_count": 41,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "맑은 고딕",
+          "count": 3246,
+          "explicit_run": 2112,
+          "inherited": 1134
+        },
+        {
+          "font": "HY견고딕",
+          "count": 123,
+          "inherited": 123
+        },
+        {
+          "font": "경기천년제목 Medium",
+          "count": 51,
+          "explicit_run": 51
+        },
+        {
+          "font": "Rix고딕_Pro Bold",
+          "count": 48,
+          "explicit_run": 48
+        },
+        {
+          "font": "Verdana",
+          "count": 16,
+          "explicit_run": 16
+        },
+        {
+          "font": "경기천년제목 Bold",
+          "count": 13,
+          "explicit_run": 13
+        },
+        {
+          "font": "Century Gothic",
+          "count": 8,
+          "explicit_run": 8
+        },
+        {
+          "font": "a시월구일2",
+          "count": 8,
+          "explicit_run": 8
+        }
+      ],
+      "font_size_runs_by_role": {
+        "table": [
+          {
+            "points": 10.0,
+            "count": 1274
+          },
+          {
+            "points": 7.0,
+            "count": 240
+          },
+          {
+            "points": 10.5,
+            "count": 165
+          },
+          {
+            "points": 11.0,
+            "count": 131
+          },
+          {
+            "points": 12.0,
+            "count": 59
+          },
+          {
+            "points": 9.0,
+            "count": 4
+          }
+        ],
+        "body-text": [
+          {
+            "points": 9.0,
+            "count": 358
+          },
+          {
+            "points": 12.0,
+            "count": 227
+          },
+          {
+            "points": 10.0,
+            "count": 213
+          },
+          {
+            "points": 7.62,
+            "count": 169
+          },
+          {
+            "points": 11.0,
+            "count": 131
+          },
+          {
+            "points": 10.5,
+            "count": 92
+          },
+          {
+            "points": 18.0,
+            "count": 64
+          },
+          {
+            "points": 7.0,
+            "count": 27
+          }
+        ],
+        "title-region": [
+          {
+            "points": 14.0,
+            "count": 152
+          },
+          {
+            "points": 28.0,
+            "count": 33
+          },
+          {
+            "points": 18.0,
+            "count": 33
+          },
+          {
+            "points": 24.0,
+            "count": 12
+          },
+          {
+            "points": 12.0,
+            "count": 6
+          },
+          {
+            "points": 10.5,
+            "count": 5
+          },
+          {
+            "points": 90.0,
+            "count": 5
+          },
+          {
+            "points": 7.62,
+            "count": 4
+          }
+        ],
+        "title": [
+          {
+            "points": 24.0,
+            "count": 48
+          },
+          {
+            "points": 14.0,
+            "count": 8
+          },
+          {
+            "points": 28.0,
+            "count": 4
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 24.0,
+            "count": 6
+          },
+          {
+            "points": 44.0,
+            "count": 5
+          },
+          {
+            "points": 32.0,
+            "count": 2
+          },
+          {
+            "points": 16.0,
+            "count": 1
+          },
+          {
+            "points": 18.0,
+            "count": 1
+          },
+          {
+            "points": 14.0,
+            "count": 1
+          }
+        ]
+      },
+      "table_count": 24,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "FFFFFF",
+          "count": 218
+        },
+        {
+          "rgb": "F2F2F2",
+          "count": 90
+        },
+        {
+          "rgb": "808080",
+          "count": 13
+        },
+        {
+          "rgb": "D9D9D9",
+          "count": 9
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{2D5ABB26-0587-4C30-8999-92F81FD0307C}",
+          "count": 11
+        },
+        {
+          "guid": "{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}",
+          "count": 7
+        },
+        {
+          "guid": "{5940675A-B579-460E-94D1-54222C63F5DA}",
+          "count": 1
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 114,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            6.091,
+            10.833,
+            0.692
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 116,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.848,
+            10.842,
+            0.068
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout3.xml",
+          "shape_id": 149,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 4
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout3.xml",
+          "shape_id": 261,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.8
+          ],
+          "referenced_slide_count": 4
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 35
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 151,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.225
+          ],
+          "referenced_slide_count": 35
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 327
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 8
+        },
+        {
+          "role": "table",
+          "slide": 16
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 10
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 41
+        }
+      ],
+      "layout_names": [
+        "1_제목 및 내용",
+        "1_제목 슬라이드",
+        "사용자 지정 레이아웃",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D01_evidence.json"
+    },
+    {
+      "id": "D02",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/CDP/제안서 3.pptx",
+      "sha256": "5445a73509fe449776ccc71ccdf8acfde48b7a55df06b7a5ecae650ec1d3b786",
+      "file_bytes": 26273461,
+      "slide_count": 49,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "맑은 고딕",
+          "count": 3666,
+          "explicit_run": 2410,
+          "inherited": 1256
+        },
+        {
+          "font": "HY견고딕",
+          "count": 182,
+          "inherited": 182
+        },
+        {
+          "font": "경기천년제목 Medium",
+          "count": 51,
+          "explicit_run": 51
+        },
+        {
+          "font": "Rix고딕_Pro Bold",
+          "count": 47,
+          "explicit_run": 47
+        },
+        {
+          "font": "a시월구일2",
+          "count": 23,
+          "explicit_run": 23
+        },
+        {
+          "font": "IBM Plex Sans KR",
+          "count": 18,
+          "explicit_run": 18
+        },
+        {
+          "font": "Verdana",
+          "count": 16,
+          "explicit_run": 16
+        },
+        {
+          "font": "경기천년제목 Bold",
+          "count": 13,
+          "explicit_run": 13
+        }
+      ],
+      "font_size_runs_by_role": {
+        "table": [
+          {
+            "points": 10.0,
+            "count": 1449
+          },
+          {
+            "points": 7.0,
+            "count": 269
+          },
+          {
+            "points": 10.5,
+            "count": 159
+          },
+          {
+            "points": 11.0,
+            "count": 154
+          },
+          {
+            "points": 12.0,
+            "count": 63
+          },
+          {
+            "points": 9.0,
+            "count": 16
+          },
+          {
+            "points": 8.0,
+            "count": 12
+          }
+        ],
+        "body-text": [
+          {
+            "points": 9.0,
+            "count": 273
+          },
+          {
+            "points": 12.0,
+            "count": 259
+          },
+          {
+            "points": 10.0,
+            "count": 249
+          },
+          {
+            "points": 7.62,
+            "count": 193
+          },
+          {
+            "points": 10.5,
+            "count": 171
+          },
+          {
+            "points": 11.0,
+            "count": 136
+          },
+          {
+            "points": 18.0,
+            "count": 60
+          },
+          {
+            "points": 15.0,
+            "count": 42
+          }
+        ],
+        "title-region": [
+          {
+            "points": 14.0,
+            "count": 230
+          },
+          {
+            "points": 24.0,
+            "count": 64
+          },
+          {
+            "points": 18.0,
+            "count": 53
+          },
+          {
+            "points": 90.0,
+            "count": 5
+          },
+          {
+            "points": 7.62,
+            "count": 4
+          },
+          {
+            "points": 11.0,
+            "count": 1
+          }
+        ],
+        "title": [
+          {
+            "points": 24.0,
+            "count": 52
+          },
+          {
+            "points": 18.0,
+            "count": 10
+          },
+          {
+            "points": 14.0,
+            "count": 8
+          },
+          {
+            "points": 28.0,
+            "count": 4
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 24.0,
+            "count": 6
+          },
+          {
+            "points": 44.0,
+            "count": 3
+          },
+          {
+            "points": 32.0,
+            "count": 2
+          },
+          {
+            "points": 16.0,
+            "count": 1
+          },
+          {
+            "points": 18.0,
+            "count": 1
+          },
+          {
+            "points": 14.0,
+            "count": 1
+          }
+        ]
+      },
+      "table_count": 31,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "FFFFFF",
+          "count": 278
+        },
+        {
+          "rgb": "F2F2F2",
+          "count": 114
+        },
+        {
+          "rgb": "808080",
+          "count": 12
+        },
+        {
+          "rgb": "D9D9D9",
+          "count": 9
+        },
+        {
+          "rgb": "E6E0EC",
+          "count": 4
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{2D5ABB26-0587-4C30-8999-92F81FD0307C}",
+          "count": 15
+        },
+        {
+          "guid": "{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}",
+          "count": 9
+        },
+        {
+          "guid": "{5940675A-B579-460E-94D1-54222C63F5DA}",
+          "count": 1
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 113,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            5.959,
+            10.831,
+            0.692
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 115,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.886,
+            10.831,
+            0.05
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 47
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 151,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.726,
+            10.851,
+            6.225
+          ],
+          "referenced_slide_count": 47
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 218
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 17
+        },
+        {
+          "role": "table",
+          "slide": 7
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 17
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 49
+        }
+      ],
+      "layout_names": [
+        "1_제목 및 내용",
+        "1_제목 슬라이드",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D02_evidence.json"
+    },
+    {
+      "id": "D03",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/CDP/제안서.pptx",
+      "sha256": "4395366602479ddb6ef747f3ed371a5b3ce3d1ac51a0675ae4a7b526fc48aae4",
+      "file_bytes": 14130509,
+      "slide_count": 52,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "맑은 고딕",
+          "count": 4846,
+          "explicit_run": 4387,
+          "inherited": 459
+        },
+        {
+          "font": "IBM Plex Sans KR",
+          "count": 29,
+          "explicit_run": 29
+        },
+        {
+          "font": "현대하모니 L",
+          "count": 4,
+          "explicit_run": 4
+        },
+        {
+          "font": "HY견고딕",
+          "count": 4,
+          "inherited": 4
+        },
+        {
+          "font": "Adobe 고딕 Std B",
+          "count": 2,
+          "explicit_run": 2
+        }
+      ],
+      "font_size_runs_by_role": {
+        "table": [
+          {
+            "points": 9.0,
+            "count": 1169
+          },
+          {
+            "points": 7.0,
+            "count": 239
+          },
+          {
+            "points": 11.0,
+            "count": 184
+          },
+          {
+            "points": 10.0,
+            "count": 174
+          },
+          {
+            "points": 8.0,
+            "count": 156
+          },
+          {
+            "points": 10.5,
+            "count": 63
+          },
+          {
+            "points": 8.5,
+            "count": 7
+          },
+          {
+            "points": 12.0,
+            "count": 6
+          }
+        ],
+        "body-text": [
+          {
+            "points": 11.0,
+            "count": 681
+          },
+          {
+            "points": 12.0,
+            "count": 533
+          },
+          {
+            "points": 10.0,
+            "count": 364
+          },
+          {
+            "points": 10.5,
+            "count": 239
+          },
+          {
+            "points": 15.0,
+            "count": 117
+          },
+          {
+            "points": 14.0,
+            "count": 86
+          },
+          {
+            "points": 7.62,
+            "count": 66
+          },
+          {
+            "points": 18.0,
+            "count": 58
+          }
+        ],
+        "title-region": [
+          {
+            "points": 15.0,
+            "count": 166
+          },
+          {
+            "points": 14.0,
+            "count": 119
+          },
+          {
+            "points": 28.0,
+            "count": 55
+          },
+          {
+            "points": 9.0,
+            "count": 32
+          },
+          {
+            "points": 20.0,
+            "count": 29
+          },
+          {
+            "points": 12.0,
+            "count": 28
+          },
+          {
+            "points": 11.0,
+            "count": 25
+          },
+          {
+            "points": 10.5,
+            "count": 9
+          }
+        ],
+        "title": [
+          {
+            "points": 28.0,
+            "count": 114
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 20.0,
+            "count": 9
+          },
+          {
+            "points": 24.0,
+            "count": 2
+          }
+        ],
+        "footer": [
+          {
+            "points": 10.97,
+            "count": 1
+          }
+        ]
+      },
+      "table_count": 26,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "FFFFFF",
+          "count": 360
+        },
+        {
+          "rgb": "D9D9D9",
+          "count": 45
+        },
+        {
+          "rgb": "F2F2F2",
+          "count": 43
+        },
+        {
+          "rgb": "EBF1DE",
+          "count": 10
+        },
+        {
+          "rgb": "808080",
+          "count": 5
+        },
+        {
+          "rgb": "D2DBE5",
+          "count": 4
+        },
+        {
+          "rgb": "376092",
+          "count": 4
+        },
+        {
+          "rgb": "E2E0D6",
+          "count": 1
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}",
+          "count": 10
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 2,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout3.xml",
+          "shape_id": 149,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 4
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout3.xml",
+          "shape_id": 261,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.8
+          ],
+          "referenced_slide_count": 4
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 47
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 151,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.021,
+            0.719,
+            10.851,
+            6.225
+          ],
+          "referenced_slide_count": 47
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 327
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 29
+        },
+        {
+          "role": "table",
+          "slide": 52
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 22
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 52
+        }
+      ],
+      "layout_names": [
+        "1_제목 슬라이드",
+        "사용자 지정 레이아웃",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D03_evidence.json"
+    },
+    {
+      "id": "D04",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/CDP/착수보고.pptx",
+      "sha256": "736a70e24cafe29c5d0f597ce8060ead97ce1286e79f42a4e642c76f65eaa918",
+      "file_bytes": 4957380,
+      "slide_count": 24,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "맑은 고딕",
+          "count": 1592,
+          "explicit_run": 1141,
+          "inherited": 451
+        },
+        {
+          "font": "Rix고딕_Pro Bold",
+          "count": 33,
+          "explicit_run": 33
+        },
+        {
+          "font": "HY견고딕",
+          "count": 29,
+          "inherited": 29
+        },
+        {
+          "font": "a시월구일2",
+          "count": 12,
+          "explicit_run": 12
+        },
+        {
+          "font": "Arial",
+          "count": 5,
+          "explicit_run": 5
+        },
+        {
+          "font": "EYInterstate",
+          "count": 1,
+          "inherited": 1
+        }
+      ],
+      "font_size_runs_by_role": {
+        "body-text": [
+          {
+            "points": 10.0,
+            "count": 275
+          },
+          {
+            "points": 11.0,
+            "count": 184
+          },
+          {
+            "points": 12.0,
+            "count": 109
+          },
+          {
+            "points": 9.0,
+            "count": 50
+          },
+          {
+            "points": 14.0,
+            "count": 43
+          },
+          {
+            "points": 10.5,
+            "count": 25
+          },
+          {
+            "points": 7.62,
+            "count": 25
+          },
+          {
+            "points": 18.0,
+            "count": 20
+          }
+        ],
+        "table": [
+          {
+            "points": 10.5,
+            "count": 216
+          },
+          {
+            "points": 9.0,
+            "count": 194
+          },
+          {
+            "points": 10.0,
+            "count": 170
+          },
+          {
+            "points": 11.0,
+            "count": 59
+          },
+          {
+            "points": 8.0,
+            "count": 10
+          },
+          {
+            "points": 12.0,
+            "count": 2
+          }
+        ],
+        "title-region": [
+          {
+            "points": 14.0,
+            "count": 151
+          },
+          {
+            "points": 18.0,
+            "count": 20
+          },
+          {
+            "points": 10.5,
+            "count": 10
+          },
+          {
+            "points": 90.0,
+            "count": 5
+          },
+          {
+            "points": 24.0,
+            "count": 2
+          },
+          {
+            "points": 11.0,
+            "count": 2
+          }
+        ],
+        "title": [
+          {
+            "points": 24.0,
+            "count": 37
+          },
+          {
+            "points": 14.0,
+            "count": 27
+          },
+          {
+            "points": 18.0,
+            "count": 7
+          },
+          {
+            "points": 28.0,
+            "count": 3
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 32.0,
+            "count": 4
+          },
+          {
+            "points": 28.0,
+            "count": 1
+          }
+        ]
+      },
+      "table_count": 12,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "FFFFFF",
+          "count": 105
+        },
+        {
+          "rgb": "F2F2F2",
+          "count": 34
+        },
+        {
+          "rgb": "808080",
+          "count": 4
+        },
+        {
+          "rgb": "D9D9D9",
+          "count": 4
+        },
+        {
+          "rgb": "7F0048",
+          "count": 3
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}",
+          "count": 8
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 114,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            6.091,
+            10.833,
+            0.692
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 116,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.848,
+            10.842,
+            0.068
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout4.xml",
+          "shape_id": 149,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 3
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout4.xml",
+          "shape_id": 261,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.8
+          ],
+          "referenced_slide_count": 3
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 19
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 151,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.225
+          ],
+          "referenced_slide_count": 19
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 327
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 14
+        },
+        {
+          "role": "table",
+          "slide": 23
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 14
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 24
+        }
+      ],
+      "layout_names": [
+        "1_제목 및 내용",
+        "1_제목 슬라이드",
+        "사용자 지정 레이아웃",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D04_evidence.json"
+    },
+    {
+      "id": "D05",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/CDP/최종보고 2.pptx",
+      "sha256": "dd93093112c5c535184d5484794cf766812bf1bd55855dd79bf3c25381e3c7d4",
+      "file_bytes": 381352,
+      "slide_count": 21,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "맑은 고딕",
+          "count": 2680,
+          "explicit_run": 2574,
+          "inherited": 106
+        },
+        {
+          "font": "HY견고딕",
+          "count": 97,
+          "inherited": 97
+        },
+        {
+          "font": "Arial",
+          "count": 9,
+          "explicit_run": 9
+        },
+        {
+          "font": "Adobe 고딕 Std B",
+          "count": 3,
+          "explicit_run": 3
+        }
+      ],
+      "font_size_runs_by_role": {
+        "table": [
+          {
+            "points": 10.5,
+            "count": 1176
+          },
+          {
+            "points": 10.0,
+            "count": 795
+          },
+          {
+            "points": 11.0,
+            "count": 558
+          },
+          {
+            "points": 9.0,
+            "count": 22
+          },
+          {
+            "points": 12.0,
+            "count": 17
+          }
+        ],
+        "title": [
+          {
+            "points": 18.0,
+            "count": 56
+          },
+          {
+            "points": 24.0,
+            "count": 41
+          }
+        ],
+        "title-region": [
+          {
+            "points": 14.0,
+            "count": 51
+          },
+          {
+            "points": 90.0,
+            "count": 5
+          },
+          {
+            "points": 12.0,
+            "count": 1
+          }
+        ],
+        "body-text": [
+          {
+            "points": 12.0,
+            "count": 39
+          },
+          {
+            "points": 16.0,
+            "count": 9
+          },
+          {
+            "points": 14.0,
+            "count": 8
+          },
+          {
+            "points": 36.0,
+            "count": 5
+          },
+          {
+            "points": 10.5,
+            "count": 2
+          },
+          {
+            "points": 18.0,
+            "count": 2
+          },
+          {
+            "points": 28.0,
+            "count": 1
+          },
+          {
+            "points": 11.0,
+            "count": 1
+          }
+        ]
+      },
+      "table_count": 21,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "FFFFFF",
+          "count": 486
+        },
+        {
+          "rgb": "F2F2F2",
+          "count": 83
+        },
+        {
+          "rgb": "F2DCDB",
+          "count": 30
+        },
+        {
+          "rgb": "FDEADA",
+          "count": 16
+        },
+        {
+          "rgb": "FDEADE",
+          "count": 9
+        },
+        {
+          "rgb": "DEECF4",
+          "count": 2
+        },
+        {
+          "rgb": "EEF0DE",
+          "count": 1
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}",
+          "count": 21
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 113,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            5.959,
+            10.831,
+            0.692
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 115,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.886,
+            10.831,
+            0.05
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 19
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 151,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.726,
+            10.851,
+            6.225
+          ],
+          "referenced_slide_count": 19
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 218
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 20
+        },
+        {
+          "role": "table",
+          "slide": 2
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 21
+        }
+      ],
+      "layout_names": [
+        "1_제목 및 내용",
+        "1_제목 슬라이드",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D05_evidence.json"
+    },
+    {
+      "id": "D06",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/CDP/최종보고.pptx",
+      "sha256": "17c70fcf741bdb0d2933f114e0e668bf8fb5b4e9a563a6e350628d952df30f10",
+      "file_bytes": 1788877,
+      "slide_count": 26,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "맑은 고딕",
+          "count": 3276,
+          "explicit_run": 3074,
+          "inherited": 202
+        },
+        {
+          "font": "HY견고딕",
+          "count": 113,
+          "inherited": 113
+        },
+        {
+          "font": "Trebuchet MS",
+          "count": 17,
+          "explicit_run": 17
+        },
+        {
+          "font": "Arial Unicode MS",
+          "count": 8,
+          "explicit_run": 8
+        },
+        {
+          "font": "Arial",
+          "count": 5,
+          "explicit_run": 5
+        },
+        {
+          "font": "Adobe 고딕 Std B",
+          "count": 3,
+          "explicit_run": 3
+        },
+        {
+          "font": "Malgun Gothic Semilight",
+          "count": 2,
+          "explicit_run": 2
+        }
+      ],
+      "font_size_runs_by_role": {
+        "table": [
+          {
+            "points": 10.5,
+            "count": 857
+          },
+          {
+            "points": 11.0,
+            "count": 589
+          },
+          {
+            "points": 10.0,
+            "count": 543
+          },
+          {
+            "points": 9.0,
+            "count": 323
+          },
+          {
+            "points": 12.0,
+            "count": 38
+          }
+        ],
+        "body-text": [
+          {
+            "points": 12.0,
+            "count": 432
+          },
+          {
+            "points": 11.0,
+            "count": 191
+          },
+          {
+            "points": 10.0,
+            "count": 159
+          },
+          {
+            "points": 16.0,
+            "count": 26
+          },
+          {
+            "points": 14.0,
+            "count": 23
+          },
+          {
+            "points": 7.62,
+            "count": 9
+          },
+          {
+            "points": 36.0,
+            "count": 5
+          },
+          {
+            "points": 10.5,
+            "count": 2
+          }
+        ],
+        "title-region": [
+          {
+            "points": 14.0,
+            "count": 87
+          },
+          {
+            "points": 90.0,
+            "count": 5
+          },
+          {
+            "points": 11.0,
+            "count": 4
+          },
+          {
+            "points": 12.0,
+            "count": 1
+          }
+        ],
+        "title": [
+          {
+            "points": 24.0,
+            "count": 62
+          },
+          {
+            "points": 18.0,
+            "count": 41
+          },
+          {
+            "points": 14.0,
+            "count": 21
+          }
+        ],
+        "footer": [
+          {
+            "points": 12.0,
+            "count": 3
+          }
+        ]
+      },
+      "table_count": 23,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "FFFFFF",
+          "count": 473
+        },
+        {
+          "rgb": "F2F2F2",
+          "count": 75
+        },
+        {
+          "rgb": "F2DCDB",
+          "count": 26
+        },
+        {
+          "rgb": "DEECF4",
+          "count": 4
+        },
+        {
+          "rgb": "002060",
+          "count": 4
+        },
+        {
+          "rgb": "FDEADE",
+          "count": 3
+        },
+        {
+          "rgb": "EEF0DE",
+          "count": 3
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}",
+          "count": 23
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 113,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            5.959,
+            10.831,
+            0.692
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 115,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.886,
+            10.831,
+            0.05
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 24
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 151,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.021,
+            0.786,
+            10.851,
+            6.225
+          ],
+          "referenced_slide_count": 24
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 218
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 23
+        },
+        {
+          "role": "table",
+          "slide": 2
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 17
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 26
+        }
+      ],
+      "layout_names": [
+        "1_제목 및 내용",
+        "1_제목 슬라이드",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D06_evidence.json"
+    },
+    {
+      "id": "D07",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/감축사업/방법론 개발 보고 2.pptx",
+      "sha256": "074566feab2de56304ea24deb5eba63163d4a43a6afcfc8907c54bdbf1bee310",
+      "file_bytes": 1781279,
+      "slide_count": 21,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "IBM Plex Sans KR",
+          "count": 1518,
+          "explicit_run": 1432,
+          "inherited": 86
+        },
+        {
+          "font": "IBM Plex Sans KR SemiBold",
+          "count": 38,
+          "explicit_run": 38
+        },
+        {
+          "font": "맑은 고딕",
+          "count": 3,
+          "inherited": 3
+        }
+      ],
+      "font_size_runs_by_role": {
+        "table": [
+          {
+            "points": 10.5,
+            "count": 345
+          },
+          {
+            "points": 12.0,
+            "count": 153
+          },
+          {
+            "points": 8.0,
+            "count": 38
+          },
+          {
+            "points": 7.0,
+            "count": 27
+          },
+          {
+            "points": 9.0,
+            "count": 19
+          },
+          {
+            "points": 10.0,
+            "count": 10
+          },
+          {
+            "points": 11.0,
+            "count": 9
+          }
+        ],
+        "title-region": [
+          {
+            "points": 10.0,
+            "count": 183
+          },
+          {
+            "points": 11.0,
+            "count": 103
+          },
+          {
+            "points": 13.0,
+            "count": 23
+          },
+          {
+            "points": 12.0,
+            "count": 8
+          },
+          {
+            "points": 90.0,
+            "count": 5
+          },
+          {
+            "points": 14.0,
+            "count": 2
+          },
+          {
+            "points": 16.0,
+            "count": 2
+          }
+        ],
+        "body-text": [
+          {
+            "points": 11.0,
+            "count": 131
+          },
+          {
+            "points": 12.0,
+            "count": 123
+          },
+          {
+            "points": 7.62,
+            "count": 99
+          },
+          {
+            "points": 9.0,
+            "count": 59
+          },
+          {
+            "points": 13.0,
+            "count": 38
+          },
+          {
+            "points": 18.0,
+            "count": 30
+          },
+          {
+            "points": 10.5,
+            "count": 25
+          },
+          {
+            "points": 14.0,
+            "count": 19
+          }
+        ],
+        "title": [
+          {
+            "points": 28.0,
+            "count": 69
+          },
+          {
+            "points": 20.0,
+            "count": 3
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 20.0,
+            "count": 9
+          },
+          {
+            "points": 28.0,
+            "count": 3
+          }
+        ]
+      },
+      "table_count": 6,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "F2F2F2",
+          "count": 47
+        },
+        {
+          "rgb": "86AFDC",
+          "count": 32
+        },
+        {
+          "rgb": "D9D9D9",
+          "count": 5
+        },
+        {
+          "rgb": "002060",
+          "count": 5
+        },
+        {
+          "rgb": "BFBFBF",
+          "count": 3
+        }
+      ],
+      "table_style_ids": [],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 2,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 16
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 151,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.225
+          ],
+          "referenced_slide_count": 16
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout4.xml",
+          "shape_id": 149,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 3
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout4.xml",
+          "shape_id": 261,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.8
+          ],
+          "referenced_slide_count": 3
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 436
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 12
+        },
+        {
+          "role": "table",
+          "slide": 4
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 12
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 21
+        }
+      ],
+      "layout_names": [
+        "1_제목 및 내용",
+        "1_제목 슬라이드",
+        "사용자 지정 레이아웃",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D07_evidence.json"
+    },
+    {
+      "id": "D08",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/감축사업/방법론 개발 보고 3.pptx",
+      "sha256": "fcc461eb65d060a51b86de834cef805d2ba3469d51df2347080aabcd6026dc94",
+      "file_bytes": 7950080,
+      "slide_count": 24,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "IBM Plex Sans KR",
+          "count": 1679,
+          "explicit_run": 1580,
+          "inherited": 99
+        },
+        {
+          "font": "맑은 고딕",
+          "count": 251,
+          "explicit_run": 143,
+          "inherited": 108
+        },
+        {
+          "font": "IBM Plex Sans KR SemiBold",
+          "count": 13,
+          "explicit_run": 13
+        },
+        {
+          "font": "ibm",
+          "count": 4,
+          "explicit_run": 4
+        }
+      ],
+      "font_size_runs_by_role": {
+        "body-text": [
+          {
+            "points": 12.0,
+            "count": 436
+          },
+          {
+            "points": 7.62,
+            "count": 377
+          },
+          {
+            "points": 11.0,
+            "count": 72
+          },
+          {
+            "points": 10.0,
+            "count": 71
+          },
+          {
+            "points": 10.5,
+            "count": 68
+          },
+          {
+            "points": 13.0,
+            "count": 37
+          },
+          {
+            "points": 18.0,
+            "count": 30
+          },
+          {
+            "points": 14.0,
+            "count": 23
+          }
+        ],
+        "table": [
+          {
+            "points": 7.0,
+            "count": 175
+          },
+          {
+            "points": 9.0,
+            "count": 172
+          },
+          {
+            "points": 12.0,
+            "count": 130
+          },
+          {
+            "points": 10.5,
+            "count": 127
+          },
+          {
+            "points": 8.0,
+            "count": 38
+          },
+          {
+            "points": 11.0,
+            "count": 26
+          },
+          {
+            "points": 5.0,
+            "count": 2
+          },
+          {
+            "points": 10.0,
+            "count": 1
+          }
+        ],
+        "title": [
+          {
+            "points": 28.0,
+            "count": 76
+          }
+        ],
+        "title-region": [
+          {
+            "points": 13.0,
+            "count": 36
+          },
+          {
+            "points": 12.0,
+            "count": 12
+          },
+          {
+            "points": 11.0,
+            "count": 6
+          },
+          {
+            "points": 90.0,
+            "count": 5
+          },
+          {
+            "points": 14.0,
+            "count": 3
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 20.0,
+            "count": 9
+          },
+          {
+            "points": 28.0,
+            "count": 3
+          }
+        ]
+      },
+      "table_count": 6,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "F2F2F2",
+          "count": 81
+        },
+        {
+          "rgb": "86AFDC",
+          "count": 31
+        },
+        {
+          "rgb": "E8E8E8",
+          "count": 7
+        },
+        {
+          "rgb": "FFC000",
+          "count": 7
+        },
+        {
+          "rgb": "D9D9D9",
+          "count": 5
+        },
+        {
+          "rgb": "002060",
+          "count": 5
+        },
+        {
+          "rgb": "153D64",
+          "count": 4
+        },
+        {
+          "rgb": "3B618E",
+          "count": 3
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{5940675A-B579-460E-94D1-54222C63F5DA}",
+          "count": 3
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 2,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 19
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 151,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.225
+          ],
+          "referenced_slide_count": 19
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout4.xml",
+          "shape_id": 149,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 3
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout4.xml",
+          "shape_id": 261,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.8
+          ],
+          "referenced_slide_count": 3
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 436
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 12
+        },
+        {
+          "role": "table",
+          "slide": 3
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 8
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 24
+        }
+      ],
+      "layout_names": [
+        "1_제목 및 내용",
+        "1_제목 슬라이드",
+        "사용자 지정 레이아웃",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D08_evidence.json"
+    },
+    {
+      "id": "D09",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/감축사업/방법론 개발 보고.pptx",
+      "sha256": "8c10b1e4905f8871ac8751d4acbf0fa5be0d9da7d9e3c9a5a01186d85e771281",
+      "file_bytes": 1430421,
+      "slide_count": 24,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "IBM Plex Sans KR",
+          "count": 2090,
+          "explicit_run": 2023,
+          "inherited": 67
+        },
+        {
+          "font": "Noto Sans KR",
+          "count": 22,
+          "explicit_run": 22
+        },
+        {
+          "font": "IBM Plex Sans KR SemiBold",
+          "count": 12,
+          "explicit_run": 12
+        }
+      ],
+      "font_size_runs_by_role": {
+        "table": [
+          {
+            "points": 10.5,
+            "count": 406
+          },
+          {
+            "points": 7.0,
+            "count": 239
+          },
+          {
+            "points": 8.0,
+            "count": 173
+          },
+          {
+            "points": 9.0,
+            "count": 77
+          },
+          {
+            "points": 10.0,
+            "count": 39
+          },
+          {
+            "points": 12.0,
+            "count": 14
+          },
+          {
+            "points": 11.0,
+            "count": 8
+          },
+          {
+            "points": 6.0,
+            "count": 7
+          }
+        ],
+        "body-text": [
+          {
+            "points": 12.0,
+            "count": 206
+          },
+          {
+            "points": 11.0,
+            "count": 199
+          },
+          {
+            "points": 7.62,
+            "count": 130
+          },
+          {
+            "points": 9.0,
+            "count": 120
+          },
+          {
+            "points": 10.5,
+            "count": 118
+          },
+          {
+            "points": 8.0,
+            "count": 61
+          },
+          {
+            "points": 10.0,
+            "count": 59
+          },
+          {
+            "points": 13.0,
+            "count": 48
+          }
+        ],
+        "title": [
+          {
+            "points": 28.0,
+            "count": 53
+          }
+        ],
+        "title-region": [
+          {
+            "points": 11.0,
+            "count": 24
+          },
+          {
+            "points": 13.0,
+            "count": 22
+          },
+          {
+            "points": 12.0,
+            "count": 21
+          },
+          {
+            "points": 9.0,
+            "count": 7
+          },
+          {
+            "points": 90.0,
+            "count": 5
+          },
+          {
+            "points": 14.0,
+            "count": 2
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 20.0,
+            "count": 10
+          },
+          {
+            "points": 28.0,
+            "count": 3
+          }
+        ]
+      },
+      "table_count": 12,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "86AFDC",
+          "count": 41
+        },
+        {
+          "rgb": "DAE9F8",
+          "count": 38
+        },
+        {
+          "rgb": "ADADAD",
+          "count": 33
+        },
+        {
+          "rgb": "F2F2F2",
+          "count": 30
+        },
+        {
+          "rgb": "94DCF8",
+          "count": 15
+        },
+        {
+          "rgb": "002060",
+          "count": 12
+        },
+        {
+          "rgb": "FBE2D5",
+          "count": 12
+        },
+        {
+          "rgb": "FFFF00",
+          "count": 9
+        },
+        {
+          "rgb": "DAF2D0",
+          "count": 9
+        },
+        {
+          "rgb": "F2CEEF",
+          "count": 6
+        },
+        {
+          "rgb": "D2DBE5",
+          "count": 5
+        },
+        {
+          "rgb": "0F9ED5",
+          "count": 5
+        },
+        {
+          "rgb": "E97132",
+          "count": 5
+        },
+        {
+          "rgb": "DCE6F2",
+          "count": 3
+        },
+        {
+          "rgb": "F8FAFC",
+          "count": 3
+        },
+        {
+          "rgb": "47D359",
+          "count": 3
+        },
+        {
+          "rgb": "D86DCD",
+          "count": 3
+        },
+        {
+          "rgb": "DBEEF4",
+          "count": 2
+        },
+        {
+          "rgb": "D9D9D9",
+          "count": 1
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{5940675A-B579-460E-94D1-54222C63F5DA}",
+          "count": 1
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 2,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 19
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 151,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.225
+          ],
+          "referenced_slide_count": 19
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout4.xml",
+          "shape_id": 149,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 3
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout4.xml",
+          "shape_id": 261,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.8
+          ],
+          "referenced_slide_count": 3
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 436
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 11
+        },
+        {
+          "role": "table",
+          "slide": 15
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 11
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 24
+        }
+      ],
+      "layout_names": [
+        "1_제목 및 내용",
+        "1_제목 슬라이드",
+        "사용자 지정 레이아웃",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D09_evidence.json"
+    },
+    {
+      "id": "D10",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/감축사업/제안서.pptx",
+      "sha256": "ba2754960d74184c69395067b7aee5b8e939cb330ba802b3a3c41f893bbc1a58",
+      "file_bytes": 53945698,
+      "slide_count": 40,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "IBM Plex Sans KR",
+          "count": 3349,
+          "explicit_run": 3125,
+          "inherited": 224
+        },
+        {
+          "font": "나눔스퀘어",
+          "count": 46,
+          "explicit_run": 46
+        },
+        {
+          "font": "IBM Plex Sans KR SemiBold",
+          "count": 28,
+          "explicit_run": 28
+        },
+        {
+          "font": "맑은 고딕",
+          "count": 2,
+          "inherited": 2
+        }
+      ],
+      "font_size_runs_by_role": {
+        "body-text": [
+          {
+            "points": 12.0,
+            "count": 360
+          },
+          {
+            "points": 10.0,
+            "count": 297
+          },
+          {
+            "points": 10.5,
+            "count": 296
+          },
+          {
+            "points": 9.0,
+            "count": 244
+          },
+          {
+            "points": 11.0,
+            "count": 230
+          },
+          {
+            "points": 7.62,
+            "count": 174
+          },
+          {
+            "points": 8.0,
+            "count": 167
+          },
+          {
+            "points": 14.0,
+            "count": 115
+          }
+        ],
+        "table": [
+          {
+            "points": 8.0,
+            "count": 188
+          },
+          {
+            "points": 9.0,
+            "count": 156
+          },
+          {
+            "points": 11.0,
+            "count": 94
+          },
+          {
+            "points": 12.0,
+            "count": 46
+          },
+          {
+            "points": 10.0,
+            "count": 44
+          },
+          {
+            "points": 10.5,
+            "count": 31
+          },
+          {
+            "points": 7.0,
+            "count": 27
+          }
+        ],
+        "title-region": [
+          {
+            "points": 13.0,
+            "count": 107
+          },
+          {
+            "points": 12.0,
+            "count": 69
+          },
+          {
+            "points": 11.0,
+            "count": 37
+          },
+          {
+            "points": 10.5,
+            "count": 5
+          },
+          {
+            "points": 90.0,
+            "count": 5
+          },
+          {
+            "points": 28.0,
+            "count": 3
+          },
+          {
+            "points": 14.0,
+            "count": 2
+          }
+        ],
+        "title": [
+          {
+            "points": 28.0,
+            "count": 83
+          },
+          {
+            "points": 20.0,
+            "count": 29
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 22.75,
+            "count": 29
+          },
+          {
+            "points": 20.0,
+            "count": 9
+          },
+          {
+            "points": 28.0,
+            "count": 3
+          }
+        ]
+      },
+      "table_count": 11,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "F2F2F2",
+          "count": 43
+        },
+        {
+          "rgb": "86AFDC",
+          "count": 32
+        },
+        {
+          "rgb": "D9D9D9",
+          "count": 9
+        },
+        {
+          "rgb": "EBF1DE",
+          "count": 8
+        },
+        {
+          "rgb": "002060",
+          "count": 5
+        },
+        {
+          "rgb": "808080",
+          "count": 4
+        },
+        {
+          "rgb": "376092",
+          "count": 4
+        },
+        {
+          "rgb": "FFFFFF",
+          "count": 3
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{5940675A-B579-460E-94D1-54222C63F5DA}",
+          "count": 2
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 2,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout4.xml",
+          "shape_id": 149,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 4
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout4.xml",
+          "shape_id": 261,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.8
+          ],
+          "referenced_slide_count": 4
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 34
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 151,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.225
+          ],
+          "referenced_slide_count": 34
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 436
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 13
+        },
+        {
+          "role": "table",
+          "slide": 38
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 35
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 40
+        }
+      ],
+      "layout_names": [
+        "1_제목 및 내용",
+        "1_제목 슬라이드",
+        "사용자 지정 레이아웃",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D10_evidence.json"
+    },
+    {
+      "id": "D11",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/감축사업/착수보고 2.pptx",
+      "sha256": "8a2c1702ba8e40285b741b581095f815c85ae058a82c63f19d2f5b306a9be3a2",
+      "file_bytes": 12534697,
+      "slide_count": 32,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "IBM Plex Sans KR",
+          "count": 2365,
+          "explicit_run": 2250,
+          "inherited": 115
+        },
+        {
+          "font": "IBM Plex Sans KR SemiBold",
+          "count": 50,
+          "explicit_run": 50
+        },
+        {
+          "font": "나눔스퀘어",
+          "count": 46,
+          "explicit_run": 46
+        },
+        {
+          "font": "맑은 고딕",
+          "count": 2,
+          "inherited": 2
+        }
+      ],
+      "font_size_runs_by_role": {
+        "body-text": [
+          {
+            "points": 12.0,
+            "count": 402
+          },
+          {
+            "points": 10.5,
+            "count": 267
+          },
+          {
+            "points": 11.0,
+            "count": 189
+          },
+          {
+            "points": 7.62,
+            "count": 170
+          },
+          {
+            "points": 8.0,
+            "count": 162
+          },
+          {
+            "points": 10.0,
+            "count": 162
+          },
+          {
+            "points": 9.0,
+            "count": 116
+          },
+          {
+            "points": 14.0,
+            "count": 93
+          }
+        ],
+        "table": [
+          {
+            "points": 12.0,
+            "count": 238
+          },
+          {
+            "points": 11.0,
+            "count": 68
+          },
+          {
+            "points": 8.0,
+            "count": 38
+          },
+          {
+            "points": 10.0,
+            "count": 37
+          },
+          {
+            "points": 10.5,
+            "count": 31
+          },
+          {
+            "points": 7.0,
+            "count": 27
+          },
+          {
+            "points": 9.0,
+            "count": 23
+          }
+        ],
+        "title-region": [
+          {
+            "points": 12.0,
+            "count": 74
+          },
+          {
+            "points": 13.0,
+            "count": 69
+          },
+          {
+            "points": 11.0,
+            "count": 22
+          },
+          {
+            "points": 10.5,
+            "count": 5
+          },
+          {
+            "points": 90.0,
+            "count": 5
+          },
+          {
+            "points": 28.0,
+            "count": 3
+          },
+          {
+            "points": 14.0,
+            "count": 2
+          }
+        ],
+        "title": [
+          {
+            "points": 28.0,
+            "count": 71
+          },
+          {
+            "points": 20.0,
+            "count": 25
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 20.0,
+            "count": 9
+          },
+          {
+            "points": 28.0,
+            "count": 3
+          }
+        ]
+      },
+      "table_count": 11,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "F2F2F2",
+          "count": 45
+        },
+        {
+          "rgb": "86AFDC",
+          "count": 32
+        },
+        {
+          "rgb": "D9D9D9",
+          "count": 9
+        },
+        {
+          "rgb": "EBF1DE",
+          "count": 8
+        },
+        {
+          "rgb": "DCE6F2",
+          "count": 6
+        },
+        {
+          "rgb": "002060",
+          "count": 5
+        },
+        {
+          "rgb": "DADFE8",
+          "count": 4
+        },
+        {
+          "rgb": "376092",
+          "count": 4
+        },
+        {
+          "rgb": "BFBFBF",
+          "count": 3
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{5940675A-B579-460E-94D1-54222C63F5DA}",
+          "count": 4
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 2,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout4.xml",
+          "shape_id": 149,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 3
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout4.xml",
+          "shape_id": 261,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.8
+          ],
+          "referenced_slide_count": 3
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 27
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 151,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.225
+          ],
+          "referenced_slide_count": 27
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 436
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 4
+        },
+        {
+          "role": "table",
+          "slide": 29
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 26
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 32
+        }
+      ],
+      "layout_names": [
+        "1_제목 및 내용",
+        "1_제목 슬라이드",
+        "사용자 지정 레이아웃",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D11_evidence.json"
+    },
+    {
+      "id": "D12",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/감축사업/착수보고.pptx",
+      "sha256": "2ca3bbbe56eeec89c5c6a519c40c1c15bc29e33e83ef711523c743ba6b6c6e2e",
+      "file_bytes": 48470169,
+      "slide_count": 44,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "IBM Plex Sans KR",
+          "count": 2872,
+          "explicit_run": 2655,
+          "inherited": 217
+        },
+        {
+          "font": "나눔스퀘어",
+          "count": 555,
+          "explicit_run": 544,
+          "inherited": 11
+        },
+        {
+          "font": "IBM Plex Sans",
+          "count": 264,
+          "explicit_run": 264
+        },
+        {
+          "font": "IBM Plex Sans KR SemiBold",
+          "count": 195,
+          "explicit_run": 189,
+          "inherited": 6
+        },
+        {
+          "font": "맑은 고딕",
+          "count": 173,
+          "inherited": 95,
+          "explicit_run": 78
+        },
+        {
+          "font": "KoPubWorld돋움체_Pro Light",
+          "count": 34,
+          "explicit_run": 34
+        },
+        {
+          "font": "Roboto",
+          "count": 7,
+          "explicit_run": 7
+        }
+      ],
+      "font_size_runs_by_role": {
+        "body-text": [
+          {
+            "points": 12.0,
+            "count": 918
+          },
+          {
+            "points": 10.0,
+            "count": 300
+          },
+          {
+            "points": 10.5,
+            "count": 291
+          },
+          {
+            "points": 9.0,
+            "count": 284
+          },
+          {
+            "points": 8.0,
+            "count": 209
+          },
+          {
+            "points": 11.0,
+            "count": 189
+          },
+          {
+            "points": 9.75,
+            "count": 132
+          },
+          {
+            "points": 8.67,
+            "count": 105
+          }
+        ],
+        "table": [
+          {
+            "points": 9.0,
+            "count": 233
+          },
+          {
+            "points": 8.0,
+            "count": 215
+          },
+          {
+            "points": 11.0,
+            "count": 111
+          },
+          {
+            "points": 10.5,
+            "count": 60
+          },
+          {
+            "points": 12.0,
+            "count": 49
+          },
+          {
+            "points": 10.0,
+            "count": 37
+          },
+          {
+            "points": 6.0,
+            "count": 23
+          },
+          {
+            "points": 7.0,
+            "count": 6
+          }
+        ],
+        "title-region": [
+          {
+            "points": 13.0,
+            "count": 105
+          },
+          {
+            "points": 12.0,
+            "count": 42
+          },
+          {
+            "points": 11.0,
+            "count": 37
+          },
+          {
+            "points": 10.5,
+            "count": 10
+          },
+          {
+            "points": 90.0,
+            "count": 5
+          },
+          {
+            "points": 28.0,
+            "count": 3
+          },
+          {
+            "points": 14.0,
+            "count": 2
+          }
+        ],
+        "title": [
+          {
+            "points": 28.0,
+            "count": 88
+          },
+          {
+            "points": 20.0,
+            "count": 9
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 22.75,
+            "count": 23
+          },
+          {
+            "points": 20.0,
+            "count": 9
+          },
+          {
+            "points": 28.0,
+            "count": 3
+          }
+        ]
+      },
+      "table_count": 14,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "F2F2F2",
+          "count": 36
+        },
+        {
+          "rgb": "86AFDC",
+          "count": 36
+        },
+        {
+          "rgb": "D9D9D9",
+          "count": 30
+        },
+        {
+          "rgb": "FFFFFF",
+          "count": 21
+        },
+        {
+          "rgb": "EBF1DE",
+          "count": 8
+        },
+        {
+          "rgb": "DEF1CA",
+          "count": 5
+        },
+        {
+          "rgb": "E6E0EC",
+          "count": 5
+        },
+        {
+          "rgb": "002060",
+          "count": 5
+        },
+        {
+          "rgb": "808080",
+          "count": 4
+        },
+        {
+          "rgb": "376092",
+          "count": 4
+        },
+        {
+          "rgb": "FDEADA",
+          "count": 2
+        },
+        {
+          "rgb": "FFC000",
+          "count": 1
+        },
+        {
+          "rgb": "B97035",
+          "count": 1
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{5940675A-B579-460E-94D1-54222C63F5DA}",
+          "count": 2
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 2,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout4.xml",
+          "shape_id": 149,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 4
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout4.xml",
+          "shape_id": 261,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.8
+          ],
+          "referenced_slide_count": 4
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 38
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 151,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.225
+          ],
+          "referenced_slide_count": 38
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 436
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 29
+        },
+        {
+          "role": "table",
+          "slide": 43
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 38
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 44
+        }
+      ],
+      "layout_names": [
+        "1_제목 및 내용",
+        "1_제목 슬라이드",
+        "사용자 지정 레이아웃",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D12_evidence.json"
+    },
+    {
+      "id": "D13",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/규제대응사업/착수보고_규제.pptx",
+      "sha256": "8c1405ee0af40b209a588f4cec65f8c2b67b100d94b4807cf3e211d08e638a05",
+      "file_bytes": 5557565,
+      "slide_count": 28,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "IBM Plex Sans KR",
+          "count": 2211,
+          "explicit_run": 1842,
+          "inherited": 369
+        },
+        {
+          "font": "Noto Sans KR",
+          "count": 97,
+          "explicit_run": 97
+        },
+        {
+          "font": "나눔스퀘어",
+          "count": 24,
+          "explicit_run": 24
+        }
+      ],
+      "font_size_runs_by_role": {
+        "table": [
+          {
+            "points": 10.0,
+            "count": 436
+          },
+          {
+            "points": 8.0,
+            "count": 247
+          },
+          {
+            "points": 9.0,
+            "count": 233
+          },
+          {
+            "points": 10.5,
+            "count": 37
+          },
+          {
+            "points": 12.0,
+            "count": 26
+          },
+          {
+            "points": 7.0,
+            "count": 5
+          }
+        ],
+        "body-text": [
+          {
+            "points": 12.0,
+            "count": 216
+          },
+          {
+            "points": 8.0,
+            "count": 130
+          },
+          {
+            "points": 10.5,
+            "count": 129
+          },
+          {
+            "points": 9.0,
+            "count": 127
+          },
+          {
+            "points": 10.0,
+            "count": 104
+          },
+          {
+            "points": 13.0,
+            "count": 60
+          },
+          {
+            "points": 7.62,
+            "count": 54
+          },
+          {
+            "points": 11.0,
+            "count": 43
+          }
+        ],
+        "title-region": [
+          {
+            "points": 14.0,
+            "count": 63
+          },
+          {
+            "points": 10.0,
+            "count": 61
+          },
+          {
+            "points": 7.62,
+            "count": 34
+          },
+          {
+            "points": 11.0,
+            "count": 25
+          },
+          {
+            "points": 12.0,
+            "count": 24
+          },
+          {
+            "points": 13.0,
+            "count": 18
+          },
+          {
+            "points": 9.0,
+            "count": 10
+          },
+          {
+            "points": 16.0,
+            "count": 8
+          }
+        ],
+        "title": [
+          {
+            "points": 28.0,
+            "count": 63
+          },
+          {
+            "points": 20.0,
+            "count": 36
+          },
+          {
+            "points": 17.0,
+            "count": 8
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 20.0,
+            "count": 9
+          },
+          {
+            "points": 28.0,
+            "count": 3
+          }
+        ]
+      },
+      "table_count": 16,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "F2F2F2",
+          "count": 46
+        },
+        {
+          "rgb": "BFBFBF",
+          "count": 35
+        },
+        {
+          "rgb": "93CDDD",
+          "count": 19
+        },
+        {
+          "rgb": "C3D69B",
+          "count": 12
+        },
+        {
+          "rgb": "F2DCDB",
+          "count": 10
+        },
+        {
+          "rgb": "D9D9D9",
+          "count": 8
+        },
+        {
+          "rgb": "FFFF00",
+          "count": 8
+        },
+        {
+          "rgb": "86AFDC",
+          "count": 8
+        },
+        {
+          "rgb": "EFF6FF",
+          "count": 4
+        },
+        {
+          "rgb": "F9FAFB",
+          "count": 4
+        },
+        {
+          "rgb": "376092",
+          "count": 4
+        },
+        {
+          "rgb": "FFFFFF",
+          "count": 3
+        },
+        {
+          "rgb": "F8FAFC",
+          "count": 3
+        },
+        {
+          "rgb": "D2DBE5",
+          "count": 3
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{5940675A-B579-460E-94D1-54222C63F5DA}",
+          "count": 5
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 2,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout6.xml",
+          "shape_id": 149,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 4
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout6.xml",
+          "shape_id": 261,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.8
+          ],
+          "referenced_slide_count": 4
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 22
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 151,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.225
+          ],
+          "referenced_slide_count": 22
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 436
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 23
+        },
+        {
+          "role": "table",
+          "slide": 25
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 4
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 28
+        }
+      ],
+      "layout_names": [
+        "1_제목 및 내용",
+        "1_제목 슬라이드",
+        "사용자 지정 레이아웃",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D13_evidence.json"
+    },
+    {
+      "id": "D14",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/규제대응사업/최종보고_규제.pptx",
+      "sha256": "693e54bf761b6bcee46c70a7ace91eed5d15382b9bc3e780afbfea58ab998418",
+      "file_bytes": 6272938,
+      "slide_count": 17,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "IBM Plex Sans KR",
+          "count": 1398,
+          "explicit_run": 950,
+          "inherited": 448
+        },
+        {
+          "font": "Noto Sans KR",
+          "count": 156,
+          "explicit_run": 146,
+          "inherited": 10
+        },
+        {
+          "font": "HY헤드라인M",
+          "count": 4,
+          "explicit_run": 4
+        }
+      ],
+      "font_size_runs_by_role": {
+        "table": [
+          {
+            "points": 7.0,
+            "count": 348
+          },
+          {
+            "points": 9.0,
+            "count": 92
+          },
+          {
+            "points": 6.0,
+            "count": 49
+          },
+          {
+            "points": 10.0,
+            "count": 48
+          },
+          {
+            "points": 8.0,
+            "count": 16
+          },
+          {
+            "points": 10.5,
+            "count": 6
+          },
+          {
+            "points": 5.0,
+            "count": 4
+          }
+        ],
+        "body-text": [
+          {
+            "points": 12.0,
+            "count": 195
+          },
+          {
+            "points": 7.0,
+            "count": 167
+          },
+          {
+            "points": 6.0,
+            "count": 103
+          },
+          {
+            "points": 8.0,
+            "count": 86
+          },
+          {
+            "points": 9.0,
+            "count": 85
+          },
+          {
+            "points": 18.0,
+            "count": 21
+          },
+          {
+            "points": 11.0,
+            "count": 16
+          },
+          {
+            "points": 10.0,
+            "count": 15
+          }
+        ],
+        "title-region": [
+          {
+            "points": 12.0,
+            "count": 148
+          },
+          {
+            "points": 13.0,
+            "count": 44
+          },
+          {
+            "points": 10.0,
+            "count": 10
+          },
+          {
+            "points": 90.0,
+            "count": 5
+          }
+        ],
+        "title": [
+          {
+            "points": 28.0,
+            "count": 31
+          }
+        ],
+        "footer": [
+          {
+            "points": 8.0,
+            "count": 13
+          },
+          {
+            "points": 7.0,
+            "count": 6
+          },
+          {
+            "points": 12.0,
+            "count": 2
+          },
+          {
+            "points": 24.0,
+            "count": 1
+          },
+          {
+            "points": 9.0,
+            "count": 1
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 12.0,
+            "count": 4
+          },
+          {
+            "points": 24.0,
+            "count": 2
+          }
+        ]
+      },
+      "table_count": 4,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "35D97E",
+          "count": 37
+        },
+        {
+          "rgb": "808080",
+          "count": 33
+        },
+        {
+          "rgb": "002060",
+          "count": 19
+        },
+        {
+          "rgb": "FFFBEB",
+          "count": 15
+        },
+        {
+          "rgb": "F8FAFC",
+          "count": 10
+        },
+        {
+          "rgb": "1A2B5F",
+          "count": 9
+        },
+        {
+          "rgb": "EFF6FF",
+          "count": 3
+        },
+        {
+          "rgb": "4A90D9",
+          "count": 1
+        },
+        {
+          "rgb": "ECFDF5",
+          "count": 1
+        },
+        {
+          "rgb": "FEF3C7",
+          "count": 1
+        }
+      ],
+      "table_style_ids": [],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 2,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout3.xml",
+          "shape_id": 149,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 3
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout3.xml",
+          "shape_id": 261,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            0.0,
+            0.757,
+            10.851,
+            6.797
+          ],
+          "referenced_slide_count": 3
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 12
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 151,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.007,
+            0.747,
+            10.851,
+            6.225
+          ],
+          "referenced_slide_count": 12
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 218
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 16
+        },
+        {
+          "role": "table",
+          "slide": 4
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 15
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 17
+        }
+      ],
+      "layout_names": [
+        "1_제목 및 내용",
+        "1_제목 슬라이드",
+        "사용자 지정 레이아웃",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D14_evidence.json"
+    },
+    {
+      "id": "D15",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/온실가스 인벤토리/제안서.pptx",
+      "sha256": "65ae9f3c363b1b73bc1389f6f56201d38361ee84b7fbdf94536bb2f5813dc43a",
+      "file_bytes": 6950910,
+      "slide_count": 23,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "맑은 고딕",
+          "count": 1440,
+          "explicit_run": 1013,
+          "inherited": 427
+        },
+        {
+          "font": "KoPub돋움체 Light",
+          "count": 111,
+          "explicit_run": 78,
+          "inherited": 33
+        },
+        {
+          "font": "HY견고딕",
+          "count": 87,
+          "inherited": 87
+        },
+        {
+          "font": "Noto Sans CJK KR Medium",
+          "count": 77,
+          "explicit_run": 77
+        },
+        {
+          "font": "Tahoma",
+          "count": 53,
+          "explicit_run": 53
+        },
+        {
+          "font": "나눔고딕",
+          "count": 17,
+          "explicit_run": 17
+        },
+        {
+          "font": "KoPub돋움체 Bold",
+          "count": 16,
+          "explicit_run": 16
+        },
+        {
+          "font": "Century Gothic",
+          "count": 9,
+          "explicit_run": 9
+        }
+      ],
+      "font_size_runs_by_role": {
+        "table": [
+          {
+            "points": 5.0,
+            "count": 326
+          },
+          {
+            "points": 10.5,
+            "count": 78
+          },
+          {
+            "points": 11.0,
+            "count": 49
+          },
+          {
+            "points": 13.0,
+            "count": 2
+          }
+        ],
+        "title-region": [
+          {
+            "points": 16.0,
+            "count": 187
+          },
+          {
+            "points": 14.0,
+            "count": 84
+          },
+          {
+            "points": 15.0,
+            "count": 25
+          },
+          {
+            "points": 12.0,
+            "count": 9
+          },
+          {
+            "points": 90.0,
+            "count": 5
+          },
+          {
+            "points": 20.0,
+            "count": 4
+          },
+          {
+            "points": 10.5,
+            "count": 1
+          }
+        ],
+        "body-text": [
+          {
+            "points": 14.0,
+            "count": 177
+          },
+          {
+            "points": 13.0,
+            "count": 148
+          },
+          {
+            "points": 8.0,
+            "count": 118
+          },
+          {
+            "points": 12.0,
+            "count": 114
+          },
+          {
+            "points": 7.62,
+            "count": 98
+          },
+          {
+            "points": 11.0,
+            "count": 86
+          },
+          {
+            "points": 9.0,
+            "count": 71
+          },
+          {
+            "points": 10.5,
+            "count": 39
+          }
+        ],
+        "title": [
+          {
+            "points": 24.0,
+            "count": 61
+          },
+          {
+            "points": 18.0,
+            "count": 14
+          },
+          {
+            "points": 20.0,
+            "count": 8
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 20.0,
+            "count": 9
+          }
+        ]
+      },
+      "table_count": 3,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "FFFFFF",
+          "count": 133
+        },
+        {
+          "rgb": "B4C6E7",
+          "count": 102
+        },
+        {
+          "rgb": "FFC000",
+          "count": 26
+        },
+        {
+          "rgb": "D9D9D9",
+          "count": 15
+        },
+        {
+          "rgb": "33CCCC",
+          "count": 4
+        },
+        {
+          "rgb": "FF0000",
+          "count": 2
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{9D7B26C5-4107-4FEC-AEDC-1716B250A1EF}",
+          "count": 1
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 2,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 21
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 151,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.008,
+            0.718,
+            10.862,
+            6.225
+          ],
+          "referenced_slide_count": 21
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 327
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 9
+        },
+        {
+          "role": "table",
+          "slide": 4
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 10
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 23
+        }
+      ],
+      "layout_names": [
+        "1_제목 및 내용",
+        "1_제목 슬라이드",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D15_evidence.json"
+    },
+    {
+      "id": "D16",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/온실가스 인벤토리/제안서_V2.pptx",
+      "sha256": "511e5286c706f4fadb912147b2e5721ac134c31778bd0caa2b48909007b08a05",
+      "file_bytes": 6623293,
+      "slide_count": 22,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "IBM Plex Sans KR",
+          "count": 818,
+          "explicit_run": 818
+        },
+        {
+          "font": "나눔스퀘어",
+          "count": 161,
+          "explicit_run": 161
+        },
+        {
+          "font": "kopub",
+          "count": 147,
+          "explicit_run": 147
+        },
+        {
+          "font": "IBM Plex Sans KR Medium",
+          "count": 131,
+          "explicit_run": 131
+        },
+        {
+          "font": "KoPub돋움체 Light",
+          "count": 64,
+          "explicit_run": 64
+        },
+        {
+          "font": "나눔스퀘어 Bold",
+          "count": 63,
+          "explicit_run": 63
+        },
+        {
+          "font": "Roboto",
+          "count": 19,
+          "explicit_run": 19
+        },
+        {
+          "font": "Century Gothic",
+          "count": 18,
+          "explicit_run": 18
+        }
+      ],
+      "font_size_runs_by_role": {
+        "body-text": [
+          {
+            "points": 12.0,
+            "count": 270
+          },
+          {
+            "points": 14.0,
+            "count": 155
+          },
+          {
+            "points": 13.0,
+            "count": 132
+          },
+          {
+            "points": 7.0,
+            "count": 80
+          },
+          {
+            "points": 11.0,
+            "count": 63
+          },
+          {
+            "points": 12.5,
+            "count": 36
+          },
+          {
+            "points": 9.0,
+            "count": 33
+          },
+          {
+            "points": 8.0,
+            "count": 24
+          }
+        ],
+        "title-region": [
+          {
+            "points": 16.0,
+            "count": 207
+          },
+          {
+            "points": 14.0,
+            "count": 37
+          },
+          {
+            "points": 15.0,
+            "count": 29
+          },
+          {
+            "points": 20.0,
+            "count": 6
+          },
+          {
+            "points": 12.0,
+            "count": 3
+          },
+          {
+            "points": 18.0,
+            "count": 3
+          }
+        ],
+        "table": [
+          {
+            "points": 11.0,
+            "count": 182
+          }
+        ],
+        "title": [
+          {
+            "points": 20.0,
+            "count": 28
+          },
+          {
+            "points": 24.0,
+            "count": 27
+          }
+        ],
+        "footer": [
+          {
+            "points": 8.0,
+            "count": 19
+          },
+          {
+            "points": 10.97,
+            "count": 1
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 20.0,
+            "count": 18
+          },
+          {
+            "points": 36.0,
+            "count": 2
+          }
+        ]
+      },
+      "table_count": 2,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "BFBFBF",
+          "count": 7
+        },
+        {
+          "rgb": "005EB8",
+          "count": 5
+        },
+        {
+          "rgb": "DCE6F2",
+          "count": 5
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}",
+          "count": 1
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 2,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 2
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.004,
+            0.554,
+            10.833,
+            0.148
+          ],
+          "referenced_slide_count": 20
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 218
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 11
+        },
+        {
+          "role": "table",
+          "slide": 3
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 13
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 22
+        }
+      ],
+      "layout_names": [
+        "1_제목 슬라이드",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D16_evidence.json"
+    },
+    {
+      "id": "D17",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/온실가스 인벤토리/착수보고.pptx",
+      "sha256": "30a840be24b38c1ba0ebf01671a188fd31677fa08b5e9e580fe4d11772e67014",
+      "file_bytes": 12840990,
+      "slide_count": 17,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "맑은 고딕",
+          "count": 760,
+          "explicit_run": 538,
+          "inherited": 222
+        },
+        {
+          "font": "나눔스퀘어",
+          "count": 283,
+          "explicit_run": 283
+        },
+        {
+          "font": "나눔스퀘어_ac",
+          "count": 141,
+          "explicit_run": 141
+        },
+        {
+          "font": "나눔스퀘어 Bold",
+          "count": 27,
+          "explicit_run": 27
+        },
+        {
+          "font": "IBM Plex Sans KR",
+          "count": 21,
+          "explicit_run": 21
+        },
+        {
+          "font": "Century Gothic",
+          "count": 18,
+          "explicit_run": 18
+        },
+        {
+          "font": "Tahoma",
+          "count": 15,
+          "explicit_run": 15
+        },
+        {
+          "font": "Haansoft Batang",
+          "count": 10,
+          "explicit_run": 10
+        }
+      ],
+      "font_size_runs_by_role": {
+        "body-text": [
+          {
+            "points": 11.0,
+            "count": 238
+          },
+          {
+            "points": 10.0,
+            "count": 216
+          },
+          {
+            "points": 12.0,
+            "count": 123
+          },
+          {
+            "points": 9.0,
+            "count": 99
+          },
+          {
+            "points": 10.5,
+            "count": 65
+          },
+          {
+            "points": 13.0,
+            "count": 43
+          },
+          {
+            "points": 9.5,
+            "count": 41
+          },
+          {
+            "points": 14.0,
+            "count": 31
+          }
+        ],
+        "table": [
+          {
+            "points": 10.0,
+            "count": 110
+          },
+          {
+            "points": 8.0,
+            "count": 70
+          },
+          {
+            "points": 9.0,
+            "count": 18
+          }
+        ],
+        "title-region": [
+          {
+            "points": 16.0,
+            "count": 107
+          },
+          {
+            "points": 14.0,
+            "count": 27
+          },
+          {
+            "points": 15.0,
+            "count": 15
+          },
+          {
+            "points": 11.0,
+            "count": 8
+          },
+          {
+            "points": 18.0,
+            "count": 2
+          }
+        ],
+        "title": [
+          {
+            "points": 24.0,
+            "count": 39
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 20.0,
+            "count": 19
+          },
+          {
+            "points": 12.0,
+            "count": 1
+          },
+          {
+            "points": 36.0,
+            "count": 1
+          }
+        ],
+        "footer": [
+          {
+            "points": 8.0,
+            "count": 3
+          }
+        ]
+      },
+      "table_count": 5,
+      "chart_count": 0,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "F2F2F2",
+          "count": 17
+        },
+        {
+          "rgb": "FFFFFF",
+          "count": 10
+        },
+        {
+          "rgb": "BFBFBF",
+          "count": 4
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{21E4AEA4-8DFA-4A89-87EB-49C32662AFE0}",
+          "count": 2
+        },
+        {
+          "guid": "{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}",
+          "count": 1
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 2,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 2
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.004,
+            0.554,
+            10.833,
+            0.148
+          ],
+          "referenced_slide_count": 15
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 218
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 10
+        },
+        {
+          "role": "table",
+          "slide": 3
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 2
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 17
+        }
+      ],
+      "layout_names": [
+        "1_제목 슬라이드",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D17_evidence.json"
+    },
+    {
+      "id": "D18",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/온실가스 인벤토리/최종보고 2.pptx",
+      "sha256": "dcd6805f6bd272a36ebb7286e02ed3b6bb09ccbe6f72a0db11506ebe24b80c36",
+      "file_bytes": 18580667,
+      "slide_count": 38,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "맑은 고딕",
+          "count": 3338,
+          "explicit_run": 2838,
+          "inherited": 500
+        },
+        {
+          "font": "IBM Plex Sans KR",
+          "count": 452,
+          "explicit_run": 386,
+          "inherited": 66
+        },
+        {
+          "font": "Arial",
+          "count": 22,
+          "explicit_run": 22
+        },
+        {
+          "font": "IBM Plex Sans",
+          "count": 9,
+          "explicit_run": 9
+        },
+        {
+          "font": "Arial Unicode MS",
+          "count": 8,
+          "explicit_run": 8
+        },
+        {
+          "font": "Adobe 고딕 Std B",
+          "count": 6,
+          "explicit_run": 6
+        },
+        {
+          "font": "EYInterstate",
+          "count": 4,
+          "explicit_run": 4
+        },
+        {
+          "font": "HY견고딕",
+          "count": 4,
+          "inherited": 4
+        }
+      ],
+      "font_size_runs_by_role": {
+        "table": [
+          {
+            "points": 10.5,
+            "count": 772
+          },
+          {
+            "points": 10.0,
+            "count": 653
+          },
+          {
+            "points": 11.0,
+            "count": 416
+          },
+          {
+            "points": 9.0,
+            "count": 128
+          },
+          {
+            "points": 12.0,
+            "count": 41
+          },
+          {
+            "points": 9.5,
+            "count": 15
+          }
+        ],
+        "body-text": [
+          {
+            "points": 11.0,
+            "count": 478
+          },
+          {
+            "points": 12.0,
+            "count": 359
+          },
+          {
+            "points": 10.0,
+            "count": 220
+          },
+          {
+            "points": 14.0,
+            "count": 99
+          },
+          {
+            "points": 7.62,
+            "count": 74
+          },
+          {
+            "points": 9.0,
+            "count": 70
+          },
+          {
+            "points": 18.0,
+            "count": 24
+          },
+          {
+            "points": 7.0,
+            "count": 16
+          }
+        ],
+        "title-region": [
+          {
+            "points": 14.0,
+            "count": 253
+          },
+          {
+            "points": 16.0,
+            "count": 47
+          },
+          {
+            "points": 15.0,
+            "count": 29
+          },
+          {
+            "points": 24.0,
+            "count": 22
+          },
+          {
+            "points": 90.0,
+            "count": 5
+          },
+          {
+            "points": 12.0,
+            "count": 1
+          },
+          {
+            "points": 18.0,
+            "count": 1
+          }
+        ],
+        "title": [
+          {
+            "points": 24.0,
+            "count": 46
+          },
+          {
+            "points": 16.0,
+            "count": 35
+          },
+          {
+            "points": 14.0,
+            "count": 4
+          },
+          {
+            "points": 28.0,
+            "count": 3
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 28.0,
+            "count": 1
+          },
+          {
+            "points": 20.0,
+            "count": 1
+          }
+        ]
+      },
+      "table_count": 19,
+      "chart_count": 1,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "FFFFFF",
+          "count": 374
+        },
+        {
+          "rgb": "F2F2F2",
+          "count": 78
+        },
+        {
+          "rgb": "F2DCDB",
+          "count": 36
+        },
+        {
+          "rgb": "FDEADA",
+          "count": 16
+        },
+        {
+          "rgb": "1F497D",
+          "count": 9
+        },
+        {
+          "rgb": "808080",
+          "count": 8
+        },
+        {
+          "rgb": "DEECF4",
+          "count": 6
+        },
+        {
+          "rgb": "D2DBE5",
+          "count": 4
+        },
+        {
+          "rgb": "7F0048",
+          "count": 3
+        },
+        {
+          "rgb": "FDEADE",
+          "count": 3
+        },
+        {
+          "rgb": "EEF0DE",
+          "count": 1
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}",
+          "count": 18
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout3.xml",
+          "shape_id": 113,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            5.959,
+            10.831,
+            0.692
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout3.xml",
+          "shape_id": 115,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.886,
+            10.831,
+            0.05
+          ],
+          "referenced_slide_count": 1
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout4.xml",
+          "shape_id": 149,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 3
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout4.xml",
+          "shape_id": 261,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.8
+          ],
+          "referenced_slide_count": 3
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 33
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 151,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.225
+          ],
+          "referenced_slide_count": 33
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 327
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 7
+        },
+        {
+          "role": "table",
+          "slide": 12
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 32
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 38
+        }
+      ],
+      "layout_names": [
+        "1_제목 및 내용",
+        "1_제목 슬라이드",
+        "사용자 지정 레이아웃",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D18_evidence.json"
+    },
+    {
+      "id": "D19",
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/온실가스 인벤토리/최종보고.pptx",
+      "sha256": "04fa6aa6bd0655df03b18b8d1df8c2dbe971428adc46f531f9707f90cd8960db",
+      "file_bytes": 10813452,
+      "slide_count": 30,
+      "canvas_inches": [
+        10.8333,
+        7.5
+      ],
+      "canvas_points": [
+        780,
+        540
+      ],
+      "font_runs": [
+        {
+          "font": "맑은 고딕",
+          "count": 1942,
+          "explicit_run": 1351,
+          "inherited": 591
+        }
+      ],
+      "font_size_runs_by_role": {
+        "body-text": [
+          {
+            "points": 10.0,
+            "count": 265
+          },
+          {
+            "points": 11.0,
+            "count": 264
+          },
+          {
+            "points": 12.0,
+            "count": 250
+          },
+          {
+            "points": 9.0,
+            "count": 78
+          },
+          {
+            "points": 7.62,
+            "count": 74
+          },
+          {
+            "points": 10.5,
+            "count": 73
+          },
+          {
+            "points": 14.0,
+            "count": 57
+          },
+          {
+            "points": 9.5,
+            "count": 42
+          }
+        ],
+        "table": [
+          {
+            "points": 10.0,
+            "count": 232
+          },
+          {
+            "points": 11.0,
+            "count": 67
+          }
+        ],
+        "title-region": [
+          {
+            "points": 14.5,
+            "count": 186
+          },
+          {
+            "points": 15.0,
+            "count": 102
+          },
+          {
+            "points": 14.0,
+            "count": 78
+          },
+          {
+            "points": 24.0,
+            "count": 64
+          },
+          {
+            "points": 10.0,
+            "count": 45
+          },
+          {
+            "points": 12.0,
+            "count": 10
+          },
+          {
+            "points": 11.0,
+            "count": 2
+          }
+        ],
+        "section-heading": [
+          {
+            "points": 20.0,
+            "count": 19
+          },
+          {
+            "points": 12.0,
+            "count": 1
+          },
+          {
+            "points": 36.0,
+            "count": 1
+          }
+        ],
+        "title": [
+          {
+            "points": 24.0,
+            "count": 8
+          },
+          {
+            "points": 28.0,
+            "count": 2
+          }
+        ],
+        "footer": [
+          {
+            "points": 8.0,
+            "count": 6
+          }
+        ]
+      },
+      "table_count": 6,
+      "chart_count": 2,
+      "direct_table_cell_fills": [
+        {
+          "rgb": "FFFFFF",
+          "count": 116
+        },
+        {
+          "rgb": "D9D9D9",
+          "count": 14
+        },
+        {
+          "rgb": "F2F2F2",
+          "count": 14
+        },
+        {
+          "rgb": "808080",
+          "count": 13
+        },
+        {
+          "rgb": "FFFFCC",
+          "count": 4
+        },
+        {
+          "rgb": "1F497D",
+          "count": 2
+        }
+      ],
+      "table_style_ids": [
+        {
+          "guid": "{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}",
+          "count": 2
+        }
+      ],
+      "native_template_layers": [
+        {
+          "part": "/ppt/slideLayouts/slideLayout2.xml",
+          "shape_id": 2,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 2
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout3.xml",
+          "shape_id": 149,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.0,
+            0.0,
+            10.833,
+            7.5
+          ],
+          "referenced_slide_count": 2
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout3.xml",
+          "shape_id": 261,
+          "type": "white-body-overlay",
+          "rgb": "FFFFFF",
+          "bbox_in": [
+            -0.004,
+            0.718,
+            10.851,
+            6.8
+          ],
+          "referenced_slide_count": 2
+        },
+        {
+          "part": "/ppt/slideLayouts/slideLayout1.xml",
+          "shape_id": 240,
+          "type": "navy-layer",
+          "rgb": "0F243F",
+          "bbox_in": [
+            0.004,
+            0.554,
+            10.833,
+            0.148
+          ],
+          "referenced_slide_count": 26
+        }
+      ],
+      "template_line_opacity": [
+        {
+          "color_kind": "schemeClr",
+          "color_value": "bg1",
+          "opacity": 0.14,
+          "count": 327
+        }
+      ],
+      "representative_slides": [
+        {
+          "role": "cover",
+          "slide": 1
+        },
+        {
+          "role": "typical-body",
+          "slide": 11
+        },
+        {
+          "role": "table",
+          "slide": 14
+        },
+        {
+          "role": "process-or-diagram-candidate",
+          "slide": 29
+        },
+        {
+          "role": "closing-candidate",
+          "slide": 30
+        }
+      ],
+      "layout_names": [
+        "1_제목 슬라이드",
+        "사용자 지정 레이아웃",
+        "제목만"
+      ],
+      "evidence_file": ".preview/innergen-analysis/D19_evidence.json"
+    }
+  ],
+  "counting_rules": [
+    "Font and font-size counts are non-empty text runs, not slides or characters.",
+    "Explicit font means font declaration on the run; inherited includes paragraph, shape, layout and master-text-style declarations. Theme references are resolved against each slide master.",
+    "Template inventories count a unique used master/layout once; referenced_slide_count gives its deck usage. Layer overlap, visibility and customer-specific logos require visual review.",
+    "Palette cells are counted only where direct cell properties contain a solidFill; inherited table-style cells are not invented.",
+    "Alpha values are recorded separately from RGB. Color counts do not imply semantic brand status."
+  ],
+  "verified_own_company_assets": [
+    {
+      "role": "cover-blue",
+      "path": ".preview\\innergen-analysis\\assets\\innergen-logo-cover-blue.png",
+      "source": "INPUTS\\이너젠 PPT 장표 레퍼런스\\CDP\\제안서 2.pptx",
+      "source_sha256": "9d12036471032259fb66f5dcf25060d549ead78436de8b1668be3bae3695ed40",
+      "source_slide": 1,
+      "container_part": "/ppt/slideLayouts/slideLayout1.xml",
+      "shape_id": 3,
+      "relation_id": "rId2",
+      "image_part": "/ppt/media/image1.png",
+      "image_sha256": "36809cb0561f7d966f1132b71fa971ab61d6fbf9b97505156c7b218efd91f27d",
+      "pixel_size": [
+        709,
+        709
+      ],
+      "bbox_in": [
+        4.0526,
+        4.2147,
+        2.3878,
+        2.2163
+      ],
+      "visual_verification": "Image read and visually confirmed as INNerGEN own-company logo, not client logo.",
+      "dominant_opaque_rgb": [
+        {
+          "rgb": "13387B",
+          "pixels": 38558
+        },
+        {
+          "rgb": "286CB5",
+          "pixels": 8585
+        },
+        {
+          "rgb": "80BFD7",
+          "pixels": 6111
+        }
+      ]
+    },
+    {
+      "role": "footer-white",
+      "path": ".preview\\innergen-analysis\\assets\\innergen-logo-footer-white.png",
+      "source": "INPUTS\\이너젠 PPT 장표 레퍼런스\\CDP\\제안서 2.pptx",
+      "source_sha256": "9d12036471032259fb66f5dcf25060d549ead78436de8b1668be3bae3695ed40",
+      "source_slide": 7,
+      "container_part": "/ppt/slideLayouts/slideLayout2.xml",
+      "shape_id": 128,
+      "relation_id": "rId3",
+      "image_part": "/ppt/media/image4.png",
+      "image_sha256": "f9b95479168262c5041163991213175d974034983d0f9ba30f2175d2b446e6dc",
+      "pixel_size": [
+        160,
+        101
+      ],
+      "bbox_in": [
+        0.2013,
+        7.0042,
+        0.7267,
+        0.4589
+      ],
+      "visual_verification": "Image read and visually confirmed as INNerGEN own-company logo, not client logo.",
+      "dominant_opaque_rgb": [
+        {
+          "rgb": "FFFFFF",
+          "pixels": 3176
+        },
+        {
+          "rgb": "FDFDFD",
+          "pixels": 58
+        },
+        {
+          "rgb": "FCFCFC",
+          "pixels": 29
+        },
+        {
+          "rgb": "FEFEFE",
+          "pixels": 22
+        },
+        {
+          "rgb": "FBFBFB",
+          "pixels": 20
+        },
+        {
+          "rgb": "F4F4F4",
+          "pixels": 20
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "font_runs": [
+      {
+        "font": "맑은 고딕",
+        "count": 27217,
+        "explicit_run": 21659,
+        "inherited": 5558
+      },
+      {
+        "font": "IBM Plex Sans KR",
+        "count": 18820,
+        "explicit_run": 17129,
+        "inherited": 1691
+      },
+      {
+        "font": "나눔스퀘어",
+        "count": 1115,
+        "explicit_run": 1104,
+        "inherited": 11
+      },
+      {
+        "font": "HY견고딕",
+        "count": 641,
+        "inherited": 641
+      },
+      {
+        "font": "IBM Plex Sans KR SemiBold",
+        "count": 336,
+        "explicit_run": 330,
+        "inherited": 6
+      },
+      {
+        "font": "Noto Sans KR",
+        "count": 275,
+        "explicit_run": 265,
+        "inherited": 10
+      },
+      {
+        "font": "IBM Plex Sans",
+        "count": 273,
+        "explicit_run": 273
+      },
+      {
+        "font": "KoPub돋움체 Light",
+        "count": 177,
+        "explicit_run": 144,
+        "inherited": 33
+      },
+      {
+        "font": "kopub",
+        "count": 147,
+        "explicit_run": 147
+      },
+      {
+        "font": "나눔스퀘어_ac",
+        "count": 141,
+        "explicit_run": 141
+      },
+      {
+        "font": "IBM Plex Sans KR Medium",
+        "count": 131,
+        "explicit_run": 131
+      },
+      {
+        "font": "Rix고딕_Pro Bold",
+        "count": 128,
+        "explicit_run": 128
+      },
+      {
+        "font": "경기천년제목 Medium",
+        "count": 102,
+        "explicit_run": 102
+      },
+      {
+        "font": "나눔스퀘어 Bold",
+        "count": 90,
+        "explicit_run": 90
+      },
+      {
+        "font": "Tahoma",
+        "count": 82,
+        "explicit_run": 82
+      },
+      {
+        "font": "Noto Sans CJK KR Medium",
+        "count": 77,
+        "explicit_run": 77
+      },
+      {
+        "font": "Century Gothic",
+        "count": 61,
+        "explicit_run": 61
+      },
+      {
+        "font": "Arial",
+        "count": 58,
+        "explicit_run": 58
+      },
+      {
+        "font": "a시월구일2",
+        "count": 43,
+        "explicit_run": 43
+      },
+      {
+        "font": "Verdana",
+        "count": 39,
+        "explicit_run": 39
+      },
+      {
+        "font": "KoPubWorld돋움체_Pro Light",
+        "count": 34,
+        "explicit_run": 34
+      },
+      {
+        "font": "Roboto",
+        "count": 27,
+        "explicit_run": 27
+      },
+      {
+        "font": "경기천년제목 Bold",
+        "count": 26,
+        "explicit_run": 26
+      },
+      {
+        "font": "Adobe 고딕 Std B",
+        "count": 18,
+        "explicit_run": 18
+      },
+      {
+        "font": "Trebuchet MS",
+        "count": 17,
+        "explicit_run": 17
+      },
+      {
+        "font": "나눔고딕",
+        "count": 17,
+        "explicit_run": 17
+      },
+      {
+        "font": "Arial Unicode MS",
+        "count": 16,
+        "explicit_run": 16
+      },
+      {
+        "font": "KoPub돋움체 Bold",
+        "count": 16,
+        "explicit_run": 16
+      },
+      {
+        "font": "Haansoft Batang",
+        "count": 10,
+        "explicit_run": 10
+      },
+      {
+        "font": "나눔바른고딕",
+        "count": 8,
+        "explicit_run": 8
+      },
+      {
+        "font": "Open Sans",
+        "count": 6,
+        "explicit_run": 6
+      },
+      {
+        "font": "EYInterstate",
+        "count": 5,
+        "inherited": 1,
+        "explicit_run": 4
+      },
+      {
+        "font": "Algerian",
+        "count": 4,
+        "explicit_run": 4
+      },
+      {
+        "font": "현대하모니 L",
+        "count": 4,
+        "explicit_run": 4
+      },
+      {
+        "font": "ibm",
+        "count": 4,
+        "explicit_run": 4
+      },
+      {
+        "font": "HY헤드라인M",
+        "count": 4,
+        "explicit_run": 4
+      },
+      {
+        "font": "Malgun Gothic Semilight",
+        "count": 2,
+        "explicit_run": 2
+      },
+      {
+        "font": "돋움",
+        "count": 1,
+        "explicit_run": 1
+      },
+      {
+        "font": "배달의민족 도현",
+        "count": 1,
+        "inherited": 1
+      }
+    ],
+    "font_size_runs_by_role": {
+      "table": [
+        {
+          "points": 10.0,
+          "count": 6052
+        },
+        {
+          "points": 10.5,
+          "count": 4529
+        },
+        {
+          "points": 9.0,
+          "count": 2879
+        },
+        {
+          "points": 11.0,
+          "count": 2705
+        },
+        {
+          "points": 7.0,
+          "count": 1602
+        },
+        {
+          "points": 8.0,
+          "count": 1201
+        },
+        {
+          "points": 12.0,
+          "count": 882
+        },
+        {
+          "points": 5.0,
+          "count": 332
+        },
+        {
+          "points": 6.0,
+          "count": 79
+        },
+        {
+          "points": 9.5,
+          "count": 15
+        },
+        {
+          "points": 8.5,
+          "count": 7
+        },
+        {
+          "points": 9.75,
+          "count": 5
+        },
+        {
+          "points": 8.25,
+          "count": 3
+        },
+        {
+          "points": 13.0,
+          "count": 2
+        }
+      ],
+      "body-text": [
+        {
+          "points": 12.0,
+          "count": 5571
+        },
+        {
+          "points": 11.0,
+          "count": 3522
+        },
+        {
+          "points": 10.0,
+          "count": 3035
+        },
+        {
+          "points": 9.0,
+          "count": 2086
+        },
+        {
+          "points": 10.5,
+          "count": 1919
+        },
+        {
+          "points": 7.62,
+          "count": 1805
+        },
+        {
+          "points": 14.0,
+          "count": 1099
+        },
+        {
+          "points": 8.0,
+          "count": 994
+        },
+        {
+          "points": 13.0,
+          "count": 753
+        },
+        {
+          "points": 18.0,
+          "count": 589
+        },
+        {
+          "points": 7.0,
+          "count": 515
+        },
+        {
+          "points": 8.67,
+          "count": 216
+        },
+        {
+          "points": 16.0,
+          "count": 192
+        },
+        {
+          "points": 15.0,
+          "count": 191
+        },
+        {
+          "points": 9.75,
+          "count": 178
+        },
+        {
+          "points": 6.0,
+          "count": 176
+        },
+        {
+          "points": 10.83,
+          "count": 151
+        },
+        {
+          "points": 9.5,
+          "count": 83
+        },
+        {
+          "points": 12.5,
+          "count": 65
+        },
+        {
+          "points": 5.0,
+          "count": 54
+        },
+        {
+          "points": 11.37,
+          "count": 40
+        },
+        {
+          "points": 7.58,
+          "count": 35
+        },
+        {
+          "points": 11.88,
+          "count": 33
+        },
+        {
+          "points": 36.0,
+          "count": 30
+        },
+        {
+          "points": 32.0,
+          "count": 28
+        },
+        {
+          "points": 11.92,
+          "count": 25
+        },
+        {
+          "points": 17.0,
+          "count": 25
+        },
+        {
+          "points": 44.0,
+          "count": 20
+        },
+        {
+          "points": 5.42,
+          "count": 20
+        },
+        {
+          "points": 6.5,
+          "count": 18
+        },
+        {
+          "points": 11.56,
+          "count": 12
+        },
+        {
+          "points": 4.0,
+          "count": 9
+        },
+        {
+          "points": 28.0,
+          "count": 6
+        },
+        {
+          "points": 40.0,
+          "count": 5
+        },
+        {
+          "points": 16.6,
+          "count": 5
+        },
+        {
+          "points": 96.0,
+          "count": 4
+        },
+        {
+          "points": 3.0,
+          "count": 4
+        },
+        {
+          "points": 2.0,
+          "count": 3
+        },
+        {
+          "points": 8.5,
+          "count": 1
+        }
+      ],
+      "title-region": [
+        {
+          "points": 14.0,
+          "count": 1345
+        },
+        {
+          "points": 16.0,
+          "count": 565
+        },
+        {
+          "points": 12.0,
+          "count": 457
+        },
+        {
+          "points": 13.0,
+          "count": 430
+        },
+        {
+          "points": 15.0,
+          "count": 366
+        },
+        {
+          "points": 10.0,
+          "count": 303
+        },
+        {
+          "points": 11.0,
+          "count": 297
+        },
+        {
+          "points": 14.5,
+          "count": 186
+        },
+        {
+          "points": 24.0,
+          "count": 168
+        },
+        {
+          "points": 18.0,
+          "count": 112
+        },
+        {
+          "points": 28.0,
+          "count": 97
+        },
+        {
+          "points": 90.0,
+          "count": 75
+        },
+        {
+          "points": 10.5,
+          "count": 50
+        },
+        {
+          "points": 9.0,
+          "count": 49
+        },
+        {
+          "points": 7.62,
+          "count": 42
+        },
+        {
+          "points": 20.0,
+          "count": 39
+        },
+        {
+          "points": 8.0,
+          "count": 2
+        }
+      ],
+      "title": [
+        {
+          "points": 28.0,
+          "count": 664
+        },
+        {
+          "points": 24.0,
+          "count": 421
+        },
+        {
+          "points": 20.0,
+          "count": 138
+        },
+        {
+          "points": 18.0,
+          "count": 128
+        },
+        {
+          "points": 14.0,
+          "count": 68
+        },
+        {
+          "points": 16.0,
+          "count": 35
+        },
+        {
+          "points": 17.0,
+          "count": 8
+        }
+      ],
+      "section-heading": [
+        {
+          "points": 20.0,
+          "count": 139
+        },
+        {
+          "points": 22.75,
+          "count": 52
+        },
+        {
+          "points": 28.0,
+          "count": 23
+        },
+        {
+          "points": 24.0,
+          "count": 16
+        },
+        {
+          "points": 44.0,
+          "count": 8
+        },
+        {
+          "points": 32.0,
+          "count": 8
+        },
+        {
+          "points": 12.0,
+          "count": 6
+        },
+        {
+          "points": 36.0,
+          "count": 4
+        },
+        {
+          "points": 16.0,
+          "count": 2
+        },
+        {
+          "points": 18.0,
+          "count": 2
+        },
+        {
+          "points": 14.0,
+          "count": 2
+        }
+      ],
+      "footer": [
+        {
+          "points": 8.0,
+          "count": 41
+        },
+        {
+          "points": 7.0,
+          "count": 6
+        },
+        {
+          "points": 12.0,
+          "count": 5
+        },
+        {
+          "points": 10.97,
+          "count": 2
+        },
+        {
+          "points": 24.0,
+          "count": 1
+        },
+        {
+          "points": 9.0,
+          "count": 1
+        }
+      ]
+    },
+    "direct_table_cell_fills": [
+      {
+        "rgb": "FFFFFF",
+        "count": 2580
+      },
+      {
+        "rgb": "F2F2F2",
+        "count": 876
+      },
+      {
+        "rgb": "86AFDC",
+        "count": 212
+      },
+      {
+        "rgb": "D9D9D9",
+        "count": 163
+      },
+      {
+        "rgb": "F2DCDB",
+        "count": 102
+      },
+      {
+        "rgb": "B4C6E7",
+        "count": 102
+      },
+      {
+        "rgb": "808080",
+        "count": 96
+      },
+      {
+        "rgb": "002060",
+        "count": 60
+      },
+      {
+        "rgb": "BFBFBF",
+        "count": 52
+      },
+      {
+        "rgb": "DAE9F8",
+        "count": 38
+      },
+      {
+        "rgb": "35D97E",
+        "count": 37
+      },
+      {
+        "rgb": "EBF1DE",
+        "count": 34
+      },
+      {
+        "rgb": "FDEADA",
+        "count": 34
+      },
+      {
+        "rgb": "FFC000",
+        "count": 34
+      },
+      {
+        "rgb": "ADADAD",
+        "count": 33
+      },
+      {
+        "rgb": "376092",
+        "count": 20
+      },
+      {
+        "rgb": "93CDDD",
+        "count": 19
+      },
+      {
+        "rgb": "FFFF00",
+        "count": 17
+      },
+      {
+        "rgb": "D2DBE5",
+        "count": 16
+      },
+      {
+        "rgb": "F8FAFC",
+        "count": 16
+      },
+      {
+        "rgb": "FDEADE",
+        "count": 15
+      },
+      {
+        "rgb": "94DCF8",
+        "count": 15
+      },
+      {
+        "rgb": "FFFBEB",
+        "count": 15
+      },
+      {
+        "rgb": "DCE6F2",
+        "count": 14
+      },
+      {
+        "rgb": "DEECF4",
+        "count": 12
+      },
+      {
+        "rgb": "FBE2D5",
+        "count": 12
+      },
+      {
+        "rgb": "C3D69B",
+        "count": 12
+      },
+      {
+        "rgb": "1F497D",
+        "count": 11
+      },
+      {
+        "rgb": "E6E0EC",
+        "count": 9
+      },
+      {
+        "rgb": "DAF2D0",
+        "count": 9
+      },
+      {
+        "rgb": "1A2B5F",
+        "count": 9
+      },
+      {
+        "rgb": "E8E8E8",
+        "count": 7
+      },
+      {
+        "rgb": "EFF6FF",
+        "count": 7
+      },
+      {
+        "rgb": "7F0048",
+        "count": 6
+      },
+      {
+        "rgb": "F2CEEF",
+        "count": 6
+      },
+      {
+        "rgb": "EEF0DE",
+        "count": 5
+      },
+      {
+        "rgb": "0F9ED5",
+        "count": 5
+      },
+      {
+        "rgb": "E97132",
+        "count": 5
+      },
+      {
+        "rgb": "DEF1CA",
+        "count": 5
+      },
+      {
+        "rgb": "005EB8",
+        "count": 5
+      },
+      {
+        "rgb": "153D64",
+        "count": 4
+      },
+      {
+        "rgb": "DADFE8",
+        "count": 4
+      },
+      {
+        "rgb": "F9FAFB",
+        "count": 4
+      },
+      {
+        "rgb": "33CCCC",
+        "count": 4
+      },
+      {
+        "rgb": "FFFFCC",
+        "count": 4
+      },
+      {
+        "rgb": "3B618E",
+        "count": 3
+      },
+      {
+        "rgb": "47D359",
+        "count": 3
+      },
+      {
+        "rgb": "D86DCD",
+        "count": 3
+      },
+      {
+        "rgb": "DBEEF4",
+        "count": 2
+      },
+      {
+        "rgb": "FF0000",
+        "count": 2
+      },
+      {
+        "rgb": "E2E0D6",
+        "count": 1
+      },
+      {
+        "rgb": "B97035",
+        "count": 1
+      },
+      {
+        "rgb": "4A90D9",
+        "count": 1
+      },
+      {
+        "rgb": "ECFDF5",
+        "count": 1
+      },
+      {
+        "rgb": "FEF3C7",
+        "count": 1
+      }
+    ],
+    "template_line_opacity": [
+      {
+        "color_kind": "schemeClr",
+        "color_value": "bg1",
+        "opacity": 0.14,
+        "count": 6322
+      }
+    ]
+  },
+  "render_validation": {
+    "renderer": "Microsoft PowerPoint read-only Slide.Export",
+    "rendered_slides": 573,
+    "render_errors": 0,
+    "visually_sampled_slide_positions": 214,
+    "manifest": ".preview/innergen-visual/render_manifest.json"
+  }
+}

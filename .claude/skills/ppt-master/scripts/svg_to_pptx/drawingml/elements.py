@@ -2342,6 +2342,18 @@ def convert_text(elem: ET.Element, ctx: ConvertContext) -> ShapeResult | None:
             fs_px = float(runs[0].get('font_size', font_size)) if runs else font_size
             text_width += _bullet_margin_px(single_bullet, fs_px)
         text_height = font_size * 1.5
+    # An authored content width keeps measured-font Korean paragraphs inside
+    # their column even when the conservative per-glyph estimate is wider.
+    # Opt-in only: existing decks retain their original sizing behavior.
+    authored_text_width = elem.get('data-pptx-text-width')
+    if authored_text_width is not None:
+        try:
+            width_px = float(authored_text_width)
+        except ValueError as exc:
+            raise ValueError('data-pptx-text-width must be a positive finite pixel width') from exc
+        if not math.isfinite(width_px) or width_px <= 0:
+            raise ValueError('data-pptx-text-width must be a positive finite pixel width')
+        text_width = width_px * (ctx.scale_x or 1.0)
     padding = _textbox_padding(font_size)
 
     # Adjust position based on text-anchor

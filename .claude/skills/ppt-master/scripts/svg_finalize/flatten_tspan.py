@@ -389,6 +389,7 @@ def _classify_paragraph_block(
         # distinct visual lines do not merge into one PowerPoint line.
         is_soft = (
             abs(extra) <= DY_TOLERANCE_PX
+            and text_el.get('data-pptx-preserve-line-breaks') != 'true'
             and not _starts_with_list_marker(line_groups[idx])
             and abs(line_font_sizes[idx] - line_font_sizes[idx - 1]) <= 1e-6
         )

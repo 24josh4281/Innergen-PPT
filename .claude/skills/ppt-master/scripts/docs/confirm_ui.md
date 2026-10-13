@@ -214,7 +214,57 @@ The shape above is the **final** result, carrying every field. A single-pass wri
 - `image_ai_path` and `image_strategy` are omitted from `result.json` unless `image_usage` includes `ai`. Both are honored downstream as confirmed choices — and the page is only a convenience surface over the **canonical chat channel**: the same choices made in chat are honored identically when no `result.json` exists. `image_ai_path` drives the Step 5 generation ladder (`image-generator.md` §7 — `codex` forces Path A only; `api` forces the API backend; legacy `host-native` reads as `auto` and legacy `manual` routes to the user-drop handoff); the chosen `image_strategy` candidate is locked verbatim by Strategist h.5 (no re-pick).
 - After the user clicks the **final Confirm** (single-pass, or Stage 3 of the staged flow), the page saves `result.json` and shuts the server down (auto-close). In the default single-pass flow, the one `--daemon --wait` returns on the final result. In the staged flow, Stage-1 and Stage-2 **Next** keep the page open while it polls for the re-derived downstream stage: the first `--daemon --wait` returns on the stage-1 result, `--wait-only --wait-stage stage2` returns on the stage-2 result, and the final `--wait-only` returns on the final result; the AI reads each immediately — no extra chat confirmation is required. Chat confirmation remains the fallback when the page cannot be used. Either way, Step 4 ends with a `--shutdown` cleanup so a never-confirmed page cannot keep holding port 5050 ahead of the Step 6 live preview.
 
+### INNerGEN deck card
+
+When `template: "innergen"`, Stage 1 also saves three closed choices:
+`innergen_business_type` (`cdp_disclosure`, `reduction`, `regulatory`,
+`inventory`), `innergen_report_type` (`proposal`, `kickoff`, `interim`,
+`final`), and `innergen_variant` (`classic_grid`, `solid_navy`, `slim_line`).
+They persist through staged Stage 2 and final confirmation. The page shows
+the number of directly matching reference PPTXs for the business/report pair;
+zero is explicitly **구성 제안**. The three frame previews use the registered
+cover SVGs. After confirmation, follow
+`docs/styles/innergen/report-profiles.json` and the `innergen-style` adapter:
+record all three choices in the project spec and lock, use only the chosen
+frame family in `page_layouts`, and derive actual facts and figures from the
+current project material.
+
 ## Scope
 
 - Confirmation surface only — Strategist authors every recommendation; the page never generates deck content.
-- No SVG / layout preview here — that is the live preview server's job (`workflows/live-preview.md`, Step 6).
+- Template cards may show their reusable cover shells for selection. Final slide preview belongs to the live preview server (`workflows/live-preview.md`, Step 6).
+
+
+## INNerGEN / INNerCarry compact chooser (v17)
+
+A `recommend.style_family` of `innergen_basic`, `innergen_business`, or
+`innercarry` opts into the compact chooser. Existing `template: innergen` also
+shows it without silently staging another template. `_build_catalogs()` loads
+`docs/styles/innergen/design-standard-v17.json` as `style_standard`, so previews,
+size labels and materialization share the same values. General projects keep the
+existing interface. Installed templates lock profile/canvas switching.
+
+The first view offers three families, business type, report type, delivery mode,
+and three recommended structures. All eight structures remain available. The
+existing fields remain in expandable details and are still included in the same
+confirmation bundle. No gate is removed. A profile or delivery-mode click
+explicitly resets that profile's canvas, font roles and colors; other choices do
+not reset detailed user overrides. Previews show illustrative content only.
+
+Round-trip anchors: `style_family`, `style_delivery_mode`,
+`innergen_business_type`, `innergen_report_type`, `layout_choice`, `media_mode`,
+`design_standard_version`. Values are validated against the canonical catalog.
+Named-style stage-1/2 payloads also preserve the visible `color`, `typography`,
+`image_usage`, and `image_notes` snapshot. These values are restored on every
+stage, including reopening stage 1. Explicit detailed overrides win; empty or
+non-positive font sizes are rejected. Generic projects retain their prior flow.
+The `media_mode` maps to existing `image_usage` IDs `none`, `web`, or `ai`;
+searching and inserting still belong to the selected owner's acquisition stage.
+Web assets require origin, license/permission status and captions. Missing assets
+remain Needs-Manual. A preview never claims to have acquired an image.
+
+After confirmation, run `style_standard.py <project>` to create
+`design_profile_v17.json` and its readable table. Preserve all confirmed overrides
+when copying values into the project lock. `validate_spec.py` rejects missing or
+stale materialization for projects that opted into a named family. Older
+projects without `style_family` keep their prior validation contract.

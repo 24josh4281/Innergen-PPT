@@ -1192,6 +1192,9 @@ def convert_svg_to_slide_shapes(
     source_shape_id_map = _build_source_shape_id_map(root)
     ctx = ConvertContext(
         defs=defs,
+        # The root SVG is a style ancestor just like a group. Without this,
+        # root-level brand fonts silently fall back to the export defaults.
+        inherited_styles=_extract_inheritable_styles(root),
         reserved_shape_ids=frozenset(source_shape_id_map.values()),
         source_shape_id_map=source_shape_id_map,
         slide_num=slide_num,

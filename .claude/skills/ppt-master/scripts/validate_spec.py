@@ -48,6 +48,7 @@ if str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
 
 from console_encoding import configure_utf8_stdio  # noqa: E402
+from style_standard import check_project as check_named_style  # noqa: E402
 
 CHARTS_INDEX = _SCRIPTS_DIR.parent / "templates" / "charts" / "charts_index.json"
 RHYTHM_VALUES = {"anchor", "dense", "breathing"}
@@ -321,7 +322,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     errors, warnings = check_slides(slides)
     e2, w2 = check_vii(vii_rows, charts)
     e3, w3 = check_spec_lock(sections, len(slides), charts, vii_rows)
-    errors += e2 + e3
+    errors += e2 + e3 + check_named_style(project)
     warnings += w2 + w3
 
     for w in warnings:

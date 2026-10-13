@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1040 720" data-pptx-master="innergen-master-13x9" data-pptx-master-name="이너젠 13:9" data-pptx-layout="innergen-solid-ending" data-pptx-layout-name="이너젠 단색 마무리">
+<rect id="master-bg" x="0" y="0" width="1040" height="720" fill="#FFFFFF" data-pptx-layer="master" data-pptx-editable="false"/>
+<rect id="ending-bottom-band" x="0" y="651" width="1040" height="69" fill="#0F243F"  data-pptx-layer="layout" data-pptx-editable="false"/>
+<image id="ending-logo" x="810" y="440" width="145" height="124" xlink:href="../images/innergen-logo-cover-blue.png" preserveAspectRatio="xMidYMid meet" data-pptx-layer="layout" data-pptx-editable="false"/>
+<g id="ending-message" data-pptx-placeholder="title" data-pptx-placeholder-bounds="85 198 875 106"><text id="ending-message-carrier" data-pptx-placeholder-carrier="true" x="92" y="271" text-anchor="start" font-family="IBM Plex Sans KR, Malgun Gothic, sans-serif" font-size="47" font-weight="700" fill="#0F243F">{{CLOSING_MESSAGE}}</text></g>
+<g id="ending-subtitle" data-pptx-placeholder="subtitle" data-pptx-placeholder-idx="1" data-pptx-placeholder-bounds="90 320 830 95"><text id="ending-subtitle-carrier" data-pptx-placeholder-carrier="true" x="92" y="369" text-anchor="start" font-family="IBM Plex Sans KR, Malgun Gothic, sans-serif" font-size="24" font-weight="400" fill="#808080">{{ENDING_SUBTITLE}}</text></g>
+</svg>

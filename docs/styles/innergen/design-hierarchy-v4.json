@@ -1,0 +1,17 @@
+{
+  "version": "4.0",
+  "priority": "latest_user_feedback_over_previous_title_claim_rules",
+  "page_contract": {
+    "title": {"role": "main_title_and_subtitle", "format": "메인 제목 / 부제목", "ending": "noun_phrase", "purpose": "분류·대상·세부 주제"},
+    "governing": {"role": "main_governing_message", "ending": "입니다/합니다", "sentences": 1, "max_lines": 2, "purpose": "본문 핵심 판단 또는 전체 요약"},
+    "support": {"role": "optional_support_or_diagram", "repeat_governing": false},
+    "structured_body": {"ending": "nominal", "examples": ["공시", "통합", "변경", "구분", "검토", "예외 적용"], "preserve": ["필수/선택", "AND/OR", "적용 대상", "기간", "제외", "예외", "수치", "단위"]},
+    "final": {"when": "dense_page", "boxed": true, "sentences": 1, "max_lines": 2, "ending": "입니다/합니다", "purpose": "실무 적용 행동의 종합"},
+    "source": {"format": "문서명, PDF N~M쪽", "page_basis": "provided_pdf_file_page"},
+    "exceptions": ["표지", "섹션 구분", "의미 보존이 필요한 직접 인용"]
+  },
+  "detailed_training_typography": {"body_pt": 14, "body_svg_px": 18.666667, "title_pt": 24, "governing_pt": 18, "subheading_pt": 16.5, "source_pt": 10, "apply_to_other_purposes_automatically": false},
+  "wrapping": {"boundary": "word_or_independent_semantic_item", "avoid_split": ["단어", "약어", "수치와 단위", "괄호 조건"], "orphan_tail_review_ratio": 0.35, "short_independent_node_exception": true, "repair": ["폭 조정", "행수 재배치", "2~3단어 함께 이동", "조건을 보존한 문장 재작성"], "keep_body_size": true},
+  "alignment": {"table_horizontal": "center", "table_vertical": "middle", "table_scope": "header_body_number_unit", "long_diagram_paragraph": "left", "short_node": "center_when_suitable", "padding_svg_px": [18, 24]},
+  "qa": ["정보 위계", "거버닝·최종 메시지 형식체", "본문 명사형", "조건 보존", "단어 경계", "짧은 문장 꼬리", "표 가운데 정렬", "패딩·겹침·침범", "출처", "실제 PowerPoint 렌더"]
+}

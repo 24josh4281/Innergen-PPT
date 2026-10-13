@@ -1,0 +1,24 @@
+{
+  "version": "6.0",
+  "extends": "design-hierarchy-v5.json",
+  "priority": "latest_user_feedback_body_fonts_minus_2pt",
+  "scope": "detailed_training",
+  "detailed_training_typography": {
+    "body_pt": 12,
+    "body_svg_px": 16,
+    "body_subheading_pt": 14.5,
+    "body_subheading_svg_px": 19.333333,
+    "toc_chapter_range_pt": 10,
+    "toc_chapter_range_svg_px": 13.333333,
+    "title_pt": 24,
+    "governing_pt": 20,
+    "governing_svg_px": 26.666667,
+    "source_pt": 10,
+    "apply_to_other_purposes_automatically": false
+  },
+  "reduce_roles": ["body", "table", "diagram", "body_annotation", "final_message", "body_subheading", "toc_labels", "toc_chapter_heading", "toc_chapter_page_range", "cover_description", "cover_process_label"],
+  "preserve_roles": ["slide_title", "governing", "source", "footer", "footer_page_number", "cover_title", "cover_kicker"],
+  "preserve": ["text", "numbers", "units", "conditions", "geometry", "line_breaks", "numbering", "contents", "v5_governing_spacing"],
+  "qa": ["native_font_sizes", "all_slide_text_and_geometry_parity", "actual_powerpoint_visual_review", "toc_parity", "source_integrity"],
+  "versioned_output": true
+}

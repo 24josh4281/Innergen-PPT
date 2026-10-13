@@ -85,3 +85,34 @@ Direct-PPTX routes use only their own native validation loops and preserve their
 source fonts. Pretendard applies to SVG-authoring routes. `docs/rules/` style
 rules, Markdown language consistency, and the workflow-package boundary remain
 standing repository conventions from [`CLAUDE.md`](CLAUDE.md).
+
+## User-authorized persistent style: 이너젠 / INNerGEN
+
+When the user requests "이너젠 스타일", "이너젠처럼", "INNerGEN style", or
+"innergen style", or explicitly names a PPTX under `INPUTS/이너젠 PPT 장표 레퍼런스/`
+as a design/style reference, read [the canonical style adapter](.claude/skills/innergen-style/SKILL.md)
+and its linked `docs/styles/innergen/` rules before planning the presentation.
+This is a user-authorized persistent style preference for this workspace.
+Route first through the existing `routing.md`; the adapter adds style inputs,
+not a new executor or Step 3 template selection. Keep the selected owner's gates.
+The saved JSON is a style profile, not a project `spec_lock.md`: materialize its
+decisions into the project's own spec and lock. Never reuse reference client
+content, logos, dates, or numerical values as new-project facts.
+For new SVG pages in this named style only, the user-authorized source-style font
+preference is Malgun Gothic / IBM Plex Sans KR as defined in the profile; this takes precedence
+over the generic SVG Pretendard default. Check installed fonts and record any
+fallback. Other styles retain the standing font policy.
+
+## User-authorized persistent style: 이너캐리 / INNerCarry
+
+When the user requests "이너캐리 스타일", "이너캐리처럼", "INNerCarry style", or
+"InnerCarry style", or names `(이너젠) 이너캐리 소개 자료_260820_v2.3.pptx`
+as a design reference, read [the canonical style adapter](.claude/skills/innercarry-style/SKILL.md)
+and its `docs/styles/innercarry/` design rules. Route first through the existing
+`routing.md`; this adapter supplies style decisions, not an executor or implicit
+Step 3 template path. The source-backed JSON is not a project `spec_lock.md`.
+Current user facts and confirmed values win over the reference. For this named
+SVG style only, IBM Plex Sans KR is the source-family preference; check local
+availability and text fit, and record any fallback. Native PPTX routes preserve
+source fonts. Do not reuse historical source claims, client logos, product
+screenshots, contact information, or numerical values as new-project facts.

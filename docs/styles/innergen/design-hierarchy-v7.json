@@ -1,0 +1,14 @@
+{
+  "version": "7.0",
+  "extends": "design-hierarchy-v6.json",
+  "priority": "latest_user_feedback_readability_emphasis_and_teaching_messages",
+  "scope": "detailed_training",
+  "typography_pt": {"body":12,"body_subheading":14.5,"title":24,"governing":20,"source":10},
+  "analytical_sections": {"background":"#F2F2F2","border":"#D9D9D9","meaningful_boundary_required":true,"preserve_relationship_geometry":true},
+  "spacing_svg_px": {"section_gap":16,"horizontal_padding":24,"heading_body_baseline_gap":[30,34],"body_line_height":[24,26],"connector_increment":8},
+  "emphasis": {"bold_weight":700,"blue":"#13387B","red_underline":"#FF0000","priority":"condition_exception_prohibition_period","key_phrases_per_panel":[1,2],"dark_surface":"white_bold","do_not_emphasize_entire_body":true},
+  "governing": {"register":["기억해야 합니다","준비해야 합니다","대비해야 합니다"],"content":"specific_learning_condition_or_distinction","avoid":"generic_summary_without_learning_point"},
+  "final_message": {"sentences":1,"lines":[1,2],"content":["evidence_to_prepare","judgment_basis","review_target","misapplication_to_avoid"],"avoid_governing_repetition":true,"educational_advice_is_not_new_normative_duty":true},
+  "preserve": ["normative_body_facts","conditions","exceptions","numbers","units","sources","numbering","contents_parity"],
+  "qa": ["actual_powerpoint_geometry","section_padding","text_completeness","native_blue_bold","editable_red_underline","specific_educational_messages"]
+}

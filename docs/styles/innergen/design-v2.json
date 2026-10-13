@@ -1,0 +1,47 @@
+{
+  "schema_version": "2.0",
+  "style_name": "INNerGEN",
+  "updated": "2026-10-01",
+  "inherits_tokens_from": "design.json",
+  "content_rules_from": "design-v2.md",
+  "scope": "신규 이너젠 장표의 의미 구조; 정확한 기존 템플릿을 채우는 경우에는 사용자 보존 조건을 우선",
+  "page_contract": {
+    "title": "메인 제목 / 부제목: 분류·주제 명사구",
+    "lead": "본문 핵심 거버닝 한 문장: ~입니다/합니다",
+    "diagram": "내용의 실제 관계를 표현",
+    "evidence": "기준·단위·경계·출처",
+    "footer": "페이지 탐색 정보"
+  },
+  "semantic_layouts": {
+    "scope": "nested_boundary",
+    "cause_effect": "causal_flow",
+    "condition": "labelled_branches",
+    "comparison": "same_dimension_parallel",
+    "management": "feedback_cycle",
+    "ownership": "role_handoff",
+    "period": "honest_timeline",
+    "classification": "hierarchy"
+  },
+  "avoid": [
+    "내용과 무관한 01·02·03 세 칸 반복",
+    "의미 없는 화살표",
+    "근거 없는 수치 차트와 행렬 임계값",
+    "선택 사항의 의무화",
+    "예외 조건·단위·출처 삭제",
+    "글자 크기 축소로만 과밀 해결"
+  ],
+  "preserve": [
+    "현재 사용자 승인 범위",
+    "원자료와 기존 버전",
+    "확인된 글꼴과 역할 크기",
+    "수치·단위·경계·기간·출처",
+    "필수·선택·예외 및 예외 후 공시 의무"
+  ],
+  "checks": [
+    "원문 주제와 새 장표의 대응",
+    "본문 조건의 정확성",
+    "텍스트와 도형의 편집 가능성",
+    "PPT 렌더와 PDF의 누락·넘침",
+    "대표 장표의 시각적 가독성"
+  ]
+}

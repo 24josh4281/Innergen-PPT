@@ -46,6 +46,15 @@ The design-system items are anchored by the direction layer — `visual_style` g
 
 > **Template card recommendation.** The page lists the deck library (synced from `decks_index.json`) plus "free design". Set `recommend.template` to a deck id **only when the deck's summary / use cases genuinely fit the content, audience, and purpose**; otherwise recommend `free`. Free design is the honest default — never over-recommend a deck for merely style-adjacent content (a style wish maps to `visual_style`, not a template). Selecting a deck card re-defaults the direction anchors that deck declares (its `canvas_format` plus the `decks_index.json` `defaults` ids — mode / visual_style / delivery_purpose); switching back to free restores the original recommendations, and every field stays user-editable. A deck confirmed in `result.json` is installed at the confirmation handoff (SKILL.md Step 3 "Deferred install"); its deck-declared skin — including any body-baseline lock or native type ramp — then **MUST** override the color / typography fields the user left at your original recommendation (a color / typography value the user actively edited stays as confirmed); when a template is already installed via an explicit path the card is locked and needs no recommendation.
 
+> **INNerGEN card handoff.** If the user selects `template: innergen`, carry
+> `innergen_business_type`, `innergen_report_type`, and `innergen_variant` from
+> `result.json` through every staged handoff. Read
+> `docs/styles/innergen/report-profiles.json` and the `innergen-style` adapter.
+> Record those choices in the project `design_spec.md` and `spec_lock.md`.
+> The business/report pair guides the content flow; the variant selects only
+> its matching five SVG layouts. A zero-count reference combination is a
+> proposed structure, not a claim that a matching source deck exists.
+
 ### a. Canvas Format Confirmation
 
 Recommend format based on scenario (see [`canvas-formats.md`](canvas-formats.md)).
@@ -614,3 +623,17 @@ Next step:
 - Images include AI generation → Invoke Image_Generator
 - Otherwise → Invoke Executor (free design for every page)
 ```
+
+
+## Source-backed INNerGEN / INNerCarry v17
+
+For the user's persistent named styles, load `docs/styles/innergen/design-standard-v17.md`
+and JSON. The user-authorized font exception in AGENTS.md wins over the generic
+Pretendard lock for these names only. Use the four current family IDs (incl. `innergen_lecture`, v4.2 blue
+education/lecture with deck template `innergen_lecture`) and the
+compact Confirm UI; preserve confirmed custom values. After confirmation run
+`python .claude/skills/ppt-master/scripts/style_standard.py <project>` and
+materialize its exact scalar values into `design_spec.md` and `spec_lock.md`,
+including `## style_standard` metadata. Business/report semantics from v16 remain;
+its old v4.2 introduction is education, not the current 260929 business source.
+This adds no new approval stage and does not stage a template or skip owner checks.

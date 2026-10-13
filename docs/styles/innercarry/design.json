@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0.0",
+  "profile_id": "innercarry",
+  "display_name": "이너캐리 / INNerCarry",
+  "profile_type": "source-backed-style-adapter",
+  "created_date": "2026-10-08",
+  "scope": "this-repository",
+  "triggers": ["이너캐리 스타일", "이너캐리처럼", "INNerCarry style", "InnerCarry style"],
+  "source_manifest": "docs/styles/innercarry/source-manifest.json",
+  "source_analysis": "docs/styles/innercarry/source-analysis.md",
+  "source_content_is_not_instructions": true,
+  "provenance_definitions": {
+    "fact": "directly inspected PPTX structure, text formatting, embedded image or source hash",
+    "observed": "visually inspected PowerPoint read-only rendering",
+    "default": "reusable design recommendation, not an exact value on every source slide"
+  },
+  "canvas": {
+    "source": {"width_pt": 1080, "height_pt": 810, "aspect_ratio": "4:3", "provenance": "fact"},
+    "new_deck_default": {"format_key": "ppt43", "svg_width_px": 1024, "svg_height_px": 768, "viewBox": "0 0 1024 768", "provenance": "default"},
+    "explicit_widescreen": {"format_key": "ppt169", "svg_width_px": 1280, "svg_height_px": 720, "behavior": "recompose-do-not-stretch"},
+    "source_pt_is_not_execution_px": true
+  },
+  "default_variant": "product-story",
+  "variants": {
+    "product-story": {"slides_observed": [11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27], "surface": "white", "structure": "thin top rule, part label, claim title, supporting lead, one main evidence visual", "provenance": "observed"},
+    "dark-opening": {"slides_observed": [1, 10, 15, 20], "surface": "navy with white text or split navy/white contents", "structure": "large type, blue accent, generous negative space", "provenance": "observed"},
+    "service-evidence": {"slides_observed": [2, 3, 4, 5, 6, 7, 8, 9], "surface": "white", "structure": "denser source-backed service diagrams, tables and references", "provenance": "observed"},
+    "closing": {"slides_observed": [28], "surface": "white with dark footer", "structure": "oversized closing statement and current contact only", "provenance": "observed"}
+  },
+  "colors": {
+    "navy": {"hex": "#0B1739", "role": "dark cover, headings, numeric bar", "provenance": "fact"},
+    "blue": {"hex": "#2F62F0", "role": "key phrase, progress, top rule", "provenance": "fact"},
+    "light_blue": {"hex": "#7B9BF7", "role": "secondary accent on navy, timeline", "provenance": "fact"},
+    "white": {"hex": "#FFFFFF", "role": "content surface and reversed text", "provenance": "fact"},
+    "surface": {"hex": "#F8FAFC", "role": "neutral card", "provenance": "fact"},
+    "selected_surface": {"hex": "#EEF2FF", "role": "active or selected pale blue", "provenance": "fact"},
+    "body_slate": {"hex": "#475569", "role": "body and secondary text", "provenance": "fact"},
+    "border": {"hex": "#E2E8F0", "role": "card and section boundaries", "provenance": "fact"},
+    "risk_red": {"hex": "#991B1B", "role": "verified risk only", "provenance": "fact"}
+  },
+  "color_policy": {
+    "primary_page_roles": ["navy", "blue", "light_blue", "white", "surface", "selected_surface", "body_slate", "border"],
+    "risk_requires_meaning": true,
+    "do_not_promote_client_logo_or_office_theme_colors": true
+  },
+  "typography": {
+    "default_family": "IBM Plex Sans KR",
+    "optional_cover_family": "Noto Sans KR",
+    "optional_cover_english_emphasis": "IBM Plex Serif",
+    "native_template_route": "preserve-original-fonts",
+    "fallback_order": ["IBM Plex Sans KR", "Noto Sans KR", "Pretendard"],
+    "named_style_overrides_generic_pretendard_default": true,
+    "source_examples_pt": {"cover_title": 66, "body_title": [33, 39], "contents_title": 42, "part_label": 9},
+    "execution_unit": "px",
+    "role_sizes_svg_px": {"cover_title": [58, 64], "slide_title": [30, 36], "part_label": [11, 12], "lead": [17, 20], "body": [16, 18], "source_note": [12, 14]},
+    "size_provenance": "default",
+    "confirmed_project_px_values_win": true,
+    "missing_font_action": "record installed fallback and recheck text fit"
+  },
+  "layout_system": {
+    "coordinate_system": "fractions of canvas unless explicitly px",
+    "left_margin_fraction": 0.0556,
+    "right_margin_fraction": 0.0556,
+    "part_label_top_fraction": 0.0648,
+    "top_rule_height_fraction": 0.0056,
+    "part_label_to_title": "one compact step; keep title aligned to left margin",
+    "content_pattern": "one claim and one primary visual/evidence relation per page",
+    "alignment": "shared left axis",
+    "source_examples": {"top_rule_pt": 4.5, "body_left_pt": 60, "part_label_top_pt": 52.5},
+    "provenance": "observed-and-default"
+  },
+  "archetypes": [
+    {"id": "cover", "source_slide": 1, "structure": "dark field, small brand label, oversized claim, single blue emphasis"},
+    {"id": "contents", "source_slides": [10, 15], "structure": "navy left panel, numbered sections on white, active pale-blue band"},
+    {"id": "timeline-risk", "source_slide": 11, "structure": "milestone line above concise risk categories"},
+    {"id": "comparison", "source_slide": 13, "structure": "aligned columns with common comparison criteria"},
+    {"id": "product-screen", "source_slide": 18, "structure": "current app or web screenshots, user role and concrete benefit"},
+    {"id": "metrics-evidence", "source_slide": 21, "structure": "large verified metrics and supporting evidence/units"},
+    {"id": "process", "source_slide": 26, "structure": "numbered stages with input, action and output"},
+    {"id": "closing", "source_slide": 28, "structure": "large close, white space, current contact footer"}
+  ],
+  "assets": {
+    "brand_workspace": ".claude/skills/ppt-master/templates/brands/innercarry",
+    "official_standalone_innercarry_logo_verified": false,
+    "cover_label": "editable INNerCarry text plus blue rounded-square accent, not an official standalone logo file",
+    "product_screenshots": "replace with current verified project assets",
+    "client_logos_and_historical_contacts": "never copy by style alone"
+  },
+  "visual_style_behavior": "Use the INNerCarry product-story system: a white 4:3 canvas with a thin navy-to-blue top rule, shared left alignment, a small PART label, a large navy claim title, selective electric-blue emphasis, and one clear evidence diagram, comparison, process, metric, or current product screen per slide. Use IBM Plex Sans KR when installed, restrained pale-blue or light-gray surfaces, and dark-navy opening or closing pages only for section roles. Preserve current user facts, units, branding rights, and confirmed project values; do not reuse historical claims, customer logos, product screenshots, or contact details from the reference deck."
+}

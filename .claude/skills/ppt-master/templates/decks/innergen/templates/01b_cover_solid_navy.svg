@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1040 720" data-pptx-master="innergen-master-13x9" data-pptx-master-name="이너젠 13:9" data-pptx-layout="innergen-solid-cover" data-pptx-layout-name="이너젠 단색 표지">
+<rect id="master-bg" x="0" y="0" width="1040" height="720" fill="#FFFFFF" data-pptx-layer="master" data-pptx-editable="false"/>
+<line id="cover-top-rule" x1="36" y1="55" x2="1004" y2="55" stroke="#0F243F" stroke-width="2" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="cover-bottom-band" x="0" y="656" width="1040" height="64" fill="#0F243F"  data-pptx-layer="layout" data-pptx-editable="false"/>
+<image id="cover-logo" x="60" y="485" width="135" height="120" xlink:href="../images/innergen-logo-cover-blue.png" preserveAspectRatio="xMidYMid meet" data-pptx-layer="layout" data-pptx-editable="false"/>
+<g id="cover-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="58 178 565 134"><text id="cover-title-carrier" data-pptx-placeholder-carrier="true" x="60" y="235" text-anchor="start" font-family="IBM Plex Sans KR, Malgun Gothic, sans-serif" font-size="43" font-weight="700" fill="#0F243F">{{TITLE}}</text></g>
+<g id="cover-subtitle" data-pptx-placeholder="subtitle" data-pptx-placeholder-idx="1" data-pptx-placeholder-bounds="58 340 565 88"><text id="cover-subtitle-carrier" data-pptx-placeholder-carrier="true" x="60" y="390" text-anchor="start" font-family="IBM Plex Sans KR, Malgun Gothic, sans-serif" font-size="25" font-weight="400" fill="#000000">{{SUBTITLE}}</text></g>
+</svg>

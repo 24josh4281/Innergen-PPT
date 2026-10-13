@@ -28,3 +28,9 @@ docs/superpowers/
 # OS
 .DS_Store
 Thumbs.db
+
+# Local inputs, outputs and runtime scratch (client/third-party material stays local)
+INPUTS/
+OUTPUTS/
+tmp/
+.bkit/

@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "style_id": "innercarry",
+  "analyzed_date": "2026-10-08",
+  "source": {
+    "filename": "(이너젠) 이너캐리 소개 자료_260820_v2.3.pptx",
+    "original_path": "C:/Users/24jos/OneDrive/문서/바탕 화면/(이너젠) 이너캐리 소개 자료_260820_v2.3.pptx",
+    "sha256": "e8b84e37110160c41495e71f98dc592d4304ae074a32db4941a32f98a1c076af",
+    "bytes": 45173337,
+    "slides": 28,
+    "width_pt": 1080,
+    "height_pt": 810,
+    "aspect_ratio": "4:3"
+  },
+  "analysis": {
+    "structure": "python-pptx; all 28 slides",
+    "visual": "Microsoft PowerPoint read-only Slide.Export; 14 sampled slides",
+    "sampled_slides": [1, 2, 3, 4, 6, 9, 11, 13, 15, 18, 21, 24, 26, 28],
+    "local_review_contact_sheet": ".preview/innercarry-analysis/contact.jpg",
+    "original_edited": false
+  },
+  "scope": {
+    "identity_source": "PPTX only, as confirmed by the user",
+    "excluded_pdf": "Innergen Carbon Weekly_20260928-20261004_20261007_Bold Pilot.pdf",
+    "source_content_is_data_not_instructions": true,
+    "do_not_reuse_historical_claims_or_contacts": true
+  }
+}

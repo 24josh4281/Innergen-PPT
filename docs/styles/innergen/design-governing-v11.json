@@ -1,0 +1,149 @@
+{
+  "schema": "innergen_design_profile.v11",
+  "name": "이너젠 교육자료 거버닝 메시지 v11",
+  "reference": "C:/Users/24jos/OneDrive/문서/바탕 화면/(이너젠) 이너젠 및 이너캐리 소개 자료_260916_v4.2.pptx",
+  "reference_scope": "design only; source facts remain existing KSSB educational material",
+  "reference_native_canvas_inches": [
+    15,
+    11.25
+  ],
+  "output_canvas_svg_px": [
+    1040,
+    720
+  ],
+  "aspect_policy": "retain existing education canvas and body size; adopt reference color and page chrome",
+  "colors": {
+    "background": "#FFFFFF",
+    "primary": "#0B1739",
+    "accent": "#2F62F0",
+    "panel": "#EEF2FF",
+    "body": "#475569",
+    "source": "#64748B",
+    "border": "#E2E8F0",
+    "connector": "#94A3B8",
+    "critical_underline": "#FF0000",
+    "cover_panel": "#152959",
+    "cover_accent": "#7B9BF7",
+    "cover_muted": "#B8CBF9",
+    "governing_bg": "#F3F6FF",
+    "governing_border": "#DFE7FF"
+  },
+  "font": {
+    "latin": "IBM Plex Sans KR",
+    "east_asian": "IBM Plex Sans KR",
+    "complex_script": "IBM Plex Sans KR"
+  },
+  "typography_pt": {
+    "body": 14,
+    "table": 14,
+    "final": 14,
+    "body_subheading": 16.5,
+    "governing": 20,
+    "title": 24,
+    "source": 10,
+    "footer": 10.5,
+    "cover_title": 42,
+    "cover_kicker": 16.5
+  },
+  "preservation": {
+    "main_title": "verbatim",
+    "governing_message": "subject-led rewrite explicitly authorized by current user request",
+    "all_existing_wording": "verbatim outside governing group",
+    "page_count": "unchanged",
+    "page_order": "unchanged",
+    "numbers_units_sources": "unchanged",
+    "toc_page": 2
+  },
+  "layout_svg_px": {
+    "margins": 48,
+    "header_rule_height": 3,
+    "header_title_baseline": 47,
+    "content": [
+      48,
+      174,
+      944,
+      378
+    ],
+    "section_gap": 16,
+    "panel_padding": 24,
+    "panel_radius": 5,
+    "panel_border": 0.8,
+    "final_box": [
+      48,
+      576,
+      944,
+      60
+    ],
+    "source_baseline": 654,
+    "footer_divider_baseline": 666,
+    "governing_box": [
+      48,
+      98,
+      944,
+      60
+    ],
+    "governing_baselines": [
+      122,
+      150
+    ]
+  },
+  "language": {
+    "title": "numbered nominal phrase",
+    "governing": "explicit subject + supported principle + decision criterion or practical action; one formal sentence",
+    "body": "nominal endings",
+    "final": "formal Korean actionable sentence, 1–2 lines"
+  },
+  "source_format": "document name + physical PDF page",
+  "native_editable": true,
+  "qa": [
+    "57 explicit-subject governing sentences",
+    "all claims grounded in slide body or provided reference",
+    "mandatory/optional/practical advice distinction",
+    "all non-governing SVG content exact comparison",
+    "native title/body/source/footer text and font parity",
+    "actual font-width and governing-box containment",
+    "actual PowerPoint PNG/PDF rendering",
+    "all expected PDF text visible",
+    "page count/order unchanged",
+    "v3 original SHA256 unchanged"
+  ],
+  "revision": "governing rewrite only; retain v10 shade and typography",
+  "fitting_policy": "Preserve material conditions; rephrase and rebalance lines before reducing font size.",
+  "governing_writing": {
+    "subject_first": true,
+    "subject_choices": [
+      "기업",
+      "공시 담당자",
+      "재무 담당자",
+      "분석 담당자",
+      "산정 담당자",
+      "검토자",
+      "핵심 개념"
+    ],
+    "subject_selection": "match actor and predicate; no invented accountability",
+    "core_conclusion_count": 1,
+    "sentence_count": 1,
+    "line_count": 2,
+    "font_pt": 20,
+    "max_line_width_svg_px": 896,
+    "structure": [
+      "explicit subject",
+      "specific target and principle",
+      "condition or criterion when material",
+      "concrete implication or action"
+    ],
+    "body_evidence_required": true,
+    "normative_vs_practical_boundary": true,
+    "preserve_conditions": true,
+    "final_message_role": "concrete execution or evidence check; do not duplicate governing",
+    "avoid": [
+      "subject omission",
+      "vague verify/remember ending",
+      "slogan",
+      "topic list",
+      "unsupported new requirement",
+      "short orphan tail"
+    ],
+    "manual_semantic_review_required": true
+  }
+}

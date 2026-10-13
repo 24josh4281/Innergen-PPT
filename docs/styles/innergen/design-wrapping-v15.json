@@ -1,0 +1,29 @@
+{
+  "version": "15",
+  "date": "2026-10-03",
+  "scope": "new-or-revised-INNerGEN-slides",
+  "precedence": "current-user > confirmed-project > v15-wrapping-governing-size > applicable-v4-v14",
+  "canvas_reference": {"svg_px": [1040,720], "ppt_pt": [780,540]},
+  "typography": {
+    "education": {"governing_svg_px":22,"governing_ppt_pt":16.5,"body_svg_px":18.67,"body_ppt_pt":14},
+    "presentation": {"governing_svg_px":26.67,"governing_ppt_pt":20,"body_svg_px":24,"body_ppt_pt":18},
+    "explicit_svg_font_size": true,
+    "explicit_svg_text_font_family": true,
+    "user_confirmed_values_win": true
+  },
+  "wrapping": {
+    "measure": "installed-font-and-weight-with-actual-frame-padding",
+    "optional_export_width_attribute": "data-pptx-text-width (positive finite px)",
+    "optional_author_break_preservation": "data-pptx-preserve-line-breaks=true; after actual-width review only",
+    "fits_one_line": "no-manual-break",
+    "overflow": "minimum-required-lines-at-word-or-protected-phrase-boundaries",
+    "equal_length_forced_breaks": false,
+    "orphan_tail": "move-complete-last-phrase-without-deleting-text",
+    "logical_list_items": "retain-separate-items",
+    "table_cells": "use-cell-width-not-canvas-width"
+  },
+  "vertical_alignment": "center-actual-one-or-two-line-extent; reassess-following-elements",
+  "preserve": ["wording","conditions","exceptions","values","units","page-count","page-order","body-size","safe-gaps"],
+  "checks": ["source-content-parity","pptx-pdf-font-sizes","actual-frame-width","unnecessary-wraps","orphan-tails","overlap-clipping","list-semantics","original-preservation"],
+  "implementation_claim": "authoring-and-QA-guidance; not-a-universal-language-boundary-engine"
+}
