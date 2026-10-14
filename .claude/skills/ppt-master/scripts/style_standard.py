@@ -213,6 +213,10 @@ def main(argv=None):
         return 0
     if not args.project: parser.error('project or --check required')
     payload = json.loads((args.project/'confirm_ui/result.json').read_text(encoding='utf-8'))
+    if (payload.get('status') != 'confirmed' or payload.get('notApplied') or
+            payload.get('stage', 'final') != 'final'):
+        print('Final confirmed choices are required. A simulation or intermediate stage cannot be applied.')
+        return 1
     profile = resolve(payload,data)
     dest = args.project/'design_profile_v17.json'
     dest.write_text(json.dumps(profile,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

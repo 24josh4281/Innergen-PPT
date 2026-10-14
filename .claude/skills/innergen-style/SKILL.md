@@ -64,6 +64,17 @@ table cell grammar, series rules and a pre-release checklist. The
 `s21_guidance_focus`, `s22_case_capture`, `s23_key_summary` for these rules.
 v20 refines v4/v5/v11/v12/v13/v16; it does not change v17 metrics or v19 wiring.
 
+After the SVG deck passes `svg_quality_checker.py` with 0 errors, and again
+before hand-off, run the INNerGEN uniformity gate
+`python .claude/skills/ppt-master/scripts/innergen_qaqc.py <project> --deck-type <v20 type>`
+(`docs/styles/innergen/qaqc-v21.md`, rule table `qaqc-v21.json`). It checks the
+fixed chrome geometry (v17), governing grammar and register (v11/v20), title
+form and numbering, TOC ↔ chapter and page-range consistency, per-deck-type
+required and closing layouts, minimum text sizes, palette and the source line,
+and writes `analysis/innergen_qaqc_report.md`. ERROR must be fixed; WARN needs a
+recorded reason; the six render-review items in that document stay a human
+check on the exported PPTX. It does not replace `verify_deck.py`.
+
 A style family alone never stages a template. Use only explicitly selected valid
 template paths. Existing owner gates and source fact protections stay in force.
 
@@ -80,6 +91,13 @@ education completeness; run `consulting_review.py` on a v14-compatible review re
 when present and fix declared-contract errors before handoff. Always distinguish
 that check from source meaning and actual rendered-output review. Old projects
 without the v19 fields retain their existing contracts. No new confirmation gate.
+
+For selection comparisons and whole-deck flow, also read
+`docs/styles/innergen/structure-experience-v21.md`. It connects the v20 outline
+to the existing choices, expands concrete HTML examples to all 40 current layouts,
+and records deck flow, business evidence needs and media acquisition intent in
+the same v19 content plan. Treat those as suggested plans and illustrative previews;
+preserve confirmed outline, page count, visual values and detailed image sources.
 
 ## 1. Load and route
 

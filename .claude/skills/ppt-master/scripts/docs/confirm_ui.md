@@ -300,3 +300,25 @@ When a v19 project has `analysis/source_review_v19.json`, the existing named-sty
 spec check also runs the declared content-contract validator. Missing review records
 are not reported as content passes. Rendering and source-meaning verification remain
 with the selected execution owner.
+
+### Structure comparison and whole-deck flow (v21)
+
+Read `docs/styles/innergen/structure-experience-v21.md`. The v21 overlay adds concrete
+illustrative bodies for the remaining layouts, including the five v20 additions;
+all 40 currently registered structures now have content examples. An optional
+three-up comparison uses the same renderer as the selected large preview. Preserve
+expanded sections and keyboard focus across re-renders. Compact examples adapt to
+screen width; they do not assert the final PPT geometry.
+
+Derive eight suggested deck flows from the existing delivery/report choices and
+v20 rules. Show opening/body/closing, required content and the nine business profiles'
+evidence needs without adding another mandatory choice. Keep current user intent,
+confirmed outline and page count authoritative. The four media intents show layout
+schematics and acquisition inputs only; no network, generation or asset insertion
+occurs in the chooser. Explicit detailed image sources override media defaults.
+
+Keep the v19 selection schema and planning filenames. Materialized content plans
+add `experience_version`, `deck_story`, `business_requirements` and `media_plan`.
+The digest covers v19, v20 and v21 input catalogs. Both planning CLIs reject an
+intermediate result, `simulation_selection`, or `notApplied: true` before writing.
+Offline downloads omit transient `studio_*` keys. No new confirmation gate.

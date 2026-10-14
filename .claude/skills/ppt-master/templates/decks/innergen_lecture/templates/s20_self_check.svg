@@ -5,21 +5,21 @@
 <rect id="head-bg" x="48" y="164" width="944" height="36" fill="#475569" data-pptx-layer="layout" data-pptx-editable="false"/>
 <line id="row-1-rule" x1="48" y1="264" x2="992" y2="264" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
 <circle id="point-1-badge" cx="228" cy="232" r="12" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false"/>
-<text id="point-1-no" x="228" y="238" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="14" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">1</text>
+<text id="point-1-no" x="228" y="238" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="16" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">1</text>
 <rect id="row-2-zebra" x="48" y="264" width="944" height="64" fill="#F3F6FF" data-pptx-layer="layout" data-pptx-editable="false"/>
 <line id="row-2-rule" x1="48" y1="328" x2="992" y2="328" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
 <circle id="point-2-badge" cx="228" cy="296" r="12" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false"/>
-<text id="point-2-no" x="228" y="302" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="14" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">2</text>
+<text id="point-2-no" x="228" y="302" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="16" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">2</text>
 <line id="row-3-rule" x1="48" y1="392" x2="992" y2="392" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
 <circle id="point-3-badge" cx="228" cy="360" r="12" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false"/>
-<text id="point-3-no" x="228" y="366" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="14" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">3</text>
+<text id="point-3-no" x="228" y="366" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="16" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">3</text>
 <rect id="row-4-zebra" x="48" y="392" width="944" height="64" fill="#F3F6FF" data-pptx-layer="layout" data-pptx-editable="false"/>
 <line id="row-4-rule" x1="48" y1="456" x2="992" y2="456" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
 <circle id="point-4-badge" cx="228" cy="424" r="12" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false"/>
-<text id="point-4-no" x="228" y="430" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="14" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">4</text>
+<text id="point-4-no" x="228" y="430" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="16" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">4</text>
 <line id="row-5-rule" x1="48" y1="520" x2="992" y2="520" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
 <circle id="point-5-badge" cx="228" cy="488" r="12" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false"/>
-<text id="point-5-no" x="228" y="494" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="14" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">5</text>
+<text id="point-5-no" x="228" y="494" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="16" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">5</text>
 <rect id="next-bar" x="48" y="532" width="944" height="72" fill="#EEF2FF" data-pptx-layer="layout" data-pptx-editable="false"/>
 <rect id="next-bar-top" x="48" y="532" width="944" height="3" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false"/>
 <text id="next-label" x="68" y="562" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="16" font-weight="700" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false">다음 행동</text>

@@ -111,7 +111,77 @@
 .ig-choice-contract p {margin:0}
 .ig-innergen_lecture {border-top:5px solid var(--ig-primary)}
 .ig-innergen_lecture .ig-claim {border-left:4px solid var(--ig-primary)}
+.ig-deck-story {border:1px solid #cbd5e1;border-radius:8px;padding:14px 18px;margin-bottom:16px;font-size:14px;line-height:1.6}
+.ig-deck-story summary {cursor:pointer;font-weight:700}
+.ig-story-flow {display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:12px;margin-top:14px}
+.ig-story-flow .ig-rich-panel {border-color:#cbd5e1;background:#f6f8fb}
+.ig-deck-story small {color:#526377}
+.ig-example-cards {display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.ig-cards-evidence_pair {grid-template-columns:1fr 1fr}
+.ig-cards-evidence_pair .ig-rich-panel:first-child {background:var(--ig-panel)}
+.ig-cards-keyword .ig-rich-panel {border-top:4px solid var(--ig-primary)}
+.ig-cards-divider {grid-template-columns:1fr}
+.ig-cards-divider .ig-rich-panel {border:0;border-left:4px solid var(--ig-primary);background:var(--ig-panel)}
+.ig-cards-flow_steps {gap:24px}
+.ig-cards-flow_steps .ig-rich-panel,.ig-cards-vertical_steps .ig-rich-panel {position:relative;background:var(--ig-panel)}
+.ig-cards-flow_steps .ig-rich-panel:not(:last-child)::after {content:"→";position:absolute;left:100%;top:40%;width:24px;text-align:center;color:var(--ig-primary)}
+.ig-cards-vertical_steps {grid-template-columns:1fr;gap:24px}
+.ig-cards-vertical_steps .ig-rich-panel {display:grid;grid-template-columns:140px 1fr;align-items:center;gap:12px}
+.ig-cards-vertical_steps p {margin:0}
+.ig-cards-vertical_steps .ig-rich-panel:not(:last-child)::after {content:"↓";position:absolute;left:50%;top:100%;height:24px;color:var(--ig-primary)}
+.ig-cards-milestones .ig-rich-panel {border:0;border-top:4px solid var(--ig-primary);background:var(--ig-panel)}
+.ig-rich-schedule td:not(:first-child) {text-align:center;background:var(--ig-panel)}
+.ig-rich-paired tbody tr:nth-child(even) {background:var(--ig-panel)}
+.ig-state-known {background:#e2ece8;color:#194937;font-weight:700}
+.ig-state-partial {background:#fdf0d9;color:#6b4a19}
+.ig-state-unknown {background:#f0f2f5;color:#475569}
+.ig-focus-columns {display:grid;grid-template-columns:1fr 2fr;gap:16px}
+.ig-rich-focus .ig-focus-columns {grid-template-columns:1fr 2.2fr 1.6fr}
+.ig-example-nav {list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.ig-example-nav li {padding:12px;border:1px solid var(--ig-border)}
+.ig-example-nav .ig-active-item {background:var(--ig-primary);color:white;font-weight:700}
+.ig-focus-notes,.ig-capture-notes {grid-template-columns:1fr}
+.ig-capture-columns {display:grid;grid-template-columns:1.5fr 1fr;gap:18px}
+.ig-document-specimen {background:var(--ig-panel);border:1px dashed var(--ig-primary);padding:14px;min-width:0}
+.ig-specimen-label {font-size:12px;font-weight:700;color:var(--ig-primary);margin:0 0 12px}
+.ig-compare-toggle {border:1px solid #b9c8d9;background:#eef3f9;padding:9px 14px;border-radius:6px;margin:0 0 16px 18px}
+.ig-comparison {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:4px 0 24px}
+.ig-comparison-card {border:1px solid #cbd5e1;border-radius:8px;padding:12px;min-width:0;background:#f6f8fb;display:flex;flex-direction:column}
+.ig-comparison-card h3 {font-size:16px;margin:4px 0}
+.ig-comparison-card>p {font-size:13px;line-height:1.6}
+.ig-comparison .ig-slide {padding:14px;min-height:0;aspect-ratio:auto}
+.ig-comparison .ig-slide-title {font-size:18px}
+.ig-comparison .ig-claim {font-size:14px;padding:10px}
+.ig-comparison .ig-rich-body {font-size:13px}
+.ig-comparison .ig-rich-table {min-width:0;font-size:13px;table-layout:fixed}
+.ig-comparison .ig-table-wrap {overflow-x:auto}
+.ig-comparison .ig-education-detail {grid-template-columns:1fr}
+.ig-comparison .ig-tree-children {grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.ig-comparison .ig-tree-child {padding:10px 5px}
+.ig-comparison .ig-process-steps,.ig-comparison .ig-asymmetric-cols,.ig-comparison .ig-chart-pair,.ig-comparison .ig-answer-pair,.ig-comparison .ig-decision-branches {grid-template-columns:1fr}
+.ig-comparison .ig-process-step:not(:last-child)::after {content:"↓";top:100%;left:50%;height:20px}
+.ig-comparison .ig-process-step .ig-rich-panel {display:grid;grid-template-columns:34px 1fr;gap:8px;padding:9px}
+.ig-comparison .ig-process-step .ig-rich-panel p {margin:0}
+.ig-comparison .ig-claim,.ig-comparison .ig-rich-panel p,.ig-comparison .ig-rich-table td {word-break:keep-all;overflow-wrap:break-word}
+.ig-comparison .ig-decision-question {max-width:100%}
+.ig-comparison .ig-example-cards,.ig-comparison .ig-focus-columns,.ig-comparison .ig-capture-columns {grid-template-columns:1fr}
+.ig-comparison .ig-cards-flow_steps .ig-rich-panel:not(:last-child)::after {content:"↓";top:100%;left:50%}
+.ig-comparison-choose {border:1px solid #94a3b8;padding:10px;background:#fff;border-radius:5px;margin-top:8px}
+.ig-comparison-choose[aria-pressed=true] {background:#244469;color:white}
+.ig-media-plan {padding:18px;border:1px solid #cbd5e1;border-radius:8px;line-height:1.6;font-size:14px;margin-bottom:12px}
+.ig-media-plan h3 {font-size:16px;margin:0 0 14px}
+.ig-media-example {display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.ig-media-example .ig-rich-panel {background:#eef3f9;border:1px solid #cbd5e1;min-height:90px}
+.ig-media-example .ig-media-source {border-style:dashed;background:#f9fafb}
+.ig-media-example .ig-media-illustration {background:#f0eef7;border-style:dashed}
+.ig-media-plan small {display:block;color:#526377}
+.ig-source-override {padding:10px;background:#fff2db}
+.ig-studio button:focus-visible,.ig-studio summary:focus-visible,.ig-studio select:focus-visible {outline:3px solid #2866a5;outline-offset:3px}
 @media(max-width:720px) {
+    .ig-story-flow,.ig-comparison,.ig-focus-columns,.ig-rich-focus .ig-focus-columns,.ig-capture-columns,.ig-cards-evidence_pair,.ig-cards-flow_steps {grid-template-columns:1fr}
+    .ig-cards-flow_steps .ig-rich-panel:not(:last-child)::after {content:"↓";top:100%;left:50%}
+    .ig-cards-vertical_steps .ig-rich-panel {grid-template-columns:1fr}
+    .ig-compare-toggle {margin-left:0;display:block}
     .ig-design-choices {grid-template-columns:repeat(2,minmax(0,1fr))}
     .ig-asymmetric-cols,.ig-chart-pair,.ig-answer-pair,.ig-education-detail,.ig-choice-contract {grid-template-columns:1fr}
     .ig-process-steps {grid-template-columns:1fr;gap:20px}

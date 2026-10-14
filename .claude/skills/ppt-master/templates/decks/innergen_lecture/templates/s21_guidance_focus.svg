@@ -3,13 +3,13 @@
 <rect id="top-rule" x="0" y="0" width="1040" height="3" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false"/>
 <rect id="governing-box" x="48" y="70" width="944" height="80" rx="5" ry="5" fill="#F3F6FF" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
 <rect id="nav-bg" x="48" y="164" width="122" height="440" fill="#EEF2FF" data-pptx-layer="layout" data-pptx-editable="false"/>
-<text id="nav-label" x="60" y="190" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="14" font-weight="700" fill="#64748B" data-pptx-layer="layout" data-pptx-editable="false">세부 항목</text>
+<text id="nav-label" x="60" y="190" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="16" font-weight="700" fill="#64748B" data-pptx-layer="layout" data-pptx-editable="false">세부 항목</text>
 <line id="req-rail-top" x1="182" y1="165" x2="712" y2="165" stroke="#0B1739" stroke-width="2" data-pptx-layer="layout" data-pptx-editable="false"/>
 <line id="req-rail-bottom" x1="182" y1="196" x2="712" y2="196" stroke="#0B1739" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
 <rect id="req-common-tag" x="182" y="210" width="80" height="26" fill="#0B1739" data-pptx-layer="layout" data-pptx-editable="false"/>
-<text id="req-common-text" x="222" y="229" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="14" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">공통</text>
+<text id="req-common-text" x="222" y="229" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="16" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">공통</text>
 <rect id="req-special-tag" x="182" y="410" width="80" height="26" fill="#7B9BF7" data-pptx-layer="layout" data-pptx-editable="false"/>
-<text id="req-special-text" x="222" y="429" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="14" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">특화</text>
+<text id="req-special-text" x="222" y="429" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="16" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">특화</text>
 <rect id="focus-panel" x="724" y="164" width="268" height="440" fill="#F3F6FF" data-pptx-layer="layout" data-pptx-editable="false"/>
 <rect id="focus-bar" x="724" y="164" width="268" height="4" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false"/>
 <text id="focus-label" x="744" y="198" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="20" font-weight="700" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false">핵심 Focus</text>

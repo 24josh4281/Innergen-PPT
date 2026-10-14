@@ -1,0 +1,290 @@
+{
+  "version": "21",
+  "date": "2026-10-14",
+  "purpose": "Rule table for innergen_qaqc.py — uniformity gate for INNerGEN decks built from docs/styles rules (v4/v5 hierarchy, v11/v20 governing, v16 citation, v17 geometry, v18 density, v20 TOC/closing).",
+  "doc": "docs/styles/innergen/qaqc-v21.md",
+  "families": {
+    "innergen_lecture": {
+      "label": "이너젠 교육·강의(블루)",
+      "canvas": [
+        1040,
+        720
+      ],
+      "accent": "#2F62F0",
+      "primary": "#0B1739",
+      "muted": "#64748B",
+      "top_rule": {
+        "x": 0,
+        "y": 0,
+        "w": 1040,
+        "h": 3
+      },
+      "title": {
+        "x": 48,
+        "baseline": 50,
+        "size": 32,
+        "weight": "700",
+        "fill": "#0B1739",
+        "tolerance": 2
+      },
+      "governing": {
+        "box": [
+          48,
+          70,
+          944,
+          80
+        ],
+        "size": 24,
+        "weight": "700",
+        "fill": "#2F62F0",
+        "baseline_one_line": 118,
+        "baseline_two_lines": [
+          101,
+          133
+        ],
+        "max_lines": 2,
+        "inner_width": 896,
+        "tolerance": 3
+      },
+      "source": {
+        "baseline": 630,
+        "size": 16,
+        "fill": "#64748B",
+        "prefix": "출처",
+        "tolerance": 3
+      },
+      "footer": {
+        "line_y": 648,
+        "logo": [
+          48,
+          660,
+          40,
+          40
+        ],
+        "label": {
+          "x": 98,
+          "baseline": 686,
+          "size": 14
+        },
+        "page_number": {
+          "x": 992,
+          "baseline": 686,
+          "size": 16,
+          "anchor": "end"
+        }
+      },
+      "content_zone": [
+        48,
+        164,
+        944,
+        440
+      ],
+      "exempt_layout_keywords": [
+        "cover",
+        "ending",
+        "toc",
+        "section-divider"
+      ],
+      "role_sizes": {
+        "title": 32,
+        "governing": 24,
+        "body": 24,
+        "card_title": 22,
+        "subheading": 20,
+        "table": 18,
+        "annotation": 16,
+        "footnote": 16,
+        "footer": 14
+      }
+    }
+  },
+  "font": {
+    "required_family": "Pretendard",
+    "min_px_content": 16,
+    "min_px_footer": 14
+  },
+  "governing": {
+    "max_lines": 2,
+    "chars_no_space": {
+      "24": {
+        "one_line": 38,
+        "two_lines": 75
+      },
+      "22": {
+        "one_line": 42,
+        "two_lines": 85
+      }
+    },
+    "min_chars": 12,
+    "registers": {
+      "external": {
+        "label": "완결 문장체",
+        "endings": [
+          "니다",
+          "다.",
+          "다"
+        ],
+        "deck_types": [
+          "lecture",
+          "handout",
+          "seminar",
+          "proposal",
+          "interim",
+          "final",
+          "insight"
+        ]
+      },
+      "internal": {
+        "label": "개조식",
+        "endings": [
+          "음",
+          "임",
+          "됨",
+          "함",
+          "필요",
+          "中",
+          "예정",
+          "검토",
+          "요"
+        ],
+        "deck_types": [
+          "kickoff",
+          "weekly",
+          "biweekly",
+          "monthly",
+          "diagnosis",
+          "benchmark"
+        ]
+      },
+      "promise_endings": [
+        "예정입니다",
+        "예정임"
+      ]
+    },
+    "forbidden_starts": [
+      "이것은",
+      "이를 통해",
+      "중요한 것은",
+      "이는 ",
+      "그리고",
+      "또한"
+    ],
+    "forbidden_phrases": [
+      "체계적으로 관리",
+      "종합적으로 검토",
+      "연결이 중요",
+      "적극 대응",
+      "효과적으로 관리"
+    ],
+    "question_mark_warn": true,
+    "number_pattern": "[0-9０-９]|％|%",
+    "duplicate_similarity": 0.9
+  },
+  "title": {
+    "min_chars": 4,
+    "max_chars": 34,
+    "sentence_endings": [
+      "다",
+      "요",
+      "니다",
+      "함",
+      "음"
+    ],
+    "numbering_regex": "^\\s*(Ⅰ|Ⅱ|Ⅲ|Ⅳ|Ⅴ|Ⅵ|Ⅶ|Ⅷ|Ⅸ|Ⅹ|[IVX]+\\.|\\d+(\\.\\d+)*\\.?|\\d+-\\d+|부록|참고|도입|맺음|\\[참고\\]|\\[Back-up\\])",
+    "repeat_limit": 3,
+    "series_marks": [
+      "(계속)",
+      "/"
+    ]
+  },
+  "toc": {
+    "layouts": [
+      "innergen-intro-toc",
+      "innergen-intro-toc-pages"
+    ],
+    "divider_layouts": [
+      "innergen-intro-section-divider"
+    ],
+    "match_min_chars": 4
+  },
+  "structure": {
+    "max_consecutive_same_layout": 4,
+    "max_share_single_layout": 0.6,
+    "closing_layouts": {
+      "lecture": [
+        "innergen-intro-key-summary",
+        "innergen-intro-self-check",
+        "innergen-intro-content-final"
+      ],
+      "seminar": [
+        "innergen-intro-key-takeaways"
+      ],
+      "proposal": [
+        "innergen-intro-key-takeaways"
+      ],
+      "kickoff": [
+        "innergen-intro-actor-checklist",
+        "innergen-intro-key-takeaways",
+        "innergen-intro-phase-roadmap"
+      ],
+      "weekly": [
+        "innergen-intro-actor-checklist"
+      ],
+      "monthly": [
+        "innergen-intro-phase-roadmap"
+      ],
+      "diagnosis": [
+        "innergen-intro-entity-matrix"
+      ],
+      "interim": [
+        "innergen-intro-key-takeaways",
+        "innergen-intro-vertical-chevron"
+      ],
+      "final": [
+        "innergen-intro-key-takeaways",
+        "innergen-intro-entity-matrix"
+      ],
+      "insight": [
+        "innergen-intro-key-takeaways",
+        "innergen-intro-key-summary"
+      ]
+    },
+    "required_layouts": {
+      "lecture": [
+        "innergen-intro-toc-pages|innergen-intro-toc",
+        "innergen-intro-guidance-focus|innergen-intro-case-capture",
+        "innergen-intro-self-check|innergen-intro-key-summary"
+      ],
+      "kickoff": [
+        "innergen-intro-toc-pages|innergen-intro-toc",
+        "innergen-intro-actor-checklist"
+      ],
+      "final": [
+        "innergen-intro-toc-pages|innergen-intro-toc",
+        "innergen-intro-exec-summary|innergen-intro-kpi"
+      ]
+    }
+  },
+  "source_line": {
+    "required_on_layouts_with": [
+      "chart",
+      "table",
+      "evidence",
+      "entity-matrix",
+      "chart-insight",
+      "chart-table",
+      "maturity",
+      "period",
+      "compare"
+    ],
+    "format_regex": "^출처\\s*[:：]"
+  },
+  "render_review": [
+    "제목·거버닝·출처·푸터가 모든 본문 장표에서 같은 자리에 있는가",
+    "거버닝이 두 줄 이내이고 박스 안에서 세로 가운데인가",
+    "칸 글자가 넘치거나 잘리지 않는가(표·카드·배지)",
+    "강조는 장표당 한 곳인가",
+    "같은 질문의 장표가 같은 구조·색·위치인가",
+    "사례·예시 수치에 '예시' 표기가 있는가"
+  ]
+}

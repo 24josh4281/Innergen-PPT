@@ -27,6 +27,11 @@ structure choices without changing the INNerCarry canvas, fonts or image acquisi
 owner. The same content-contract checker is available; its declared coverage is not
 actual PPT/PDF verification or a legal conclusion.
 
+Read `docs/styles/innergen/structure-experience-v21.md` for the optional three-way
+comparison, whole-deck flow and media plan in the same chooser. All 40 registered
+structures have illustrative content. These examples neither change the Carry
+visual profile nor acquire images or confirm an outline for an existing project.
+
 ## Load
 
 1. Read `.claude/skills/ppt-master/workflows/routing.md` first and load only

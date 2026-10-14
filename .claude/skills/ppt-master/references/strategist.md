@@ -646,3 +646,11 @@ conditions in the page outline. Record the source-unit IDs and visible condition
 detail and answer destinations. Use `consulting_review.py` for an existing v14-format
 review record, then separately inspect source meaning and actual rendered pages.
 Do not import the attached example fonts, regulatory claims or sample chart values.
+
+**Reference — not a constraint**: Read `docs/styles/innergen/structure-experience-v21.md`
+for the current comparison interface. Consume `content_plan_v19.deck_story` as a
+suggested opening/body/closing outline; keep the current user's confirmed outline
+and page count. Use `business_requirements` to identify needed sources. Translate
+`media_plan` into the selected owner's resource plan, preserving detailed image
+sources and notes. Its `not_started` status is not evidence of acquired assets.
+Concrete HTML previews never supply client facts or replace output validation.

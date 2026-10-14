@@ -100,10 +100,45 @@
         });
         tree.appendChild(row); return tree;
     }
+    function cards(rows, cls) {
+        var group = node("div", "ig-example-cards " + (cls || ""));
+        rows.forEach(function (row) { group.appendChild(panel(row[0], row[1])); });
+        return group;
+    }
+    function navigation(ex) {
+        var list = node("ol", "ig-example-nav");
+        ex.items.forEach(function (label, i) {
+            var item = node("li", i === ex.active ? "ig-active-item" : "", label);
+            if (i === ex.active) item.setAttribute("aria-current", "step");
+            list.appendChild(item);
+        });
+        return list;
+    }
     function richBody(body, layout, education) {
         var ex = layout.preview, kind = layout.pattern;
         body.className = "ig-rich-body ig-rich-" + kind;
-        if (kind === "concept") {
+        if (["cards", "evidence_pair", "keyword", "divider", "flow_steps", "vertical_steps", "milestones"].indexOf(kind) >= 0) {
+            body.appendChild(cards(ex.cards, "ig-cards-" + kind));
+        } else if (kind === "zoom" || kind === "focus") {
+            var focus = node("div", "ig-focus-columns");
+            focus.appendChild(navigation(ex)); focus.appendChild(panel(ex.detail_title, ex.detail));
+            if (kind === "focus") focus.appendChild(cards(ex.cards, "ig-focus-notes"));
+            body.appendChild(focus);
+        } else if (kind === "capture") {
+            var capture = node("div", "ig-capture-columns"), specimen = node("div", "ig-document-specimen");
+            specimen.appendChild(node("p", "ig-specimen-label", ex.document_title));
+            specimen.appendChild(table(["항목", "가상 기록"], ex.document_rows));
+            specimen.appendChild(node("p", "ig-relation-note", "① 상태 · ② 출처 연결"));
+            capture.appendChild(specimen); capture.appendChild(cards(ex.annotations, "ig-capture-notes"));
+            body.appendChild(capture);
+        } else if (kind === "heatmap") {
+            var map = table(ex.headers, ex.rows);
+            map.querySelectorAll("tbody tr").forEach(function (row) {
+                Array.from(row.children).slice(1).forEach(function (cell) {
+                    cell.className = { "확인": "ig-state-known", "부분 확인": "ig-state-partial", "미확인": "ig-state-unknown" }[cell.textContent] || "";
+                });
+            }); body.appendChild(map);
+        } else if (kind === "concept") {
             body.appendChild(branches(ex)); body.appendChild(table(ex.headers, ex.rows));
         } else if (kind === "tree") {
             body.appendChild(branches(ex, ex.outputs));
@@ -167,6 +202,9 @@
         if (kind === "asymmetric") labels = ["대상 A 상세", "대상 B", "공통 통합·조건"];
         if (kind === "decision") labels = ["판단 조건", "예", "아니오", "미확인"];
         if (kind === "chart" || kind === "chart_table") labels = ["값 비교", "지표·해석", "단위·출처"];
+        if (ex.cards) labels = ex.cards.map(function (row) { return row[0]; });
+        if (kind === "zoom" || kind === "focus") labels = ["전체 항목", ex.detail_title, "상세·조건"];
+        if (kind === "capture") labels = ["원본·화면", "설명 번호", "출처·한계"];
         labels.slice(0, 5).forEach(function (text) { root.appendChild(node("span", "", text)); });
         return root;
     }
@@ -194,7 +232,7 @@
         var body = node("div", "ig-layout ig-pattern-" + layout.pattern);
         if (layout.preview) {
             slide.classList.add("ig-rich-slide");
-            richBody(body, layout, contentMode(state) === "education");
+            richBody(body, layout, contentMode(state) === "education" && !compact);
         } else if (layout.pattern === "table") {
             var table = node("table"), head = node("thead"), tr = node("tr");
             layout.slots.forEach(function (s) { tr.appendChild(node("th", "", s)); }); head.appendChild(tr); table.appendChild(head);
@@ -227,6 +265,7 @@
         Object.keys(data.profiles).forEach(function (id) {
             var p = data.profiles[id], button = node("button", "ig-design", p.label);
             button.type = "button"; button.dataset.profile = id;
+            button.setAttribute("aria-label", "디자인 선택: " + p.label);
             button.setAttribute("aria-pressed", String(state.style_family === id));
             button.disabled = !!options.locked;
             var stripe = node("span", "ig-stripe"); stripe.style.background = p.colors.primary;
@@ -246,7 +285,21 @@
             modeInfo.appendChild(node("strong", "", modeContract.label + " · " + modeContract.question));
             modeInfo.appendChild(node("p", "", modeContract.modules.join(" → ")));
             modeInfo.appendChild(node("small", "", "자료 구성의 읽기 순서입니다. 실제 업무 절차를 뜻하지 않습니다.")); root.appendChild(modeInfo);
+            if (catalog.experience) {
+                var story = catalog.experience.deck_stories[state.style_delivery_mode + "|" + state.innergen_report_type];
+                var deck = node("details", "ig-deck-story"); deck.open = !!state.studio_story_open;
+                deck.appendChild(node("summary", "", "도입부터 마무리까지 · " + story.label));
+                var flow = node("div", "ig-story-flow");
+                story.flow.forEach(function (text, i) { flow.appendChild(panel(["도입", "본문", "마무리"][i], text)); });
+                deck.appendChild(flow);
+                deck.appendChild(node("p", "", "빠뜨리지 않을 내용: " + story.must_have.join(" · ")));
+                deck.appendChild(node("p", "ig-business-needs", data.business_types[state.innergen_business_type].label_ko + "에서 확인할 항목: " + data.business_types[state.innergen_business_type].required.join(" · ")));
+                deck.appendChild(node("small", "", story.note));
+                deck.addEventListener("toggle", function () { state.studio_story_open = deck.open; }); root.appendChild(deck);
+            }
             var otherGoal = node("details", "ig-other-goal");
+            otherGoal.open = !!state.studio_goal_open;
+            otherGoal.addEventListener("toggle", function () { state.studio_goal_open = otherGoal.open; });
             otherGoal.appendChild(node("summary", "", "다른 질문으로 추천받기 · 현재: " + catalog.goals[effectiveGoal(state)].label));
             select(otherGoal, "이번 장표의 질문", catalog.goals, state.structure_goal || "auto", function (v) { onChange("structure_goal", v); });
             root.appendChild(otherGoal);
@@ -266,6 +319,7 @@
         available.forEach(function (id) {
             var item = data.layouts[id], b = node("button", "ig-structure", item.label);
             b.type = "button"; b.dataset.layout = id; b.setAttribute("aria-pressed", String(state.layout_choice === id));
+            b.setAttribute("aria-label", "구조 선택: " + item.label);
             b.prepend(mini(item));
             if (recs.indexOf(id) >= 0) b.appendChild(node("span", "ig-rec-badge", "추천 " + (recs.indexOf(id) + 1)));
             b.appendChild(node("small", "", item.purpose));
@@ -274,6 +328,28 @@
         }); root.appendChild(layoutrow);
         var all = node("button", "ig-all", state.studio_show_all ? "추천 구조만 보기" : "전체 구조 " + Object.keys(data.layouts).length + "개 보기");
         all.type = "button"; all.addEventListener("click", function () { onChange("studio_show_all", !state.studio_show_all); }); root.appendChild(all);
+        all.setAttribute("aria-label", "전체 구조 목록 전환"); all.setAttribute("aria-expanded", String(!!state.studio_show_all));
+        var compare = node("button", "ig-compare-toggle", state.studio_compare ? "비교 접기" : "추천 3개 나란히 비교");
+        compare.type = "button"; compare.setAttribute("aria-label", "추천 구조 비교 전환");
+        compare.setAttribute("aria-expanded", String(!!state.studio_compare));
+        compare.addEventListener("click", function () { onChange("studio_compare", !state.studio_compare); }); root.appendChild(compare);
+        if (state.studio_compare) {
+            root.appendChild(node("p", "ig-caption", "비교에서는 핵심 구조를 먼저 보여줍니다. 교육 보충 설명은 아래 큰 예시에서 확인할 수 있습니다."));
+            var comparison = node("div", "ig-comparison");
+            recs.forEach(function (id) {
+                var item = data.layouts[id], card = node("section", "ig-comparison-card");
+                card.dataset.compareLayout = id;
+                card.appendChild(node("h3", "", item.label));
+                card.appendChild(node("p", "", "이럴 때: " + item.purpose));
+                preview(card, data, Object.assign({}, state, {layout_choice: id}), true);
+                card.appendChild(node("p", "ig-comparison-caution", "필요한 자료: " + item.required_evidence.join(" · ")));
+                var choose = node("button", "ig-comparison-choose", state.layout_choice === id ? "선택됨" : "이 구조 선택");
+                choose.type = "button"; choose.setAttribute("aria-label", "비교에서 선택: " + item.label);
+                choose.setAttribute("aria-pressed", String(state.layout_choice === id));
+                choose.addEventListener("click", function () { onChange("layout_choice", id); }); card.appendChild(choose);
+                comparison.appendChild(card);
+            }); root.appendChild(comparison);
+        }
         var display = node("div", "ig-preview"); display.setAttribute("aria-live", "polite"); preview(display, data, state); root.appendChild(display);
         var chosen = data.layouts[state.layout_choice];
         if (chosen.required_evidence) {
@@ -288,6 +364,32 @@
         function pt(value, fallback) { return value == null ? fallback : Math.round(Number(value) * .75 * 100) / 100; }
         root.appendChild(node("p", "ig-metrics", (typ.body && typ.body.cjk || p.font) + " · 제목 " + pt(sizes.title, m.pt.title) + "pt · 핵심 문장 " + pt(sizes.governing, m.pt.governing) + "pt · 본문 " + pt(typ.body_size, m.pt.body) + "pt · 표 " + pt(sizes.table, m.pt.table) + "pt · 열 간격 12pt"));
         select(root, "도식·그림 사용", data.media_modes, state.media_mode, function (v) { onChange("media_mode", v); });
+        if (catalog && catalog.experience) {
+            var mediaPlan = catalog.experience.media_plans[state.media_mode];
+            var media = node("section", "ig-media-plan"); media.dataset.mediaMode = state.media_mode;
+            media.appendChild(node("h3", "", "선택하면 이렇게 구성됩니다"));
+            var mediaExample = node("div", "ig-media-example");
+            if (state.media_mode === "diagram" || state.media_mode === "mixed") {
+                var diagram = panel("편집 가능한 도식", "자료 접수 → 항목 점검 → 검토 기록", "ig-media-diagram");
+                mediaExample.appendChild(diagram);
+            }
+            if (state.media_mode === "search" || state.media_mode === "mixed") {
+                mediaExample.appendChild(panel("원문 그림·실제 화면 배치", "확보한 원본 + 설명 번호 + 출처·버전·사용 조건", "ig-media-source"));
+            }
+            if (state.media_mode === "ai") {
+                mediaExample.appendChild(panel("설명 삽화 배치", "생성 전 배치 예시 · 개념·장면을 시각화", "ig-media-illustration"));
+            }
+            media.appendChild(mediaExample); media.appendChild(node("p", "", mediaPlan.result));
+            media.appendChild(node("p", "", "어울리는 용도: " + mediaPlan.use_when));
+            media.appendChild(node("p", "", "필요한 자료: " + mediaPlan.inputs.join(" · ")));
+            media.appendChild(node("p", "", "제작 순서: " + mediaPlan.steps.join(" → ")));
+            media.appendChild(node("small", "", mediaPlan.limit));
+            var sourceDefaults = data.media_modes[state.media_mode].image_usage.slice().sort().join("|");
+            if (state.image_usage && state.image_usage.slice().sort().join("|") !== sourceDefaults) {
+                media.appendChild(node("p", "ig-source-override", "상세 설정에서 다른 이미지 출처를 선택했습니다. 확정한 상세 설정이 제작에 우선합니다."));
+            }
+            root.appendChild(media);
+        }
         root.appendChild(node("p", "ig-caption", data.media_modes[state.media_mode].description + " · 검색·생성은 장표 제작 단계에서 실행합니다."));
         if (state.innergen_report_type === "interim") root.appendChild(node("p", "ig-caption", "중간보고는 구성 제안입니다. 직접 해당하는 원본으로 확인된 자료는 없습니다."));
         root.appendChild(node("p", "ig-caption", "미리보기는 구조 예시이며 PPT 출력 검증을 대신하지 않습니다. 상세 설정의 변경값이 제작에 우선합니다."));

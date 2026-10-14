@@ -13,6 +13,7 @@
 <line id="toc-4-rule" x1="48" y1="472" x2="992" y2="472" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
 <line id="toc-5-rule" x1="48" y1="538" x2="992" y2="538" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
 <line id="toc-6-rule" x1="48" y1="604" x2="992" y2="604" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+$B
 <line id="footer-line" x1="48" y1="648" x2="992" y2="648" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
 <image id="footer-logo" x="48" y="660" width="40" height="40" xlink:href="../images/innergen-logo-cover-blue.png" preserveAspectRatio="xMidYMid meet" data-pptx-layer="layout" data-pptx-editable="false"/>
 <circle id="toc-1-badge" cx="72" cy="238" r="20" fill="#2F62F0"/>
