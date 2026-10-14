@@ -36,8 +36,11 @@ if str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
 from console_encoding import configure_utf8_stdio  # noqa: E402
 
-REPO = _SCRIPTS_DIR.parents[3]
+REPO = _SCRIPTS_DIR.parents[min(3, len(_SCRIPTS_DIR.parents) - 1)]
 RULES_PATH = REPO / "docs/styles/innergen/qaqc-v21.json"
+# Standalone skill bundles (build_chat_skill.py) ship the rule table beside the skill.
+if not RULES_PATH.is_file():
+    RULES_PATH = _SCRIPTS_DIR.parent / "references/qaqc-v21.json"
 
 
 # ---------------------------------------------------------------- helpers

@@ -112,6 +112,14 @@ sh setup.sh
 
 받은 폴더를 에이전트에서 엽니다 — IDE형이면 File → Open Folder, CLI형이면 폴더에서 `claude` / `codex` / `gemini` 실행. 그다음 "이너젠 스타일로 이 자료 컨설팅 장표 만들어줘"처럼 요청하면 됩니다.
 
+**claude.ai 채팅·Cowork에서 쓰기 (선택)** — 채팅은 이 폴더를 읽지 못하므로 독립 실행판 스킬 `innergen-deck`을 따로 올립니다. 이너젠 세 계열 템플릿, SVG→PPTX 변환기, 이너젠 QA/QC, 규칙 문서를 한 ZIP에 담습니다.
+
+```bash
+python .claude/skills/ppt-master/scripts/build_chat_skill.py
+```
+
+만들어진 `OUTPUTS/claude-chat-skill/innergen-deck.zip`을 claude.ai **설정 → Capabilities(Skills) → Upload skill**로 올립니다. 채팅판에는 확인 UI·AI 이미지 생성·나레이션·PowerPoint 렌더 검증이 없고, PPT 구조는 flat(사용자 정의 마스터 없음)입니다. Claude Design에서는 스킬 대신 디자인 시스템(색·글꼴·레이아웃 기준)을 씁니다.
+
 **4단계 (선택) — AI 이미지 생성**
 
 표지·인포그래픽에 AI 이미지를 쓰려면 둘 중 하나:
