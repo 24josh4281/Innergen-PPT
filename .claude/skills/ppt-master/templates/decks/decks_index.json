@@ -13,7 +13,7 @@
   "innercarry": {
     "summary": "이너캐리 4:3 컴팩트 템플릿 — 거버닝 1줄·본문 12pt 내외(v22 컴팩트), 기본 레이아웃 + 구조화 장표 s01–s23 + 목차·장 구분·교육 장표",
     "canvas_format": "ppt43",
-    "page_count": 34,
+    "page_count": 53,
     "primary_color": "#0B1739"
   },
   "innergen": {
@@ -29,13 +29,13 @@
   "innergen_business": {
     "summary": "이너젠 회사소개 16:9(720×405pt) 컴팩트 템플릿 — 거버닝 1줄·본문 12pt 내외(v22 컴팩트), 기본 레이아웃 + 구조화 장표 s01–s23 + 목차·장 구분·교육 장표",
     "canvas_format": "ppt169s",
-    "page_count": 34,
+    "page_count": 53,
     "primary_color": "#518FFF"
   },
   "innergen_lecture": {
     "summary": "이너젠 교육·강의(블루) 13:9 컴팩트 템플릿 — 거버닝 1줄·본문 12pt 내외(v22 컴팩트), 기본 레이아웃 + 구조화 장표 s01–s23 + 목차·장 구분·교육 장표",
     "canvas_format": "ppt139",
-    "page_count": 35,
+    "page_count": 54,
     "primary_color": "#0B1739"
   },
   "jangpm": {

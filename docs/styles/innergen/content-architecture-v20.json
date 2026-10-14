@@ -913,20 +913,33 @@
         "s17_decision_tree"
       ],
       "과업 개요·범위": [
+        "s24_project_overview",
         "03a_content",
         "s14_task_structure"
       ],
       "절차·방법론": [
+        "s33_approach_matrix",
+        "s40_process_steps_detail",
         "s15_vertical_chevron",
         "s08_phase_roadmap"
       ],
-      "일정": "charts/gantt_chart",
-      "데이터 요청": "s12_actor_checklist(요청물·기간·대상·형태·용도·담당·기한)",
+      "일정": [
+        "s25_gantt_schedule",
+        "charts/gantt_chart"
+      ],
+      "데이터 요청": [
+        "s26_data_request",
+        "s12_actor_checklist(요청물·기간·대상·형태·용도·담당·기한)"
+      ],
       "과업 현황·진행": [
+        "s28_status_board",
+        "s29_progress_plan",
         "s08_phase_roadmap",
         "03d_content_dual"
       ],
       "진단": [
+        "s31_diagnosis_table",
+        "s32_priority_matrix",
         "s06_principle_matrix",
         "s10_maturity_heatmap"
       ],
@@ -935,6 +948,7 @@
         "s05_entity_matrix"
       ],
       "결정·요청": [
+        "s35_decision_request",
         "s13_key_takeaways 변형(안건·선택지·권고안·기한)",
         "s12_actor_checklist"
       ],
@@ -942,6 +956,33 @@
         "s23_key_summary",
         "s20_self_check",
         "s13_key_takeaways"
+      ],
+      "수행 체계": [
+        "s27_team_roles"
+      ],
+      "벤치마킹": [
+        "s30_radar_benchmark"
+      ],
+      "경영진 요약": [
+        "s34_exec_one_pager"
+      ],
+      "회의·교육 실적": [
+        "s36_meeting_log"
+      ],
+      "배경·기대효과": [
+        "s37_purpose_effects"
+      ],
+      "이슈 카드": [
+        "s38_issue_cards"
+      ],
+      "과제·고려사항": [
+        "s39_challenges_considerations"
+      ],
+      "오프너·클로저": [
+        "s41_quote_opener"
+      ],
+      "범위·방법·결과": [
+        "s42_scope_method_result"
       ]
     },
     "conclusion_box": {
@@ -969,7 +1010,8 @@
       "자체 분석 명시",
       "예시 수치 '예시' 표기",
       "비율 차트 n·분모"
-    ]
+    ],
+    "pattern_map_v23_note": "2026-10-14 v23: 보고 생애주기·세미나 구조 19종(s24–s42) 추가. 앞에 적힌 레이아웃이 우선."
   },
   "series": {
     "fixed": [

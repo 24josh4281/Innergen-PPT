@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1040 720" data-pptx-master="innergen-intro-master-13x9" data-pptx-master-name="이너젠 소개자료 13:9" data-pptx-layout="innergen-intro-exec-one-pager" data-pptx-layout-name="이너젠 소개자료 경영진 요약 1장">
+<rect id="master-bg" x="0" y="0" width="1040" height="720" fill="#FFFFFF" data-pptx-layer="master" data-pptx-editable="false"/>
+<rect id="top-rule" x="0" y="0" width="1040" height="3" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="governing-box" x="48" y="60" width="944" height="44" rx="5" ry="5" fill="#F3F6FF" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="approach-panel" x="48" y="120" width="252" height="484" fill="#F3F6FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<text id="approach-label" x="64" y="150.8" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false">접근 방법</text>
+<line id="approach-rule" x1="64" y1="410.4" x2="284" y2="410.4" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<text id="scope-label" x="64" y="439" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#64748B" data-pptx-layer="layout" data-pptx-editable="false">분석 범위·한계</text>
+<rect id="plot-bg" x="324" y="137.6" width="304" height="334.4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="plot-q1" x="476" y="137.6" width="152" height="167.2" fill="#EEF2FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="plot-x" x1="324" y1="304.8" x2="628" y2="304.8" stroke="#94A3B8" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="plot-y" x1="476" y1="137.6" x2="476" y2="472" stroke="#94A3B8" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<text id="plot-note" x="324" y="533.6" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#64748B" data-pptx-layer="layout" data-pptx-editable="false">번호 = 우측 리스크·기회 목록</text>
+<rect id="risk-tag" x="652" y="120" width="340" height="33" fill="#0B1739" data-pptx-layer="layout" data-pptx-editable="false"/>
+<text id="risk-label" x="668" y="143.1" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">중대 리스크</text>
+<rect id="opp-tag" x="652" y="296" width="340" height="33" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false"/>
+<text id="opp-label" x="668" y="319.1" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">중요 기회</text>
+<rect id="impl-box" x="652" y="423.6" width="340" height="180.4" fill="#F3F6FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="impl-bar" x="652" y="423.6" width="4" height="180.4" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false"/>
+<text id="impl-label" x="672" y="452.2" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false">시사점</text>
+<line id="footer-line" x1="48" y1="648" x2="992" y2="648" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<image id="footer-logo" x="48" y="660" width="40" height="40" xlink:href="../images/innergen-logo-cover-blue.png" preserveAspectRatio="xMidYMid meet" data-pptx-layer="layout" data-pptx-editable="false"/>
+<circle id="dot-1" cx="560" cy="192.6" r="14" fill="#2F62F0"/>
+<text id="dot-1-no" x="560" y="198.1" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF">1</text>
+<circle id="dot-2" cx="520" cy="269.6" r="14" fill="#2F62F0"/>
+<text id="dot-2-no" x="520" y="275.1" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF">2</text>
+<circle id="dot-3" cx="600" cy="225.6" r="14" fill="#2F62F0"/>
+<text id="dot-3-no" x="600" y="231.1" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF">3</text>
+<circle id="dot-4" cx="400" cy="357.6" r="14" fill="#94A3B8"/>
+<text id="dot-4-no" x="400" y="363.1" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF">4</text>
+<circle id="dot-5" cx="440" cy="401.6" r="14" fill="#94A3B8"/>
+<text id="dot-5-no" x="440" y="407.1" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF">5</text>
+<g id="content-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="48 14 832 36"><text id="content-title-carrier" data-pptx-placeholder-carrier="true" x="48" y="44" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="24" font-weight="700" fill="#0B1739">{{PAGE_TITLE}}</text></g>
+<g id="key-message" data-pptx-placeholder="body" data-pptx-placeholder-idx="90" data-pptx-placeholder-bounds="60 66 920 32"><text id="key-message-carrier" data-pptx-placeholder-carrier="true" x="68" y="90" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="22" font-weight="700" fill="#2F62F0">{{KEY_MESSAGE}}</text></g>
+<g id="approach" data-pptx-placeholder="body" data-pptx-placeholder-idx="1" data-pptx-placeholder-bounds="64 166.2 220 231"><text id="approach-carrier" data-pptx-placeholder-carrier="true" x="64" y="192.6" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="400" fill="#475569">{{APPROACH}}</text></g>
+<g id="scope-note" data-pptx-placeholder="body" data-pptx-placeholder-idx="2" data-pptx-placeholder-bounds="64 452.2 220 143"><text id="scope-note-carrier" data-pptx-placeholder-carrier="true" x="64" y="476.4" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="400" fill="#475569">{{SCOPE_NOTE}}</text></g>
+<g id="axis-x" data-pptx-placeholder="body" data-pptx-placeholder-idx="3" data-pptx-placeholder-bounds="324 478.6 304 24.2"><text id="axis-x-carrier" data-pptx-placeholder-carrier="true" x="476" y="496.2" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="400" fill="#64748B">{{AXIS_X}}</text></g>
+<g id="axis-y" data-pptx-placeholder="body" data-pptx-placeholder-idx="4" data-pptx-placeholder-bounds="324 120 304 17.6"><text id="axis-y-carrier" data-pptx-placeholder-carrier="true" x="476" y="133.2" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="400" fill="#64748B">{{AXIS_Y}}</text></g>
+<g id="risks" data-pptx-placeholder="body" data-pptx-placeholder-idx="5" data-pptx-placeholder-bounds="664 159.6 320 127.6"><text id="risks-carrier" data-pptx-placeholder-carrier="true" x="664" y="183.8" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="400" fill="#475569">{{RISKS}}</text></g>
+<g id="opps" data-pptx-placeholder="body" data-pptx-placeholder-idx="6" data-pptx-placeholder-bounds="664 335.6 320 77"><text id="opps-carrier" data-pptx-placeholder-carrier="true" x="664" y="359.8" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="400" fill="#475569">{{OPPS}}</text></g>
+<g id="implications" data-pptx-placeholder="body" data-pptx-placeholder-idx="7" data-pptx-placeholder-bounds="672 465.4 304 132"><text id="implications-carrier" data-pptx-placeholder-carrier="true" x="672" y="489.6" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#0B1739">{{IMPLICATIONS}}</text></g>
+<g id="source-note" data-pptx-placeholder="body" data-pptx-placeholder-idx="91" data-pptx-placeholder-bounds="48 614 944 22"><text id="source-note-carrier" data-pptx-placeholder-carrier="true" x="48" y="630" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="400" fill="#64748B">{{SOURCE}}</text></g>
+<g id="footer-section" data-pptx-placeholder="footer" data-pptx-placeholder-bounds="98 672 600 22"><text id="footer-section-carrier" data-pptx-placeholder-carrier="true" x="98" y="686" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="400" fill="#64748B">{{SECTION_NAME}}</text></g>
+<g id="page-number" data-pptx-placeholder="slide-number" data-pptx-placeholder-bounds="912 672 80 22"><text id="page-number-carrier" data-pptx-placeholder-carrier="true" x="992" y="686" text-anchor="end" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="13.33" font-weight="400" fill="#64748B">{{PAGE_NUM}}</text></g>
+</svg>

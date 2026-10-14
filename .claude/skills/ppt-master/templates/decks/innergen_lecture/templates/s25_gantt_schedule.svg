@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1040 720" data-pptx-master="innergen-intro-master-13x9" data-pptx-master-name="이너젠 소개자료 13:9" data-pptx-layout="innergen-intro-gantt-schedule" data-pptx-layout-name="이너젠 소개자료 추진 일정 간트">
+<rect id="master-bg" x="0" y="0" width="1040" height="720" fill="#FFFFFF" data-pptx-layer="master" data-pptx-editable="false"/>
+<rect id="top-rule" x="0" y="0" width="1040" height="3" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="governing-box" x="48" y="60" width="944" height="44" rx="5" ry="5" fill="#F3F6FF" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="gantt-head" x="48" y="120" width="944" height="39.6" fill="#0B1739" data-pptx-layer="layout" data-pptx-editable="false"/>
+<text id="gantt-head-task" x="148" y="146.4" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF" data-pptx-layer="layout" data-pptx-editable="false">업무</text>
+<line id="week-1-1" x1="294.5" y1="159.6" x2="294.5" y2="511.6" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="week-1-2" x1="341" y1="159.6" x2="341" y2="511.6" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="week-1-3" x1="387.5" y1="159.6" x2="387.5" y2="511.6" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="month-2-sep" x1="434" y1="120" x2="434" y2="555.6" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="week-2-1" x1="480.5" y1="159.6" x2="480.5" y2="511.6" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="week-2-2" x1="527" y1="159.6" x2="527" y2="511.6" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="week-2-3" x1="573.5" y1="159.6" x2="573.5" y2="511.6" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="month-3-sep" x1="620" y1="120" x2="620" y2="555.6" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="week-3-1" x1="666.5" y1="159.6" x2="666.5" y2="511.6" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="week-3-2" x1="713" y1="159.6" x2="713" y2="511.6" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="week-3-3" x1="759.5" y1="159.6" x2="759.5" y2="511.6" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="month-4-sep" x1="806" y1="120" x2="806" y2="555.6" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="week-4-1" x1="852.5" y1="159.6" x2="852.5" y2="511.6" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="week-4-2" x1="899" y1="159.6" x2="899" y2="511.6" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="week-4-3" x1="945.5" y1="159.6" x2="945.5" y2="511.6" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="gantt-task-sep" x1="248" y1="120" x2="248" y2="555.6" stroke="#0B1739" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="row-1-rule" x1="48" y1="219" x2="992" y2="219" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="row-2-zebra" x="48" y="219" width="944" height="59.4" fill="#F3F6FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="row-2-rule" x1="48" y1="278.4" x2="992" y2="278.4" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="row-3-rule" x1="48" y1="337.8" x2="992" y2="337.8" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="row-4-zebra" x="48" y="337.8" width="944" height="59.4" fill="#F3F6FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="row-4-rule" x1="48" y1="397.2" x2="992" y2="397.2" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="row-5-rule" x1="48" y1="456.6" x2="992" y2="456.6" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="row-6-zebra" x="48" y="456.6" width="944" height="59.4" fill="#F3F6FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="row-6-rule" x1="48" y1="516" x2="992" y2="516" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="milestone-row" x="48" y="516" width="944" height="39.6" fill="#EEF2FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<text id="milestone-label" x="148" y="541.3" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#0B1739" data-pptx-layer="layout" data-pptx-editable="false">보고·행사</text>
+<line id="footer-line" x1="48" y1="648" x2="992" y2="648" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<image id="footer-logo" x="48" y="660" width="40" height="40" xlink:href="../images/innergen-logo-cover-blue.png" preserveAspectRatio="xMidYMid meet" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="bar-1" x="252" y="176.1" width="178" height="26.4" fill="#2F62F0"/>
+<rect id="bar-2" x="345" y="235.5" width="224" height="26.4" fill="#7B9BF7"/>
+<rect id="bar-3" x="531" y="294.9" width="178" height="26.4" fill="#7B9BF7"/>
+<rect id="bar-4" x="624" y="354.3" width="224" height="26.4" fill="#2F62F0"/>
+<rect id="bar-5" x="810" y="413.7" width="178" height="26.4" fill="#7B9BF7"/>
+<rect id="bar-6" x="717" y="473.1" width="271" height="26.4" fill="#2F62F0"/>
+<path id="milestone-1-mark" d="M 294 524.8 L 303 535.8 L 294 546.8 L 285 535.8Z" fill="#0B1739"/>
+<path id="milestone-2-mark" d="M 620 524.8 L 629 535.8 L 620 546.8 L 611 535.8Z" fill="#0B1739"/>
+<path id="milestone-3-mark" d="M 946 524.8 L 955 535.8 L 946 546.8 L 937 535.8Z" fill="#0B1739"/>
+<g id="content-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="48 14 832 36"><text id="content-title-carrier" data-pptx-placeholder-carrier="true" x="48" y="44" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="24" font-weight="700" fill="#0B1739">{{PAGE_TITLE}}</text></g>
+<g id="key-message" data-pptx-placeholder="body" data-pptx-placeholder-idx="90" data-pptx-placeholder-bounds="60 66 920 32"><text id="key-message-carrier" data-pptx-placeholder-carrier="true" x="68" y="90" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="22" font-weight="700" fill="#2F62F0">{{KEY_MESSAGE}}</text></g>
+<g id="month-1" data-pptx-placeholder="body" data-pptx-placeholder-idx="1" data-pptx-placeholder-bounds="248 120 186 39.6"><text id="month-1-carrier" data-pptx-placeholder-carrier="true" x="341" y="146.4" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF">{{MONTH_1}}</text></g>
+<g id="month-2" data-pptx-placeholder="body" data-pptx-placeholder-idx="2" data-pptx-placeholder-bounds="434 120 186 39.6"><text id="month-2-carrier" data-pptx-placeholder-carrier="true" x="527" y="146.4" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF">{{MONTH_2}}</text></g>
+<g id="month-3" data-pptx-placeholder="body" data-pptx-placeholder-idx="3" data-pptx-placeholder-bounds="620 120 186 39.6"><text id="month-3-carrier" data-pptx-placeholder-carrier="true" x="713" y="146.4" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF">{{MONTH_3}}</text></g>
+<g id="month-4" data-pptx-placeholder="body" data-pptx-placeholder-idx="4" data-pptx-placeholder-bounds="806 120 186 39.6"><text id="month-4-carrier" data-pptx-placeholder-carrier="true" x="899" y="146.4" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF">{{MONTH_4}}</text></g>
+<g id="task-1" data-pptx-placeholder="body" data-pptx-placeholder-idx="5" data-pptx-placeholder-bounds="56 159.6 184 59.4"><text id="task-1-carrier" data-pptx-placeholder-carrier="true" x="56" y="195.9" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#0B1739">{{TASK_1}}</text></g>
+<g id="task-2" data-pptx-placeholder="body" data-pptx-placeholder-idx="6" data-pptx-placeholder-bounds="56 219 184 59.4"><text id="task-2-carrier" data-pptx-placeholder-carrier="true" x="56" y="255.3" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#0B1739">{{TASK_2}}</text></g>
+<g id="task-3" data-pptx-placeholder="body" data-pptx-placeholder-idx="7" data-pptx-placeholder-bounds="56 278.4 184 59.4"><text id="task-3-carrier" data-pptx-placeholder-carrier="true" x="56" y="314.7" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#0B1739">{{TASK_3}}</text></g>
+<g id="task-4" data-pptx-placeholder="body" data-pptx-placeholder-idx="8" data-pptx-placeholder-bounds="56 337.8 184 59.4"><text id="task-4-carrier" data-pptx-placeholder-carrier="true" x="56" y="374.1" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#0B1739">{{TASK_4}}</text></g>
+<g id="task-5" data-pptx-placeholder="body" data-pptx-placeholder-idx="9" data-pptx-placeholder-bounds="56 397.2 184 59.4"><text id="task-5-carrier" data-pptx-placeholder-carrier="true" x="56" y="433.5" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#0B1739">{{TASK_5}}</text></g>
+<g id="task-6" data-pptx-placeholder="body" data-pptx-placeholder-idx="10" data-pptx-placeholder-bounds="56 456.6 184 59.4"><text id="task-6-carrier" data-pptx-placeholder-carrier="true" x="56" y="492.9" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#0B1739">{{TASK_6}}</text></g>
+<g id="milestone-1" data-pptx-placeholder="body" data-pptx-placeholder-idx="11" data-pptx-placeholder-bounds="214 518.2 160 35.2"><text id="milestone-1-carrier" data-pptx-placeholder-carrier="true" x="294" y="568.8" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#0B1739">{{MILESTONE_1}}</text></g>
+<g id="milestone-2" data-pptx-placeholder="body" data-pptx-placeholder-idx="12" data-pptx-placeholder-bounds="540 518.2 160 35.2"><text id="milestone-2-carrier" data-pptx-placeholder-carrier="true" x="620" y="568.8" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#0B1739">{{MILESTONE_2}}</text></g>
+<g id="milestone-3" data-pptx-placeholder="body" data-pptx-placeholder-idx="13" data-pptx-placeholder-bounds="866 518.2 160 35.2"><text id="milestone-3-carrier" data-pptx-placeholder-carrier="true" x="946" y="568.8" text-anchor="middle" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#0B1739">{{MILESTONE_3}}</text></g>
+<g id="schedule-note" data-pptx-placeholder="body" data-pptx-placeholder-idx="14" data-pptx-placeholder-bounds="48 577.6 944 26.4"><text id="schedule-note-carrier" data-pptx-placeholder-carrier="true" x="48" y="597.4" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="400" fill="#64748B">{{SCHEDULE_NOTE}}</text></g>
+<g id="source-note" data-pptx-placeholder="body" data-pptx-placeholder-idx="91" data-pptx-placeholder-bounds="48 614 944 22"><text id="source-note-carrier" data-pptx-placeholder-carrier="true" x="48" y="630" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="400" fill="#64748B">{{SOURCE}}</text></g>
+<g id="footer-section" data-pptx-placeholder="footer" data-pptx-placeholder-bounds="98 672 600 22"><text id="footer-section-carrier" data-pptx-placeholder-carrier="true" x="98" y="686" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="400" fill="#64748B">{{SECTION_NAME}}</text></g>
+<g id="page-number" data-pptx-placeholder="slide-number" data-pptx-placeholder-bounds="912 672 80 22"><text id="page-number-carrier" data-pptx-placeholder-carrier="true" x="992" y="686" text-anchor="end" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="13.33" font-weight="400" fill="#64748B">{{PAGE_NUM}}</text></g>
+</svg>

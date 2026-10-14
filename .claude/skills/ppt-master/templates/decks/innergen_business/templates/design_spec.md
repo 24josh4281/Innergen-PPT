@@ -15,7 +15,7 @@ source_canvas_height: 540
 source_viewbox: "0 0 960 540"
 replication_mode: standard
 native_structure_mode: structured
-page_count: 34
+page_count: 53
 placeholders:
   01_cover: ["{{EVENT_NAME}}", "{{SUBTITLE}}", "{{TITLE}}", "{{COVER_MESSAGE}}", "{{KEY_FIGURES}}", "{{DATE}}", "{{AUTHOR}}"]
   02b_toc_pages: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{TOC_1_NO}}", "{{TOC_1_TITLE}}", "{{TOC_1_DESC}}", "{{TOC_1_PAGES}}", "{{TOC_2_NO}}"]
@@ -51,6 +51,25 @@ placeholders:
   s21_guidance_focus: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{NAV_1}}", "{{NAV_2}}", "{{NAV_3}}", "{{NAV_4}}", "{{REQ_TITLE}}"]
   s22_case_capture: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{CASE_HEADER}}", "{{ALIGN_1}}", "{{ALIGN_2}}", "{{ALIGN_3}}", "{{CASE_LIMIT}}"]
   s23_key_summary: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{COL_1_TITLE}}", "{{POINT_1_1}}", "{{POINT_1_2}}", "{{POINT_1_3}}", "{{COL_2_TITLE}}"]
+  s24_project_overview: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{INFO_1_LABEL}}", "{{INFO_1_VALUE}}", "{{INFO_2_LABEL}}", "{{INFO_2_VALUE}}", "{{INFO_3_LABEL}}"]
+  s25_gantt_schedule: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{MONTH_1}}", "{{MONTH_2}}", "{{MONTH_3}}", "{{MONTH_4}}", "{{TASK_1}}"]
+  s26_data_request: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{REQ_1_TITLE}}", "{{REQ_1_PERIOD}}", "{{REQ_1_TARGET}}", "{{REQ_1_USE}}", "{{REQ_1_OWNER}}"]
+  s27_team_roles: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{ROLE_1_TITLE}}", "{{ROLE_1_SCOPE}}", "{{ROLE_1_EXP}}", "{{ROLE_2_TITLE}}", "{{ROLE_2_SCOPE}}"]
+  s28_status_board: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{STREAM_1}}", "{{CARD_1_1_TITLE}}", "{{CARD_1_1_STATUS}}", "{{CARD_1_2_TITLE}}", "{{CARD_1_2_STATUS}}"]
+  s29_progress_plan: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{PERIOD_1}}", "{{PERIOD_2}}", "{{TASK_1}}", "{{DONE_1}}", "{{NEXT_1}}"]
+  s30_radar_benchmark: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{AXIS_1}}", "{{AXIS_2}}", "{{AXIS_3}}", "{{AXIS_4}}", "{{AXIS_5}}"]
+  s31_diagnosis_table: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{HEAD_1}}", "{{HEAD_2}}", "{{HEAD_3}}", "{{CRIT_1}}", "{{STATUS_1}}"]
+  s32_priority_matrix: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{HEAD_1}}", "{{HEAD_2}}", "{{HEAD_3}}", "{{HEAD_4}}", "{{ITEM_1}}"]
+  s33_approach_matrix: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{STAGE_1}}", "{{STAGE_2}}", "{{STAGE_3}}", "{{ROW_1}}", "{{CELL_1_1}}"]
+  s34_exec_one_pager: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{APPROACH}}", "{{SCOPE_NOTE}}", "{{AXIS_X}}", "{{AXIS_Y}}", "{{RISKS}}"]
+  s35_decision_request: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{HEAD_1}}", "{{HEAD_2}}", "{{HEAD_3}}", "{{HEAD_4}}", "{{AGENDA_1}}"]
+  s36_meeting_log: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{HEAD_1}}", "{{HEAD_2}}", "{{HEAD_3}}", "{{HEAD_4}}", "{{HEAD_5}}"]
+  s37_purpose_effects: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{POINT_1_HEAD}}", "{{POINT_1_SUB}}", "{{POINT_2_HEAD}}", "{{POINT_2_SUB}}", "{{POINT_3_HEAD}}"]
+  s38_issue_cards: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{ISSUE_1_TITLE}}", "{{ISSUE_1_BODY}}", "{{ISSUE_2_TITLE}}", "{{ISSUE_2_BODY}}", "{{ISSUE_3_TITLE}}"]
+  s39_challenges_considerations: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{CHALLENGE_1}}", "{{CHALLENGE_1_DESC}}", "{{CHALLENGE_2}}", "{{CHALLENGE_2_DESC}}", "{{CHALLENGE_3}}"]
+  s40_process_steps_detail: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{STEP_1}}", "{{STEP_1_SUB}}", "{{STEP_1_DETAIL}}", "{{STEP_2}}", "{{STEP_2_SUB}}"]
+  s41_quote_opener: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{QUOTE_A}}", "{{QUOTE_A_SOURCE}}", "{{QUOTE_A_NOTE}}", "{{QUOTE_B}}", "{{QUOTE_B_SOURCE}}"]
+  s42_scope_method_result: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{COL_1}}", "{{BODY_1}}", "{{COL_2}}", "{{BODY_2}}", "{{COL_3}}"]
 ---
 
 # 이너젠 회사소개 16:9(720×405pt) 컴팩트 템플릿 — 디자인 명세
@@ -138,6 +157,25 @@ placeholders:
 | `s21_guidance_focus.svg` | `innergen-biz-guidance-focus` / 이너젠 회사소개 요구사항+핵심 Focus | 슬롯 15개 |
 | `s22_case_capture.svg` | `innergen-biz-case-capture` / 이너젠 회사소개 사례 캡처+해설 | 슬롯 10개 |
 | `s23_key_summary.svg` | `innergen-biz-key-summary` / 이너젠 회사소개 핵심 정리 | 슬롯 22개 |
+| `s24_project_overview.svg` | `innergen-biz-project-overview` / 이너젠 회사소개 프로젝트 개요+과업 카드 | 슬롯 17개 |
+| `s25_gantt_schedule.svg` | `innergen-biz-gantt-schedule` / 이너젠 회사소개 추진 일정 간트 | 슬롯 19개 |
+| `s26_data_request.svg` | `innergen-biz-data-request` / 이너젠 회사소개 자료 요청 목록 | 슬롯 25개 |
+| `s27_team_roles.svg` | `innergen-biz-team-roles` / 이너젠 회사소개 수행 체계·역할 | 슬롯 16개 |
+| `s28_status_board.svg` | `innergen-biz-status-board` / 이너젠 회사소개 과업 현황판 | 슬롯 26개 |
+| `s29_progress_plan.svg` | `innergen-biz-progress-plan` / 이너젠 회사소개 진행현황·향후계획 2열 | 슬롯 20개 |
+| `s30_radar_benchmark.svg` | `innergen-biz-radar-benchmark` / 이너젠 회사소개 벤치마킹 레이더+Key Findings | 슬롯 20개 |
+| `s31_diagnosis_table.svg` | `innergen-biz-diagnosis-table` / 이너젠 회사소개 진단표(기준·현황·과제 묶음) | 슬롯 22개 |
+| `s32_priority_matrix.svg` | `innergen-biz-priority-matrix` / 이너젠 회사소개 과제 우선순위표+2×2 | 슬롯 34개 |
+| `s33_approach_matrix.svg` | `innergen-biz-approach-matrix` / 이너젠 회사소개 접근방법 매트릭스 | 슬롯 20개 |
+| `s34_exec_one_pager.svg` | `innergen-biz-exec-one-pager` / 이너젠 회사소개 경영진 요약 1장 | 슬롯 12개 |
+| `s35_decision_request.svg` | `innergen-biz-decision-request` / 이너젠 회사소개 안건·선택지·권고(결정 요청) | 슬롯 22개 |
+| `s36_meeting_log.svg` | `innergen-biz-meeting-log` / 이너젠 회사소개 회의·교육 실적표 | 슬롯 36개 |
+| `s37_purpose_effects.svg` | `innergen-biz-purpose-effects` / 이너젠 회사소개 추진 배경·기대효과 | 슬롯 17개 |
+| `s38_issue_cards.svg` | `innergen-biz-issue-cards` / 이너젠 회사소개 이슈·토픽 카드 6 | 슬롯 17개 |
+| `s39_challenges_considerations.svg` | `innergen-biz-challenges-considerations` / 이너젠 회사소개 과제·고려사항 2열 | 슬롯 17개 |
+| `s40_process_steps_detail.svg` | `innergen-biz-process-steps` / 이너젠 회사소개 단계 프로세스 상세(번호·소단계) | 슬롯 21개 |
+| `s41_quote_opener.svg` | `innergen-biz-quote-opener` / 이너젠 회사소개 양극 인용+질문 | 슬롯 12개 |
+| `s42_scope_method_result.svg` | `innergen-biz-scope-method-result` / 이너젠 회사소개 범위·방법·결과 3열 | 슬롯 14개 |
 
 ## VI. Assets
 

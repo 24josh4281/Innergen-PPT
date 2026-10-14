@@ -91,6 +91,8 @@ s01–s23 slot tokens. Governing messages are one line everywhere
 concrete content or another font after seeing a deck, change only those
 feedback values and re-run the Executor; coordinates, colors and templates stay.
 
+v23 (2026-10-14): 19 more structures (`s24_project_overview` … `s42_scope_method_result`) cover the reporting life cycle (project overview, Gantt, data request, team roles, status board, progress/plan, radar benchmark, diagnosis table, priority 2×2, approach matrix, executive one-pager, decision request, meeting log, purpose/effects) and seminar devices (issue cards, challenges/considerations, process steps, polar quotes, scope/method/result). See `structured-slides-v18.md` §3b; all three family templates carry them.
+
 A style family alone never stages a template. Use only explicitly selected valid
 template paths. Existing owner gates and source fact protections stay in force.
 

@@ -532,38 +532,396 @@
         "RCP14"
       ],
       "lecture_template_layout": "02c_section_divider.svg"
+    },
+    "project_overview": {
+      "label": "프로젝트 개요 + 과업 카드",
+      "reader_question": "이 과업은 무엇을 언제 누구와 하나?",
+      "pattern": "cards",
+      "slots": [
+        "개요 3행(기간·대상·범위)",
+        "과업 카드 3개"
+      ],
+      "reference_patterns": [
+        "착수보고 22 p.7",
+        "최종보고 40 p.5"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s24_project_overview.svg",
+      "use": "착수·최종",
+      "v23": true
+    },
+    "gantt_schedule": {
+      "label": "추진 일정 간트",
+      "reader_question": "언제 무엇을 하고 어디서 보고하나?",
+      "pattern": "timeline",
+      "slots": [
+        "월×주차 열",
+        "업무 6행 막대",
+        "보고·행사 마일스톤 3개",
+        "일정 주석"
+      ],
+      "reference_patterns": [
+        "착수 22 p.15",
+        "진행현황 10 s.50",
+        "격주 19 p.3"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s25_gantt_schedule.svg",
+      "use": "착수·진행·격주",
+      "v23": true
+    },
+    "data_request": {
+      "label": "자료 요청 목록",
+      "reader_question": "무엇을 언제까지 누구에게 받아야 하나?",
+      "pattern": "cards",
+      "slots": [
+        "요청물 4블록(기간·대상·형태·담당)"
+      ],
+      "reference_patterns": [
+        "착수 22 p.16",
+        "주간 23 p.18"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s26_data_request.svg",
+      "use": "착수·주간",
+      "v23": true
+    },
+    "team_roles": {
+      "label": "수행 체계·역할",
+      "reader_question": "누가 어떤 역할로 참여하나?",
+      "pattern": "cards",
+      "slots": [
+        "역할 카드 3개",
+        "협업 체계",
+        "참여 인력 구성"
+      ],
+      "reference_patterns": [
+        "착수 22 p.17",
+        "진행현황 10 s.41"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s27_team_roles.svg",
+      "use": "착수·제안",
+      "v23": true
+    },
+    "status_board": {
+      "label": "과업 현황판",
+      "reader_question": "지금 어디까지 왔나?",
+      "pattern": "cards",
+      "slots": [
+        "과업 3열",
+        "세부 과업 카드 9개 + 상태 배지"
+      ],
+      "reference_patterns": [
+        "진행현황 10 s.2"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s28_status_board.svg",
+      "use": "진행·격주 첫 장",
+      "v23": true
+    },
+    "progress_plan": {
+      "label": "진행현황·향후계획 2열",
+      "reader_question": "지난 기간 무엇을 했고 다음 기간 무엇을 하나?",
+      "pattern": "table",
+      "slots": [
+        "과업 4행",
+        "진행현황(기간)",
+        "향후계획(기간)",
+        "요청·결정 줄"
+      ],
+      "reference_patterns": [
+        "격주 19 p.2"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s29_progress_plan.svg",
+      "use": "주간·격주",
+      "v23": true
+    },
+    "radar_benchmark": {
+      "label": "벤치마킹 레이더 + Key Findings",
+      "reader_question": "우리는 선도사 대비 어디가 약한가?",
+      "pattern": "chart",
+      "slots": [
+        "6축 레이더(당사·벤치)",
+        "영역별 발견 4개",
+        "범례"
+      ],
+      "reference_patterns": [
+        "벤치마킹 08 s.3",
+        "09 s.1",
+        "10 s.37"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s30_radar_benchmark.svg",
+      "use": "벤치마킹·진단",
+      "v23": true
+    },
+    "diagnosis_table": {
+      "label": "진단표(기준·현황·과제 묶음)",
+      "reader_question": "기준마다 현황이 어떻고 어떤 과제로 묶이나?",
+      "pattern": "table",
+      "slots": [
+        "기준 5행",
+        "현황",
+        "개선과제 3개(행 묶음)",
+        "결론 바"
+      ],
+      "reference_patterns": [
+        "진단 18 p.5~6"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s31_diagnosis_table.svg",
+      "use": "진단",
+      "v23": true
+    },
+    "priority_matrix": {
+      "label": "과제 우선순위표 + 2×2",
+      "reader_question": "무엇부터 추진하나?",
+      "pattern": "matrix",
+      "slots": [
+        "과제 6행(용이성·효과성·추진여부)",
+        "2×2 배치도",
+        "배치 주석"
+      ],
+      "reference_patterns": [
+        "진단 마무리 18 p.32"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s32_priority_matrix.svg",
+      "use": "진단·최종",
+      "v23": true
+    },
+    "approach_matrix": {
+      "label": "접근방법 매트릭스",
+      "reader_question": "단계별로 무엇을 어떤 자료로 하고 무엇에 집중하나?",
+      "pattern": "table",
+      "slots": [
+        "단계 3열",
+        "Task·Source·Focus 3행"
+      ],
+      "reference_patterns": [
+        "교육 06 p.7",
+        "진행현황 10 s.35"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s33_approach_matrix.svg",
+      "use": "제안·착수·최종",
+      "v23": true
+    },
+    "exec_one_pager": {
+      "label": "경영진 요약 1장",
+      "reader_question": "결론·근거·시사점을 한 장에서 보려면?",
+      "pattern": "evidence_pair",
+      "slots": [
+        "접근 방법",
+        "가능성×영향 2×2",
+        "중대 리스크·기회",
+        "시사점"
+      ],
+      "reference_patterns": [
+        "경영진 요약 17 s.1"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s34_exec_one_pager.svg",
+      "use": "경영진 브리핑·최종",
+      "v23": true
+    },
+    "decision_request": {
+      "label": "안건·선택지·권고(결정 요청)",
+      "reader_question": "무엇을 언제까지 결정해야 하나?",
+      "pattern": "table",
+      "slots": [
+        "안건 3행",
+        "선택지 A/B",
+        "권고",
+        "결정 기한"
+      ],
+      "reference_patterns": [
+        "규칙 제안 E (22 p.10, 23 p.17, 18 p.32)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s35_decision_request.svg",
+      "use": "주간·격주·중간",
+      "v23": true
+    },
+    "meeting_log": {
+      "label": "회의·교육 실적표",
+      "reader_question": "언제 누구와 무엇을 논의했나?",
+      "pattern": "table",
+      "slots": [
+        "회차·일자·참석·주제·비고 5행",
+        "요약 바"
+      ],
+      "reference_patterns": [
+        "진행현황 10 s.42·49",
+        "최종 40 p.7"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s36_meeting_log.svg",
+      "use": "진행·최종",
+      "v23": true
+    },
+    "purpose_effects": {
+      "label": "추진 배경·기대효과",
+      "reader_question": "왜 하고 무엇이 좋아지나?",
+      "pattern": "evidence_pair",
+      "slots": [
+        "배경 3포인트",
+        "기대효과 3박스"
+      ],
+      "reference_patterns": [
+        "착수 22 p.8",
+        "리포트 29 p.16"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s37_purpose_effects.svg",
+      "use": "착수·제안",
+      "v23": true
+    },
+    "issue_cards": {
+      "label": "이슈·토픽 카드 6",
+      "reader_question": "주요 이슈는 무엇인가?",
+      "pattern": "cards",
+      "slots": [
+        "번호 카드 6개(제목+요지)"
+      ],
+      "reference_patterns": [
+        "리포트 29 p.12",
+        "세미나 04 p.17",
+        "24 p.12"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s38_issue_cards.svg",
+      "use": "세미나·리포트·브리핑",
+      "v23": true
+    },
+    "challenges_considerations": {
+      "label": "과제·고려사항 2열",
+      "reader_question": "흔한 과제와 검토할 질문은?",
+      "pattern": "focus",
+      "slots": [
+        "흔한 과제 카드 3개",
+        "고려사항 질문 5개",
+        "검토 결과 힌트"
+      ],
+      "reference_patterns": [
+        "세미나 04 p.12~14·22~25"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s39_challenges_considerations.svg",
+      "use": "세미나·교육",
+      "v23": true
+    },
+    "process_steps_detail": {
+      "label": "단계 프로세스 상세",
+      "reader_question": "몇 단계로, 각 단계에서 구체적으로 무엇을 하나?",
+      "pattern": "flow_steps",
+      "slots": [
+        "번호 원 5단계",
+        "소단계",
+        "상세",
+        "각주"
+      ],
+      "reference_patterns": [
+        "세미나 28 p.16·18",
+        "24 p.19"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s40_process_steps_detail.svg",
+      "use": "세미나·교육·제안",
+      "v23": true
+    },
+    "quote_opener": {
+      "label": "양극 인용 + 질문",
+      "reader_question": "두 관점 사이에서 우리는 어디에 있는가?",
+      "pattern": "evidence_pair",
+      "slots": [
+        "인용 A/B(출처·보충)",
+        "질문 바"
+      ],
+      "reference_patterns": [
+        "발표 26 s.2·11",
+        "교육 07 인용"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s41_quote_opener.svg",
+      "use": "세미나·제안 오프너·클로저",
+      "v23": true
+    },
+    "scope_method_result": {
+      "label": "범위·방법·결과 3열",
+      "reader_question": "무엇을 어떻게 분석해 무엇이 나왔나?",
+      "pattern": "table",
+      "slots": [
+        "분석 범위",
+        "분석 방법",
+        "결과 점수+해석",
+        "결론 바"
+      ],
+      "reference_patterns": [
+        "세미나 04 p.20"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s42_scope_method_result.svg",
+      "use": "제안·중간·최종",
+      "v23": true
     }
   },
   "recommended_by_report": {
     "proposal": [
       "task_structure",
       "phase_roadmap",
-      "evidence"
+      "evidence",
+      "approach_matrix",
+      "purpose_effects",
+      "team_roles",
+      "scope_method_result"
     ],
     "kickoff": [
       "task_structure",
       "vertical_flow",
-      "actor_checklist"
+      "actor_checklist",
+      "project_overview",
+      "gantt_schedule",
+      "data_request",
+      "purpose_effects",
+      "team_roles"
     ],
     "interim": [
       "status",
       "maturity_heatmap",
-      "actor_checklist"
+      "actor_checklist",
+      "status_board",
+      "progress_plan",
+      "decision_request",
+      "meeting_log"
     ],
     "final": [
       "exec_summary",
       "chart_insight",
-      "key_takeaways"
+      "key_takeaways",
+      "exec_one_pager",
+      "diagnosis_table",
+      "priority_matrix",
+      "radar_benchmark",
+      "meeting_log"
     ],
     "education": [
       "keyword_map",
       "year_timeline",
-      "self_check"
+      "self_check",
+      "issue_cards",
+      "challenges_considerations",
+      "process_steps_detail",
+      "quote_opener"
     ],
     "briefing": [
       "exec_summary",
       "compare_implication",
-      "key_takeaways"
+      "key_takeaways",
+      "exec_one_pager",
+      "issue_cards"
     ]
   },
   "recommended_by_business": {
@@ -613,5 +971,30 @@
       "exec_summary"
     ]
   },
-  "content_architecture": "docs/styles/innergen/content-architecture-v20.json"
+  "content_architecture": "docs/styles/innergen/content-architecture-v20.json",
+  "v23": {
+    "date": "2026-10-14",
+    "added": [
+      "project_overview",
+      "gantt_schedule",
+      "data_request",
+      "team_roles",
+      "status_board",
+      "progress_plan",
+      "radar_benchmark",
+      "diagnosis_table",
+      "priority_matrix",
+      "approach_matrix",
+      "exec_one_pager",
+      "decision_request",
+      "meeting_log",
+      "purpose_effects",
+      "issue_cards",
+      "challenges_considerations",
+      "process_steps_detail",
+      "quote_opener",
+      "scope_method_result"
+    ],
+    "note": "로컬 레퍼런스(착수·주간·월간·진행현황·진단·벤치마킹·세미나·제안 덱 26건 + 덤프 40건)에서 구조만 추출. 고객명·수치·로고 없음. 세 계열 템플릿에 같은 슬롯 토큰으로 생성."
+  }
 }

@@ -1,6 +1,6 @@
 # 이너젠 장표 QA/QC 체계 v21 — 균일성 점검
 
-작성일 2026-10-14, 규칙표 rev.22(계열 4종·거버닝 한 줄·컴팩트 글자 하한). 규칙표는 [qaqc-v21.json](qaqc-v21.json), 실행 스크립트는 `.claude/skills/ppt-master/scripts/innergen_qaqc.py`.
+작성일 2026-10-14, 규칙표 rev.22(계열 4종·거버닝 한 줄·컴팩트 글자 하한) → rev.23(v23 구조 19종을 덱 유형별 필수·마무리 세트에 반영: 착수 = 과업 개요·간트·자료 요청, 주간·격주 = 진행현황·결정 요청, 진단 = 진단표·우선순위, 최종·브리핑 = 경영진 요약 1장). 규칙표는 [qaqc-v21.json](qaqc-v21.json), 실행 스크립트는 `.claude/skills/ppt-master/scripts/innergen_qaqc.py`.
 
 ## 1. 목적과 위치
 
