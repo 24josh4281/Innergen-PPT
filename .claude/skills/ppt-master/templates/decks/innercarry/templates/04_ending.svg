@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1024 768" data-pptx-master="innercarry-master-4x3" data-pptx-master-name="이너캐리 4:3" data-pptx-layout="innercarry-ending" data-pptx-layout-name="이너캐리 맺음">
+<rect id="master-bg" x="0" y="0" width="1024" height="768" fill="#FFFFFF" data-pptx-layer="master" data-pptx-editable="false"/>
+<rect id="ending-bg" x="0" y="0" width="1024" height="768" fill="#EEF2FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<text id="ending-brand" x="56" y="67" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="16" font-weight="700" fill="#0B1739" data-pptx-layer="layout" data-pptx-editable="false">INNerCarry</text>
+<rect id="ending-rule" x="56" y="330" width="90" height="4" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="contact-panel" x="56" y="520" width="912" height="120" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<g id="ending-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="56 220 912 96"><text id="ending-title-carrier" data-pptx-placeholder-carrier="true" x="56" y="300" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="40" font-weight="700" fill="#0B1739">{{THANK_YOU}}</text></g>
+<g id="closing-message" data-pptx-placeholder="body" data-pptx-placeholder-idx="1" data-pptx-placeholder-bounds="56 350 912 80"><text id="closing-message-carrier" data-pptx-placeholder-carrier="true" x="56" y="380" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="18.67" font-weight="400" fill="#475569">{{CLOSING_MESSAGE}}</text></g>
+<g id="contact-info" data-pptx-placeholder="body" data-pptx-placeholder-idx="2" data-pptx-placeholder-bounds="80 536 864 92"><text id="contact-info-carrier" data-pptx-placeholder-carrier="true" x="80" y="566" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="13.33" font-weight="400" fill="#64748B">{{CONTACT_INFO}}</text></g>
+</svg>

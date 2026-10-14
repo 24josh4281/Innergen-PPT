@@ -2,7 +2,9 @@
 
 This file is the project entry point for Claude Code. The ppt-master skill lives at `.claude/skills/ppt-master/` and is auto-discovered by Claude Code.
 
-> **Cross-harness (dual-host)**: [`AGENTS.md`](AGENTS.md) is the Codex-side execution-rules layer — it references this file as SSOT and only adds enforcement, so content edits here do not need mirroring there. `.codex/skills/` holds **generated** Codex discovery stubs: after editing any `.claude/skills/<name>/SKILL.md` frontmatter, run `python3 .claude/skills/ppt-master/scripts/sync_codex_stubs.py` (never hand-edit stubs; `preflight.py` fails while they are stale). Skill content itself lives only in `.claude/skills/`.
+> **Cross-harness (multi-host)**: [`AGENTS.md`](AGENTS.md) is the Codex (GPT) execution-rules layer and [`GEMINI.md`](GEMINI.md) the Gemini CLI layer — both reference this file as SSOT and only add enforcement, so content edits here do not need mirroring there. `.codex/skills/` and `.gemini/skills/` hold **generated** discovery stubs: after editing any `.claude/skills/<name>/SKILL.md` frontmatter, run `python3 .claude/skills/ppt-master/scripts/sync_codex_stubs.py` (regenerates both; never hand-edit stubs; `preflight.py` fails while they are stale). Skill content itself lives only in `.claude/skills/`. Do not add a shared `.agents/skills/` set — Codex and Gemini CLI both scan it, so it would shadow the per-host sets.
+>
+> **Python environment**: `setup.ps1` / `setup.sh` create `.venv/`, install dependencies and fonts, and sync the host stubs. When `.venv/` exists, run repository scripts with its interpreter (`.venv\Scripts\python.exe` on Windows, `.venv/bin/python` elsewhere) instead of the system `python3`/`python`.
 
 **Route before full-load (mandatory)**: for a presentation request, first read
 [`.claude/skills/ppt-master/workflows/routing.md`](.claude/skills/ppt-master/workflows/routing.md).
@@ -48,6 +50,7 @@ re-architectable source. Do not load either full owner before that answer.
 ## Font Policy (install-local, standing preference)
 
 - Every SVG-authored deck uses **Pretendard** as the fixed font family — do not propose or pick other families unless the user explicitly asks in the current conversation. Hierarchy comes from weight/size, not family switching. Direct-PPTX routes preserve source fonts unless their selected owner says otherwise. Full contract: [`strategist.md §g` install-local font lock](.claude/skills/ppt-master/references/strategist.md).
+- **Named INNerGEN families (2026-10-14, user decision)**: `innergen_business` (회사소개, 16:9 `ppt169s`) and `innercarry` use **IBM Plex Sans KR**; `innergen_lecture` keeps Pretendard. The standard's `fonts` catalog (`docs/styles/innergen/design-standard-v17.json` rev.22) also lists NanumSquare Neo / NanumSquare / NanumSquareRound / Noto Sans CJK KR as user-selectable through the Confirm UI feedback option `font_family`. Bundled files: `assets/fonts/{Pretendard,IBMPlexSansKR,NanumSquareNeo}/`; install user-level with `python3 .claude/skills/ppt-master/scripts/install_fonts.py`. Compact density (governing ≤18pt on one line, body ~12pt) is the default for these families.
 - Stack: `Pretendard, "Malgun Gothic", sans-serif`; intermediate weights use installed family names (`"Pretendard Medium"`, `"Pretendard SemiBold"`, etc.).
 - Font files are bundled at [`.claude/skills/ppt-master/assets/fonts/Pretendard/`](.claude/skills/ppt-master/assets/fonts/Pretendard/) (SIL OFL) and installed user-level on this machine. PPTX does not embed fonts — decks shared to other machines need Pretendard installed there.
 

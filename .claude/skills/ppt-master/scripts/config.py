@@ -185,6 +185,15 @@ CANVAS_FORMATS = {
         'aspect_ratio': '16:9',
         'use_case': 'Modern projectors, online presentations'
     },
+    'ppt169s': {
+        'name': 'PPT 16:9 (10in, 720×405 pt)',
+        'dimensions': '960×540',
+        'viewbox': '0 0 960 540',
+        'width': 960,
+        'height': 540,
+        'aspect_ratio': '16:9',
+        'use_case': 'INNerGEN 회사소개 decks: PowerPoint 10in×5.625in slide, pt values match the 260518 reference'
+    },
     'ppt43': {
         'name': 'PPT 4:3',
         'dimensions': '1024×768',

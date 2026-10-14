@@ -35,6 +35,26 @@
         Object.keys(pinned).forEach(function (role) { px[role] = pinned[role] / .75; });
         return px;
     }
+    // v22: density preset (compact by default) replaces mode sizes for the family canvas.
+    function densityPx(data, state, p, m) {
+        var density = state.density || p.density_default || "standard";
+        var preset = (data.density_presets || {})[density], canvas = state.canvas || p.canvas;
+        if (density !== "standard" && preset && preset.px_by_canvas && preset.px_by_canvas[canvas]) {
+            return Object.assign({}, preset.px_by_canvas[canvas]);
+        }
+        return modePx(p, m, state.style_delivery_mode);
+    }
+    function fontName(data, state, p) {
+        var key = state.font_family || "family_default", fonts = data.fonts || {};
+        return fonts[key] ? fonts[key].family : p.font;
+    }
+    function applyTypography(data, state, p, m) {
+        var px = densityPx(data, state, p, m), family = fontName(data, state, p);
+        state.typography = { name: "v17-" + state.style_family + "-" + (state.density || p.density_default || "standard"),
+            heading: { cjk: family, latin: family }, body: { cjk: family, latin: family },
+            body_size: px.body, body_size_unit: "px",
+            sizes: Object.assign({}, px, { subtitle: px.governing, annotation: px.note }) };
+    }
     function apply(data, state, field, value) {
         state[field] = value;
         var p = data.profiles[state.style_family], m = data.modes[state.style_delivery_mode];
@@ -50,12 +70,13 @@
                 primary: p.colors.primary, accent: p.colors.accent,
                 secondary_accent: p.colors.muted, body_text: p.colors.text
             }};
-            var px = modePx(p, m, state.style_delivery_mode);
-            state.typography = { name: "v17-" + state.style_family,
-                heading: { cjk: p.font, latin: p.font }, body: { cjk: p.font, latin: p.font },
-                body_size: px.body, body_size_unit: "px",
-                sizes: Object.assign({}, px, { subtitle: px.governing, annotation: px.note }) };
+            if (!state.density) state.density = p.density_default || "compact";
+            if (!state.content_detail) state.content_detail = "specific";
+            if (!state.font_family) state.font_family = "family_default";
+            state.governing_lines = "1";
+            applyTypography(data, state, p, m);
         }
+        if (field === "density" || field === "font_family") applyTypography(data, state, p, m);
         if (field === "media_mode") state.image_usage = data.media_modes[value].image_usage.slice();
         if (!state.layout_choice || field === "structure_goal" || field === "innergen_report_type" ||
                 field === "innergen_business_type" || field === "style_delivery_mode") {
@@ -278,6 +299,25 @@
         select(fields, "보고 성격", data.report_types, state.innergen_report_type, function (v) { onChange("innergen_report_type", v); });
         select(fields, "사용 방식", data.modes, state.style_delivery_mode, function (v) { onChange("style_delivery_mode", v); }, options.locked);
         root.appendChild(fields);
+        if (data.feedback_options) {
+            var adjust = node("section", "ig-adjust"); adjust.setAttribute("aria-label", "결과물 조정 선택");
+            adjust.appendChild(node("h3", "", "결과물 조정 (피드백 선택지)"));
+            var adjustFields = node("div", "ig-fields");
+            data.feedback_options.forEach(function (opt) {
+                var entries = {};
+                if (opt.id === "font_family") {
+                    entries.family_default = { label: opt.choices.family_default };
+                    Object.keys(data.fonts || {}).forEach(function (id) { entries[id] = { label: data.fonts[id].label + " (" + data.fonts[id].family + ")" }; });
+                } else {
+                    Object.keys(opt.choices).forEach(function (id) { entries[id] = { label: opt.choices[id] }; });
+                }
+                var current = state[opt.id] || opt.default;
+                select(adjustFields, opt.label, entries, current, function (v) { onChange(opt.id, v); }, opt.id === "governing_lines");
+            });
+            adjust.appendChild(adjustFields);
+            adjust.appendChild(node("p", "ig-caption", "컴팩트: 본문 12pt 내외, 거버닝 최대 18pt 한 줄. 구체형: 수치·근거·사례를 명시. 글꼴은 설치된 가족만 선택(install_fonts.py)."));
+            root.appendChild(adjust);
+        }
         var catalog = data.consulting_structure;
         if (catalog) {
             var modeContract = catalog.mode_contracts[contentMode(state)];

@@ -152,15 +152,16 @@ def check_image_backend() -> list[str]:
 
 
 def check_codex_stubs() -> list[str]:
-    """Dual-host drift gate: .codex/skills stubs must match a fresh build from
-    the canonical .claude/skills tree (see AGENTS.md / CLAUDE.md cross-harness
-    note). Stale stubs mean Codex triggers on outdated skill frontmatter."""
+    """Multi-host drift gate: .codex/skills and .gemini/skills stubs must match
+    a fresh build from the canonical .claude/skills tree (see AGENTS.md /
+    GEMINI.md / CLAUDE.md cross-harness note). Stale stubs mean Codex or
+    Gemini CLI triggers on outdated skill frontmatter."""
     stale = stale_stub_paths()
     if not stale:
         return []
     sample = ", ".join(stale[:3]) + (", ..." if len(stale) > 3 else "")
     return [
-        f".codex/skills Codex stubs are stale ({len(stale)} file(s): {sample}) "
+        f"Host skill stubs are stale ({len(stale)} file(s): {sample}) "
         f"— regenerate: {SYNC_CMD}"
     ]
 

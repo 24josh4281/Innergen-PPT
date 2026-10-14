@@ -3,15 +3,16 @@
 PPT Master - INNerGEN QA/QC gate (uniformity + writing rules)
 
 Checks a finished (or in-progress) SVG deck against the INNerGEN design rules
-in docs/styles/innergen: chrome geometry (v17), governing grammar (v11/v20),
-title system (v4/v5/v20), TOC ↔ chapter consistency (v5/v20), structure and
-closing set per deck type (v20), font sizes (v18), citation line (v16).
-It complements svg_quality_checker.py (SVG/PPTX contract) with the
-*content* and *uniformity* layer that otherwise needs a human review.
+in docs/styles/innergen: family chrome geometry (v17/v22), governing grammar
+(v11/v20, one line since v22), title system (v4/v5/v20), TOC ↔ chapter
+consistency (v5/v20), structure and closing set per deck type (v20), minimum
+text sizes (v18/v22), citation line (v16). It complements svg_quality_checker.py
+(SVG/PPTX contract) with the *content* and *uniformity* layer.
 
 Usage:
     python3 scripts/innergen_qaqc.py <project_path> [--deck-type lecture] [--register auto|external|internal]
-                                     [--family innergen_lecture] [--strict] [--json <out.json>]
+                                     [--family innergen_lecture|innergen_lecture_v20|innergen_business|innercarry]
+                                     [--strict] [--json <out.json>]
 
 Outputs:
     <project>/analysis/innergen_qaqc_report.md and .json
@@ -37,9 +38,6 @@ from console_encoding import configure_utf8_stdio  # noqa: E402
 
 REPO = _SCRIPTS_DIR.parents[3]
 RULES_PATH = REPO / "docs/styles/innergen/qaqc-v21.json"
-V17_PATH = REPO / "docs/styles/innergen/design-standard-v17.json"
-V20_PATH = REPO / "docs/styles/innergen/content-architecture-v20.json"
-SVG_NS = "{http://www.w3.org/2000/svg}"
 
 
 # ---------------------------------------------------------------- helpers
@@ -77,10 +75,6 @@ def _text_lines(el: ET.Element) -> list[str]:
     return [l for l in lines if l]
 
 
-def _full_text(el: ET.Element) -> str:
-    return re.sub(r"\s+", " ", " ".join(_text_lines(el))).strip()
-
-
 def _glyph_width(s: str, size: float) -> float:
     w = 0.0
     for ch in s:
@@ -107,9 +101,13 @@ def _similar(a: str, b: str) -> float:
     return len(sa & sb) / max(1, len(sa | sb))
 
 
+def _near(a, b, tol):
+    return a is not None and b is not None and abs(a - b) <= tol
+
+
 # ---------------------------------------------------------------- page model
 class Page:
-    def __init__(self, path: Path, index: int):
+    def __init__(self, path: Path, index: int, fam: dict | None = None):
         self.path, self.index = path, index
         self.root = ET.parse(str(path)).getroot()
         self.layout = self.root.get("data-pptx-layout") or ""
@@ -118,12 +116,21 @@ class Page:
         self.rects: list[dict] = []
         self.images: list[dict] = []
         self.lines: list[dict] = []
+        self._parent_map = None
         self._walk(self.root, {})
-        self.title = self._pick(lambda t: abs(t["y"] - 50) <= 3 and abs(t["size"] - 32) <= 1)
-        self.governing = self._pick(lambda t: 90 <= t["y"] <= 136 and abs(t["size"] - 24) <= 1 and t["x"] >= 60)
-        self.source = self._pick(lambda t: 618 <= t["y"] <= 642 and t["size"] <= 18)
-        self.footer_label = self._pick(lambda t: 680 <= t["y"] <= 692 and t["x"] < 400)
-        self.page_number = self._pick(lambda t: 680 <= t["y"] <= 692 and t["anchor"] == "end")
+        self.title = self.governing = self.source = self.footer_label = self.page_number = None
+        if fam:
+            self.bind(fam)
+
+    def bind(self, fam: dict):
+        t, gv, src, ft = fam["title"], fam["governing"], fam["source"], fam["footer"]
+        tol = t.get("tolerance", 3)
+        self.title = self._pick(lambda x: _near(x["y"], t["baseline"], tol) and _near(x["size"], t["size"], 1.5) and x["x"] < fam["canvas"][0] * 0.6)
+        g_baselines = [gv["baseline"]] + ([gv["baseline_two_lines"]] if gv.get("baseline_two_lines") else [])
+        self.governing = self._pick(lambda x: any(_near(x["y"], b, gv.get("tolerance", 3)) for b in g_baselines) and _near(x["size"], gv["size"], 1.5) and x["x"] >= gv["text_x"] - 4)
+        self.source = self._pick(lambda x: _near(x["y"], src["baseline"], src.get("tolerance", 3)) and x["size"] <= src["size"] + 2)
+        self.footer_label = self._pick(lambda x: _near(x["y"], ft["label"]["baseline"], 3) and _near(x["x"], ft["label"]["x"], 6))
+        self.page_number = self._pick(lambda x: _near(x["y"], ft["page_number"]["baseline"], 3) and x["anchor"] == ft["page_number"].get("anchor", "end") and _near(x["x"], ft["page_number"]["x"], 6))
 
     def _walk(self, el, inherited):
         tag = _local(el.tag)
@@ -144,15 +151,13 @@ class Page:
         if tag == "rect":
             self.rects.append({"x": _num(el.get("x"), 0.0), "y": _num(el.get("y"), 0.0), "w": _num(el.get("width"), 0.0), "h": _num(el.get("height"), 0.0), "fill": (el.get("fill") or "").upper(), "id": el.get("id") or ""})
         elif tag == "image":
-            self.images.append({"x": _num(el.get("x"), 0.0), "y": _num(el.get("y"), 0.0), "w": _num(el.get("width"), 0.0), "h": _num(el.get("height"), 0.0), "href": el.get("href") or el.get("{http://www.w3.org/1999/xlink}href") or ""})
+            self.images.append({"x": _num(el.get("x"), 0.0), "y": _num(el.get("y"), 0.0), "w": _num(el.get("width"), 0.0), "h": _num(el.get("height"), 0.0)})
         elif tag == "line":
             self.lines.append({"y1": _num(el.get("y1"), 0.0), "y2": _num(el.get("y2"), 0.0), "x1": _num(el.get("x1"), 0.0), "x2": _num(el.get("x2"), 0.0)})
         for ch in el:
             if _local(ch.tag) in ("metadata", "defs", "style"):
                 continue
             self._walk(ch, style)
-
-    _parent_map = None
 
     def _group_id(self, el):
         if self._parent_map is None:
@@ -178,8 +183,18 @@ class Page:
                 return t
         return None
 
+    def has_atom(self, atom: dict, tol=1.5) -> bool:
+        kind = atom["type"]
+        if kind == "rect":
+            return any(_near(r["x"], atom["x"], tol) and _near(r["y"], atom["y"], tol) and _near(r["w"], atom["w"], tol) and _near(r["h"], atom["h"], tol) for r in self.rects)
+        if kind == "line":
+            return any(_near(l["y1"], atom["y"], tol) and _near(l["y2"], atom["y"], tol) for l in self.lines)
+        if kind == "image":
+            return any(_near(i["x"], atom["x"], tol) and _near(i["y"], atom["y"], tol) for i in self.images)
+        return True
 
-# ---------------------------------------------------------------- checks
+
+# ---------------------------------------------------------------- report
 class Report:
     def __init__(self):
         self.items: list[dict] = []
@@ -202,6 +217,25 @@ def detect_register(ending: str, rules: dict) -> str:
     return "noun"
 
 
+def detect_family(pages: list[Page], declared: str | None, rules: dict) -> str:
+    fams = rules["families"]
+    if declared in fams and declared != "innergen_lecture":
+        return declared
+    # innergen_lecture: tell the v22 compact chrome from the v20 two-line chrome by the title baseline.
+    content = [p for p in pages if not p.is_exempt(fams["innergen_lecture"]["exempt_layout_keywords"])]
+    sample = content[:3] or pages[:3]
+    for key in ("innergen_lecture", "innergen_lecture_v20"):
+        det = fams[key]["detect"]
+        hits = sum(1 for p in sample if any(_near(t["y"], det["title_baseline"], 3) and _near(t["size"], det["title_size"], 1.5) for t in p.texts))
+        if hits >= max(1, len(sample) // 2):
+            return key
+    return declared or "innergen_lecture"
+
+
+def _layout_in(layout: str, group: str) -> bool:
+    return any(x in layout for x in group.split("|"))
+
+
 def run(project: Path, deck_type: str | None, register: str, family: str | None, rules: dict) -> tuple[Report, dict]:
     rep = Report()
     svg_dir = project / "svg_output"
@@ -210,24 +244,24 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
         rep.add("ERROR", "P00", 0, "svg_output/ 에 SVG가 없습니다")
         return rep, {}
 
-    # family / deck type from project files when not given
     prof_file = project / "design_profile_v17.json"
     if family is None and prof_file.exists():
         try:
             family = json.loads(prof_file.read_text(encoding="utf-8")).get("family")
         except Exception:  # noqa: BLE001
             family = None
-    family = family or "innergen_lecture"
-    fam = rules["families"].get(family) or rules["families"]["innergen_lecture"]
+    family = detect_family(pages, family, rules)
+    fam = rules["families"][family]
+    for p in pages:
+        p.bind(fam)
     if deck_type is None:
         spec = (project / "design_spec.md")
         if spec.exists():
-            m = re.search(r"deck_type:\s*(\w+)", spec.read_text(encoding="utf-8"))
+            m = re.search(r"deck_type\*{0,2}\s*\|?\s*[:|]\s*\**(\w+)", spec.read_text(encoding="utf-8"))
             deck_type = m.group(1) if m else None
     exempt = fam["exempt_layout_keywords"]
     content = [p for p in pages if not p.is_exempt(exempt)]
 
-    # ---- spec_lock colors
     lock = project / "spec_lock.md"
     palette = set()
     if lock.exists():
@@ -235,71 +269,72 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
     palette |= {"#FFFFFF", "NONE", ""}
 
     # ---- C: chrome / geometry
-    tol = fam["title"]["tolerance"]
+    gv = fam["governing"]
     for p in content:
-        if not any(abs(r["y"]) < 1 and r["h"] <= 4 and r["w"] >= fam["canvas"][0] - 1 for r in p.rects):
-            rep.add("ERROR", "C01", p.index, "상단 블루 선(0,0,1040,3)이 없습니다")
+        for atom in fam.get("atoms", []):
+            if not p.has_atom(atom):
+                rep.add("ERROR", "C01", p.index, f"고정 요소 '{atom['id']}'({atom['type']})가 기준 위치에 없습니다")
         if p.title is None:
-            rep.add("ERROR", "C02", p.index, "제목(x48, 기준선 50, 32px)을 찾지 못했습니다")
+            rep.add("ERROR", "C02", p.index, f"제목(x{fam['title']['x']}, 기준선 {fam['title']['baseline']}, {fam['title']['size']}px)을 찾지 못했습니다")
         else:
             t = p.title
-            if abs(t["x"] - fam["title"]["x"]) > tol or t["fill"] != fam["title"]["fill"].upper() or t["weight"] not in ("700", "bold"):
+            if abs(t["x"] - fam["title"]["x"]) > fam["title"].get("tolerance", 3) or t["fill"] != fam["title"]["fill"].upper() or t["weight"] not in ("700", "bold"):
                 rep.add("WARN", "C02", p.index, f"제목 위치·색·굵기가 기준과 다릅니다 (x={t['x']:g}, fill={t['fill']}, weight={t['weight']})")
-        gb = fam["governing"]["box"]
-        if not any(abs(r["x"] - gb[0]) <= 1 and abs(r["y"] - gb[1]) <= 1 and abs(r["w"] - gb[2]) <= 1 and abs(r["h"] - gb[3]) <= 1 for r in p.rects):
-            rep.add("ERROR", "C03", p.index, "거버닝 박스(48,70,944,80)가 없습니다")
+        if gv.get("box"):
+            gb = gv["box"]
+            if not any(abs(r["x"] - gb[0]) <= 1 and abs(r["y"] - gb[1]) <= 1 and abs(r["w"] - gb[2]) <= 1 and abs(r["h"] - gb[3]) <= 1 for r in p.rects):
+                rep.add("ERROR", "C03", p.index, f"거버닝 박스({','.join(str(v) for v in gb)})가 없습니다")
         if p.governing is not None:
             g = p.governing
-            n = len(g["lines"])
-            exp = fam["governing"]["baseline_one_line"] if n == 1 else fam["governing"]["baseline_two_lines"][0]
-            if abs(g["y"] - exp) > fam["governing"]["tolerance"]:
-                rep.add("WARN", "C03", p.index, f"거버닝 기준선 y={g['y']:g} (기준 {exp}, {n}줄)")
-            if g["fill"] != fam["governing"]["fill"].upper() or g["weight"] not in ("700", "bold"):
-                rep.add("WARN", "C03", p.index, "거버닝은 블루(#2F62F0) 볼드여야 합니다")
+            if g["fill"] != gv["fill"].upper():
+                rep.add("WARN", "C03", p.index, f"거버닝 색이 기준({gv['fill']})과 다릅니다: {g['fill']}")
+            if gv.get("weight_bold") and g["weight"] not in ("700", "bold"):
+                rep.add("WARN", "C03", p.index, "거버닝은 볼드여야 합니다")
         if p.source is None:
             key = p.layout.lower()
             if any(k in key for k in rules["source_line"]["required_on_layouts_with"]):
-                rep.add("WARN", "C04", p.index, "근거·표·차트 장표인데 출처 줄(y630)이 없습니다")
+                rep.add("WARN", "C04", p.index, f"근거·표·차트 장표인데 출처 줄(y{fam['source']['baseline']})이 없습니다")
         else:
             if not re.match(rules["source_line"]["format_regex"], p.source["text"]):
                 rep.add("WARN", "C04", p.index, f"출처 줄은 '출처:'로 시작해야 합니다: {p.source['text'][:40]}")
-            if abs(p.source["y"] - fam["source"]["baseline"]) > fam["source"]["tolerance"] or abs(p.source["size"] - fam["source"]["size"]) > 1:
-                rep.add("WARN", "C04", p.index, f"출처 줄 위치·크기 (y={p.source['y']:g}, {p.source['size']:g}px)")
-        if not any(abs(l["y1"] - fam["footer"]["line_y"]) <= 1 and abs(l["y2"] - fam["footer"]["line_y"]) <= 1 for l in p.lines):
-            rep.add("ERROR", "C05", p.index, "푸터 선(y648)이 없습니다")
-        if not any(abs(i["x"] - 48) <= 1 and abs(i["y"] - 660) <= 1 for i in p.images):
-            rep.add("ERROR", "C05", p.index, "푸터 로고(48,660)가 없습니다")
+            if abs(p.source["size"] - fam["source"]["size"]) > 1.5:
+                rep.add("WARN", "C04", p.index, f"출처 줄 크기 {p.source['size']:g}px (기준 {fam['source']['size']}px)")
         if p.page_number is None:
-            rep.add("ERROR", "C05", p.index, "페이지 번호가 없습니다")
+            rep.add("ERROR", "C05", p.index, "페이지 번호가 기준 위치에 없습니다")
         elif p.page_number["text"].strip() != str(p.index):
             rep.add("ERROR", "C05", p.index, f"페이지 번호 '{p.page_number['text']}' ≠ 실제 순번 {p.index}")
     labels = Counter(p.footer_label["text"] for p in content if p.footer_label)
     if len(labels) > 1:
-        rep.add("WARN", "C05", 0, f"푸터 라벨이 여러 종류입니다: {dict(labels)}")
+        rep.add("WARN", "C05", 0, f"푸터·섹션 라벨이 여러 종류입니다: {dict(labels)}")
 
     # ---- fonts & colors
+    fams_ok = rules["font"]["required_families"]
     for p in pages:
         for t in p.texts:
-            if t["family"] and rules["font"]["required_family"] not in t["family"]:
-                rep.add("ERROR", "C08", p.index, f"글꼴 '{t['family'][:30]}' — Pretendard 아님")
+            if t["family"] and not any(f in t["family"] for f in fams_ok):
+                rep.add("ERROR", "C08", p.index, f"글꼴 '{t['family'][:30]}' — 허용 가족({', '.join(fams_ok)}) 아님")
                 break
-        small = [t for t in p.texts if t["text"] and 0 < t["size"] < rules["font"]["min_px_content"] and t["y"] < 648]
+        ft = fam["footer"]
+
+        def _limit(t):
+            in_footer = _near(t["y"], ft["label"]["baseline"], 4) or _near(t["y"], ft["page_number"]["baseline"], 4)
+            return fam["min_px"]["footer"] if in_footer else fam["min_px"]["content"]
+        small = [t for t in p.texts if t["text"] and 0 < t["size"] < _limit(t) - 0.05]
         for t in small[:3]:
-            rep.add("WARN", "C06", p.index, f"본문 글자 {t['size']:g}px < {rules['font']['min_px_content']}px: '{t['text'][:24]}'")
-        tiny = [t for t in p.texts if t["text"] and 0 < t["size"] < rules["font"]["min_px_footer"]]
-        for t in tiny[:2]:
-            rep.add("ERROR", "C06", p.index, f"글자 {t['size']:g}px < {rules['font']['min_px_footer']}px: '{t['text'][:24]}'")
+            rep.add("WARN", "C06", p.index, f"글자 {t['size']:g}px < {_limit(t)}px: '{t['text'][:24]}'")
         if palette:
             off = sorted({t["fill"] for t in p.texts if t["fill"] and t["fill"] not in palette} | {r["fill"] for r in p.rects if r["fill"] and r["fill"] not in palette})
             if off:
                 rep.add("WARN", "C07", p.index, f"spec_lock 밖의 색: {', '.join(off[:5])}")
 
     # ---- G: governing
-    gov_pages = [(p, p.governing) for p in content]
+    gr = rules["governing"]
     regs = Counter()
     seen: list[tuple[int, str]] = []
-    gr = rules["governing"]
-    for p, g in gov_pages:
+    max_lines = int(gv.get("max_lines", 1))
+    one_line_chars = int(gv["inner_width"] / gv["size"] * gr.get("line_fill_ratio", 0.97))
+    for p in content:
+        g = p.governing
         if g is None:
             rep.add("ERROR", "G01", p.index, "본문 장표에 거버닝 문장이 없습니다")
             continue
@@ -312,15 +347,12 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
                 break
         seen.append((p.index, text))
         n = len(g["lines"])
-        if n > gr["max_lines"]:
-            rep.add("ERROR", "G04", p.index, f"거버닝이 {n}줄입니다(최대 {gr['max_lines']}줄)")
-        lim = gr["chars_no_space"].get(str(int(g["size"])), gr["chars_no_space"]["24"])
+        if n > max_lines:
+            rep.add("ERROR", "G04", p.index, f"거버닝이 {n}줄입니다(최대 {max_lines}줄)")
         cnt = len(text.replace(" ", ""))
-        if cnt > lim["two_lines"]:
-            rep.add("WARN", "G04", p.index, f"거버닝 {cnt}자 > 두 줄 상한 {lim['two_lines']}자")
         for ln in g["lines"]:
-            if _glyph_width(ln, g["size"]) > fam["governing"]["inner_width"]:
-                rep.add("WARN", "G04", p.index, f"거버닝 한 줄이 박스 폭을 넘습니다: '{ln[:30]}…'")
+            if _glyph_width(ln, g["size"]) > gv["inner_width"]:
+                rep.add("WARN", "G04", p.index, f"거버닝이 영역 폭({gv['inner_width']}px)을 넘습니다: '{ln[:30]}…'")
         if cnt < gr["min_chars"]:
             rep.add("WARN", "G08", p.index, f"거버닝이 너무 짧습니다({cnt}자) — 명사구가 아닌 판단 문장으로")
         if any(text.startswith(s) for s in gr["forbidden_starts"]):
@@ -374,15 +406,15 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
     toc_pages = [p for p in pages if _is_toc(p.layout)]
     if toc_pages:
         toc = toc_pages[0]
-        items = [t["text"] for t in toc.texts if re.match(r"toc-\d+-title", t["group"] or t["id"] or "")]
+        items = [t["text"] for t in toc.texts if re.match(r"toc-(item-)?\d+-title", t["group"] or t["id"] or "")]
         chapter_titles = [t for _, t in titles]
         for item in items:
             core = re.sub(tr["numbering_regex"], "", item).strip(" ./-–")
             if len(core) < rules["toc"]["match_min_chars"]:
                 continue
             cands = chapter_titles + [t["text"] for p in pages for t in p.texts
-                                      if (p.layout in rules["toc"]["divider_layouts"] and t["size"] >= 40)
-                                      or (p.is_exempt(exempt) and not _is_toc(p.layout) and t["size"] >= 20)]
+                                      if (p.layout in rules["toc"]["divider_layouts"] and t["size"] >= 24)
+                                      or (p.is_exempt(exempt) and not _is_toc(p.layout) and t["size"] >= 14)]
             if not any(core[:6] in ct or _similar(core, ct.split("/")[0]) > 0.5 for ct in cands):
                 rep.add("WARN", "O01", toc.index, f"목차 항목 '{item}'에 대응하는 장 제목·장 구분을 찾지 못했습니다")
         ranges = [t["text"] for t in toc.texts if re.match(r"toc-\d+-pages", t["group"] or "")]
@@ -412,14 +444,13 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
         if c / len(layouts) > st["max_share_single_layout"] and len(layouts) >= 6:
             rep.add("WARN", "S01", 0, f"본문의 {c/len(layouts):.0%}가 한 레이아웃({top})입니다")
     if deck_type:
-        req = st["required_layouts"].get(deck_type, [])
         all_layouts = set(p.layout for p in pages)
-        for group in req:
-            if not any(l.startswith(x) for x in group.split("|") for l in all_layouts):
+        for group in st["required_layouts"].get(deck_type, []):
+            if not any(_layout_in(l, group) for l in all_layouts):
                 rep.add("WARN", "S03", 0, f"{deck_type} 덱 필수 레이아웃 없음: {group.replace('|', ' 또는 ')}")
         closing = st["closing_layouts"].get(deck_type, [])
         tail = [p.layout for p in content[-3:]]
-        if closing and not any(l.startswith(c) for l in tail for c in closing):
+        if closing and not any(c in l for l in tail for c in closing):
             rep.add("WARN", "S02", content[-1].index if content else 0, f"{deck_type} 마무리 세트({', '.join(closing)}) 중 하나가 마지막 3장에 없습니다")
     for p in content:
         fm = p.slot_text("final-message") or p.slot_text("synthesis") or p.slot_text("conclusion") or p.slot_text("next-action")
@@ -459,7 +490,7 @@ def main(argv=None) -> int:
     ap.add_argument("project", type=Path)
     ap.add_argument("--deck-type", default=None, help="lecture|handout|seminar|proposal|kickoff|weekly|biweekly|monthly|diagnosis|interim|final|briefing|benchmark|insight")
     ap.add_argument("--register", default="auto", choices=["auto", "external", "internal"])
-    ap.add_argument("--family", default=None)
+    ap.add_argument("--family", default=None, help="innergen_lecture|innergen_lecture_v20|innergen_business|innercarry (default: design_profile_v17.json + chrome detection)")
     ap.add_argument("--strict", action="store_true")
     ap.add_argument("--json", type=Path, default=None)
     args = ap.parse_args(argv)
@@ -470,7 +501,7 @@ def main(argv=None) -> int:
         if it["level"] == "INFO":
             continue
         print(f"[{it['level']}] {it['code']} P{it['page']:02d} {it['message']}")
-    print(f"[innergen_qaqc] {summary.get('pages')} pages · ERROR {summary.get('errors')} · WARN {summary.get('warnings')} · INFO {summary.get('infos')} · report: {args.project / 'analysis/innergen_qaqc_report.md'}")
+    print(f"[innergen_qaqc] family {summary.get('family')} · {summary.get('pages')} pages · ERROR {summary.get('errors')} · WARN {summary.get('warnings')} · INFO {summary.get('infos')} · report: {args.project / 'analysis/innergen_qaqc_report.md'}")
     if summary.get("errors") or (args.strict and summary.get("warnings")):
         print("[innergen_qaqc] FAIL")
         return 1

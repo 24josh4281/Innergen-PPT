@@ -30,6 +30,14 @@ except ImportError:
             'viewbox': '0 0 1280 720',
             'aspect_ratio': '16:9'
         },
+        'ppt169s': {
+            'name': 'PPT 16:9 (10in, 720×405 pt)',
+            'dimensions': '960×540',
+            'viewbox': '0 0 960 540',
+            'width': 960,
+            'height': 540,
+            'aspect_ratio': '16:9'
+        },
         'ppt43': {
             'name': 'PPT 4:3',
             'dimensions': '1024×768',

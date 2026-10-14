@@ -71,6 +71,14 @@ def validate_selection(payload, data=None):
         if not isinstance(payload.get(field), str) or payload.get(field) not in data[catalog]:
             errors.append(f'Unknown {field}: {payload.get(field)}')
     errors.extend(validate_choice(payload, data.get('consulting_structure')))
+    presets = data.get('density_presets') or {}
+    if payload.get('density') is not None and payload.get('density') not in presets:
+        errors.append(f'Unknown density: {payload.get("density")} (have: {", ".join(presets)})')
+    fonts = data.get('fonts') or {}
+    if payload.get('font_family') not in (None, 'family_default') and payload.get('font_family') not in fonts:
+        errors.append(f'Unknown font_family: {payload.get("font_family")} (have: {", ".join(fonts)})')
+    if payload.get('content_detail') not in (None, 'concise', 'specific'):
+        errors.append(f'Unknown content_detail: {payload.get("content_detail")}')
     ty = payload.get('typography') or {}
     if isinstance(ty, dict):
         sizes = ty.get('sizes') or {}
@@ -95,7 +103,7 @@ def validate_selection(payload, data=None):
 def source_digest(payload):
     keys = ('style_family','style_delivery_mode','innergen_business_type','innergen_report_type',
             'layout_choice','media_mode','canvas','typography','color','image_usage','image_notes',
-            'structure_goal','structure_standard_version')
+            'structure_goal','structure_standard_version','density','font_family','content_detail','governing_lines')
     values = {k:payload[k] for k in keys if k in payload}
     return hashlib.sha256(json.dumps(values,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
 
@@ -119,12 +127,29 @@ def resolve(payload, data=None):
               'geometry_status':'standard profile; recompose for a confirmed custom canvas',
               'execution_note':'Input to design_spec.md/spec_lock.md; does not replace either file or authorize skipping owner gates.'}
     ty = payload.get('typography') or {}
-    # A family may pin role sizes its fixed template geometry depends on.
-    for role, pt in (profile.get('typography_pt_overrides') or {}).get(payload['style_delivery_mode'], {}).items():
-        result['typography_pt'][role] = float(pt)
-        result['typography_px'][role] = float(pt) / .75
-    result['font'] = (ty.get('body') or {}).get('cjk') or profile['font']
-    result['heading_font'] = (ty.get('heading') or {}).get('cjk') or result['font']
+    # v22 feedback options: density preset, font family, content detail, one-line governing.
+    density = payload.get('density') or profile.get('density_default') or 'standard'
+    canvas_key = payload.get('canvas') or profile['canvas']
+    preset = (data.get('density_presets') or {}).get(density) or {}
+    preset_pt = (preset.get('pt_by_canvas') or {}).get(canvas_key)
+    if density != 'standard' and preset_pt:
+        result['typography_pt'] = {k: float(v) for k, v in preset_pt.items()}
+        result['typography_px'] = {k: float(v) / .75 for k, v in preset_pt.items()}
+    else:
+        # A family may pin role sizes its fixed template geometry depends on.
+        for role, pt in (profile.get('typography_pt_overrides') or {}).get(payload['style_delivery_mode'], {}).items():
+            result['typography_pt'][role] = float(pt)
+            result['typography_px'][role] = float(pt) / .75
+    font_key = payload.get('font_family') or 'family_default'
+    fonts = data.get('fonts') or {}
+    chosen_font = fonts[font_key]['family'] if font_key in fonts else None
+    result['font'] = chosen_font or (ty.get('body') or {}).get('cjk') or profile['font']
+    result['heading_font'] = chosen_font or (ty.get('heading') or {}).get('cjk') or result['font']
+    result['adjustments'] = {
+        'density': density, 'font_family': font_key, 'content_detail': payload.get('content_detail') or 'specific',
+        'governing_max_lines': int(payload.get('governing_lines') or data['text'].get('governing_max_lines', 1)),
+        'note': 'feedback_options in the standard; density replaces mode sizes, font replaces profile.font, content_detail steers Strategist body density and QA strictness.'}
+    result['text_rules'] = dict(result['text_rules'], governing_max_lines=result['adjustments']['governing_max_lines'])
     result['text_colors'] = dict(profile['text_colors'])
     result['colors'] = dict(profile['colors'])
     mapping = {'background':'background','secondary_bg':'panel','primary':'primary',

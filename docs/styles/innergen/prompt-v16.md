@@ -10,6 +10,7 @@
 - 전달 방식: [발표형 | 교육형(강의) | 교육형(배포 교재) | 제안형 | 보고형(읽기용)]
 - 청중·시간: [예: 대학생 60명, 90분]
 - 고객·행사 로고: [경로 또는 없음]
+- 조정: 글자 크기 [컴팩트(기본) | 표준], 내용 [구체형(기본) | 요약형], 글꼴 [계열 기본 | Pretendard | IBM Plex Sans KR | 나눔스퀘어 네오 | Noto Sans CJK KR], 거버닝은 한 줄
 docs/styles/innergen/innergen-profile-matrix-v16.md와 innergen-evidence-charts-v16.md 기준으로
 업무별 필수 장표를 넣고, 수치는 1차 기관 자료로 최신값을 확인해 출처(기관·자료명·발간연월·기준연도·단위)를 달아줘.
 목차·장 구분·거버닝·본문 배치는 docs/styles/innergen/content-architecture-v20.md의 덱 유형 골격을 따라줘.

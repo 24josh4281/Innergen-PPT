@@ -10,6 +10,12 @@
       "delivery_purpose": "balanced"
     }
   },
+  "innercarry": {
+    "summary": "이너캐리 4:3 컴팩트 템플릿 — 거버닝 1줄·본문 12pt 내외(v22 컴팩트), 기본 레이아웃 + 구조화 장표 s01–s23 + 목차·장 구분·교육 장표",
+    "canvas_format": "ppt43",
+    "page_count": 34,
+    "primary_color": "#0B1739"
+  },
   "innergen": {
     "summary": "이너젠 ESG·기후 컨설팅 보고서용 13:9 템플릿 — 격자형·단색 남색형·슬림라인형",
     "canvas_format": "ppt139",
@@ -20,8 +26,14 @@
       "delivery_purpose": "text"
     }
   },
+  "innergen_business": {
+    "summary": "이너젠 회사소개 16:9(720×405pt) 컴팩트 템플릿 — 거버닝 1줄·본문 12pt 내외(v22 컴팩트), 기본 레이아웃 + 구조화 장표 s01–s23 + 목차·장 구분·교육 장표",
+    "canvas_format": "ppt169s",
+    "page_count": 34,
+    "primary_color": "#518FFF"
+  },
   "innergen_lecture": {
-    "summary": "이너젠 교육·강의(v4.2 블루) 13:9 템플릿 — 기본 10종 + 삼일PwC·삼정KPMG·딜로이트 레퍼런스 기반 구조화 장표 20종(요약카드·차트+시사점·비교 매트릭스·적용 시기표·판단 트리·로드맵·히트맵 등)",
+    "summary": "이너젠 교육·강의(블루) 13:9 컴팩트 템플릿 — 거버닝 1줄·본문 12pt 내외(v22 컴팩트), 기본 레이아웃 + 구조화 장표 s01–s23 + 목차·장 구분·교육 장표",
     "canvas_format": "ppt139",
     "page_count": 35,
     "primary_color": "#0B1739"

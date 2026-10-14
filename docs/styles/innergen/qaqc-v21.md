@@ -1,6 +1,6 @@
 # 이너젠 장표 QA/QC 체계 v21 — 균일성 점검
 
-작성일 2026-10-14. 규칙표는 [qaqc-v21.json](qaqc-v21.json), 실행 스크립트는 `.claude/skills/ppt-master/scripts/innergen_qaqc.py`.
+작성일 2026-10-14, 규칙표 rev.22(계열 4종·거버닝 한 줄·컴팩트 글자 하한). 규칙표는 [qaqc-v21.json](qaqc-v21.json), 실행 스크립트는 `.claude/skills/ppt-master/scripts/innergen_qaqc.py`.
 
 ## 1. 목적과 위치
 
@@ -32,18 +32,20 @@ python3 .claude/skills/ppt-master/scripts/innergen_qaqc.py projects/<project> \
 
 수준: **ERROR**(균일성 위반, 반드시 수정) · **WARN**(규칙 이탈 가능성, 확인 후 수정 또는 사유 기록) · **INFO**(권장 사항).
 
-### C. 화면 고정 요소 (v17 좌표)
+계열은 `design_profile_v17.json`의 family와 제목 위치로 자동 판별한다: `innergen_lecture`(v22 컴팩트) · `innergen_lecture_v20`(거버닝 2줄 구형) · `innergen_business`(960×540) · `innercarry`(1024×768). `--family`로 강제할 수 있다.
+
+### C. 화면 고정 요소 (v17·v22 좌표, 계열별 `families.<id>`)
 
 | 코드 | 검사 | 수준 |
 |---|---|---|
-| C01 | 상단 블루 선 `0,0,1040,3` 존재 | ERROR |
-| C02 | 제목 `x48 기준선 50 32px` 존재, 색 `#0B1739`, 볼드 | ERROR / WARN |
-| C03 | 거버닝 박스 `48,70,944,80` 존재, 거버닝 기준선(1줄 118 / 2줄 101), 블루 볼드 | ERROR / WARN |
-| C04 | 출처 줄: 근거·표·차트 레이아웃에 존재, `출처:`로 시작, `y630 16px` | WARN |
-| C05 | 푸터 선 `y648`, 로고 `48,660`, 페이지 번호 = 실제 순번, 푸터 라벨 한 종류 | ERROR / WARN |
-| C06 | 본문 글자 16px 미만(WARN), 14px 미만(ERROR) | WARN / ERROR |
+| C01 | 계열 고정 요소(`atoms`: 상단 선·왼쪽 바·거버닝 밑선·푸터 선·로고) 존재 | ERROR |
+| C02 | 계열 제목 위치·크기 존재, 색·볼드 | ERROR / WARN |
+| C03 | 거버닝 박스(교육 계열만), 거버닝 색·굵기 | ERROR / WARN |
+| C04 | 출처 줄: 근거·표·차트 레이아웃에 존재, `출처:`로 시작, 계열 기준선·크기 | WARN |
+| C05 | 페이지 번호 위치 = 계열 기준, 번호 = 실제 순번, 푸터·섹션 라벨 한 종류 | ERROR / WARN |
+| C06 | 계열 `min_px` 미만 글자(컴팩트: 본문 12px·회사소개/이너캐리 10.67px, 푸터 별도) | WARN |
 | C07 | `spec_lock.md`에 없는 색 사용 | WARN |
-| C08 | Pretendard가 아닌 글꼴 | ERROR |
+| C08 | 허용 가족(Pretendard·IBM Plex Sans KR·NanumSquare·Noto Sans·Malgun Gothic) 밖의 글꼴 | ERROR |
 
 표지·맺음·목차·장 구분(`exempt_layout_keywords`)은 C 검사에서 제외한다.
 
@@ -54,7 +56,7 @@ python3 .claude/skills/ppt-master/scripts/innergen_qaqc.py projects/<project> \
 | G01 | 본문 장표에 거버닝 없음 | ERROR |
 | G02 | 거버닝이 제목을 반복(유사도 0.9↑) | ERROR |
 | G03 | 다른 장표와 같은 거버닝 | ERROR |
-| G04 | 3줄 이상(ERROR), 글자 수 상한 초과(24px 75자, 22px 85자), 한 줄이 박스 폭 초과 | ERROR / WARN |
+| G04 | 계열 `max_lines`(v22: 1줄) 초과(ERROR), 한 줄이 거버닝 영역 폭 초과(WARN) | ERROR / WARN |
 | G05 | 문체가 덱 기준과 다름(완결 문장체 ↔ 개조식), 명사 끝맺음 | WARN |
 | G06 | 지시어 시작(이는·이를 통해·또한…), 행동 없는 구호, 질문형 | WARN |
 | G07 | 수치 없음 | INFO |
@@ -100,10 +102,10 @@ python3 .claude/skills/ppt-master/scripts/innergen_qaqc.py projects/<project> \
 
 | 결과 | 처리 |
 |---|---|
-| G04 두 줄 상한 초과 | 수식어·괄호를 빼고 주어+판단+수치만 남긴다. 2줄이 안 되면 제목 쪽으로 범위를 옮긴다 |
+| G04 한 줄 초과 | 수식어·괄호를 빼고 주어+판단+수치만 남긴다. 한 줄이 안 되면 범위를 제목으로 옮긴다(v22: 두 줄 금지) |
 | G05 문체 혼재 | 외부 덱은 전부 `~합니다`, 내부 진행 덱은 전부 개조식. 약속 문장만 `~할 예정입니다` 허용 |
 | G02 제목 반복 | 거버닝을 "그래서 무엇"으로 바꾼다. 제목은 주제, 거버닝은 판단 |
-| C06 14px 배지·태그 | 템플릿 배지는 16px(2026-10-14 수정). 새 배지는 16px 이상 |
+| C06 글자 하한 | 컴팩트 계열은 칸 12px·배지 10.67px, v20 교육 계열은 16px/14px. 템플릿 값을 유지 |
 | C05 페이지 번호 불일치 | 장표 삽입·삭제 뒤 `PAGE_NUM`을 다시 매긴다. 목차 쪽 범위(O02)도 함께 |
 | S02 마무리 세트 없음 | lecture는 `s23`/`s20`/`03b(Q&A)`, final은 `s13`+`s05`, kickoff·weekly는 `s12`+결정 요청 |
 | C07 spec_lock 밖 색 | 차트·캡처용 색은 `spec_lock.md ## colors`에 먼저 등록한다 |
@@ -117,4 +119,4 @@ python3 .claude/skills/ppt-master/scripts/innergen_qaqc.py projects/<project> \
 - v17 수치·v18 구조·v20 문법을 바꾸지 않는다. 그 규칙을 **검사**로 옮긴 것이다.
 - `svg_quality_checker.py` 0 errors가 먼저다. 이 검사는 그 다음이며, `verify_deck.py`를 대신하지 않는다.
 - 확정된 프로젝트 잠금값(`spec_lock.md`)이 규칙표와 다르면 잠금값이 우선이고, 다른 이유를 전달 메모에 적는다.
-- 2026-10-14 견본 결과: 구조화 장표 견본(23장, final) ERROR 0 · 교육형 견본(15장, lecture) ERROR 0.
+- 2026-10-14 견본 결과: 구조화 장표 견본(23장, final, v20 계열) ERROR 0 · 교육형 견본(15장, lecture) v20 계열 ERROR 0 · 회사소개 계열 15장 ERROR 0 · 이너캐리 계열 15장 ERROR 0.

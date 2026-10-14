@@ -79,19 +79,38 @@ projects/<프로젝트>/svg_final/                        ← 브라우저로 �
 
 [Claude Code](https://claude.ai/code)(CLI 또는 VS Code/JetBrains 확장) 권장 — 이 프로젝트가 가장 많이 검증된 환경입니다.
 
-**Codex도 공식 지원합니다** — Codex CLI든 **ChatGPT 데스크탑 앱의 Codex**든, 이 저장소 폴더를 열기만 하면 됩니다. Codex용 실행 규칙([`AGENTS.md`](AGENTS.md))과 스킬 발견 스텁(`.codex/skills/`)이 저장소에 이미 포함되어 있어 별도 설정이 필요 없습니다.
+**GPT(Codex)·Gemini도 공식 지원합니다** — 같은 스킬 셋(이너젠·이너캐리 스타일, 장표 생성·템플릿 채우기·QA/QC 포함)이 호스트별로 들어 있어, 저장소 폴더를 열기만 하면 바로 적용됩니다.
+
+| 호스트 | 스킬 셋 | 실행 규칙 |
+|---|---|---|
+| Claude Code | `.claude/skills/` (원본) | [`CLAUDE.md`](CLAUDE.md) |
+| GPT — Codex CLI · ChatGPT 데스크탑 앱의 Codex | `.codex/skills/` (생성 스텁) | [`AGENTS.md`](AGENTS.md) |
+| Gemini CLI | `.gemini/skills/` (생성 스텁) | [`GEMINI.md`](GEMINI.md) |
+
+스텁은 원본 `.claude/skills/`를 가리키는 생성 파일입니다. 스킬을 고친 뒤에는 `python .claude/skills/ppt-master/scripts/sync_codex_stubs.py`로 두 스텁 셋을 함께 다시 만듭니다(직접 수정 금지).
 
 그 밖에 Cursor, VS Code Copilot 등 파일 읽기/쓰기 + 명령 실행이 되는 에이전트라면 동작합니다.
 
-**3단계 — 저장소 받기 + 의존성 설치**
+**3단계 — 저장소 받기 + 가상환경 설정**
 
 ```bash
-git clone https://github.com/byungjunjang/slide-master.git
+git clone -b slide-master https://github.com/24josh4281/innergen-ppt.git slide-master
 cd slide-master
-pip install -r requirements.txt
 ```
 
-받은 폴더를 에이전트에서 엽니다 — IDE형이면 File → Open Folder, CLI형이면 `cd slide-master` 후 실행.
+설정 스크립트 한 번으로 `.venv` 생성 → 의존성 설치 → 번들 폰트(Pretendard · IBM Plex Sans KR · 나눔스퀘어 네오) 사용자 설치 → Codex/Gemini 스킬 스텁 동기화 → 검증까지 끝납니다. 여러 번 실행해도 안전합니다.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\setup.ps1
+```
+
+```bash
+sh setup.sh
+```
+
+옵션: `--skip-fonts`(폰트 설치 생략) · `--recreate`(`.venv` 새로 만들기) · `--check`(변경 없이 상태만 점검). 에이전트는 `.venv`가 있으면 그 Python으로 스크립트를 실행합니다.
+
+받은 폴더를 에이전트에서 엽니다 — IDE형이면 File → Open Folder, CLI형이면 폴더에서 `claude` / `codex` / `gemini` 실행. 그다음 "이너젠 스타일로 이 자료 컨설팅 장표 만들어줘"처럼 요청하면 됩니다.
 
 **4단계 (선택) — AI 이미지 생성**
 

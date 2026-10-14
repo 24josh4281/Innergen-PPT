@@ -75,6 +75,22 @@ and writes `analysis/innergen_qaqc_report.md`. ERROR must be fixed; WARN needs a
 recorded reason; the six render-review items in that document stay a human
 check on the exported PPTX. It does not replace `verify_deck.py`.
 
+v22 (2026-10-14, standard rev.22): the standard now carries a `fonts` catalog
+(Pretendard, IBM Plex Sans KR, NanumSquare Neo, NanumSquare, NanumSquareRound,
+Noto Sans CJK KR, Malgun Gothic; bundled under `.claude/skills/ppt-master/assets/fonts/`,
+installed with `scripts/install_fonts.py`), `density_presets` (default `compact`:
+governing ≤18pt on one line, body about 12pt, cells 9–10.5pt, per canvas),
+`feedback_options` (density / content_detail / font_family / governing_lines,
+chosen in the Confirm UI "결과물 조정" block and applied by `style_standard.py`
+into `design_profile_v17.json.adjustments`), and `template_families_v22`:
+`innergen_lecture` (ppt139, Pretendard, regenerated compact), `innergen_business`
+(canvas `ppt169s` 960×540 px = 720×405 pt, IBM Plex Sans KR, chrome from the
+260518 company profile) and `innercarry` (ppt43). The three decks share the
+s01–s23 slot tokens. Governing messages are one line everywhere
+(`text.governing_max_lines = 1`). When the user asks for smaller type, more
+concrete content or another font after seeing a deck, change only those
+feedback values and re-run the Executor; coordinates, colors and templates stay.
+
 A style family alone never stages a template. Use only explicitly selected valid
 template paths. Existing owner gates and source fact protections stay in force.
 

@@ -9,6 +9,7 @@
 | 결정할 항목 | 적용 문서 | 범위와 우선순위 |
 |---|---|---|
 | 현재 요청·확정 명세 | 사용자 요청, 프로젝트 명세·잠금값 | 최우선. 기존 장표의 변경 허용 범위를 먼저 확인 |
+| 글꼴 선택, 글자 크기(밀도), 거버닝 줄 수, 내용 구체성 — 결과물 피드백 선택지 | [v17 rev.22](design-standard-v17.md) `fonts`·`density_presets`·`feedback_options`·`template_families_v22` | 2026-10-14 사용자 결정: 거버닝 한 줄, 본문 12pt 내외(컴팩트 기본), 회사소개·이너캐리는 IBM Plex Sans KR, 교육은 Pretendard. Confirm UI '결과물 조정'에서 고르고 `style_standard.py`가 적용. 계열별 템플릿·캔버스 `ppt169s` |
 | 완성 덱의 균일성·작성 규칙 자동 점검(고정 요소·거버닝·제목·목차·구조·글자 크기·출처) | [QA/QC v21](qaqc-v21.md), [규칙표](qaqc-v21.json), `scripts/innergen_qaqc.py` | `svg_quality_checker.py` 0 errors 뒤 내보내기 전과 전달 전에 실행. v17 수치·v18 구조·v20 문법을 검사로 옮긴 것이며 규칙 자체를 바꾸지 않음. ERROR는 수정, WARN은 사유 기록, 렌더 리뷰 6항은 사람이 확인 |
 | 덱 유형별 목차 골격, 제목 체계, 거버닝 문법(역할별 문장 틀·문체·길이), 본문 블록 배치·셀 문법, 시리즈·마무리 장표 | [v20](content-architecture-v20.md), [JSON](content-architecture-v20.json) | 신규 덱의 목차·제목·거버닝·본문 작성 규칙. 레퍼런스 40건(교육·보고 생애주기·세미나·리포트)에서 구조만 추출. 외부 자료는 완결 문장체, 내부 진행 자료는 개조식, 한 덱에 한 문체. v4/v5 위계·v11 거버닝 원칙·v12 분해·v16 단계·v18/v19 구조 선택은 유지 |
 | 교육·제안·구조 선택의 실행 연결 | [v19](consulting-structures-v19.md), [JSON](consulting-structures-v19.json) | 질문별 추천 3개, 14개 구체 예시, 모드별 작성 계획·정보 배치 점검. v14 의미 계약과 v17 확정 수치는 유지. v18 밀도 힌트를 이유로 확정 본문·표 크기를 축소하지 않음 |

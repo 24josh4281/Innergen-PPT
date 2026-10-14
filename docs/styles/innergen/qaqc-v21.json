@@ -1,290 +1,83 @@
 {
-  "version": "21",
+  "version": "22",
   "date": "2026-10-14",
-  "purpose": "Rule table for innergen_qaqc.py — uniformity gate for INNerGEN decks built from docs/styles rules (v4/v5 hierarchy, v11/v20 governing, v16 citation, v17 geometry, v18 density, v20 TOC/closing).",
+  "purpose": "Rule table for innergen_qaqc.py — uniformity gate for INNerGEN decks (v4/v5 hierarchy, v11/v20 governing, v16 citation, v17 geometry, v18 density, v20 TOC/closing, v22 compact density · one-line governing · three family templates).",
   "doc": "docs/styles/innergen/qaqc-v21.md",
   "families": {
     "innergen_lecture": {
-      "label": "이너젠 교육·강의(블루)",
-      "canvas": [
-        1040,
-        720
-      ],
-      "accent": "#2F62F0",
-      "primary": "#0B1739",
-      "muted": "#64748B",
-      "top_rule": {
-        "x": 0,
-        "y": 0,
-        "w": 1040,
-        "h": 3
-      },
-      "title": {
-        "x": 48,
-        "baseline": 50,
-        "size": 32,
-        "weight": "700",
-        "fill": "#0B1739",
-        "tolerance": 2
-      },
-      "governing": {
-        "box": [
-          48,
-          70,
-          944,
-          80
-        ],
-        "size": 24,
-        "weight": "700",
-        "fill": "#2F62F0",
-        "baseline_one_line": 118,
-        "baseline_two_lines": [
-          101,
-          133
-        ],
-        "max_lines": 2,
-        "inner_width": 896,
-        "tolerance": 3
-      },
-      "source": {
-        "baseline": 630,
-        "size": 16,
-        "fill": "#64748B",
-        "prefix": "출처",
-        "tolerance": 3
-      },
-      "footer": {
-        "line_y": 648,
-        "logo": [
-          48,
-          660,
-          40,
-          40
-        ],
-        "label": {
-          "x": 98,
-          "baseline": 686,
-          "size": 14
-        },
-        "page_number": {
-          "x": 992,
-          "baseline": 686,
-          "size": 16,
-          "anchor": "end"
-        }
-      },
-      "content_zone": [
-        48,
-        164,
-        944,
-        440
-      ],
-      "exempt_layout_keywords": [
-        "cover",
-        "ending",
-        "toc",
-        "section-divider"
-      ],
-      "role_sizes": {
-        "title": 32,
-        "governing": 24,
-        "body": 24,
-        "card_title": 22,
-        "subheading": 20,
-        "table": 18,
-        "annotation": 16,
-        "footnote": 16,
-        "footer": 14
-      }
+      "label": "이너젠 교육·강의(블루) 13:9 — v22 컴팩트",
+      "canvas": [1040, 720],
+      "title": {"x": 48, "baseline": 44, "size": 24, "fill": "#0B1739", "tolerance": 3},
+      "governing": {"box": [48, 60, 944, 44], "text_x": 68, "baseline": 90, "size": 22, "fill": "#2F62F0", "weight_bold": true, "max_lines": 1, "inner_width": 916, "tolerance": 3},
+      "source": {"baseline": 630, "size": 12, "prefix": "출처", "tolerance": 3},
+      "footer": {"label": {"x": 98, "baseline": 686, "size": 12}, "page_number": {"x": 992, "baseline": 686, "anchor": "end"}},
+      "atoms": [{"id": "top-rule", "type": "rect", "x": 0, "y": 0, "w": 1040, "h": 3}, {"id": "footer-line", "type": "line", "y": 648}, {"id": "footer-logo", "type": "image", "x": 48, "y": 660}],
+      "content_zone": [48, 120, 944, 484],
+      "min_px": {"content": 12, "footer": 12},
+      "exempt_layout_keywords": ["cover", "ending", "toc", "section-divider"],
+      "detect": {"title_baseline": 44, "title_size": 24}
+    },
+    "innergen_lecture_v20": {
+      "label": "이너젠 교육·강의(블루) 13:9 — v20 표준(거버닝 2줄)",
+      "canvas": [1040, 720],
+      "title": {"x": 48, "baseline": 50, "size": 32, "fill": "#0B1739", "tolerance": 3},
+      "governing": {"box": [48, 70, 944, 80], "text_x": 72, "baseline": 118, "baseline_two_lines": 101, "size": 24, "fill": "#2F62F0", "weight_bold": true, "max_lines": 2, "inner_width": 896, "tolerance": 3},
+      "source": {"baseline": 630, "size": 16, "prefix": "출처", "tolerance": 3},
+      "footer": {"label": {"x": 98, "baseline": 686, "size": 14}, "page_number": {"x": 992, "baseline": 686, "anchor": "end"}},
+      "atoms": [{"id": "top-rule", "type": "rect", "x": 0, "y": 0, "w": 1040, "h": 3}, {"id": "footer-line", "type": "line", "y": 648}, {"id": "footer-logo", "type": "image", "x": 48, "y": 660}],
+      "content_zone": [48, 164, 944, 440],
+      "min_px": {"content": 16, "footer": 14},
+      "exempt_layout_keywords": ["cover", "ending", "toc", "section-divider"],
+      "detect": {"title_baseline": 50, "title_size": 32}
+    },
+    "innergen_business": {
+      "label": "이너젠 회사소개 16:9(720×405pt) — v22 컴팩트",
+      "canvas": [960, 540],
+      "title": {"x": 34, "baseline": 36, "size": 16, "fill": "#000000", "tolerance": 3},
+      "governing": {"box": null, "text_x": 24, "baseline": 71, "size": 21.33, "fill": "#000000", "weight_bold": true, "max_lines": 1, "inner_width": 888, "tolerance": 3},
+      "source": {"baseline": 504, "size": 10.67, "prefix": "출처", "tolerance": 3},
+      "footer": {"label": {"x": 24, "baseline": 526, "size": 10.67}, "page_number": {"x": 936, "baseline": 34, "anchor": "end"}},
+      "atoms": [{"id": "title-bar", "type": "rect", "x": 24, "y": 22, "w": 3, "h": 16}, {"id": "governing-rule", "type": "line", "y": 82}],
+      "content_zone": [24, 94, 912, 392],
+      "min_px": {"content": 10.67, "footer": 10.67},
+      "exempt_layout_keywords": ["cover", "ending", "toc", "section-divider"],
+      "detect": {"title_baseline": 36, "title_size": 16}
+    },
+    "innercarry": {
+      "label": "이너캐리 4:3 — v22 컴팩트",
+      "canvas": [1024, 768],
+      "title": {"x": 56, "baseline": 96, "size": 26.67, "fill": "#0B1739", "tolerance": 3},
+      "governing": {"box": null, "text_x": 56, "baseline": 134, "size": 21.33, "fill": "#475569", "weight_bold": false, "max_lines": 1, "inner_width": 896, "tolerance": 3},
+      "source": {"baseline": 640, "size": 10.67, "prefix": "출처", "tolerance": 3},
+      "footer": {"label": {"x": 56, "baseline": 54, "size": 12}, "page_number": {"x": 968, "baseline": 732, "anchor": "end"}},
+      "atoms": [{"id": "top-rule", "type": "rect", "x": 0, "y": 0, "w": 1024, "h": 4}, {"id": "footer-line", "type": "line", "y": 704}],
+      "content_zone": [56, 156, 912, 460],
+      "min_px": {"content": 10.67, "footer": 10.67},
+      "exempt_layout_keywords": ["cover", "ending", "toc", "section-divider"],
+      "detect": {"title_baseline": 96, "title_size": 26.67}
     }
   },
-  "font": {
-    "required_family": "Pretendard",
-    "min_px_content": 16,
-    "min_px_footer": 14
-  },
+  "font": {"required_families": ["Pretendard", "IBM Plex Sans KR", "NanumSquare", "Noto Sans", "Malgun Gothic"]},
   "governing": {
-    "max_lines": 2,
-    "chars_no_space": {
-      "24": {
-        "one_line": 38,
-        "two_lines": 75
-      },
-      "22": {
-        "one_line": 42,
-        "two_lines": 85
-      }
-    },
     "min_chars": 12,
     "registers": {
-      "external": {
-        "label": "완결 문장체",
-        "endings": [
-          "니다",
-          "다.",
-          "다"
-        ],
-        "deck_types": [
-          "lecture",
-          "handout",
-          "seminar",
-          "proposal",
-          "interim",
-          "final",
-          "insight"
-        ]
-      },
-      "internal": {
-        "label": "개조식",
-        "endings": [
-          "음",
-          "임",
-          "됨",
-          "함",
-          "필요",
-          "中",
-          "예정",
-          "검토",
-          "요"
-        ],
-        "deck_types": [
-          "kickoff",
-          "weekly",
-          "biweekly",
-          "monthly",
-          "diagnosis",
-          "benchmark"
-        ]
-      },
-      "promise_endings": [
-        "예정입니다",
-        "예정임"
-      ]
+      "external": {"label": "완결 문장체", "endings": ["니다", "다.", "다"], "deck_types": ["lecture", "handout", "seminar", "proposal", "interim", "final", "insight"]},
+      "internal": {"label": "개조식", "endings": ["음", "임", "됨", "함", "필요", "中", "예정", "검토", "요"], "deck_types": ["kickoff", "weekly", "biweekly", "monthly", "diagnosis", "benchmark"]},
+      "promise_endings": ["예정입니다", "예정임"]
     },
-    "forbidden_starts": [
-      "이것은",
-      "이를 통해",
-      "중요한 것은",
-      "이는 ",
-      "그리고",
-      "또한"
-    ],
-    "forbidden_phrases": [
-      "체계적으로 관리",
-      "종합적으로 검토",
-      "연결이 중요",
-      "적극 대응",
-      "효과적으로 관리"
-    ],
+    "forbidden_starts": ["이것은", "이를 통해", "중요한 것은", "이는 ", "그리고", "또한"],
+    "forbidden_phrases": ["체계적으로 관리", "종합적으로 검토", "연결이 중요", "적극 대응", "효과적으로 관리"],
     "question_mark_warn": true,
     "number_pattern": "[0-9０-９]|％|%",
-    "duplicate_similarity": 0.9
+    "duplicate_similarity": 0.9,
+    "line_fill_ratio": 0.97
   },
-  "title": {
-    "min_chars": 4,
-    "max_chars": 34,
-    "sentence_endings": [
-      "다",
-      "요",
-      "니다",
-      "함",
-      "음"
-    ],
-    "numbering_regex": "^\\s*(Ⅰ|Ⅱ|Ⅲ|Ⅳ|Ⅴ|Ⅵ|Ⅶ|Ⅷ|Ⅸ|Ⅹ|[IVX]+\\.|\\d+(\\.\\d+)*\\.?|\\d+-\\d+|부록|참고|도입|맺음|\\[참고\\]|\\[Back-up\\])",
-    "repeat_limit": 3,
-    "series_marks": [
-      "(계속)",
-      "/"
-    ]
-  },
-  "toc": {
-    "layouts": [
-      "innergen-intro-toc",
-      "innergen-intro-toc-pages"
-    ],
-    "divider_layouts": [
-      "innergen-intro-section-divider"
-    ],
-    "match_min_chars": 4
-  },
-  "structure": {
-    "max_consecutive_same_layout": 4,
-    "max_share_single_layout": 0.6,
-    "closing_layouts": {
-      "lecture": [
-        "innergen-intro-key-summary",
-        "innergen-intro-self-check",
-        "innergen-intro-content-final"
-      ],
-      "seminar": [
-        "innergen-intro-key-takeaways"
-      ],
-      "proposal": [
-        "innergen-intro-key-takeaways"
-      ],
-      "kickoff": [
-        "innergen-intro-actor-checklist",
-        "innergen-intro-key-takeaways",
-        "innergen-intro-phase-roadmap"
-      ],
-      "weekly": [
-        "innergen-intro-actor-checklist"
-      ],
-      "monthly": [
-        "innergen-intro-phase-roadmap"
-      ],
-      "diagnosis": [
-        "innergen-intro-entity-matrix"
-      ],
-      "interim": [
-        "innergen-intro-key-takeaways",
-        "innergen-intro-vertical-chevron"
-      ],
-      "final": [
-        "innergen-intro-key-takeaways",
-        "innergen-intro-entity-matrix"
-      ],
-      "insight": [
-        "innergen-intro-key-takeaways",
-        "innergen-intro-key-summary"
-      ]
-    },
-    "required_layouts": {
-      "lecture": [
-        "innergen-intro-toc-pages|innergen-intro-toc",
-        "innergen-intro-guidance-focus|innergen-intro-case-capture",
-        "innergen-intro-self-check|innergen-intro-key-summary"
-      ],
-      "kickoff": [
-        "innergen-intro-toc-pages|innergen-intro-toc",
-        "innergen-intro-actor-checklist"
-      ],
-      "final": [
-        "innergen-intro-toc-pages|innergen-intro-toc",
-        "innergen-intro-exec-summary|innergen-intro-kpi"
-      ]
-    }
-  },
-  "source_line": {
-    "required_on_layouts_with": [
-      "chart",
-      "table",
-      "evidence",
-      "entity-matrix",
-      "chart-insight",
-      "chart-table",
-      "maturity",
-      "period",
-      "compare"
-    ],
-    "format_regex": "^출처\\s*[:：]"
-  },
-  "render_review": [
-    "제목·거버닝·출처·푸터가 모든 본문 장표에서 같은 자리에 있는가",
-    "거버닝이 두 줄 이내이고 박스 안에서 세로 가운데인가",
-    "칸 글자가 넘치거나 잘리지 않는가(표·카드·배지)",
-    "강조는 장표당 한 곳인가",
-    "같은 질문의 장표가 같은 구조·색·위치인가",
-    "사례·예시 수치에 '예시' 표기가 있는가"
-  ]
+  "title": {"min_chars": 4, "max_chars": 34, "sentence_endings": ["다", "요", "니다", "함", "음"], "numbering_regex": "^\\s*(Ⅰ|Ⅱ|Ⅲ|Ⅳ|Ⅴ|Ⅵ|Ⅶ|Ⅷ|Ⅸ|Ⅹ|[IVX]+\\.|\\d+(\\.\\d+)*\\.?|\\d+-\\d+|부록|참고|도입|맺음|\\[참고\\]|\\[Back-up\\])", "repeat_limit": 3, "series_marks": ["(계속)", "/"]},
+  "toc": {"layouts": ["innergen-intro-toc", "innergen-intro-toc-pages", "innergen-biz-toc-pages", "innercarry-toc-pages"], "divider_layouts": ["innergen-intro-section-divider", "innergen-biz-section-divider", "innercarry-section-divider"], "match_min_chars": 4},
+  "structure": {"max_consecutive_same_layout": 4, "max_share_single_layout": 0.6,
+    "closing_layouts": {"lecture": ["key-summary", "self-check", "content-final"], "seminar": ["key-takeaways"], "proposal": ["key-takeaways"], "kickoff": ["actor-checklist", "key-takeaways", "phase-roadmap"], "weekly": ["actor-checklist"], "monthly": ["phase-roadmap"], "diagnosis": ["entity-matrix"], "interim": ["key-takeaways", "vertical-chevron"], "final": ["key-takeaways", "entity-matrix"], "insight": ["key-takeaways", "key-summary"]},
+    "required_layouts": {"lecture": ["toc-pages|toc", "guidance-focus|case-capture", "self-check|key-summary"], "kickoff": ["toc-pages|toc", "actor-checklist"], "final": ["toc-pages|toc", "exec-summary|kpi"]},
+    "note": "레이아웃 키는 계열 접두어(innergen-intro-/innergen-biz-/innercarry-)를 뺀 부분 문자열로 비교한다."},
+  "source_line": {"required_on_layouts_with": ["chart", "table", "evidence", "entity-matrix", "chart-insight", "chart-table", "maturity", "period", "compare"], "format_regex": "^출처\\s*[:：]"},
+  "render_review": ["제목·거버닝·출처·푸터가 모든 본문 장표에서 같은 자리에 있는가", "거버닝이 한 줄이고 영역 안에서 세로 가운데인가", "칸 글자가 넘치거나 잘리지 않는가(표·카드·배지)", "강조는 장표당 한 곳인가", "같은 질문의 장표가 같은 구조·색·위치인가", "사례·예시 수치에 '예시' 표기가 있는가"]
 }

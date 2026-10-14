@@ -79,6 +79,12 @@ DUAL_SCRIPT_FONTS = {
     'Pretendard', 'Pretendard Thin', 'Pretendard ExtraLight', 'Pretendard Light',
     'Pretendard Medium', 'Pretendard SemiBold', 'Pretendard ExtraBold',
     'Pretendard Black', 'Pretendard JP', 'Pretendard GOV',
+    'NanumSquare Neo', 'NanumSquare Neo Light', 'NanumSquare Neo Bold',
+    'NanumSquare Neo ExtraBold', 'NanumSquare Neo Heavy',
+    'NanumSquare', 'NanumSquare Light', 'NanumSquare Bold', 'NanumSquare ExtraBold',
+    'NanumSquareRound', 'NanumSquareRound Light', 'NanumSquareRound Bold', 'NanumSquareRound ExtraBold',
+    'Noto Sans CJK KR', 'Noto Sans CJK KR Light', 'Noto Sans CJK KR DemiLight', 'Noto Sans CJK KR Medium',
+    'Noto Sans CJK KR Bold', 'Noto Sans CJK KR Black', 'Noto Sans KR',
 }
 
 # macOS/Linux-only fonts -> Windows equivalents

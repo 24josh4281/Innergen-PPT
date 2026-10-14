@@ -208,3 +208,66 @@ CDP는 요구사항·근거 매핑, 규제는 적용 대상·기한·책임, 인
 - 산출물: 실제 PPT의 사용 폰트·크기·여백·넘침·출처를 검사하고 렌더를 눈으로 확인. 원본 관측값을 신규 장표 검증 통과로 오인하지 않는다.
 
 전체 파일별 관측 기록: [전수 분석](../../../OUTPUTS/design-audit-v17/source-design-audit.md). 상세 값: [통합 JSON](design-standard-v17.json).
+
+## v22 (2026-10-14) — 글꼴 목록 · 컴팩트 밀도 · 거버닝 한 줄 · 피드백 선택지 · 계열 템플릿
+
+사용자 결정(2026-10-14): 첨부한 글꼴(IBM Plex Sans KR, 나눔스퀘어·네오·라운드, Noto Sans CJK KR)을 반영하고, 거버닝 메시지는 **한 줄**로, 전체 글자 크기는 회사소개 자료(260518 외부 발송용, 720×405pt)처럼 **거버닝 최대 18pt·본문 12pt 내외**로 줄인다. JSON 키: `fonts`, `font_rules`, `density_presets`, `feedback_options`, `template_families_v22`, `text.governing_max_lines = 1`.
+
+### 글꼴 목록 (`fonts`)
+
+| 키 | 가족(설치명) | 기본 계열 | 번들 | 설치 |
+|---|---|---|---|---|
+| `pretendard` | Pretendard (+Light·Medium·SemiBold·ExtraBold) | `innergen_lecture` | `assets/fonts/Pretendard/` | 설치됨 |
+| `ibm_plex_sans_kr` | IBM Plex Sans KR (+Light·Medium·SemiBold) | `innergen_business`, `innercarry` | `assets/fonts/IBMPlexSansKR/` (Regular·Medium·SemiBold·Bold) | 설치됨 |
+| `nanum_square_neo` | NanumSquare Neo (+Light·Bold·ExtraBold·Heavy) | 선택 | `assets/fonts/NanumSquareNeo/` (Regular·Bold·ExtraBold) | 설치됨 |
+| `nanum_square`, `nanum_square_round` | NanumSquare / NanumSquareRound | 선택 | 번들 없음(네이버 배포) | 설치됨 |
+| `noto_sans_cjk_kr` | Noto Sans CJK KR (7종) | 선택 | 번들 없음(용량) | 설치됨 |
+| `malgun_gothic` | Malgun Gothic | `innergen_basic` | 시스템 | — |
+
+- 설치: `python3 .claude/skills/ppt-master/scripts/install_fonts.py`(번들 전체) · `--family IBMPlexSansKR` · `--dir <zip 또는 폴더>`. 사용자 권한으로 설치하며 관리자 권한이 필요 없다. PPTX는 글꼴을 포함하지 않으므로 받는 PC에도 설치가 필요하다.
+- 내보내기: 위 가족은 `svg_to_pptx` `DUAL_SCRIPT_FONTS`에 등록되어 Latin·EA 두 슬롯에 같은 글꼴이 들어간다.
+- 중간 굵기는 설치된 가족명을 `font-family`로 쓴다(예: `"IBM Plex Sans KR SemiBold"`). 400/700은 `font-weight`.
+
+### 밀도 프리셋 (`density_presets`) — 기본 `compact`
+
+기준: 260518 회사소개(720×405pt) — 섹션 제목 12pt SemiBold, 거버닝 15–16pt(최대 18), 본문 10–12pt, 표·라벨 9–10pt, 출처 8–9pt. 캔버스마다 720pt 폭 기준을 환산했다(px = pt / 0.75).
+
+| 캔버스 | 제목 | 거버닝 | 본문 | 표 | 소제목 | 주석 | 출처 | 쪽 | 표지 제목 |
+|---|---|---|---|---|---|---|---|---|---|
+| `ppt169s` 960×540px (720×405pt, 회사소개) | 12 | 16 | 11 | 9.5 | 12 | 9 | 8 | 8 | 32 |
+| `ppt139` 1040×720px (교육·강의) | 18 | 16.5 | 12 | 10.5 | 13 | 10 | 9 | 10 | 42 |
+| `ppt43` 1024×768px (이너캐리) | 20 | 16 | 12 | 10.5 | 13 | 10 | 8 | 9 | 36 |
+| `ppt169` 1280×720px | 16 | 18 | 14 | 12 | 15 | 11 | 10 | 10.5 | 42 |
+
+`standard`는 종전 `modes.<사용 방식>.pt`와 계열 `typography_pt_overrides`를 그대로 쓴다. 칸 글자 하한은 9pt, 배지·주석 8pt.
+
+### 거버닝 한 줄
+
+`text.governing_max_lines = 1`. 거버닝은 주어+판단+수치 한 문장이며, 한글 기준 24px 38자·22px 40자·21.33px(16pt) 40자 이내로 쓴다(공백 포함 폭 기준은 `innergen_qaqc.py` G04가 계산). 두 줄이 되면 수식어를 빼거나 범위를 제목으로 옮긴다. 템플릿의 거버닝 영역도 한 줄 높이다.
+
+### 피드백 선택지 (`feedback_options`)
+
+Confirm UI(`innergen_studio.js`)의 **결과물 조정** 묶음에서 고르고 `confirm_ui/result.json`에 `density`, `content_detail`, `font_family`, `governing_lines`로 저장된다. `style_standard.py`가 `design_profile_v17.json`의 `typography_pt/px`, `font`, `adjustments`에 반영한다.
+
+| 선택지 | 값 | 효과 |
+|---|---|---|
+| 글자 크기 `density` | `compact`(기본) / `standard` | 역할별 pt/px를 밀도 프리셋으로 교체 |
+| 내용 구체성 `content_detail` | `specific`(기본) / `concise` | Strategist 본문 밀도(v20 §6 블록·줄 수, 수치·출처 명시)와 QA G07·C04 강도 |
+| 글꼴 `font_family` | `family_default`(기본) / `fonts` 키 | `profile.font` 교체. 설치 확인 필수 |
+| 거버닝 줄 수 `governing_lines` | `1` 고정 | 템플릿·QA 모두 한 줄 |
+
+결과물을 본 뒤 "글자를 더 줄여줘 / 내용을 구체적으로 / 글꼴을 나눔스퀘어 네오로" 같은 피드백은 이 값만 바꾸고 Executor를 다시 실행한다. 좌표·색·템플릿은 바뀌지 않는다.
+
+### 계열 템플릿 (`template_families_v22`)
+
+| 계열 | 템플릿 | 캔버스 | 글꼴 | 레이아웃 |
+|---|---|---|---|---|
+| `innergen_lecture` | `templates/decks/innergen_lecture/` | ppt139 1040×720 | Pretendard | 35 (컴팩트 재생성: 제목 24px, 거버닝 22px 한 줄, 본문 16px) |
+| `innergen_business` | `templates/decks/innergen_business/` | **ppt169s** 960×540 (720×405pt) | IBM Plex Sans KR | 34 (왼쪽 바+섹션 제목 16px, 거버닝 21.33px 한 줄, 본문 16px, 쪽번호 우상단) |
+| `innercarry` | `templates/decks/innercarry/` | ppt43 1024×768 | IBM Plex Sans KR | 34 (섹션 라벨 12px, 제목 26.67px, 거버닝 21.33px 한 줄, 본문 16px) |
+
+세 계열은 같은 파일명·슬롯 토큰(s01–s23, 02b·02c, 03a–03g)을 쓰므로 한 덱의 내용을 계열 간에 옮길 수 있다. 캔버스 `ppt169s`는 PowerPoint 기본 16:9(10in)와 같아 pt 값이 회사소개 원본과 일치한다.
+
+### 견본 (2026-10-14, OUTPUTS/example-decks-v22)
+
+교육형 15장을 회사소개·이너캐리 계열로 재생성했다. `svg_quality_checker` 0 errors, `verify_deck` PASS, `innergen_qaqc --strict` PASS.
