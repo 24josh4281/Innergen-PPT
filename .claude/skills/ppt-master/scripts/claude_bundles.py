@@ -13,7 +13,7 @@ is due. setup_env.py runs `build`, and the repository git hooks
 every pull, so an unchanged pull costs one file walk and prints nothing.
 
 Usage:
-    python3 scripts/claude_bundles.py build [--quiet] [--if-changed] [--no-fonts]
+    python3 scripts/claude_bundles.py build [--quiet] [--if-changed] [--with-fonts]
     python3 scripts/claude_bundles.py status
     python3 scripts/claude_bundles.py mark-uploaded {chat,design,all}
 
@@ -86,7 +86,7 @@ def source_fingerprint() -> str:
     return h.hexdigest()[:16]
 
 
-def build_all(fonts: bool = True, quiet: bool = False, if_changed: bool = False) -> dict:
+def build_all(fonts: bool = False, quiet: bool = False, if_changed: bool = False) -> dict:
     """Rebuild both bundles (or skip when no input changed); returns the updated state."""
     state = load_state()
     fingerprint = source_fingerprint()
@@ -142,7 +142,7 @@ def build_parser() -> argparse.ArgumentParser:
     b = sub.add_parser("build", help="rebuild both bundles and report what needs uploading")
     b.add_argument("--quiet", action="store_true", help="print only when an upload is due (git hooks)")
     b.add_argument("--if-changed", action="store_true", help="skip the rebuild when no input file changed")
-    b.add_argument("--no-fonts", action="store_true", help="omit fonts from the design system")
+    b.add_argument("--with-fonts", action="store_true", help="bundle font files in the design system (~10 MB)")
     sub.add_parser("status", help="show built vs uploaded versions")
     m = sub.add_parser("mark-uploaded", help="record that the current build was uploaded")
     m.add_argument("which", choices=("chat", "design", "all"))
@@ -153,7 +153,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     configure_utf8_stdio()
     args = build_parser().parse_args(argv)
     if args.command == "build":
-        state = build_all(fonts=not args.no_fonts, quiet=args.quiet, if_changed=args.if_changed)
+        state = build_all(fonts=args.with_fonts, quiet=args.quiet, if_changed=args.if_changed)
         report(state, quiet=args.quiet)
         return 0
     state = load_state()

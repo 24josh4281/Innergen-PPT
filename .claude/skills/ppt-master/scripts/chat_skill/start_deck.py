@@ -4,7 +4,10 @@ INNerGEN Deck (chat skill) - Project Scaffold
 
 Creates a deck project for the standalone innergen-deck skill: copies the
 family's base spec_lock.md, brand images and SVG layout templates, and makes the
-svg_output/ folder the page SVGs are written into. Bundled into the claude.ai
+svg_output/ folder the page SVGs are written into. claude.ai caps a skill at 200
+files and rejects nested ZIPs, so each family ships as templates/decks/<family>.json
+(layout SVG text) plus <family>_images/; both are read in place, so the skill
+folder may be read-only. Bundled into the claude.ai
 chat skill by build_chat_skill.py; it is not used by the repository pipeline.
 
 Usage:
@@ -21,6 +24,7 @@ from __future__ import annotations
 
 import argparse
 import re
+import json
 import shutil
 import sys
 from pathlib import Path
@@ -58,24 +62,36 @@ def flatten_template(svg: str, layout_name: str) -> str:
     return _SVG_ROOT_RE.sub(role, svg, count=1)
 
 
+def deck_files(family: str):
+    """Yield (relative path, bytes) for the family's images/ and templates/ files."""
+    folder = DECKS_DIR / family
+    if folder.is_dir():
+        for path in sorted(folder.rglob("*")):
+            rel = path.relative_to(folder)
+            if path.is_file() and rel.parts[0] in ("images", "templates"):
+                yield rel.as_posix(), path.read_bytes()
+        return
+    texts = json.loads((DECKS_DIR / f"{family}.json").read_text(encoding="utf-8"))
+    for rel, text in texts.items():
+        yield rel, text.encode("utf-8")
+    for path in sorted((DECKS_DIR / f"{family}_images").iterdir()):
+        yield f"images/{path.name}", path.read_bytes()
+
+
 def scaffold(family: str, out: Path, force: bool) -> None:
     if out.exists() and any(out.iterdir()):
         if not force:
             raise SystemExit(f"{out} is not empty — pass --force to rebuild it")
         shutil.rmtree(out)
-    deck = DECKS_DIR / family
-    (out / "svg_output").mkdir(parents=True)
-    (out / "analysis").mkdir()
-    (out / "exports").mkdir()
-    shutil.copytree(deck / "images", out / "images")
-    (out / "templates").mkdir()
-    for src in (deck / "templates").iterdir():
-        dst = out / "templates" / src.name
-        if src.suffix == ".svg":
-            dst.write_text(flatten_template(src.read_text(encoding="utf-8"), src.stem),
+    for sub in ("svg_output", "analysis", "exports", "images", "templates"):
+        (out / sub).mkdir(parents=True)
+    for rel, data in deck_files(family):
+        dst = out / rel
+        if dst.suffix == ".svg":
+            dst.write_text(flatten_template(data.decode("utf-8"), dst.stem),
                            encoding="utf-8", newline="\n")
         else:
-            shutil.copy2(src, dst)
+            dst.write_bytes(data)
     shutil.copy2(LOCKS_DIR / f"{family}.md", out / "spec_lock.md")
 
 

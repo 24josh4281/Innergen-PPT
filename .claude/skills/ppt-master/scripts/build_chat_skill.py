@@ -23,6 +23,7 @@ Dependencies:
 from __future__ import annotations
 
 import argparse
+import json
 import modulefinder
 import shutil
 import sys
@@ -56,6 +57,7 @@ STYLE_DOCS = (
 )
 ENGINE_DOCS = ("shared-standards.md", "executor-cheatcard.md", "semantic-svg.md")
 _IGNORE = shutil.ignore_patterns("__pycache__", "*.pyc")
+MAX_SKILL_FILES = 200  # claude.ai rejects skill ZIPs with more files
 
 
 def _local_modules() -> tuple[set[str], set[str]]:
@@ -98,9 +100,17 @@ def build(out_dir: Path) -> Path:
     for pkg in sorted(packages):
         shutil.copytree(_SCRIPTS_DIR / pkg, scripts / pkg, ignore=_IGNORE)
 
+    # claude.ai caps a skill at 200 files and rejects nested ZIPs, so each family's
+    # layout SVGs + design_spec.md travel as one JSON text map; images stay files.
+    decks = bundle / "templates" / "decks"
+    decks.mkdir(parents=True)
     for family in FAMILIES:
-        shutil.copytree(SKILL_ROOT / "templates" / "decks" / family,
-                        bundle / "templates" / "decks" / family, ignore=_IGNORE)
+        src = SKILL_ROOT / "templates" / "decks" / family
+        texts = {f"templates/{p.name}": p.read_text(encoding="utf-8")
+                 for p in sorted((src / "templates").iterdir()) if p.is_file()}
+        (decks / f"{family}.json").write_text(
+            json.dumps(texts, ensure_ascii=False, indent=0) + "\n", encoding="utf-8")
+        shutil.copytree(src / "images", decks / f"{family}_images", ignore=_IGNORE)
 
     refs = bundle / "references"
     refs.mkdir()
@@ -111,10 +121,13 @@ def build(out_dir: Path) -> Path:
 
     # claude.ai expects the ZIP to contain the skill folder, not loose files.
     archive = out_dir / f"{SKILL_NAME}.zip"
+    files = [p for p in sorted(bundle.rglob("*")) if p.is_file()]
+    if len(files) > MAX_SKILL_FILES:
+        raise SystemExit(f"[build_chat_skill] {len(files)} files exceed claude.ai's "
+                         f"{MAX_SKILL_FILES}-file skill limit")
     with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as zf:
-        for path in sorted(bundle.rglob("*")):
-            if path.is_file():
-                zf.write(path, path.relative_to(out_dir).as_posix())
+        for path in files:
+            zf.write(path, path.relative_to(out_dir).as_posix())
     print(f"[build_chat_skill] {len(modules)} module(s), {len(packages)} package(s), "
           f"{len(FAMILIES)} famil(ies), {len(STYLE_DOCS) + len(ENGINE_DOCS)} reference(s)")
     return archive

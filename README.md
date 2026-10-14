@@ -124,7 +124,7 @@ sh setup.sh
 - **같은 Team/Enterprise 조직이면**: 관리자 한 명이 조직 스킬과 조직 공유 디자인 시스템으로 한 번 올리면 구성원은 따로 올릴 필요가 없습니다. `slide-master`에 push할 때마다 GitHub Actions(`.github/workflows/claude-bundles.yml`)가 두 ZIP을 Release **`claude-bundles`**에 최신으로 올려 두므로, 관리자는 저장소를 받지 않아도 그 파일로 교체하면 됩니다.
 - **개인 계정이면**: 각자 위 두 파일을 한 번 올리고, 알림이 뜰 때만 다시 올립니다.
 - 채팅판에는 확인 UI·AI 이미지 생성·나레이션·PowerPoint 렌더 검증이 없고, PPT 구조는 flat(사용자 정의 마스터 없음)입니다. Claude Design은 스킬이 아니라 디자인 시스템(색·글꼴·레이아웃 기준)으로 반영됩니다.
-- 따로 만들 때: `build_chat_skill.py`(채팅 스킬만) · `build_design_system.py`(디자인 시스템만, `--no-fonts`로 폰트 제외). 설정 때 건너뛰려면 `--skip-claude-bundles`.
+- 따로 만들 때: `build_chat_skill.py`(채팅 스킬만) · `build_design_system.py`(디자인 시스템만. 글꼴 파일은 기본 제외 — 없으면 맑은 고딕으로 표시, `--with-fonts`로 포함). 설정 때 건너뛰려면 `--skip-claude-bundles`.
 
 **4단계 (선택) — AI 이미지 생성**
 
