@@ -153,8 +153,7 @@ def copy_templates(bundle: Path) -> None:
     images = bundle / "assets" / "images"
     images.mkdir(parents=True)
     for src in sorted((DECKS / "innergen_business" / "images").glob("*.png")):
-        if src.name != "sample_capture.png":
-            shutil.copy2(src, images / src.name)
+        shutil.copy2(src, images / src.name)
 
 
 def _page(group: str, title: str, body: str, fam: str = "innergen_business") -> str:
