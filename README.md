@@ -71,6 +71,8 @@ projects/<프로젝트>/svg_final/                        ← 브라우저로 �
 
 ## 설치 (10분)
 
+> **처음 쓰는 분은 [`설치안내.md`](설치안내.md)만 보세요.** AI에게 "https://github.com/24josh4281/innergen-ppt/tree/slide-master 이 저장소의 slide-master 브랜치를 받아서 가상환경 설정해줘"라고 한 문장만 보내면, 설치부터 점검까지 AI가 다 합니다. 아래는 직접 설치하는 분용 상세 설명입니다.
+
 **1단계 — Python 3.10+**
 
 [python.org](https://www.python.org/downloads/)에서 설치할 때 **"Add to PATH" 체크** 필수. Windows는 [단계별 가이드](docs/windows-installation.md) 참고.
@@ -98,7 +100,17 @@ git clone -b slide-master https://github.com/24josh4281/innergen-ppt.git slide-m
 cd slide-master
 ```
 
-설정 스크립트 한 번으로 `.venv` 생성 → 의존성 설치 → 번들 폰트(Pretendard · IBM Plex Sans KR · 나눔스퀘어 네오) 사용자 설치 → Codex/Gemini 스킬 스텁 동기화 → 검증 → **claude.ai 채팅 스킬·Claude Design 디자인 시스템 빌드 → git pull 자동 갱신 훅 등록**까지 끝납니다. 여러 번 실행해도 안전합니다.
+설정 스크립트 한 번으로 아래 과정이 모두 끝납니다. 여러 번 실행해도 안전합니다.
+
+1. (Python이 없으면 winget으로 설치)
+2. `.venv` 생성 → 의존성 설치
+3. 번들 폰트(Pretendard · IBM Plex Sans KR · 나눔스퀘어 네오) 사용자 설치
+4. Codex/Gemini 스킬 스텁 동기화
+5. **부가 도구 자동 설치**: playwright + Chromium, OfficeCLI, Codex CLI. npm이 없으면 Node.js LTS를 먼저 설치합니다
+6. **claude.ai 채팅 스킬·Claude Design 디자인 시스템 빌드**
+7. **git pull 자동 갱신 훅 등록**: 이후 pull 때마다 의존성 변경과 claude.ai 번들 재빌드를 자동으로 처리합니다
+8. **시험 장표 2쪽 PPTX 내보내기**
+9. 마지막에 한국어 **설치 결과** 표 출력
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\setup.ps1
@@ -108,7 +120,7 @@ powershell -ExecutionPolicy Bypass -File .\setup.ps1
 sh setup.sh
 ```
 
-옵션: `--skip-fonts`(폰트 설치 생략) · `--skip-claude-bundles`(claude.ai 번들·훅 생략) · `--recreate`(`.venv` 새로 만들기) · `--check`(변경 없이 상태만 점검). 에이전트는 `.venv`가 있으면 그 Python으로 스크립트를 실행합니다.
+옵션: `--skip-fonts`(폰트 설치 생략) · `--skip-extras`(부가 도구 생략) · `--skip-claude-bundles`(claude.ai 번들·훅 생략) · `--recreate`(`.venv` 새로 만들기) · `--check`(설치 없이 시험 장표까지 점검). 에이전트는 `.venv`가 있으면 그 Python으로 스크립트를 실행합니다.
 
 받은 폴더를 에이전트에서 엽니다 — IDE형이면 File → Open Folder, CLI형이면 폴더에서 `claude` / `codex` / `gemini` 실행. 그다음 "이너젠 스타일로 이 자료 컨설팅 장표 만들어줘"처럼 요청하면 됩니다.
 
@@ -117,7 +129,7 @@ sh setup.sh
 | 대상 | 자동 생성 파일 | 올리는 곳 |
 |---|---|---|
 | claude.ai 채팅·Cowork | `OUTPUTS/claude-chat-skill/innergen-deck.zip` — 세 계열 템플릿, SVG→PPTX 변환기, 이너젠 QA/QC, 규칙 문서 | **설정 → Capabilities(기능) → Skills → Upload skill** (기존 `innergen-deck`이 있으면 지우고 새로 올림) |
-| Claude Design | `OUTPUTS/claude-design/innergen-design-system.zip` — 색·글자 토큰(CSS/JSON), 폰트, 로고, 세 계열 레이아웃 SVG, 미리보기 카드 18장, 규칙 문서 | **claude.ai/design → 디자인 시스템** 새로 만들기(처음) 또는 INNerGEN 업데이트에 ZIP·폴더 첨부 |
+| Claude Design | `OUTPUTS/claude-design/innergen-design-system.zip` — 색·글자 토큰(CSS/JSON), 로고, 세 계열 레이아웃 SVG, 미리보기 카드 18장, 규칙 문서. 폰트 파일은 업로드 한도(10 MB) 때문에 빼고, 대체 글꼴은 맑은 고딕입니다 | **claude.ai/design → 디자인 시스템** 새로 만들기(처음) 또는 INNerGEN 업데이트에 ZIP·폴더 첨부 |
 
 - **자동 갱신**: 설정 스크립트가 `git config core.hooksPath .githooks`를 켭니다. 이후 `git pull`마다 원본이 바뀌었으면 두 파일을 다시 만들고(바뀐 게 없으면 1초 안에 넘어감) "업로드 필요"를 출력합니다. 직접 확인은 `python .claude/skills/ppt-master/scripts/claude_bundles.py status`.
 - **올린 뒤**: `python .claude/skills/ppt-master/scripts/claude_bundles.py mark-uploaded all` — 다음 변경 전까지 알림이 멈춥니다(이 PC 기준 기록, `OUTPUTS/claude-bundles-state.json`).
@@ -128,7 +140,7 @@ sh setup.sh
 
 **4단계 (선택) — AI 이미지 생성**
 
-표지·인포그래픽에 AI 이미지를 쓰려면 둘 중 하나:
+설정 스크립트가 Codex CLI까지 설치하므로 보통은 `codex login` 한 번이면 됩니다. 설치 결과에 [사용자 할 일]로 표시됩니다. 직접 설치하거나 API 키를 쓰려면 아래 둘 중 하나를 하세요:
 
 ```bash
 # A) Codex CLI OAuth (API 키 불필요)
@@ -140,7 +152,7 @@ codex login
 
 **5단계 (선택) — 수출 PPTX 검증 도구**
 
-내보낸 PPTX의 패키지 무결성·텍스트 넘침·렌더링을 자동 점검하려면 [OfficeCLI](https://github.com/iOfficeAI/OfficeCLI)를 설치합니다:
+설정 스크립트가 자동으로 설치합니다. 직접 설치할 때만 아래를 실행하세요. [OfficeCLI](https://github.com/iOfficeAI/OfficeCLI)는 내보낸 PPTX의 패키지 무결성·텍스트 넘침·렌더링을 자동 점검하며, 템플릿 채우기 검증에 필수입니다:
 
 ```bash
 npm install -g @officecli/officecli@1.0.135

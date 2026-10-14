@@ -29,6 +29,12 @@ below add Codex-side enforcement; they never override the selected owner.
   (`.venv\Scripts\python.exe` on Windows, `.venv/bin/python` elsewhere). Otherwise,
   if `python3` is missing (common on Windows), rerun the same command with `python`.
 
+## Setup requests
+
+Install / "가상환경 설정해줘" / update / status requests follow
+[`CLAUDE.md` § Setup and Update Requests](CLAUDE.md) exactly (branch `slide-master`,
+root `setup.ps1` / `setup.sh`, relay the `설치 결과` block in plain Korean).
+
 ## PPT requests — MANDATORY procedure
 
 When the user asks for a presentation ("PPT 만들어줘", "make slides", "生成PPT",

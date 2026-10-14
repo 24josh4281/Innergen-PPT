@@ -54,6 +54,34 @@ re-architectable source. Do not load either full owner before that answer.
 - Stack: `Pretendard, "Malgun Gothic", sans-serif`; intermediate weights use installed family names (`"Pretendard Medium"`, `"Pretendard SemiBold"`, etc.).
 - Font files are bundled at [`.claude/skills/ppt-master/assets/fonts/Pretendard/`](.claude/skills/ppt-master/assets/fonts/Pretendard/) (SIL OFL) and installed user-level on this machine. PPTX does not embed fonts — decks shared to other machines need Pretendard installed there.
 
+## Setup and Update Requests (new PC)
+
+Users are non-technical; they typically give only the git URL and ask to install it or
+to "가상환경 설정해줘". The user guide is [`설치안내.md`](설치안내.md).
+
+1. **Clone branch `slide-master`**:
+   `git clone -b slide-master https://github.com/24josh4281/innergen-ppt.git slide-master`.
+   The default branch `main` is a different project (a web app with `package.json`
+   and no `.claude/skills/ppt-master`). If a `main` checkout was made by mistake,
+   clone `slide-master` beside it and work there. On Windows without git:
+   `winget install -e --id Git.Git`.
+2. **Run setup from the repository root** —
+   `powershell -ExecutionPolicy Bypass -File .\setup.ps1` (Windows) or `sh setup.sh`.
+   It is idempotent and installs everything itself (Python via winget, `.venv`,
+   fonts, playwright + Chromium, Node.js LTS, OfficeCLI, Codex CLI, claude.ai
+   bundles, git hooks), then exports a self-test deck. Allow several minutes; do
+   not replace it with manual steps.
+3. **Relay the final `설치 결과` block in plain Korean**, without commands the user
+   does not need. For a `사용자 할 일` row, say exactly what to do: `codex login` is
+   the user's own browser sign-in — never enter credentials for them. For
+   claude.ai chat / Claude Design, follow [`설치안내.md`](설치안내.md) §4.
+4. **Hand off**: tell the user to open the cloned folder in their agent and give the
+   example request printed by setup.
+5. **Status / update**: "설치 점검해줘" → `setup.ps1 --check` (`sh setup.sh --check`);
+   "최신으로 업데이트해줘" → `python .claude/skills/ppt-master/scripts/update_repo.py`
+   (pull + dependency sync; the git hooks rebuild the claude.ai bundles), then
+   `--check`. Any failed check → re-run setup.
+
 ## Required Conventions
 
 - **Repo-wide style rules** — when editing prompt files under [`.claude/skills/ppt-master/references/`](.claude/skills/ppt-master/references/), Python under [`.claude/skills/ppt-master/scripts/`](.claude/skills/ppt-master/scripts/), or any other code/prose in the repo, follow the matching style rule in [`docs/rules/`](docs/rules/).

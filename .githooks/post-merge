@@ -1,10 +1,13 @@
 #!/bin/sh
-# Slide Master: after a pull, rebuild the claude.ai chat skill and the Claude Design
-# design system, and print a notice only when one of them needs re-uploading.
+# Slide Master: after a pull, update .venv when requirements changed, rebuild the
+# claude.ai chat skill and the Claude Design design system, and print a notice
+# only when one of them needs re-uploading.
 # Installed by setup (git config core.hooksPath .githooks). Never blocks git.
 root="$(git rev-parse --show-toplevel)" || exit 0
 py="$root/.venv/Scripts/python.exe"
 [ -x "$py" ] || py="$root/.venv/bin/python"
 [ -x "$py" ] || exit 0
-"$py" "$root/.claude/skills/ppt-master/scripts/claude_bundles.py" build --quiet --if-changed || true
+scripts="$root/.claude/skills/ppt-master/scripts"
+"$py" "$scripts/setup_env.py" --deps-if-changed || true
+"$py" "$scripts/claude_bundles.py" build --quiet --if-changed || true
 exit 0
