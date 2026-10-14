@@ -1,0 +1,56 @@
+# Builds the claude.ai chat skill (innergen-deck.zip) and the Claude Design design
+# system (innergen-design-system.zip) on every push to slide-master and publishes
+# them to the rolling release `claude-bundles`, so org admins always download the
+# current files. Source of truth: .claude/skills/ppt-master/scripts/claude_bundles.py
+name: claude-bundles
+
+on:
+  push:
+    branches: [slide-master]
+    paths:
+      - ".claude/skills/ppt-master/scripts/**"
+      - ".claude/skills/ppt-master/references/**"
+      - ".claude/skills/ppt-master/templates/decks/innergen_lecture/**"
+      - ".claude/skills/ppt-master/templates/decks/innergen_business/**"
+      - ".claude/skills/ppt-master/templates/decks/innercarry/**"
+      - ".claude/skills/ppt-master/assets/fonts/**"
+      - "docs/styles/innergen/**"
+      - ".github/workflows/claude-bundles.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: claude-bundles
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build bundles
+        run: python .claude/skills/ppt-master/scripts/claude_bundles.py build
+      - name: Publish rolling release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          chat=$(python -c "import json;print(json.load(open('OUTPUTS/claude-bundles-state.json'))['chat']['built'])")
+          design=$(python -c "import json;print(json.load(open('OUTPUTS/claude-bundles-state.json'))['design']['built'])")
+          notes="커밋 ${GITHUB_SHA::7} · 채팅 스킬 ${chat} · 디자인 시스템 ${design}
+
+          - innergen-deck.zip → claude.ai 설정 → Capabilities → Skills (조직 관리자는 조직 스킬로 배포)
+          - innergen-design-system.zip → claude.ai/design 디자인 시스템 INNerGEN 업데이트"
+          if ! gh release view claude-bundles >/dev/null 2>&1; then
+            gh release create claude-bundles --target "$GITHUB_SHA" --title "claude.ai 번들 (최신)" \
+              --notes "$notes" --latest=false
+          else
+            gh release edit claude-bundles --notes "$notes"
+          fi
+          gh release upload claude-bundles --clobber \
+            OUTPUTS/claude-chat-skill/innergen-deck.zip \
+            OUTPUTS/claude-design/innergen-design-system.zip

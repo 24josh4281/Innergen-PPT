@@ -98,7 +98,7 @@ git clone -b slide-master https://github.com/24josh4281/innergen-ppt.git slide-m
 cd slide-master
 ```
 
-설정 스크립트 한 번으로 `.venv` 생성 → 의존성 설치 → 번들 폰트(Pretendard · IBM Plex Sans KR · 나눔스퀘어 네오) 사용자 설치 → Codex/Gemini 스킬 스텁 동기화 → 검증까지 끝납니다. 여러 번 실행해도 안전합니다.
+설정 스크립트 한 번으로 `.venv` 생성 → 의존성 설치 → 번들 폰트(Pretendard · IBM Plex Sans KR · 나눔스퀘어 네오) 사용자 설치 → Codex/Gemini 스킬 스텁 동기화 → 검증 → **claude.ai 채팅 스킬·Claude Design 디자인 시스템 빌드 → git pull 자동 갱신 훅 등록**까지 끝납니다. 여러 번 실행해도 안전합니다.
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\setup.ps1
@@ -108,17 +108,23 @@ powershell -ExecutionPolicy Bypass -File .\setup.ps1
 sh setup.sh
 ```
 
-옵션: `--skip-fonts`(폰트 설치 생략) · `--recreate`(`.venv` 새로 만들기) · `--check`(변경 없이 상태만 점검). 에이전트는 `.venv`가 있으면 그 Python으로 스크립트를 실행합니다.
+옵션: `--skip-fonts`(폰트 설치 생략) · `--skip-claude-bundles`(claude.ai 번들·훅 생략) · `--recreate`(`.venv` 새로 만들기) · `--check`(변경 없이 상태만 점검). 에이전트는 `.venv`가 있으면 그 Python으로 스크립트를 실행합니다.
 
 받은 폴더를 에이전트에서 엽니다 — IDE형이면 File → Open Folder, CLI형이면 폴더에서 `claude` / `codex` / `gemini` 실행. 그다음 "이너젠 스타일로 이 자료 컨설팅 장표 만들어줘"처럼 요청하면 됩니다.
 
-**claude.ai 채팅·Cowork에서 쓰기 (선택)** — 채팅은 이 폴더를 읽지 못하므로 독립 실행판 스킬 `innergen-deck`을 따로 올립니다. 이너젠 세 계열 템플릿, SVG→PPTX 변환기, 이너젠 QA/QC, 규칙 문서를 한 ZIP에 담습니다.
+**claude.ai 채팅·Cowork · Claude Design에 반영하기** — 채팅과 Claude Design은 이 폴더를 직접 읽지 못하고, 스킬·디자인 시스템이 각자의 claude.ai 계정(또는 조직) 안에 저장됩니다. 그래서 설정 스크립트가 올릴 파일 두 개를 자동으로 만들고, 언제 다시 올려야 하는지 알려 줍니다.
 
-```bash
-python .claude/skills/ppt-master/scripts/build_chat_skill.py
-```
+| 대상 | 자동 생성 파일 | 올리는 곳 |
+|---|---|---|
+| claude.ai 채팅·Cowork | `OUTPUTS/claude-chat-skill/innergen-deck.zip` — 세 계열 템플릿, SVG→PPTX 변환기, 이너젠 QA/QC, 규칙 문서 | **설정 → Capabilities(기능) → Skills → Upload skill** (기존 `innergen-deck`이 있으면 지우고 새로 올림) |
+| Claude Design | `OUTPUTS/claude-design/innergen-design-system.zip` — 색·글자 토큰(CSS/JSON), 폰트, 로고, 세 계열 레이아웃 SVG, 미리보기 카드 18장, 규칙 문서 | **claude.ai/design → 디자인 시스템** 새로 만들기(처음) 또는 INNerGEN 업데이트에 ZIP·폴더 첨부 |
 
-만들어진 `OUTPUTS/claude-chat-skill/innergen-deck.zip`을 claude.ai **설정 → Capabilities(Skills) → Upload skill**로 올립니다. 채팅판에는 확인 UI·AI 이미지 생성·나레이션·PowerPoint 렌더 검증이 없고, PPT 구조는 flat(사용자 정의 마스터 없음)입니다. Claude Design에서는 스킬 대신 디자인 시스템(색·글꼴·레이아웃 기준)을 씁니다.
+- **자동 갱신**: 설정 스크립트가 `git config core.hooksPath .githooks`를 켭니다. 이후 `git pull`마다 원본이 바뀌었으면 두 파일을 다시 만들고(바뀐 게 없으면 1초 안에 넘어감) "업로드 필요"를 출력합니다. 직접 확인은 `python .claude/skills/ppt-master/scripts/claude_bundles.py status`.
+- **올린 뒤**: `python .claude/skills/ppt-master/scripts/claude_bundles.py mark-uploaded all` — 다음 변경 전까지 알림이 멈춥니다(이 PC 기준 기록, `OUTPUTS/claude-bundles-state.json`).
+- **같은 Team/Enterprise 조직이면**: 관리자 한 명이 조직 스킬과 조직 공유 디자인 시스템으로 한 번 올리면 구성원은 따로 올릴 필요가 없습니다. `slide-master`에 push할 때마다 GitHub Actions(`.github/workflows/claude-bundles.yml`)가 두 ZIP을 Release **`claude-bundles`**에 최신으로 올려 두므로, 관리자는 저장소를 받지 않아도 그 파일로 교체하면 됩니다.
+- **개인 계정이면**: 각자 위 두 파일을 한 번 올리고, 알림이 뜰 때만 다시 올립니다.
+- 채팅판에는 확인 UI·AI 이미지 생성·나레이션·PowerPoint 렌더 검증이 없고, PPT 구조는 flat(사용자 정의 마스터 없음)입니다. Claude Design은 스킬이 아니라 디자인 시스템(색·글꼴·레이아웃 기준)으로 반영됩니다.
+- 따로 만들 때: `build_chat_skill.py`(채팅 스킬만) · `build_design_system.py`(디자인 시스템만, `--no-fonts`로 폰트 제외). 설정 때 건너뛰려면 `--skip-claude-bundles`.
 
 **4단계 (선택) — AI 이미지 생성**
 

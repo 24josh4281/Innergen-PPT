@@ -8,6 +8,9 @@ fonts for the current user, regenerates the per-host skill stubs
 (.codex/skills for GPT/Codex, .gemini/skills for Gemini CLI; Claude Code reads
 .claude/skills directly) and verifies the result. Afterwards opening Claude
 Code, Codex or Gemini CLI at the repository root picks up the same skill set.
+It also builds the claude.ai chat skill and the Claude Design design system
+(claude_bundles.py) and points git at .githooks so every pull rebuilds them
+and says when a re-upload is due.
 
 Run it with any system Python 3.10+; the root wrappers setup.ps1 / setup.sh
 find one for you. Safe to re-run: every step is idempotent.
@@ -20,6 +23,7 @@ Examples:
     python3 .claude/skills/ppt-master/scripts/setup_env.py --skip-fonts
     python3 .claude/skills/ppt-master/scripts/setup_env.py --recreate
     python3 .claude/skills/ppt-master/scripts/setup_env.py --check
+    python3 .claude/skills/ppt-master/scripts/setup_env.py --skip-claude-bundles
 
 Dependencies:
     None (only uses standard library; installs requirements.txt into .venv)
@@ -41,6 +45,7 @@ if str(_SCRIPTS_DIR) not in sys.path:
 
 from console_encoding import configure_utf8_stdio  # noqa: E402
 import sync_codex_stubs  # noqa: E402
+import claude_bundles  # noqa: E402
 
 # scripts/setup_env.py: [0]=scripts [1]=ppt-master [2]=skills [3]=.claude [4]=repo
 REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -107,6 +112,37 @@ def sync_stubs() -> int:
     return sync_codex_stubs.main([])
 
 
+def build_claude_bundles() -> int:
+    _step("building claude.ai chat skill + Claude Design design system (OUTPUTS/)")
+    try:
+        claude_bundles.report(claude_bundles.build_all(quiet=True))
+    except OSError as exc:
+        print(f"  bundle build failed: {exc}", file=sys.stderr)
+        return 1
+    return 0
+
+
+def install_git_hooks() -> None:
+    """Point this clone at .githooks unless the user already has hooks of their own."""
+    _step("enabling .githooks (rebuild claude.ai bundles after git pull)")
+    if not (REPO_ROOT / ".git").is_dir() or not shutil.which("git"):
+        print("  skipped: not a git clone or git not on PATH")
+        return
+    git = ["git", "-C", str(REPO_ROOT), "config", "--local"]
+    current = subprocess.run(git + ["--get", "core.hooksPath"],
+                             capture_output=True, text=True).stdout.strip()
+    own = [h.name for h in (REPO_ROOT / ".git" / "hooks").glob("*")
+           if h.is_file() and not h.name.endswith(".sample")]
+    if current == ".githooks":
+        print("  already enabled")
+    elif current or own:
+        print(f"  skipped: existing hooks ({current or ', '.join(own)}); "
+              "copy .githooks/post-merge next to them to keep both")
+    else:
+        subprocess.run(git + ["core.hooksPath", ".githooks"], check=False)
+        print("  enabled: git config core.hooksPath .githooks")
+
+
 def smoke_test(py: Path) -> int:
     _step("verifying core imports inside .venv")
     code = "import " + ", ".join(SMOKE_IMPORTS) + "; print('  imports ok')"
@@ -137,6 +173,7 @@ def check_only() -> int:
         problems += 1
     if sync_codex_stubs.check():
         problems += 1
+    claude_bundles.report(claude_bundles.load_state())
     report_hosts()
     return 1 if problems else 0
 
@@ -151,6 +188,8 @@ def build_parser() -> argparse.ArgumentParser:
                         help="delete and rebuild .venv from scratch")
     parser.add_argument("--skip-fonts", action="store_true",
                         help="do not install the bundled fonts")
+    parser.add_argument("--skip-claude-bundles", action="store_true",
+                        help="do not build the claude.ai chat skill / Claude Design bundles")
     parser.add_argument("--check", action="store_true",
                         help="verify an existing setup without changing anything")
     return parser
@@ -178,6 +217,9 @@ def main(argv: Optional[list[str]] = None) -> int:
         return 1
     if smoke_test(py):
         return 1
+    if not args.skip_claude_bundles:
+        build_claude_bundles()
+        install_git_hooks()
     report_hosts()
     print("\n[setup] done", flush=True)
     return 0
