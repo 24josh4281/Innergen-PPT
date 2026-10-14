@@ -443,6 +443,95 @@
         "RCP17"
       ],
       "lecture_template_layout": "s20_self_check.svg"
+    },
+    "guidance_focus": {
+      "label": "요구사항 + 핵심 Focus",
+      "reader_question": "이 항목은 무엇을 요구하고 무엇을 기억해야 하나?",
+      "pattern": "table",
+      "slots": [
+        "세부 항목 내비",
+        "요구사항(공통/특화)",
+        "핵심 Focus 3개"
+      ],
+      "reference_patterns": [
+        "교육자료 가이던스 3단(v20)"
+      ],
+      "contract_ids": [
+        "RCP02",
+        "RCP05"
+      ],
+      "lecture_template_layout": "s21_guidance_focus.svg"
+    },
+    "case_capture": {
+      "label": "사례 캡처 + 배울 점",
+      "reader_question": "이 사례는 무엇을 어떻게 공시했고 무엇을 배우나?",
+      "pattern": "evidence",
+      "slots": [
+        "사례 헤더",
+        "캡처",
+        "배울 점 3개",
+        "한계"
+      ],
+      "reference_patterns": [
+        "교육자료 Good practice(v20)",
+        "벤치마킹 Back-up"
+      ],
+      "contract_ids": [
+        "RCP05"
+      ],
+      "lecture_template_layout": "s22_case_capture.svg"
+    },
+    "key_summary": {
+      "label": "핵심 정리 + 다음 행동",
+      "reader_question": "이 자료에서 기억할 것은?",
+      "pattern": "evidence",
+      "slots": [
+        "영역 4열",
+        "핵심 3개씩",
+        "다음 행동"
+      ],
+      "reference_patterns": [
+        "교육자료 마무리 제안(v20)"
+      ],
+      "contract_ids": [
+        "RCP01",
+        "RCP14"
+      ],
+      "lecture_template_layout": "s23_key_summary.svg"
+    },
+    "toc_pages": {
+      "label": "목차(번호·설명·쪽)",
+      "reader_question": "어디에 무엇이 있나?",
+      "pattern": "list",
+      "slots": [
+        "장 번호",
+        "장명",
+        "한 줄 설명",
+        "쪽 범위"
+      ],
+      "reference_patterns": [
+        "전 유형 목차(v20)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "02b_toc_pages.svg"
+    },
+    "section_divider": {
+      "label": "장 구분(질문 3개 + 미니 목차)",
+      "reader_question": "이 장에서 무엇을 답하나?",
+      "pattern": "evidence",
+      "slots": [
+        "장 번호·장명",
+        "리드",
+        "질문 3개",
+        "미니 목차"
+      ],
+      "reference_patterns": [
+        "교육·세미나 디바이더(v20)"
+      ],
+      "contract_ids": [
+        "RCP14"
+      ],
+      "lecture_template_layout": "02c_section_divider.svg"
     }
   },
   "recommended_by_report": {
@@ -523,5 +612,6 @@
       "entity_matrix",
       "exec_summary"
     ]
-  }
+  },
+  "content_architecture": "docs/styles/innergen/content-architecture-v20.json"
 }

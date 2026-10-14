@@ -528,6 +528,8 @@ _ANCHOR_RECOMMEND_KEYS = (
     'layout_choice',
     'media_mode',
     'design_standard_version',
+    'structure_goal',
+    'structure_standard_version',
 )
 _ANCHOR_VALUE_KEYS = ('audience', 'content_divergence')
 _DESIGN_RECOMMEND_KEYS = ('icons', 'formula_policy')

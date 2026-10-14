@@ -12,6 +12,7 @@
 - 고객·행사 로고: [경로 또는 없음]
 docs/styles/innergen/innergen-profile-matrix-v16.md와 innergen-evidence-charts-v16.md 기준으로
 업무별 필수 장표를 넣고, 수치는 1차 기관 자료로 최신값을 확인해 출처(기관·자료명·발간연월·기준연도·단위)를 달아줘.
+목차·장 구분·거버닝·본문 배치는 docs/styles/innergen/content-architecture-v20.md의 덱 유형 골격을 따라줘.
 차트와 표는 편집 가능하게 만들고, 확인하지 못한 수치는 따로 알려줘.
 ```
 

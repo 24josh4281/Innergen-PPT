@@ -50,8 +50,36 @@ limits (no text under 16px), sample/source rules, per-family adaptation, and
 recommendations by report stage and business type (also merged into the v17
 `layouts` catalog). The `innergen_lecture` template ships them as `s01–s20`.
 
+For the deck's table of contents, chapter dividers, title numbering, governing
+message grammar and body block placement, read
+`docs/styles/innergen/content-architecture-v20.md` (`content-architecture-v20.json`):
+16 deck types (lecture, handout, seminar, proposal, kickoff, weekly, biweekly,
+monthly WG, diagnosis, interim, final, briefing, benchmark, insight report,
+report outline, memo) each with a TOC skeleton, required slides and closing set;
+one writing register per deck (external decks use full sentences, internal
+progress decks use 개조식, promises use ~할 예정입니다); role-based governing
+templates, length limits, forbidden patterns; split ratios, fixed block labels,
+table cell grammar, series rules and a pre-release checklist. The
+`innergen_lecture` template adds `02b_toc_pages`, `02c_section_divider`,
+`s21_guidance_focus`, `s22_case_capture`, `s23_key_summary` for these rules.
+v20 refines v4/v5/v11/v12/v13/v16; it does not change v17 metrics or v19 wiring.
+
 A style family alone never stages a template. Use only explicitly selected valid
 template paths. Existing owner gates and source fact protections stay in force.
+
+For new education, proposal or structured-report planning, read
+`docs/styles/innergen/consulting-structures-v19.md`. The v19 selector connects
+the existing v14 semantics and v18 structures to three question-based suggestions,
+14 concrete previews and separate education/presentation/proposal/report contracts.
+Preserve `structure_standard_version: "19"` and `structure_goal` through confirmation.
+`style_standard.py` then writes `content_plan_v19.json/md` as well as the numeric profile.
+Use the content plan in the page outline; it is a preferred structure, not a deck-wide mandate.
+Keep the confirmed v17 typography when older density hints disagree; split rather
+than silently reducing core text. Prepare source units and visible placements for
+education completeness; run `consulting_review.py` on a v14-compatible review record
+when present and fix declared-contract errors before handoff. Always distinguish
+that check from source meaning and actual rendered-output review. Old projects
+without the v19 fields retain their existing contracts. No new confirmation gate.
 
 ## 1. Load and route
 

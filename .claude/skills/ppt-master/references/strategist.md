@@ -637,3 +637,12 @@ materialize its exact scalar values into `design_spec.md` and `spec_lock.md`,
 including `## style_standard` metadata. Business/report semantics from v16 remain;
 its old v4.2 introduction is education, not the current 260929 business source.
 This adds no new approval stage and does not stage a template or skip owner checks.
+
+For education, proposal and structured reports using these named styles, read
+`docs/styles/innergen/consulting-structures-v19.md`. Keep `structure_goal` and
+`structure_standard_version` from confirmation. `style_standard.py` also writes
+`content_plan_v19.json/md`; use its mode modules, required evidence and protected
+conditions in the page outline. Record the source-unit IDs and visible condition,
+detail and answer destinations. Use `consulting_review.py` for an existing v14-format
+review record, then separately inspect source meaning and actual rendered pages.
+Do not import the attached example fonts, regulatory claims or sample chart values.

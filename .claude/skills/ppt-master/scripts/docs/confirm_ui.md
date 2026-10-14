@@ -268,3 +268,35 @@ After confirmation, run `style_standard.py <project>` to create
 when copying values into the project lock. `validate_spec.py` rejects missing or
 stale materialization for projects that opted into a named family. Older
 projects without `style_family` keep their prior validation contract.
+
+### Consulting structure choices (v19)
+
+The named-style chooser loads `docs/styles/innergen/consulting-structures-v19.json`
+through `style_standard.load_standard()`. It adds seven layouts to the existing
+28 and supplies concrete content previews for fourteen. These are illustrative
+HTML compositions, not reusable SVG templates or 35 implemented PPT renderers.
+
+New named-style selections carry `structure_standard_version: "19"` and
+`structure_goal: "auto"` by default. The closed goal catalog is `auto`, `education`,
+`proposal`, `requirements`, `procedure`, `diagnosis`, `progress`, `quantitative`,
+`overview`. Keep both fields in Stage-1 anchors, final submission and refresh
+restoration. `layout_choice` remains the selected preferred layout. The delivery
+mode controls information completeness independently of the question/structure.
+
+Display three recommended structures with miniature examples, then a larger
+selected example and its evidence requirements. Keep other reader questions
+collapsed and expose the searchable full layout list on request. Selecting a
+structure/goal never resets user-edited typography, colors or image sources.
+Font/geometry changes still occur only through their existing named-style controls.
+
+After final confirmation, `style_standard.py` materializes a v19 content plan
+alongside the v17 numeric profile. Existing spec validation checks its exact
+selection and catalog digest; legacy projects without the new fields remain
+unchanged. An offline `consulting_structure.py preview` uses the same UI code but
+saves `status: simulation_selection, notApplied: true`. Never treat that download
+as a final project confirmation. Image search/acquisition stays in the existing owner.
+
+When a v19 project has `analysis/source_review_v19.json`, the existing named-style
+spec check also runs the declared content-contract validator. Missing review records
+are not reported as content passes. Rendering and source-meaning verification remain
+with the selected execution owner.

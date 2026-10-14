@@ -19,6 +19,14 @@ observation below is historical where it differs. Current source evidence is
 unverified because browser access was declined; do not claim it was reviewed.
 Follow the v17 materialization and validation handoff in `innergen-style`.
 
+For education, proposal and structured-report planning, also read
+`docs/styles/innergen/consulting-structures-v19.md`. Preserve v19 question/structure
+choices through the existing confirmation and consume `content_plan_v19.json/md`
+written by `style_standard.py`. This adds source/coverage requirements and illustrative
+structure choices without changing the INNerCarry canvas, fonts or image acquisition
+owner. The same content-contract checker is available; its declared coverage is not
+actual PPT/PDF verification or a legal conclusion.
+
 ## Load
 
 1. Read `.claude/skills/ppt-master/workflows/routing.md` first and load only
@@ -36,7 +44,9 @@ Follow the v17 materialization and validation handoff in `innergen-style`.
    `docs/styles/innergen/innergen-profile-matrix-v16.md`,
    `innergen-evidence-charts-v16.md`, and `innergen-profiles-v16.json`
    (`style_families.innercarry`, `chart_palette.innercarry`), plus
-   `structured-slides-v18.md` §5 for structured slides on the 4:3 canvas. Those files add
+   `structured-slides-v18.md` §5 for structured slides on the 4:3 canvas, and
+   `content-architecture-v20.md` for TOC skeletons, governing grammar and body
+   block rules (proposal / seminar / report types apply to INNerCarry decks too). Those files add
    content structure only; INNerCarry visuals below stay authoritative. The named style uses IBM Plex Sans KR as authorized by AGENTS.md; this
    overrides the generic Pretendard default. Native routes retain source fonts.
 

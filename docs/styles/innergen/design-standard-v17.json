@@ -422,7 +422,24 @@
           "table": 15
         }
       },
-      "font_note": "사용자가 확정한 덱이 Pretendard로 제작됨. 이 계열은 Pretendard 유지(저장소 기본 잠금과 동일)."
+      "font_note": "사용자가 확정한 덱이 Pretendard로 제작됨. 이 계열은 Pretendard 유지(저장소 기본 잠금과 동일).",
+      "layouts": {
+        "cover": "01_cover",
+        "toc_and_chapter": "02_toc",
+        "content": "03a_content",
+        "content_final": "03b_content_final",
+        "split_evidence": "03c_content_split",
+        "dual_compare": "03d_content_dual",
+        "table_chart_evidence": "03e_content_table",
+        "kpi": "03f_content_kpi",
+        "process": "03g_content_process",
+        "ending": "04_ending",
+        "toc_pages": "02b_toc_pages",
+        "section_divider": "02c_section_divider",
+        "guidance_focus": "s21_guidance_focus",
+        "case_capture": "s22_case_capture",
+        "key_summary": "s23_key_summary"
+      }
     },
     "innercarry": {
       "label": "이너캐리",
@@ -1350,6 +1367,74 @@
       ],
       "structured_v18": true,
       "lecture_template_layout": "s20_self_check.svg"
+    },
+    "guidance_focus": {
+      "label": "요구사항 + 핵심 Focus",
+      "purpose": "이 항목은 무엇을 요구하고 무엇을 기억해야 하나?",
+      "pattern": "table",
+      "slots": [
+        "세부 항목 내비",
+        "요구사항(공통/특화)",
+        "핵심 Focus 3개"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s21_guidance_focus.svg",
+      "v20": true
+    },
+    "case_capture": {
+      "label": "사례 캡처 + 배울 점",
+      "purpose": "이 사례는 무엇을 어떻게 공시했고 무엇을 배우나?",
+      "pattern": "evidence",
+      "slots": [
+        "사례 헤더",
+        "캡처",
+        "배울 점 3개",
+        "한계"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s22_case_capture.svg",
+      "v20": true
+    },
+    "key_summary": {
+      "label": "핵심 정리 + 다음 행동",
+      "purpose": "이 자료에서 기억할 것은?",
+      "pattern": "evidence",
+      "slots": [
+        "영역 4열",
+        "핵심 3개씩",
+        "다음 행동"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s23_key_summary.svg",
+      "v20": true
+    },
+    "toc_pages": {
+      "label": "목차(번호·설명·쪽)",
+      "purpose": "어디에 무엇이 있나?",
+      "pattern": "list",
+      "slots": [
+        "장 번호",
+        "장명",
+        "한 줄 설명",
+        "쪽 범위"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "02b_toc_pages.svg",
+      "v20": true
+    },
+    "section_divider": {
+      "label": "장 구분(질문 3개 + 미니 목차)",
+      "purpose": "이 장에서 무엇을 답하나?",
+      "pattern": "evidence",
+      "slots": [
+        "장 번호·장명",
+        "리드",
+        "질문 3개",
+        "미니 목차"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "02c_section_divider.svg",
+      "v20": true
     }
   },
   "recommended_by_report": {
@@ -1374,9 +1459,9 @@
       "key_takeaways"
     ],
     "education": [
-      "keyword_map",
-      "year_timeline",
-      "self_check"
+      "guidance_focus",
+      "case_capture",
+      "key_summary"
     ],
     "briefing": [
       "exec_summary",
@@ -1422,8 +1507,8 @@
     ],
     "climate_education": [
       "keyword_map",
-      "year_timeline",
-      "findings_insights"
+      "guidance_focus",
+      "case_capture"
     ],
     "climate_tech": [
       "chart_insight",
@@ -1516,5 +1601,6 @@
     "do_not_claim_render_from_xml": true
   },
   "audit_manifest": "OUTPUTS/design-audit-v17/manifest.json",
-  "structured_slides": "docs/styles/innergen/structured-slides-v18.json"
+  "structured_slides": "docs/styles/innergen/structured-slides-v18.json",
+  "content_architecture": "docs/styles/innergen/content-architecture-v20.json"
 }

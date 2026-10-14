@@ -1240,6 +1240,9 @@
         STATE.innergen_business_type = recId("innergen_business_type") || "cdp_disclosure";
         STATE.innergen_report_type = recId("innergen_report_type") || "kickoff";
         STATE.media_mode = recId("media_mode") || "diagram";
+        STATE.structure_goal = recId("structure_goal") || "auto";
+        STATE.structure_standard_version = recId("structure_standard_version") || "19";
+        if (data.consulting_structure && !data.consulting_structure.goals[STATE.structure_goal]) STATE.structure_goal = "auto";
         STATE.layout_choice = recId("layout_choice") || window.InnergenStudio.recommended(data, STATE)[0];
         STATE.design_standard_version = data.version;
         if (!data.modes[STATE.style_delivery_mode]) STATE.style_delivery_mode = "report_reading";
@@ -1254,7 +1257,7 @@
     function studioPayload(payload) {
         if (!STATE.style_family) return payload;
         ["style_family", "style_delivery_mode", "innergen_business_type", "innergen_report_type",
-            "layout_choice", "media_mode", "design_standard_version"].forEach(function (key) {
+            "layout_choice", "media_mode", "design_standard_version", "structure_goal", "structure_standard_version"].forEach(function (key) {
             payload[key] = STATE[key];
         });
         // The quick chooser already applied these visible defaults. Preserve the
@@ -1394,7 +1397,7 @@
             delete STATE.innergen_variant;
         }
         if (id !== "free" && id !== "innergen") {
-            ["style_family", "style_delivery_mode", "layout_choice", "media_mode", "design_standard_version"].forEach(function (key) { delete STATE[key]; });
+            ["style_family", "style_delivery_mode", "layout_choice", "media_mode", "design_standard_version", "structure_goal", "structure_standard_version"].forEach(function (key) { delete STATE[key]; });
         }
         if (id && id !== "free") {
             if (!STATE.template_adherence) {

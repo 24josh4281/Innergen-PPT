@@ -15,7 +15,7 @@ source_canvas_height: 720
 source_viewbox: "0 0 1040 720"
 replication_mode: standard
 native_structure_mode: structured
-page_count: 30
+page_count: 35
 placeholders:
   01_cover: ["{{TITLE}}", "{{SUBTITLE}}", "{{EVENT_NAME}}", "{{COVER_MESSAGE}}", "{{KEY_FIGURES}}", "{{DATE}}", "{{AUTHOR}}"]
   02_toc: ["{{TITLE}}", "{{KEY_MESSAGE}}", "{{TOC_ITEM_1_TITLE}}", "{{TOC_ITEM_1_DESC}}", "{{SECTION_NAME}}", "{{PAGE_NUM}}"]
@@ -27,6 +27,11 @@ placeholders:
   03f_content_kpi: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{KPI_1_FIGURE}}", "{{KPI_1_LABEL}}", "{{CONTENT_AREA}}", "{{SOURCE}}", "{{PAGE_NUM}}"]
   03g_content_process: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{STEP_1_TITLE}}", "{{STEP_1_BODY}}", "{{FINAL_MESSAGE}}", "{{SOURCE}}", "{{PAGE_NUM}}"]
   04_ending: ["{{THANK_YOU}}", "{{CLOSING_MESSAGE}}", "{{CONTACT_INFO}}"]
+  02b_toc_pages: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{TOC_1_NO}}", "{{TOC_1_TITLE}}", "{{TOC_1_DESC}}", "{{TOC_1_PAGES}}", "{{PAGE_NUM}}"]
+  02c_section_divider: ["{{PAGE_TITLE}}", "{{CHAPTER_NO}}", "{{CHAPTER_TITLE}}", "{{CHAPTER_LEAD}}", "{{CHAPTER_Q_1}}", "{{CHAPTER_Q_2}}", "{{PAGE_NUM}}"]
+  s21_guidance_focus: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{NAV_1}}", "{{NAV_2}}", "{{NAV_3}}", "{{NAV_4}}", "{{SOURCE}}", "{{PAGE_NUM}}"]
+  s22_case_capture: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{CASE_HEADER}}", "{{ALIGN_1}}", "{{ALIGN_2}}", "{{ALIGN_3}}", "{{SOURCE}}", "{{PAGE_NUM}}"]
+  s23_key_summary: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{COL_1_TITLE}}", "{{POINT_1_1}}", "{{POINT_1_2}}", "{{POINT_1_3}}", "{{SOURCE}}", "{{PAGE_NUM}}"]
   s01_exec_summary: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{EXHIBIT_TITLE}}", "{{CARD_1_TITLE}}", "{{SOURCE}}", "{{PAGE_NUM}}"]
   s02_findings_insights: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{FINDING_1}}", "{{INSIGHT_1}}", "{{SOURCE}}", "{{PAGE_NUM}}"]
   s03_chart_insight: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{EXHIBIT_TITLE}}", "{{UNIT}}", "{{SOURCE}}", "{{PAGE_NUM}}"]
@@ -146,6 +151,18 @@ Pretendard 고정(설치본 공통 규칙). 크기는 위계별로 고정한다.
 | `s19_compare_implication.svg` | `innergen-intro-compare-implication` / 이너젠 소개자료 기준 비교+시사점 | 항목·현행 기준·목표 기준(틴트)·시사점 + 결론 바 |
 | `s20_self_check.svg` | `innergen-intro-self-check` / 이너젠 소개자료 자가진단 체크리스트 | 영역·점검 포인트·질문 5행 + 다음 행동 바 |
 
+### 목차·장 구분·교육 장표 (v20, 교육·보고 레퍼런스 기반)
+
+목차·장 구분·거버닝 작성 규칙은 `docs/styles/innergen/content-architecture-v20.md`를 따른다.
+
+| SVG | Layout key / picker | 화면 성격 |
+| --- | --- | --- |
+| `02b_toc_pages.svg` | `innergen-intro-toc-pages` / 이너젠 소개자료 목차(쪽수) | 장 번호 배지·장명·한 줄 설명·쪽 범위 6행. 리드 문장 박스 포함 |
+| `02c_section_divider.svg` | `innergen-intro-section-divider` / 이너젠 소개자료 장 구분(학습 포인트) | 남색 띠에 장 번호·장명, 리드 1~2줄, 이 장에서 답할 질문 3개, 우측 미니 목차(현재 장 강조) |
+| `s21_guidance_focus.svg` | `innergen-intro-guidance-focus` / 이너젠 소개자료 요구사항+핵심 Focus | 좌 세부 항목 내비(현재 강조) 13% · 중 요구사항(공통/특화) 55% · 우 핵심 Focus 3개 27% |
+| `s22_case_capture.svg` | `innergen-intro-case-capture` / 이너젠 소개자료 사례 캡처+해설 | 사례 헤더 띠 + 좌 캡처(picture 슬롯) 60% + 우 배울 점 3개 + 한계 1줄 |
+| `s23_key_summary.svg` | `innergen-intro-key-summary` / 이너젠 소개자료 핵심 정리 | 4개 영역 열 × 핵심 3개 + 다음 행동 바(마무리 장표) |
+
 표·차트는 근거 영역 슬롯 안에 프로젝트 단계에서 편집 가능한 도형 또는 `data-pptx-native="table|chart"` 블록으로 저작한다. 차트 유형 선택과 근거 기관 목록은 `docs/styles/innergen/innergen-evidence-charts-v16.md`를 따른다.
 
 ## VI. Assets
@@ -155,3 +172,4 @@ Pretendard 고정(설치본 공통 규칙). 크기는 위계별로 고정한다.
 | `../images/innergen-logo-cover-blue.png` | 본문 푸터 로고, 120×120(원본 709×709 축소) |
 | `../images/innergen-logo-footer-white.png` | 남색 표지·맺음 로고, 160×101 원본 |
 | `../images/innergen_isometric.png` | 목차·장 구분 일러스트, 1497×1000 원본 |
+| `../images/sample_capture.png` | 사례 캡처 슬롯의 자리표시 그림(1088×744). 실제 프로젝트에서는 공시자료 캡처로 교체 |

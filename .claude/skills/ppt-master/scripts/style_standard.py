@@ -21,11 +21,23 @@ import math
 import re
 from pathlib import Path
 
+from consulting_structure import (
+    build_plan,
+    load_catalog,
+    validate_choice,
+    write_plan,
+)
+
 STANDARD_PATH = Path(__file__).resolve().parents[4] / 'docs/styles/innergen/design-standard-v17.json'
 
 
 def load_standard():
-    return json.loads(STANDARD_PATH.read_text(encoding='utf-8'))
+    data = json.loads(STANDARD_PATH.read_text(encoding='utf-8'))
+    catalog = load_catalog()
+    data['consulting_structure'] = catalog
+    for key, layout in catalog['layouts'].items():
+        data['layouts'][key] = {**data['layouts'].get(key, {}), **layout}
+    return data
 
 
 def validate_standard(data):
@@ -58,6 +70,7 @@ def validate_selection(payload, data=None):
     for field, catalog in fields.items():
         if not isinstance(payload.get(field), str) or payload.get(field) not in data[catalog]:
             errors.append(f'Unknown {field}: {payload.get(field)}')
+    errors.extend(validate_choice(payload, data.get('consulting_structure')))
     ty = payload.get('typography') or {}
     if isinstance(ty, dict):
         sizes = ty.get('sizes') or {}
@@ -81,7 +94,8 @@ def validate_selection(payload, data=None):
 
 def source_digest(payload):
     keys = ('style_family','style_delivery_mode','innergen_business_type','innergen_report_type',
-            'layout_choice','media_mode','canvas','typography','color','image_usage','image_notes')
+            'layout_choice','media_mode','canvas','typography','color','image_usage','image_notes',
+            'structure_goal','structure_standard_version')
     values = {k:payload[k] for k in keys if k in payload}
     return hashlib.sha256(json.dumps(values,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
 
@@ -135,6 +149,8 @@ def resolve(payload, data=None):
     result['canvas'] = payload.get('canvas') or profile['canvas']
     if result['canvas'] != profile['canvas']:
         result['geometry_status'] = 'REQUIRES_RECOMPOSITION: confirmed canvas differs; do not reuse profile coordinates'
+    if str(payload.get('structure_standard_version', '')) == '19':
+        result['content_structure'] = build_plan(payload, data)
     return result
 
 
@@ -152,6 +168,23 @@ def check_project(project):
         errors.append('design_profile_v17.json is stale relative to confirmed choices.')
     if profile.get('standard_sha256') != hashlib.sha256(STANDARD_PATH.read_bytes()).hexdigest():
         errors.append('design_profile_v17.json is stale relative to the standard.')
+    if str(payload.get('structure_standard_version', '')) == '19':
+        expected = build_plan(payload, load_standard()) if not errors else None
+        if expected and profile.get('content_structure') != expected:
+            errors.append('design_profile_v17.json has stale structure choices; run style_standard.py <project>.')
+        plan_file = project / 'content_plan_v19.json'
+        if not plan_file.exists():
+            errors.append('Missing content_plan_v19.json; run style_standard.py <project>.')
+        elif expected and json.loads(plan_file.read_text(encoding='utf-8')) != expected:
+            errors.append('content_plan_v19.json is stale relative to confirmed choices or structure catalog.')
+        review_file = project / 'analysis/source_review_v19.json'
+        if review_file.exists():
+            try:
+                from consulting_review import review
+                content = review(json.loads(review_file.read_text(encoding='utf-8')))
+                errors.extend('Content contract: ' + error for error in content['errors'])
+            except (ImportError, ValueError, TypeError, KeyError) as exc:
+                errors.append(f'Cannot check source_review_v19.json: {exc}; use the workspace Python and v14 schema.')
     lock = project / 'spec_lock.md'
     if lock.exists():
         content = lock.read_text(encoding='utf-8')
@@ -190,6 +223,8 @@ def main(argv=None):
     md += '아래 항목을 프로젝트 잠금에 기록하고 JSON의 색·여백·영역을 프로젝트 명세에 옮긴다.\n\n'
     md += '```\n## style_standard\n- version: 17\n- family: '+profile['family']+'\n- delivery_mode: '+profile['delivery_mode']+'\n- profile_file: design_profile_v17.json\n```\n'
     (args.project/'design_profile_v17.md').write_text(md,encoding='utf-8')
+    if profile.get('content_structure'):
+        write_plan(args.project, profile['content_structure'])
     print(dest)
     return 0
 
