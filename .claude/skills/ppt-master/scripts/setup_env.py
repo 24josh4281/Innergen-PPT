@@ -220,24 +220,34 @@ def ensure_npm() -> Optional[str]:
         return npm
     _step("npm not found — installing Node.js LTS with winget")
     _run(WINGET_NODE)
-    return _find("npm")
+    npm = _find("npm")
+    if npm:
+        # Child processes (npm's own node, the self-test) need the new folders on PATH.
+        extra = [str(Path(npm).parent), str(Path(os.environ.get("APPDATA", "")) / "npm")]
+        os.environ["PATH"] = os.pathsep.join(extra + [os.environ.get("PATH", "")])
+    return npm
 
 
-def install_extras(py: Path) -> None:
+def install_extras(py: Path) -> bool:
+    """Install the optional tools; returns True when anything new was installed."""
     _step("installing optional tools (screen checks, PPTX verification, AI images)")
+    installed = False
     if _run([py, "-c", "import playwright"], quiet=True):
-        _run([py, "-m", "pip", "install", "playwright", "--quiet"])
+        installed |= _run([py, "-m", "pip", "install", "playwright", "--quiet"]) == 0
     _run([py, "-m", "playwright", "install", "chromium"])
+    had_npm = bool(_find("npm"))
     npm = ensure_npm()
     if not npm:
         print("  npm not found — skipped OfficeCLI and Codex CLI; "
               "install Node.js LTS (https://nodejs.org) and re-run setup")
-        return
+        return installed
+    installed |= not had_npm
     for binary, package in NPM_TOOLS:
         if _find(binary):
             print(f"  {binary}: already installed")
         else:
-            _run([npm, "install", "-g", package])
+            installed |= _run([npm, "install", "-g", package]) == 0
+    return installed
 
 
 def smoke_test(py: Path) -> int:
@@ -278,7 +288,7 @@ def _codex_logged_in() -> bool:
     return (home / "auth.json").is_file()
 
 
-def readiness(py: Path, core_ok: bool, fonts_ok: bool) -> int:
+def readiness(py: Path, core_ok: bool, fonts_ok: bool, restart: bool = False) -> int:
     """Print the plain-Korean summary the agent relays to the user; returns 0 when the core works."""
     has_playwright = py.is_file() and _run([py, "-c", "import playwright"], quiet=True) == 0
     image_key = (REPO_ROOT / ".env").is_file() or any(
@@ -314,6 +324,8 @@ def readiness(py: Path, core_ok: bool, fonts_ok: bool) -> int:
         print('\n  이제 이렇게 요청하면 됩니다: "이너젠 스타일로 <자료 경로> 컨설팅 장표 만들어줘"')
     if todo:
         print(f"  남은 일 {len(todo)}개는 위 표의 설명대로 하면 됩니다 (자세한 안내: {GUIDE}).")
+    if restart:
+        print("  새로 설치한 도구를 AI 앱이 인식하도록, 지금 쓰는 AI 앱(Claude·Codex 등)을 한 번 껐다 켜 주세요.")
     return 0 if core_ok else 1
 
 
@@ -382,14 +394,13 @@ def main(argv: Optional[list[str]] = None) -> int:
         return 1
     if smoke_test(py):
         return 1
-    if not args.skip_extras:
-        install_extras(py)
+    restart = install_extras(py) if not args.skip_extras else False
     if not args.skip_claude_bundles:
         build_claude_bundles()
         install_git_hooks()
     core_ok = self_test(py)
     report_hosts()
-    return readiness(py, core_ok, fonts_ok)
+    return readiness(py, core_ok, fonts_ok, restart)
 
 
 if __name__ == "__main__":

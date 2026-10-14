@@ -12,5 +12,5 @@ for py in python3 python; do
         exec "$py" "$SCRIPT" "$@"
     fi
 done
-echo "Python 3.10+ not found. Install it (https://www.python.org/downloads/) and re-run." >&2
+echo "Python 3.10+ not found. Install it (macOS: https://www.python.org/downloads/ or brew install python@3.12) and re-run." >&2
 exit 1
