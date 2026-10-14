@@ -279,7 +279,13 @@ HTML compositions, not reusable SVG templates or 35 implemented PPT renderers.
 New named-style selections carry `structure_standard_version: "19"` and
 `structure_goal: "auto"` by default. The closed goal catalog is `auto`, `education`,
 `proposal`, `requirements`, `procedure`, `diagnosis`, `progress`, `quantitative`,
-`overview`. Keep both fields in Stage-1 anchors, final submission and refresh
+`overview`, plus the v24 consulting-diagram goals `problem_solving`,
+`performance_drivers`, `decarbonization`, `materiality_risk`, `strategy_portfolio`,
+`governance`. Under `auto`, the existing education/proposal/interim/regulatory/final
+rules win; then a kickoff report resolves to `problem_solving`, and the reduction,
+climate-risk/ESG-rating and climate-tech business types resolve to `decarbonization`,
+`materiality_risk` and `strategy_portfolio`. `consulting_structure.effective_goal`
+and `innergen_studio.js effectiveGoal` must stay identical. Keep both fields in Stage-1 anchors, final submission and refresh
 restoration. `layout_choice` remains the selected preferred layout. The delivery
 mode controls information completeness independently of the question/structure.
 

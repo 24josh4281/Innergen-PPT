@@ -221,6 +221,30 @@ python3 scripts/svg_position_calculator.py analyze <svg_file>
 
 Use this after SVG generation to inspect existing SVG geometry when manual comparison needs more context.
 
+## `consulting_diagram.py`
+
+Recompute the data-driven slide-local shapes of the INNerGEN v24 consulting layouts from source numbers. Run it on a slide SVG built from one of these layouts, after the placeholders are filled and before `svg_quality_checker.py`.
+
+| Kind | Layout | Data | Stops when |
+|---|---|---|---|
+| `waterfall_bridge` | s47 | `start`, 5 `deltas`, optional `end` | start + Σdeltas ≠ end; running total < 0 |
+| `macc_curve` | s48 | 7 `levers` {`abatement`, `cost`}, optional `price` | costs not ascending; abatement ≤ 0 |
+| `pathway_wedge` | s49 | 3-point `bau` and `target`, 4 `shares` | shares ≠ 1.0; target outside 0..BAU |
+| `materiality_matrix` | s50 | 8 `topics` {`impact`, `financial`}, `max`, `threshold` | score outside 0..max |
+| `risk_heatmap` | s51 | 6 `risks` {`likelihood`, `impact`} 1..5 | non-integer grade |
+| `harvey_compare` | s53 | 5×4 `scores`, quarters 0..4 | wrong shape or value |
+| `stakeholder_map` | s55 | 6 `stakeholders` {`influence`, `interest`}, `max` | score outside 0..max |
+| `nine_box` | s57 | 6 `units` {`competitiveness`, `attractiveness`, `size`} | grade outside 0.5..3.5 |
+
+```bash
+python3 scripts/consulting_diagram.py kinds
+python3 scripts/consulting_diagram.py example macc_curve > macc.json
+python3 scripts/consulting_diagram.py check projects/<project>/svg_output/08_macc.svg macc.json
+python3 scripts/consulting_diagram.py apply projects/<project>/svg_output/08_macc.svg macc.json
+```
+
+The plot frame (axes, plot background, grid cells, Harvey rings) is read from the slide's own fixed shapes, so the same data works on all three INNerGEN families. Only the named slide-local elements are rewritten and value/price label carriers move vertically; placeholder bounds, layout shapes and filled text are untouched. The kind is inferred from `data-pptx-layout` unless the JSON sets `kind`. Entry counts must equal the layout's slot count — split or merge rows in the source analysis, not in the picture.
+
 ## Advanced Standalone Tools
 
 ### `flatten_tspan.py`

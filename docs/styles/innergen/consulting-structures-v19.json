@@ -72,6 +72,60 @@
         "exec_summary",
         "list_zoom"
       ]
+    },
+    "problem_solving": {
+      "label": "문제를 쪼개고 검증 계획을 세우기",
+      "layouts": [
+        "issue_tree",
+        "hypothesis_workplan",
+        "scqa_storyline"
+      ],
+      "added": "v24"
+    },
+    "performance_drivers": {
+      "label": "지표를 동인으로 나누고 증감을 설명하기",
+      "layouts": [
+        "driver_tree",
+        "waterfall_bridge",
+        "chart_insight"
+      ],
+      "added": "v24"
+    },
+    "decarbonization": {
+      "label": "감축 수단과 경로를 비용과 함께 보여주기",
+      "layouts": [
+        "macc_curve",
+        "pathway_wedge",
+        "waterfall_bridge"
+      ],
+      "added": "v24"
+    },
+    "materiality_risk": {
+      "label": "중대성·리스크·시나리오를 평가하기",
+      "layouts": [
+        "materiality_matrix",
+        "risk_heatmap",
+        "scenario_matrix"
+      ],
+      "added": "v24"
+    },
+    "strategy_portfolio": {
+      "label": "성장 포트폴리오와 대안을 비교해 정하기",
+      "layouts": [
+        "three_horizons",
+        "nine_box",
+        "harvey_compare"
+      ],
+      "added": "v24"
+    },
+    "governance": {
+      "label": "역할·이해관계자·운영체계를 정하기",
+      "layouts": [
+        "raci_matrix",
+        "stakeholder_map",
+        "operating_model"
+      ],
+      "added": "v24"
     }
   },
   "mode_contracts": {
@@ -1062,5 +1116,6 @@
     "수치의 단위·기간·경계·분모·상태를 유지",
     "프로파일의 최소 본문 크기에서 넘치면 구조·장수 조정",
     "실제 PPT 렌더 검사와 의미 검토를 분리"
-  ]
+  ],
+  "goals_v24_note": "v24 컨설팅 도식(s43–s58) 추천 질문 6종. auto 추천: 착수 보고→problem_solving, 감축사업→decarbonization, 기후리스크·ESG 평가→materiality_risk, 기후테크→strategy_portfolio. 교육·제안·중간·규제·최종 보고의 기존 추천 순서가 우선."
 }

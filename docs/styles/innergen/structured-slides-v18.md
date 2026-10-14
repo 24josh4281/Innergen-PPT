@@ -141,6 +141,9 @@
 - **척도 표기**: MACC는 비용 산정 기준(할인율·기간)과 탄소가격 기준선, 중대성은 척도·임계값, 히트맵은 점수 산식, 하비볼은 범례를 같은 장에 적는다.
 - **판단 라벨**: RACI는 활동당 A 하나, 9-box 판단은 `투자/선별/회수`, 운영모델 격차는 `상/중/하`처럼 3택 이하 짧은 라벨만 쓴다.
 
+- **좌표 계산 도구**: 수치가 크기·위치를 정하는 8종(s47 워터폴·s48 MACC·s49 웨지·s50 중대성·s51 히트맵·s53 하비볼·s55 이해관계자·s57 9-box)은 손으로 그리지 않는다. 원자료 수치를 JSON으로 적고 `consulting_diagram.py apply <slide.svg> <data.json>`을 실행하면 로컬 도형과 값·가격선 라벨 위치가 비례에 맞춰 다시 계산된다. 축·격자·플롯 배경은 장표의 고정 도형에서 읽는다. 같은 도구가 산식도 검사한다: 워터폴 기준+요인 합≠결과, MACC 비용 오름차순 아님, 웨지 기여율 합≠100%, 슬롯 수 불일치면 오류로 멈춘다. 예시 데이터는 `consulting_diagram.py example <kind>`.
+- **추천 질문**: Confirm UI의 "다른 질문으로 추천받기"에 v24 질문 6종(문제를 쪼개고 검증 계획 세우기 · 지표를 동인으로 나누고 증감 설명 · 감축 수단과 경로를 비용과 함께 · 중대성·리스크·시나리오 평가 · 성장 포트폴리오와 대안 비교 · 역할·이해관계자·운영체계)이 있다. `auto`에서는 착수 보고→문제 구조화, 감축사업→감축, 기후리스크·ESG 평가→중대성·리스크, 기후테크→포트폴리오 질문이 추천된다.
+
 참고한 공개 자료(구조 확인용): McKinsey Quarterly *Enduring Ideas: The GE and McKinsey nine-box matrix*, *Understanding the price of decarbonization*(MACC); KPMG·Deloitte·PwC 이중 중대성 평가 안내; Deloitte *Climate-related risk assessments and financial disclosures(TCFD)*; PwC Strategy& *Capabilities-Driven Strategy*; Bain RAPID·Elements of Value; Minto *The Pyramid Principle*; 컨설팅 슬라이드 작성법 영상·해설(액션 타이틀·수평/수직 논리·SCR).
 
 ## 4. 업무 × 보고 단계 추천

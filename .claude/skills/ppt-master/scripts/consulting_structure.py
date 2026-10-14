@@ -87,6 +87,11 @@ def catalog_digest() -> str:
     return digest.hexdigest()
 
 
+# v24: consulting-diagram goals for business types without an earlier report-based rule.
+V24_BUSINESS_GOALS = {'reduction': 'decarbonization', 'climate_risk': 'materiality_risk',
+                      'esg_rating': 'materiality_risk', 'climate_tech': 'strategy_portfolio'}
+
+
 def effective_goal(selection: dict) -> str:
     """Resolve a suggested goal, preserving an explicit user question."""
     if selection.get('structure_goal', 'auto') != 'auto':
@@ -103,6 +108,11 @@ def effective_goal(selection: dict) -> str:
         return 'requirements'
     if report == 'final':
         return 'diagnosis'
+    if report == 'kickoff':
+        return 'problem_solving'
+    business = selection.get('innergen_business_type', '')
+    if business in V24_BUSINESS_GOALS:
+        return V24_BUSINESS_GOALS[business]
     return 'overview'
 
 

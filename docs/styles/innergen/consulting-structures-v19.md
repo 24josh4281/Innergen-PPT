@@ -82,7 +82,13 @@ v18의 밀집 표 크기와 최소 크기 문구가 충돌하면 **확정된 본
 ```
 
 `structure_goal`은 `auto`, `education`, `proposal`, `requirements`, `procedure`,
-`diagnosis`, `progress`, `quantitative`, `overview` 중 하나다. 시각적 사용 방식과
+`diagnosis`, `progress`, `quantitative`, `overview` 중 하나다. v24(2026-10-14)부터
+컨설팅 도식 질문 `problem_solving`(이슈 트리·가설 작업계획·SCQA),
+`performance_drivers`(동인 트리·증감 브리지·차트), `decarbonization`(MACC·감축 경로·브리지),
+`materiality_risk`(중대성·리스크 히트맵·시나리오), `strategy_portfolio`(3 Horizons·9-box·
+Harvey 비교), `governance`(RACI·이해관계자·운영모델)를 추가로 고를 수 있다. `auto`는 기존
+규칙(교육·제안·중간·규제·최종) 다음에 착수 보고→`problem_solving`, 감축사업→`decarbonization`,
+기후리스크·ESG 평가→`materiality_risk`, 기후테크→`strategy_portfolio` 순으로 추천한다. 시각적 사용 방식과
 질문은 별도다. 예를 들어 교육·배포에서 요구사항 질문을 고르면 교육형 정보 보존
 계약과 비대칭/비교/판단 구조 추천이 함께 적용된다.
 

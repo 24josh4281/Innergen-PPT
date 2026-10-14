@@ -14,6 +14,9 @@
         var b = data.recommended_by_business[state.innergen_business_type] || ["matrix"];
         return Array.from(new Set(a.slice(0, 2).concat(b, a))).slice(0, 3);
     }
+    // v24: mirrors consulting_structure.V24_BUSINESS_GOALS.
+    var V24_BUSINESS_GOALS = { reduction: "decarbonization", climate_risk: "materiality_risk",
+        esg_rating: "materiality_risk", climate_tech: "strategy_portfolio" };
     function effectiveGoal(state) {
         if (state.structure_goal && state.structure_goal !== "auto") return state.structure_goal;
         var mode = state.style_delivery_mode || "", report = state.innergen_report_type;
@@ -22,7 +25,8 @@
         if (report === "interim") return "progress";
         if (state.innergen_business_type === "regulatory") return "requirements";
         if (report === "final") return "diagnosis";
-        return "overview";
+        if (report === "kickoff") return "problem_solving";
+        return V24_BUSINESS_GOALS[state.innergen_business_type] || "overview";
     }
     function contentMode(state) {
         var mode = state.style_delivery_mode || "";
