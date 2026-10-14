@@ -941,7 +941,8 @@
         "s31_diagnosis_table",
         "s32_priority_matrix",
         "s06_principle_matrix",
-        "s10_maturity_heatmap"
+        "s10_maturity_heatmap",
+        "s58_operating_model"
       ],
       "개선": [
         "s07_asis_tobe_effect",
@@ -950,7 +951,8 @@
       "결정·요청": [
         "s35_decision_request",
         "s13_key_takeaways 변형(안건·선택지·권고안·기한)",
-        "s12_actor_checklist"
+        "s12_actor_checklist",
+        "s53_harvey_compare"
       ],
       "마무리": [
         "s23_key_summary",
@@ -964,7 +966,8 @@
         "s30_radar_benchmark"
       ],
       "경영진 요약": [
-        "s34_exec_one_pager"
+        "s34_exec_one_pager",
+        "s45_scqa_storyline"
       ],
       "회의·교육 실적": [
         "s36_meeting_log"
@@ -983,6 +986,51 @@
       ],
       "범위·방법·결과": [
         "s42_scope_method_result"
+      ],
+      "문제 정의·구조화": [
+        "s43_issue_tree",
+        "s45_scqa_storyline"
+      ],
+      "가설·작업계획": [
+        "s44_hypothesis_workplan"
+      ],
+      "지표 분해": [
+        "s46_driver_tree"
+      ],
+      "증감 요인": [
+        "s47_waterfall_bridge"
+      ],
+      "감축 수단 비용": [
+        "s48_macc_curve"
+      ],
+      "감축 경로": [
+        "s49_pathway_wedge",
+        "s08_phase_roadmap"
+      ],
+      "중대성 평가": [
+        "s50_materiality_matrix"
+      ],
+      "리스크 평가": [
+        "s51_risk_heatmap",
+        "s52_scenario_matrix"
+      ],
+      "대안 비교": [
+        "s53_harvey_compare",
+        "s19_compare_implication"
+      ],
+      "역할·책임": [
+        "s54_raci_matrix",
+        "s27_team_roles"
+      ],
+      "이해관계자": [
+        "s55_stakeholder_map"
+      ],
+      "성장·포트폴리오": [
+        "s56_three_horizons",
+        "s57_nine_box"
+      ],
+      "운영모델": [
+        "s58_operating_model"
       ]
     },
     "conclusion_box": {
@@ -1011,7 +1059,8 @@
       "예시 수치 '예시' 표기",
       "비율 차트 n·분모"
     ],
-    "pattern_map_v23_note": "2026-10-14 v23: 보고 생애주기·세미나 구조 19종(s24–s42) 추가. 앞에 적힌 레이아웃이 우선."
+    "pattern_map_v23_note": "2026-10-14 v23: 보고 생애주기·세미나 구조 19종(s24–s42) 추가. 앞에 적힌 레이아웃이 우선.",
+    "pattern_map_v24_note": "2026-10-14 v24: 컨설팅 펌 공개 방법론에서 뽑은 도식 16종(s43–s58) 추가. 앞에 적힌 레이아웃이 우선."
   },
   "series": {
     "fixed": [

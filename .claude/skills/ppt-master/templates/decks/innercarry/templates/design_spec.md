@@ -3,7 +3,7 @@ template_id: innercarry
 deck_id: innercarry
 kind: deck
 category: brand
-summary: 이너캐리 4:3 컴팩트 템플릿 — 거버닝 1줄·본문 12pt 내외(v22 컴팩트), 기본 레이아웃 + 구조화 장표 s01–s23 + 목차·장 구분·교육 장표
+summary: 이너캐리 4:3 컴팩트 템플릿 — 거버닝 1줄·본문 12pt 내외(v22 컴팩트), 기본 레이아웃 + 구조화 장표 s01–s58(v24 컨설팅 도식 16종 포함) + 목차·장 구분·교육 장표
 keywords: [이너캐리, INNerCarry, 제품, 제안, '4:3', 컴팩트, 구조화]
 primary_color: "#0B1739"
 canvas_format: ppt43
@@ -15,7 +15,7 @@ source_canvas_height: 768
 source_viewbox: "0 0 1024 768"
 replication_mode: standard
 native_structure_mode: structured
-page_count: 53
+page_count: 69
 placeholders:
   01_cover: ["{{EVENT_NAME}}", "{{SUBTITLE}}", "{{TITLE}}", "{{COVER_MESSAGE}}", "{{KEY_FIGURES}}", "{{DATE}}", "{{AUTHOR}}"]
   02b_toc_pages: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{TOC_1_NO}}", "{{TOC_1_TITLE}}", "{{TOC_1_DESC}}", "{{TOC_1_PAGES}}", "{{TOC_2_NO}}"]
@@ -70,6 +70,22 @@ placeholders:
   s40_process_steps_detail: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{STEP_1}}", "{{STEP_1_SUB}}", "{{STEP_1_DETAIL}}", "{{STEP_2}}", "{{STEP_2_SUB}}"]
   s41_quote_opener: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{QUOTE_A}}", "{{QUOTE_A_SOURCE}}", "{{QUOTE_A_NOTE}}", "{{QUOTE_B}}", "{{QUOTE_B_SOURCE}}"]
   s42_scope_method_result: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{COL_1}}", "{{BODY_1}}", "{{COL_2}}", "{{BODY_2}}", "{{COL_3}}"]
+  s43_issue_tree: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{HEAD_1}}", "{{HEAD_2}}", "{{HEAD_3}}", "{{HEAD_4}}", "{{ROOT_QUESTION}}"]
+  s44_hypothesis_workplan: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{HEAD_1}}", "{{HEAD_2}}", "{{HEAD_3}}", "{{HEAD_4}}", "{{HEAD_5}}"]
+  s45_scqa_storyline: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{SITUATION}}", "{{COMPLICATION}}", "{{QUESTION}}", "{{ANSWER}}", "{{SUPPORT_1_TITLE}}"]
+  s46_driver_tree: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{HEAD_1}}", "{{HEAD_2}}", "{{HEAD_3}}", "{{HEAD_4}}", "{{ROOT_KPI}}"]
+  s47_waterfall_bridge: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{UNIT}}", "{{VAL_1}}", "{{BAR_1}}", "{{VAL_2}}", "{{BAR_2}}"]
+  s48_macc_curve: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{AXIS_Y}}", "{{PRICE_LINE}}", "{{AXIS_X}}", "{{HEAD_1}}", "{{HEAD_2}}"]
+  s49_pathway_wedge: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{UNIT}}", "{{YEAR_1}}", "{{YEAR_2}}", "{{YEAR_3}}", "{{YEAR_4}}"]
+  s50_materiality_matrix: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{THRESHOLD_NOTE}}", "{{HEAD_1}}", "{{HEAD_2}}", "{{HEAD_3}}", "{{TOPIC_1}}"]
+  s51_risk_heatmap: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{HEAD_1}}", "{{HEAD_2}}", "{{HEAD_3}}", "{{HEAD_4}}", "{{RISK_1}}"]
+  s52_scenario_matrix: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{AXIS_Y_HIGH}}", "{{AXIS_Y_LOW}}", "{{SCN_1_NAME}}", "{{SCN_1_BODY}}", "{{SCN_2_NAME}}"]
+  s53_harvey_compare: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{HEAD_1}}", "{{HEAD_2}}", "{{OPT_1}}", "{{OPT_2}}", "{{OPT_3}}"]
+  s54_raci_matrix: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{HEAD_1}}", "{{ROLE_1}}", "{{ROLE_2}}", "{{ROLE_3}}", "{{ROLE_4}}"]
+  s55_stakeholder_map: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{HEAD_1}}", "{{HEAD_2}}", "{{HEAD_3}}", "{{SH_1}}", "{{CONCERN_1}}"]
+  s56_three_horizons: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{H1_TITLE}}", "{{H1_BODY}}", "{{H1_KPI}}", "{{H2_TITLE}}", "{{H2_BODY}}"]
+  s57_nine_box: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{HEAD_1}}", "{{HEAD_2}}", "{{HEAD_3}}", "{{UNIT_1}}", "{{CALL_1}}"]
+  s58_operating_model: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{VISION}}", "{{LAYER_1}}", "{{DESIGN_1}}", "{{GAP_1}}", "{{LAYER_2}}"]
 ---
 
 # 이너캐리 4:3 컴팩트 템플릿 — 디자인 명세
@@ -78,7 +94,8 @@ placeholders:
 
 - 캔버스 1024×768px (ppt43), 글꼴 `"IBM Plex Sans KR", "Malgun Gothic", sans-serif`.
 - 모든 본문 레이아웃은 제목 → 거버닝 1줄 → 구조물 1개 → 출처 → 페이지 번호 순서로 읽힌다(v20 content architecture, v22 compact density).
-- 구조화 장표 s01–s23은 `innergen_lecture`와 같은 슬롯 토큰을 쓰므로 한 덱의 내용을 계열 간에 옮길 수 있다.
+- 구조화 장표 s01–s58은 세 계열(`innergen_lecture`·`innergen_business`·`innercarry`)이 같은 파일명·슬롯 토큰을 쓰므로 한 덱의 내용을 계열 간에 옮길 수 있다.
+- v24 컨설팅 도식 s43–s58(이슈 트리·가설 작업계획·SCQA·동인 트리·워터폴·MACC·감축 웨지·이중 중대성·리스크 히트맵·시나리오·하비볼·RACI·이해관계자·3지평·9-box·운영모델)은 막대·점·곡선·하비볼이 슬라이드 로컬 도형이라 값에 맞춰 길이·위치를 고쳐 쓴다(`structured-slides-v18.md` §3c).
 - 세부 규칙: `docs/styles/innergen/design-standard-v17.md` v22 절, `structured-slides-v18.md`, `content-architecture-v20.md`.
 
 ## II. Color Scheme
@@ -175,6 +192,22 @@ placeholders:
 | `s40_process_steps_detail.svg` | `innercarry-process-steps` / 이너캐리 단계 프로세스 상세(번호·소단계) | 슬롯 21개 |
 | `s41_quote_opener.svg` | `innercarry-quote-opener` / 이너캐리 양극 인용+질문 | 슬롯 12개 |
 | `s42_scope_method_result.svg` | `innercarry-scope-method-result` / 이너캐리 범위·방법·결과 3열 | 슬롯 14개 |
+| `s43_issue_tree.svg` | `innercarry-issue-tree` / 이너캐리 이슈 트리(MECE 질문 분해) | 슬롯 26개 |
+| `s44_hypothesis_workplan.svg` | `innercarry-hypothesis-workplan` / 이너캐리 가설·분석 작업계획표 | 슬롯 42개 |
+| `s45_scqa_storyline.svg` | `innercarry-scqa-storyline` / 이너캐리 SCQA 스토리라인+지지 근거 | 슬롯 15개 |
+| `s46_driver_tree.svg` | `innercarry-driver-tree` / 이너캐리 KPI 동인 트리(값 분해) | 슬롯 30개 |
+| `s47_waterfall_bridge.svg` | `innercarry-waterfall-bridge` / 이너캐리 워터폴 브리지+해석 | 슬롯 24개 |
+| `s48_macc_curve.svg` | `innercarry-macc-curve` / 이너캐리 한계감축비용곡선(MACC)+수단 목록 | 슬롯 24개 |
+| `s49_pathway_wedge.svg` | `innercarry-pathway-wedge` / 이너캐리 감축 경로 웨지(BAU→목표) | 슬롯 22개 |
+| `s50_materiality_matrix.svg` | `innercarry-materiality-matrix` / 이너캐리 이중 중대성 매트릭스+이슈 목록 | 슬롯 33개 |
+| `s51_risk_heatmap.svg` | `innercarry-risk-heatmap` / 이너캐리 리스크 히트맵 5×5+리스크 목록 | 슬롯 34개 |
+| `s52_scenario_matrix.svg` | `innercarry-scenario-matrix` / 이너캐리 2×2 시나리오+공통 대응 | 슬롯 22개 |
+| `s53_harvey_compare.svg` | `innercarry-harvey-compare` / 이너캐리 하비볼 대안 평가표+권고 | 슬롯 27개 |
+| `s54_raci_matrix.svg` | `innercarry-raci-matrix` / 이너캐리 RACI 역할 매트릭스 | 슬롯 47개 |
+| `s55_stakeholder_map.svg` | `innercarry-stakeholder-map` / 이너캐리 이해관계자 영향력·관심도 지도 | 슬롯 27개 |
+| `s56_three_horizons.svg` | `innercarry-three-horizons` / 이너캐리 성장 3지평(H1·H2·H3) | 슬롯 14개 |
+| `s57_nine_box.svg` | `innercarry-nine-box` / 이너캐리 포트폴리오 9-box(매력도×경쟁우위) | 슬롯 26개 |
+| `s58_operating_model.svg` | `innercarry-operating-model` / 이너캐리 운영모델 하우스(전략·계층·기반) | 슬롯 28개 |
 
 ## VI. Assets
 

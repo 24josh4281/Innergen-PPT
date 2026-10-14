@@ -93,6 +93,8 @@ feedback values and re-run the Executor; coordinates, colors and templates stay.
 
 v23 (2026-10-14): 19 more structures (`s24_project_overview` … `s42_scope_method_result`) cover the reporting life cycle (project overview, Gantt, data request, team roles, status board, progress/plan, radar benchmark, diagnosis table, priority 2×2, approach matrix, executive one-pager, decision request, meeting log, purpose/effects) and seminar devices (issue cards, challenges/considerations, process steps, polar quotes, scope/method/result). See `structured-slides-v18.md` §3b; all three family templates carry them.
 
+v24 (2026-10-14): 16 consulting diagrams drawn from the public methods of McKinsey, BCG, Bain and the Big Four (`s43_issue_tree` … `s58_operating_model`): issue tree, hypothesis workplan, SCQA storyline, KPI driver tree, waterfall bridge, MACC, abatement pathway wedges, double materiality matrix, 5×5 risk heatmap, 2×2 scenarios, Harvey-ball option comparison, RACI, stakeholder map, three horizons, GE–McKinsey nine-box and operating-model house. Only structure is borrowed (no firm branding, client facts or figures); bars, dots, curves and Harvey balls are slide-local shapes resized per slide. See `structured-slides-v18.md` §3c.
+
 A style family alone never stages a template. Use only explicitly selected valid
 template paths. Existing owner gates and source fact protections stay in force.
 

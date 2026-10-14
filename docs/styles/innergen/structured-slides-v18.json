@@ -866,6 +866,305 @@
       "lecture_template_layout": "s42_scope_method_result.svg",
       "use": "제안·중간·최종",
       "v23": true
+    },
+    "issue_tree": {
+      "label": "이슈 트리(MECE 질문 분해)",
+      "reader_question": "핵심 질문을 어떤 하위 질문으로 나눠 답하나?",
+      "pattern": "tree",
+      "slots": [
+        "핵심 질문",
+        "하위 이슈 3",
+        "세부 질문 6",
+        "분석·자료",
+        "MECE 점검 줄"
+      ],
+      "reference_patterns": [
+        "McKinsey 문제 해결(이슈 트리·MECE)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s43_issue_tree.svg",
+      "use": "제안·착수·교육",
+      "v24": true
+    },
+    "hypothesis_workplan": {
+      "label": "가설·분석 작업계획표",
+      "reader_question": "어떤 가설을 어떤 분석·자료로 언제까지 검증하나?",
+      "pattern": "table",
+      "slots": [
+        "이슈",
+        "가설",
+        "분석",
+        "자료·출처",
+        "담당",
+        "시점",
+        "최종 산출물 줄"
+      ],
+      "reference_patterns": [
+        "McKinsey 가설 기반 작업계획(이슈–가설–분석–자료–담당–시점)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s44_hypothesis_workplan.svg",
+      "use": "제안·착수",
+      "v24": true
+    },
+    "scqa_storyline": {
+      "label": "SCQA 스토리라인+지지 근거",
+      "reader_question": "상황·문제·질문에서 답과 근거 3개로 이어지는가?",
+      "pattern": "cards",
+      "slots": [
+        "상황",
+        "문제",
+        "질문",
+        "답",
+        "지지 근거 3(제목·근거)"
+      ],
+      "reference_patterns": [
+        "Barbara Minto 피라미드 원칙(SCQA, 수평·수직 논리)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s45_scqa_storyline.svg",
+      "use": "경영진 브리핑·최종·제안 첫 장",
+      "v24": true
+    },
+    "driver_tree": {
+      "label": "KPI 동인 트리(값 분해)",
+      "reader_question": "목표 지표는 어떤 동인의 곱·합이고 어디를 움직이나?",
+      "pattern": "tree",
+      "slots": [
+        "목표 KPI+값",
+        "1차 동인 2",
+        "2차 동인 4",
+        "연산 기호",
+        "통제 가능한 레버 4"
+      ],
+      "reference_patterns": [
+        "McKinsey·BCG 가치 동인 트리(value driver tree)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s46_driver_tree.svg",
+      "use": "인벤토리·감축·진단",
+      "v24": true
+    },
+    "waterfall_bridge": {
+      "label": "워터폴 브리지+해석",
+      "reader_question": "기준값에서 결과값까지 어떤 요인이 얼마나 더하고 뺐나?",
+      "pattern": "chart",
+      "slots": [
+        "기준 막대",
+        "증감 요인 5",
+        "결과 막대",
+        "범례",
+        "해석 3"
+      ],
+      "reference_patterns": [
+        "McKinsey 워터폴(브리지) 차트"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s47_waterfall_bridge.svg",
+      "use": "감축·인벤토리·중간·최종",
+      "v24": true
+    },
+    "macc_curve": {
+      "label": "한계감축비용곡선(MACC)+수단 목록",
+      "reader_question": "어떤 감축 수단이 싸고 얼마나 줄이나?",
+      "pattern": "chart",
+      "slots": [
+        "폭 = 감축량, 높이 = 한계감축비용 막대 7",
+        "탄소가격 기준선",
+        "수단 목록(비용·잠재량)"
+      ],
+      "reference_patterns": [
+        "McKinsey 한계감축비용곡선(2007~, Pathways to a low-carbon economy)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s48_macc_curve.svg",
+      "use": "감축·제안·최종",
+      "v24": true
+    },
+    "pathway_wedge": {
+      "label": "감축 경로 웨지(BAU→목표)",
+      "reader_question": "BAU 대비 목표까지 어떤 수단이 얼마씩 메우나?",
+      "pattern": "chart",
+      "slots": [
+        "BAU 선",
+        "목표 경로",
+        "수단 웨지 4",
+        "중간 목표",
+        "수단·기여율 표",
+        "목표 주석"
+      ],
+      "reference_patterns": [
+        "McKinsey·IEA 넷제로 경로(수단별 웨지)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s49_pathway_wedge.svg",
+      "use": "감축·최종·경영진",
+      "v24": true
+    },
+    "materiality_matrix": {
+      "label": "이중 중대성 매트릭스+이슈 목록",
+      "reader_question": "어떤 이슈가 영향·재무 양쪽에서 중대한가?",
+      "pattern": "matrix",
+      "slots": [
+        "영향(Inside-out)×재무(Outside-in) 평면",
+        "임계선",
+        "이슈 점 8",
+        "이슈 목록(점수 2개)",
+        "임계값 주석"
+      ],
+      "reference_patterns": [
+        "Big4 이중 중대성 평가(KPMG·Deloitte·PwC·EY, ESRS 1 DMA)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s50_materiality_matrix.svg",
+      "use": "ESG 평가·공시·CDP",
+      "v24": true
+    },
+    "risk_heatmap": {
+      "label": "리스크 히트맵 5×5+리스크 목록",
+      "reader_question": "어떤 기후 리스크가 크고 언제 무엇으로 대응하나?",
+      "pattern": "heatmap",
+      "slots": [
+        "발생 가능성×영향 5×5",
+        "리스크 표식 6",
+        "목록(유형·시점·대응)",
+        "점수 기준 주석"
+      ],
+      "reference_patterns": [
+        "TCFD·Deloitte 기후 리스크 평가(물리·전환, 발생 가능성×영향)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s51_risk_heatmap.svg",
+      "use": "기후 리스크·TCFD/ISSB 공시",
+      "v24": true
+    },
+    "scenario_matrix": {
+      "label": "2×2 시나리오+공통 대응",
+      "reader_question": "두 불확실성에 따라 어떤 미래가 오고 공통으로 할 일은?",
+      "pattern": "matrix",
+      "slots": [
+        "두 불확실성 축(양 끝)",
+        "시나리오 4(이름·설명)",
+        "공통 대응(No-regret) 3",
+        "선행 지표"
+      ],
+      "reference_patterns": [
+        "2×2 시나리오 플래닝(Shell·Deloitte, McKinsey no-regret moves·signposts)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s52_scenario_matrix.svg",
+      "use": "기후 리스크·전략·경영진",
+      "v24": true
+    },
+    "harvey_compare": {
+      "label": "하비볼 대안 평가표+권고",
+      "reader_question": "대안들을 기준별로 비교하면 무엇을 택하나?",
+      "pattern": "matrix",
+      "slots": [
+        "평가 기준 5(가중치)",
+        "대안 4",
+        "하비볼 0–4",
+        "종합 점수",
+        "범례",
+        "권고"
+      ],
+      "reference_patterns": [
+        "하비볼 평가표(Booz Allen, 컨설팅 대안 비교)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s53_harvey_compare.svg",
+      "use": "제안·진단·최종",
+      "v24": true
+    },
+    "raci_matrix": {
+      "label": "RACI 역할 매트릭스",
+      "reader_question": "활동마다 누가 실행·책임·협의·통보하나?",
+      "pattern": "matrix",
+      "slots": [
+        "활동 6",
+        "주체 5",
+        "R/A/C/I 칸",
+        "범례"
+      ],
+      "reference_patterns": [
+        "RACI 매트릭스·Bain RAPID 결정 역할"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s54_raci_matrix.svg",
+      "use": "착수·거버넌스·규제 대응",
+      "v24": true
+    },
+    "stakeholder_map": {
+      "label": "이해관계자 영향력·관심도 지도",
+      "reader_question": "누구를 긴밀히 관리하고 누구에게 알리나?",
+      "pattern": "matrix",
+      "slots": [
+        "영향력×관심도 4분면",
+        "이해관계자 점 6",
+        "목록(관심사·소통 방식)",
+        "배치 주석"
+      ],
+      "reference_patterns": [
+        "영향력·관심도 그리드(Eden & Ackermann), 컨설팅 이해관계자 분석"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s55_stakeholder_map.svg",
+      "use": "착수·중대성 평가·변화관리",
+      "v24": true
+    },
+    "three_horizons": {
+      "label": "성장 3지평(H1·H2·H3)",
+      "reader_question": "핵심·신규·미래 사업을 어떻게 나눠 키우나?",
+      "pattern": "cards",
+      "slots": [
+        "시간×가치 곡선 3",
+        "H1·H2·H3 제목",
+        "과제",
+        "평가 지표"
+      ],
+      "reference_patterns": [
+        "McKinsey 3 Horizons of Growth(Baghai·Coley·White 1999)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s56_three_horizons.svg",
+      "use": "전략·기후테크·제안",
+      "v24": true
+    },
+    "nine_box": {
+      "label": "포트폴리오 9-box(매력도×경쟁우위)",
+      "reader_question": "어느 사업에 투자하고 어느 사업을 회수하나?",
+      "pattern": "matrix",
+      "slots": [
+        "시장 매력도×경쟁 우위 3×3",
+        "구역(투자·선별·회수)",
+        "사업 버블 6",
+        "목록(판단·근거)"
+      ],
+      "reference_patterns": [
+        "GE–McKinsey 9-box 포트폴리오 매트릭스"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s57_nine_box.svg",
+      "use": "전략·포트폴리오 전환·기후테크",
+      "v24": true
+    },
+    "operating_model": {
+      "label": "운영모델 하우스(전략·계층·기반)",
+      "reader_question": "전략을 실행하려면 조직·프로세스·데이터 중 무엇을 바꾸나?",
+      "pattern": "table",
+      "slots": [
+        "지붕(전략·가치 제안)",
+        "계층 5(설계 원칙·격차)",
+        "기반",
+        "우선 보완 과제 4"
+      ],
+      "reference_patterns": [
+        "운영모델 설계(EY 운영모델 전환·PwC Strategy& capabilities-driven strategy)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s58_operating_model.svg",
+      "use": "진단·최종·거버넌스",
+      "v24": true
     }
   },
   "recommended_by_report": {
@@ -876,7 +1175,10 @@
       "approach_matrix",
       "purpose_effects",
       "team_roles",
-      "scope_method_result"
+      "scope_method_result",
+      "issue_tree",
+      "hypothesis_workplan",
+      "harvey_compare"
     ],
     "kickoff": [
       "task_structure",
@@ -886,7 +1188,10 @@
       "gantt_schedule",
       "data_request",
       "purpose_effects",
-      "team_roles"
+      "team_roles",
+      "hypothesis_workplan",
+      "raci_matrix",
+      "stakeholder_map"
     ],
     "interim": [
       "status",
@@ -895,7 +1200,9 @@
       "status_board",
       "progress_plan",
       "decision_request",
-      "meeting_log"
+      "meeting_log",
+      "waterfall_bridge",
+      "harvey_compare"
     ],
     "final": [
       "exec_summary",
@@ -905,7 +1212,11 @@
       "diagnosis_table",
       "priority_matrix",
       "radar_benchmark",
-      "meeting_log"
+      "meeting_log",
+      "scqa_storyline",
+      "macc_curve",
+      "pathway_wedge",
+      "operating_model"
     ],
     "education": [
       "keyword_map",
@@ -914,36 +1225,50 @@
       "issue_cards",
       "challenges_considerations",
       "process_steps_detail",
-      "quote_opener"
+      "quote_opener",
+      "issue_tree",
+      "scqa_storyline"
     ],
     "briefing": [
       "exec_summary",
       "compare_implication",
       "key_takeaways",
       "exec_one_pager",
-      "issue_cards"
+      "issue_cards",
+      "scqa_storyline",
+      "scenario_matrix",
+      "waterfall_bridge"
     ]
   },
   "recommended_by_business": {
     "cdp_disclosure": [
       "maturity_heatmap",
       "principle_matrix",
-      "compare_implication"
+      "compare_implication",
+      "materiality_matrix",
+      "raci_matrix"
     ],
     "regulatory": [
       "period_applicability",
       "decision_tree",
-      "entity_matrix"
+      "entity_matrix",
+      "raci_matrix"
     ],
     "reduction": [
+      "macc_curve",
       "chart_insight",
       "asis_tobe",
-      "phase_roadmap"
+      "phase_roadmap",
+      "waterfall_bridge",
+      "pathway_wedge",
+      "driver_tree"
     ],
     "inventory": [
       "list_zoom",
       "chart_table",
-      "vertical_flow"
+      "vertical_flow",
+      "driver_tree",
+      "waterfall_bridge"
     ],
     "lca_product": [
       "chart_table",
@@ -951,24 +1276,31 @@
       "compare"
     ],
     "climate_risk": [
+      "risk_heatmap",
       "maturity_heatmap",
       "chart_insight",
-      "entity_matrix"
+      "entity_matrix",
+      "scenario_matrix"
     ],
     "esg_rating": [
+      "materiality_matrix",
       "self_check",
       "principle_matrix",
-      "asis_tobe"
+      "asis_tobe",
+      "stakeholder_map"
     ],
     "climate_education": [
       "keyword_map",
       "year_timeline",
-      "findings_insights"
+      "findings_insights",
+      "issue_tree"
     ],
     "climate_tech": [
       "chart_insight",
       "entity_matrix",
-      "exec_summary"
+      "exec_summary",
+      "three_horizons",
+      "nine_box"
     ]
   },
   "content_architecture": "docs/styles/innergen/content-architecture-v20.json",
@@ -996,5 +1328,27 @@
       "scope_method_result"
     ],
     "note": "로컬 레퍼런스(착수·주간·월간·진행현황·진단·벤치마킹·세미나·제안 덱 26건 + 덤프 40건)에서 구조만 추출. 고객명·수치·로고 없음. 세 계열 템플릿에 같은 슬롯 토큰으로 생성."
+  },
+  "v24": {
+    "date": "2026-10-14",
+    "added": [
+      "issue_tree",
+      "hypothesis_workplan",
+      "scqa_storyline",
+      "driver_tree",
+      "waterfall_bridge",
+      "macc_curve",
+      "pathway_wedge",
+      "materiality_matrix",
+      "risk_heatmap",
+      "scenario_matrix",
+      "harvey_compare",
+      "raci_matrix",
+      "stakeholder_map",
+      "three_horizons",
+      "nine_box",
+      "operating_model"
+    ],
+    "note": "맥킨지·BCG·베인·PwC·KPMG·딜로이트·EY의 공개 방법론·발표 자료(웹·영상)에서 구조만 추출. 고객명·수치·로고·브랜드 도식은 쓰지 않음. 세 계열 템플릿에 같은 슬롯 토큰으로 수록. 막대·점·곡선·하비볼은 슬라이드 로컬 도형."
   }
 }

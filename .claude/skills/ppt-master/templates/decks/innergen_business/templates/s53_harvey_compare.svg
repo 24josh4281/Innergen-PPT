@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 960 540" data-pptx-master="innergen-biz-master-16x9" data-pptx-master-name="이너젠 회사소개 16:9" data-pptx-layout="innergen-biz-harvey-compare" data-pptx-layout-name="이너젠 회사소개 하비볼 대안 평가표+권고">
+<rect id="master-bg" x="0" y="0" width="960" height="540" fill="#FFFFFF" data-pptx-layer="master" data-pptx-editable="false"/>
+<rect id="title-bar" x="24" y="22" width="3" height="16" fill="#518FFF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="governing-rule" x1="24" y1="82" x2="936" y2="82" stroke="#D9D9D9" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="head-bg" x="24" y="94" width="674.9" height="39.2" fill="#2B4C7E" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="row-1-rule" x1="24" y1="180.2" x2="698.9" y2="180.2" stroke="#D9D9D9" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="row-2-zebra" x="24" y="180.2" width="674.9" height="47" fill="#F3F7FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="row-2-rule" x1="24" y1="227.3" x2="698.9" y2="227.3" stroke="#D9D9D9" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="row-3-rule" x1="24" y1="274.3" x2="698.9" y2="274.3" stroke="#D9D9D9" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="row-4-zebra" x="24" y="274.3" width="674.9" height="47" fill="#F3F7FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="row-4-rule" x1="24" y1="321.4" x2="698.9" y2="321.4" stroke="#D9D9D9" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="row-5-rule" x1="24" y1="368.4" x2="698.9" y2="368.4" stroke="#D9D9D9" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="total-bg" x="24" y="368.4" width="674.9" height="47" fill="#EEF3FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="total-rule" x1="24" y1="368.4" x2="698.9" y2="368.4" stroke="#2B4C7E" stroke-width="1.5" data-pptx-layer="layout" data-pptx-editable="false"/>
+<text id="total-label" x="34" y="396.2" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#2B4C7E" data-pptx-layer="layout" data-pptx-editable="false">종합 평가</text>
+<circle id="legend-0-ring" cx="31" cy="439" r="6.5" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2" data-pptx-layer="layout" data-pptx-editable="false"/>
+<text id="legend-0-label" x="42" y="443" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="400" fill="#595959" data-pptx-layer="layout" data-pptx-editable="false">없음</text>
+<circle id="legend-1-ring" cx="86.3" cy="439" r="6.5" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2" data-pptx-layer="layout" data-pptx-editable="false"/>
+<path id="legend-1-fill" d="M 86.3 439 L 86.3 432.5 A 6.5 6.5 0 0 1 92.8 439 Z" fill="#2B4C7E" data-pptx-layer="layout" data-pptx-editable="false"/>
+<text id="legend-1-label" x="97.3" y="443" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="400" fill="#595959" data-pptx-layer="layout" data-pptx-editable="false">낮음</text>
+<circle id="legend-2-ring" cx="141.7" cy="439" r="6.5" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2" data-pptx-layer="layout" data-pptx-editable="false"/>
+<path id="legend-2-fill" d="M 141.7 439 L 141.7 432.5 A 6.5 6.5 0 0 1 141.7 445.5 Z" fill="#2B4C7E" data-pptx-layer="layout" data-pptx-editable="false"/>
+<text id="legend-2-label" x="152.7" y="443" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="400" fill="#595959" data-pptx-layer="layout" data-pptx-editable="false">보통</text>
+<circle id="legend-3-ring" cx="197" cy="439" r="6.5" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2" data-pptx-layer="layout" data-pptx-editable="false"/>
+<path id="legend-3-fill" d="M 197 439 L 197 432.5 A 6.5 6.5 0 1 1 190.5 439 Z" fill="#2B4C7E" data-pptx-layer="layout" data-pptx-editable="false"/>
+<text id="legend-3-label" x="208" y="443" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="400" fill="#595959" data-pptx-layer="layout" data-pptx-editable="false">높음</text>
+<circle id="legend-4-ring" cx="252.4" cy="439" r="6.5" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2" data-pptx-layer="layout" data-pptx-editable="false"/>
+<circle id="legend-4-fill" cx="252.4" cy="439" r="6.5" fill="#2B4C7E" data-pptx-layer="layout" data-pptx-editable="false"/>
+<text id="legend-4-label" x="263.4" y="443" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="400" fill="#595959" data-pptx-layer="layout" data-pptx-editable="false">매우 높음</text>
+<rect id="rec-bg" x="726.2" y="94" width="209.8" height="392" fill="#2B4C7E" data-pptx-layer="layout" data-pptx-editable="false"/>
+<text id="rec-label" x="740.2" y="118.7" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="700" fill="#B9CFFF" data-pptx-layer="layout" data-pptx-editable="false">권고</text>
+<line id="rec-rule" x1="740.2" y1="211.6" x2="922" y2="211.6" stroke="#1F355E" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<circle id="ball-1-1-ring" cx="324.7" cy="156.7" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<circle id="ball-1-1-fill" cx="324.7" cy="156.7" r="10" fill="#2B4C7E"/>
+<circle id="ball-1-2-ring" cx="431.6" cy="156.7" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<path id="ball-1-2-fill" d="M 431.6 156.7 L 431.6 146.7 A 10 10 0 1 1 421.6 156.7 Z" fill="#2B4C7E"/>
+<circle id="ball-1-3-ring" cx="538.5" cy="156.7" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<path id="ball-1-3-fill" d="M 538.5 156.7 L 538.5 146.7 A 10 10 0 0 1 538.5 166.7 Z" fill="#2B4C7E"/>
+<circle id="ball-1-4-ring" cx="645.4" cy="156.7" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<path id="ball-1-4-fill" d="M 645.4 156.7 L 645.4 146.7 A 10 10 0 0 1 655.4 156.7 Z" fill="#2B4C7E"/>
+<circle id="ball-2-1-ring" cx="324.7" cy="203.8" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<path id="ball-2-1-fill" d="M 324.7 203.8 L 324.7 193.8 A 10 10 0 1 1 314.7 203.8 Z" fill="#2B4C7E"/>
+<circle id="ball-2-2-ring" cx="431.6" cy="203.8" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<circle id="ball-2-2-fill" cx="431.6" cy="203.8" r="10" fill="#2B4C7E"/>
+<circle id="ball-2-3-ring" cx="538.5" cy="203.8" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<path id="ball-2-3-fill" d="M 538.5 203.8 L 538.5 193.8 A 10 10 0 0 1 548.5 203.8 Z" fill="#2B4C7E"/>
+<circle id="ball-2-4-ring" cx="645.4" cy="203.8" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<path id="ball-2-4-fill" d="M 645.4 203.8 L 645.4 193.8 A 10 10 0 0 1 645.4 213.8 Z" fill="#2B4C7E"/>
+<circle id="ball-3-1-ring" cx="324.7" cy="250.8" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<path id="ball-3-1-fill" d="M 324.7 250.8 L 324.7 240.8 A 10 10 0 0 1 324.7 260.8 Z" fill="#2B4C7E"/>
+<circle id="ball-3-2-ring" cx="431.6" cy="250.8" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<path id="ball-3-2-fill" d="M 431.6 250.8 L 431.6 240.8 A 10 10 0 0 1 431.6 260.8 Z" fill="#2B4C7E"/>
+<circle id="ball-3-3-ring" cx="538.5" cy="250.8" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<circle id="ball-3-3-fill" cx="538.5" cy="250.8" r="10" fill="#2B4C7E"/>
+<circle id="ball-3-4-ring" cx="645.4" cy="250.8" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<path id="ball-3-4-fill" d="M 645.4 250.8 L 645.4 240.8 A 10 10 0 1 1 635.4 250.8 Z" fill="#2B4C7E"/>
+<circle id="ball-4-1-ring" cx="324.7" cy="297.8" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<circle id="ball-4-1-fill" cx="324.7" cy="297.8" r="10" fill="#2B4C7E"/>
+<circle id="ball-4-2-ring" cx="431.6" cy="297.8" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<path id="ball-4-2-fill" d="M 431.6 297.8 L 431.6 287.8 A 10 10 0 0 1 441.6 297.8 Z" fill="#2B4C7E"/>
+<circle id="ball-4-3-ring" cx="538.5" cy="297.8" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<path id="ball-4-3-fill" d="M 538.5 297.8 L 538.5 287.8 A 10 10 0 1 1 528.5 297.8 Z" fill="#2B4C7E"/>
+<circle id="ball-4-4-ring" cx="645.4" cy="297.8" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<path id="ball-4-4-fill" d="M 645.4 297.8 L 645.4 287.8 A 10 10 0 0 1 645.4 307.8 Z" fill="#2B4C7E"/>
+<circle id="ball-5-1-ring" cx="324.7" cy="344.9" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<path id="ball-5-1-fill" d="M 324.7 344.9 L 324.7 334.9 A 10 10 0 0 1 334.7 344.9 Z" fill="#2B4C7E"/>
+<circle id="ball-5-2-ring" cx="431.6" cy="344.9" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<path id="ball-5-2-fill" d="M 431.6 344.9 L 431.6 334.9 A 10 10 0 1 1 421.6 344.9 Z" fill="#2B4C7E"/>
+<circle id="ball-5-3-ring" cx="538.5" cy="344.9" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<path id="ball-5-3-fill" d="M 538.5 344.9 L 538.5 334.9 A 10 10 0 0 1 538.5 354.9 Z" fill="#2B4C7E"/>
+<circle id="ball-5-4-ring" cx="645.4" cy="344.9" r="10" fill="#FFFFFF" stroke="#2B4C7E" stroke-width="1.2"/>
+<circle id="ball-5-4-fill" cx="645.4" cy="344.9" r="10" fill="#2B4C7E"/>
+<g id="content-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="34 20 760 22"><text id="content-title-carrier" data-pptx-placeholder-carrier="true" x="34" y="36" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="16" font-weight="700" fill="#000000">{{PAGE_TITLE}}</text></g>
+<g id="key-message" data-pptx-placeholder="body" data-pptx-placeholder-idx="90" data-pptx-placeholder-bounds="24 50 912 28"><text id="key-message-carrier" data-pptx-placeholder-carrier="true" x="24" y="71" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="21.33" font-weight="700" fill="#000000">{{KEY_MESSAGE}}</text></g>
+<g id="head-1" data-pptx-placeholder="body" data-pptx-placeholder-idx="1" data-pptx-placeholder-bounds="24 94 180.4 39.2"><text id="head-1-carrier" data-pptx-placeholder-carrier="true" x="114.2" y="117.9" text-anchor="middle" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF">{{HEAD_1}}</text></g>
+<g id="head-2" data-pptx-placeholder="body" data-pptx-placeholder-idx="2" data-pptx-placeholder-bounds="204.4 94 66.8 39.2"><text id="head-2-carrier" data-pptx-placeholder-carrier="true" x="237.8" y="117.9" text-anchor="middle" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF">{{HEAD_2}}</text></g>
+<g id="head-3" data-pptx-placeholder="body" data-pptx-placeholder-idx="3" data-pptx-placeholder-bounds="271.2 94 106.9 39.2"><text id="head-3-carrier" data-pptx-placeholder-carrier="true" x="324.7" y="117.9" text-anchor="middle" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF">{{OPT_1}}</text></g>
+<g id="head-4" data-pptx-placeholder="body" data-pptx-placeholder-idx="4" data-pptx-placeholder-bounds="378.1 94 106.9 39.2"><text id="head-4-carrier" data-pptx-placeholder-carrier="true" x="431.6" y="117.9" text-anchor="middle" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF">{{OPT_2}}</text></g>
+<g id="head-5" data-pptx-placeholder="body" data-pptx-placeholder-idx="5" data-pptx-placeholder-bounds="485.1 94 106.9 39.2"><text id="head-5-carrier" data-pptx-placeholder-carrier="true" x="538.5" y="117.9" text-anchor="middle" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF">{{OPT_3}}</text></g>
+<g id="head-6" data-pptx-placeholder="body" data-pptx-placeholder-idx="6" data-pptx-placeholder-bounds="592 94 106.9 39.2"><text id="head-6-carrier" data-pptx-placeholder-carrier="true" x="645.4" y="117.9" text-anchor="middle" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#FFFFFF">{{OPT_4}}</text></g>
+<g id="crit-1" data-pptx-placeholder="body" data-pptx-placeholder-idx="7" data-pptx-placeholder-bounds="34 133.2 166.4 47"><text id="crit-1-carrier" data-pptx-placeholder-carrier="true" x="34" y="160.6" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="700" fill="#2B4C7E">{{CRIT_1}}</text></g>
+<g id="weight-1" data-pptx-placeholder="body" data-pptx-placeholder-idx="8" data-pptx-placeholder-bounds="204.4 133.2 66.8 47"><text id="weight-1-carrier" data-pptx-placeholder-carrier="true" x="237.8" y="160.6" text-anchor="middle" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="400" fill="#595959">{{WEIGHT_1}}</text></g>
+<g id="crit-2" data-pptx-placeholder="body" data-pptx-placeholder-idx="9" data-pptx-placeholder-bounds="34 180.2 166.4 47"><text id="crit-2-carrier" data-pptx-placeholder-carrier="true" x="34" y="207.6" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="700" fill="#2B4C7E">{{CRIT_2}}</text></g>
+<g id="weight-2" data-pptx-placeholder="body" data-pptx-placeholder-idx="10" data-pptx-placeholder-bounds="204.4 180.2 66.8 47"><text id="weight-2-carrier" data-pptx-placeholder-carrier="true" x="237.8" y="207.6" text-anchor="middle" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="400" fill="#595959">{{WEIGHT_2}}</text></g>
+<g id="crit-3" data-pptx-placeholder="body" data-pptx-placeholder-idx="11" data-pptx-placeholder-bounds="34 227.3 166.4 47"><text id="crit-3-carrier" data-pptx-placeholder-carrier="true" x="34" y="254.6" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="700" fill="#2B4C7E">{{CRIT_3}}</text></g>
+<g id="weight-3" data-pptx-placeholder="body" data-pptx-placeholder-idx="12" data-pptx-placeholder-bounds="204.4 227.3 66.8 47"><text id="weight-3-carrier" data-pptx-placeholder-carrier="true" x="237.8" y="254.6" text-anchor="middle" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="400" fill="#595959">{{WEIGHT_3}}</text></g>
+<g id="crit-4" data-pptx-placeholder="body" data-pptx-placeholder-idx="13" data-pptx-placeholder-bounds="34 274.3 166.4 47"><text id="crit-4-carrier" data-pptx-placeholder-carrier="true" x="34" y="301.7" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="700" fill="#2B4C7E">{{CRIT_4}}</text></g>
+<g id="weight-4" data-pptx-placeholder="body" data-pptx-placeholder-idx="14" data-pptx-placeholder-bounds="204.4 274.3 66.8 47"><text id="weight-4-carrier" data-pptx-placeholder-carrier="true" x="237.8" y="301.7" text-anchor="middle" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="400" fill="#595959">{{WEIGHT_4}}</text></g>
+<g id="crit-5" data-pptx-placeholder="body" data-pptx-placeholder-idx="15" data-pptx-placeholder-bounds="34 321.4 166.4 47"><text id="crit-5-carrier" data-pptx-placeholder-carrier="true" x="34" y="348.7" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="700" fill="#2B4C7E">{{CRIT_5}}</text></g>
+<g id="weight-5" data-pptx-placeholder="body" data-pptx-placeholder-idx="16" data-pptx-placeholder-bounds="204.4 321.4 66.8 47"><text id="weight-5-carrier" data-pptx-placeholder-carrier="true" x="237.8" y="348.7" text-anchor="middle" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="400" fill="#595959">{{WEIGHT_5}}</text></g>
+<g id="total-1" data-pptx-placeholder="body" data-pptx-placeholder-idx="17" data-pptx-placeholder-bounds="271.2 368.4 106.9 47"><text id="total-1-carrier" data-pptx-placeholder-carrier="true" x="324.7" y="396.2" text-anchor="middle" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#518FFF">{{TOTAL_1}}</text></g>
+<g id="total-2" data-pptx-placeholder="body" data-pptx-placeholder-idx="18" data-pptx-placeholder-bounds="378.1 368.4 106.9 47"><text id="total-2-carrier" data-pptx-placeholder-carrier="true" x="431.6" y="396.2" text-anchor="middle" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#518FFF">{{TOTAL_2}}</text></g>
+<g id="total-3" data-pptx-placeholder="body" data-pptx-placeholder-idx="19" data-pptx-placeholder-bounds="485.1 368.4 106.9 47"><text id="total-3-carrier" data-pptx-placeholder-carrier="true" x="538.5" y="396.2" text-anchor="middle" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#518FFF">{{TOTAL_3}}</text></g>
+<g id="total-4" data-pptx-placeholder="body" data-pptx-placeholder-idx="20" data-pptx-placeholder-bounds="592 368.4 106.9 47"><text id="total-4-carrier" data-pptx-placeholder-carrier="true" x="645.4" y="396.2" text-anchor="middle" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#518FFF">{{TOTAL_4}}</text></g>
+<g id="rec-title" data-pptx-placeholder="body" data-pptx-placeholder-idx="21" data-pptx-placeholder-bounds="740.2 126.7 181.8 54.9"><text id="rec-title-carrier" data-pptx-placeholder-carrier="true" x="740.2" y="144" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="13.33" font-weight="700" fill="#FFFFFF">{{REC_TITLE}}</text></g>
+<g id="rec-body" data-pptx-placeholder="body" data-pptx-placeholder-idx="22" data-pptx-placeholder-bounds="740.2 219.4 181.8 258.7"><text id="rec-body-carrier" data-pptx-placeholder-carrier="true" x="740.2" y="234.1" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="400" fill="#D9E7FD">{{REC_BODY}}</text></g>
+<g id="source-note" data-pptx-placeholder="body" data-pptx-placeholder-idx="91" data-pptx-placeholder-bounds="24 492 912 16"><text id="source-note-carrier" data-pptx-placeholder-carrier="true" x="24" y="504" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="400" fill="#595959">{{SOURCE}}</text></g>
+<g id="footer-section" data-pptx-placeholder="footer" data-pptx-placeholder-bounds="24 514 600 16"><text id="footer-section-carrier" data-pptx-placeholder-carrier="true" x="24" y="526" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="400" fill="#595959">{{SECTION_NAME}}</text></g>
+<g id="page-number" data-pptx-placeholder="slide-number" data-pptx-placeholder-bounds="880 20 56 18"><text id="page-number-carrier" data-pptx-placeholder-carrier="true" x="936" y="34" text-anchor="end" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="400" fill="#595959">{{PAGE_NUM}}</text></g>
+</svg>

@@ -2369,6 +2369,771 @@
         "condition": "결론 | 데이터 범위가 첫 과제"
       },
       "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "issue_tree": {
+      "label": "이슈 트리(MECE 질문 분해)",
+      "purpose": "핵심 질문을 어떤 하위 질문으로 나눠 답하나?",
+      "pattern": "tree",
+      "slots": [
+        "핵심 질문",
+        "하위 이슈 3",
+        "세부 질문 6",
+        "분석·자료",
+        "MECE 점검 줄"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s43_issue_tree.svg",
+      "v24": true,
+      "reference": "McKinsey 문제 해결(이슈 트리·MECE)",
+      "required_evidence": [
+        "질문이 서로 겹치지 않고 빠짐없음",
+        "세부 질문마다 분석 방법"
+      ],
+      "protect": [
+        "가지는 질문형으로 통일",
+        "MECE 점검 줄을 비우지 않음"
+      ],
+      "preview": {
+        "title": "이슈 트리",
+        "claim": "2030 감축 목표 달성 질문을 3개 이슈로 나눕니다.",
+        "parent": "2030 목표를 비용 효율적으로 달성하려면?",
+        "children": [
+          "감축 수단은 충분한가?",
+          "비용은 감당 가능한가?",
+          "실행 체계는 갖춰졌나?"
+        ],
+        "outputs": [
+          "MACC·잠재량",
+          "투자 회수·탄소가격",
+          "RACI·데이터"
+        ],
+        "condition": "MECE | 수단·비용·체계 축"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "hypothesis_workplan": {
+      "label": "가설·분석 작업계획표",
+      "purpose": "어떤 가설을 어떤 분석·자료로 언제까지 검증하나?",
+      "pattern": "table",
+      "slots": [
+        "이슈",
+        "가설",
+        "분석",
+        "자료·출처",
+        "담당",
+        "시점",
+        "최종 산출물 줄"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s44_hypothesis_workplan.svg",
+      "v24": true,
+      "reference": "McKinsey 가설 기반 작업계획(이슈–가설–분석–자료–담당–시점)",
+      "required_evidence": [
+        "가설은 검증 가능한 문장",
+        "자료 출처·담당·시점"
+      ],
+      "protect": [
+        "가설과 결론을 섞지 않음",
+        "시점은 주 단위"
+      ],
+      "preview": {
+        "title": "가설·분석 계획",
+        "claim": "5개 이슈를 가설로 바꿔 6주 안에 검증합니다.",
+        "headers": [
+          "이슈",
+          "가설",
+          "분석",
+          "시점"
+        ],
+        "rows": [
+          [
+            "감축 잠재량",
+            "전기화로 30% 감축 가능",
+            "MACC 분석",
+            "2주"
+          ],
+          [
+            "감축 비용",
+            "재생에너지 단가 하락",
+            "PPA 견적 비교",
+            "3주"
+          ]
+        ],
+        "condition": "산출물 | 수단별 비용·잠재량 목록"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "scqa_storyline": {
+      "label": "SCQA 스토리라인+지지 근거",
+      "purpose": "상황·문제·질문에서 답과 근거 3개로 이어지는가?",
+      "pattern": "cards",
+      "slots": [
+        "상황",
+        "문제",
+        "질문",
+        "답",
+        "지지 근거 3(제목·근거)"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s45_scqa_storyline.svg",
+      "v24": true,
+      "reference": "Barbara Minto 피라미드 원칙(SCQA, 수평·수직 논리)",
+      "required_evidence": [
+        "답은 질문에 직접 답함",
+        "근거 3개는 답을 각각 지지"
+      ],
+      "protect": [
+        "답은 한 문장",
+        "근거는 서로 겹치지 않음"
+      ],
+      "preview": {
+        "title": "SCQA",
+        "claim": "질문에 대한 답과 근거 3개를 한 장에 둡니다.",
+        "cards": [
+          [
+            "상황",
+            "2030 42% 감축 목표 공표"
+          ],
+          [
+            "문제",
+            "현 추세로는 18% 감축"
+          ],
+          [
+            "질문",
+            "어떤 수단을 어떤 순서로?"
+          ],
+          [
+            "답",
+            "전기화·재생에너지 우선"
+          ]
+        ],
+        "condition": "근거 | 잠재량·단가·투자 회수"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "driver_tree": {
+      "label": "KPI 동인 트리(값 분해)",
+      "purpose": "목표 지표는 어떤 동인의 곱·합이고 어디를 움직이나?",
+      "pattern": "tree",
+      "slots": [
+        "목표 KPI+값",
+        "1차 동인 2",
+        "2차 동인 4",
+        "연산 기호",
+        "통제 가능한 레버 4"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s46_driver_tree.svg",
+      "v24": true,
+      "reference": "McKinsey·BCG 가치 동인 트리(value driver tree)",
+      "required_evidence": [
+        "동인 간 산식 성립(×·+)",
+        "값의 기준 연도·단위"
+      ],
+      "protect": [
+        "산식이 맞지 않으면 트리를 쓰지 않음",
+        "레버는 통제 가능한 행동"
+      ],
+      "preview": {
+        "title": "배출량 동인 트리",
+        "claim": "배출량은 활동량 × 배출계수로 나뉘고 원단위가 가장 큰 레버입니다.",
+        "parent": "총 배출량 125ktCO2e",
+        "children": [
+          "활동량(생산량·원단위)",
+          "배출계수(전력·연료 비중)"
+        ],
+        "outputs": [
+          "가동률·열회수",
+          "PPA·연료 전환"
+        ],
+        "condition": "산식 | 배출량 = 활동량 × 배출계수"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "waterfall_bridge": {
+      "label": "워터폴 브리지+해석",
+      "purpose": "기준값에서 결과값까지 어떤 요인이 얼마나 더하고 뺐나?",
+      "pattern": "chart",
+      "slots": [
+        "기준 막대",
+        "증감 요인 5",
+        "결과 막대",
+        "범례",
+        "해석 3"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s47_waterfall_bridge.svg",
+      "v24": true,
+      "reference": "McKinsey 워터폴(브리지) 차트",
+      "required_evidence": [
+        "요인 합계 = 결과 − 기준",
+        "단위·기준 연도"
+      ],
+      "protect": [
+        "요인이 겹치면 쓰지 않음",
+        "증가·감소 색 구분"
+      ],
+      "preview": {
+        "title": "배출량 브리지",
+        "claim": "2023→2030 감축의 55%가 전기화·재생에너지에서 나옵니다.",
+        "bars": [
+          [
+            "효율화",
+            22
+          ],
+          [
+            "전기화",
+            15
+          ],
+          [
+            "재생에너지",
+            11
+          ],
+          [
+            "연료 전환",
+            19
+          ],
+          [
+            "생산 증가(+)",
+            8
+          ]
+        ],
+        "unit": "ktCO2e(감소·증가 절댓값)",
+        "insight": "생산 증가분은 효율화로 상쇄",
+        "condition": "합계 | 125 − 59 = 66"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "macc_curve": {
+      "label": "한계감축비용곡선(MACC)+수단 목록",
+      "purpose": "어떤 감축 수단이 싸고 얼마나 줄이나?",
+      "pattern": "chart",
+      "slots": [
+        "폭 = 감축량, 높이 = 한계감축비용 막대 7",
+        "탄소가격 기준선",
+        "수단 목록(비용·잠재량)"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s48_macc_curve.svg",
+      "v24": true,
+      "reference": "McKinsey 한계감축비용곡선(2007~, Pathways to a low-carbon economy)",
+      "required_evidence": [
+        "수단별 비용(원/tCO2e)·잠재량(tCO2e)",
+        "비용 산정 기준(할인율·기간)"
+      ],
+      "protect": [
+        "수단 간 상호작용은 주석",
+        "음(−) 비용은 절감 영역 표시"
+      ],
+      "preview": {
+        "title": "MACC",
+        "claim": "7개 수단 중 3개는 비용 절감, 2개는 내부 탄소가격 이하입니다.",
+        "bars": [
+          [
+            "설비 가동률",
+            12
+          ],
+          [
+            "열회수",
+            9
+          ],
+          [
+            "PPA",
+            7
+          ],
+          [
+            "LNG 전환",
+            14
+          ],
+          [
+            "전기화",
+            10
+          ]
+        ],
+        "unit": "ktCO2e 감축 잠재량",
+        "insight": "탄소가격 3만원 이하 수단부터",
+        "condition": "기준선 | 내부 탄소가격"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "pathway_wedge": {
+      "label": "감축 경로 웨지(BAU→목표)",
+      "purpose": "BAU 대비 목표까지 어떤 수단이 얼마씩 메우나?",
+      "pattern": "chart",
+      "slots": [
+        "BAU 선",
+        "목표 경로",
+        "수단 웨지 4",
+        "중간 목표",
+        "수단·기여율 표",
+        "목표 주석"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s49_pathway_wedge.svg",
+      "v24": true,
+      "reference": "McKinsey·IEA 넷제로 경로(수단별 웨지)",
+      "required_evidence": [
+        "웨지 합계 = BAU − 목표",
+        "기준 연도·목표 연도"
+      ],
+      "protect": [
+        "잔여 배출·상쇄는 구분",
+        "기여율 합 100%"
+      ],
+      "preview": {
+        "title": "감축 경로",
+        "claim": "2040 넷제로 갭의 63%를 전기화·효율화가 메웁니다.",
+        "bars": [
+          [
+            "전기화",
+            35
+          ],
+          [
+            "효율화",
+            28
+          ],
+          [
+            "재생에너지",
+            22
+          ],
+          [
+            "연료 전환",
+            15
+          ]
+        ],
+        "unit": "% 기여",
+        "insight": "2030 중간 목표 −42%",
+        "condition": "잔여 | 10%는 제거 크레딧"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "materiality_matrix": {
+      "label": "이중 중대성 매트릭스+이슈 목록",
+      "purpose": "어떤 이슈가 영향·재무 양쪽에서 중대한가?",
+      "pattern": "matrix",
+      "slots": [
+        "영향(Inside-out)×재무(Outside-in) 평면",
+        "임계선",
+        "이슈 점 8",
+        "이슈 목록(점수 2개)",
+        "임계값 주석"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s50_materiality_matrix.svg",
+      "v24": true,
+      "reference": "Big4 이중 중대성 평가(KPMG·Deloitte·PwC·EY, ESRS 1 DMA)",
+      "required_evidence": [
+        "점수 척도·임계값",
+        "이해관계자 참여 범위"
+      ],
+      "protect": [
+        "영향·재무 점수 분리",
+        "임계값을 주석에 명시"
+      ],
+      "preview": {
+        "title": "이중 중대성",
+        "claim": "8개 이슈 중 4개가 영향·재무 모두 임계값을 넘습니다.",
+        "headers": [
+          "이슈",
+          "영향",
+          "재무"
+        ],
+        "rows": [
+          [
+            "기후변화 대응",
+            "4.6",
+            "4.4"
+          ],
+          [
+            "에너지 관리",
+            "4.1",
+            "3.9"
+          ],
+          [
+            "공급망 인권",
+            "3.8",
+            "2.6"
+          ]
+        ],
+        "condition": "임계값 | 각 3.0점(5점 척도)"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "risk_heatmap": {
+      "label": "리스크 히트맵 5×5+리스크 목록",
+      "purpose": "어떤 기후 리스크가 크고 언제 무엇으로 대응하나?",
+      "pattern": "heatmap",
+      "slots": [
+        "발생 가능성×영향 5×5",
+        "리스크 표식 6",
+        "목록(유형·시점·대응)",
+        "점수 기준 주석"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s51_risk_heatmap.svg",
+      "v24": true,
+      "reference": "TCFD·Deloitte 기후 리스크 평가(물리·전환, 발생 가능성×영향)",
+      "required_evidence": [
+        "점수 산식·기준",
+        "시점(단·중·장기) 정의"
+      ],
+      "protect": [
+        "점수는 산식과 함께",
+        "물리·전환 유형 구분"
+      ],
+      "preview": {
+        "title": "기후 리스크",
+        "claim": "6개 리스크 중 3개가 12점 이상으로 우선 관리 대상입니다.",
+        "headers": [
+          "리스크",
+          "유형",
+          "시점",
+          "대응"
+        ],
+        "rows": [
+          [
+            "탄소가격 상승",
+            "전환",
+            "단기",
+            "내부 탄소가격"
+          ],
+          [
+            "폭염 생산 차질",
+            "물리",
+            "중기",
+            "냉방 보강"
+          ]
+        ],
+        "condition": "점수 | 발생 가능성 × 영향 ≥ 12"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "scenario_matrix": {
+      "label": "2×2 시나리오+공통 대응",
+      "purpose": "두 불확실성에 따라 어떤 미래가 오고 공통으로 할 일은?",
+      "pattern": "matrix",
+      "slots": [
+        "두 불확실성 축(양 끝)",
+        "시나리오 4(이름·설명)",
+        "공통 대응(No-regret) 3",
+        "선행 지표"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s52_scenario_matrix.svg",
+      "v24": true,
+      "reference": "2×2 시나리오 플래닝(Shell·Deloitte, McKinsey no-regret moves·signposts)",
+      "required_evidence": [
+        "축은 서로 독립적인 핵심 불확실성",
+        "시나리오별 서술 근거"
+      ],
+      "protect": [
+        "시나리오에 확률을 붙이지 않음",
+        "공통 대응은 4개 시나리오 모두에서 유효"
+      ],
+      "preview": {
+        "title": "시나리오",
+        "claim": "네 시나리오 모두에서 효율 투자·데이터 체계는 유효합니다.",
+        "headers": [
+          "시나리오",
+          "기술",
+          "규제"
+        ],
+        "rows": [
+          [
+            "질서 있는 전환",
+            "가속",
+            "강"
+          ],
+          [
+            "정체",
+            "지연",
+            "약"
+          ]
+        ],
+        "condition": "선행 지표 | CBAM 대상 확대·그린수소 단가"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "harvey_compare": {
+      "label": "하비볼 대안 평가표+권고",
+      "purpose": "대안들을 기준별로 비교하면 무엇을 택하나?",
+      "pattern": "matrix",
+      "slots": [
+        "평가 기준 5(가중치)",
+        "대안 4",
+        "하비볼 0–4",
+        "종합 점수",
+        "범례",
+        "권고"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s53_harvey_compare.svg",
+      "v24": true,
+      "reference": "하비볼 평가표(Booz Allen, 컨설팅 대안 비교)",
+      "required_evidence": [
+        "기준별 판정 근거",
+        "가중치 합 100%"
+      ],
+      "protect": [
+        "하비볼 범례 필수",
+        "권고는 종합 점수와 일치"
+      ],
+      "preview": {
+        "title": "대안 평가",
+        "claim": "가중 평가에서 대안 C가 3.6점으로 가장 높습니다.",
+        "headers": [
+          "기준",
+          "A",
+          "B",
+          "C"
+        ],
+        "rows": [
+          [
+            "감축 효과",
+            "●",
+            "◕",
+            "◑"
+          ],
+          [
+            "비용",
+            "◕",
+            "●",
+            "◔"
+          ]
+        ],
+        "condition": "권고 | 대안 C(PPA+자가발전)"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "raci_matrix": {
+      "label": "RACI 역할 매트릭스",
+      "purpose": "활동마다 누가 실행·책임·협의·통보하나?",
+      "pattern": "matrix",
+      "slots": [
+        "활동 6",
+        "주체 5",
+        "R/A/C/I 칸",
+        "범례"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s54_raci_matrix.svg",
+      "v24": true,
+      "reference": "RACI 매트릭스·Bain RAPID 결정 역할",
+      "required_evidence": [
+        "활동마다 A는 한 주체",
+        "주체 명칭은 조직도와 일치"
+      ],
+      "protect": [
+        "A 중복 금지",
+        "빈 칸은 '—'"
+      ],
+      "preview": {
+        "title": "RACI",
+        "claim": "6개 활동의 최종 책임(A)을 주체별로 하나씩 지정합니다.",
+        "headers": [
+          "활동",
+          "경영진",
+          "환경팀",
+          "재무팀"
+        ],
+        "rows": [
+          [
+            "감축 목표 승인",
+            "A",
+            "R",
+            "C"
+          ],
+          [
+            "배출량 산정",
+            "I",
+            "A/R",
+            "C"
+          ]
+        ],
+        "condition": "규칙 | 활동당 A 1개"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "stakeholder_map": {
+      "label": "이해관계자 영향력·관심도 지도",
+      "purpose": "누구를 긴밀히 관리하고 누구에게 알리나?",
+      "pattern": "matrix",
+      "slots": [
+        "영향력×관심도 4분면",
+        "이해관계자 점 6",
+        "목록(관심사·소통 방식)",
+        "배치 주석"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s55_stakeholder_map.svg",
+      "v24": true,
+      "reference": "영향력·관심도 그리드(Eden & Ackermann), 컨설팅 이해관계자 분석",
+      "required_evidence": [
+        "배치 근거(인터뷰·설문)",
+        "소통 주기"
+      ],
+      "protect": [
+        "실명 대신 집단명",
+        "4분면 대응 원칙 유지"
+      ],
+      "preview": {
+        "title": "이해관계자",
+        "claim": "고객사·투자자는 긴밀 관리, 지역사회는 정보 제공 대상입니다.",
+        "headers": [
+          "이해관계자",
+          "관심사",
+          "소통"
+        ],
+        "rows": [
+          [
+            "고객사",
+            "Scope 3 목표",
+            "분기 협의회"
+          ],
+          [
+            "투자자",
+            "공시 품질",
+            "IR 미팅"
+          ]
+        ],
+        "condition": "4분면 | 긴밀 관리·만족 유지·정보 제공·모니터링"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "three_horizons": {
+      "label": "성장 3지평(H1·H2·H3)",
+      "purpose": "핵심·신규·미래 사업을 어떻게 나눠 키우나?",
+      "pattern": "cards",
+      "slots": [
+        "시간×가치 곡선 3",
+        "H1·H2·H3 제목",
+        "과제",
+        "평가 지표"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s56_three_horizons.svg",
+      "v24": true,
+      "reference": "McKinsey 3 Horizons of Growth(Baghai·Coley·White 1999)",
+      "required_evidence": [
+        "지평별 기간·투자 규모",
+        "지평별 평가 지표 구분"
+      ],
+      "protect": [
+        "H3를 H1 지표로 평가하지 않음",
+        "곡선은 개념도 표시"
+      ],
+      "preview": {
+        "title": "3지평",
+        "claim": "저탄소 전환을 핵심·신규·미래 지평으로 나눠 투자합니다.",
+        "cards": [
+          [
+            "H1 핵심 방어·확장",
+            "공정 효율화·원료 전환"
+          ],
+          [
+            "H2 신규 사업 구축",
+            "재생 소재 사업"
+          ],
+          [
+            "H3 미래 옵션",
+            "수소·CCUS 파일럿"
+          ]
+        ],
+        "condition": "지표 | 원단위·매출·파일럿 수"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "nine_box": {
+      "label": "포트폴리오 9-box(매력도×경쟁우위)",
+      "purpose": "어느 사업에 투자하고 어느 사업을 회수하나?",
+      "pattern": "matrix",
+      "slots": [
+        "시장 매력도×경쟁 우위 3×3",
+        "구역(투자·선별·회수)",
+        "사업 버블 6",
+        "목록(판단·근거)"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s57_nine_box.svg",
+      "v24": true,
+      "reference": "GE–McKinsey 9-box 포트폴리오 매트릭스",
+      "required_evidence": [
+        "매력도·경쟁 우위 산정 기준",
+        "버블 크기 의미(매출 등)"
+      ],
+      "protect": [
+        "버블 크기 범례",
+        "판단은 3택 라벨"
+      ],
+      "preview": {
+        "title": "포트폴리오",
+        "claim": "6개 사업 중 2개는 투자, 2개는 회수 구역입니다.",
+        "headers": [
+          "사업",
+          "구역",
+          "근거"
+        ],
+        "rows": [
+          [
+            "저탄소 소재",
+            "투자",
+            "성장 12%·기술 우위"
+          ],
+          [
+            "석유 제품",
+            "회수",
+            "규제 강화·수요 감소"
+          ]
+        ],
+        "condition": "구역 | 투자·선별·회수"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "operating_model": {
+      "label": "운영모델 하우스(전략·계층·기반)",
+      "purpose": "전략을 실행하려면 조직·프로세스·데이터 중 무엇을 바꾸나?",
+      "pattern": "table",
+      "slots": [
+        "지붕(전략·가치 제안)",
+        "계층 5(설계 원칙·격차)",
+        "기반",
+        "우선 보완 과제 4"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s58_operating_model.svg",
+      "v24": true,
+      "reference": "운영모델 설계(EY 운영모델 전환·PwC Strategy& capabilities-driven strategy)",
+      "required_evidence": [
+        "계층별 현행 대비 격차 근거",
+        "과제와 계층 연결"
+      ],
+      "protect": [
+        "계층 명칭은 덱 전체에서 고정",
+        "격차는 상·중·하 3택"
+      ],
+      "preview": {
+        "title": "운영모델",
+        "claim": "거버넌스·데이터 계층의 격차가 커 우선 보완합니다.",
+        "headers": [
+          "계층",
+          "설계 원칙",
+          "격차"
+        ],
+        "rows": [
+          [
+            "거버넌스",
+            "이사회 분기 보고",
+            "상"
+          ],
+          [
+            "데이터·시스템",
+            "월간 배출 집계",
+            "상"
+          ]
+        ],
+        "condition": "기반 | 데이터 플랫폼·탄소가격·역량"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
     }
   },
   "recommended_by_report": {
@@ -2378,7 +3143,10 @@
       "evidence",
       "approach_matrix",
       "purpose_effects",
-      "scope_method_result"
+      "scope_method_result",
+      "issue_tree",
+      "hypothesis_workplan",
+      "harvey_compare"
     ],
     "kickoff": [
       "task_structure",
@@ -2386,7 +3154,10 @@
       "actor_checklist",
       "project_overview",
       "gantt_schedule",
-      "data_request"
+      "data_request",
+      "hypothesis_workplan",
+      "raci_matrix",
+      "stakeholder_map"
     ],
     "interim": [
       "status",
@@ -2394,7 +3165,9 @@
       "actor_checklist",
       "status_board",
       "progress_plan",
-      "decision_request"
+      "decision_request",
+      "waterfall_bridge",
+      "harvey_compare"
     ],
     "final": [
       "exec_summary",
@@ -2402,42 +3175,60 @@
       "key_takeaways",
       "exec_one_pager",
       "diagnosis_table",
-      "priority_matrix"
+      "priority_matrix",
+      "scqa_storyline",
+      "macc_curve",
+      "pathway_wedge",
+      "operating_model"
     ],
     "education": [
       "guidance_focus",
       "case_capture",
       "key_summary",
       "issue_cards",
-      "process_steps_detail"
+      "process_steps_detail",
+      "issue_tree",
+      "scqa_storyline"
     ],
     "briefing": [
       "exec_summary",
       "compare_implication",
       "key_takeaways",
-      "exec_one_pager"
+      "exec_one_pager",
+      "scqa_storyline",
+      "scenario_matrix",
+      "waterfall_bridge"
     ]
   },
   "recommended_by_business": {
     "cdp_disclosure": [
       "maturity_heatmap",
       "principle_matrix",
-      "compare_implication"
+      "compare_implication",
+      "materiality_matrix",
+      "raci_matrix"
     ],
     "regulatory": [
       "period_applicability",
       "decision_tree",
-      "entity_matrix"
+      "entity_matrix",
+      "raci_matrix"
     ],
     "reduction": [
+      "macc_curve",
       "chart_insight",
       "asis_tobe",
-      "phase_roadmap"
+      "phase_roadmap",
+      "waterfall_bridge",
+      "pathway_wedge",
+      "driver_tree"
     ],
     "inventory": [
       "list_zoom",
       "chart_table",
-      "vertical_flow"
+      "vertical_flow",
+      "driver_tree",
+      "waterfall_bridge"
     ],
     "lca_product": [
       "chart_table",
@@ -2445,24 +3236,31 @@
       "compare"
     ],
     "climate_risk": [
+      "risk_heatmap",
       "maturity_heatmap",
       "chart_insight",
-      "entity_matrix"
+      "entity_matrix",
+      "scenario_matrix"
     ],
     "esg_rating": [
+      "materiality_matrix",
       "self_check",
       "principle_matrix",
-      "asis_tobe"
+      "asis_tobe",
+      "stakeholder_map"
     ],
     "climate_education": [
       "keyword_map",
       "guidance_focus",
-      "case_capture"
+      "case_capture",
+      "issue_tree"
     ],
     "climate_tech": [
       "chart_insight",
       "entity_matrix",
-      "exec_summary"
+      "exec_summary",
+      "three_horizons",
+      "nine_box"
     ]
   },
   "spacing_pt": {
@@ -2847,9 +3645,9 @@
     }
   ],
   "template_families_v22": {
-    "innergen_lecture": "ppt139 1040×720 · Pretendard · 54 layouts (v23: s24–s42 추가) · .claude/skills/ppt-master/templates/decks/innergen_lecture/",
-    "innergen_business": "ppt169s 960×540 · IBM Plex Sans KR · 53 layouts (v23: s24–s42 추가) (02_toc 없음) · .claude/skills/ppt-master/templates/decks/innergen_business/",
-    "innercarry": "ppt43 1024×768 · IBM Plex Sans KR · 53 layouts (v23: s24–s42 추가) · .claude/skills/ppt-master/templates/decks/innercarry/",
+    "innergen_lecture": "ppt139 1040×720 · Pretendard · 70 layouts (v23: s24–s42, v24: s43–s58 추가) · .claude/skills/ppt-master/templates/decks/innergen_lecture/",
+    "innergen_business": "ppt169s 960×540 · IBM Plex Sans KR · 69 layouts (v23: s24–s42, v24: s43–s58 추가) (02_toc 없음) · .claude/skills/ppt-master/templates/decks/innergen_business/",
+    "innercarry": "ppt43 1024×768 · IBM Plex Sans KR · 69 layouts (v23: s24–s42, v24: s43–s58 추가) · .claude/skills/ppt-master/templates/decks/innercarry/",
     "shared_tokens": "세 계열의 레이아웃은 같은 파일명·슬롯 토큰을 쓴다. 레이아웃 키 접두어: innergen-intro- / innergen-biz- / innercarry-"
   }
 }
