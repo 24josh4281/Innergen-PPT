@@ -1,0 +1,327 @@
+{
+  "version": "v30",
+  "date": "2026-10-15",
+  "purpose": "거버닝 메시지 유형(장마다 선택)과 본문 구성 프리셋(사업 성격·담당자별 선택)을 정의하고, innergen_message_check.py가 장표를 선택한 유형·프리셋에 대조한다.",
+  "doc": "governing-body-v30.md",
+  "basis": [
+    "design-governing-v11.md §2–§3 (주어 시작, 원칙+판단·행동)",
+    "content-architecture-v20.md §5.2 문체 표, §5.3 역할별 문장 틀 12종, §5.4 숫자·기준시점, §5.5 금지",
+    "structured-slides-v18.md §1 원칙 1 (제목은 주제, 거버닝은 결론, 본문은 증거), recommended_by_business",
+    "content-requirements-v25 report_types·business_types"
+  ],
+  "governing_types": {
+    "definition": {
+      "no": 1, "label": "정의·개념", "aliases": ["정의", "개념", "definition"],
+      "reader_question": "이것은 무엇이며 어디까지를 말하는가?",
+      "frame": "[개념]은 [범위]를 포괄하는 [성격]이며, [관점]으로 봅니다",
+      "example": "기후 리스크는 물리적·이행 리스크를 함께 포괄하는 재무 위험입니다",
+      "subject": true, "number": "none",
+      "checks": [
+        {"id": "scope", "label": "범위·성격 서술(포괄·의미·구성·말합니다 등)", "pattern": "포괄|의미|구성|말합니다|말함|뜻합니다|이란|란 |정의|개념|범위|나뉩니다|나뉨|으로 봅니다|입니다|임$|가지로|구분|이루어|제공됩니다", "level": "INFO"}
+      ]
+    },
+    "fact": {
+      "no": 2, "label": "현황·사실", "aliases": ["현황", "사실", "fact", "status_quo"],
+      "reader_question": "지금 어떤 상태이고 숫자는 얼마인가?",
+      "frame": "[주체]는 [기준시점] [대상]에서 [수치·추세]를 보입니다",
+      "example": "A사 Scope 1·2 배출은 2025년 전년 대비 4% 줄었습니다",
+      "subject": true, "number": "required",
+      "checks": [
+        {"id": "time", "label": "기준시점(연도·분기·기준·전년 대비)", "pattern": "20\\d{2}|'\\d{2}|\\d{1,2}월|분기|기준|전년|전월|현재|최근|누적"}
+      ]
+    },
+    "comparison": {
+      "no": 3, "label": "비교·차이", "aliases": ["비교", "차이", "격차", "comparison", "benchmark"],
+      "reader_question": "무엇과 비교해 어디가 얼마나 다른가?",
+      "frame": "[대상 A]는 [대상 B] 대비 [차이]이며, [차이를 만드는 조건]이 다릅니다",
+      "example": "A사 Scope 3 산정 범위는 업계 평균 8개 대비 3개에 그칩니다",
+      "subject": true, "number": "recommended",
+      "checks": [
+        {"id": "versus", "label": "비교 기준(대비·보다·차이·반면·비해·와 달리·~이 아닌)", "pattern": "대비|보다|차이|반면|비해|비교|격차|vs\\.?|와 달리|과 달리|만큼|수준|아닌|아니라"}
+      ]
+    },
+    "cause": {
+      "no": 4, "label": "원인·동인", "aliases": ["원인", "동인", "요인", "cause", "driver"],
+      "reader_question": "왜 이런 결과가 나왔고 무엇이 움직였나?",
+      "frame": "[결과]는 [동인]의 [변화] 때문이며, [기여 크기]를 차지합니다",
+      "example": "2025년 배출 증가 12%의 대부분은 신규 공장 가동 때문입니다",
+      "subject": true, "number": "recommended",
+      "checks": [
+        {"id": "because", "label": "원인 연결어(때문·요인·으로 인해·에 따라·기인·주도)", "pattern": "때문|원인|요인|으로 인해|로 인해|에 따라|기인|영향으로|동인|탓|덕분|주도|에서 비롯|좌우"}
+      ]
+    },
+    "judgment": {
+      "no": 5, "label": "분석·판단", "aliases": ["판단", "분석", "평가", "judgment", "insight"],
+      "reader_question": "분석해 보니 무엇이 중요한가?",
+      "frame": "[분석 범위]에서 [대상]은 [결과]인 것으로 분석됩니다",
+      "example": "사업장 6곳 중 2곳은 2040년 홍수 위험이 높은 것으로 분석됩니다",
+      "subject": true, "number": "recommended",
+      "checks": [
+        {"id": "verdict", "label": "판단 서술(분석·확인·평가·나타·높/낮·핵심·가장)", "pattern": "분석|확인|판단|평가|나타|드러|보입니다|보임|것으로|높|낮|크|작|가장|핵심|집중|취약|우수|부족|미흡|충분"}
+      ]
+    },
+    "requirement": {
+      "no": 6, "label": "요구사항·기준", "aliases": ["요구사항", "기준", "의무", "requirement", "rule"],
+      "reader_question": "기준은 누구에게 무엇을, 어떤 조건으로 요구하나?",
+      "frame": "[기준]은 [대상]에게 [내용]을 요구하며, [조건]이면 [예외]를 허용합니다",
+      "example": "KSSB 제2호는 Scope 3 공시를 요구하되 첫 3년은 유예합니다",
+      "subject": true, "number": "none",
+      "checks": [
+        {"id": "demand", "label": "요구 서술(요구·의무·해야·적용·허용·유예·면제)", "pattern": "요구|의무|해야|적용|규정|허용|유예|면제|금지|제출|공시|권고합니다"},
+        {"id": "condition", "level": "INFO", "label": "조건·대상(단,·되·경우·이면·부터·까지·이상·대상)", "pattern": "단,|되 |되,|경우|이면|면 |부터|까지|이상|미만|초과|대상|에 한해|만 |동안|이내"}
+      ]
+    },
+    "case_lesson": {
+      "no": 7, "label": "사례 교훈", "aliases": ["사례", "교훈", "case", "best_practice"],
+      "reader_question": "이 사례에서 무엇을 배워 적용하나?",
+      "frame": "[사례 유형]은 [무엇을] [어떻게] 제시해 [배울 점]을 보여 줍니다",
+      "example": "선도 제조사 사례는 리스크별 재무 영향을 시점별 수치로 보여 줍니다",
+      "subject": true, "number": "none",
+      "checks": [
+        {"id": "lesson", "label": "배울 점 서술(보여·제시·시사·배울·참고·벤치마크)", "pattern": "보여|제시|시사|배울|참고|벤치마크|본보기|모범|사례"}
+      ]
+    },
+    "recommendation": {
+      "no": 8, "label": "권고·실행", "aliases": ["권고", "필요", "실행", "개선", "recommendation", "action"],
+      "reader_question": "그래서 누가 언제까지 무엇을 해야 하나?",
+      "frame": "[목표] 충족을 위해 [주체]는 [기한]까지 [조치]가 필요합니다",
+      "example": "A사는 2027년까지 연결 범위 산정 체계를 먼저 갖춰야 합니다",
+      "subject": true, "number": "recommended",
+      "checks": [
+        {"id": "action", "label": "조치 서술(필요·해야·우선·착수·도입·구축·전환·권고)", "pattern": "필요|해야|야 합니다|야 함|우선|먼저|착수|도입|구축|전환|권고|권장|추진|정비|확보|마련|개선|보완|수립"},
+        {"id": "when", "label": "기한·순서(연도·월·까지·이내·단계·먼저)", "pattern": "20\\d{2}|\\d{1,2}월|까지|이내|내 |분기|단계|먼저|우선|즉시|단기|중기|장기|Wave|웨이브|차년도"}
+      ]
+    },
+    "outlook": {
+      "no": 9, "label": "전망·기대효과", "aliases": ["전망", "기대효과", "효과", "outlook", "benefit"],
+      "reader_question": "이렇게 하면(되면) 무엇이 얼마나 달라지나?",
+      "frame": "[조건]이면 [대상]은 [효과]가 기대됩니다",
+      "example": "분기 데이터 관리가 정착되면 검증 기간을 4주 줄일 수 있습니다",
+      "subject": false, "number": "recommended",
+      "checks": [
+        {"id": "effect", "label": "효과·전망 서술(기대·예상·전망·가능·절감·줄·늘)", "pattern": "기대|예상|전망|가능|절감|줄|늘|개선|확대|감소|증가|회수|달성|될 것|있습니다"},
+        {"id": "if", "level": "INFO", "label": "조건(면·경우·시·때·따라·통해)", "pattern": "면 |면,|경우|시 |때 |따라|통해|으로써|하면"}
+      ]
+    },
+    "status": {
+      "no": 10, "label": "진행 상태", "aliases": ["진행", "상태", "진행상태", "status", "progress"],
+      "reader_question": "어디까지 했고 남은 것은 무엇인가?",
+      "frame": "[과업]을 [방법]으로 수행하며 ([월.일] 완료 / [월.일] 내 완료 예정 / 검토 중)",
+      "example": "사업장 6곳 물리적 리스크 분석 완료 (7.22, 결과 검토 중)",
+      "subject": false, "number": "required", "number_label": "날짜·진행률",
+      "number_pattern": "\\d{1,2}\\.\\d{1,2}|\\d{1,2}월|\\d+\\s?%|W\\d|\\d+주",
+      "checks": [
+        {"id": "state", "label": "상태 표기(완료·진행 중·검토 중·예정·지연·착수)", "pattern": "완료|진행\\s?중|검토\\s?중|예정|지연|착수|보류|대기|마감"}
+      ]
+    },
+    "request": {
+      "no": 11, "label": "요청·결정", "aliases": ["요청", "결정", "승인", "request", "decision"],
+      "reader_question": "고객이 무엇을 언제까지 정하거나 보내 줘야 하나?",
+      "frame": "[목적]을 위해 [대상]을 [기한]까지 요청드립니다 / 결정이 필요합니다",
+      "example": "Scope 3 산정을 위해 협력사 구매 자료를 8.30까지 요청드립니다",
+      "subject": false, "number": "required", "number_label": "기한",
+      "number_pattern": "\\d{1,2}\\.\\d{1,2}|\\d{1,2}월|\\d{1,2}일|까지|기한|이번 주|차주",
+      "checks": [
+        {"id": "ask", "label": "요청·결정 서술(요청·결정·승인·회신·협조·선택)", "pattern": "요청|결정|승인|회신|협조|선택|확정|의사결정|검토 부탁|부탁"}
+      ]
+    },
+    "promise": {
+      "no": 12, "label": "수행 약속", "aliases": ["약속", "수행", "제안", "promise", "commitment"],
+      "reader_question": "이너젠은 무엇을 언제까지 해 주는가?",
+      "frame": "이너젠은 [수단]을 활용해 [기한]까지 [산출물]을 제공할 예정입니다",
+      "example": "이너젠은 9월 말까지 Scope 3 산정 결과를 제공할 예정입니다",
+      "subject": true, "number": "recommended",
+      "checks": [
+        {"id": "who", "label": "수행 주체(이너젠·이너캐리·제안사·당사·컨설턴트)", "pattern": "이너젠|INNerGEN|이너캐리|[Ii][Nn][Nn]er[Cc]a[Rr][Rr]y|제안사|당사|저희|컨설팅\\s?팀|수행\\s?팀|PMO|컨설턴트|검증위원", "level": "INFO"},
+        {"id": "will", "label": "약속 종결(예정·제공·수행·지원·보증·~하겠습니다·~할 것입니다)", "pattern": "예정|제공|수행|지원|겠습니다|드립니다|드리겠|보장|보증|약속|것입니다|추진"}
+      ]
+    },
+    "chapter_intro": {
+      "no": 13, "label": "장 도입", "aliases": ["도입", "장도입", "chapter", "intro"],
+      "reader_question": "이 장은 무엇을 어떤 순서로 다루나?",
+      "frame": "이 장은 [근거]를 바탕으로 [대상]을 [순서]로 다룹니다",
+      "example": "이 장은 KSSB 4요소 기준으로 A사 준비도를 요소별로 진단합니다",
+      "subject": false, "number": "none",
+      "checks": [
+        {"id": "scope", "label": "다룰 범위·순서(이 장·다룹니다·살펴봅니다·순서로·진단합니다)", "pattern": "이 장|본 장|이 절|본 절|다룹니다|살펴봅니다|순서로|정리합니다|진단합니다|설명합니다|소개합니다"}
+      ]
+    },
+    "conclusion": {
+      "no": 14, "label": "결론·종합", "aliases": ["결론", "종합", "요약", "conclusion", "summary"],
+      "reader_question": "전체를 한 문장으로 말하면 무엇인가?",
+      "frame": "[주체]는 [핵심 두세 가지]를 먼저 갖춰야 [목표]에 대응할 수 있습니다",
+      "example": "A사는 데이터 범위·Scope 3·목표부터 갖춰야 첫 공시에 대응합니다",
+      "subject": true, "number": "recommended",
+      "checks": [
+        {"id": "set", "label": "묶음 제시(A·B·C, 두세 가지, N개)", "pattern": "[가-힣A-Za-z0-9]+\\s?·\\s?[가-힣A-Za-z0-9]+|[두세네]\\s?가지|\\d\\s?(가지|개|대)"},
+        {"id": "so", "label": "결론 서술(해야·갖춰야·먼저·가능·대응·달성)", "pattern": "해야|갖춰야|먼저|우선|가능|대응|달성|핵심|입니다|있습니다"}
+      ]
+    },
+    "capability": {
+      "no": 15, "label": "역량·강점", "aliases": ["역량", "강점", "실적", "경험", "capability", "strength"],
+      "reader_question": "이 회사·서비스는 무엇을 할 수 있고, 근거는 무엇인가?",
+      "frame": "[주체]는 [근거·실적]을 바탕으로 [역량·강점]을 보유하고 있습니다",
+      "example": "이너젠은 30개+ 방법론 개발 경험을 바탕으로 감축사업 전 과정을 지원할 수 있습니다",
+      "subject": true, "number": "recommended",
+      "checks": [
+        {"id": "ability", "label": "역량 서술(보유·갖추·가능·경험·전문성·역량·강점·수행 중)", "pattern": "보유|갖추|갖춘|갖고|가지고|가능|할 수 있|경험|전문성|역량|강점|노하우|실적|인정받|수행하고 있|수행 중|자문"}
+      ]
+    }
+  },
+  "sentence_end_pattern": "(니다|다|음|임|됨|함|필요|예정|요|중|완료|보유|가능|\\))\\.?\\s*$",
+  "subject_pattern": "^.{0,24}?[가-힣A-Za-z0-9\\)·]+(은|는|이|가|에서|의|도)\\s",
+  "layout_types": {
+    "_doc": "레이아웃별 어울리는 거버닝 유형. 첫째 값이 기본(유형을 고르지 않았을 때 이 유형으로 추정해 INFO로 검사). 여기 없는 레이아웃은 모든 유형을 허용.",
+    "content-kpi": ["fact", "capability", "comparison"],
+    "content-table": ["fact", "requirement", "comparison", "judgment"],
+    "content-process": ["recommendation", "definition", "promise"],
+    "content-final": ["conclusion", "recommendation"],
+    "section-divider": ["chapter_intro"],
+    "s01": ["conclusion", "judgment"],
+    "s02": ["judgment", "fact"],
+    "s03": ["judgment", "fact", "comparison", "cause"],
+    "s04": ["judgment", "fact", "comparison"],
+    "s05": ["requirement", "fact", "comparison"],
+    "s06": ["requirement", "judgment"],
+    "s07": ["recommendation", "outlook"],
+    "s08": ["recommendation", "promise", "status"],
+    "s09": ["requirement", "fact", "outlook"],
+    "s10": ["judgment", "fact"],
+    "s11": ["definition", "requirement"],
+    "s12": ["recommendation", "requirement"],
+    "s13": ["conclusion", "recommendation"],
+    "s14": ["promise", "definition", "capability"],
+    "s15": ["recommendation", "requirement"],
+    "s16": ["requirement"],
+    "s17": ["requirement", "judgment"],
+    "s18": ["definition", "chapter_intro"],
+    "s19": ["comparison", "judgment"],
+    "s20": ["recommendation"],
+    "s21": ["requirement"],
+    "s22": ["case_lesson", "capability"],
+    "s23": ["conclusion"],
+    "s24": ["promise", "definition", "capability"],
+    "s25": ["promise", "status"],
+    "s26": ["request"],
+    "s27": ["promise", "capability"],
+    "s28": ["status"],
+    "s29": ["status", "request"],
+    "s30": ["comparison", "judgment"],
+    "s31": ["judgment", "recommendation"],
+    "s32": ["recommendation", "judgment"],
+    "s33": ["promise", "definition"],
+    "s34": ["conclusion"],
+    "s35": ["request"],
+    "s36": ["status", "fact"],
+    "s37": ["outlook", "definition"],
+    "s38": ["judgment", "definition"],
+    "s39": ["recommendation", "judgment"],
+    "s40": ["recommendation", "requirement"],
+    "s41": ["case_lesson", "definition"],
+    "s42": ["judgment", "promise"],
+    "s43": ["judgment", "definition"],
+    "s44": ["promise", "judgment"],
+    "s45": ["conclusion"],
+    "s46": ["cause", "judgment"],
+    "s47": ["cause", "fact"],
+    "s48": ["recommendation", "judgment"],
+    "s49": ["outlook", "recommendation"],
+    "s50": ["judgment"],
+    "s51": ["judgment"],
+    "s52": ["outlook", "judgment"],
+    "s53": ["comparison", "recommendation"],
+    "s54": ["promise", "recommendation"],
+    "s55": ["judgment", "recommendation"],
+    "s56": ["recommendation", "outlook"],
+    "s57": ["judgment", "recommendation"],
+    "s58": ["recommendation", "definition"],
+    "s59": ["fact", "cause", "judgment"],
+    "s60": ["comparison", "judgment"],
+    "s61": ["outlook", "fact"],
+    "s62": ["judgment", "cause"],
+    "s63": ["recommendation", "requirement"],
+    "s64": ["judgment", "recommendation"],
+    "s65": ["judgment", "definition"],
+    "s66": ["promise", "capability"],
+    "s67": ["promise"],
+    "s68": ["judgment", "status"],
+    "s69": ["status", "request"],
+    "s70": ["conclusion"],
+    "s71": ["recommendation", "judgment"],
+    "s72": ["recommendation", "promise"],
+    "s73": ["recommendation", "promise"],
+    "s74": ["outlook", "judgment"]
+  },
+  "deck_type_rules": {
+    "_doc": "need_any: 덱 전체에 이 유형 묶음마다 1장 이상(M06 WARN). avoid: 이 덱 유형에서 어색한 유형(M05 INFO).",
+    "lecture": {"need_any": [["requirement", "definition"], ["conclusion", "recommendation"]], "avoid": ["status", "request", "promise"]},
+    "handout": {"need_any": [["requirement", "definition"], ["conclusion", "recommendation"]], "avoid": ["status", "request", "promise"]},
+    "seminar": {"need_any": [["judgment", "outlook", "case_lesson"], ["conclusion", "recommendation"]], "avoid": ["status", "request"]},
+    "insight": {"need_any": [["judgment", "outlook"], ["conclusion", "recommendation"]], "avoid": ["status", "request", "promise"]},
+    "proposal": {"need_any": [["judgment", "fact", "cause"], ["promise", "capability"]], "avoid": ["status"]},
+    "kickoff": {"need_any": [["promise", "definition"], ["request"]], "avoid": []},
+    "weekly": {"need_any": [["status"]], "avoid": ["chapter_intro"]},
+    "biweekly": {"need_any": [["status"]], "avoid": ["chapter_intro"]},
+    "monthly": {"need_any": [["status"]], "avoid": []},
+    "diagnosis": {"need_any": [["judgment", "comparison"], ["recommendation"]], "avoid": ["promise"]},
+    "interim": {"need_any": [["judgment", "fact"], ["status"], ["request"]], "avoid": []},
+    "final": {"need_any": [["conclusion"], ["recommendation"]], "avoid": ["status"]},
+    "briefing": {"need_any": [["conclusion", "request"]], "avoid": ["chapter_intro"]},
+    "benchmark": {"need_any": [["comparison"], ["recommendation", "judgment"]], "avoid": []},
+    "company_intro": {"need_any": [["definition", "fact", "capability"], ["promise", "capability"]], "avoid": ["status", "request"]},
+    "innercarry_intro": {"need_any": [["definition", "fact", "capability"], ["outlook", "promise"]], "avoid": ["status"]}
+  },
+  "mix": {"max_share_single_type": 0.6, "min_content_pages": 6},
+  "body_styles": {
+    "prose": {"no": 1, "label": "줄글형", "aliases": ["줄글", "줄글형", "서술", "텍스트", "prose", "text"], "use": "개념 설명, 요구사항 해설, 시사점 정리. 문단·불릿 위주"},
+    "diagram": {"no": 2, "label": "도식형", "aliases": ["도식", "도식형", "다이어그램", "구조도", "diagram", "framework"], "use": "구조·흐름·관계·단계·매트릭스. 상자·화살표·셰브론 위주"},
+    "chart": {"no": 3, "label": "그래프형", "aliases": ["그래프", "그래프형", "차트", "chart", "graph"], "use": "추이·비교·분해·분포 수치. 막대·선·점·워터폴 위주"},
+    "table": {"no": 4, "label": "표형", "aliases": ["표", "표형", "매트릭스표", "table"], "use": "항목×기준 대조, 요구사항 지도, 일정·담당·현황 목록"},
+    "kpi": {"no": 5, "label": "수치형", "aliases": ["수치", "수치형", "핵심수치", "kpi", "number"], "use": "큰 숫자 2–4개와 캡션. 성과·규모 한눈에"},
+    "case": {"no": 6, "label": "사례형", "aliases": ["사례", "사례형", "캡처", "case", "capture"], "use": "사례 캡처·인용 + 배울 점"}
+  },
+  "compatible_styles": {"chart": ["kpi"], "kpi": ["chart"], "case": ["prose"], "table": [], "diagram": [], "prose": []},
+  "layout_styles": {
+    "_doc": "레이아웃 → 본문 구성. 03a·03c·03d는 내용으로 판정(도형 8개 이상이면 도식형, 아니면 줄글형).",
+    "content-final": "prose", "content-table": "table", "content-kpi": "kpi", "content-process": "diagram",
+    "s01": "prose", "s02": "prose", "s03": "chart", "s04": "chart", "s05": "table", "s06": "table",
+    "s07": "diagram", "s08": "diagram", "s09": "diagram", "s10": "table", "s11": "diagram", "s12": "table",
+    "s13": "prose", "s14": "diagram", "s15": "diagram", "s16": "table", "s17": "diagram", "s18": "diagram",
+    "s19": "table", "s20": "table", "s21": "prose", "s22": "case", "s23": "prose", "s24": "table",
+    "s25": "diagram", "s26": "table", "s27": "diagram", "s28": "table", "s29": "table", "s30": "chart",
+    "s31": "table", "s32": "diagram", "s33": "diagram", "s34": "prose", "s35": "table", "s36": "table",
+    "s37": "diagram", "s38": "prose", "s39": "prose", "s40": "diagram", "s41": "case", "s42": "diagram",
+    "s43": "diagram", "s44": "table", "s45": "diagram", "s46": "diagram", "s47": "chart", "s48": "chart",
+    "s49": "chart", "s50": "chart", "s51": "chart", "s52": "diagram", "s53": "table", "s54": "table",
+    "s55": "chart", "s56": "diagram", "s57": "diagram", "s58": "diagram", "s59": "diagram", "s60": "chart",
+    "s61": "chart", "s62": "chart", "s63": "diagram", "s64": "diagram", "s65": "diagram", "s66": "diagram",
+    "s67": "table", "s68": "table", "s69": "table", "s70": "diagram", "s71": "table", "s72": "table",
+    "s73": "diagram", "s74": "chart"
+  },
+  "presets": {
+    "narrative": {"label": "줄글 중심(설명·교육형)", "who": "교육 강사, 제도 해설 담당", "mix": {"prose": [0.3, 0.55], "diagram": [0.15, 0.4], "chart": [0.0, 0.2], "table": [0.0, 0.25], "kpi": [0.0, 0.15], "case": [0.0, 0.25]}},
+    "visual": {"label": "도식 중심(전략·방법론형)", "who": "전략·체계 수립, 리스크·운영모델 담당", "mix": {"diagram": [0.4, 0.65], "prose": [0.0, 0.2], "table": [0.1, 0.3], "chart": [0.0, 0.25], "kpi": [0.0, 0.1], "case": [0.0, 0.15]}},
+    "data": {"label": "그래프 중심(정량 분석형)", "who": "인벤토리·감축·LCA 산정 담당", "mix": {"chart": [0.35, 0.6], "kpi": [0.0, 0.2], "table": [0.1, 0.3], "diagram": [0.1, 0.3], "prose": [0.0, 0.15], "case": [0.0, 0.1]}},
+    "table": {"label": "표 중심(공시·규제 대응형)", "who": "CDP·공시·규제·평가 대응 담당", "mix": {"table": [0.35, 0.6], "diagram": [0.15, 0.35], "prose": [0.0, 0.2], "chart": [0.0, 0.2], "kpi": [0.0, 0.1], "case": [0.0, 0.15]}},
+    "balanced": {"label": "균형형", "who": "회사소개·제안 발표 등 여러 독자", "mix": {"prose": [0.0, 0.35], "diagram": [0.15, 0.45], "chart": [0.0, 0.45], "table": [0.0, 0.45], "kpi": [0.0, 0.2], "case": [0.0, 0.25]}, "min_styles": 3}
+  },
+  "business_presets": {
+    "cdp_disclosure": {"preset": "table", "prefer": {"table": ["s31", "s06", "s10", "s44", "s67"], "diagram": ["s50", "s63", "s15"], "chart": ["s30", "s03"]}},
+    "regulatory": {"preset": "table", "prefer": {"table": ["s16", "s05", "s54", "s67"], "diagram": ["s09", "s17", "s15", "s63"], "chart": ["s03", "s62"]}},
+    "reduction": {"preset": "data", "prefer": {"chart": ["s48", "s47", "s49", "s74", "s03"], "diagram": ["s07", "s73", "s46"], "table": ["s32", "s72"]}},
+    "inventory": {"preset": "data", "prefer": {"chart": ["s47", "s03", "s04"], "diagram": ["s59", "s46", "s15"], "table": ["s11", "s26", "s31"]}},
+    "lca_product": {"preset": "data", "prefer": {"chart": ["s04", "s03", "s47"], "diagram": ["s59", "s15", "s40"], "table": ["s19", "s05"]}},
+    "climate_risk": {"preset": "visual", "prefer": {"diagram": ["s52", "s17", "s58", "s64"], "chart": ["s51", "s62", "s03"], "table": ["s10", "s05", "s71"]}},
+    "esg_rating": {"preset": "table", "prefer": {"table": ["s20", "s06", "s31", "s71"], "diagram": ["s07", "s55"], "chart": ["s50", "s30"]}},
+    "climate_education": {"preset": "narrative", "prefer": {"prose": ["s21", "s13", "s23"], "diagram": ["s18", "s09", "s43"], "case": ["s22"]}},
+    "climate_tech": {"preset": "balanced", "prefer": {"chart": ["s61", "s60", "s03"], "diagram": ["s56", "s57", "s66"], "table": ["s53", "s05"]}}
+  },
+  "deck_presets": {
+    "_doc": "사업 성격보다 덱 유형이 본문 구성을 더 크게 정하는 경우만 둔다. 사용자가 고른 프리셋(body_preset)이 항상 우선.",
+    "weekly": "table", "biweekly": "table", "monthly": "table", "briefing": "balanced",
+    "company_intro": "balanced", "innercarry_intro": "visual"
+  },
+  "prose_limits": {"max_body_lines": 14, "max_bullets_per_block": 5, "max_chars_per_block": 220},
+  "max_consecutive_style": 3,
+  "diagram_shape_threshold": 8
+}

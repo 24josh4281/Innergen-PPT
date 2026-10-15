@@ -50,6 +50,7 @@ if not SPEC_PATH.is_file():
     SPEC_PATH = _SCRIPTS_DIR.parent / "references/content-requirements-v25.json"
 
 FRAME_TOKENS = ("cover", "toc", "section-divider", "ending")
+CHOICE_HEADERS = {"거버닝유형", "유형", "본문구성", "구성", "governing_type", "body_style"}
 
 
 # v28: company_intro / innercarry_intro report types live in an overlay file
@@ -131,16 +132,21 @@ def load_outline(path: Path) -> list[PlanPage]:
             out.append(PlanPage(n, layout, r.get("title", ""), r.get("governing", ""), texts=[str(b) for b in body if b]))
         return out
     out = []
+    skip_cols: set[int] = set()  # v30: '거버닝 유형'·'본문 구성' columns are choices, not content
     for line in raw.splitlines():
         s = line.strip()
         if not s.startswith("|"):
             continue
         cells = [c.strip().strip("`").strip() for c in s.strip("|").split("|")]
+        if cells and cells[0] in ("쪽", "page", "#", "P", "No"):
+            skip_cols = {i for i, c in enumerate(cells) if re.sub(r"\s", "", c) in CHOICE_HEADERS}
+            continue
         if not cells or not re.fullmatch(r"P?\d{1,3}", cells[0]):
             continue
         n = int(cells[0].lstrip("P"))
         cells += [""] * (4 - len(cells))
-        out.append(PlanPage(n, _outline_layout(n, cells[1]), cells[2], cells[3], texts=cells[4:]))
+        texts = [c for i, c in enumerate(cells) if i >= 4 and i not in skip_cols]
+        out.append(PlanPage(n, _outline_layout(n, cells[1]), cells[2], cells[3], texts=texts))
     return out
 
 
