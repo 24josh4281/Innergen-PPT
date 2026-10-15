@@ -1,5 +1,7 @@
 # 이너젠 장표 도우미 — GPT·Gemini 호환판 (역할별)
 
+**설치 패키지와 방법은 [PACKAGES.md](PACKAGES.md)에 정리했습니다** (`dist/innergen-gpt-kit.zip`, `dist/innergen-gemini-kit.zip`).
+
 Claude innergen-deck 스킬과 같은 규칙(목차·필수 내용·회사 기본 정보·디자인 토큰·레이아웃 칸)을
 ChatGPT와 Gemini에서도 쓰도록 역할별 지침으로 나눈 묶음이다. 파일은 `kit/` 한 폴더에 있다.
 

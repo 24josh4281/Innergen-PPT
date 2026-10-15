@@ -6,7 +6,7 @@ instructions, design tokens, layout slots, company facts and content rules
 stay identical across tools.
 
 Usage:
-    python3 portable-ai/build_portable_kit.py            # writes portable-ai/kit/
+    python3 portable-ai/build_portable_kit.py            # writes portable-ai/kit/ and dist/*.zip
 
 Output (10 files; 00_orchestrator.md is pasted as instructions, the other
 nine are uploaded as knowledge files):
@@ -22,12 +22,15 @@ from __future__ import annotations
 import json
 import re
 import shutil
+import zipfile
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
 SKILL = REPO / "claude-skills" / "innergen-deck"
 OUT = HERE / "kit"
+DIST = HERE / "dist"
+PLATFORMS = {"gpt": "innergen-gpt-kit", "gemini": "innergen-gemini-kit"}
 FAMILIES = {
     "innergen_lecture": "기본 이너젠 — 교육·강의·세미나",
     "innergen_business": "사업소개서·회사소개·컨설팅 보고",
@@ -112,6 +115,34 @@ def layout_catalog() -> str:
     return "\n".join(md) + "\n"
 
 
+def build_platforms() -> None:
+    """One upload-ready folder + ZIP per platform: INSTALL, INSTRUCTIONS,
+    knowledge/ (9 files), roles-split/, starters, expected outputs."""
+    if DIST.exists():
+        shutil.rmtree(DIST)
+    roles = sorted(OUT.glob("0[1-4]_*.md"))
+    merged = "\n\n---\n\n".join(f.read_text(encoding="utf-8") for f in roles)
+    for plat, name in PLATFORMS.items():
+        root = DIST / name
+        (root / "knowledge").mkdir(parents=True)
+        (root / "roles-split").mkdir()
+        shutil.copy2(HERE / "platforms" / plat / "INSTALL.md", root / "INSTALL.md")
+        shutil.copy2(OUT / "00_orchestrator.md", root / "INSTRUCTIONS.md")
+        shutil.copy2(HERE / "platforms" / "starters.txt", root / "starters.txt")
+        shutil.copy2(HERE / "examples" / "EXPECTED-OUTPUTS.md", root / "EXPECTED-OUTPUTS.md")
+        for f in OUT.iterdir():
+            if f.name != "00_orchestrator.md":
+                shutil.copy2(f, root / "knowledge" / f.name)
+        for f in roles:
+            shutil.copy2(f, root / "roles-split" / f.name)
+        (root / "roles-merged.md").write_text(merged + "\n", encoding="utf-8")
+        with zipfile.ZipFile(DIST / f"{name}.zip", "w", zipfile.ZIP_DEFLATED) as zf:
+            for f in sorted(root.rglob("*")):
+                if f.is_file():
+                    zf.write(f, f.relative_to(DIST).as_posix())
+        print(f"[portable_kit] {name}.zip ({sum(1 for _ in root.rglob('*') if _.is_file())} files)")
+
+
 def main() -> int:
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -122,6 +153,7 @@ def main() -> int:
         shutil.copy2(SKILL / "references" / name, OUT / name)
     (OUT / "design-tokens.md").write_text(design_tokens(), encoding="utf-8")
     (OUT / "layout-catalog.md").write_text(layout_catalog(), encoding="utf-8")
+    build_platforms()
     files = sorted(OUT.iterdir())
     print(f"[portable_kit] {len(files)} files -> {OUT.relative_to(REPO)}")
     for f in files:
