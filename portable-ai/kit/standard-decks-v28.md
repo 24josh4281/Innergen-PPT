@@ -31,6 +31,16 @@
 | CDP·공시 이력 | `s09_year_timeline` | cdp_track_record, metrics.cdp_leadership | 연도별 수상 내역은 **확인 필요** |
 | 맺음·연락처 | `04_ending` | messages.closing_philosophy · closing_we_do · slogan, company.address · phone · email | 연락처는 원장 값 그대로 |
 
+### 자동 작성되는 고정 장표
+
+`scripts/innergen_standard_pages.py <프로젝트> --deck company_intro|innercarry_intro`가 아래 장을 원장 값으로 바로 만든다.
+나머지 장은 표대로 직접 쓴다. 확인 필요 값(감축실적 등)은 `--include-unconfirmed` 없이는 넣지 않고, 고객 로고는 `--client-logo`로 받은 파일만 쓴다.
+
+| 덱 | 자동 작성 장 |
+|---|---|
+| company_intro | 1 표지 · 2 회사 개요 표 · 4 사업 분야 5종 · 5 핵심 숫자 · 13 맺음 |
+| innercarry_intro | 1 표지 · 3 회사 개요 표 · 4 사업 분야(+IT 부문) · 23 맺음 |
+
 ## A. 회사소개서 표준 목차 (`company_intro`, `innergen_business`)
 
 CO260929의 흐름(회사 개요 → 구성 인원 → 사업분야 5종 → 맺음)을 따른다. 거버닝은 한 줄(공백 제외 38자 이내, v22) 초안이다. 쓰기 전에 원장 값으로 숫자를 다시 확인한다.
@@ -91,4 +101,5 @@ IC260916의 흐름(PART 00 회사소개 → PART 01 왜 지금인가 → PART 02
 |---|---|---|
 | 회사 숫자·연락처·문구·브랜드 표기(기본 사항) | `company-facts-v28.json`의 value·as_of·source, 숫자면 `checks`의 expect | `innergen_facts_check.py --print-md -o <경로>/company-facts-v28.md`로 이 문서 짝(`company-facts-v28.md`)을 다시 만들고, 기존 PPT는 `--pptx`로 대조 |
 | 표준 목차·장 구성(내용) | 이 문서 A·B 표와 `content-requirements-v28-intro.json` | `innergen_content_check.py --outline <표> --deck-type company_intro` |
+| 이미 만든 PPT의 낡은 값 | 고칠 것 없음(원장만 최신이면 됨) | `innergen_facts_update.py <파일>.pptx --dry-run`으로 바뀔 곳을 보고 `-o <사본>`으로 서식 그대로 고친 사본을 만든다. 확인 필요 값은 `--include-unconfirmed`일 때만 바꾼다 |
 | 장표 디자인·레이아웃(장표) | Slide Master 원본 `templates/decks/<family>/templates/*.svg`와 lock | `svg_quality_checker.py`, `innergen_qaqc.py` |

@@ -413,7 +413,8 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
         n = len(body.replace(" ", ""))
         if n < tr["min_chars"] or n > tr["max_chars"]:
             rep.add("WARN", "T01", p.index, f"제목 길이 {n}자 (권장 {tr['min_chars']}–{tr['max_chars']}): '{t[:30]}'")
-        if any(body.endswith(e) for e in tr["sentence_endings"]) or body.endswith("?"):
+        noun_ok = any(body.endswith(w) for w in tr.get("noun_exceptions", []))  # 회사 개요, 다음
+        if (not noun_ok and any(body.endswith(e) for e in tr["sentence_endings"])) or body.endswith("?"):
             rep.add("WARN", "T02", p.index, f"제목은 주제 명사구로: '{t[:30]}'")
     if titles and 0 < numbered < len(titles):
         rep.add("WARN", "T03", 0, f"제목 번호가 일부 장표에만 있습니다 ({numbered}/{len(titles)})")

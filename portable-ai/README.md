@@ -17,7 +17,7 @@ ChatGPT와 Gemini에서도 쓰도록 역할별 지침으로 나눈 묶음이다.
 
 공통 지식: `design-tokens.md`(계열별 색·글꼴·크기), `layout-catalog.md`(레이아웃 id와 칸 이름),
 `company-facts-v28.md`(회사 기본 정보 원장), `standard-decks-v28.md`(회사소개서·이너캐리 소개서 표준 목차),
-`content-requirements-v25.md`(덱 유형×사업 성격 필수 목차·내용), `governing-body-v30.md`(거버닝 유형 14종·본문 구성 프리셋 5종).
+`content-requirements-v25.md`(덱 유형×사업 성격 필수 목차·내용), `governing-body-v30.md`(거버닝 유형 15종·본문 구성 프리셋 5종).
 패키지에서는 역할 파일 4개를 `knowledge/roles.md` 하나로 합쳐 올린다. `shared/`에는 v30 규칙과 s65–s74 템플릿 사본(PR #5)이 있다.
 
 ## ChatGPT에서 쓰기

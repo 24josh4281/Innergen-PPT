@@ -72,6 +72,22 @@ tables in `${SKILL_DIR}/references/standard-decks-v28.md` (§A, §B) and adapt.
 Any other deck that carries a company page (a proposal's 회사 소개, a kickoff's
 수행 체계) reuses the §1 common blocks there.
 
+**Refreshing an existing deck.** When the user only wants an old PPTX brought up
+to date (numbers, phone, address, brand spelling) and not a new deck, do not
+redraw it. Write a corrected copy that keeps every run's font, size and color:
+
+```bash
+python3 ${SKILL_DIR}/scripts/innergen_facts_update.py <old>.pptx --dry-run
+python3 ${SKILL_DIR}/scripts/innergen_facts_update.py <old>.pptx -o /mnt/user-data/outputs/<name>_갱신.pptx
+python3 ${SKILL_DIR}/scripts/innergen_facts_check.py --pptx /mnt/user-data/outputs/<name>_갱신.pptx
+```
+
+Only `confirmed` ledger values are applied; values marked 확인 필요 are listed
+and skipped until the user confirms them (then add `--include-unconfirmed`). The
+input file is never overwritten. Hand off the copy with the change list
+(`P05 '300만 톤+' → '250만 톤+'`) and anything still awaiting confirmation;
+images (logos, staff cards) are not touched.
+
 ## 2. Read the rules (in this order)
 
 1. `${SKILL_DIR}/references/design-standard-v17.md` — family metrics; the v22
@@ -190,6 +206,19 @@ This creates `spec_lock.md` (colors, type sizes, canvas — the lock), `images/`
 (logos), `templates/` (flat-ready layout SVGs) and an empty `svg_output/`.
 Read `spec_lock.md` and `templates/design_spec.md` before the first page.
 
+For `company_intro` and `innercarry_intro`, write the fixed pages straight from
+the ledger before drawing the rest:
+
+```bash
+python3 ${SKILL_DIR}/scripts/innergen_standard_pages.py /tmp/<deck> --deck <company_intro|innercarry_intro> [--date "2026. 10."] [--client-logo <file>]
+```
+
+It fills cover, company overview table, business-area grid, key-number page
+(company_intro) and closing at the §A/§B page numbers in `svg_output/`, leaves
+out 확인 필요 values unless `--include-unconfirmed`, and lists what still needs
+an image or a confirmation. Skip any page the confirmed outline changed
+(`--pages cover,overview,…`), and check the written pages like any other.
+
 ## 5. Write pages (one at a time, in order)
 
 For each confirmed page:
@@ -253,6 +282,8 @@ WARN reasons), items marked `예시`, and the font note from §0.
 | Company basics (numbers, contacts, wording, brand spelling) | `company-facts-v28.json` (value, as_of, source; a number's `checks` entry) | `innergen_facts_check.py --print-md -o company-facts-v28.md`, then `--pptx` on the latest decks |
 | Standard content (intro TOCs, recurring pages) | `standard-decks-v28.md` and `content-requirements-v28-intro.json` | `innergen_content_check.py --outline … --deck-type company_intro` |
 | Slide design (layouts, chrome) | Slide Master source templates and locks | `svg_quality_checker.py`, `innergen_qaqc.py` |
+| Fixed pages (cover, overview, areas, key numbers, closing) | `innergen_standard_pages.py` (`DECKS` page numbers and governing lines; values come from the ledger) | run it on a fresh `start_deck.py` project, then `svg_quality_checker.py` |
+| Refreshing old decks after a ledger change | nothing to edit | `innergen_facts_update.py <deck>.pptx --dry-run`, then `-o <copy>` |
 
 Edit the Slide Master source on the PC and rebuild with `build_chat_skill.py`;
 an edit made only inside an unpacked skill is lost on the next rebuild.
