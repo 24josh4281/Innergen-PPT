@@ -38,10 +38,12 @@ and ask once for the rest:
 | Deck type | lecture · handout · seminar · proposal · kickoff · weekly · biweekly · monthly · diagnosis · interim · final · briefing · benchmark · insight · `company_intro` 회사소개서·사업소개서 · `innercarry_intro` 이너캐리 소개서 |
 | Business type | `cdp_disclosure` CDP·기후공시 · `regulatory` 규제 대응 · `reduction` 감축사업·상쇄 · `inventory` 온실가스 인벤토리 · `lca_product` LCA·제품 탄소 · `climate_risk` 기후리스크·시나리오 · `esg_rating` ESG 평가 대응 · `climate_education` 기후·ESG 교육 · `climate_tech` 기후테크·소셜벤처 |
 | Size | page count or talk length |
+| Body preset (v30) | `narrative` 줄글 중심 · `visual` 도식 중심 · `data` 그래프 중심 · `table` 표 중심 · `balanced` 균형형. Default comes from the business type (`references/governing-body-v30.md` §3); ask only when the user named a person or style ("○○ 팀장 스타일", "그래프 위주") |
 
 Deck type and business type together decide the required TOC sections and
 must-have content (`references/content-requirements-v25.md`). Record both in
-`design_spec.md` as `deck_type` and `innergen_business_type`. If the work spans
+`design_spec.md` as `deck_type` and `innergen_business_type` (and `body_preset` when
+the user chose one). If the work spans
 two business types, pick the main one and give the other one chapter.
 
 "소개자료" alone is ambiguous between `innergen_lecture` and `innergen_business`:
@@ -102,15 +104,28 @@ facts win. Mark every fictional or illustrative figure `예시`.
 ## 3. Outline → confirm (one stop)
 
 Write the numbered page plan to `/tmp/<deck>/outline.md` as a Markdown table
-`| 쪽 | 레이아웃 | 제목 | 거버닝 | 넣을 내용 |` (layout id from the list below,
-one-line governing message, and in the last column the must-have content that
-page carries). Follow the deck type's TOC skeleton and closing set from v20 and
+`| 쪽 | 레이아웃 | 제목 | 거버닝 | 넣을 내용 | 거버닝 유형 | 본문 구성 |` (layout id
+from the list below, one-line governing message, the must-have content that page
+carries, then the v30 choices). Pick the governing type first (14 types:
+정의·개념, 현황·사실, 비교·차이, 원인·동인, 분석·판단, 요구사항·기준, 사례 교훈,
+권고·실행, 전망·기대효과, 진행 상태, 요청·결정, 수행 약속, 장 도입, 결론·종합) and
+write the sentence in that type's frame from `references/governing-body-v30.md` §1;
+then the body style (줄글형, 도식형, 그래프형, 표형, 수치형, 사례형) that matches the
+layout and the deck's body preset. When the user names a type for a page, keep it. Follow the deck type's TOC skeleton and closing set from v20 and
 v25. Check the plan before showing it:
 
 ```bash
 python3 ${SKILL_DIR}/scripts/innergen_content_check.py --outline /tmp/<deck>/outline.md --deck-type <type> --business-type <business>
 python3 ${SKILL_DIR}/scripts/innergen_facts_check.py --outline /tmp/<deck>/outline.md
+python3 ${SKILL_DIR}/scripts/innergen_message_check.py --outline /tmp/<deck>/outline.md --deck-type <type> --business-type <business> [--body-preset <preset>]
 ```
+
+`innergen_message_check` checks each governing message against its chosen type
+(M01 type missing, M02 element of the type missing or noun-phrase ending, M03
+number/date/deadline missing, M04 no subject, M05 type unusual for the layout or
+deck, M06 a type the deck type needs is absent) and the body styles against the
+preset (D01 style ≠ layout, D02 mix outside the preset, D03 prose too long, D04
+same style run). `--list` prints the types, frames, styles and presets.
 
 `innergen_facts_check` compares numbers, phone, e-mail, address and brand
 spelling with the facts ledger (F01 stale value, F02 mixed brand spelling, F03
@@ -119,7 +134,7 @@ When the user hands over an existing PPTX to update, run it with `--pptx <file>`
 first and list the stale values in the outline message.
 
 Fix every ERROR (a missing required section) and every WARN (missing must-have
-content, order) in the plan, or keep a one-line reason for the user. Then show
+content, order, governing type, body style) in the plan, or keep a one-line reason for the user. Then show
 the plan, ask the user to confirm or adjust, and end the turn. Do not draw pages
 before this confirmation.
 
@@ -154,6 +169,13 @@ exists only in `innergen_lecture` (the other two use `02b_toc_pages`).
   `s49_pathway_wedge`, `s50_materiality_matrix`, `s51_risk_heatmap`,
   `s52_scenario_matrix`, `s53_harvey_compare`, `s54_raci_matrix`,
   `s55_stakeholder_map`, `s56_three_horizons`, `s57_nine_box`, `s58_operating_model`.
+- Report diagrams v30 (`s65`–`s74`, `references/governing-body-v30.md` §4, sources in
+  `consulting-references-v30.md`): `s65_proposal_understanding` (과업 이해),
+  `s66_why_us_pillars` (차별화 기둥), `s67_rfp_compliance` (요구사항 대응표),
+  `s68_hypothesis_tracker` (가설 검증 현황), `s69_issue_risk_log` (이슈·리스크 로그),
+  `s70_pyramid_summary` (피라미드 요약), `s71_findings_initiatives` (진단–과제 연계),
+  `s72_initiative_charter` (과제 정의서), `s73_wave_roadmap` (웨이브 로드맵),
+  `s74_business_case` (투자·효과 비즈니스 케이스).
 
 Use the v23/v24 structures first in the matching slot of the deck type's TOC
 skeleton (v20 §v23·§v24):
@@ -167,7 +189,9 @@ skeleton (v20 §v23·§v24):
 | final | s34 · s42 (v24: s45 · s47 · s49) |
 | briefing | s34 |
 | seminar | s41 · s38 · s39 · s40 |
-| proposal | v24: s43 · s44 · s53 |
+| proposal | v24: s43 · s44 · s53 (v30: s65 · s66 · s67) |
+| interim | v30: s68 · s69 · s29 · s35 |
+| final (recommendations) | v30: s70 · s71 · s72 · s73 · s74 |
 | reduction strategy | v24: s47 · s48 · s49 |
 | materiality · risk | v24: s50 · s51 · s52 |
 
@@ -208,7 +232,7 @@ For each confirmed page:
    no text below the lock's footnote size; no `foreignObject`, filters, masks,
    CSS classes or HTML entities (write raw Unicode, escape `& < >`).
 4. Governing message: exactly one line, explicit subject, a supported judgment
-   (v11/v20/v22). Split content across pages rather than shrinking body text.
+   (v11/v20/v22), written in the frame of the type chosen in the outline (v30). Split content across pages rather than shrinking body text.
 5. Keep the root `data-pptx-page-role` the template carries
    (`cover`/`toc`/`section`/`content`/`ending`). Do not add other `data-pptx-*`
    Master/Layout attributes — this edition exports in flat mode.
@@ -226,14 +250,16 @@ python3 ${SKILL_DIR}/scripts/svg_quality_checker.py /tmp/<deck> --pages 1
 
 ```bash
 python3 ${SKILL_DIR}/scripts/svg_quality_checker.py /tmp/<deck>
-python3 ${SKILL_DIR}/scripts/innergen_qaqc.py /tmp/<deck> --deck-type <type> --business-type <business> --family <family>
+python3 ${SKILL_DIR}/scripts/innergen_qaqc.py /tmp/<deck> --deck-type <type> --business-type <business> --family <family> [--body-preset <preset>]
 ```
 
 Fix every ERROR in both. A WARN needs either a fix or a one-line reason in your
 hand-off. `innergen_qaqc` writes `analysis/innergen_qaqc_report.md` (chrome
 geometry, governing grammar, title/TOC consistency, required pages, minimum text
 sizes, palette, source line, the v25 TOC sections and must-have content per
-deck type × business type, and the v28 company-facts comparison, codes F01–F04).
+deck type × business type, the v28 company-facts comparison, codes F01–F04, and
+the v30 governing type and body preset checks, codes M and D, read from
+`/tmp/<deck>/outline.md`).
 
 ## 7. Export and hand off
 
@@ -252,6 +278,7 @@ WARN reasons), items marked `예시`, and the font note from §0.
 |---|---|---|
 | Company basics (numbers, contacts, wording, brand spelling) | `company-facts-v28.json` (value, as_of, source; a number's `checks` entry) | `innergen_facts_check.py --print-md -o company-facts-v28.md`, then `--pptx` on the latest decks |
 | Standard content (intro TOCs, recurring pages) | `standard-decks-v28.md` and `content-requirements-v28-intro.json` | `innergen_content_check.py --outline … --deck-type company_intro` |
+| Governing types, body presets | `governing-body-v30.json` (frames, element patterns, layout → type/style, presets per business type) | `innergen_message_check.py --list`, then `--outline` on a sample plan |
 | Slide design (layouts, chrome) | Slide Master source templates and locks | `svg_quality_checker.py`, `innergen_qaqc.py` |
 
 Edit the Slide Master source on the PC and rebuild with `build_chat_skill.py`;

@@ -8,11 +8,13 @@ in docs/styles/innergen: family chrome geometry (v17/v22), governing grammar
 consistency (v5/v20), structure and closing set per deck type (v20), minimum
 text sizes (v18/v22), citation line (v16), and - since v25 - the table of
 contents and must-have content per report type and business type
-(content-requirements-v25.json, via innergen_content_check.py). It complements
+(content-requirements-v25.json, via innergen_content_check.py), and - since v30 - the
+governing message type chosen per page and the body composition preset
+(governing-body-v30.json, via innergen_message_check.py). It complements
 svg_quality_checker.py (SVG/PPTX contract) with the *content* and *uniformity* layer.
 
 Usage:
-    python3 scripts/innergen_qaqc.py <project_path> [--deck-type lecture] [--business-type inventory]
+    python3 scripts/innergen_qaqc.py <project_path> [--deck-type lecture] [--business-type inventory] [--body-preset data]
                                      [--register auto|external|internal]
                                      [--family innergen_lecture|innergen_lecture_v20|innergen_business|innercarry]
                                      [--strict] [--json <out.json>]
@@ -40,6 +42,7 @@ if str(_SCRIPTS_DIR) not in sys.path:
 from console_encoding import configure_utf8_stdio  # noqa: E402
 import innergen_content_check as content_check  # noqa: E402
 import innergen_facts_check as facts_check  # noqa: E402
+import innergen_message_check as message_check  # noqa: E402
 
 REPO = _SCRIPTS_DIR.parents[min(3, len(_SCRIPTS_DIR.parents) - 1)]
 RULES_PATH = REPO / "docs/styles/innergen/qaqc-v21.json"
@@ -255,7 +258,7 @@ def _layout_in(layout: str, group: str) -> bool:
 
 
 def run(project: Path, deck_type: str | None, register: str, family: str | None, rules: dict,
-        business_type: str | None = None) -> tuple[Report, dict]:
+        business_type: str | None = None, body_preset: str | None = None) -> tuple[Report, dict]:
     rep = Report()
     svg_dir = project / "svg_output"
     pages = [Page(p, i + 1) for i, p in enumerate(sorted(svg_dir.glob("*.svg")))]
@@ -282,6 +285,17 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
     if business_type is None and spec_text:
         m = re.search(r"innergen_business_type\*{0,2}\s*\|?\s*[:|]\s*`?\**(\w+)", spec_text)
         business_type = m.group(1) if m else None
+    if body_preset is None and spec_text:
+        m = re.search(r"body_preset\*{0,2}\s*\|?\s*[:|]\s*`?\**(\w+)", spec_text)
+        body_preset = m.group(1) if m else None
+    # v30: governing type and body style chosen per page in the confirmed plan
+    msg_spec = message_check.load_spec()
+    choices = {}
+    if msg_spec is not None:
+        for name in ("outline.md", "outline.json"):
+            choices = message_check.outline_choices(project / name, msg_spec)
+            if choices:
+                break
     content_spec = content_check.load_spec()
     if content_spec is not None:
         deck_type = content_check.resolve(content_spec, deck_type, None)[0]
@@ -388,9 +402,10 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
                 rep.add("WARN", "G06", p.index, f"행동 없는 구호 '{ph}' — 확인 대상·기준·행동을 붙이세요")
         if gr["question_mark_warn"] and "?" in text:
             rep.add("WARN", "G06", p.index, "거버닝이 질문형입니다 — 질문은 자가진단 장표(s20)로")
-        if not re.search(gr["number_pattern"], text):
+        if not re.search(gr["number_pattern"], text) and not (choices.get(p.index) or (None,))[0]:  # v30 M03 is type-aware
             rep.add("INFO", "G07", p.index, "거버닝에 수치가 없습니다(현황·판단 장표면 핵심 수치 1개 권장)")
-        regs[(p.index, detect_register(text.rstrip(" ."), gr))] = 1
+        # v20 §5.3 진행 상태 틀은 '([월.일] 완료)' 괄호로 끝난다: 괄호 앞 문장으로 문체를 판단
+        regs[(p.index, detect_register(re.sub(r"\s*\([^()]*\)\s*$", "", text).rstrip(" ."), gr))] = 1
     reg_counts = Counter(r for (_, r) in regs)
     main_reg = register
     if register == "auto":
@@ -493,6 +508,12 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
                                           content_spec, rep.add)
         business_type = content_res.get("business_type") or business_type
 
+    # ---- M/D: governing message type and body composition preset (v30)
+    msg_res = {}
+    if msg_spec is not None:
+        msg_res = message_check.check(message_check.pages_from_svg(pages, fam, choices), deck_type, business_type,
+                                      msg_spec, rep.add, body_preset=body_preset, number_rx=gr["number_pattern"])
+
     # ---- F: company facts ledger (v28) — stale numbers, contacts, brand spelling
     facts = facts_check.load_facts()
     if facts is not None:
@@ -500,7 +521,9 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
 
     summary = {
         "project": str(project), "family": family, "deck_type": deck_type, "business_type": business_type,
-        "register": main_reg, "sections_missing": content_res.get("sections_missing", []),
+        "register": main_reg, "body_preset": msg_res.get("preset"),
+        "governing_types": msg_res.get("type_counts", {}), "body_styles": msg_res.get("style_counts", {}),
+        "sections_missing": content_res.get("sections_missing", []),
         "pages": len(pages), "content_pages": len(content),
         "errors": rep.count("ERROR"), "warnings": rep.count("WARN"), "infos": rep.count("INFO"),
         "layouts": dict(Counter(p.layout for p in pages)),
@@ -513,13 +536,14 @@ def write_report(project: Path, rep: Report, summary: dict, json_out: Path | Non
     out_dir.mkdir(exist_ok=True)
     md = [f"# INNerGEN QA/QC 보고 — {project.name}", "",
           f"- 계열: {summary.get('family')} · 덱 유형: {summary.get('deck_type') or '미지정'} · 사업 성격: {summary.get('business_type') or '미지정'} · 거버닝 문체 기준: {summary.get('register')}",
+          f"- 본문 구성 프리셋: {summary.get('body_preset') or '-'} · 거버닝 유형 {summary.get('governing_types') or '-'} · 본문 구성 {summary.get('body_styles') or '-'}",
           f"- 장수 {summary.get('pages')} (본문 {summary.get('content_pages')}) · ERROR {summary.get('errors')} · WARN {summary.get('warnings')} · INFO {summary.get('infos')}", "",
           "| 수준 | 코드 | 장 | 내용 |", "|---|---|---|---|"]
     order = {"ERROR": 0, "WARN": 1, "INFO": 2}
     for it in sorted(rep.items, key=lambda i: (order[i["level"]], i["page"], i["code"])):
         md.append(f"| {it['level']} | {it['code']} | {('P%02d' % it['page']) if it['page'] else '덱'} | {it['message']} |")
-    md += ["", "코드: C 화면 고정 요소 · G 거버닝 · T 제목 · O 목차 · S 구조 · R 보고 유형 목차·필수 내용 · B 사업 성격 필수 내용 · Q 잔재·금지 표현 · F 회사 기본 정보 원장 대조. "
-           "규칙표: qaqc-v21.json(C·G·T·O·S), content-requirements-v25.json·v28-intro(R·B·Q), company-facts-v28.json(F), 설명: qaqc-v21.md, content-requirements-v25.md"]
+    md += ["", "코드: C 화면 고정 요소 · G 거버닝 · T 제목 · O 목차 · S 구조 · R 보고 유형 목차·필수 내용 · B 사업 성격 필수 내용 · Q 잔재·금지 표현 · F 회사 기본 정보 원장 대조 · M 거버닝 유형 · D 본문 구성 프리셋. "
+           "규칙표: qaqc-v21.json(C·G·T·O·S), content-requirements-v25.json·v28-intro(R·B·Q), company-facts-v28.json(F), governing-body-v30.json(M·D), 설명: qaqc-v21.md, content-requirements-v25.md"]
     (out_dir / "innergen_qaqc_report.md").write_text("\n".join(md) + "\n", encoding="utf-8")
     data = {"summary": summary, "items": rep.items}
     (out_dir / "innergen_qaqc_report.json").write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -533,13 +557,15 @@ def main(argv=None) -> int:
     ap.add_argument("project", type=Path)
     ap.add_argument("--deck-type", default=None, help="lecture|handout|seminar|proposal|kickoff|weekly|biweekly|monthly|diagnosis|interim|final|briefing|benchmark|insight|company_intro|innercarry_intro")
     ap.add_argument("--business-type", default=None, help="cdp_disclosure|regulatory|reduction|inventory|lca_product|climate_risk|esg_rating|climate_education|climate_tech (default: design_spec.md innergen_business_type)")
+    ap.add_argument("--body-preset", default=None, help="narrative|visual|data|table|balanced (default: design_spec.md body_preset, then deck/business type)")
     ap.add_argument("--register", default="auto", choices=["auto", "external", "internal"])
     ap.add_argument("--family", default=None, help="innergen_lecture|innergen_lecture_v20|innergen_business|innercarry (default: design_profile_v17.json + chrome detection)")
     ap.add_argument("--strict", action="store_true")
     ap.add_argument("--json", type=Path, default=None)
     args = ap.parse_args(argv)
     rules = json.loads(RULES_PATH.read_text(encoding="utf-8"))
-    rep, summary = run(args.project, args.deck_type, args.register, args.family, rules, args.business_type)
+    rep, summary = run(args.project, args.deck_type, args.register, args.family, rules, args.business_type,
+                       args.body_preset)
     write_report(args.project, rep, summary, args.json)
     for it in rep.items:
         if it["level"] == "INFO":
