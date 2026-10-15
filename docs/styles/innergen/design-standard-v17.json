@@ -3134,6 +3134,286 @@
         "condition": "기반 | 데이터 플랫폼·탄소가격·역량"
       },
       "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "value_chain_hotspot": {
+      "label": "가치사슬 단계별 핫스팟(비중·활동·기회)",
+      "purpose": "배출(또는 비용)이 가치사슬의 어느 단계에 몰려 있고 어디부터 손대나?",
+      "pattern": "matrix",
+      "slots": [
+        "단계 5(셰브론)",
+        "행 라벨 3",
+        "단계별 비중 값·막대",
+        "주요 활동 5",
+        "개선 기회 5",
+        "시사점 바"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s59_value_chain_hotspot.svg",
+      "v27": true,
+      "reference": "McKinsey 비즈니스 시스템(Enduring Ideas, 2009)·BCG×WEF 공급망 배출(2021)",
+      "required_evidence": [
+        "단계별 비중의 산정 기준·연도",
+        "비중 합 100%"
+      ],
+      "protect": [
+        "단계 명칭과 순서는 덱 전체에서 고정",
+        "핫스팟 프레임은 1곳"
+      ],
+      "preview": {
+        "title": "가치사슬 핫스팟",
+        "claim": "배출의 46%가 제조 공정에 몰려 있어 공정 연료 전환을 먼저 추진합니다.",
+        "headers": [
+          "단계",
+          "비중",
+          "개선 기회"
+        ],
+        "rows": [
+          [
+            "제조 공정",
+            "46%",
+            "전기 히트펌프 전환"
+          ],
+          [
+            "원료 조달",
+            "18%",
+            "저탄소 소재 조달"
+          ]
+        ],
+        "condition": "시사점 | 공정 전환이 감축 잠재량의 절반"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "profit_pool": {
+      "label": "가변폭 막대(비중×강도) 프로핏 풀+시사점",
+      "purpose": "어느 사업·제품이 규모 대비 이익(또는 배출 집약도)이 가장 큰가?",
+      "pattern": "chart",
+      "slots": [
+        "세로축 제목",
+        "구간 5(값·라벨)",
+        "가로축 설명(폭의 의미)",
+        "시사점 3"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s60_profit_pool.svg",
+      "v27": true,
+      "reference": "Bain 프로핏 풀(Gadiesh·Gilbert, HBR 1998)",
+      "required_evidence": [
+        "폭 합 100%(매출·물량 비중)",
+        "높이 지표의 단위·기준 연도"
+      ],
+      "protect": [
+        "폭과 높이의 의미를 가로축 설명에 반드시 적는다",
+        "강조 막대는 1개"
+      ],
+      "preview": {
+        "title": "프로핏 풀",
+        "claim": "매출 20%인 소재 사업부가 배출 집약도 1위입니다.",
+        "headers": [
+          "구간",
+          "폭(매출 비중)",
+          "높이(집약도)"
+        ],
+        "rows": [
+          [
+            "소재",
+            "20%",
+            "92"
+          ],
+          [
+            "부품",
+            "30%",
+            "35"
+          ]
+        ],
+        "condition": "시사점 | 소재 공정 전환 시 전사 집약도 18% 개선"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "experience_curve": {
+      "label": "학습곡선(누적 생산×단위 비용, 로그 축)+핵심 수치",
+      "purpose": "누적 규모가 커질수록 단가가 얼마나 빨리 내려가고 언제 경제성이 생기나?",
+      "pattern": "chart",
+      "slots": [
+        "축 제목 2",
+        "눈금 4×2",
+        "추세선 라벨(학습률)",
+        "핵심 수치 3(값·설명)",
+        "함의"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s61_experience_curve.svg",
+      "v27": true,
+      "reference": "BCG 경험곡선(Henderson, 1968)",
+      "required_evidence": [
+        "누적 2배당 단가 하락률의 근거 자료",
+        "로그 축 표기"
+      ],
+      "protect": [
+        "두 축 모두 로그 눈금",
+        "예측 구간은 실측과 구분해 적는다"
+      ],
+      "preview": {
+        "title": "학습곡선",
+        "claim": "누적 설치량이 두 배가 될 때마다 단가가 18%씩 내려갑니다.",
+        "headers": [
+          "지표",
+          "값",
+          "설명"
+        ],
+        "rows": [
+          [
+            "학습률",
+            "18%",
+            "누적 2배당 단가 하락"
+          ],
+          [
+            "2030 단가",
+            "-59%",
+            "예상 변화"
+          ]
+        ],
+        "condition": "함의 | 도입은 2028년 이후, 실증은 지금"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "sensitivity_tornado": {
+      "label": "민감도 토네이도(가정별 하한·상한 영향)",
+      "purpose": "결과값은 어떤 가정에 가장 민감하고, 먼저 확정해야 할 가정은 무엇인가?",
+      "pattern": "chart",
+      "slots": [
+        "헤더 5",
+        "가정 6(기준값 포함)",
+        "하한·상한 값",
+        "범위",
+        "기준값 메모",
+        "결론 바"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s62_sensitivity_tornado.svg",
+      "v27": true,
+      "reference": "KPMG 기후 시나리오 분석의 민감도 분석(극단값 민감도)",
+      "required_evidence": [
+        "기준 시나리오 값",
+        "가정별 하한·상한의 근거"
+      ],
+      "protect": [
+        "범위가 큰 순서로 정렬",
+        "하한·상한 색은 고정"
+      ],
+      "preview": {
+        "title": "민감도 토네이도",
+        "claim": "탄소가격 가정이 재무 영향 범위의 절반을 좌우합니다.",
+        "headers": [
+          "가정",
+          "하한",
+          "상한"
+        ],
+        "rows": [
+          [
+            "탄소가격",
+            "-92",
+            "+80"
+          ],
+          [
+            "무상할당 비율",
+            "-70",
+            "+62"
+          ]
+        ],
+        "condition": "결론 | 두 가정이 범위의 52%"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "swimlane_controls": {
+      "label": "스윔레인 프로세스+통제 지점",
+      "purpose": "누가 어떤 순서로 자료를 넘기고, 어디에 통제가 있어야 하나?",
+      "pattern": "process",
+      "slots": [
+        "단계 5",
+        "레인(주체) 4",
+        "활동 5",
+        "통제 3(이름·설명)"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s63_swimlane_controls.svg",
+      "v27": true,
+      "reference": "Deloitte COSO ICSR(흐름도·위험통제매트릭스·프로세스 책임자)·EY 지속가능성 보고 통제 안내",
+      "required_evidence": [
+        "통제마다 담당·빈도·증빙",
+        "활동과 주체의 연결"
+      ],
+      "protect": [
+        "레인 순서는 자료 흐름 순서",
+        "통제 표식 번호는 설명 칸과 일치"
+      ],
+      "preview": {
+        "title": "스윔레인 통제",
+        "claim": "활동자료 검토와 재무 대사 지점에 통제를 신설합니다.",
+        "headers": [
+          "통제",
+          "위치",
+          "내용"
+        ],
+        "rows": [
+          [
+            "C1",
+            "검토",
+            "전월 대비 ±20% 초과 시 증빙"
+          ],
+          [
+            "C2",
+            "승인",
+            "연료비 장부 대조"
+          ]
+        ],
+        "condition": "레인 | 사업장·환경팀·재무팀·경영진"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
+    },
+    "seven_s_alignment": {
+      "label": "7-S 정합성 진단(연결망+요소별 현황)",
+      "purpose": "전략을 실행할 조직 요소들이 서로 맞물려 있나? 어디가 어긋났나?",
+      "pattern": "matrix",
+      "slots": [
+        "7요소 원(하드 3·소프트 3·공유가치)",
+        "헤더 3",
+        "요소별 현재 상태 7",
+        "정합 판단 7"
+      ],
+      "structured_v18": true,
+      "lecture_template_layout": "s64_seven_s_alignment.svg",
+      "v27": true,
+      "reference": "McKinsey 7-S(Enduring Ideas, 2008; 운영모델 글, 2025)",
+      "required_evidence": [
+        "요소별 현재 상태의 근거(규정·조직도·시스템)"
+      ],
+      "protect": [
+        "정합 판단은 정합/보완/충돌 3택",
+        "강조 행은 1개"
+      ],
+      "preview": {
+        "title": "7-S 진단",
+        "claim": "전략·구조는 갖췄지만 시스템이 따라오지 못합니다.",
+        "headers": [
+          "요소",
+          "현재",
+          "정합"
+        ],
+        "rows": [
+          [
+            "시스템",
+            "연 1회 수기 집계",
+            "충돌"
+          ],
+          [
+            "전략",
+            "2040 넷제로 승인",
+            "정합"
+          ]
+        ],
+        "condition": "범례 | 하드·소프트·공유가치"
+      },
+      "preview_status": "가상 구성 예시·실제 자료 아님"
     }
   },
   "recommended_by_report": {
@@ -3146,7 +3426,8 @@
       "scope_method_result",
       "issue_tree",
       "hypothesis_workplan",
-      "harvey_compare"
+      "harvey_compare",
+      "value_chain_hotspot"
     ],
     "kickoff": [
       "task_structure",
@@ -3157,7 +3438,9 @@
       "data_request",
       "hypothesis_workplan",
       "raci_matrix",
-      "stakeholder_map"
+      "stakeholder_map",
+      "swimlane_controls",
+      "value_chain_hotspot"
     ],
     "interim": [
       "status",
@@ -3167,7 +3450,8 @@
       "progress_plan",
       "decision_request",
       "waterfall_bridge",
-      "harvey_compare"
+      "harvey_compare",
+      "sensitivity_tornado"
     ],
     "final": [
       "exec_summary",
@@ -3179,7 +3463,9 @@
       "scqa_storyline",
       "macc_curve",
       "pathway_wedge",
-      "operating_model"
+      "operating_model",
+      "profit_pool",
+      "seven_s_alignment"
     ],
     "education": [
       "guidance_focus",
@@ -3206,7 +3492,9 @@
       "principle_matrix",
       "compare_implication",
       "materiality_matrix",
-      "raci_matrix"
+      "raci_matrix",
+      "swimlane_controls",
+      "seven_s_alignment"
     ],
     "regulatory": [
       "period_applicability",
@@ -3221,14 +3509,17 @@
       "phase_roadmap",
       "waterfall_bridge",
       "pathway_wedge",
-      "driver_tree"
+      "driver_tree",
+      "value_chain_hotspot",
+      "sensitivity_tornado"
     ],
     "inventory": [
       "list_zoom",
       "chart_table",
       "vertical_flow",
       "driver_tree",
-      "waterfall_bridge"
+      "waterfall_bridge",
+      "value_chain_hotspot"
     ],
     "lca_product": [
       "chart_table",
@@ -3240,14 +3531,16 @@
       "maturity_heatmap",
       "chart_insight",
       "entity_matrix",
-      "scenario_matrix"
+      "scenario_matrix",
+      "sensitivity_tornado"
     ],
     "esg_rating": [
       "materiality_matrix",
       "self_check",
       "principle_matrix",
       "asis_tobe",
-      "stakeholder_map"
+      "stakeholder_map",
+      "seven_s_alignment"
     ],
     "climate_education": [
       "keyword_map",
@@ -3260,7 +3553,9 @@
       "entity_matrix",
       "exec_summary",
       "three_horizons",
-      "nine_box"
+      "nine_box",
+      "experience_curve",
+      "profit_pool"
     ]
   },
   "spacing_pt": {
@@ -3645,9 +3940,9 @@
     }
   ],
   "template_families_v22": {
-    "innergen_lecture": "ppt139 1040×720 · Pretendard · 70 layouts (v23: s24–s42, v24: s43–s58 추가) · .claude/skills/ppt-master/templates/decks/innergen_lecture/",
-    "innergen_business": "ppt169s 960×540 · IBM Plex Sans KR · 69 layouts (v23: s24–s42, v24: s43–s58 추가) (02_toc 없음) · .claude/skills/ppt-master/templates/decks/innergen_business/",
-    "innercarry": "ppt43 1024×768 · IBM Plex Sans KR · 69 layouts (v23: s24–s42, v24: s43–s58 추가) · .claude/skills/ppt-master/templates/decks/innercarry/",
+    "innergen_lecture": "ppt139 1040×720 · Pretendard · 76 layouts (v23: s24–s42, v24: s43–s58, v27: s59–s64 추가) · .claude/skills/ppt-master/templates/decks/innergen_lecture/",
+    "innergen_business": "ppt169s 960×540 · IBM Plex Sans KR · 75 layouts (v23: s24–s42, v24: s43–s58, v27: s59–s64 추가) (02_toc 없음) · .claude/skills/ppt-master/templates/decks/innergen_business/",
+    "innercarry": "ppt43 1024×768 · IBM Plex Sans KR · 75 layouts (v23: s24–s42, v24: s43–s58, v27: s59–s64 추가) · .claude/skills/ppt-master/templates/decks/innercarry/",
     "shared_tokens": "세 계열의 레이아웃은 같은 파일명·슬롯 토큰을 쓴다. 레이아웃 키 접두어: innergen-intro- / innergen-biz- / innercarry-"
   }
 }

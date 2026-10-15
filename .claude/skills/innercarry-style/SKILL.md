@@ -34,7 +34,7 @@ visual profile nor acquire images or confirm an outline for an existing project.
 
 v22 (2026-10-14): a compact INNerCarry deck template ships at
 `.claude/skills/ppt-master/templates/decks/innercarry/` (ppt43 1024×768, IBM Plex
-Sans KR, 69 layouts sharing the s01–s58 / 02b / 02c / 03a–03g slot tokens of the
+Sans KR, 75 layouts sharing the s01–s64 / 02b / 02c / 03a–03g slot tokens of the
 INNerGEN decks; section label 12px, title 26.67px, one-line governing 21.33px,
 body 16px). Use it when the user explicitly selects it at Step 3. Density, font
 and content-detail feedback follow `design-standard-v17.md` v22 (`feedback_options`).

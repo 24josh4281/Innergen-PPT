@@ -146,6 +146,27 @@
 
 참고한 공개 자료(구조 확인용): McKinsey Quarterly *Enduring Ideas: The GE and McKinsey nine-box matrix*, *Understanding the price of decarbonization*(MACC); KPMG·Deloitte·PwC 이중 중대성 평가 안내; Deloitte *Climate-related risk assessments and financial disclosures(TCFD)*; PwC Strategy& *Capabilities-Driven Strategy*; Bain RAPID·Elements of Value; Minto *The Pyramid Principle*; 컨설팅 슬라이드 작성법 영상·해설(액션 타이틀·수평/수직 논리·SCR).
 
+## 3d. 컨설팅 도식 6종 추가 (v27, 2026-10-15)
+
+v24 이후에도 비어 있던 도식을 맥킨지·BCG·베인·KPMG·딜로이트·EY의 공개 자료에서 골라 구조만 옮겼다. 원문 문구·수치·로고·도식 이미지는 쓰지 않는다. 세 계열 템플릿(`innergen_lecture` 76 · `innergen_business` 75 · `innercarry` 75)에 같은 슬롯 토큰으로 들어 있다. 출처 링크와 확인 범위: [consulting-references-v27.md](consulting-references-v27.md).
+
+| 구조 | 템플릿 | 이름 | 읽는 이의 질문 | 출처 계열(구조만) | 쓰는 곳 |
+|---|---|---|---|---|---|
+| `value_chain_hotspot` | s59 | 가치사슬 단계별 핫스팟(비중·활동·기회) | 배출(비용)이 가치사슬의 어느 단계에 몰려 있고 어디부터 손대나? | McKinsey 비즈니스 시스템 · BCG×WEF 공급망 배출 | 인벤토리·Scope 3·감축 착수 |
+| `profit_pool` | s60 | 가변폭 막대(비중×강도)+시사점 | 어느 사업·제품이 규모 대비 이익(배출 집약도)이 가장 큰가? | Bain 프로핏 풀 | 포트폴리오·감축 투자 우선순위 |
+| `experience_curve` | s61 | 학습곡선(로그 축)+핵심 수치 | 누적 규모가 커질수록 단가가 얼마나 내려가고 언제 경제성이 생기나? | BCG 경험곡선 | 기후테크·감축 기술 경제성 |
+| `sensitivity_tornado` | s62 | 민감도 토네이도 | 결과값은 어떤 가정에 가장 민감하고 무엇을 먼저 확정하나? | KPMG 기후 시나리오 민감도 분석 | 기후 리스크 재무 영향·탄소가격 |
+| `swimlane_controls` | s63 | 스윔레인 프로세스+통제 지점 | 누가 어떤 순서로 자료를 넘기고 어디에 통제가 있어야 하나? | Deloitte COSO ICSR · EY 보고 통제 | 공시 내부통제·산정 체계 |
+| `seven_s_alignment` | s64 | 7-S 정합성 진단 | 실행 조직 요소들이 맞물려 있나, 어디가 어긋났나? | McKinsey 7-S | 넷제로 실행 체계·거버넌스 |
+
+작성 요령:
+
+- **로컬 도형**: 비중 막대·핫스팟 점선(s59), 가변폭 막대(s60), 점·추세선(s61), 하한·상한 막대(s62), 활동 상자·연결선·통제 표식(s63), 강조 행 점선(s64)은 값과 흐름에 맞춰 장마다 고친다. 축·격자·레인·헤더는 레이아웃 고정 요소다.
+- **산식 일치**: s59 비중 합 100%, s60 막대 폭 합 100%(폭 = 매출·물량 비중, 높이 = 이익률·집약도처럼 가로축 설명에 적는다), s62 범위 = 상한 − 하한이고 범위가 큰 순서로 정렬한다. 맞지 않으면 일반 막대 차트로 바꾼다.
+- **척도 표기**: s61은 두 축 모두 로그 눈금이고 학습률(누적 2배당 하락률)의 근거 자료를 출처 줄에 적는다. 예측 구간은 실측과 구분한다. s62는 기준 시나리오 값을 `BASE_NOTE`에 적는다.
+- **판단 라벨**: s63 통제 번호(C1–C3)는 도식 표식과 아래 설명 칸이 같아야 한다. s64 정합 판단은 `정합/보완/충돌` 3택, 강조 행은 1개.
+- **견본**: 가상 B사 예시로 채운 세 계열 렌더(LibreOffice) — [교육·강의](previews/v27/innergen_lecture.png) · [회사소개](previews/v27/innergen_business.png) · [이너캐리](previews/v27/innercarry.png).
+
 ## 4. 업무 × 보고 단계 추천
 
 선택 화면은 보고 단계 추천 2개 + 업무 추천 1개를 먼저 보여 준다(`recommended_by_report`, `recommended_by_business`). 같은 덱 안에서 구조 유형은 5–8종으로 제한하고, 같은 질문에는 같은 구조를 반복한다.
@@ -193,6 +214,7 @@
 
 ## 7. 실행 견본과 작성 주의
 
+- 2026-10-15 v27: 공개 자료의 도식 6종(s59–s64: 가치사슬 핫스팟·프로핏 풀·학습곡선·민감도 토네이도·스윔레인 통제·7-S)을 더해 구조화 장표는 66종이다. §3d 참조.
 - 2026-10-14 v24: 컨설팅 펌 공개 방법론의 도식 16종(s43–s58: 이슈 트리·가설 작업계획·SCQA·동인 트리·워터폴·MACC·감축 웨지·이중 중대성·리스크 히트맵·시나리오·하비볼·RACI·이해관계자·3지평·9-box·운영모델)을 더해 구조화 장표는 60종이다. §3c 참조.
 - 2026-10-14 v23: 보고 생애주기·세미나 구조 19종(s24–s42)을 더해 구조화 장표는 44종(기본 레이아웃 제외)이다. §3b 참조.
 - 2026-10-14 v22: 세 계열 템플릿(`innergen_lecture` 컴팩트 재생성, `innergen_business` 960×540, `innercarry` 1024×768)이 같은 s01–s23 슬롯 토큰을 쓴다. 컴팩트 밀도에서 칸 글자 하한은 12px(9pt), 배지·태그 10.67px(8pt). 거버닝은 한 줄. 상세: [design-standard-v17.md v22](design-standard-v17.md).
