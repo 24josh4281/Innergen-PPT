@@ -4,9 +4,9 @@ INNerGEN message gate - governing message type per page and body composition
 preset per deck (v30).
 
 The page plan names, for each page, the governing message type the writer chose
-(14 types: 정의·개념, 현황·사실, 비교·차이, 원인·동인, 분석·판단, 요구사항·기준,
+(15 types: 정의·개념, 현황·사실, 비교·차이, 원인·동인, 분석·판단, 요구사항·기준,
 사례 교훈, 권고·실행, 전망·기대효과, 진행 상태, 요청·결정, 수행 약속, 장 도입,
-결론·종합) and the body style (줄글형, 도식형, 그래프형, 표형, 수치형, 사례형).
+결론·종합, 역량·강점) and the body style (줄글형, 도식형, 그래프형, 표형, 수치형, 사례형).
 The deck picks a body preset (narrative / visual / data / table / balanced),
 by default from its business type. This gate checks each governing sentence
 against the elements its type needs and the deck's style mix against the preset.
@@ -268,7 +268,7 @@ def check(pages: list[MsgPage], deck_type: str | None, business_type: str | None
         soft = False
         if t is None:
             if chosen_any:
-                add("WARN", "M01", p.index, "거버닝 유형이 비어 있습니다 — 14개 유형 중 하나를 고르세요 (--list)")
+                add("WARN", "M01", p.index, "거버닝 유형이 비어 있습니다 — 15개 유형 중 하나를 고르세요 (--list)")
             if not suits:
                 continue
             t, soft = suits[0], True

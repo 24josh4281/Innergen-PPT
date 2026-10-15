@@ -17,7 +17,7 @@
       "example": "기후 리스크는 물리적·이행 리스크를 함께 포괄하는 재무 위험입니다",
       "subject": true, "number": "none",
       "checks": [
-        {"id": "scope", "label": "범위·성격 서술(포괄·의미·구성·말합니다 등)", "pattern": "포괄|의미|구성|말합니다|말함|뜻합니다|이란|란 |정의|개념|범위|나뉩니다|나뉨|으로 봅니다|입니다|임$"}
+        {"id": "scope", "label": "범위·성격 서술(포괄·의미·구성·말합니다 등)", "pattern": "포괄|의미|구성|말합니다|말함|뜻합니다|이란|란 |정의|개념|범위|나뉩니다|나뉨|으로 봅니다|입니다|임$|가지로|구분|이루어|제공됩니다", "level": "INFO"}
       ]
     },
     "fact": {
@@ -37,7 +37,7 @@
       "example": "A사 Scope 3 산정 범위는 업계 평균 8개 대비 3개에 그칩니다",
       "subject": true, "number": "recommended",
       "checks": [
-        {"id": "versus", "label": "비교 기준(대비·보다·차이·반면·비해·와 달리)", "pattern": "대비|보다|차이|반면|비해|비교|격차|vs\\.?|와 달리|과 달리|만큼|수준"}
+        {"id": "versus", "label": "비교 기준(대비·보다·차이·반면·비해·와 달리·~이 아닌)", "pattern": "대비|보다|차이|반면|비해|비교|격차|vs\\.?|와 달리|과 달리|만큼|수준|아닌|아니라"}
       ]
     },
     "cause": {
@@ -132,8 +132,8 @@
       "example": "이너젠은 9월 말까지 Scope 3 산정 결과를 제공할 예정입니다",
       "subject": true, "number": "recommended",
       "checks": [
-        {"id": "who", "label": "수행 주체(이너젠·제안사·당사)", "pattern": "이너젠|INNerGEN|제안사|당사|컨설팅\\s?팀|수행\\s?팀|PMO"},
-        {"id": "will", "label": "약속 종결(예정·제공·수행·지원·하겠습니다)", "pattern": "예정|제공|수행|지원|하겠습니다|드립니다|보장"}
+        {"id": "who", "label": "수행 주체(이너젠·이너캐리·제안사·당사·컨설턴트)", "pattern": "이너젠|INNerGEN|이너캐리|[Ii][Nn][Nn]er[Cc]a[Rr][Rr]y|제안사|당사|저희|컨설팅\\s?팀|수행\\s?팀|PMO|컨설턴트|검증위원"},
+        {"id": "will", "label": "약속 종결(예정·제공·수행·지원·보증·~하겠습니다)", "pattern": "예정|제공|수행|지원|겠습니다|드립니다|드리겠|보장|보증|약속"}
       ]
     },
     "chapter_intro": {
@@ -156,13 +156,23 @@
         {"id": "set", "label": "묶음 제시(A·B·C, 두세 가지, N개)", "pattern": "[가-힣A-Za-z0-9]+\\s?·\\s?[가-힣A-Za-z0-9]+|[두세네]\\s?가지|\\d\\s?(가지|개|대)"},
         {"id": "so", "label": "결론 서술(해야·갖춰야·먼저·가능·대응·달성)", "pattern": "해야|갖춰야|먼저|우선|가능|대응|달성|핵심|입니다|있습니다"}
       ]
+    },
+    "capability": {
+      "no": 15, "label": "역량·강점", "aliases": ["역량", "강점", "실적", "경험", "capability", "strength"],
+      "reader_question": "이 회사·서비스는 무엇을 할 수 있고, 근거는 무엇인가?",
+      "frame": "[주체]는 [근거·실적]을 바탕으로 [역량·강점]을 보유하고 있습니다",
+      "example": "이너젠은 30개+ 방법론 개발 경험을 바탕으로 감축사업 전 과정을 지원할 수 있습니다",
+      "subject": true, "number": "recommended",
+      "checks": [
+        {"id": "ability", "label": "역량 서술(보유·갖추·가능·경험·전문성·역량·강점)", "pattern": "보유|갖추|갖춘|갖고|가지고|가능|할 수 있|경험|전문성|역량|강점|노하우|실적|인정받"}
+      ]
     }
   },
   "sentence_end_pattern": "(니다|다|음|임|됨|함|필요|예정|요|중|완료|\\))\\.?\\s*$",
   "subject_pattern": "^.{0,24}?[가-힣A-Za-z0-9\\)·]+(은|는|이|가|에서|의|도)\\s",
   "layout_types": {
     "_doc": "레이아웃별 어울리는 거버닝 유형. 첫째 값이 기본(유형을 고르지 않았을 때 이 유형으로 추정해 INFO로 검사). 여기 없는 레이아웃은 모든 유형을 허용.",
-    "content-kpi": ["fact", "comparison"],
+    "content-kpi": ["fact", "capability", "comparison"],
     "content-table": ["fact", "requirement", "comparison", "judgment"],
     "content-process": ["recommendation", "definition", "promise"],
     "content-final": ["conclusion", "recommendation"],
@@ -180,7 +190,7 @@
     "s11": ["definition", "requirement"],
     "s12": ["recommendation", "requirement"],
     "s13": ["conclusion", "recommendation"],
-    "s14": ["promise", "definition"],
+    "s14": ["promise", "definition", "capability"],
     "s15": ["recommendation", "requirement"],
     "s16": ["requirement"],
     "s17": ["requirement", "judgment"],
@@ -188,12 +198,12 @@
     "s19": ["comparison", "judgment"],
     "s20": ["recommendation"],
     "s21": ["requirement"],
-    "s22": ["case_lesson"],
+    "s22": ["case_lesson", "capability"],
     "s23": ["conclusion"],
-    "s24": ["promise", "definition"],
+    "s24": ["promise", "definition", "capability"],
     "s25": ["promise", "status"],
     "s26": ["request"],
-    "s27": ["promise"],
+    "s27": ["promise", "capability"],
     "s28": ["status"],
     "s29": ["status", "request"],
     "s30": ["comparison", "judgment"],
@@ -232,7 +242,7 @@
     "s63": ["recommendation", "requirement"],
     "s64": ["judgment", "recommendation"],
     "s65": ["judgment", "definition"],
-    "s66": ["promise"],
+    "s66": ["promise", "capability"],
     "s67": ["promise"],
     "s68": ["judgment", "status"],
     "s69": ["status", "request"],
@@ -248,7 +258,7 @@
     "handout": {"need_any": [["requirement", "definition"], ["conclusion", "recommendation"]], "avoid": ["status", "request", "promise"]},
     "seminar": {"need_any": [["judgment", "outlook", "case_lesson"], ["conclusion", "recommendation"]], "avoid": ["status", "request"]},
     "insight": {"need_any": [["judgment", "outlook"], ["conclusion", "recommendation"]], "avoid": ["status", "request", "promise"]},
-    "proposal": {"need_any": [["judgment", "fact", "cause"], ["promise"]], "avoid": ["status"]},
+    "proposal": {"need_any": [["judgment", "fact", "cause"], ["promise", "capability"]], "avoid": ["status"]},
     "kickoff": {"need_any": [["promise", "definition"], ["request"]], "avoid": []},
     "weekly": {"need_any": [["status"]], "avoid": ["chapter_intro"]},
     "biweekly": {"need_any": [["status"]], "avoid": ["chapter_intro"]},
@@ -258,8 +268,8 @@
     "final": {"need_any": [["conclusion"], ["recommendation"]], "avoid": ["status"]},
     "briefing": {"need_any": [["conclusion", "request"]], "avoid": ["chapter_intro"]},
     "benchmark": {"need_any": [["comparison"], ["recommendation", "judgment"]], "avoid": []},
-    "company_intro": {"need_any": [["definition", "fact"], ["promise"]], "avoid": ["status", "request"]},
-    "innercarry_intro": {"need_any": [["definition", "fact"], ["outlook", "promise"]], "avoid": ["status"]}
+    "company_intro": {"need_any": [["definition", "fact", "capability"], ["promise", "capability"]], "avoid": ["status", "request"]},
+    "innercarry_intro": {"need_any": [["definition", "fact", "capability"], ["outlook", "promise"]], "avoid": ["status"]}
   },
   "mix": {"max_share_single_type": 0.6, "min_content_pages": 6},
   "body_styles": {

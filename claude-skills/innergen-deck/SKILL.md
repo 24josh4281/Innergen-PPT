@@ -106,9 +106,10 @@ facts win. Mark every fictional or illustrative figure `예시`.
 Write the numbered page plan to `/tmp/<deck>/outline.md` as a Markdown table
 `| 쪽 | 레이아웃 | 제목 | 거버닝 | 넣을 내용 | 거버닝 유형 | 본문 구성 |` (layout id
 from the list below, one-line governing message, the must-have content that page
-carries, then the v30 choices). Pick the governing type first (14 types:
+carries, then the v30 choices). Pick the governing type first (15 types:
 정의·개념, 현황·사실, 비교·차이, 원인·동인, 분석·판단, 요구사항·기준, 사례 교훈,
-권고·실행, 전망·기대효과, 진행 상태, 요청·결정, 수행 약속, 장 도입, 결론·종합) and
+권고·실행, 전망·기대효과, 진행 상태, 요청·결정, 수행 약속, 장 도입, 결론·종합,
+역량·강점) and
 write the sentence in that type's frame from `references/governing-body-v30.md` §1;
 then the body style (줄글형, 도식형, 그래프형, 표형, 수치형, 사례형) that matches the
 layout and the deck's body preset. When the user names a type for a page, keep it. Follow the deck type's TOC skeleton and closing set from v20 and
