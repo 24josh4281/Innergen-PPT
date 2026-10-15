@@ -20,6 +20,7 @@ Reads references/content-requirements-v25.json and checks either an outline
 Usage:
     python3 scripts/innergen_content_check.py --outline plan.md --deck-type kickoff --business-type inventory
     python3 scripts/innergen_content_check.py --list                # report and business type ids
+    python3 scripts/innergen_content_check.py --outline plan.md --deck-type company_intro   # v28 회사소개서
 
 Outline format: a Markdown table whose rows start with the page number, then
 layout id, page title, governing message, and any further columns (body notes,
@@ -51,11 +52,26 @@ if not SPEC_PATH.is_file():
 FRAME_TOKENS = ("cover", "toc", "section-divider", "ending")
 
 
+# v28: company_intro / innercarry_intro report types live in an overlay file
+# next to the v25 spec and are merged into report_types and deck_type aliases.
+OVERLAY_NAMES = ("content-requirements-v28-intro.json",)
+
+
 def load_spec(path: Path | None = None) -> dict | None:
     p = path or SPEC_PATH
     if not p.is_file():
         return None
-    return json.loads(p.read_text(encoding="utf-8"))
+    spec = json.loads(p.read_text(encoding="utf-8"))
+    for name in OVERLAY_NAMES:
+        extra = p.with_name(name)
+        if not extra.is_file():
+            continue
+        data = json.loads(extra.read_text(encoding="utf-8"))
+        for key, rt in data.get("report_types", {}).items():
+            spec["report_types"].setdefault(key, rt)
+        spec.setdefault("aliases", {}).setdefault("deck_type", {}).update(
+            data.get("aliases", {}).get("deck_type", {}))
+    return spec
 
 
 def layout_from_stem(stem: str) -> str:

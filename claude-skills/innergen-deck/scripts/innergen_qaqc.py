@@ -39,6 +39,7 @@ if str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
 from console_encoding import configure_utf8_stdio  # noqa: E402
 import innergen_content_check as content_check  # noqa: E402
+import innergen_facts_check as facts_check  # noqa: E402
 
 REPO = _SCRIPTS_DIR.parents[min(3, len(_SCRIPTS_DIR.parents) - 1)]
 RULES_PATH = REPO / "docs/styles/innergen/qaqc-v21.json"
@@ -492,6 +493,11 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
                                           content_spec, rep.add)
         business_type = content_res.get("business_type") or business_type
 
+    # ---- F: company facts ledger (v28) — stale numbers, contacts, brand spelling
+    facts = facts_check.load_facts()
+    if facts is not None:
+        facts_check.check(facts_check.pages_from_qaqc(pages), facts, rep.add)
+
     summary = {
         "project": str(project), "family": family, "deck_type": deck_type, "business_type": business_type,
         "register": main_reg, "sections_missing": content_res.get("sections_missing", []),
@@ -512,8 +518,8 @@ def write_report(project: Path, rep: Report, summary: dict, json_out: Path | Non
     order = {"ERROR": 0, "WARN": 1, "INFO": 2}
     for it in sorted(rep.items, key=lambda i: (order[i["level"]], i["page"], i["code"])):
         md.append(f"| {it['level']} | {it['code']} | {('P%02d' % it['page']) if it['page'] else '덱'} | {it['message']} |")
-    md += ["", "코드: C 화면 고정 요소 · G 거버닝 · T 제목 · O 목차 · S 구조 · R 보고 유형 목차·필수 내용 · B 사업 성격 필수 내용 · Q 잔재·금지 표현. "
-           "규칙표: qaqc-v21.json(C·G·T·O·S), content-requirements-v25.json(R·B·Q), 설명: qaqc-v21.md, content-requirements-v25.md"]
+    md += ["", "코드: C 화면 고정 요소 · G 거버닝 · T 제목 · O 목차 · S 구조 · R 보고 유형 목차·필수 내용 · B 사업 성격 필수 내용 · Q 잔재·금지 표현 · F 회사 기본 정보 원장 대조. "
+           "규칙표: qaqc-v21.json(C·G·T·O·S), content-requirements-v25.json·v28-intro(R·B·Q), company-facts-v28.json(F), 설명: qaqc-v21.md, content-requirements-v25.md"]
     (out_dir / "innergen_qaqc_report.md").write_text("\n".join(md) + "\n", encoding="utf-8")
     data = {"summary": summary, "items": rep.items}
     (out_dir / "innergen_qaqc_report.json").write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -525,7 +531,7 @@ def main(argv=None) -> int:
     configure_utf8_stdio()
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("project", type=Path)
-    ap.add_argument("--deck-type", default=None, help="lecture|handout|seminar|proposal|kickoff|weekly|biweekly|monthly|diagnosis|interim|final|briefing|benchmark|insight")
+    ap.add_argument("--deck-type", default=None, help="lecture|handout|seminar|proposal|kickoff|weekly|biweekly|monthly|diagnosis|interim|final|briefing|benchmark|insight|company_intro|innercarry_intro")
     ap.add_argument("--business-type", default=None, help="cdp_disclosure|regulatory|reduction|inventory|lca_product|climate_risk|esg_rating|climate_education|climate_tech (default: design_spec.md innergen_business_type)")
     ap.add_argument("--register", default="auto", choices=["auto", "external", "internal"])
     ap.add_argument("--family", default=None, help="innergen_lecture|innergen_lecture_v20|innergen_business|innercarry (default: design_profile_v17.json + chrome detection)")
