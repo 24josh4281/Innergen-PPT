@@ -120,3 +120,7 @@ python3 .claude/skills/ppt-master/scripts/innergen_qaqc.py projects/<project> \
 - `svg_quality_checker.py` 0 errors가 먼저다. 이 검사는 그 다음이며, `verify_deck.py`를 대신하지 않는다.
 - 확정된 프로젝트 잠금값(`spec_lock.md`)이 규칙표와 다르면 잠금값이 우선이고, 다른 이유를 전달 메모에 적는다.
 - 2026-10-14 견본 결과: 구조화 장표 견본(23장, final, v20 계열) ERROR 0 · 교육형 견본(15장, lecture) v20 계열 ERROR 0 · 회사소개 계열 15장 ERROR 0 · 이너캐리 계열 15장 ERROR 0.
+
+## v25 목차·필수 내용 검사 (2026-10-15)
+
+보고 유형 × 사업 성격별 목차 골격과 꼭 들어갈 내용을 [content-requirements-v25.json](content-requirements-v25.json)으로 분리하고, `innergen_qaqc.py`가 같은 실행에서 R(보고 유형 목차·필수 내용)·B(사업 성격 필수 내용)·Q(자리표시자·잔재·금지 표현) 코드로 검사한다. 장표 계획 단계에서는 `innergen_content_check.py --outline`이 같은 표로 검사한다. 이 표가 다루는 보고 유형에서는 위 S03(필수 레이아웃)과 O01(목차 없음)을 R01이 대신한다. 설명: [content-requirements-v25.md](content-requirements-v25.md).
