@@ -1,0 +1,63 @@
+{
+  "version": "2026-10-08",
+  "purpose": "INNerGEN deck content planning after the user selects a business type, report type, and visual frame. Source examples inform structure only; never import prior client facts, logos, numbers, or dates.",
+  "business_types": {
+    "cdp_disclosure": {
+      "label_ko": "CDP·기후공시",
+      "focus": ["공시 요구사항과 답변 범위", "항목별 근거 자료", "답변 현황과 보완 과제"],
+      "evidence_rule": "공시 연도와 평가 기준은 해당 프로젝트의 최신 자료로 확인한다."
+    },
+    "reduction": {
+      "label_ko": "온실가스 감축",
+      "focus": ["기준선과 사업 경계", "감축 방법론과 데이터", "MRV와 기대 효과"],
+      "evidence_rule": "감축량·배출계수·단위는 현재 프로젝트의 계산 근거에서만 가져온다."
+    },
+    "regulatory": {
+      "label_ko": "규제 대응",
+      "focus": ["적용 제도와 의무 범위", "산정·제출·검증 절차", "일정과 쟁점"],
+      "evidence_rule": "적용 법령, 기한, 제출 양식은 해당 보고 시점의 공식 자료로 재확인한다."
+    },
+    "inventory": {
+      "label_ko": "온실가스 인벤토리",
+      "focus": ["조직·운영 경계", "활동자료와 Scope 분류", "배출계수·산정·품질관리"],
+      "evidence_rule": "활동자료 원값과 산정식, 배출계수 출처, 단위를 추적 가능하게 남긴다."
+    }
+  },
+  "report_types": {
+    "proposal": {
+      "label_ko": "제안서형",
+      "flow": ["고객 과제와 목적", "범위와 접근 방법", "수행 체계와 산출물", "일정과 필요한 협조"]
+    },
+    "kickoff": {
+      "label_ko": "착수보고형",
+      "flow": ["목적·범위·기준", "세부 수행 계획", "자료 요청과 역할", "주요 일정과 의사결정 사항"]
+    },
+    "interim": {
+      "label_ko": "중간보고형",
+      "flow": ["진행 현황", "확인된 사실과 잠정 결과", "이슈·미확정 사항", "필요한 결정과 다음 단계"],
+      "source_status": "구성 제안: 분석한 19개 PPTX에 중간보고로 직접 명명된 원본 없음"
+    },
+    "final": {
+      "label_ko": "최종보고형",
+      "flow": ["핵심 결론", "방법과 근거", "결과 및 검증", "한계·잔여 과제·인계"]
+    }
+  },
+  "frames": {
+    "classic_grid": "격자형: 남색 격자 헤더·푸터, 흰 본문",
+    "solid_navy": "단색 남색형: 격자 없는 남색 헤더·푸터",
+    "slim_line": "슬림라인형: 흰 바탕, 검은 제목, 가는 남색 구분선"
+  },
+  "reference_counts": {
+    "cdp_disclosure": {"proposal": 3, "kickoff": 1, "interim": 0, "final": 2},
+    "reduction": {"proposal": 1, "kickoff": 2, "interim": 0, "final": 0},
+    "regulatory": {"proposal": 0, "kickoff": 1, "interim": 0, "final": 1},
+    "inventory": {"proposal": 2, "kickoff": 1, "interim": 0, "final": 2}
+  },
+  "reference_count_note": "직접 확인 가능한 파일명·문서 성격 기준. 나머지 3개 감축 방법론 개발 보고서는 최종보고형으로 단정하지 않음.",
+  "selection_contract": [
+    "사용자가 선택한 business_type, report_type, frame을 프로젝트 design_spec.md와 spec_lock.md에 기록한다.",
+    "보고 유형의 flow는 순서 제안이며, 실제 목차와 페이지 수는 현 프로젝트 자료에 맞춰 조정한다.",
+    "선택한 frame의 cover/toc/chapter/content/ending SVG만 page_layouts에 매핑한다. 다른 frame을 혼합하려면 이유를 명시한다.",
+    "source count가 0인 조합은 구성 제안으로 표시하며 원본 재현으로 주장하지 않는다."
+  ]
+}
