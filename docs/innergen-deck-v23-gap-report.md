@@ -6,7 +6,7 @@
 |---|---|
 | 비교한 스킬 | claude.ai에 설치된 `innergen-deck` (이 세션에 동기화된 사본, 2026-10-15) |
 | 기준 규칙 | 스킬에 동봉된 `content-architecture-v20.md`(v23·v24 절), `design-standard-v17.md`(v22·v23 절), `qaqc-v21.json`(rev.23) |
-| 확인하지 못한 것 | slide-master 원본 저장소의 `OUTPUTS/claude-chat-skill/innergen-deck.zip`과 `build_chat_skill.py`. 이 세션에서 접근 가능한 저장소 목록에 slide-master가 없고, `Slide-Master-Workspace`(2026-10-08 백업)에는 해당 파일이 없다. 그래서 원본 zip이 아니라 **실제로 claude.ai에서 쓰이는 설치본**을 기준으로 비교했다. |
+| 원본 대조 | 사용자 PC의 `B:\CODEX\Slide Master`에서 `OUTPUTS/claude-chat-skill/innergen-deck`(2026-10-14 빌드)과 원본 `chat_skill/SKILL.chat.md`·`innergen_qaqc.py`를 읽어 설치본과 MD5로 대조했다. SKILL.md, innergen_qaqc.py, qaqc-v21.json, 3계열 템플릿 JSON 모두 **동일**하다. 즉 설치본 = 최신 빌드 = 원본이다. |
 
 ## 2. 차이 요약
 
@@ -39,6 +39,6 @@
 
 ## 5. 남은 일
 
-- 원본은 slide-master 저장소의 `build_chat_skill.py`다. 같은 변경(SKILL.md 본문, `innergen_qaqc.py` 대체 판별)을 그쪽 생성기와 원본 스크립트에도 넣어야 다음 재빌드에서 되돌아가지 않는다.
+- 원본 반영: 원격 도구는 `.claude` 폴더에 쓸 수 없어 원본을 직접 고치지 못했다. 대신 교체할 두 파일을 `B:\CODEX\Slide Master\OUTPUTS\claude-chat-skill\v23-fix\`에 두었다. `SKILL.chat.md`는 `.claude/skills/ppt-master/scripts/chat_skill/`로, `innergen_qaqc.py`는 `.claude/skills/ppt-master/scripts/`로 덮어쓴 뒤 `build_chat_skill.py`를 다시 돌리면 이번 수정이 빌드에 유지된다. 두 원본 파일은 이번 비교 기준과 같으므로 그대로 덮어써도 다른 변경을 잃지 않는다.
 - claude.ai 업로드는 하지 않았다. 묶음 파일은 프로젝트 폴더 `innergen-deck/innergen-deck.zip`에 있다.
 - v24 구조(s43–s58)는 QA 필수 세트에는 아직 없다(rev.23 기준). 필요하면 규칙표를 rev.24로 올려야 한다.
