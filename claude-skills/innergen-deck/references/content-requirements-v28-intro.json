@@ -1,0 +1,284 @@
+{
+  "version": "v28",
+  "date": "2026-10-15",
+  "purpose": "회사소개서(company_intro)와 이너캐리 소개서(innercarry_intro)의 목차·필수 내용. content-requirements-v25.json의 report_types에 더해져 innergen_content_check.py와 innergen_qaqc.py가 같은 방식으로 검사한다.",
+  "basis": "(주)이너젠_회사소개자료_260929_업데이트.pptx, (이너젠) 이너젠 및 이너캐리 소개 자료_260916_v4.1.pptx, standard-decks-v28.md",
+  "aliases": {
+    "deck_type": {
+      "company": "company_intro",
+      "profile": "company_intro",
+      "회사소개": "company_intro",
+      "사업소개": "company_intro",
+      "innercarry": "innercarry_intro",
+      "product_intro": "innercarry_intro",
+      "이너캐리": "innercarry_intro"
+    }
+  },
+  "report_types": {
+    "company_intro": {
+      "label_ko": "회사소개서·사업소개서",
+      "basis": "CO260929 목차(회사 개요 → 구성 인원 → 사업분야 5종 → 맺음), standard-decks-v28 §A",
+      "family": "innergen_business",
+      "pages": [
+        8,
+        16
+      ],
+      "sections": [
+        {
+          "id": "overview",
+          "label": "회사 개요(회사명·대표·설립·위치)",
+          "required": true,
+          "layouts": [
+            "content-table"
+          ],
+          "keywords": "회사\\s?개요|Company\\s?Overview"
+        },
+        {
+          "id": "people",
+          "label": "구성 인원·전문 인력",
+          "required": true,
+          "layouts": [
+            "team-roles"
+          ],
+          "keywords": "구성\\s?인원|인력\\s?구성|전문\\s?인력"
+        },
+        {
+          "id": "business_areas",
+          "label": "사업 분야 전체(5개 분야)",
+          "required": true,
+          "layouts": [
+            "keyword-grid",
+            "entity-matrix"
+          ],
+          "keywords": "사업\\s?분야|주요\\s?사업"
+        },
+        {
+          "id": "area_detail",
+          "label": "분야별 상세(역량·실적)",
+          "required": true,
+          "keywords": "규제\\s?대응|배출권|감축|LCA|환경성\\s?평가|공시|CDP|RE100"
+        },
+        {
+          "id": "track_record",
+          "label": "핵심 실적 숫자",
+          "required": true,
+          "layouts": [
+            "content-kpi",
+            "year-timeline"
+          ],
+          "keywords": "실적|성과|Track\\s?Record"
+        },
+        {
+          "id": "closing",
+          "label": "맺음(가치·연락처)",
+          "required": true,
+          "layouts": [
+            "ending"
+          ],
+          "keywords": "We\\s?Do|Thank|문의|연락"
+        }
+      ],
+      "order": [
+        "overview",
+        "people",
+        "business_areas",
+        "closing"
+      ],
+      "items": [
+        {
+          "id": "founded",
+          "label": "설립일",
+          "level": "ERROR",
+          "pattern": "2017",
+          "basis": "company-facts company.founded"
+        },
+        {
+          "id": "ceo",
+          "label": "대표자",
+          "level": "ERROR",
+          "pattern": "김성은|손권빈",
+          "basis": "company-facts company.ceo"
+        },
+        {
+          "id": "address",
+          "label": "주소",
+          "level": "WARN",
+          "pattern": "서빙고로",
+          "basis": "company-facts company.address"
+        },
+        {
+          "id": "five_areas",
+          "label": "5개 사업 분야",
+          "level": "WARN",
+          "all_of": [
+            "규제",
+            "배출권|감축",
+            "LCA|환경성",
+            "공시|CDP",
+            "RE100"
+          ],
+          "basis": "company-facts business_areas"
+        },
+        {
+          "id": "kpi",
+          "label": "핵심 실적 숫자(업종·인벤토리·방법론·감축실적)",
+          "level": "WARN",
+          "all_of": [
+            "업종",
+            "방법론",
+            "감축\\s?실적"
+          ],
+          "basis": "company-facts metrics"
+        },
+        {
+          "id": "contact",
+          "label": "연락처(전화·이메일)",
+          "level": "WARN",
+          "pattern": "6273-0489|innergen@inng\\.co\\.kr",
+          "basis": "company-facts company.phone/email"
+        }
+      ]
+    },
+    "innercarry_intro": {
+      "label_ko": "이너캐리 서비스 소개서",
+      "basis": "IC260916 목차(PART 00 회사소개 → PART 01 왜 지금인가 → PART 02 서비스 소개 → PART 03 왜 이너젠인가 → PART 04 도입 효과 → 도입 방식·절차 → 맺음), standard-decks-v28 §B",
+      "family": "innercarry",
+      "pages": [
+        14,
+        30
+      ],
+      "sections": [
+        {
+          "id": "company",
+          "label": "PART 00 회사소개(개요·사업 분야)",
+          "required": false,
+          "layouts": [
+            "content-table",
+            "keyword-grid"
+          ],
+          "keywords": "회사\\s?개요|사업\\s?분야|회사소개"
+        },
+        {
+          "id": "why_now",
+          "label": "PART 01 왜 지금인가(규제·리스크)",
+          "required": true,
+          "layouts": [
+            "year-timeline",
+            "issue-cards",
+            "compare-implication"
+          ],
+          "keywords": "왜\\s?지금|공시|리스크|감사"
+        },
+        {
+          "id": "service",
+          "label": "PART 02 서비스 소개(App·Web·설치형)",
+          "required": true,
+          "layouts": [
+            "task-structure",
+            "content-dual",
+            "asis-tobe-effect"
+          ],
+          "keywords": "서비스|App|Web|설치형|SaaS"
+        },
+        {
+          "id": "why_innergen",
+          "label": "PART 03 왜 이너젠인가(전문성·보안)",
+          "required": true,
+          "layouts": [
+            "content-kpi",
+            "actor-checklist"
+          ],
+          "keywords": "왜\\s?이너젠|컨설팅펌|보안|거버넌스"
+        },
+        {
+          "id": "benefits",
+          "label": "PART 04 도입 효과",
+          "required": true,
+          "layouts": [
+            "key-takeaways"
+          ],
+          "keywords": "도입\\s?효과|무엇을\\s?얻|BENEFIT|효과"
+        },
+        {
+          "id": "adoption",
+          "label": "도입 방식·절차",
+          "required": true,
+          "layouts": [
+            "harvey-compare",
+            "vertical-chevron",
+            "process-steps-detail"
+          ],
+          "keywords": "도입\\s?방식|\\d\\s?단계|절차|가입"
+        },
+        {
+          "id": "closing",
+          "label": "맺음(약속·연락처)",
+          "required": true,
+          "layouts": [
+            "ending"
+          ],
+          "keywords": "Thank|약속|CONTACT|문의"
+        }
+      ],
+      "order": [
+        "why_now",
+        "service",
+        "why_innergen",
+        "benefits",
+        "adoption",
+        "closing"
+      ],
+      "items": [
+        {
+          "id": "three_modes",
+          "label": "도입 방식 3가지(SaaS·설치형·하이브리드)",
+          "level": "WARN",
+          "all_of": [
+            "SaaS",
+            "설치형",
+            "하이브리드"
+          ],
+          "basis": "company-facts innercarry.deployment"
+        },
+        {
+          "id": "app_web",
+          "label": "현장 App · 본사 Web 역할",
+          "level": "WARN",
+          "all_of": [
+            "App|앱",
+            "Web|웹"
+          ],
+          "basis": "company-facts innercarry"
+        },
+        {
+          "id": "audit_trail",
+          "label": "감사 대응 근거(로그·권한·마감)",
+          "level": "WARN",
+          "pattern": "로그|Audit|감사\\s?추적|권한|마감",
+          "basis": "company-facts innercarry.security/controls"
+        },
+        {
+          "id": "standards",
+          "label": "산정 표준(ISO 14064·GHG Protocol 등)",
+          "level": "WARN",
+          "pattern": "ISO\\s?14064|GHG\\s?Protocol",
+          "basis": "company-facts innercarry.standards"
+        },
+        {
+          "id": "regulation_source",
+          "label": "규제 일정의 출처 표기",
+          "level": "WARN",
+          "pattern": "출처|자료\\s?:|Source",
+          "basis": "company-facts time_sensitive"
+        },
+        {
+          "id": "contact",
+          "label": "연락처(전화·이메일)",
+          "level": "WARN",
+          "pattern": "6273-0489|innergen@inng\\.co\\.kr",
+          "basis": "company-facts company.phone/email"
+        }
+      ]
+    }
+  }
+}

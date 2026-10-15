@@ -1,0 +1,548 @@
+{
+  "version": "v28",
+  "updated": "2026-10-15",
+  "purpose": "이너젠·이너캐리 장표에 매번 들어가는 회사 기본 정보 원장. 숫자·연락처·문구는 여기서만 가져오고, 바뀌면 이 파일만 고친다. innergen_facts_check.py가 덱과 이 원장을 대조한다.",
+  "how_to_update": "값이 바뀌면 value와 as_of와 source를 함께 고친다. 확인되지 않은 값은 status를 needs_confirm으로 두고, 장표에 쓰기 전에 사용자에게 확인한다. review_by가 지난 항목은 검사기가 INFO로 알린다.",
+  "sources": {
+    "CO260929": "(주)이너젠_회사소개자료_260929_업데이트.pptx (16:9, 14장)",
+    "IC260916": "(이너젠) 이너젠 및 이너캐리 소개 자료_260916_v4.1.pptx (4:3, 30장)"
+  },
+  "status_values": {
+    "confirmed": "두 원본이 같거나 한 원본에만 있고 반대 근거가 없음",
+    "needs_confirm": "두 원본이 다르거나 이미지에서 눈으로 읽은 값. 쓰기 전에 사용자 확인",
+    "time_sensitive": "제도·일정처럼 바뀔 수 있는 외부 사실. 공식 출처 확인 후 사용"
+  },
+  "company": {
+    "name_ko": {
+      "value": "㈜이너젠",
+      "status": "confirmed",
+      "source": "CO260929 p2, IC260916 p2"
+    },
+    "name_en": {
+      "value": "INNerGEN Co., Ltd.",
+      "status": "confirmed",
+      "source": "IC260916 p1"
+    },
+    "legal_name": {
+      "value": "주식회사 이너젠",
+      "status": "confirmed",
+      "source": "IC260916 p1"
+    },
+    "ceo": {
+      "value": "김성은, 손권빈",
+      "status": "confirmed",
+      "source": "CO260929 p2, IC260916 p2"
+    },
+    "headcount": {
+      "value": "상근 23명",
+      "as_of": "2026-09",
+      "status": "confirmed",
+      "source": "CO260929 p2, IC260916 p2",
+      "review_by": "2027-03-31"
+    },
+    "founded": {
+      "value": "2017년 12월 22일",
+      "status": "confirmed",
+      "source": "CO260929 p2"
+    },
+    "address": {
+      "value": "서울특별시 용산구 서빙고로 17, 센트럴파크타워 704호",
+      "postcode": "04387",
+      "status": "confirmed",
+      "source": "CO260929 p2, IC260916 p30"
+    },
+    "phone": {
+      "value": "02-6273-0489",
+      "status": "confirmed",
+      "source": "IC260916 p30"
+    },
+    "email": {
+      "value": "innergen@inng.co.kr",
+      "status": "confirmed",
+      "source": "IC260916 p30"
+    },
+    "website": {
+      "value": "www.inng.co.kr",
+      "status": "confirmed",
+      "source": "IC260916 p1"
+    },
+    "divisions": {
+      "value": [
+        {
+          "name": "컨설팅 부문",
+          "since": "2017.12",
+          "desc": "기후변화·온실가스 전문 컨설팅"
+        },
+        {
+          "name": "IT 부문",
+          "since": "2018.05",
+          "desc": "온실가스 사내망 설치형 솔루션(2019년 출시, SAP·ERP 연동, 배출권거래제 대응 특화) · 온실가스 전문 SaaS 이너캐리(2026년 출시, 전용 App·Web)"
+        }
+      ],
+      "status": "confirmed",
+      "source": "IC260916 p4"
+    },
+    "main_clients": {
+      "value": "원본 p2의 고객사 로고 묶음 이미지를 그대로 쓴다(글자 정보 없음)",
+      "status": "needs_confirm",
+      "source": "CO260929 p2, IC260916 p2 (이미지)",
+      "note": "로고 이미지를 사용자에게 받아 images/에 넣는다. 고객사 이름을 임의로 적지 않는다."
+    }
+  },
+  "messages": {
+    "company_tagline": {
+      "value": "탄소를 미래자산으로 바라보고, 기업 여건에 적합한 맞춤형 솔루션을 제공합니다.",
+      "status": "confirmed",
+      "source": "CO260929 p1"
+    },
+    "company_hashtags": {
+      "value": "#탄소배출권 #글로벌 환경공시 #탄소발자국 #IT플랫폼",
+      "status": "confirmed",
+      "source": "CO260929 p1"
+    },
+    "company_overview": {
+      "value": "이너젠은 기후변화 관련 전문 컨설팅 서비스를 제공하고 있으며, 크게 ‘규제대응 / 감축사업 / 제품 LCA / 기후공시 / RE100’ 5가지 분야에 전문성을 가지고 있습니다.",
+      "status": "confirmed",
+      "source": "CO260929 p2"
+    },
+    "people_overview": {
+      "value": "이너젠은 2017년도에 설립되었지만, 국내 온실가스 관련 제도가 본격화되기 시작한 2011년경부터 관련 업무를 수행한 전문인력 중심으로 구성된 회사입니다.",
+      "status": "confirmed",
+      "source": "CO260929 p3, IC260916 p3"
+    },
+    "people_credentials": {
+      "value": "온실가스 검증심사원, CDM(PACM) 심사원, LCA(국제통용발자국) 검증심사원, CDP 평가위원 등 다수의 전문인력이 분야별 업무를 전담합니다.",
+      "status": "confirmed",
+      "source": "CO260929 p3"
+    },
+    "closing_philosophy": {
+      "value": "컨설팅의 본질은 천편일률적인 서비스가 아닌, 고객의 여건 및 니즈를 고려하여 실질적인 가치를 제공하는 것입니다.",
+      "status": "confirmed",
+      "source": "CO260929 p14"
+    },
+    "closing_we_do": {
+      "value": "고객에게 가치를 제공하기 위해 전문성 있는 인력이 시작과 끝까지 함께합니다. 고객의 상황을 고려하여 시간, 비용, Risk 절약을 약속드립니다.",
+      "status": "confirmed",
+      "source": "CO260929 p14"
+    },
+    "slogan": {
+      "value": "고객중심의 온실가스 컨설팅 · Innovative Idea for Sustainability Business",
+      "status": "confirmed",
+      "source": "IC260916 p30"
+    },
+    "contact_services": {
+      "value": "기후변화 전략 · 배출권 중개 · 온실가스 감축사업(국내·외) · CDP · TCFD · 전과정평가 · RE100 · IT 시스템",
+      "status": "confirmed",
+      "source": "IC260916 p30"
+    },
+    "innercarry_tagline": {
+      "value": "복잡한 탄소·환경 정보, 이너캐리가 대신 Carry 해드립니다.",
+      "status": "confirmed",
+      "source": "IC260916 p1, p30"
+    },
+    "innercarry_subtitle": {
+      "value": "ESG 공시 대응 · 온실가스(환경) 정보 · SaaS",
+      "status": "confirmed",
+      "source": "IC260916 p1"
+    },
+    "innercarry_why_innergen": {
+      "value": "SaaS 벤더가 아닌, 컨설팅펌이 직접 만든 SaaS.",
+      "status": "confirmed",
+      "source": "IC260916 p23"
+    }
+  },
+  "brand": {
+    "innercarry_spelling": {
+      "value": "INNerCarry",
+      "variants_seen": [
+        "INNerCarry",
+        "iNNerCaRRy",
+        "iNNerCarry",
+        "INNerCaRRy"
+      ],
+      "status": "needs_confirm",
+      "source": "IC260916 p1, p27, p28, p29",
+      "note": "원본 한 덱 안에서 표기가 네 가지로 섞여 있다. 정식 표기를 확정하면 value만 고친다. 검사기는 한 덱 안에서 두 가지 이상 섞이면 경고한다."
+    },
+    "innergen_spelling": {
+      "value": "INNerGEN",
+      "variants_seen": [
+        "INNerGEN"
+      ],
+      "status": "confirmed",
+      "source": "IC260916 p1"
+    }
+  },
+  "business_areas": {
+    "status": "confirmed",
+    "source": "CO260929 p2, IC260916 p4",
+    "value": [
+      {
+        "id": "regulatory",
+        "name": "규제 대응 / 탄소중립 전략",
+        "tags": "TMS / ETS / CBAM",
+        "content_business_type": "regulatory"
+      },
+      {
+        "id": "credit",
+        "name": "탄소배출권 자산화 사업 (방법론 개발 & Credit 인증)",
+        "tags": "규제 / 자발적 배출권",
+        "content_business_type": "reduction"
+      },
+      {
+        "id": "lca",
+        "name": "제품 단위 환경성 평가",
+        "tags": "LCA / PFC / Labeling",
+        "content_business_type": "lca_product"
+      },
+      {
+        "id": "disclosure",
+        "name": "글로벌 환경 공시",
+        "tags": "CDP / DJSI / SBTi",
+        "content_business_type": "cdp_disclosure"
+      },
+      {
+        "id": "re100",
+        "name": "RE100 전략 분석 & 재생에너지 조달 지원",
+        "tags": "RE100, REC, PPA",
+        "content_business_type": "reduction"
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "id": "industries",
+      "label": "업종",
+      "value": "18개+",
+      "number": 18,
+      "unit": "개",
+      "label_rx": "업종",
+      "status": "confirmed",
+      "source": "CO260929 p4, IC260916 p5"
+    },
+    {
+      "id": "inventory_projects",
+      "label": "인벤토리 구축 및 규제 대응",
+      "value": "430건+",
+      "number": 430,
+      "unit": "건",
+      "label_rx": "인벤토리\\s?구축",
+      "status": "confirmed",
+      "source": "CO260929 p4, IC260916 p5"
+    },
+    {
+      "id": "methodologies",
+      "label": "방법론 개발/승인",
+      "value": "30개+",
+      "number": 30,
+      "unit": "개",
+      "label_rx": "방법론\\s?개발",
+      "detail": "규제 10건 완료 / 자발적 20건 완료",
+      "status": "confirmed",
+      "source": "CO260929 p4, p10, IC260916 p5"
+    },
+    {
+      "id": "credits_recognized",
+      "label": "감축실적 인정",
+      "value": "250만 톤+",
+      "number": 250,
+      "unit": "만 톤",
+      "label_rx": "감축\\s?실적",
+      "detail": "규제 200만 톤 / 자발적 50만 톤",
+      "status": "needs_confirm",
+      "source": "CO260929 p4, p10 (250만 톤+), IC260916 p5 (300만 톤+)",
+      "conflict": "9/16 이너캐리 덱은 300만 톤+, 9/29 회사소개 덱은 250만 톤+이고 p10 내역(200+50)도 250만이다. 최신본 250만을 기본값으로 두었다. 쓰기 전에 확인."
+    },
+    {
+      "id": "senior_experience",
+      "label": "시니어 컨설턴트 평균 경력",
+      "value": "10년+",
+      "number": 10,
+      "unit": "년",
+      "label_rx": "평균\\s?경력",
+      "status": "confirmed",
+      "source": "IC260916 p23"
+    },
+    {
+      "id": "verifiers",
+      "label": "온실가스 검증심사원",
+      "value": "4명",
+      "number": 4,
+      "unit": "명",
+      "label_rx": "검증\\s?심사원",
+      "detail": "검증기관 비상근",
+      "status": "confirmed",
+      "source": "CO260929 p5"
+    },
+    {
+      "id": "kea_experts",
+      "label": "한국에너지공단 위촉 전문가",
+      "value": "2명",
+      "number": 2,
+      "unit": "명",
+      "label_rx": "에너지공단",
+      "detail": "기후정책 자문위원 및 ’25년 에너지 효율목표 협의체 검증·평가 분과위원",
+      "status": "confirmed",
+      "source": "CO260929 p5"
+    },
+    {
+      "id": "cdp_leadership",
+      "label": "CDP 최고등급(Leadership A)",
+      "value": "CDP 12개 기업 중 5개 기업 최고등급(Leadership A) 획득",
+      "number": 5,
+      "unit": "개 기업",
+      "label_rx": "Leadership\\s?A",
+      "status": "needs_confirm",
+      "source": "CO260929 p12",
+      "note": "기준 연도가 원본에 적혀 있지 않다. 외부 자료에는 연도를 붙여 쓴다."
+    },
+    {
+      "id": "re100_pm",
+      "label": "재생에너지 계약 경험(PM)",
+      "value": "국내 30MW 이상",
+      "number": 30,
+      "unit": "MW",
+      "label_rx": "재생에너지\\s?계약",
+      "status": "confirmed",
+      "source": "CO260929 p13, IC260916 p11"
+    }
+  ],
+  "credentials": {
+    "status": "confirmed",
+    "source": "CO260929 p5, p9",
+    "value": [
+      "대한상공회의소(K-VCM, 국내 자발적 배출권 시장 운영 비영리 기관) 평가 사무국 역할 수행 (2023년 출범~현재)",
+      "한국에너지공단 기후정책 자문위원 및 ’25년 에너지 효율목표 협의체 검증·평가 분과위원 등 위촉 전문가 2명",
+      "온실가스 검증심사원 4명 포함 다수 전문가 보유 (검증기관 비상근)",
+      "국내 주요 검증기관과의 협업·네트워킹 경험, 최신 MRV 기준 준수",
+      "K-VCM 기술사무국(TAB) 지원 / G-VCM(Verra, GS, 대한상의 등) / 국내 외부사업 산업·발전 부문 지원"
+    ],
+    "partner_logos_note": "원본 p5의 KSA·kfq·KPC·DNV·Lloyd's Register·한국에너지공단 로고는 이미지라서 로고 파일을 받아 쓴다."
+  },
+  "cdp_track_record": {
+    "status": "needs_confirm",
+    "source": "CO260929 p12 (도식 이미지·텍스트 상자 판독)",
+    "value": [
+      {
+        "year": "’19",
+        "event": "환경 공시본부 신설 (CDP C.C · CDP Water · TCFD · SBTi)"
+      },
+      {
+        "year": "’20",
+        "clients": "2개 기업"
+      },
+      {
+        "year": "’21",
+        "clients": "6개 기업"
+      },
+      {
+        "year": "’22",
+        "clients": "12개 기업"
+      },
+      {
+        "year": "’23",
+        "clients": "11개 기업",
+        "event": "SBTi 고객 유치"
+      },
+      {
+        "year": "’24",
+        "clients": "12개 기업",
+        "event": "SBTi 고객 확대"
+      },
+      {
+        "year": "’25",
+        "clients": "12개 기업",
+        "event": "SBTi 승인"
+      }
+    ],
+    "note": "연도별 수상 내역(명예의 전당·아너스 클럽·섹터 아너스·Water 대상 등)은 원본에서 상자가 겹쳐 연도 대응이 불확실하다. 원본 장표를 쓰거나 사용자에게 연도별 표를 받는다."
+  },
+  "reduction_experience": {
+    "status": "confirmed",
+    "source": "CO260929 p7–p10, IC260916 p6–p8",
+    "client_names_note": "고객사명이 들어 있다. 외부 배포 자료에는 공개 동의된 고객만 쓴다.",
+    "themes": [
+      "에너지(수소) / 열&냉열 / 데이터센터 냉각 기술의 방법론 개발·감축량 평가·배출권 인정",
+      "고효율 제품(에너지 & 물질) / 자원 순환 / DAC 기술의 방법론 개발·감축량 평가·배출권 인정"
+    ],
+    "markets": "K-VCM(대한상의 탄소감축인증센터, KOC 발급·활용) · UN-기재부 G-VCM(VCM Carbon Credits) · 외부감축사업(기후에너지환경부 운영 제도) · ITMO 6.2/6.4 Feasibility Study · CORSIA",
+    "issuance": "감축실적 발급 경험: 규제 200만 톤 / 자발적 50만 톤",
+    "methodology_count": "방법론 개발 경험: 규제 10건 완료 / 자발적 20건 완료"
+  },
+  "lca_tool": {
+    "status": "confirmed",
+    "source": "CO260929 p11, IC260916 p9",
+    "value": "기업 SAP/ERP 자료 업로드 방식의 자동화 LCA 산정 Tool. 다양한 조건(제품, 방법론, 컷오프 룰)별 성적을 하나의 Tool에서 산출해 매년 반복 컨설팅 없이 성적을 관리.",
+    "references": "석유화학 H社 · 식품/바이오 C社 · 조선 H社 · 자원순환 L社 · 전기전자 D社 · 반도체 S社 구축 완료"
+  },
+  "innercarry": {
+    "status": "confirmed",
+    "source": "IC260916 p18–p29",
+    "pains": [
+      "복잡한 인벤토리 구성 및 온실가스 산정 → 전문 컨설턴트가 한번에",
+      "수많은 사업장에 흩어져 있는 Data → 이너캐리 전용 App으로 한번에",
+      "공시 및 환경 규제에 맞는 Data 가공 → 이너캐리 Web으로 한번에"
+    ],
+    "deployment": [
+      {
+        "name": "SaaS형",
+        "role": "기본",
+        "desc": "별도 설치 없이 온라인 접속. 연결회사·협력사 데이터 수집에 특화"
+      },
+      {
+        "name": "사내(내부망) 설치형",
+        "role": "옵션",
+        "desc": "사내 ERP·MES 등과 연동하는 자체 구축형. 종속회사 데이터 통합 관리, 공시 형태 변환·API 전송"
+      },
+      {
+        "name": "하이브리드형",
+        "role": "옵션",
+        "desc": "SaaS형 + 내부망 설치형. 핵심 데이터는 사내 보관, 지사·협력사 데이터는 온라인 수집"
+      }
+    ],
+    "steps": [
+      "회원 가입(법인만 가입)",
+      "사용 준비(현장 담당자 초대·전용 App 설치)",
+      "자료 입력(매월, 약 5분 내외)",
+      "자료 점검(본사 확인·월별 마감)",
+      "데이터 전송(옵션: 사내 설치형·API)"
+    ],
+    "security": [
+      "감사 로그 자동 기록(사번·타임스탬프·수정 전후 값·사유)",
+      "역할별 권한 4단계 분리(운영관리자·사업장관리자·시설관리자·감사/모니터링)",
+      "국내 리전 클라우드(네이버클라우드) 저장",
+      "개인정보보호법 준수"
+    ],
+    "controls": [
+      "데이터 취합 및 연동",
+      "입력자-확인자 · 마감 락(Lock)",
+      "배출계수 마스터 · 버전 관리",
+      "데이터 로그 자동 기록",
+      "이상치 탐지(전월/전년 대비 ±30% Red Flag)"
+    ],
+    "benefits": [
+      "“현장” 업무 부하 감소",
+      "“본사” 주기적 관리",
+      "“온실가스” 전문적 지원",
+      "“전사” 관리체계 개선",
+      "“ESG” 공시 경쟁력 강화"
+    ],
+    "promises": [
+      "전문가 지원",
+      "데이터 관리 지원",
+      "기업별 맞춤형 지원",
+      "정확성 보증",
+      "데이터 연계 지원"
+    ],
+    "standards": "국내외 산정지침 · ISO 14064 · GHG Protocol · IPCC (4대 표준)",
+    "coverage": "배출권거래제·목표관리제부터 CBAM·CSRD·ISSB(KSSB)까지",
+    "launch": {
+      "value": "2026년 출시",
+      "status": "needs_confirm",
+      "source": "IC260916 p4",
+      "note": "CO260929 p6 표에는 고객사별로 ‘정식 출시 후 사용 예정’으로 적혀 있다. 정식 출시일을 확정해 적는다."
+    }
+  },
+  "time_sensitive": [
+    {
+      "id": "kr_esg_mandatory_disclosure",
+      "claim": "「지속가능성(ESG) 공시 제도화 방안(최종안)」에 따라 자산 10조 원 이상 대기업 및 주요 연결 자회사 대상 사업보고서 법정공시가 2028년 시행되고, 2027 회계연도 실적 데이터 상시 수집이 필요하다.",
+      "status": "time_sensitive",
+      "source": "IC260916 p13 (덱 기재 내용)",
+      "verify_with": "금융위원회 보도자료 원문(fsc.go.kr)에서 대상·시행 연도를 확인한 뒤 출처 줄에 링크와 날짜를 적는다.",
+      "review_by": "2026-12-31"
+    }
+  ],
+  "checks": [
+    {
+      "id": "headcount",
+      "label": "상근 인원",
+      "rx": "상근\\s*(\\d+)\\s*명",
+      "expect": [
+        "23"
+      ],
+      "fact": "company.headcount"
+    },
+    {
+      "id": "founded",
+      "label": "설립 연도",
+      "rx": "설립[^0-9\\n]{0,12}(\\d{4})\\s*년",
+      "expect": [
+        "2017"
+      ],
+      "fact": "company.founded"
+    },
+    {
+      "id": "credits",
+      "label": "감축실적 인정량(만 톤)",
+      "rx": "(\\d{2,4})\\s*만\\s*톤",
+      "page_rx": "감축\\s?실적",
+      "expect": [
+        "250",
+        "200",
+        "50"
+      ],
+      "fact": "metrics.credits_recognized"
+    },
+    {
+      "id": "inventory",
+      "label": "인벤토리 구축·규제 대응 건수",
+      "rx": "(\\d{2,4})\\s*건\\s*\\+",
+      "page_rx": "인벤토리",
+      "expect": [
+        "430"
+      ],
+      "fact": "metrics.inventory_projects"
+    },
+    {
+      "id": "industries",
+      "label": "업종 수",
+      "rx": "(\\d{1,3})\\s*개\\s*\\+?\\s*업종|업종[^0-9\\n]{0,6}(\\d{1,3})\\s*개",
+      "expect": [
+        "18"
+      ],
+      "fact": "metrics.industries"
+    },
+    {
+      "id": "phone",
+      "label": "대표 전화",
+      "rx": "(0\\d{1,2}[-.)\\s]\\d{3,4}[-.\\s]\\d{4})",
+      "expect": [
+        "02-6273-0489"
+      ],
+      "normalize": "digits",
+      "fact": "company.phone"
+    },
+    {
+      "id": "email",
+      "label": "대표 이메일",
+      "rx": "([A-Za-z0-9._-]+@inng\\.co\\.kr)",
+      "expect": [
+        "innergen@inng.co.kr"
+      ],
+      "fact": "company.email"
+    },
+    {
+      "id": "postcode",
+      "label": "우편번호",
+      "rx": "\\((\\d{5})\\)\\s*서울",
+      "expect": [
+        "04387"
+      ],
+      "fact": "company.address"
+    },
+    {
+      "id": "address_room",
+      "label": "사무실 호수",
+      "rx": "센트럴파크타워\\s*(\\d{3,4})\\s*호",
+      "expect": [
+        "704"
+      ],
+      "fact": "company.address"
+    }
+  ],
+  "brand_rx": {
+    "innercarry": "i?NN?er\\s?Ca[Rr][Rr]y",
+    "innergen": "i?NN?er\\s?G[Ee][Nn]"
+  }
+}
