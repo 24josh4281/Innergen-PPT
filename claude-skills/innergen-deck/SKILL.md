@@ -70,16 +70,58 @@ title, and the one-line governing message. Follow the deck type's TOC skeleton
 and closing set from v20. Ask the user to confirm or adjust, then end the turn.
 Do not draw pages before this confirmation.
 
-Layout ids (same in every family): `01_cover`, `02_toc`, `02b_toc_pages`,
-`02c_section_divider`, `03a_content`, `03b_content_final`, `03c_content_split`,
-`03d_content_dual`, `03e_content_table`, `03f_content_kpi`,
-`03g_content_process`, `04_ending`, and structures `s01_exec_summary` …
-`s23_key_summary` (exec summary, findings→insights, chart+insight,
-chart+table strip, entity matrix, principle matrix, as-is/to-be/effect, phase
-roadmap, year timeline, maturity heatmap, list zoom, actor checklist, key
-takeaways, task structure, vertical chevron, period applicability, decision tree,
-keyword grid, compare+implication, self-check, guidance focus, case capture,
-key summary).
+Layout ids. All three families carry the same set, except `02_toc`, which
+exists only in `innergen_lecture` (the other two use `02b_toc_pages`).
+
+- Frame: `01_cover`, `02_toc`, `02b_toc_pages`, `02c_section_divider`,
+  `03a_content`, `03b_content_final`, `03c_content_split`, `03d_content_dual`,
+  `03e_content_table`, `03f_content_kpi`, `03g_content_process`, `04_ending`.
+- Structures v18–v20 (`s01`–`s23`): `s01_exec_summary`, `s02_findings_insights`,
+  `s03_chart_insight`, `s04_chart_table_strip`, `s05_entity_matrix`,
+  `s06_principle_matrix`, `s07_asis_tobe_effect`, `s08_phase_roadmap`,
+  `s09_year_timeline`, `s10_maturity_heatmap`, `s11_list_zoom`,
+  `s12_actor_checklist`, `s13_key_takeaways`, `s14_task_structure`,
+  `s15_vertical_chevron`, `s16_period_applicability`, `s17_decision_tree`,
+  `s18_keyword_grid`, `s19_compare_implication`, `s20_self_check`,
+  `s21_guidance_focus`, `s22_case_capture`, `s23_key_summary`.
+- Report structures v23 (`s24`–`s37`): `s24_project_overview` (과업 개요),
+  `s25_gantt_schedule` (일정 간트), `s26_data_request` (자료 요청),
+  `s27_team_roles` (수행 체계), `s28_status_board` (과업 현황판),
+  `s29_progress_plan` (진행·계획 2열), `s30_radar_benchmark` (벤치마킹 레이더),
+  `s31_diagnosis_table` (진단표), `s32_priority_matrix` (우선순위 2×2),
+  `s33_approach_matrix` (접근방법 매트릭스), `s34_exec_one_pager` (경영진 요약 1장),
+  `s35_decision_request` (결정 요청), `s36_meeting_log` (회의·교육 실적),
+  `s37_purpose_effects` (배경·기대효과).
+- Seminar·lecture structures v23 (`s38`–`s42`): `s38_issue_cards` (이슈 카드),
+  `s39_challenges_considerations` (과제·고려사항), `s40_process_steps_detail`
+  (단계 프로세스 상세), `s41_quote_opener` (양극 인용), `s42_scope_method_result`
+  (범위·방법·결과).
+- Consulting diagrams v24 (`s43`–`s58`): `s43_issue_tree`, `s44_hypothesis_workplan`,
+  `s45_scqa_storyline`, `s46_driver_tree`, `s47_waterfall_bridge`, `s48_macc_curve`,
+  `s49_pathway_wedge`, `s50_materiality_matrix`, `s51_risk_heatmap`,
+  `s52_scenario_matrix`, `s53_harvey_compare`, `s54_raci_matrix`,
+  `s55_stakeholder_map`, `s56_three_horizons`, `s57_nine_box`, `s58_operating_model`.
+
+Use the v23/v24 structures first in the matching slot of the deck type's TOC
+skeleton (v20 §v23·§v24):
+
+| Deck type or topic | Prefer |
+|---|---|
+| kickoff | s24 · s37 · s27 · s25 · s26 (v24: s44 · s54 · s55) |
+| weekly / biweekly | s29 · s35 |
+| monthly | s28 |
+| diagnosis | s31 · s32 (v24: s46 · s58) |
+| final | s34 · s42 (v24: s45 · s47 · s49) |
+| briefing | s34 |
+| seminar | s41 · s38 · s39 · s40 |
+| proposal | v24: s43 · s44 · s53 |
+| reduction strategy | v24: s47 · s48 · s49 |
+| materiality · risk | v24: s50 · s51 · s52 |
+
+`innergen_qaqc` (rev.23) warns when a deck misses its required layouts:
+kickoff = TOC + s24/s14 + s25/s08 + s26/s12; weekly·biweekly = s29/s28;
+diagnosis = s31/s10 + s32/s05; final = TOC + s01/s34/03f; lecture = TOC +
+s21/s22 + s20/s23.
 
 ## 4. Scaffold
 
@@ -95,8 +137,12 @@ Read `spec_lock.md` and `templates/design_spec.md` before the first page.
 
 For each confirmed page:
 
-1. Copy `templates/<layout>.svg` to `svg_output/NN_<short_name>.svg`
-   (`NN` = two-digit page number).
+1. Copy `templates/<layout>.svg` to `svg_output/NN_<layout>.svg`
+   (`NN` = two-digit page number, `<layout>` = the layout id unchanged, e.g.
+   `05_s24_project_overview.svg`, `02_02b_toc_pages.svg`). Flat SVGs carry no
+   layout attribute, so `innergen_qaqc` reads the layout id from this file name
+   to check the TOC, required pages and closing set. A suffix is allowed after a
+   double underscore (`07_s25_gantt_schedule__phase2.svg`).
 2. Replace every `{{PLACEHOLDER}}` with real content; delete unused slots and
    their shapes rather than leaving them empty. Keep the fixed chrome (header,
    governing box, footer, logo, page number) at the template's exact geometry.

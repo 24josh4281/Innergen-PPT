@@ -108,12 +108,22 @@ def _near(a, b, tol):
     return a is not None and b is not None and abs(a - b) <= tol
 
 
+def _layout_from_filename(stem: str) -> str:
+    """Flat (chat) edition: SVGs carry no data-pptx-layout, so read the layout id
+    from the page file name `NN_<layout_id>.svg` (e.g. `05_s24_project_overview`)
+    and return it hyphenated (`s24-project-overview`) for substring matching."""
+    m = re.match(r"^\d+_((?:0\d[a-z]?|s\d{2})_[a-z0-9_]+?)(?:__.*)?$", stem)
+    if not m:
+        return ""
+    return re.sub(r"^(?:0\d[a-z]?)_", "", m.group(1)).replace("_", "-")
+
+
 # ---------------------------------------------------------------- page model
 class Page:
     def __init__(self, path: Path, index: int, fam: dict | None = None):
         self.path, self.index = path, index
         self.root = ET.parse(str(path)).getroot()
-        self.layout = self.root.get("data-pptx-layout") or ""
+        self.layout = self.root.get("data-pptx-layout") or _layout_from_filename(path.stem)
         self.role = self.root.get("data-pptx-page-role") or ""
         self.texts: list[dict] = []
         self.rects: list[dict] = []
@@ -404,7 +414,7 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
 
     # ---- O: TOC ↔ chapters
     def _is_toc(layout):
-        return any(layout.startswith(x) for x in rules["toc"]["layouts"])
+        return any(layout.startswith(x) for x in rules["toc"]["layouts"]) or layout in ("toc", "toc-pages")
 
     toc_pages = [p for p in pages if _is_toc(p.layout)]
     if toc_pages:
