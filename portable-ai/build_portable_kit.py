@@ -8,11 +8,12 @@ stay identical across tools.
 Usage:
     python3 portable-ai/build_portable_kit.py            # writes portable-ai/kit/ and dist/*.zip
 
-Output (10 files; 00_orchestrator.md is pasted as instructions, the other
-nine are uploaded as knowledge files):
-    00_orchestrator.md 01_planner.md 02_writer.md 03_designer.md 04_qa.md
-    design-tokens.md layout-catalog.md company-facts-v28.md
-    standard-decks-v28.md content-requirements-v25.md
+Output: kit/ (role files + shared references) and one package per platform
+in dist/: INSTRUCTIONS.md (00_orchestrator) for the instructions box and
+knowledge/ with 7 files (roles.md = 01–04 merged, design-tokens, layout-catalog,
+company-facts-v28, standard-decks-v28, content-requirements-v25,
+governing-body-v30). shared/ holds the v30 governing/body spec and the
+s65–s74 templates (PR #5) until the skill sources carry them.
 
 Dependencies:
     None (standard library only)
@@ -29,6 +30,7 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
 SKILL = REPO / "claude-skills" / "innergen-deck"
 OUT = HERE / "kit"
+SHARED = HERE / "shared"
 DIST = HERE / "dist"
 PLATFORMS = {"gpt": "innergen-gpt-kit", "gemini": "innergen-gemini-kit"}
 FAMILIES = {
@@ -55,6 +57,10 @@ FRAME_USE = {
     "s49_pathway_wedge": "감축 경로 웨지", "s50_materiality_matrix": "중대성 매트릭스", "s51_risk_heatmap": "리스크 히트맵",
     "s52_scenario_matrix": "시나리오 매트릭스", "s53_harvey_compare": "하비볼 비교", "s54_raci_matrix": "RACI 매트릭스",
     "s55_stakeholder_map": "이해관계자 지도", "s56_three_horizons": "3 Horizons", "s57_nine_box": "9-Box", "s58_operating_model": "운영 모델",
+    "s65_proposal_understanding": "과업 이해(상황·쟁점·대응)", "s66_why_us_pillars": "차별화 기둥", "s67_rfp_compliance": "요구사항 대응표",
+    "s68_hypothesis_tracker": "가설 검증 현황", "s69_issue_risk_log": "이슈·리스크 로그", "s70_pyramid_summary": "피라미드 요약",
+    "s71_findings_initiatives": "진단–과제 연계", "s72_initiative_charter": "과제 정의서", "s73_wave_roadmap": "웨이브 로드맵",
+    "s74_business_case": "비즈니스 케이스",
 }
 
 
@@ -95,29 +101,52 @@ def _skill_labels() -> dict[str, str]:
     return {m.group(1): m.group(2) for m in re.finditer(r"`(s\d{2}_[a-z0-9_]+)`\s*\(([^)]+)\)", text)}
 
 
+def _v30() -> dict:
+    p = SHARED / "governing-body-v30.json"
+    return json.loads(p.read_text(encoding="utf-8")) if p.is_file() else {}
+
+
+def _layout_key(lid: str) -> str:
+    """`s47_waterfall_bridge` -> `s47`, `03f_content_kpi` -> `content-kpi`."""
+    m = re.match(r"^(s\d{2})_", lid)
+    return m.group(1) if m else re.sub(r"^0\d[a-z]?_", "", lid).replace("_", "-")
+
+
 def layout_catalog() -> str:
     labels = _skill_labels()
     maps = {f: json.loads((SKILL / "templates" / "decks" / f"{f}.json").read_text(encoding="utf-8")) for f in FAMILIES}
-    base = maps["innergen_business"]
-    ids = sorted({Path(k).stem for m in maps.values() for k in m if k.endswith(".svg")})
+    texts = {Path(k).stem: v for m in reversed(list(maps.values())) for k, v in m.items() if k.endswith(".svg")}
+    texts.update({k: v for k, v in ((Path(k).stem, v) for k, v in maps["innergen_business"].items() if k.endswith(".svg"))})
+    # v30 s65–s74 (PR #5): read from the shared copy until the skill templates carry them
+    for f in sorted((SHARED / "v30-templates").glob("*.svg")):
+        texts.setdefault(f.stem, f.read_text(encoding="utf-8"))
+    v30 = _v30()
+    gtypes, bstyles = v30.get("governing_types", {}), v30.get("body_styles", {})
+    ltypes, lstyles = v30.get("layout_types", {}), v30.get("layout_styles", {})
     md = ["# 레이아웃 목록과 칸(슬롯) 이름", "",
           "> `build_portable_kit.py`가 Claude 스킬 템플릿에서 만든다. 디자이너는 아래 id와 칸 이름만 쓴다.",
           "> 세 계열이 같은 목록을 쓰며 `02_toc`만 교육 계열 전용이다(나머지 계열은 `02b_toc_pages`).",
-          "> 공통 칸: PAGE_TITLE(제목) · KEY_MESSAGE(거버닝) · SECTION_NAME · SOURCE(출처) · PAGE_NUM.", "",
-          "| 레이아웃 id | 쓰임 | 전용 칸 |", "|---|---|---|"]
+          "> 공통 칸: PAGE_TITLE(제목) · KEY_MESSAGE(거버닝) · SECTION_NAME · SOURCE(출처) · PAGE_NUM.",
+          "> 기본 거버닝 유형·본문 구성은 `governing-body-v30.md` 기준이다. 유형의 첫 값이 기본이며, 빈 칸은 모든 유형을 허용한다.", "",
+          "| 레이아웃 id | 쓰임 | 기본 거버닝 유형 | 본문 구성 | 전용 칸 |", "|---|---|---|---|---|"]
     common = {"PAGE_TITLE", "KEY_MESSAGE", "SECTION_NAME", "SOURCE", "PAGE_NUM", "CONTENT_AREA"}
-    for lid in ids:
-        src = base.get(f"templates/{lid}.svg") or next(m[f"templates/{lid}.svg"] for m in maps.values() if f"templates/{lid}.svg" in m)
-        slots = sorted(set(re.findall(r"\{\{([A-Z0-9_]+)\}\}", src)) - common)
+    for lid in sorted(texts):
+        slots = sorted(set(re.findall(r"\{\{([A-Z0-9_]+)\}\}", texts[lid])) - common)
         use = FRAME_USE.get(lid) or labels.get(lid) or lid.split("_", 1)[1].replace("_", " ")
-        md.append(f"| `{lid}` | {use} | {', '.join(slots)} |")
-    md += ["", "칸 이름의 숫자(_1, _2 …)는 반복 칸이다. 내용이 칸 수보다 적으면 남는 번호를 빼고, 많으면 쪽을 나눈다."]
+        key = _layout_key(lid)
+        types = " · ".join(gtypes.get(t, {}).get("label", t) for t in ltypes.get(key, []))
+        style = lstyles.get(key)
+        style = bstyles.get(style, {}).get("label", style) if style else ("내용으로 판정" if key in ("content", "content-split", "content-dual") else "")
+        md.append(f"| `{lid}` | {use} | {types} | {style} | {', '.join(slots)} |")
+    md += ["", "칸 이름의 숫자(_1, _2 …)는 반복 칸이다. 내용이 칸 수보다 적으면 남는 번호를 빼고, 많으면 쪽을 나눈다.",
+           "s59–s64는 PR #2, s65–s74는 PR #5가 Claude 스킬에 반영된 뒤 PPTX로 만들 수 있다."]
     return "\n".join(md) + "\n"
 
 
 def build_platforms() -> None:
     """One upload-ready folder + ZIP per platform: INSTALL, INSTRUCTIONS,
-    knowledge/ (9 files), roles-split/, starters, expected outputs."""
+    knowledge/ (7 files: roles merged + 6 shared), roles-split/, starters,
+    expected outputs."""
     if DIST.exists():
         shutil.rmtree(DIST)
     roles = sorted(OUT.glob("0[1-4]_*.md"))
@@ -131,11 +160,11 @@ def build_platforms() -> None:
         shutil.copy2(HERE / "platforms" / "starters.txt", root / "starters.txt")
         shutil.copy2(HERE / "examples" / "EXPECTED-OUTPUTS.md", root / "EXPECTED-OUTPUTS.md")
         for f in OUT.iterdir():
-            if f.name != "00_orchestrator.md":
+            if f.name != "00_orchestrator.md" and f not in roles:
                 shutil.copy2(f, root / "knowledge" / f.name)
+        (root / "knowledge" / "roles.md").write_text(merged + "\n", encoding="utf-8")
         for f in roles:
             shutil.copy2(f, root / "roles-split" / f.name)
-        (root / "roles-merged.md").write_text(merged + "\n", encoding="utf-8")
         with zipfile.ZipFile(DIST / f"{name}.zip", "w", zipfile.ZIP_DEFLATED) as zf:
             for f in sorted(root.rglob("*")):
                 if f.is_file():
@@ -151,6 +180,8 @@ def main() -> int:
         shutil.copy2(f, OUT / f.name)
     for name in REFS:
         shutil.copy2(SKILL / "references" / name, OUT / name)
+    if (SHARED / "governing-body-v30.md").is_file():
+        shutil.copy2(SHARED / "governing-body-v30.md", OUT / "governing-body-v30.md")
     (OUT / "design-tokens.md").write_text(design_tokens(), encoding="utf-8")
     (OUT / "layout-catalog.md").write_text(layout_catalog(), encoding="utf-8")
     build_platforms()

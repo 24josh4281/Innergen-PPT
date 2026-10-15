@@ -10,30 +10,31 @@ ChatGPT와 Gemini에서도 쓰도록 역할별 지침으로 나눈 묶음이다.
 | 파일 | 역할 | 하는 일 | 결과물 |
 |---|---|---|---|
 | `00_orchestrator.md` | 진행자 | 네 역할을 순서대로 돌리고 목차 확인에서 멈춤 | — |
-| `01_planner.md` | 기획자 | 계열·덱 유형 확정, 쪽별 목차표 | `| 쪽 | 레이아웃 | 제목 | 거버닝 | 넣을 내용 |` |
-| `02_writer.md` | 작성자 | 제목·거버닝 한 줄·본문·출처 | 쪽별 문구 |
+| `01_planner.md` | 기획자 | 계열·덱 유형·본문 구성 프리셋 확정, 쪽별 목차표 | 목차표(거버닝 유형·본문 구성 열 포함) |
+| `02_writer.md` | 작성자 | 유형별 문장 틀로 거버닝 한 줄, 본문·출처 | 쪽별 문구 |
 | `03_designer.md` | 디자이너 | 레이아웃 칸 배정, 색·크기 토큰 | 슬롯 명세 JSON |
 | `04_qa.md` | 검수자 | Claude 자동 검사와 같은 코드로 점검 | 검사표(PASS/FAIL) |
 
 공통 지식: `design-tokens.md`(계열별 색·글꼴·크기), `layout-catalog.md`(레이아웃 id와 칸 이름),
 `company-facts-v28.md`(회사 기본 정보 원장), `standard-decks-v28.md`(회사소개서·이너캐리 소개서 표준 목차),
-`content-requirements-v25.md`(덱 유형×사업 성격 필수 목차·내용).
+`content-requirements-v25.md`(덱 유형×사업 성격 필수 목차·내용), `governing-body-v30.md`(거버닝 유형 14종·본문 구성 프리셋 5종).
+패키지에서는 역할 파일 4개를 `knowledge/roles.md` 하나로 합쳐 올린다. `shared/`에는 v30 규칙과 s65–s74 템플릿 사본(PR #5)이 있다.
 
 ## ChatGPT에서 쓰기
 
 1. GPT 만들기(Configure) → Instructions에 `00_orchestrator.md` 내용을 붙인다.
-2. Knowledge에 나머지 9개 파일을 올린다.
-3. 역할을 나눠 쓰고 싶으면 GPT를 네 개 만들어 Instructions에 각 역할 파일을 넣고, 공통 지식 5개를 똑같이 올린다.
+2. Knowledge에 패키지의 `knowledge/` 7개 파일을 올린다.
+3. 역할을 나눠 쓰고 싶으면 GPT를 네 개 만들어 Instructions에 각 역할 파일을 넣고, 공통 지식 6개를 똑같이 올린다.
 4. ChatGPT 프로젝트(Projects)를 쓰면 프로젝트 지침에 `00_orchestrator.md`, 파일에 나머지를 올린다.
 
 ## Gemini에서 쓰기
 
 1. Gem 만들기 → 지침 칸에 `00_orchestrator.md` 내용을 붙인다.
-2. 지식 파일에 나머지 9개를 올린다. 공식 도움말: [Use Gems in Gemini Apps](https://support.google.com/gemini/answer/15146780?hl=en)
+2. 지식 파일에 `knowledge/` 7개를 올린다. 공식 도움말: [Use Gems in Gemini Apps](https://support.google.com/gemini/answer/15146780?hl=en)
 3. 역할별 Gem이 필요하면 GPT와 같은 방식으로 네 개를 만든다.
 
-업로드 개수 한도는 두 서비스가 바꿀 수 있다. 이 묶음은 지침 1개 + 지식 9개(합계 10개)로 맞췄다.
-한도를 작성 시점에 공식 문서로 확인하지 못했으니, 올라가지 않으면 `01`–`04`를 한 파일로 합친다.
+업로드 개수 한도는 두 서비스가 바꿀 수 있다. 이 묶음은 지침 1개 + 지식 7개로 맞췄다.
+한도는 작성 시점에 공식 문서로 확인하지 못했다.
 
 ## 할 수 없는 것
 

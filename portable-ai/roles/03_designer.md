@@ -4,7 +4,7 @@
 작성자 문구, `layout-catalog.md`, `design-tokens.md`
 
 ## 해야 할 일
-1. 쪽마다 레이아웃 id를 확정한다. 문구 양이 레이아웃 칸보다 많으면 쪽을 나누거나 표형 레이아웃으로 바꾼다. 글자를 줄여서 맞추지 않는다.
+1. 쪽마다 레이아웃 id를 확정한다. 레이아웃의 본문 구성(`layout-catalog.md`)이 목차표의 본문 구성과 같아야 한다. 다르면 레이아웃을 바꾸거나 목차표를 고친다. 문구 양이 레이아웃 칸보다 많으면 쪽을 나누거나 표형 레이아웃으로 바꾼다. 글자를 줄여서 맞추지 않는다.
 2. 계열의 색·글꼴·크기는 `design-tokens.md`의 값만 쓴다. 다른 회사 브랜드 색을 쓰지 않는다.
 3. 칸(슬롯)마다 들어갈 글을 배정한다. 쓰지 않는 칸은 비우지 말고 목록에서 뺀다.
 4. 이미지 칸에는 사용자가 준 파일 이름만 쓴다. 없으면 `need_image`에 적고 그 칸이 없는 레이아웃을 고른다.
@@ -22,12 +22,15 @@
   "family": "innergen_business",
   "deck_type": "company_intro",
   "business_type": null,
+  "body_preset": "balanced",
   "pages": [
     {
       "page": 5,
       "layout": "03f_content_kpi",
       "title": "3-1. 규제 대응 / 탄소중립 전략",
-      "governing": "이너젠은 18개+ 업종 산정 실적으로 국가별 GHG 규제에 대응합니다.",
+      "governing": "이너젠은 2026년 기준 18개+ 업종에서 GHG 규제 대응을 수행했습니다.",
+      "governing_type": "fact",
+      "body_style": "kpi",
       "slots": {
         "KPI_1_FIGURE": "18개+", "KPI_1_LABEL": "업종",
         "KPI_2_FIGURE": "430건+", "KPI_2_LABEL": "인벤토리 구축",

@@ -5,9 +5,9 @@
 | 폴더·파일 | 쓰는 곳 |
 |---|---|
 | `INSTRUCTIONS.md` | GPT 편집 화면의 **Instructions** 칸에 붙여 넣기 (약 1,600자, 8,000자 한도 안) |
-| `knowledge/` 9개 파일 | **Knowledge** 에 업로드 |
+| `knowledge/` 7개 파일 | **Knowledge** 에 업로드 |
 | `starters.txt` | **Conversation starters** 칸에 한 줄씩 |
-| `roles-split/` | 역할별 GPT 4개로 나눠 쓸 때만 사용 |
+| `roles-split/` | 역할별 GPT 4개로 나눠 쓸 때만 사용(`knowledge/roles.md`는 이 4개를 합친 것) |
 | `EXPECTED-OUTPUTS.md` | 결과물 예시(올리지 않아도 됨) |
 
 ## A. GPT 하나로 쓰기 (권장)
@@ -18,7 +18,7 @@
 2. **이름**: `이너젠 장표 도우미` · **설명**: `이너젠·이너캐리 스타일 장표의 목차·문구·슬롯 명세·검수표를 만듭니다`
 3. **Instructions**: `INSTRUCTIONS.md` 내용을 전부 복사해 붙입니다.
 4. **Conversation starters**: `starters.txt`의 네 줄을 하나씩 넣습니다.
-5. **Knowledge** → **파일 업로드**: `knowledge/` 폴더의 9개 파일을 모두 올립니다.
+5. **Knowledge** → **파일 업로드**: `knowledge/` 폴더의 7개 파일을 모두 올립니다.
 6. **기능(Capabilities)**: 웹 검색은 끄기를 권장합니다(회사 숫자는 원장에서만 가져오게 하려는 목적). 캔버스는 켜 두면 긴 문구를 고치기 편합니다. 코드 인터프리터는 꺼도 됩니다.
 7. 오른쪽 위 **만들기/업데이트** → 공유 범위는 **나만 보기** 또는 **링크가 있는 사용자**를 고릅니다. 회사 내부 정보가 들어 있으니 **GPT 스토어 공개는 하지 않습니다.**
 8. 시험: 대화창에 `회사소개서 4장짜리 짧은 버전 만들어줘`를 입력해 1단계 목차표가 나오고 확인을 기다리는지 봅니다.
@@ -27,12 +27,12 @@
 
 1. 왼쪽 메뉴 **프로젝트** → **새 프로젝트** `이너젠 장표`
 2. 프로젝트 **지침(Instructions)** 에 `INSTRUCTIONS.md`를 붙입니다.
-3. 프로젝트 **파일**에 `knowledge/` 9개를 올립니다.
+3. 프로젝트 **파일**에 `knowledge/` 7개를 올립니다.
 4. 원본 PPT나 보고서 자료는 대화마다 첨부합니다.
 
 ## C. 역할별 GPT 4개로 쓰기 (선택)
 
-`roles-split/`의 파일을 GPT마다 Instructions에 넣고, Knowledge는 4개 GPT 모두 `knowledge/`의 공통 파일 5개(`design-tokens.md`, `layout-catalog.md`, `company-facts-v28.md`, `standard-decks-v28.md`, `content-requirements-v25.md`)를 똑같이 올립니다.
+`roles-split/`의 파일을 GPT마다 Instructions에 넣고, Knowledge는 4개 GPT 모두 `knowledge/`에서 `roles.md`를 뺀 공통 파일 6개(`design-tokens.md`, `layout-catalog.md`, `company-facts-v28.md`, `standard-decks-v28.md`, `content-requirements-v25.md`, `governing-body-v30.md`)를 똑같이 올립니다.
 
 | GPT 이름 | Instructions | 넘겨줄 것 |
 |---|---|---|
