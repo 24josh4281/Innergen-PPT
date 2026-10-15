@@ -1,0 +1,1142 @@
+{
+  "version": "20",
+  "date": "2026-10-14",
+  "purpose": "Deck-type TOC skeletons, title system, governing-message grammar, body block rules, series and closing slides distilled from 40 reference decks (structure only).",
+  "doc": "docs/styles/innergen/content-architecture-v20.md",
+  "precedence": [
+    "current_user",
+    "project_spec_lock",
+    "v20",
+    "v19 structure selection",
+    "v18 structures",
+    "v16 stages",
+    "v11-v15 semantics",
+    "v4/v5 hierarchy"
+  ],
+  "lecture_template_layouts_added": [
+    "02b_toc_pages",
+    "02c_section_divider",
+    "s21_guidance_focus",
+    "s22_case_capture",
+    "s23_key_summary"
+  ],
+  "deck_types": {
+    "lecture": {
+      "label": "교육·강의(투사)",
+      "mode": "education",
+      "report_stage": "education",
+      "audience": "수강생·실무자",
+      "reader_question": "무엇이며 언제 어떻게 적용하는가",
+      "governing_style": "완결 문장(~합니다/~입니다/~해야 합니다), 주어 시작",
+      "pages": [
+        30,
+        90
+      ],
+      "toc": [
+        {
+          "chapter": "0 도입",
+          "slides": [
+            "01_cover",
+            "02b_toc_pages",
+            "03b_content_final(학습 목표)"
+          ]
+        },
+        {
+          "chapter": "Ⅰ 배경·제도",
+          "share": "25–30%",
+          "slides": [
+            "s03_chart_insight",
+            "03f_content_kpi",
+            "s18_keyword_grid",
+            "s05_entity_matrix",
+            "s01_exec_summary",
+            "03c_content_split",
+            "s09_year_timeline"
+          ]
+        },
+        {
+          "chapter": "Ⅱ 요소별 요구사항·사례",
+          "share": "60–70%",
+          "unit": "요소 장 구분(02c) → 세부 항목마다 s21 요구사항 1장 + s22 사례 1–5장 → 요소 끝 비교·판단 1장(s19/s17)"
+        },
+        {
+          "chapter": "Ⅲ 우리 과제(선택)",
+          "slides": [
+            "s20_self_check",
+            "s05_entity_matrix"
+          ]
+        },
+        {
+          "chapter": "끝",
+          "slides": [
+            "s23_key_summary",
+            "s20_self_check",
+            "03b_content_final(Q&A·다음 단계)",
+            "04_ending"
+          ]
+        }
+      ],
+      "must_have": [
+        "학습 목표",
+        "요소별 핵심 Focus",
+        "사례 배울 점",
+        "Key Questions 자가진단",
+        "핵심 정리",
+        "Q&A·다음 단계"
+      ]
+    },
+    "handout": {
+      "label": "교육·배포 교재",
+      "mode": "education",
+      "report_stage": "education",
+      "audience": "읽는 실무자",
+      "reader_question": "무엇이며 언제 어떻게 적용하는가",
+      "governing_style": "완결 문장(~합니다/~입니다/~해야 합니다), 주어 시작",
+      "pages": [
+        30,
+        90
+      ],
+      "toc": "lecture와 같음(장당 분량 상한은 v16 배포 교재 값)",
+      "must_have": [
+        "lecture와 같음",
+        "조건·예외를 문장으로 보존"
+      ]
+    },
+    "seminar": {
+      "label": "세미나·강연·발표",
+      "mode": "presentation",
+      "report_stage": "education",
+      "audience": "외부 청중",
+      "reader_question": "왜 지금 중요한가, 무엇을 준비하는가",
+      "governing_style": "완결 문장(~합니다/~입니다/~해야 합니다), 주어 시작, 1문장",
+      "pages": [
+        15,
+        30
+      ],
+      "toc": [
+        {
+          "chapter": "도입",
+          "slides": [
+            "01_cover(발표자·소속·행사·일자)",
+            "개념 정의 또는 질문 1장",
+            "02b_toc_pages(3–4장)"
+          ]
+        },
+        {
+          "chapter": "장1 배경·개념",
+          "pages": "3–4",
+          "slides": [
+            "정의",
+            "03f_content_kpi",
+            "왜 지금인가"
+          ]
+        },
+        {
+          "chapter": "장2 제도·동향",
+          "pages": "4–6",
+          "slides": [
+            "s18_keyword_grid",
+            "s05_entity_matrix",
+            "s16_period_applicability"
+          ]
+        },
+        {
+          "chapter": "장3 분석·사례",
+          "pages": "5–8",
+          "slides": [
+            "s22_case_capture",
+            "s15_vertical_chevron",
+            "s19_compare_implication"
+          ]
+        },
+        {
+          "chapter": "장4 대응·준비",
+          "pages": "3–5",
+          "slides": [
+            "s15_vertical_chevron",
+            "s08_phase_roadmap",
+            "s13_key_takeaways(결론)"
+          ]
+        },
+        {
+          "chapter": "끝",
+          "slides": [
+            "04_ending(감사·연락처)"
+          ],
+          "note": "Q&A 장표 없음, 질문은 s20에"
+        }
+      ],
+      "must_have": [
+        "개념 정의 또는 질문 1장",
+        "큰 숫자 3개",
+        "결론 1장(방향 3개)",
+        "연락처"
+      ]
+    },
+    "proposal": {
+      "label": "제안서·제안 발표",
+      "mode": "proposal",
+      "report_stage": "proposal",
+      "audience": "발주처·고객 의사결정자",
+      "reader_question": "왜 이 방안이고 무엇을 납품하는가",
+      "governing_style": "완결 문장(~합니다/~입니다/~해야 합니다), 주어 시작; 수행 약속만 ~할 예정입니다",
+      "pages": [
+        12,
+        25
+      ],
+      "toc": [
+        {
+          "chapter": "과제",
+          "slides": [
+            "01_cover",
+            "03b_content_final(고객 과제 한 문장)",
+            "s03_chart_insight(제도·시장 근거)",
+            "s01_exec_summary(핵심 쟁점)"
+          ]
+        },
+        {
+          "chapter": "범위·접근",
+          "slides": [
+            "03d_content_dual(범위 안/밖)",
+            "s15_vertical_chevron 또는 s14_task_structure",
+            "03a_content(세부 수행)×N",
+            "03e_content_table(산출물)"
+          ]
+        },
+        {
+          "chapter": "일정·체계",
+          "slides": [
+            "charts/gantt_chart",
+            "03d_content_dual(수행 체계·인력)",
+            "03f_content_kpi(실적·차별점)"
+          ]
+        },
+        {
+          "chapter": "효과·마무리",
+          "slides": [
+            "s07_asis_tobe_effect(기대효과)",
+            "s13_key_takeaways(Way forward)",
+            "04_ending(과제 문장 콜백)"
+          ]
+        }
+      ],
+      "must_have": [
+        "과제 1문장",
+        "범위 안/밖",
+        "산출물 목록",
+        "일정",
+        "수행 체계·인력",
+        "근거 있는 기대효과",
+        "필요 협조"
+      ]
+    },
+    "kickoff": {
+      "label": "착수보고",
+      "mode": "report",
+      "report_stage": "kickoff",
+      "audience": "고객 실무·임원",
+      "reader_question": "무엇을, 어떤 순서로, 무엇을 받아서 하는가",
+      "governing_style": "개조식(~음/~임/~됨/~함/~필요함), 판단은 ~것으로 분석됨, 수행 약속만 ~할 예정입니다",
+      "pages": [
+        10,
+        20
+      ],
+      "toc": [
+        {
+          "chapter": "0",
+          "slides": [
+            "01_cover(단계명은 표지에만)",
+            "02b_toc_pages"
+          ]
+        },
+        {
+          "chapter": "Ⅰ 프로젝트 개요",
+          "pages": "6–7",
+          "slides": [
+            "배경(고객 선언·목표)",
+            "s03_chart_insight(현황 As-Is)",
+            "03d_content_dual(대상·범위)",
+            "s16/s10(업계 위치)",
+            "03a_content(업무 범위 3행)",
+            "03d_content_dual(목적·기대효과)",
+            "[참고] 시장 특성"
+          ]
+        },
+        {
+          "chapter": "Ⅱ 추진방안",
+          "pages": "5–6",
+          "slides": [
+            "s15_vertical_chevron(과업 ① 접근)",
+            "03d_content_dual(과업 ① 상세)",
+            "과업 ② 접근·상세",
+            "charts/gantt_chart(마일스톤 착수·중간·최종)"
+          ]
+        },
+        {
+          "chapter": "Ⅲ 데이터 수집 요청",
+          "pages": "1",
+          "slides": [
+            "s12_actor_checklist 변형(요청물·기간·대상·형태·용도·담당·기한)"
+          ]
+        },
+        {
+          "chapter": "Ⅳ 관리방안",
+          "pages": "3–4",
+          "slides": [
+            "03d_content_dual(참여 인력)",
+            "s15(QA/QC·성과품)",
+            "03f_content_kpi(특장점)"
+          ]
+        },
+        {
+          "chapter": "끝",
+          "slides": [
+            "s13_key_takeaways 변형(결정 요청·다음 일정)",
+            "04_ending"
+          ]
+        }
+      ],
+      "must_have": [
+        "기준연도·경계·적용 기준",
+        "자료 요청 항목·담당·기한",
+        "참여 인력·역할",
+        "결정 요청 안건",
+        "간트"
+      ]
+    },
+    "weekly": {
+      "label": "주간 진행보고",
+      "mode": "report",
+      "report_stage": "interim",
+      "audience": "고객 실무",
+      "reader_question": "이번 주 무엇을 확인했고 다음에 무엇을 하는가",
+      "governing_style": "개조식(~음/~임/~됨/~함/~필요함), 판단은 ~것으로 분석됨, 수행 약속만 ~할 예정입니다",
+      "pages": [
+        10,
+        20
+      ],
+      "toc": [
+        {
+          "chapter": "0",
+          "slides": [
+            "01_cover(W[n] 주간보고)",
+            "02b_toc_pages"
+          ]
+        },
+        {
+          "chapter": "Ⅰ 이번 주 맥락",
+          "pages": "2–3",
+          "slides": [
+            "s03_chart_insight"
+          ]
+        },
+        {
+          "chapter": "Ⅱ·Ⅲ 주제 장(평행)",
+          "unit": "개요 → 현황 표 → 이행 수단, 두 장 같은 레이아웃"
+        },
+        {
+          "chapter": "Ⅳ Wrap-up",
+          "slides": [
+            "s19_compare_implication",
+            "s16/s08(일정·고객 판단)"
+          ]
+        },
+        {
+          "chapter": "끝",
+          "slides": [
+            "s12(향후 추진 계획: 분석 항목 ✓ + 추가 요청 + 예상 일자)",
+            "04_ending"
+          ]
+        }
+      ],
+      "must_have": [
+        "평행 구조 주제 장",
+        "Wrap-up 비교표",
+        "향후 추진 계획",
+        "추가 요청 항목"
+      ]
+    },
+    "biweekly": {
+      "label": "격주 미팅 자료",
+      "mode": "report",
+      "report_stage": "interim",
+      "audience": "고객 실무",
+      "reader_question": "기준일 현재 진행·향후 계획·요청",
+      "governing_style": "개조식(~음/~임/~됨/~함/~필요함), 판단은 ~것으로 분석됨, 수행 약속만 ~할 예정입니다",
+      "pages": [
+        2,
+        3
+      ],
+      "toc": [
+        {
+          "chapter": "본문",
+          "slides": [
+            "03d_content_dual 변형(진행현황(기간) | 향후계획(기간), 과업 행, 일자 괄호)",
+            "charts/gantt_chart(착수 간트 재사용 + 현재 주차)"
+          ]
+        },
+        {
+          "chapter": "첨부",
+          "slides": [
+            "첨부1 직전 완료 산출물 전체",
+            "첨부2 차기 산출물 초안"
+          ]
+        }
+      ],
+      "must_have": [
+        "과업 행 = 회의록 영역 1:1",
+        "요청·결정 행",
+        "일자 괄호"
+      ]
+    },
+    "monthly": {
+      "label": "월간 WG·진행현황",
+      "mode": "report",
+      "report_stage": "interim",
+      "audience": "워킹그룹·운영위",
+      "reader_question": "과업별 어디까지 왔고 무엇이 나왔는가",
+      "governing_style": "개조식(~음/~임/~됨/~함/~필요함), 판단은 ~것으로 분석됨, 수행 약속만 ~할 예정입니다, 상태 괄호",
+      "pages": [
+        25,
+        50
+      ],
+      "toc": [
+        {
+          "chapter": "0",
+          "slides": [
+            "01_cover",
+            "s08 변형(과업 현황판: 과업 × 상태 배지, 목차 겸용)"
+          ]
+        },
+        {
+          "chapter": "교육 장",
+          "pages": "5–15",
+          "unit": "lecture Ⅰ장 축약"
+        },
+        {
+          "chapter": "과업별 수행 현황",
+          "slides": [
+            "s15(분석 절차)",
+            "s03/s05 결과 시리즈",
+            "진단 절차",
+            "s19(Gap)"
+          ]
+        },
+        {
+          "chapter": "운영 현황",
+          "slides": [
+            "03e(실적표: 회차×일자×참석×주제×주요 의견)"
+          ]
+        },
+        {
+          "chapter": "끝",
+          "slides": [
+            "charts/gantt_chart(향후 추진 일정)",
+            "APPENDIX"
+          ]
+        }
+      ],
+      "must_have": [
+        "과업 현황판",
+        "상태 괄호 날짜",
+        "실적표",
+        "간트"
+      ]
+    },
+    "diagnosis": {
+      "label": "진단·개선과제 도출",
+      "mode": "report",
+      "report_stage": "interim",
+      "audience": "고객 실무 워크숍",
+      "reader_question": "기준 대비 어디가 비었고 무엇을 고치는가",
+      "governing_style": "개조식(~음/~임/~됨/~함/~필요함), 판단은 ~것으로 분석됨, 수행 약속만 ~할 예정입니다",
+      "pages": [
+        30,
+        50
+      ],
+      "toc": [
+        {
+          "chapter": "Framework",
+          "pages": "1–2",
+          "slides": [
+            "s18_keyword_grid",
+            "s20_self_check(Key Questions)"
+          ]
+        },
+        {
+          "chapter": "공통 프로세스",
+          "slides": [
+            "s06_principle_matrix(기준×현황×개선과제 ①~④)",
+            "s07_asis_tobe_effect(과제 상세)",
+            "s15",
+            "지표표"
+          ]
+        },
+        {
+          "chapter": "영역별",
+          "unit": "영역마다 s06 진단 1장 + s12 실행과제 1장 + s22 [참고] 1–3장"
+        },
+        {
+          "chapter": "끝",
+          "slides": [
+            "s05_entity_matrix(개선과제 종합: 용이성·효과성·추진여부)",
+            "Appendix"
+          ]
+        }
+      ],
+      "must_have": [
+        "Key Questions",
+        "기준×현황×과제 표",
+        "AS-IS/TO-BE",
+        "우선순위·추진여부 선택란"
+      ]
+    },
+    "interim": {
+      "label": "중간보고",
+      "mode": "report",
+      "report_stage": "interim",
+      "audience": "고객 임원",
+      "reader_question": "잠정 결과와 결정 요청",
+      "governing_style": "완결 문장(~합니다/~입니다/~해야 합니다), 주어 시작",
+      "pages": [
+        10,
+        18
+      ],
+      "toc": [
+        {
+          "chapter": "본문",
+          "slides": [
+            "01_cover",
+            "s01_exec_summary",
+            "s08_phase_roadmap(진행 현황)",
+            "s03/s05(잠정 결과, '잠정' 표기)",
+            "03d_content_dual(확인 vs 미확정)",
+            "03b(이슈·리스크)",
+            "s13 변형(결정 요청)",
+            "s15(다음 단계)",
+            "04_ending"
+          ]
+        }
+      ],
+      "must_have": [
+        "진행률 근거",
+        "잠정 표기",
+        "결정 요청 문장"
+      ]
+    },
+    "final": {
+      "label": "최종보고",
+      "mode": "report",
+      "report_stage": "final",
+      "audience": "고객 임원·발주처",
+      "reader_question": "무엇을 했고 무엇이 남는가",
+      "governing_style": "완결 문장(~했습니다/~할 수 있습니다)",
+      "pages": [
+        20,
+        40
+      ],
+      "toc": [
+        {
+          "chapter": "0",
+          "slides": [
+            "01_cover(최종보고)",
+            "02b_toc_pages"
+          ]
+        },
+        {
+          "chapter": "Ⅰ 과업 개요",
+          "slides": [
+            "추진배경·목적 ①~③",
+            "s14_task_structure(과업 범위·추진계획)"
+          ]
+        },
+        {
+          "chapter": "산출물 장 ×N",
+          "unit": "운영 개요(실적표) → 결과(s03·s05) → 시사점(종합 → 개별, s13)"
+        },
+        {
+          "chapter": "끝",
+          "slides": [
+            "03b(검증·한계)",
+            "s05(잔여 과제·인계)",
+            "부록",
+            "04_ending"
+          ]
+        }
+      ],
+      "must_have": [
+        "결론 먼저",
+        "결과별 출처·단위",
+        "참여 실적표",
+        "한계",
+        "잔여 과제·담당"
+      ]
+    },
+    "briefing": {
+      "label": "경영진 요약(1–3장)",
+      "mode": "presentation",
+      "report_stage": "briefing",
+      "audience": "경영진",
+      "reader_question": "결정할 것은 무엇인가",
+      "governing_style": "거버닝 없음; 우측 시사점 박스 3줄(결론 → 단, 단서 → 제안)",
+      "pages": [
+        1,
+        3
+      ],
+      "toc": [
+        {
+          "chapter": "1 결과 요약",
+          "slides": [
+            "접근 3줄 + 매트릭스 + 요인 목록 + 시사점 박스"
+          ]
+        },
+        {
+          "chapter": "2 핵심 분석",
+          "slides": [
+            "좌 라벨(대상·방법·도구) + 중앙 그림 + 우 해석 2줄 + 각주"
+          ]
+        },
+        {
+          "chapter": "3 향후 계획",
+          "slides": [
+            "s08_phase_roadmap(기간 × Task/Focus/예시)"
+          ]
+        }
+      ],
+      "must_have": [
+        "결정 사항 1문장",
+        "단서",
+        "다음 일정"
+      ]
+    },
+    "benchmark": {
+      "label": "벤치마킹",
+      "mode": "report",
+      "report_stage": "interim",
+      "audience": "고객 실무",
+      "reader_question": "동종사 대비 어디가 부족한가",
+      "governing_style": "개조식(~음/~임/~됨/~함/~필요함), 판단은 ~것으로 분석됨, 수행 약속만 ~할 예정입니다, 판단 1문장",
+      "pages": [
+        10,
+        20
+      ],
+      "toc": [
+        {
+          "chapter": "본문",
+          "slides": [
+            "Approach(대상·방법·프레임)",
+            "s20(분석 주안점 Key Questions)",
+            "s03(Overview 레이더 + Key Findings)",
+            "s10(비교 히트맵)",
+            "s19 ×N([n] 영역별 Gap표)",
+            "s22([Back-up] 사례)"
+          ]
+        }
+      ],
+      "must_have": [
+        "대상·방법",
+        "Key Questions",
+        "영역별 Gap표(갭 열 최광)",
+        "판단 거버닝"
+      ]
+    },
+    "insight": {
+      "label": "인사이트 리포트",
+      "mode": "presentation",
+      "report_stage": "briefing",
+      "audience": "외부 고객·시장",
+      "reader_question": "올해 봐야 할 이슈는 무엇인가",
+      "governing_style": "완결 문장 2–3문장(사실 → 시사)",
+      "pages": [
+        20,
+        45
+      ],
+      "toc": [
+        {
+          "chapter": "도입",
+          "slides": [
+            "01_cover(시리즈·발행월·조직)",
+            "연락처/서문",
+            "02b_toc_pages"
+          ]
+        },
+        {
+          "chapter": "배경",
+          "slides": [
+            "s18",
+            "s05",
+            "s09",
+            "s03"
+          ]
+        },
+        {
+          "chapter": "이슈",
+          "slides": [
+            "s01(이슈 개요 카드 N≤7)",
+            "s05(범주 매핑)",
+            "이슈마다 현황 → 제도 상세표 → 영향·전망 3–4장"
+          ]
+        },
+        {
+          "chapter": "끝",
+          "slides": [
+            "s13/s23(Key Takeaways: 현황 요약 → 이해관계자별 대응)",
+            "연락처",
+            "면책"
+          ]
+        }
+      ],
+      "must_have": [
+        "이슈 개요 카드",
+        "범주 매핑",
+        "블록별 출처",
+        "이해관계자별 대응"
+      ]
+    },
+    "report_outline": {
+      "label": "보고서 구성안",
+      "mode": "report",
+      "report_stage": "interim",
+      "audience": "고객 TF",
+      "reader_question": "보고서 장마다 무엇을 넣는가",
+      "governing_style": "거버닝 없음; 장표마다 넣을 내용·출처·담당",
+      "pages": [
+        20,
+        40
+      ],
+      "toc": "보고서 목차 그대로(Intro → 요소 디바이더 → 본문 → Appendix → Index 표)",
+      "must_have": [
+        "요구항목 ↔ 페이지 Index"
+      ]
+    },
+    "memo": {
+      "label": "요약·시사점 메모(A4)",
+      "mode": "report",
+      "report_stage": "briefing",
+      "audience": "내부 보고",
+      "reader_question": "원문의 요지와 우리 시사점",
+      "governing_style": "개조식 ㅇ 단락, 명사형 종결",
+      "pages": [
+        1,
+        3
+      ],
+      "toc": "제목「원문」(기관) + 【일자·부서】 → □ 원문 개요 → □ 주요 내용(ㅇ 5–6) → □ 시사점(ㅇ 2–3) → 참고 표",
+      "must_have": [
+        "원문 출처",
+        "시사점 2–3개"
+      ]
+    }
+  },
+  "title": {
+    "form": "주제 명사구 10–30자",
+    "numbering": {
+      "education": "3. 장명 / 3-1 절명",
+      "report": "Ⅰ. 장명 – 절명",
+      "task": "①, ②-①",
+      "sub_item": "(a) 항목명 – 장표 유형"
+    },
+    "colon_subtitle": "주제: 부제 허용",
+    "question_titles": "장 도입·마무리·관점 제시·세미나 6W 목차만",
+    "series": [
+      "(n/N)",
+      "(계속)",
+      "(대상명)"
+    ],
+    "tags": [
+      "[참고]",
+      "[Back-up]",
+      "[사례]",
+      "예시"
+    ],
+    "stage_name": "표지에만",
+    "no_company_in_title": true
+  },
+  "governing": {
+    "position": "거버닝 박스 48,70 / 944×80, 1문장, 최대 2줄",
+    "length_chars_no_space": {
+      "24px": {
+        "one_line": 38,
+        "two_lines": 75
+      },
+      "22px": {
+        "one_line": 42,
+        "two_lines": 85
+      }
+    },
+    "style_by_deck": {
+      "external": {
+        "types": [
+          "lecture",
+          "handout",
+          "seminar",
+          "proposal",
+          "interim",
+          "final",
+          "insight"
+        ],
+        "ending": "~합니다/~입니다/~해야 합니다/~할 수 있습니다",
+        "subject": "명시"
+      },
+      "internal": {
+        "types": [
+          "kickoff",
+          "weekly",
+          "biweekly",
+          "monthly",
+          "diagnosis",
+          "benchmark"
+        ],
+        "ending": "~음/~임/~됨/~함/~필요함/~것으로 분석됨",
+        "subject": "명시 권장"
+      },
+      "promise": {
+        "types": [
+          "all"
+        ],
+        "ending": "~할 예정입니다",
+        "subject": "이너젠은/제안사는"
+      },
+      "briefing": {
+        "types": [
+          "briefing"
+        ],
+        "replacement": "우측 시사점 박스: 결론 → 단, 단서 → 제안"
+      }
+    },
+    "templates": {
+      "definition": "[개념]은 [범위]를 포괄하는 [성격]이며, [관점]으로 봅니다",
+      "fact": "[주체]는 [기준시점] [대상]에서 [수치·추세]를 보입니다",
+      "requirement": "[기준]은 [대상]에게 [내용]의 공시·설명을 요구하며, [조건]이면 [예외]를 허용합니다",
+      "case_lesson": "[사례 유형]은 [무엇을] [어떻게] 제시해 [배울 점]을 보여 줍니다",
+      "judgment": "[분석 범위]에서 [대상]은 [결과]인 것으로 분석됩니다 / 분석됨",
+      "recommendation": "[기준·목표] 충족을 위해 [주체]는 [기한]까지 [조치]가 필요합니다 / 필요함",
+      "status": "[과업]을 [방법]으로 수행하며 ([월.일] 완료 / [월.일] 내 완료 예정 / 검토 중)",
+      "request": "[목적]을 위해 아래 자료를 [기한]까지 요청드립니다",
+      "promise": "이너젠은 [수단]을 활용해 [기한]까지 [산출물]을 제공할 예정입니다",
+      "outlook": "[조건]이면 [대상]은 [효과]가 기대됩니다 / 예상됨",
+      "chapter_intro": "이 장은 [근거]를 바탕으로 [대상]을 [순서]로 다룹니다",
+      "conclusion": "[주체]는 [세 가지]를 먼저 갖춰야 [목표]에 대응할 수 있습니다"
+    },
+    "numbers": "핵심 수치 1–2개 포함; 기준시점 '[yy].[m]월 기준; 상태는 끝 괄호; 출처는 거버닝에 넣지 않음",
+    "forbidden": [
+      "제목 복사",
+      "같은 거버닝 반복",
+      "지시어 시작(이것은/이를 통해)",
+      "행동 없는 구호",
+      "질문형(→ s20)",
+      "명사 두 어절",
+      "회사명·연번",
+      "예외 조건 삭제",
+      "문체 혼용"
+    ],
+    "max_lines": 1,
+    "one_line_chars_by_px": {
+      "24": 38,
+      "22": 40,
+      "21.33": 40
+    },
+    "v22_note": "2026-10-14 사용자 결정: 거버닝 한 줄. 두 줄 길이 상한(length_chars_no_space.two_lines)은 참고용으로만 남김."
+  },
+  "body": {
+    "order": [
+      "독자 질문 1개",
+      "원문 분해(v12)",
+      "구조 선택(v18/v19)",
+      "블록 배치",
+      "거버닝",
+      "결론 박스",
+      "출처·단위·기준시점"
+    ],
+    "split_ratios": {
+      "chart_insight": [
+        65,
+        35
+      ],
+      "case_capture": [
+        60,
+        40
+      ],
+      "guidance_focus": [
+        13,
+        55,
+        27
+      ],
+      "dual": [
+        50,
+        50
+      ],
+      "gap_table": [
+        12,
+        35,
+        53
+      ],
+      "three_equal": [
+        33,
+        33,
+        33
+      ],
+      "progress_table": [
+        20,
+        40,
+        40
+      ]
+    },
+    "blocks_per_slide": [
+      2,
+      3
+    ],
+    "block_label_px": 20,
+    "fixed_labels": [
+      "주요 내용",
+      "핵심 Focus",
+      "배울 점",
+      "Key Findings",
+      "시사점",
+      "개선과제",
+      "향후 계획",
+      "요청 사항",
+      "결정 요청",
+      "단위·기준시점"
+    ],
+    "pattern_map": {
+      "요구사항 해설": "s21_guidance_focus",
+      "사례 분석": "s22_case_capture",
+      "제도·개념 전체도": [
+        "s18_keyword_grid",
+        "s05_entity_matrix"
+      ],
+      "핵심 수치": "03f_content_kpi",
+      "현황·추이": "s03_chart_insight",
+      "비교·판단": [
+        "s19_compare_implication",
+        "s16_period_applicability",
+        "s17_decision_tree"
+      ],
+      "과업 개요·범위": [
+        "s24_project_overview",
+        "03a_content",
+        "s14_task_structure"
+      ],
+      "절차·방법론": [
+        "s33_approach_matrix",
+        "s40_process_steps_detail",
+        "s15_vertical_chevron",
+        "s08_phase_roadmap"
+      ],
+      "일정": [
+        "s25_gantt_schedule",
+        "charts/gantt_chart"
+      ],
+      "데이터 요청": [
+        "s26_data_request",
+        "s12_actor_checklist(요청물·기간·대상·형태·용도·담당·기한)"
+      ],
+      "과업 현황·진행": [
+        "s28_status_board",
+        "s29_progress_plan",
+        "s08_phase_roadmap",
+        "03d_content_dual"
+      ],
+      "진단": [
+        "s31_diagnosis_table",
+        "s32_priority_matrix",
+        "s06_principle_matrix",
+        "s10_maturity_heatmap",
+        "s58_operating_model"
+      ],
+      "개선": [
+        "s07_asis_tobe_effect",
+        "s05_entity_matrix"
+      ],
+      "결정·요청": [
+        "s35_decision_request",
+        "s13_key_takeaways 변형(안건·선택지·권고안·기한)",
+        "s12_actor_checklist",
+        "s53_harvey_compare"
+      ],
+      "마무리": [
+        "s23_key_summary",
+        "s20_self_check",
+        "s13_key_takeaways"
+      ],
+      "수행 체계": [
+        "s27_team_roles"
+      ],
+      "벤치마킹": [
+        "s30_radar_benchmark"
+      ],
+      "경영진 요약": [
+        "s34_exec_one_pager",
+        "s45_scqa_storyline"
+      ],
+      "회의·교육 실적": [
+        "s36_meeting_log"
+      ],
+      "배경·기대효과": [
+        "s37_purpose_effects"
+      ],
+      "이슈 카드": [
+        "s38_issue_cards"
+      ],
+      "과제·고려사항": [
+        "s39_challenges_considerations"
+      ],
+      "오프너·클로저": [
+        "s41_quote_opener"
+      ],
+      "범위·방법·결과": [
+        "s42_scope_method_result"
+      ],
+      "문제 정의·구조화": [
+        "s43_issue_tree",
+        "s45_scqa_storyline"
+      ],
+      "가설·작업계획": [
+        "s44_hypothesis_workplan"
+      ],
+      "지표 분해": [
+        "s46_driver_tree"
+      ],
+      "증감 요인": [
+        "s47_waterfall_bridge"
+      ],
+      "감축 수단 비용": [
+        "s48_macc_curve"
+      ],
+      "감축 경로": [
+        "s49_pathway_wedge",
+        "s08_phase_roadmap"
+      ],
+      "중대성 평가": [
+        "s50_materiality_matrix"
+      ],
+      "리스크 평가": [
+        "s51_risk_heatmap",
+        "s52_scenario_matrix"
+      ],
+      "대안 비교": [
+        "s53_harvey_compare",
+        "s19_compare_implication"
+      ],
+      "역할·책임": [
+        "s54_raci_matrix",
+        "s27_team_roles"
+      ],
+      "이해관계자": [
+        "s55_stakeholder_map"
+      ],
+      "성장·포트폴리오": [
+        "s56_three_horizons",
+        "s57_nine_box"
+      ],
+      "운영모델": [
+        "s58_operating_model"
+      ]
+    },
+    "conclusion_box": {
+      "position": "하단 전폭 48–54px 또는 우측 열 1/3, 장표당 하나",
+      "content": "거버닝 반복 금지, 행동만",
+      "ending": {
+        "external": "~합니다",
+        "internal": "~필요/~검토"
+      },
+      "findings_insights_separate": true
+    },
+    "cell_grammar": {
+      "current": "긍정 사실",
+      "gap": "~부재/~미흡/~미제시/~불일치",
+      "leader": "~제시/~공시/~제공",
+      "response": "[완료 – 출처] / [추후 보완] / [확인 필요]",
+      "task_status": "금번 반영 / 계획 소통 / 향후 과제; 추진여부 금년/차년/검토",
+      "disclosed": "O / X",
+      "badge": "완료 / 진행 중 / 예정(날짜)"
+    },
+    "source_set": [
+      "차트·표 우상단 단위·기준시점",
+      "하단 출처 줄(v16 형식)",
+      "본문 보조 * 각주",
+      "자체 분석 명시",
+      "예시 수치 '예시' 표기",
+      "비율 차트 n·분모"
+    ],
+    "pattern_map_v23_note": "2026-10-14 v23: 보고 생애주기·세미나 구조 19종(s24–s42) 추가. 앞에 적힌 레이아웃이 우선.",
+    "pattern_map_v24_note": "2026-10-14 v24: 컨설팅 펌 공개 방법론에서 뽑은 도식 16종(s43–s58) 추가. 앞에 적힌 레이아웃이 우선."
+  },
+  "series": {
+    "fixed": [
+      "제목",
+      "프레임",
+      "범례",
+      "출처 위치"
+    ],
+    "varies": [
+      "거버닝 판단문",
+      "우상단 태그(기간·시나리오·대상)",
+      "내비 강조"
+    ],
+    "numbering": {
+      "area": "[1]~[4]",
+      "task": "①~⑩(공통 ①~④, 개별 ⑤~)",
+      "split": "(n/N)",
+      "sub_item": "(a)(b)(c)"
+    },
+    "sets": {
+      "education": "요구사항 1 + 사례 1–5",
+      "diagnosis": "진단 1 + 실행과제 1 + [참고] 1–3",
+      "scenario": "보수·공격 2장 동형"
+    },
+    "nav_threshold": 11
+  },
+  "closing": {
+    "lecture": [
+      "s23_key_summary",
+      "s20_self_check",
+      "03b(Q&A·다음 단계)",
+      "04_ending"
+    ],
+    "seminar": [
+      "s13_key_takeaways(결론)",
+      "04_ending(감사·연락처)"
+    ],
+    "proposal": [
+      "s13_key_takeaways(Way forward)",
+      "04_ending(과제 문장 콜백)"
+    ],
+    "kickoff|weekly|monthly": [
+      "s12(향후 추진 계획)",
+      "s13 변형(결정 요청: 안건·선택지·권고·기한)",
+      "charts/gantt_chart"
+    ],
+    "biweekly": [
+      "2열표 안 요청·결정 행",
+      "첨부"
+    ],
+    "diagnosis": [
+      "s05(개선과제 종합, 추진여부 선택란)",
+      "Appendix"
+    ],
+    "final": [
+      "s13(시사점 종합 → 개별)",
+      "s05(잔여 과제·인계)",
+      "부록"
+    ],
+    "insight": [
+      "s13/s23(Key Takeaways)",
+      "연락처",
+      "면책"
+    ],
+    "report_outline": [
+      "Index 표"
+    ]
+  },
+  "pre_release_checklist": [
+    "목차 번호·장명·쪽수 ↔ 본문 제목 1:1; 모든 본문 장표에 현재 위치 표시",
+    "거버닝: 제목 복사·반복·질문형·구호 없음, 문체 단일, 2줄 이내, 수치·기준시점, 본문 근거",
+    "본문: 장표당 질문 1개, 블록 2–3개, 분할 비율 표준, 결론 박스 비중복",
+    "표: Gap·상태·추진여부 셀 문법, 단위·기준시점·출처 3종",
+    "보고형: 단계명 표지만, 간트 재사용·현재 주차, 상태 날짜 갱신, 요청·결정 블록",
+    "리뷰어 메모·TBD·///·타 덱 태그 제거, 미완 장표 삭제 또는 [참고], 부록 15장↑ 별도 첨부",
+    "이전 고객 명칭·수치·로고 없음, 가상 수치 '예시'",
+    "PowerPoint 렌더로 거버닝 줄바꿈·표 넘침·푸터 침범 확인"
+  ]
+}
