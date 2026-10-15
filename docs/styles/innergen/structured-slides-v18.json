@@ -1165,6 +1165,119 @@
       "lecture_template_layout": "s58_operating_model.svg",
       "use": "진단·최종·거버넌스",
       "v24": true
+    },
+    "value_chain_hotspot": {
+      "label": "가치사슬 단계별 핫스팟(비중·활동·기회)",
+      "reader_question": "배출(또는 비용)이 가치사슬의 어느 단계에 몰려 있고 어디부터 손대나?",
+      "pattern": "matrix",
+      "slots": [
+        "단계 5(셰브론)",
+        "행 라벨 3",
+        "단계별 비중 값·막대",
+        "주요 활동 5",
+        "개선 기회 5",
+        "시사점 바"
+      ],
+      "reference_patterns": [
+        "McKinsey 비즈니스 시스템(Enduring Ideas, 2009)·BCG×WEF 공급망 배출(2021)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s59_value_chain_hotspot.svg",
+      "use": "인벤토리·Scope 3·감축 착수",
+      "v27": true
+    },
+    "profit_pool": {
+      "label": "가변폭 막대(비중×강도) 프로핏 풀+시사점",
+      "reader_question": "어느 사업·제품이 규모 대비 이익(또는 배출 집약도)이 가장 큰가?",
+      "pattern": "chart",
+      "slots": [
+        "세로축 제목",
+        "구간 5(값·라벨)",
+        "가로축 설명(폭의 의미)",
+        "시사점 3"
+      ],
+      "reference_patterns": [
+        "Bain 프로핏 풀(Gadiesh·Gilbert, HBR 1998)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s60_profit_pool.svg",
+      "use": "포트폴리오·전략·감축 투자 우선순위",
+      "v27": true
+    },
+    "experience_curve": {
+      "label": "학습곡선(누적 생산×단위 비용, 로그 축)+핵심 수치",
+      "reader_question": "누적 규모가 커질수록 단가가 얼마나 빨리 내려가고 언제 경제성이 생기나?",
+      "pattern": "chart",
+      "slots": [
+        "축 제목 2",
+        "눈금 4×2",
+        "추세선 라벨(학습률)",
+        "핵심 수치 3(값·설명)",
+        "함의"
+      ],
+      "reference_patterns": [
+        "BCG 경험곡선(Henderson, 1968)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s61_experience_curve.svg",
+      "use": "기후테크·감축 기술 경제성·투자 시점",
+      "v27": true
+    },
+    "sensitivity_tornado": {
+      "label": "민감도 토네이도(가정별 하한·상한 영향)",
+      "reader_question": "결과값은 어떤 가정에 가장 민감하고, 먼저 확정해야 할 가정은 무엇인가?",
+      "pattern": "chart",
+      "slots": [
+        "헤더 5",
+        "가정 6(기준값 포함)",
+        "하한·상한 값",
+        "범위",
+        "기준값 메모",
+        "결론 바"
+      ],
+      "reference_patterns": [
+        "KPMG 기후 시나리오 분석의 민감도 분석(극단값 민감도)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s62_sensitivity_tornado.svg",
+      "use": "기후 리스크 재무 영향·감축 사업 경제성·탄소가격",
+      "v27": true
+    },
+    "swimlane_controls": {
+      "label": "스윔레인 프로세스+통제 지점",
+      "reader_question": "누가 어떤 순서로 자료를 넘기고, 어디에 통제가 있어야 하나?",
+      "pattern": "process",
+      "slots": [
+        "단계 5",
+        "레인(주체) 4",
+        "활동 5",
+        "통제 3(이름·설명)"
+      ],
+      "reference_patterns": [
+        "Deloitte COSO ICSR(흐름도·위험통제매트릭스·프로세스 책임자)·EY 지속가능성 보고 통제 안내"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s63_swimlane_controls.svg",
+      "use": "공시 내부통제·산정 체계·착수",
+      "v27": true
+    },
+    "seven_s_alignment": {
+      "label": "7-S 정합성 진단(연결망+요소별 현황)",
+      "reader_question": "전략을 실행할 조직 요소들이 서로 맞물려 있나? 어디가 어긋났나?",
+      "pattern": "matrix",
+      "slots": [
+        "7요소 원(하드 3·소프트 3·공유가치)",
+        "헤더 3",
+        "요소별 현재 상태 7",
+        "정합 판단 7"
+      ],
+      "reference_patterns": [
+        "McKinsey 7-S(Enduring Ideas, 2008; 운영모델 글, 2025)"
+      ],
+      "contract_ids": [],
+      "lecture_template_layout": "s64_seven_s_alignment.svg",
+      "use": "넷제로 실행 체계·거버넌스·진단",
+      "v27": true
     }
   },
   "recommended_by_report": {
@@ -1178,7 +1291,8 @@
       "scope_method_result",
       "issue_tree",
       "hypothesis_workplan",
-      "harvey_compare"
+      "harvey_compare",
+      "value_chain_hotspot"
     ],
     "kickoff": [
       "task_structure",
@@ -1191,7 +1305,9 @@
       "team_roles",
       "hypothesis_workplan",
       "raci_matrix",
-      "stakeholder_map"
+      "stakeholder_map",
+      "swimlane_controls",
+      "value_chain_hotspot"
     ],
     "interim": [
       "status",
@@ -1202,7 +1318,8 @@
       "decision_request",
       "meeting_log",
       "waterfall_bridge",
-      "harvey_compare"
+      "harvey_compare",
+      "sensitivity_tornado"
     ],
     "final": [
       "exec_summary",
@@ -1216,7 +1333,9 @@
       "scqa_storyline",
       "macc_curve",
       "pathway_wedge",
-      "operating_model"
+      "operating_model",
+      "profit_pool",
+      "seven_s_alignment"
     ],
     "education": [
       "keyword_map",
@@ -1246,7 +1365,9 @@
       "principle_matrix",
       "compare_implication",
       "materiality_matrix",
-      "raci_matrix"
+      "raci_matrix",
+      "swimlane_controls",
+      "seven_s_alignment"
     ],
     "regulatory": [
       "period_applicability",
@@ -1261,14 +1382,17 @@
       "phase_roadmap",
       "waterfall_bridge",
       "pathway_wedge",
-      "driver_tree"
+      "driver_tree",
+      "value_chain_hotspot",
+      "sensitivity_tornado"
     ],
     "inventory": [
       "list_zoom",
       "chart_table",
       "vertical_flow",
       "driver_tree",
-      "waterfall_bridge"
+      "waterfall_bridge",
+      "value_chain_hotspot"
     ],
     "lca_product": [
       "chart_table",
@@ -1280,14 +1404,16 @@
       "maturity_heatmap",
       "chart_insight",
       "entity_matrix",
-      "scenario_matrix"
+      "scenario_matrix",
+      "sensitivity_tornado"
     ],
     "esg_rating": [
       "materiality_matrix",
       "self_check",
       "principle_matrix",
       "asis_tobe",
-      "stakeholder_map"
+      "stakeholder_map",
+      "seven_s_alignment"
     ],
     "climate_education": [
       "keyword_map",
@@ -1300,7 +1426,9 @@
       "entity_matrix",
       "exec_summary",
       "three_horizons",
-      "nine_box"
+      "nine_box",
+      "experience_curve",
+      "profit_pool"
     ]
   },
   "content_architecture": "docs/styles/innergen/content-architecture-v20.json",
@@ -1350,5 +1478,17 @@
       "operating_model"
     ],
     "note": "맥킨지·BCG·베인·PwC·KPMG·딜로이트·EY의 공개 방법론·발표 자료(웹·영상)에서 구조만 추출. 고객명·수치·로고·브랜드 도식은 쓰지 않음. 세 계열 템플릿에 같은 슬롯 토큰으로 수록. 막대·점·곡선·하비볼은 슬라이드 로컬 도형."
+  },
+  "v27": {
+    "date": "2026-10-15",
+    "added": [
+      "value_chain_hotspot",
+      "profit_pool",
+      "experience_curve",
+      "sensitivity_tornado",
+      "swimlane_controls",
+      "seven_s_alignment"
+    ],
+    "note": "맥킨지(비즈니스 시스템·7-S)·BCG(경험곡선·공급망 배출)·베인(프로핏 풀)·KPMG(민감도)·딜로이트·EY(통제 흐름) 공개 자료에서 구조만 추출. 원문 문구·수치·로고·도식 이미지는 쓰지 않음. 출처 링크: consulting-references-v27.md. 세 계열 템플릿에 같은 슬롯 토큰으로 수록. 비중 막대·가변폭 막대·점·추세선·토네이도 막대·활동 상자·통제 표식은 슬라이드 로컬 도형."
   }
 }
