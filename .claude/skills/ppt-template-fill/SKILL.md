@@ -378,7 +378,7 @@ Save the `issues --json` output to `<project_dir>/validation/officecli_issues.js
 
 ### 7.3 Native render pass
 
-Render every output page and read the images (with PowerPoint installed, default `--render auto` drives native PowerPoint — ground truth):
+Render every output page and read the images (with PowerPoint installed, default `--render auto` drives native PowerPoint — ground truth). If PowerPoint is already running (`tasklist /FI "IMAGENAME eq POWERPNT.EXE"`), add `--render html`: the native path quits the running PowerPoint and closes the user's open decks.
 
 ```bash
 officecli view "<project_dir>/exports/<file>.pptx" screenshot --page 1-<N> \

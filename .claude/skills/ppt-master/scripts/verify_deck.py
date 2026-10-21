@@ -207,6 +207,25 @@ def _run_officecli(args: list[str], timeout: int) -> Optional[subprocess.Complet
         return None
 
 
+def _powerpoint_running() -> bool:
+    """True when a PowerPoint window is open on Windows. OfficeCLI's native
+    render drives that same PowerPoint instance and quits it afterwards,
+    closing whatever deck the user has open."""
+    if os.name != "nt":
+        return False
+    try:
+        out = subprocess.run(["tasklist", "/FI", "IMAGENAME eq POWERPNT.EXE", "/NH"],
+                             capture_output=True, text=True, timeout=15).stdout
+    except (subprocess.TimeoutExpired, OSError):
+        return True  # unknown: prefer the render that cannot close the user's work
+    return "powerpnt.exe" in out.lower()
+
+
+def render_args() -> list[str]:
+    """Screenshot render flag: native PowerPoint only when no PowerPoint is open."""
+    return ["--render", "html"] if _powerpoint_running() else []
+
+
 def officecli_checks(project: Path, render: bool = True) -> tuple[list[str], list[str]]:
     """OpenXML validation + converted-PPTX contact sheet. Measurement-only:
     skipped entirely when officecli is absent. render=False keeps the
@@ -247,7 +266,8 @@ def officecli_checks(project: Path, render: bool = True) -> tuple[list[str], lis
         out = project / "_pptx_render" / f"{pptx.stem}-grid.png"
         out.parent.mkdir(parents=True, exist_ok=True)
         rs = _run_officecli([binary, "view", str(pptx), "screenshot",
-                             "--grid", "auto", "--out", str(out), "--json"],
+                             "--grid", "auto", "--out", str(out), "--json",
+                             *render_args()],
                             timeout=180)
         if rs is not None and rs.returncode == 0 and out.exists():
             print(f"[verify_deck] pptx render: {out} — Read it to eyeball "

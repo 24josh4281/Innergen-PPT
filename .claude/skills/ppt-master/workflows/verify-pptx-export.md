@@ -41,6 +41,8 @@ officecli --version
 | Windows with PowerPoint installed (default `--render auto`) | Drives native PowerPoint | Ground truth — pixels are what PowerPoint shows |
 | No Office available (`--render html` fallback) | OfficeCLI built-in HTML engine | High fidelity; apply the Step 3 known-deviation table |
 
+> **PowerPoint already open → `--render html` (Mandatory).** The native path drives the running PowerPoint instance and quits it afterwards, closing the user's open decks. Check first (`tasklist /FI "IMAGENAME eq POWERPNT.EXE"`); when PowerPoint is running, add `--render html` to every `view screenshot` / `view pdf` call. `verify_deck.py` applies this automatically.
+
 ---
 
 ## Step 1: Package Validation
