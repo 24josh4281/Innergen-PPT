@@ -405,11 +405,11 @@ def run(pages: list[StoryPage], deck_type: str | None, rules: dict, source_text:
     if closing and not (closing[-1].governing or closing[-1].slots):
         rep.add("WARN", "N43", closing[-1].index, "마지막 본문 장표에 결론 메시지(거버닝 또는 결론 박스)가 없습니다")
 
-    # ---- N5: independent AI content review record (on request only; gates once a record exists)
+    # ---- N5: independent AI content review record
     if review is not None:
         check_review(review, ghost_sha, rules, rep, len(pages))
     elif not plan_stage:
-        rep.add("INFO", "N50", 0, "AI 내용 검토는 요청 시에만 실행합니다(\"내용 검토해줘\") — content-review-v32.md")
+        rep.add("WARN", "N50", 0, "AI 내용 검토 기록(analysis/content_review.json)이 없습니다 — content-review-v32.md 절차로 검토자를 따로 실행하세요")
     return rep
 
 

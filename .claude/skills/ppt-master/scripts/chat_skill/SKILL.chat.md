@@ -225,10 +225,10 @@ python3 ${SKILL_DIR}/scripts/innergen_story_check.py /tmp/<deck> --deck-type <ty
 story (N01–N02), TOC names must match chapter tags and numbering (N10–N17),
 governing numbers must appear in the page body (N22), diagram layouts need their
 relation cues (N30), and the last three pages must answer the opening with
-`(owner) by date` actions (N40–N44). Only when the user asks for a content
-review, re-read `analysis/storyline_ghost.md` as a reviewer who did not write it
-and score the six roles in `references/content-review-v32.md` §3; fix any role
-under 3 and say that this was a self-review, not an independent one.
+`(owner) by date` actions (N40–N44). Then re-read `analysis/storyline_ghost.md`
+as a reviewer who did not write it and score the six roles in
+`references/content-review-v32.md` §3; fix any role under 3 before hand-off and
+say in the hand-off that this was a self-review, not an independent one.
 
 Build the TOC page from the drawn pages with
 `python3 ${SKILL_DIR}/scripts/toc_builder.py build /tmp/<deck> --family <family> -o /tmp/<deck>/svg_output/02_toc.svg --lead "<answer>"`
