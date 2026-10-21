@@ -13,7 +13,7 @@
 <line id="toc-4-rule" x1="47.3" y1="503.5" x2="976.7" y2="503.5" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
 <line id="toc-5-rule" x1="47.3" y1="573.9" x2="976.7" y2="573.9" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
 <line id="toc-6-rule" x1="47.3" y1="644.3" x2="976.7" y2="644.3" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
-<line id="footer-line" x1="56" y1="704" x2="968" y2="704" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+<line id="footer-line" x1="56" y1="728" x2="968" y2="728" stroke="#E2E8F0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
 <circle id="toc-1-badge" cx="70.9" cy="253.9" r="19.7" fill="#2F62F0"/>
 <circle id="toc-2-badge" cx="70.9" cy="324.3" r="19.7" fill="#EEF2FF"/>
 <circle id="toc-3-badge" cx="70.9" cy="394.7" r="19.7" fill="#EEF2FF"/>
@@ -47,5 +47,5 @@
 <g id="toc-6-desc" data-pptx-placeholder="body" data-pptx-placeholder-idx="24" data-pptx-placeholder-bounds="118.2 612.3 689.2 27.7"><text id="toc-6-desc-carrier" data-pptx-placeholder-carrier="true" x="118.2" y="633.6" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="12" font-weight="400" fill="#64748B">{{TOC_6_DESC}}</text></g>
 <g id="toc-6-pages" data-pptx-placeholder="body" data-pptx-placeholder-idx="25" data-pptx-placeholder-bounds="846.8 582.4 130 32"><text id="toc-6-pages-carrier" data-pptx-placeholder-carrier="true" x="976.7" y="605.9" text-anchor="end" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="13.33" font-weight="700" fill="#2F62F0">{{TOC_6_PAGES}}</text></g>
 <g id="footer-section" data-pptx-placeholder="footer" data-pptx-placeholder-bounds="56 40 600 18"><text id="footer-section-carrier" data-pptx-placeholder-carrier="true" x="56" y="54" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#2F62F0">{{SECTION_NAME}}</text></g>
-<g id="page-number" data-pptx-placeholder="slide-number" data-pptx-placeholder-bounds="888 716 80 20"><text id="page-number-carrier" data-pptx-placeholder-carrier="true" x="968" y="732" text-anchor="end" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="12" font-weight="400" fill="#64748B">{{PAGE_NUM}}</text></g>
+<g id="page-number" data-pptx-placeholder="slide-number" data-pptx-placeholder-bounds="888 736 80 20"><text id="page-number-carrier" data-pptx-placeholder-carrier="true" x="968" y="752" text-anchor="end" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="12" font-weight="400" fill="#64748B">{{PAGE_NUM}}</text></g>
 </svg>

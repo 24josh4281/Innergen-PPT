@@ -267,12 +267,14 @@ _PPTX_STRUCTURE_ATTRS = frozenset({
     'data-pptx-layer',
     'data-pptx-layout-kind',
     'data-pptx-placeholder',
+    'data-pptx-placeholder-anchor',
     'data-pptx-placeholder-binding',
     'data-pptx-placeholder-bounds',
     'data-pptx-placeholder-carrier',
     'data-pptx-placeholder-idx',
 })
 _PPTX_PLACEHOLDER_DETAIL_ATTRS = frozenset({
+    'data-pptx-placeholder-anchor',
     'data-pptx-placeholder-binding',
     'data-pptx-placeholder-bounds',
     'data-pptx-placeholder-idx',

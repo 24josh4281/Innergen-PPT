@@ -15,7 +15,7 @@ source_canvas_height: 720
 source_viewbox: "0 0 1040 720"
 replication_mode: standard
 native_structure_mode: structured
-page_count: 15
+page_count: 21
 ---
 
 # 이너젠 오리지널 (컨설팅 보고서 13:9) 템플릿 — 디자인 명세
@@ -60,8 +60,14 @@ page_count: 15
 | `01b_cover_solid_navy.svg` | `innergen-solid-cover` / 이너젠 오리지널 단색 표지 | 왼쪽 제목·절제된 남색 구조·자체 로고 |
 | `01c_cover_slim_line.svg` | `innergen-slim-cover` / 이너젠 오리지널 슬림 표지 | 흰 바탕·가느다란 상단 선·간결한 제목 |
 | `02a_toc_classic.svg` | `innergen-classic-toc` / 이너젠 오리지널 격자 목차 | 격자 헤더·번호별 목차 |
+| `02a_toc_classic_4.svg` | `innergen-classic-toc-4` / 이너젠 오리지널 격자 목차 4장 | 격자 헤더·번호별 목차·4장 |
+| `02a_toc_classic_5.svg` | `innergen-classic-toc-5` / 이너젠 오리지널 격자 목차 5장 | 격자 헤더·번호별 목차·5장 |
 | `02b_toc_solid_navy.svg` | `innergen-solid-toc` / 이너젠 오리지널 단색 목차 | 단색 헤더·번호별 목차 |
+| `02b_toc_solid_navy_4.svg` | `innergen-solid-toc-4` / 이너젠 오리지널 단색 목차 4장 | 단색 헤더·번호별 목차·4장 |
+| `02b_toc_solid_navy_5.svg` | `innergen-solid-toc-5` / 이너젠 오리지널 단색 목차 5장 | 단색 헤더·번호별 목차·5장 |
 | `02c_toc_slim_line.svg` | `innergen-slim-toc` / 이너젠 오리지널 슬림 목차 | 얇은 남색 구분선·번호별 목차 |
+| `02c_toc_slim_line_4.svg` | `innergen-slim-toc-4` / 이너젠 오리지널 슬림 목차 4장 | 얇은 남색 구분선·번호별 목차·4장 |
+| `02c_toc_slim_line_5.svg` | `innergen-slim-toc-5` / 이너젠 오리지널 슬림 목차 5장 | 얇은 남색 구분선·번호별 목차·5장 |
 | `03a_chapter_classic.svg` | `innergen-classic-chapter` / 이너젠 오리지널 격자 장 구분 | 현재 장을 굵게 표시하는 장 구분 |
 | `03b_chapter_solid_navy.svg` | `innergen-solid-chapter` / 이너젠 오리지널 단색 장 구분 | 단색 남색 제목띠의 장 구분 |
 | `03c_chapter_slim_line.svg` | `innergen-slim-chapter` / 이너젠 오리지널 슬림 장 구분 | 흰 화면과 남색 선의 장 구분 |

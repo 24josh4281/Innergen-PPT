@@ -438,7 +438,10 @@
       "innergen-intro-toc",
       "innergen-intro-toc-pages",
       "innergen-biz-toc-pages",
-      "innercarry-toc-pages"
+      "innercarry-toc-pages",
+      "innergen-classic-toc",
+      "innergen-solid-toc",
+      "innergen-slim-toc"
     ],
     "divider_layouts": [
       "innergen-intro-section-divider",

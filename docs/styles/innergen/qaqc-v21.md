@@ -78,6 +78,8 @@ python3 .claude/skills/ppt-master/scripts/innergen_qaqc.py projects/<project> \
 | O01 | 목차 항목에 대응하는 본문 제목·장 구분 없음, 목차 자체가 없음(교육·착수·최종·세미나·리포트) | WARN |
 | O02 | 목차 쪽 범위가 순서·총 장수와 맞지 않음 | WARN |
 
+목차 레이아웃은 `toc.layouts` 접두로 찾으므로 장 수 변형(`…-toc-pages-4`, `innergen-classic-toc-5` 등)도 목차로 본다. 목차 아래 빈 띠(CB02)와 카드 안 상단 쏠림(CB01)은 `content_balance_check.py`가 검사한다([구조화 장표 v18 §7](structured-slides-v18.md)).
+
 ### S. 구조 (v18·v20)
 
 | 코드 | 검사 | 수준 |

@@ -2,8 +2,8 @@
 <rect id="master-bg" x="0" y="0" width="1040" height="720" fill="#FFFFFF" data-pptx-layer="master" data-pptx-editable="false"/>
 <rect id="top-rule" x="0" y="0" width="1040" height="3" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false"/>
 <rect id="governing-box" x="48" y="60" width="944" height="44" rx="5" ry="5" fill="#F3F6FF" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
-<rect id="plot-bg" x="66" y="129.7" width="416.2" height="416.2" fill="#F3F6FF" data-pptx-layer="layout" data-pptx-editable="false"/>
-<rect id="plot-q1" x="274.1" y="129.7" width="208.1" height="208.1" fill="#EEF2FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="plot-bg" x="66" y="129.7" width="416.2" height="416.2" fill="#F3F6FF" data-pptx-layer="layout" data-pptx-editable="false" data-balance-exempt="데이터 위치 표시 영역(점·버블 좌표가 값) — 가운데 정렬 대상 아님"/>
+<rect id="plot-q1" x="274.1" y="129.7" width="208.1" height="208.1" fill="#EEF2FF" data-pptx-layer="layout" data-pptx-editable="false" data-balance-exempt="데이터 위치 표시 영역(점·버블 좌표가 값) — 가운데 정렬 대상 아님"/>
 <rect id="plot-q1-edge" x="274.1" y="129.7" width="208.1" height="208.1" fill="none" stroke="#B8CBF9" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
 <line id="thr-x" x1="66" y1="337.8" x2="482.2" y2="337.8" stroke="#94A3B8" stroke-width="1" stroke-dasharray="4 3" data-pptx-layer="layout" data-pptx-editable="false"/>
 <line id="thr-y" x1="274.1" y1="129.7" x2="274.1" y2="545.9" stroke="#94A3B8" stroke-width="1" stroke-dasharray="4 3" data-pptx-layer="layout" data-pptx-editable="false"/>

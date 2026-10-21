@@ -24,6 +24,16 @@ positions, spacing inside the group and text alignment stay unchanged. CB02
 and CB03 are report-only: redistribute the rows or re-plan the page (see the
 skill ppt-content-group-centering).
 
+Structured templates: a placeholder slot with
+`data-pptx-placeholder-anchor="middle"` may have its carrier moved inside its
+unchanged bounds, so `--fix` centers such slots and also flags groups that sit
+too low. Fixed `data-pptx-layer="layout"` elements never move in a deck; when a
+group mixes them with centered slots, each slot is centered in its own bounds
+instead. `--template` is for template authors: it also moves layout-layer
+content and keeps each moved carrier inside its bounds. A container rect with
+`data-balance-exempt="<reason>"` is skipped and reported as exempt; the same
+attribute on the root `<svg>` skips CB03 for a free-layout template page.
+
 Usage:
     python3 scripts/content_balance_check.py <project_path|svg_dir|file.svg> [options]
 
@@ -60,6 +70,7 @@ TOC_VOID_RATIO = 0.10
 PAGE_VOID_RATIO = 0.06
 SOURCE_PREFIXES = ("출처", "자료:", "Source", "source")
 NO_BODY_ROLES = ("cover", "ending", "closing", "section", "chapter", "divider", "toc", "표지", "맺음", "간지", "목차")
+FULL_SLOT_RATIO = 0.75                  # a slot this tall (vs. its zone) centers on its own
 SHIFTABLE = {"text", "rect", "circle", "ellipse", "image", "line", "polygon", "polyline"}
 
 
@@ -86,6 +97,14 @@ class Item:
     is_text: bool = False
     ax: float = 0.0
     placeholder: bool = False
+    layer: str = ""                          # data-pptx-layer of the element (master/layout = fixed)
+    slot: Optional[ET.Element] = None        # placeholder <g> that carries this element
+    anchor: str = ""                         # data-pptx-placeholder-anchor of that slot
+
+    @property
+    def movable(self) -> bool:
+        """A deck may move it: slide-local, and a placeholder only when its slot opts in."""
+        return self.layer not in ("master", "layout") and (not self.placeholder or self.anchor == "middle")
 
     @property
     def w(self) -> float:
@@ -175,10 +194,11 @@ def collect(root) -> tuple[list[Item], bool]:
     items: list[Item] = []
     transformed = False
 
-    def walk(el, style, under_transform, in_ph=False):
+    def walk(el, style, under_transform, slot=None):
         nonlocal transformed
         tag = _tag(el)
-        in_ph = in_ph or el.get("data-pptx-placeholder") is not None
+        if slot is None and el.get("data-pptx-placeholder") is not None:
+            slot = el
         if tag in ("defs", "metadata", "style", "clipPath", "mask", "symbol"):
             return
         st = dict(style)
@@ -192,7 +212,7 @@ def collect(root) -> tuple[list[Item], bool]:
         if tag == "text":
             it = _text_item(el, st)
             if it:
-                it.placeholder = in_ph
+                _tag_item(it, el, slot)
                 items.append(it)
             return
         if tag == "rect":
@@ -217,18 +237,31 @@ def collect(root) -> tuple[list[Item], bool]:
         elif tag == "path":
             transformed = True  # bounds unknown; containers holding paths are skipped
         if items and items[-1].el is el:
-            items[-1].placeholder = in_ph
+            _tag_item(items[-1], el, slot)
         for ch in el:
-            walk(ch, st, tr, in_ph)
+            walk(ch, st, tr, slot)
 
     walk(root, {}, False)
     return items, transformed
 
 
+def _tag_item(it: Item, el, slot) -> None:
+    it.layer = (el.get("data-pptx-layer") or "").strip().lower()
+    if slot is not None:
+        it.placeholder, it.slot = True, slot
+        it.anchor = (slot.get("data-pptx-placeholder-anchor") or "").strip().lower()
+
+
+def slot_bounds(slot) -> Optional[list[float]]:
+    """`x y width height` of a placeholder slot, or None."""
+    nums = re.findall(r"-?\d+(?:\.\d+)?", (slot.get("data-pptx-placeholder-bounds") or "") if slot is not None else "")
+    return [float(n) for n in nums] if len(nums) == 4 else None
+
+
 def _containers(items: list[Item], cw: float, ch: float) -> list[Item]:
     out = []
     for it in items:
-        if it.kind != "rect" or it.fill in ("NONE", "TRANSPARENT"):
+        if it.kind != "rect" or it.fill in ("NONE", "TRANSPARENT") or it.el.get("data-balance-exempt"):
             continue
         if it.w < 40 or it.h < 24:
             continue
@@ -251,10 +284,33 @@ def _is_divider(it: Item, c: Item) -> bool:
     return thin and it.w >= c.w * 0.6
 
 
+def _split_header(top: float, content: list[Item]) -> tuple[float, list[Item]]:
+    """A top row made only of fixed layout elements (section label, step badge + letter)
+    or of slots declared `anchor="top"` (panel heading) is the card's heading: it
+    stays put and the rest is centered below it."""
+    rows = sorted(content, key=lambda it: it.y0)
+    if len(rows) < 2:
+        return top, content
+    band = [rows[0]]
+    y1 = rows[0].y1
+    for it in rows[1:]:
+        if it.y0 < y1 - 0.5:
+            band.append(it)
+            y1 = max(y1, it.y1)
+    rest = [it for it in content if it not in band]
+    if (rest and any(it.is_text for it in band) and all(it.layer == "layout" or it.anchor == "top" for it in band)
+            and min(it.y0 for it in rest) >= y1):
+        return y1, rest
+    return top, content
+
+
 def _balance(c: Item, zone: tuple[float, float], content: list[Item], page: str) -> Optional[Finding]:
     top, bottom = zone
     if not any(it.is_text for it in content):
         return None
+    top, content = _split_header(top, content)
+    if not content or any(it.anchor == "top" for it in content):
+        return None                          # slot declared top-anchored (chart, table, free drawing)
     if any(not it.is_text and it.h >= (bottom - top) * 0.85 for it in content):
         return None                          # inner frame / image fills the zone
     g0 = min(it.y0 for it in content)
@@ -263,7 +319,11 @@ def _balance(c: Item, zone: tuple[float, float], content: list[Item], page: str)
     if gap_top < 0 or gap_bottom < 0:
         return None
     imbalance = gap_bottom - gap_top
-    if imbalance <= max(MIN_IMBALANCE_PX, IMBALANCE_RATIO * (bottom - top)):
+    if any(it.anchor == "middle" for it in content):
+        imbalance_seen = abs(imbalance)          # a centered slot may also have been written too low
+    else:
+        imbalance_seen = imbalance
+    if imbalance_seen <= max(MIN_IMBALANCE_PX, IMBALANCE_RATIO * (bottom - top)):
         return None
     return Finding("CB01", page, (round(c.x0, 1), round(top, 1), round(c.w, 1), round(bottom - top, 1)),
                    round(gap_top, 1), round(gap_bottom, 1), round(imbalance / 2, 2), items=content)
@@ -326,26 +386,49 @@ def analyse_toc(items: list[Item], cw: float, ch: float, page: str) -> Optional[
                    note=f"목차 영역이 y{last:.0f}에서 끝나 바닥선(y{floor:.0f})까지 {void:.0f}px가 비어 있음 — 행 간격을 늘려 영역을 채우세요")
 
 
-def _footer_floor(items: list[Item], cw: float, ch: float) -> float:
+def _footer_floor(items: list[Item], cw: float, ch: float, below: float = 0.0) -> float:
+    """Footer line: a rule whose id names the footer, else a wide low rule under `below`."""
     rules = [it for it in items if it.kind in ("line", "rect") and it.h < 2.5 and it.w >= cw * 0.5]
     footer = [it for it in rules if "footer" in (it.el.get("id") or "").lower()]
-    footer = footer or [it for it in rules if it.y0 > ch * 0.85]
+    footer = footer or [it for it in rules if it.y0 > max(ch * 0.85, below)]
     return min((it.y0 for it in footer), default=ch * 0.95)
 
 
-def analyse_page_bottom(items: list[Item], cw: float, ch: float, page: str) -> Optional[Finding]:
+def _path_bottoms(root, ch: float) -> list[float]:
+    """Lowest y of each untransformed absolute path (M/L/C/S/Q/T pairs and V values)."""
+    out = []
+    for el in root.iter():
+        if _tag(el) != "path" or el.get("transform") or el.get("id", "").startswith(("footer", "source")):
+            continue
+        ys, cmd, idx = [], "", 0
+        for tok in re.findall(r"[A-Za-z]|-?\d+(?:\.\d+)?", el.get("d", "")):
+            if tok.isalpha():
+                cmd, idx = tok, 0
+                continue
+            if (cmd in "MLCSQT" and idx % 2 == 1) or cmd == "V":
+                ys.append(float(tok))
+            idx += 1
+        if ys and not any(c.islower() for c in re.findall(r"[A-Za-z]", el.get("d", ""))):
+            out.append(max(ys))
+    return [y for y in out if ch * 0.18 < y < ch]
+
+
+def analyse_page_bottom(items: list[Item], cw: float, ch: float, page: str,
+                        path_bottoms: list[float] = ()) -> Optional[Finding]:
     """CB03: gap between the lowest body element and the source line (or the footer line)."""
-    floor = _footer_floor(items, cw, ch)
-    sources = [it for it in items if it.is_text and ch * 0.6 < it.y0 < floor
+    sources = [it for it in items if it.is_text and it.y0 > ch * 0.6
                and ("".join(it.el.itertext()).strip().startswith(SOURCE_PREFIXES)
                     or "source" in (it.el.get("id") or "").lower())]
+    # A table or frame rule above the source line is body, not the footer.
+    floor = _footer_floor(items, cw, ch, below=max((it.y0 for it in sources), default=0.0))
+    sources = [it for it in sources if it.y0 < floor]
     if sources:
         floor = min(it.y0 for it in sources)
-    body = [it for it in items if it not in sources and it.y0 > ch * 0.18 and it.y1 < floor - 0.5
+    body = [it for it in items if it not in sources and it.y0 > ch * 0.155 and it.y1 < floor - 0.5
             and not (it.kind == "rect" and it.w >= cw * 0.95 and it.h >= ch * 0.5)]
     if not body:
         return None
-    last = max(it.y1 for it in body)
+    last = max([it.y1 for it in body] + [y for y in path_bottoms if y < floor - 0.5])
     void = floor - last
     if void <= PAGE_VOID_RATIO * ch:
         return None
@@ -355,9 +438,50 @@ def analyse_page_bottom(items: list[Item], cw: float, ch: float, page: str) -> O
                         f"(허용 {PAGE_VOID_RATIO * ch:.0f}px) — 본문 글자·행 높이를 키우거나 맺음 메시지 띠를 넣으세요")
 
 
+def _can_shift(content: list[Item], template: bool) -> bool:
+    for it in content:
+        if _tag(it.el) not in SHIFTABLE:
+            return False
+        if template:
+            if it.layer == "master" or (it.placeholder and it.anchor != "middle"):
+                return False
+        elif not it.movable:
+            return False
+    return True
+
+
+def _move_slot_bounds(content: list[Item], delta: float, zone: tuple[float, float]) -> None:
+    """Template mode: keep each moved carrier inside its slot bounds, and the bounds inside the zone."""
+    for slot in {id(it.slot): it.slot for it in content if it.slot is not None}.values():
+        b = slot_bounds(slot)
+        if b is None:
+            continue
+        ink = [it for it in content if it.slot is slot]
+        y0, y1 = min(it.y0 for it in ink) + delta, max(it.y1 for it in ink) + delta
+        if b[1] - 0.5 <= y0 and y1 <= b[1] + b[3] + 0.5:
+            continue
+        top = min(max(b[1] + delta, zone[0]), zone[1] - b[3])
+        slot.set("data-pptx-placeholder-bounds", " ".join(f"{v:g}" for v in (b[0], round(top, 1), b[2], b[3])))
+
+
+def center_in_slots(content: list[Item], min_height: float = 0.0) -> bool:
+    """Center opted-in carriers inside their own slot bounds: rows beside fixed badges,
+    or side-by-side slots that each span the zone (`min_height` filters stacked slots)."""
+    moved = False
+    for it in content:
+        b = slot_bounds(it.slot)
+        if it.anchor != "middle" or b is None or not it.is_text or it.layer in ("master", "layout"):
+            continue
+        if b[3] < min_height or it.h > b[3]:
+            continue
+        delta = round(b[1] + (b[3] - it.h) / 2 - it.y0, 2)
+        if abs(delta) > 0.5:
+            shift([it], delta)
+            moved = True
+    return moved
+
+
 def shift(content: list[Item], delta: float) -> bool:
-    if any(_tag(it.el) not in SHIFTABLE or it.placeholder for it in content):
-        return False
     for it in content:
         el, tag = it.el, _tag(it.el)
         keys = {"rect": ("y",), "image": ("y",), "text": ("y",), "circle": ("cy",),
@@ -375,7 +499,27 @@ def shift(content: list[Item], delta: float) -> bool:
     return True
 
 
-def check_file(path: Path, fix: bool) -> list[Finding]:
+def _refusal(content: list[Item]) -> str:
+    if any(it.layer in ("master", "layout") for it in content):
+        return "고정 레이아웃 요소(data-pptx-layer=layout) 포함 — 템플릿에서 수정"
+    if any(it.placeholder and it.anchor != "middle" for it in content):
+        return "구조화 자리(placeholder)가 위 고정 — 템플릿에 data-pptx-placeholder-anchor=\"middle\" 지정 필요"
+    return "자동 보정 불가(경로·변형 요소 포함) — 직접 이동"
+
+
+def exempt_notes(path: Path) -> list[str]:
+    """Containers the template author exempted, with the stated reason."""
+    root = ET.parse(str(path)).getroot()
+    notes = [f"{path.name} #{el.get('id') or 'rect'}: {el.get('data-balance-exempt')}"
+             for el in root.iter() if _tag(el) == "rect" and el.get("data-balance-exempt")]
+    if root.get("data-balance-exempt"):
+        notes.append(f"{path.name} (CB03 제외): {root.get('data-balance-exempt')}")
+    notes += [f"{path.name} #{el.get('id')}: 위 고정 자리(차트·표·도식을 채우는 영역)"
+              for el in root.iter() if (el.get("data-pptx-placeholder-anchor") or "").strip().lower() == "top"]
+    return notes
+
+
+def check_file(path: Path, fix: bool, template: bool = False) -> list[Finding]:
     tree = ET.parse(str(path))
     root = tree.getroot()
     vb = [float(v) for v in (root.get("viewBox") or "0 0 1280 720").split()]
@@ -387,18 +531,27 @@ def check_file(path: Path, fix: bool) -> list[Finding]:
         f = analyse_toc(items, cw, ch, path.name)
         if f:
             findings.append(f)
-    elif not any(r in role.lower() for r in NO_BODY_ROLES):
-        f = analyse_page_bottom(items, cw, ch, path.name)
+    elif not any(r in role.lower() for r in NO_BODY_ROLES) and not root.get("data-balance-exempt"):
+        f = analyse_page_bottom(items, cw, ch, path.name, _path_bottoms(root, ch))
         if f:
             findings.append(f)
     changed = False
     for c in _containers(items, cw, ch):
         for f in analyse_card(c, items, path.name):
-            if fix and shift(f.items, f.delta):
+            if fix and _can_shift(f.items, template):
+                if template:
+                    _move_slot_bounds(f.items, f.delta, (f.box[1], f.box[1] + f.box[3]))
+                shift(f.items, f.delta)
+                if not template:
+                    for it in f.items:           # the shift moved them; keep the measured box in step
+                        it.y0, it.y1 = it.y0 + f.delta, it.y1 + f.delta
+                    center_in_slots(f.items, FULL_SLOT_RATIO * f.box[3])
                 f.fixed, changed = True, True
+            elif fix and not template and center_in_slots(f.items):
+                f.fixed, changed = True, True
+                f.note = "고정 요소는 두고 자리별로 가운데 정렬함 — 렌더로 확인"
             elif fix:
-                f.note = ("구조화 자리(placeholder) — 템플릿·자리 경계에서 수정"
-                          if any(it.placeholder for it in f.items) else "자동 보정 불가(경로·변형 요소 포함) — 직접 이동")
+                f.note = _refusal(f.items)
             findings.append(f)
         if changed:
             items, _ = collect(root)         # re-measure after a move
@@ -418,24 +571,37 @@ def main(argv: Optional[list[str]] = None) -> int:
     ap = argparse.ArgumentParser(description="Detect top-heavy content blocks (CB01), TOC bottom voids (CB02) and page bottom voids (CB03).")
     ap.add_argument("target", type=Path, help="project path, svg directory or a single SVG")
     ap.add_argument("--fix", action="store_true", help="center flagged CB01 content groups in place")
+    ap.add_argument("--template", action="store_true",
+                    help="template authoring: with --fix, also move layout-layer content and slot bounds")
     ap.add_argument("--json", type=Path, help="write the findings as JSON")
     args = ap.parse_args(argv)
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, OSError, ValueError):
+            pass
     files = resolve(args.target)
     if not files:
         print(f"[content_balance] no SVG found under {args.target}")
         return 1
     all_f: list[Finding] = []
+    exempt: list[str] = []
     for p in files:
-        all_f.extend(check_file(p, args.fix))
+        all_f.extend(check_file(p, args.fix, args.template))
+        exempt.extend(exempt_notes(p))
     for f in all_f:
         if f.code == "CB01":
-            state = "보정함" if f.fixed else (f.note or f"아래로 {f.delta:g}px 이동 권장")
+            hint = f"{'아래' if f.delta > 0 else '위'}로 {abs(f.delta):g}px 이동 권장"
+            state = (f.note or "보정함") if f.fixed else (f.note or hint)
             print(f"[WARN] CB01 {f.page} 상자 {f.box}: 위 여백 {f.gap_top:g}px · 아래 여백 {f.gap_bottom:g}px — {state}")
         else:
             print(f"[WARN] {f.code} {f.page}: {f.note}")
+    for note in exempt:
+        print(f"[INFO] 제외 {note}")
     open_n = sum(1 for f in all_f if not f.fixed)
     print(f"[content_balance] {len(files)} pages · CB01 {sum(f.code == 'CB01' for f in all_f)} · "
-          f"CB02 {sum(f.code == 'CB02' for f in all_f)} · CB03 {sum(f.code == 'CB03' for f in all_f)} · fixed {len(all_f) - open_n} · open {open_n}")
+          f"CB02 {sum(f.code == 'CB02' for f in all_f)} · CB03 {sum(f.code == 'CB03' for f in all_f)} · "
+          f"fixed {len(all_f) - open_n} · open {open_n} · exempt {len(exempt)}")
     if args.json:
         args.json.write_text(json.dumps([{k: v for k, v in f.__dict__.items() if k != "items"} for f in all_f],
                                         ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

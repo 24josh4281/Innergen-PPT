@@ -2,13 +2,13 @@
 <rect id="master-bg" x="0" y="0" width="1040" height="720" fill="#FFFFFF" data-pptx-layer="master" data-pptx-editable="false"/>
 <rect id="top-rule" x="0" y="0" width="1040" height="3" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false"/>
 <rect id="governing-box" x="48" y="60" width="944" height="44" rx="5" ry="5" fill="#F3F6FF" stroke="#DFE7FF" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
-<rect id="quad-1" x="67.5" y="131.2" width="205.1" height="205.1" fill="#F3F6FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="quad-1" x="67.5" y="131.2" width="205.1" height="205.1" fill="#F3F6FF" data-pptx-layer="layout" data-pptx-editable="false" data-balance-exempt="데이터 위치 표시 영역(점·버블 좌표가 값) — 가운데 정렬 대상 아님"/>
 <text id="quad-1-label" x="78" y="149.7" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#64748B" data-pptx-layer="layout" data-pptx-editable="false">만족 유지</text>
-<rect id="quad-2" x="275.6" y="131.2" width="205.1" height="205.1" fill="#EEF2FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="quad-2" x="275.6" y="131.2" width="205.1" height="205.1" fill="#EEF2FF" data-pptx-layer="layout" data-pptx-editable="false" data-balance-exempt="데이터 위치 표시 영역(점·버블 좌표가 값) — 가운데 정렬 대상 아님"/>
 <text id="quad-2-label" x="286.1" y="149.7" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#2F62F0" data-pptx-layer="layout" data-pptx-editable="false">긴밀 관리</text>
-<rect id="quad-3" x="67.5" y="339.3" width="205.1" height="205.1" fill="#F3F6FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="quad-3" x="67.5" y="339.3" width="205.1" height="205.1" fill="#F3F6FF" data-pptx-layer="layout" data-pptx-editable="false" data-balance-exempt="데이터 위치 표시 영역(점·버블 좌표가 값) — 가운데 정렬 대상 아님"/>
 <text id="quad-3-label" x="78" y="357.8" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#64748B" data-pptx-layer="layout" data-pptx-editable="false">모니터링</text>
-<rect id="quad-4" x="275.6" y="339.3" width="205.1" height="205.1" fill="#F3F6FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="quad-4" x="275.6" y="339.3" width="205.1" height="205.1" fill="#F3F6FF" data-pptx-layer="layout" data-pptx-editable="false" data-balance-exempt="데이터 위치 표시 영역(점·버블 좌표가 값) — 가운데 정렬 대상 아님"/>
 <text id="quad-4-label" x="286.1" y="357.8" font-family='Pretendard, "Malgun Gothic", sans-serif' font-size="12" font-weight="700" fill="#64748B" data-pptx-layer="layout" data-pptx-editable="false">정보 제공</text>
 <line id="axis-x" x1="66" y1="545.9" x2="482.2" y2="545.9" stroke="#94A3B8" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
 <line id="axis-y" x1="66" y1="129.7" x2="66" y2="545.9" stroke="#94A3B8" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>

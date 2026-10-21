@@ -193,6 +193,13 @@
 
 ## 7. 실행 견본과 작성 주의
 
+- 2026-10-21 카드 안 가운데 정렬(CB01·CB02, `ppt-content-group-centering`): 카드·KPI 칸·설명 상자 안 글자 묶음은 위아래 여백을 같게 둔다. 네 계열(`innergen`, `innergen_lecture`, `innergen_business`, `innercarry`) 템플릿은 다음처럼 바뀌었다.
+  - 카드 안 본문 자리에 `data-pptx-placeholder-anchor="middle"`을 단다. 레이아웃 플레이스홀더는 세로 가운데(`anchor="ctr"`)로 내보내고, 견본 글자는 칸 가운데에 둔다. 차트·표·자유 영역(`evidence-area`, `content-area`, `org-flow`)과 판독 제목(`readout-title`)은 `top`으로 위 정렬을 밝힌다. 속성은 레이아웃 지문에 들어가지 않는다.
+  - 자리 범위(`data-pptx-placeholder-bounds`)는 글자가 범위 밖으로 나가는 자리만 같은 카드 안에서 옮겼다. 기존 프로젝트는 템플릿 사본을 쓰므로 영향이 없고, 새 덱부터 적용된다.
+  - 값이 곧 위치인 영역(s50·s55 사분면, s57 9-box 칸)과 s21 탐색 목록 띠는 `data-balance-exempt="<사유>"`로 검사에서 뺀다.
+  - 목차는 장 수에 맞는 변형을 고른다: 뉴·캐리 계열 `02b_toc_pages_{3,4,5}`(키 `…-toc-pages-3/4/5`, 6장은 기존 `…-toc-pages`), 오리지널 `02?_toc_*`(3장 기본, `_4`·`_5`, 키 `innergen-{classic,solid,slim}-toc-4/5`). 행을 지우지 말고 변형을 바꿔 목차 영역 아래 빈 띠를 쪽 높이 10% 이하로 둔다.
+  - 본문 하단 공백(CB03): 이너캐리 출처·바닥선·쪽번호는 y712·728·752, 본문 영역은 y156–696이다. 세 계열의 고정 도식은 본문을 출처 줄 위 쪽 높이 3%까지 늘렸다. 자유 배치 틀(`03a`, `03c`, `03d`, `03f`, `s09`)과 인용 도입(`s41`)은 덱에서 채우므로 루트 `<svg data-balance-exempt="<사유>">`로 CB03에서만 뺀다.
+  - 검사: `content_balance_check.py <svg_output>`(덱), `--template <templates>`(템플릿 수정). 덱에서 `--fix`는 자리 범위 안에서만 글자를 옮긴다. PowerPoint에서 내용을 고친 뒤 다시 가운데 맞춤이 되는 것은 레이아웃 자리뿐이고, 슬라이드 글상자는 위 정렬로 남는다.
 - 2026-10-14 v24: 컨설팅 펌 공개 방법론의 도식 16종(s43–s58: 이슈 트리·가설 작업계획·SCQA·동인 트리·워터폴·MACC·감축 웨지·이중 중대성·리스크 히트맵·시나리오·하비볼·RACI·이해관계자·3지평·9-box·운영모델)을 더해 구조화 장표는 60종이다. §3c 참조.
 - 2026-10-14 v23: 보고 생애주기·세미나 구조 19종(s24–s42)을 더해 구조화 장표는 44종(기본 레이아웃 제외)이다. §3b 참조.
 - 2026-10-14 v22: 세 계열 템플릿(`innergen_lecture` 컴팩트 재생성, `innergen_business` 960×540, `innercarry` 1024×768)이 같은 s01–s23 슬롯 토큰을 쓴다. 컴팩트 밀도에서 칸 글자 하한은 12px(9pt), 배지·태그 10.67px(8pt). 거버닝은 한 줄. 상세: [design-standard-v17.md v22](design-standard-v17.md).

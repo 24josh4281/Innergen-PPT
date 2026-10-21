@@ -2,13 +2,13 @@
 <rect id="master-bg" x="0" y="0" width="960" height="540" fill="#FFFFFF" data-pptx-layer="master" data-pptx-editable="false"/>
 <rect id="title-bar" x="24" y="22" width="3" height="16" fill="#518FFF" data-pptx-layer="layout" data-pptx-editable="false"/>
 <line id="governing-rule" x1="24" y1="82" x2="936" y2="82" stroke="#D9D9D9" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
-<rect id="quad-1" x="43.5" y="103.3" width="165.6" height="165.6" fill="#F3F7FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="quad-1" x="43.5" y="103.3" width="165.6" height="165.6" fill="#F3F7FF" data-pptx-layer="layout" data-pptx-editable="false" data-balance-exempt="데이터 위치 표시 영역(점·버블 좌표가 값) — 가운데 정렬 대상 아님"/>
 <text id="quad-1-label" x="54" y="121.8" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="700" fill="#595959" data-pptx-layer="layout" data-pptx-editable="false">만족 유지</text>
-<rect id="quad-2" x="212.1" y="103.3" width="165.6" height="165.6" fill="#EEF3FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="quad-2" x="212.1" y="103.3" width="165.6" height="165.6" fill="#EEF3FF" data-pptx-layer="layout" data-pptx-editable="false" data-balance-exempt="데이터 위치 표시 영역(점·버블 좌표가 값) — 가운데 정렬 대상 아님"/>
 <text id="quad-2-label" x="222.6" y="121.8" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="700" fill="#518FFF" data-pptx-layer="layout" data-pptx-editable="false">긴밀 관리</text>
-<rect id="quad-3" x="43.5" y="271.9" width="165.6" height="165.6" fill="#F3F7FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="quad-3" x="43.5" y="271.9" width="165.6" height="165.6" fill="#F3F7FF" data-pptx-layer="layout" data-pptx-editable="false" data-balance-exempt="데이터 위치 표시 영역(점·버블 좌표가 값) — 가운데 정렬 대상 아님"/>
 <text id="quad-3-label" x="54" y="290.4" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="700" fill="#595959" data-pptx-layer="layout" data-pptx-editable="false">모니터링</text>
-<rect id="quad-4" x="212.1" y="271.9" width="165.6" height="165.6" fill="#F3F7FF" data-pptx-layer="layout" data-pptx-editable="false"/>
+<rect id="quad-4" x="212.1" y="271.9" width="165.6" height="165.6" fill="#F3F7FF" data-pptx-layer="layout" data-pptx-editable="false" data-balance-exempt="데이터 위치 표시 영역(점·버블 좌표가 값) — 가운데 정렬 대상 아님"/>
 <text id="quad-4-label" x="222.6" y="290.4" font-family='"IBM Plex Sans KR", "Malgun Gothic", sans-serif' font-size="10.67" font-weight="700" fill="#595959" data-pptx-layer="layout" data-pptx-editable="false">정보 제공</text>
 <line id="axis-x" x1="42" y1="439" x2="379.1" y2="439" stroke="#A6A6A6" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
 <line id="axis-y" x1="42" y1="101.8" x2="42" y2="439" stroke="#A6A6A6" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>

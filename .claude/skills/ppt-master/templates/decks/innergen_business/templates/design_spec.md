@@ -15,10 +15,13 @@ source_canvas_height: 540
 source_viewbox: "0 0 960 540"
 replication_mode: standard
 native_structure_mode: structured
-page_count: 69
+page_count: 72
 placeholders:
   01_cover: ["{{EVENT_NAME}}", "{{SUBTITLE}}", "{{TITLE}}", "{{COVER_MESSAGE}}", "{{KEY_FIGURES}}", "{{DATE}}", "{{AUTHOR}}"]
   02b_toc_pages: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{TOC_1_NO}}", "{{TOC_1_TITLE}}", "{{TOC_1_DESC}}", "{{TOC_1_PAGES}}", "{{TOC_2_NO}}"]
+  02b_toc_pages_3: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{TOC_1_NO}}", "{{TOC_1_TITLE}}", "{{TOC_1_DESC}}", "{{TOC_1_PAGES}}", "{{TOC_2_NO}}"]
+  02b_toc_pages_4: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{TOC_1_NO}}", "{{TOC_1_TITLE}}", "{{TOC_1_DESC}}", "{{TOC_1_PAGES}}", "{{TOC_2_NO}}"]
+  02b_toc_pages_5: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{TOC_1_NO}}", "{{TOC_1_TITLE}}", "{{TOC_1_DESC}}", "{{TOC_1_PAGES}}", "{{TOC_2_NO}}"]
   02c_section_divider: ["{{PAGE_TITLE}}", "{{CHAPTER_NO}}", "{{CHAPTER_TITLE}}", "{{CHAPTER_LEAD}}", "{{CHAPTER_Q_1}}", "{{CHAPTER_Q_2}}", "{{CHAPTER_Q_3}}"]
   03a_content: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{CONTENT_AREA}}", "{{SOURCE}}", "{{SECTION_NAME}}", "{{PAGE_NUM}}"]
   03b_content_final: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{CONTENT_AREA}}", "{{FINAL_MESSAGE}}", "{{SOURCE}}", "{{SECTION_NAME}}", "{{PAGE_NUM}}"]
@@ -142,6 +145,9 @@ placeholders:
 | --- | --- | --- |
 | `01_cover.svg` | `innergen-biz-cover` / 이너젠 뉴 사업소개 표지 | 슬롯 7개 |
 | `02b_toc_pages.svg` | `innergen-biz-toc-pages` / 이너젠 뉴 사업소개 목차(쪽수) | 슬롯 28개 |
+| `02b_toc_pages_3.svg` | `innergen-biz-toc-pages-3` / 이너젠 뉴 사업소개 목차(쪽수·3장) | 슬롯 16개·3장 |
+| `02b_toc_pages_4.svg` | `innergen-biz-toc-pages-4` / 이너젠 뉴 사업소개 목차(쪽수·4장) | 슬롯 20개·4장 |
+| `02b_toc_pages_5.svg` | `innergen-biz-toc-pages-5` / 이너젠 뉴 사업소개 목차(쪽수·5장) | 슬롯 24개·5장 |
 | `02c_section_divider.svg` | `innergen-biz-section-divider` / 이너젠 뉴 사업소개 장 구분(학습 포인트) | 슬롯 15개 |
 | `03a_content.svg` | `innergen-biz-content` / 이너젠 뉴 사업소개 본문 | 슬롯 6개 |
 | `03b_content_final.svg` | `innergen-biz-content-final` / 이너젠 뉴 사업소개 본문+결론 | 슬롯 7개 |

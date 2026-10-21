@@ -2086,11 +2086,26 @@ def _placeholder_text_body(
         if source_tx_body is not None
         else None
     )
-    tx_body.append(
+    body_pr = (
         ET.fromstring(ET.tostring(source_body_pr, encoding="utf-8"))
         if source_body_pr is not None
         else ET.Element(f"{{{DML_NS}}}bodyPr")
     )
+    if item.placeholder_anchor == "middle":
+        # A centered slot fills its design-zone bounds and keeps the text
+        # group in the vertical middle; auto-fit would shrink the frame back
+        # to the first line and pin the text to the top again.
+        for autofit in list(body_pr):
+            if autofit.tag in {
+                f"{{{DML_NS}}}spAutoFit",
+                f"{{{DML_NS}}}normAutofit",
+                f"{{{DML_NS}}}noAutofit",
+            }:
+                body_pr.remove(autofit)
+        body_pr.set("wrap", "square")
+        body_pr.set("anchor", "ctr")
+        body_pr.set("anchorCtr", "0")
+    tx_body.append(body_pr)
     list_style = (
         ET.fromstring(ET.tostring(source_lst_style, encoding="utf-8"))
         if source_lst_style is not None

@@ -41,6 +41,7 @@ _STRUCTURE_ATTRS = frozenset({
     "data-pptx-master",
     "data-pptx-master-name",
     "data-pptx-placeholder",
+    "data-pptx-placeholder-anchor",
     "data-pptx-placeholder-binding",
     "data-pptx-placeholder-bounds",
     "data-pptx-placeholder-carrier",
@@ -48,6 +49,7 @@ _STRUCTURE_ATTRS = frozenset({
     "data-pptx-editable",
 })
 _LAYERS = frozenset({"master", "layout", "slide"})
+_PLACEHOLDER_ANCHORS = frozenset({"top", "middle"})
 _PLACEHOLDERS = frozenset({
     "title",
     "subtitle",
@@ -243,6 +245,10 @@ class TemplateElementSpec:
     placeholder_binding: str | None = None
     placeholder_carrier_tag: str | None = None
     is_background: bool = False
+    # Vertical anchor of the reusable slot ("middle" centers the content group).
+    # Layout-only hint: slides keep their own carrier geometry, so it is not
+    # part of the cross-slide contract signature.
+    placeholder_anchor: str | None = None
 
     def contract_signature(self) -> tuple[object, ...]:
         """Return metadata that must agree across slides sharing a structure."""
@@ -1171,6 +1177,7 @@ def parse_template_slide(
             (placeholder_raw or "").strip().lower() or None
         )
         bounds_raw = elem.get("data-pptx-placeholder-bounds")
+        anchor_raw = (elem.get("data-pptx-placeholder-anchor") or "").strip().lower()
         placeholder_idx_raw = elem.get("data-pptx-placeholder-idx")
         binding_raw = elem.get("data-pptx-placeholder-binding")
         carrier_raw = elem.get("data-pptx-placeholder-carrier")
@@ -1286,6 +1293,11 @@ def parse_template_slide(
             svg_path=svg_path,
             element_id=element_id or tag,
         )
+        if anchor_raw and (not placeholder or anchor_raw not in _PLACEHOLDER_ANCHORS):
+            raise TemplateStructureError(
+                f"{svg_path.name}: {element_id or tag} data-pptx-placeholder-anchor "
+                f"must be one of {sorted(_PLACEHOLDER_ANCHORS)} on a placeholder slot"
+            )
 
         placeholder_binding: str | None = None
         placeholder_carrier_tag: str | None = None
@@ -1420,6 +1432,7 @@ def parse_template_slide(
                 placeholder_binding=placeholder_binding,
                 placeholder_carrier_tag=placeholder_carrier_tag,
                 is_background=is_background,
+                placeholder_anchor=anchor_raw or None,
             ))
         visual_order += 1
 
