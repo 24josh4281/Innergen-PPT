@@ -213,7 +213,11 @@ def check(pages: list[PlanPage], deck_type: str | None, business_type: str | Non
     if dt is None:
         add("WARN", "R00", 0, "보고 유형(--deck-type 또는 design_spec.md deck_type)이 없어 목차·필수 내용 검사를 건너뜁니다")
     elif rt is None:
-        add("INFO", "R00", 0, f"보고 유형 '{dt}'은 content-requirements 대상이 아닙니다({', '.join(spec.get('not_covered', []))} 포함)")
+        excluded = {name.split("(", 1)[0] for name in spec.get("not_covered", [])}
+        if dt in excluded:
+            add("INFO", "R00", 0, f"보고 유형 '{dt}'은 content-requirements 대상이 아니므로 R/B 필수 내용 검사를 건너뜁니다")
+        else:
+            add("ERROR", "R00", 0, f"알 수 없는 보고 유형 '{dt}'입니다 (선택지: {', '.join(spec['report_types'])})")
     else:
         for sec in rt["sections"]:
             sections[sec["id"]] = _section_pages(sec, pages)
@@ -232,17 +236,20 @@ def check(pages: list[PlanPage], deck_type: str | None, business_type: str | Non
         if n and not (lo * 0.5 <= n <= hi * 1.5):
             add("INFO", "R04", 0, f"{rt['label_ko']} 기본 장수 {lo}–{hi}장 대비 {n}장입니다")
 
-    if bt is None:
-        lvl = "WARN" if dt in (None, "proposal", "kickoff", "weekly", "biweekly", "monthly", "diagnosis", "interim", "final", "briefing", "benchmark") else "INFO"
-        msg = f"사업 성격 '{business_type}'을 알 수 없습니다" if business_type else "사업 성격(--business-type 또는 design_spec.md innergen_business_type)이 없어 업무별 필수 내용 검사를 건너뜁니다"
-        add(lvl, "B00", 0, msg + f" (선택지: {', '.join(spec['business_types'])})")
-    elif bt not in spec["business_types"]:
-        add("WARN", "B00", 0, f"사업 성격 '{bt}'을 알 수 없습니다 (선택지: {', '.join(spec['business_types'])})")
-        bt = None
-    else:
-        b = spec["business_types"][bt]
-        items = [it for it in b["items"] if not it.get("stages") or (dt and dt in it["stages"])]
-        _run_items(items, "B01", pages, sections, add, outline, prefix=f"[{b['label_ko']}] ")
+    # A known non-deck output (memo/report outline) has no business slide checklist.
+    # An unknown deck type already fails R00 above; do not add misleading B01 hits.
+    if dt is None or rt is not None:
+        if bt is None:
+            lvl = "WARN" if dt in (None, "proposal", "kickoff", "weekly", "biweekly", "monthly", "diagnosis", "interim", "final", "briefing", "benchmark") else "INFO"
+            msg = f"사업 성격 '{business_type}'을 알 수 없습니다" if business_type else "사업 성격(--business-type 또는 design_spec.md innergen_business_type)이 없어 업무별 필수 내용 검사를 건너뜁니다"
+            add(lvl, "B00", 0, msg + f" (선택지: {', '.join(spec['business_types'])})")
+        elif bt not in spec["business_types"]:
+            add("WARN", "B00", 0, f"사업 성격 '{bt}'을 알 수 없습니다 (선택지: {', '.join(spec['business_types'])})")
+            bt = None
+        else:
+            b = spec["business_types"][bt]
+            items = [it for it in b["items"] if not it.get("stages") or (dt and dt in it["stages"])]
+            _run_items(items, "B01", pages, sections, add, outline, prefix=f"[{b['label_ko']}] ")
 
     for it in spec.get("hygiene", []):
         if it["level"] == "FORBID":

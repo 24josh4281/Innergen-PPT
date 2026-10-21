@@ -703,13 +703,20 @@
     {"id":"cdp_disclosure","label_ko":"CDP·기후공시","label_en":"CDP / climate disclosure","label_ja":"CDP・気候開示","label_zh":"CDP／气候披露","desc_ko":"공시 문항·근거·답변 현황","desc_en":"Questions, evidence, response status","desc_ja":"設問・根拠・回答状況","desc_zh":"问题、证据与答复进度"},
     {"id":"reduction","label_ko":"온실가스 감축","label_en":"GHG reduction","label_ja":"温室効果ガス削減","label_zh":"温室气体减排","desc_ko":"기준선·방법론·MRV","desc_en":"Baseline, method, MRV","desc_ja":"ベースライン・方法論・MRV","desc_zh":"基准线、方法与MRV"},
     {"id":"regulatory","label_ko":"규제 대응","label_en":"Regulatory response","label_ja":"規制対応","label_zh":"法规应对","desc_ko":"적용 의무·제출·검증","desc_en":"Obligations, filing, verification","desc_ja":"義務・提出・検証","desc_zh":"义务、提交与核查"},
-    {"id":"inventory","label_ko":"온실가스 인벤토리","label_en":"GHG inventory","label_ja":"温室効果ガスインベントリ","label_zh":"温室气体清单","desc_ko":"경계·활동자료·산정 품질","desc_en":"Boundary, activity data, QA","desc_ja":"境界・活動量・品質管理","desc_zh":"边界、活动数据与质量管理"}
+    {"id":"inventory","label_ko":"온실가스 인벤토리","label_en":"GHG inventory","label_ja":"温室効果ガスインベントリ","label_zh":"温室气体清单","desc_ko":"경계·활동자료·산정 품질","desc_en":"Boundary, activity data, QA","desc_ja":"境界・活動量・品質管理","desc_zh":"边界、活动数据与质量管理"},
+    {"id":"lca_product","label_ko":"LCA·제품 탄소발자국","label_en":"LCA / product carbon footprint","label_ja":"LCA・製品カーボンフットプリント","label_zh":"LCA／产品碳足迹","desc_ko":"기능단위·시스템 경계·검증","desc_en":"Functional unit, system boundary, verification","desc_ja":"機能単位・システム境界・検証","desc_zh":"功能单位、系统边界与核验"},
+    {"id":"climate_risk","label_ko":"기후리스크·시나리오","label_en":"Climate risk / scenarios","label_ja":"気候リスク・シナリオ","label_zh":"气候风险／情景","desc_ko":"시나리오·영향·대응","desc_en":"Scenarios, impacts, response","desc_ja":"シナリオ・影響・対応","desc_zh":"情景、影响与应对"},
+    {"id":"esg_rating","label_ko":"ESG 평가 대응","label_en":"ESG rating response","label_ja":"ESG評価対応","label_zh":"ESG评级应对","desc_ko":"평가 기준·근거·개선","desc_en":"Criteria, evidence, improvement","desc_ja":"評価基準・根拠・改善","desc_zh":"评价标准、证据与改进"},
+    {"id":"climate_education","label_ko":"기후·ESG 교육","label_en":"Climate / ESG education","label_ja":"気候・ESG教育","label_zh":"气候／ESG培训","desc_ko":"사실·제도·직무 연결","desc_en":"Facts, policy, job relevance","desc_ja":"事実・制度・職務との関連","desc_zh":"事实、制度与岗位关联"},
+    {"id":"climate_tech","label_ko":"기후테크·소셜벤처","label_en":"Climate tech / social ventures","label_ja":"気候テック・ソーシャルベンチャー","label_zh":"气候科技／社会企业","desc_ko":"분류·투자·지원·사례","desc_en":"Categories, investment, support, cases","desc_ja":"分類・投資・支援・事例","desc_zh":"分类、投资、扶持与案例"}
   ],
   "innergen_report_types": [
     {"id":"proposal","label_ko":"제안서형","label_en":"Proposal","label_ja":"提案書","label_zh":"提案书","desc_ko":"과제→범위→접근→산출물","desc_en":"Challenge → scope → approach → outputs","desc_ja":"課題→範囲→方法→成果物","desc_zh":"问题→范围→方法→成果"},
     {"id":"kickoff","label_ko":"착수보고형","label_en":"Kickoff","label_ja":"着手報告","label_zh":"启动报告","desc_ko":"목적→계획→자료요청→일정","desc_en":"Purpose → plan → data request → milestones","desc_ja":"目的→計画→資料依頼→日程","desc_zh":"目标→计划→资料请求→日程"},
     {"id":"interim","label_ko":"중간보고형","label_en":"Interim report","label_ja":"中間報告","label_zh":"中期报告","desc_ko":"진행→잠정 결과→이슈→다음 단계","desc_en":"Progress → findings → issues → next steps","desc_ja":"進捗→暫定結果→課題→次の段階","desc_zh":"进度→阶段成果→问题→下一步"},
-    {"id":"final","label_ko":"최종보고형","label_en":"Final report","label_ja":"最終報告","label_zh":"最终报告","desc_ko":"결론→근거→검증→인계","desc_en":"Conclusion → evidence → validation → handover","desc_ja":"結論→根拠→検証→引き継ぎ","desc_zh":"结论→证据→核验→移交"}
+    {"id":"final","label_ko":"최종보고형","label_en":"Final report","label_ja":"最終報告","label_zh":"最终报告","desc_ko":"결론→근거→검증→인계","desc_en":"Conclusion → evidence → validation → handover","desc_ja":"結論→根拠→検証→引き継ぎ","desc_zh":"结论→证据→核验→移交"},
+    {"id":"education","label_ko":"교육·워크숍","label_en":"Education / workshop","label_ja":"教育・ワークショップ","label_zh":"培训／工作坊","desc_ko":"학습 목표→사례→질문·정리","desc_en":"Learning goals → cases → questions","desc_ja":"学習目標→事例→質問・整理","desc_zh":"学习目标→案例→提问与总结"},
+    {"id":"briefing","label_ko":"경영진 브리핑","label_en":"Executive briefing","label_ja":"経営層向けブリーフィング","label_zh":"高管简报","desc_ko":"결정 안건→대안·근거→권고","desc_en":"Decision → options and evidence → recommendation","desc_ja":"決定事項→選択肢・根拠→提言","desc_zh":"决策事项→方案与依据→建议"}
   ],
   "innergen_variants": [
     {"id":"classic_grid","label_ko":"격자형","label_en":"Classic grid","label_ja":"グリッド型","label_zh":"网格型","desc_ko":"격자 남색 헤더·푸터","desc_en":"Gridded navy header and footer","desc_ja":"格子柄の紺色ヘッダー・フッター","desc_zh":"网格海军蓝页眉和页脚"},

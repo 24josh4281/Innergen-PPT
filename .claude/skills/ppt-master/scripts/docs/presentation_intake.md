@@ -46,7 +46,7 @@ with a reason. An inferred value is never silently promoted to a confirmed fact.
 | Evidence `kind: regulatory` | Requires `jurisdiction` and `version` |
 | Conflict | `summary`, `status: unresolved/resolved`; resolved entries require `resolution_basis` |
 
-The 16 deck IDs and 9 business IDs are in `docs/presentation-intake-v26.json`.
+The 16 deck IDs and 13 business IDs are in `docs/presentation-intake-v26.json`.
 Unknown IDs fail clearly; other business work uses `general`. Do not keyword-match
 a report type automatically from a file name. The agent interprets the actual task.
 
