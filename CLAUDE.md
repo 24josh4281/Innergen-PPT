@@ -54,6 +54,23 @@ re-architectable source. Do not load either full owner before that answer.
 - Stack: `Pretendard, "Malgun Gothic", sans-serif`; intermediate weights use installed family names (`"Pretendard Medium"`, `"Pretendard SemiBold"`, etc.).
 - Font files are bundled at [`.claude/skills/ppt-master/assets/fonts/Pretendard/`](.claude/skills/ppt-master/assets/fonts/Pretendard/) (SIL OFL) and installed user-level on this machine. PPTX does not embed fonts — decks shared to other machines need Pretendard installed there.
 
+## User-authorized report diagrams and editable reduction equations
+
+For kickoff, interim and final reports, apply
+[`report-diagrams-v30.md`](docs/styles/innergen/report-diagrams-v30.md) when
+planning schedules, procedures, detailed status and scope. Read reference pages,
+reuse their structural relationships, and keep source/page/hash plus actual
+output feedback for later work. A reference index is not visual review or model
+retraining. Keep the selected route, current content and confirmed design values.
+
+For reduction projects, scenario equations and monitoring-parameter symbols must
+remain native editable Office Math in Word and PPT (`m:oMath`, PPT `a14:m`).
+PNG, outline shapes and plain text alone do not meet this requirement. Use the
+same source formulas in both formats; verify equation structure, parameter/unit
+mapping, and actual rendering/editing separately from calculation correctness.
+This user-authorized requirement takes precedence over the generic formula-PNG
+default. Preserve originals and do not invent methodology, coefficients or results.
+
 ## Setup and Update Requests (new PC)
 
 Users are non-technical; they typically give only the git URL and ask to install it or

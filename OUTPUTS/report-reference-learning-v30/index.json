@@ -1,0 +1,5739 @@
+{
+  "version": "30",
+  "root": "INPUTS/이너젠 PPT 장표 레퍼런스",
+  "status": "structural_retrieval_index_not_design_or_content_validation",
+  "decks": [
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/CDP/제안서 2.pptx",
+      "sha256": "9d12036471032259fb66f5dcf25060d549ead78436de8b1668be3bae3695ed40",
+      "slide_count": 41,
+      "candidates": [
+        {
+          "slide": 3,
+          "part": "ppt/slides/slide3.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 33,
+            "pic": 0,
+            "cxnSp": 1,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 4,
+          "part": "ppt/slides/slide4.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 11,
+            "pic": 3,
+            "cxnSp": 3,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 5,
+          "part": "ppt/slides/slide5.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 22,
+            "pic": 0,
+            "cxnSp": 20,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 6,
+          "part": "ppt/slides/slide6.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 38,
+            "pic": 0,
+            "cxnSp": 15,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 11,
+          "part": "ppt/slides/slide11.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 22,
+            "pic": 8,
+            "cxnSp": 0,
+            "grpSp": 6,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 13,
+          "part": "ppt/slides/slide13.xml",
+          "subjects": [
+            "schedule",
+            "scope"
+          ],
+          "counts": {
+            "sp": 22,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 14,
+          "part": "ppt/slides/slide14.xml",
+          "subjects": [
+            "schedule",
+            "detail"
+          ],
+          "counts": {
+            "sp": 13,
+            "pic": 4,
+            "cxnSp": 2,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 16,
+          "part": "ppt/slides/slide16.xml",
+          "subjects": [
+            "schedule",
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 1,
+            "cxnSp": 4,
+            "grpSp": 0,
+            "tables": 4
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 18,
+          "part": "ppt/slides/slide18.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 33,
+            "pic": 0,
+            "cxnSp": 13,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 27,
+          "part": "ppt/slides/slide27.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 11,
+            "pic": 5,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 30,
+          "part": "ppt/slides/slide30.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 31,
+          "part": "ppt/slides/slide31.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 32,
+          "part": "ppt/slides/slide32.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 33,
+          "part": "ppt/slides/slide33.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 37,
+          "part": "ppt/slides/slide37.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 38,
+          "part": "ppt/slides/slide38.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 39,
+          "part": "ppt/slides/slide39.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 40,
+          "part": "ppt/slides/slide40.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/CDP/제안서 3.pptx",
+      "sha256": "5445a73509fe449776ccc71ccdf8acfde48b7a55df06b7a5ecae650ec1d3b786",
+      "slide_count": 49,
+      "candidates": [
+        {
+          "slide": 3,
+          "part": "ppt/slides/slide3.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 15,
+            "pic": 1,
+            "cxnSp": 3,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 9,
+          "part": "ppt/slides/slide9.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 33,
+            "pic": 0,
+            "cxnSp": 1,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 10,
+          "part": "ppt/slides/slide10.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 11,
+            "pic": 3,
+            "cxnSp": 3,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 11,
+          "part": "ppt/slides/slide11.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 22,
+            "pic": 0,
+            "cxnSp": 20,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 12,
+          "part": "ppt/slides/slide12.xml",
+          "subjects": [
+            "schedule",
+            "scope"
+          ],
+          "counts": {
+            "sp": 23,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 13,
+          "part": "ppt/slides/slide13.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 37,
+            "pic": 0,
+            "cxnSp": 14,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 14,
+          "part": "ppt/slides/slide14.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 27,
+            "pic": 4,
+            "cxnSp": 3,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 15,
+          "part": "ppt/slides/slide15.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 22,
+            "pic": 4,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 16,
+          "part": "ppt/slides/slide16.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 31,
+            "pic": 4,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 17,
+          "part": "ppt/slides/slide17.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 45,
+            "pic": 5,
+            "cxnSp": 18,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 20,
+          "part": "ppt/slides/slide20.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 33,
+            "pic": 0,
+            "cxnSp": 13,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 23,
+          "part": "ppt/slides/slide23.xml",
+          "subjects": [
+            "schedule",
+            "detail"
+          ],
+          "counts": {
+            "sp": 13,
+            "pic": 4,
+            "cxnSp": 2,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 25,
+          "part": "ppt/slides/slide25.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 12,
+            "pic": 0,
+            "cxnSp": 3,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 26,
+          "part": "ppt/slides/slide26.xml",
+          "subjects": [
+            "procedure",
+            "detail"
+          ],
+          "counts": {
+            "sp": 21,
+            "pic": 3,
+            "cxnSp": 3,
+            "grpSp": 1,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 27,
+          "part": "ppt/slides/slide27.xml",
+          "subjects": [
+            "schedule",
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 1,
+            "cxnSp": 4,
+            "grpSp": 0,
+            "tables": 4
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 31,
+          "part": "ppt/slides/slide31.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 11,
+            "pic": 5,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 34,
+          "part": "ppt/slides/slide34.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 37,
+          "part": "ppt/slides/slide37.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 38,
+          "part": "ppt/slides/slide38.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 41,
+          "part": "ppt/slides/slide41.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 42,
+          "part": "ppt/slides/slide42.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 44,
+          "part": "ppt/slides/slide44.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 45,
+          "part": "ppt/slides/slide45.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 46,
+          "part": "ppt/slides/slide46.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/CDP/제안서.pptx",
+      "sha256": "4395366602479ddb6ef747f3ed371a5b3ce3d1ac51a0675ae4a7b526fc48aae4",
+      "slide_count": 52,
+      "candidates": [
+        {
+          "slide": 3,
+          "part": "ppt/slides/slide3.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 9,
+            "pic": 4,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 4,
+          "part": "ppt/slides/slide4.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 21,
+            "pic": 5,
+            "cxnSp": 0,
+            "grpSp": 4,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 5,
+          "part": "ppt/slides/slide5.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 27,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 6,
+          "part": "ppt/slides/slide6.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 31,
+            "pic": 1,
+            "cxnSp": 11,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 7,
+          "part": "ppt/slides/slide7.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 24,
+            "cxnSp": 1,
+            "grpSp": 4,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 8,
+          "part": "ppt/slides/slide8.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 20,
+            "pic": 25,
+            "cxnSp": 1,
+            "grpSp": 6,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 9,
+          "part": "ppt/slides/slide9.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 18,
+            "pic": 3,
+            "cxnSp": 2,
+            "grpSp": 3,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 15,
+          "part": "ppt/slides/slide15.xml",
+          "subjects": [
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 22,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 16,
+          "part": "ppt/slides/slide16.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 11,
+            "pic": 3,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 17,
+          "part": "ppt/slides/slide17.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 33,
+            "pic": 9,
+            "cxnSp": 0,
+            "grpSp": 6,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 19,
+          "part": "ppt/slides/slide19.xml",
+          "subjects": [
+            "procedure",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 40,
+            "pic": 0,
+            "cxnSp": 34,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 20,
+          "part": "ppt/slides/slide20.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 15,
+            "pic": 6,
+            "cxnSp": 1,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 21,
+          "part": "ppt/slides/slide21.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 39,
+            "pic": 3,
+            "cxnSp": 4,
+            "grpSp": 5,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 22,
+          "part": "ppt/slides/slide22.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 239,
+            "pic": 0,
+            "cxnSp": 13,
+            "grpSp": 5,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 23,
+          "part": "ppt/slides/slide23.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 3,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 24,
+          "part": "ppt/slides/slide24.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 3,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 26,
+          "part": "ppt/slides/slide26.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 35,
+            "pic": 5,
+            "cxnSp": 3,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 30,
+          "part": "ppt/slides/slide30.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 3,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 31,
+          "part": "ppt/slides/slide31.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 33,
+            "pic": 0,
+            "cxnSp": 13,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 32,
+          "part": "ppt/slides/slide32.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 23,
+            "pic": 4,
+            "cxnSp": 1,
+            "grpSp": 7,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 33,
+          "part": "ppt/slides/slide33.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 39,
+            "pic": 1,
+            "cxnSp": 7,
+            "grpSp": 4,
+            "tables": 2
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 34,
+          "part": "ppt/slides/slide34.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 40,
+            "pic": 4,
+            "cxnSp": 7,
+            "grpSp": 5,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 35,
+          "part": "ppt/slides/slide35.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 3,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 36,
+          "part": "ppt/slides/slide36.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 23,
+            "pic": 0,
+            "cxnSp": 2,
+            "grpSp": 4,
+            "tables": 2
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 37,
+          "part": "ppt/slides/slide37.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 31,
+            "pic": 0,
+            "cxnSp": 2,
+            "grpSp": 4,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 38,
+          "part": "ppt/slides/slide38.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 33,
+            "pic": 3,
+            "cxnSp": 5,
+            "grpSp": 4,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 41,
+          "part": "ppt/slides/slide41.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 27,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 42,
+          "part": "ppt/slides/slide42.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 3,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 43,
+          "part": "ppt/slides/slide43.xml",
+          "subjects": [
+            "schedule",
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 38,
+            "pic": 0,
+            "cxnSp": 15,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 44,
+          "part": "ppt/slides/slide44.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 12,
+            "pic": 0,
+            "cxnSp": 3,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 46,
+          "part": "ppt/slides/slide46.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 3,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 48,
+          "part": "ppt/slides/slide48.xml",
+          "subjects": [
+            "schedule",
+            "detail",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 17,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 49,
+          "part": "ppt/slides/slide49.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 25,
+            "pic": 0,
+            "cxnSp": 3,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 52,
+          "part": "ppt/slides/slide52.xml",
+          "subjects": [
+            "schedule",
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 3,
+            "pic": 1,
+            "cxnSp": 4,
+            "grpSp": 1,
+            "tables": 4
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/CDP/착수보고.pptx",
+      "sha256": "736a70e24cafe29c5d0f597ce8060ead97ce1286e79f42a4e642c76f65eaa918",
+      "slide_count": 24,
+      "candidates": [
+        {
+          "slide": 3,
+          "part": "ppt/slides/slide3.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 26,
+            "pic": 0,
+            "cxnSp": 4,
+            "grpSp": 1,
+            "tables": 2
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 5,
+          "part": "ppt/slides/slide5.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 27,
+            "pic": 1,
+            "cxnSp": 1,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 7,
+          "part": "ppt/slides/slide7.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 35,
+            "pic": 0,
+            "cxnSp": 23,
+            "grpSp": 6,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 8,
+          "part": "ppt/slides/slide8.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 30,
+            "pic": 4,
+            "cxnSp": 3,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 9,
+          "part": "ppt/slides/slide9.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 8,
+            "pic": 4,
+            "cxnSp": 2,
+            "grpSp": 1,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 10,
+          "part": "ppt/slides/slide10.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 7,
+            "pic": 2,
+            "cxnSp": 2,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 11,
+          "part": "ppt/slides/slide11.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 18,
+            "pic": 3,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 12,
+          "part": "ppt/slides/slide12.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 31,
+            "pic": 4,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 13,
+          "part": "ppt/slides/slide13.xml",
+          "subjects": [
+            "procedure",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 10,
+            "pic": 1,
+            "cxnSp": 2,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 14,
+          "part": "ppt/slides/slide14.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 45,
+            "pic": 5,
+            "cxnSp": 18,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 15,
+          "part": "ppt/slides/slide15.xml",
+          "subjects": [
+            "schedule",
+            "procedure",
+            "detail"
+          ],
+          "counts": {
+            "sp": 38,
+            "pic": 0,
+            "cxnSp": 5,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 16,
+          "part": "ppt/slides/slide16.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 14,
+            "pic": 1,
+            "cxnSp": 6,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 17,
+          "part": "ppt/slides/slide17.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 18,
+            "pic": 3,
+            "cxnSp": 1,
+            "grpSp": 4,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 18,
+          "part": "ppt/slides/slide18.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 38,
+            "pic": 9,
+            "cxnSp": 0,
+            "grpSp": 9,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 20,
+          "part": "ppt/slides/slide20.xml",
+          "subjects": [
+            "schedule",
+            "scope"
+          ],
+          "counts": {
+            "sp": 24,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 21,
+          "part": "ppt/slides/slide21.xml",
+          "subjects": [
+            "schedule",
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 13,
+            "pic": 4,
+            "cxnSp": 3,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 22,
+          "part": "ppt/slides/slide22.xml",
+          "subjects": [
+            "procedure",
+            "detail"
+          ],
+          "counts": {
+            "sp": 22,
+            "pic": 3,
+            "cxnSp": 3,
+            "grpSp": 1,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 23,
+          "part": "ppt/slides/slide23.xml",
+          "subjects": [
+            "schedule",
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 1,
+            "cxnSp": 4,
+            "grpSp": 0,
+            "tables": 4
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/CDP/최종보고 2.pptx",
+      "sha256": "dd93093112c5c535184d5484794cf766812bf1bd55855dd79bf3c25381e3c7d4",
+      "slide_count": 21,
+      "candidates": [
+        {
+          "slide": 2,
+          "part": "ppt/slides/slide2.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 11,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 2
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 3,
+          "part": "ppt/slides/slide3.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 3,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 4,
+          "part": "ppt/slides/slide4.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 3,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 5,
+          "part": "ppt/slides/slide5.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 6,
+          "part": "ppt/slides/slide6.xml",
+          "subjects": [
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 7,
+          "part": "ppt/slides/slide7.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 9,
+          "part": "ppt/slides/slide9.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 10,
+          "part": "ppt/slides/slide10.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 2
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 11,
+          "part": "ppt/slides/slide11.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 12,
+          "part": "ppt/slides/slide12.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 13,
+          "part": "ppt/slides/slide13.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 7,
+            "pic": 0,
+            "cxnSp": 4,
+            "grpSp": 3,
+            "tables": 2
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 14,
+          "part": "ppt/slides/slide14.xml",
+          "subjects": [
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 15,
+          "part": "ppt/slides/slide15.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 16,
+          "part": "ppt/slides/slide16.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 17,
+          "part": "ppt/slides/slide17.xml",
+          "subjects": [
+            "procedure",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 18,
+          "part": "ppt/slides/slide18.xml",
+          "subjects": [
+            "procedure",
+            "detail"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 19,
+          "part": "ppt/slides/slide19.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/CDP/최종보고.pptx",
+      "sha256": "17c70fcf741bdb0d2933f114e0e668bf8fb5b4e9a563a6e350628d952df30f10",
+      "slide_count": 26,
+      "candidates": [
+        {
+          "slide": 2,
+          "part": "ppt/slides/slide2.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 11,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 2
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 3,
+          "part": "ppt/slides/slide3.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 7,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 1,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 4,
+          "part": "ppt/slides/slide4.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 5,
+          "part": "ppt/slides/slide5.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 6,
+          "part": "ppt/slides/slide6.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 7,
+          "part": "ppt/slides/slide7.xml",
+          "subjects": [
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 8,
+          "part": "ppt/slides/slide8.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 9,
+          "part": "ppt/slides/slide9.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 10,
+          "part": "ppt/slides/slide10.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 11,
+          "part": "ppt/slides/slide11.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 2
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 12,
+          "part": "ppt/slides/slide12.xml",
+          "subjects": [
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 7,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 13,
+          "part": "ppt/slides/slide13.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 14,
+          "part": "ppt/slides/slide14.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 15,
+          "part": "ppt/slides/slide15.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 16,
+          "part": "ppt/slides/slide16.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 18,
+          "part": "ppt/slides/slide18.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 71,
+            "pic": 4,
+            "cxnSp": 5,
+            "grpSp": 8,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 19,
+          "part": "ppt/slides/slide19.xml",
+          "subjects": [
+            "procedure",
+            "detail"
+          ],
+          "counts": {
+            "sp": 18,
+            "pic": 0,
+            "cxnSp": 1,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 20,
+          "part": "ppt/slides/slide20.xml",
+          "subjects": [
+            "detail"
+          ],
+          "counts": {
+            "sp": 18,
+            "pic": 0,
+            "cxnSp": 1,
+            "grpSp": 1,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 21,
+          "part": "ppt/slides/slide21.xml",
+          "subjects": [
+            "detail",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 20,
+            "pic": 0,
+            "cxnSp": 1,
+            "grpSp": 1,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 22,
+          "part": "ppt/slides/slide22.xml",
+          "subjects": [
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 35,
+            "pic": 0,
+            "cxnSp": 1,
+            "grpSp": 5,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 23,
+          "part": "ppt/slides/slide23.xml",
+          "subjects": [
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 28,
+            "pic": 2,
+            "cxnSp": 1,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 24,
+          "part": "ppt/slides/slide24.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 30,
+            "pic": 0,
+            "cxnSp": 2,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/감축사업/방법론 개발 보고 2.pptx",
+      "sha256": "074566feab2de56304ea24deb5eba63163d4a43a6afcfc8907c54bdbf1bee310",
+      "slide_count": 21,
+      "candidates": [
+        {
+          "slide": 2,
+          "part": "ppt/slides/slide2.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 20,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 4,
+          "part": "ppt/slides/slide4.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 9,
+          "part": "ppt/slides/slide9.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 12,
+          "part": "ppt/slides/slide12.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 48,
+            "pic": 4,
+            "cxnSp": 11,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 13,
+          "part": "ppt/slides/slide13.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 22,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 15,
+          "part": "ppt/slides/slide15.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 8,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 16,
+          "part": "ppt/slides/slide16.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 8,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 18,
+          "part": "ppt/slides/slide18.xml",
+          "subjects": [
+            "schedule",
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 1,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 21,
+          "part": "ppt/slides/slide21.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 12,
+            "pic": 1,
+            "cxnSp": 4,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/감축사업/방법론 개발 보고 3.pptx",
+      "sha256": "fcc461eb65d060a51b86de834cef805d2ba3469d51df2347080aabcd6026dc94",
+      "slide_count": 24,
+      "candidates": [
+        {
+          "slide": 2,
+          "part": "ppt/slides/slide2.xml",
+          "subjects": [
+            "procedure",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 20,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 3,
+          "part": "ppt/slides/slide3.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 5,
+          "part": "ppt/slides/slide5.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 23,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 6,
+          "part": "ppt/slides/slide6.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 27,
+            "pic": 0,
+            "cxnSp": 15,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 7,
+          "part": "ppt/slides/slide7.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 30,
+            "pic": 12,
+            "cxnSp": 17,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 8,
+          "part": "ppt/slides/slide8.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 32,
+            "pic": 13,
+            "cxnSp": 21,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 10,
+          "part": "ppt/slides/slide10.xml",
+          "subjects": [
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 13,
+          "part": "ppt/slides/slide13.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 18,
+            "pic": 4,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 14,
+          "part": "ppt/slides/slide14.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 19,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 15,
+          "part": "ppt/slides/slide15.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 24,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 20,
+          "part": "ppt/slides/slide20.xml",
+          "subjects": [
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 23,
+          "part": "ppt/slides/slide23.xml",
+          "subjects": [
+            "schedule",
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 1,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/감축사업/방법론 개발 보고.pptx",
+      "sha256": "8c10b1e4905f8871ac8751d4acbf0fa5be0d9da7d9e3c9a5a01186d85e771281",
+      "slide_count": 24,
+      "candidates": [
+        {
+          "slide": 2,
+          "part": "ppt/slides/slide2.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 21,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 4,
+          "part": "ppt/slides/slide4.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 6,
+          "part": "ppt/slides/slide6.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 9,
+          "part": "ppt/slides/slide9.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 8,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 11,
+          "part": "ppt/slides/slide11.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 48,
+            "pic": 4,
+            "cxnSp": 11,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 12,
+          "part": "ppt/slides/slide12.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 25,
+            "pic": 3,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 13,
+          "part": "ppt/slides/slide13.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 70,
+            "pic": 5,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 14,
+          "part": "ppt/slides/slide14.xml",
+          "subjects": [
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 16,
+          "part": "ppt/slides/slide16.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 17,
+          "part": "ppt/slides/slide17.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 19,
+          "part": "ppt/slides/slide19.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 20,
+          "part": "ppt/slides/slide20.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 22,
+          "part": "ppt/slides/slide22.xml",
+          "subjects": [
+            "schedule",
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 1,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 24,
+          "part": "ppt/slides/slide24.xml",
+          "subjects": [
+            "schedule",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/감축사업/제안서.pptx",
+      "sha256": "ba2754960d74184c69395067b7aee5b8e939cb330ba802b3a3c41f893bbc1a58",
+      "slide_count": 40,
+      "candidates": [
+        {
+          "slide": 2,
+          "part": "ppt/slides/slide2.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 0,
+            "cxnSp": 4,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 6,
+          "part": "ppt/slides/slide6.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 18,
+            "pic": 15,
+            "cxnSp": 2,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 9,
+          "part": "ppt/slides/slide9.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 41,
+            "pic": 21,
+            "cxnSp": 1,
+            "grpSp": 5,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 11,
+          "part": "ppt/slides/slide11.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 23,
+            "pic": 5,
+            "cxnSp": 4,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 12,
+          "part": "ppt/slides/slide12.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 23,
+            "pic": 2,
+            "cxnSp": 1,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 13,
+          "part": "ppt/slides/slide13.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 23,
+            "pic": 2,
+            "cxnSp": 1,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 16,
+          "part": "ppt/slides/slide16.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 0,
+            "cxnSp": 4,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 17,
+          "part": "ppt/slides/slide17.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 48,
+            "pic": 6,
+            "cxnSp": 11,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 18,
+          "part": "ppt/slides/slide18.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 23,
+            "pic": 5,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 20,
+          "part": "ppt/slides/slide20.xml",
+          "subjects": [
+            "schedule",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 22,
+            "pic": 0,
+            "cxnSp": 8,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 21,
+          "part": "ppt/slides/slide21.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 8,
+            "pic": 3,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 22,
+          "part": "ppt/slides/slide22.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 21,
+            "pic": 8,
+            "cxnSp": 1,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 23,
+          "part": "ppt/slides/slide23.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 0,
+            "cxnSp": 4,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 24,
+          "part": "ppt/slides/slide24.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 20,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 25,
+          "part": "ppt/slides/slide25.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 11,
+            "pic": 5,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 26,
+          "part": "ppt/slides/slide26.xml",
+          "subjects": [
+            "procedure",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 48,
+            "pic": 4,
+            "cxnSp": 11,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 27,
+          "part": "ppt/slides/slide27.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 18,
+            "pic": 0,
+            "cxnSp": 6,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 28,
+          "part": "ppt/slides/slide28.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 29,
+          "part": "ppt/slides/slide29.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 11,
+            "pic": 1,
+            "cxnSp": 2,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 30,
+          "part": "ppt/slides/slide30.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 32,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 4,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 31,
+          "part": "ppt/slides/slide31.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 22,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 32,
+          "part": "ppt/slides/slide32.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 14,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 33,
+          "part": "ppt/slides/slide33.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 7,
+            "pic": 3,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 34,
+          "part": "ppt/slides/slide34.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 20,
+            "pic": 3,
+            "cxnSp": 12,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 35,
+          "part": "ppt/slides/slide35.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 45,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 36,
+          "part": "ppt/slides/slide36.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 0,
+            "cxnSp": 4,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 38,
+          "part": "ppt/slides/slide38.xml",
+          "subjects": [
+            "schedule",
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 6,
+            "pic": 1,
+            "cxnSp": 4,
+            "grpSp": 3,
+            "tables": 4
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 39,
+          "part": "ppt/slides/slide39.xml",
+          "subjects": [
+            "schedule",
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/감축사업/착수보고 2.pptx",
+      "sha256": "8a2c1702ba8e40285b741b581095f815c85ae058a82c63f19d2f5b306a9be3a2",
+      "slide_count": 32,
+      "candidates": [
+        {
+          "slide": 2,
+          "part": "ppt/slides/slide2.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 3,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 3,
+          "part": "ppt/slides/slide3.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 48,
+            "pic": 6,
+            "cxnSp": 11,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 4,
+          "part": "ppt/slides/slide4.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 23,
+            "pic": 5,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 6,
+          "part": "ppt/slides/slide6.xml",
+          "subjects": [
+            "schedule",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 22,
+            "pic": 0,
+            "cxnSp": 8,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 7,
+          "part": "ppt/slides/slide7.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 8,
+            "pic": 3,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 8,
+          "part": "ppt/slides/slide8.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 21,
+            "pic": 8,
+            "cxnSp": 1,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 10,
+          "part": "ppt/slides/slide10.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 8,
+            "pic": 2,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 11,
+          "part": "ppt/slides/slide11.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 3,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 12,
+          "part": "ppt/slides/slide12.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 13,
+          "part": "ppt/slides/slide13.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 20,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 14,
+          "part": "ppt/slides/slide14.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 11,
+            "pic": 5,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 15,
+          "part": "ppt/slides/slide15.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 48,
+            "pic": 4,
+            "cxnSp": 11,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 16,
+          "part": "ppt/slides/slide16.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 18,
+            "pic": 0,
+            "cxnSp": 6,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 17,
+          "part": "ppt/slides/slide17.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 12,
+            "pic": 1,
+            "cxnSp": 4,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 18,
+          "part": "ppt/slides/slide18.xml",
+          "subjects": [
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 19,
+          "part": "ppt/slides/slide19.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 11,
+            "pic": 1,
+            "cxnSp": 2,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 20,
+          "part": "ppt/slides/slide20.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 32,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 4,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 21,
+          "part": "ppt/slides/slide21.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 22,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 23,
+          "part": "ppt/slides/slide23.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 7,
+            "pic": 3,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 26,
+          "part": "ppt/slides/slide26.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 45,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 27,
+          "part": "ppt/slides/slide27.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 3,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 29,
+          "part": "ppt/slides/slide29.xml",
+          "subjects": [
+            "schedule",
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 6,
+            "pic": 1,
+            "cxnSp": 4,
+            "grpSp": 3,
+            "tables": 4
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 30,
+          "part": "ppt/slides/slide30.xml",
+          "subjects": [
+            "schedule",
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/감축사업/착수보고.pptx",
+      "sha256": "2ca3bbbe56eeec89c5c6a519c40c1c15bc29e33e83ef711523c743ba6b6c6e2e",
+      "slide_count": 44,
+      "candidates": [
+        {
+          "slide": 3,
+          "part": "ppt/slides/slide3.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 48,
+            "pic": 6,
+            "cxnSp": 11,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 4,
+          "part": "ppt/slides/slide4.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 21,
+            "pic": 5,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 5,
+          "part": "ppt/slides/slide5.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 29,
+            "pic": 2,
+            "cxnSp": 5,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 6,
+          "part": "ppt/slides/slide6.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 24,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 7,
+          "part": "ppt/slides/slide7.xml",
+          "subjects": [
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 8,
+            "pic": 2,
+            "cxnSp": 2,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 9,
+          "part": "ppt/slides/slide9.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 17,
+            "pic": 4,
+            "cxnSp": 1,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 10,
+          "part": "ppt/slides/slide10.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 24,
+            "pic": 8,
+            "cxnSp": 1,
+            "grpSp": 3,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 11,
+          "part": "ppt/slides/slide11.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 10,
+            "pic": 0,
+            "cxnSp": 1,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 17,
+          "part": "ppt/slides/slide17.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 18,
+            "pic": 16,
+            "cxnSp": 2,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 19,
+          "part": "ppt/slides/slide19.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 41,
+            "pic": 21,
+            "cxnSp": 1,
+            "grpSp": 5,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 21,
+          "part": "ppt/slides/slide21.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 24,
+            "pic": 5,
+            "cxnSp": 4,
+            "grpSp": 4,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 22,
+          "part": "ppt/slides/slide22.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 23,
+            "pic": 2,
+            "cxnSp": 1,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 24,
+          "part": "ppt/slides/slide24.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 31,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 25,
+          "part": "ppt/slides/slide25.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 22,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 27,
+          "part": "ppt/slides/slide27.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 48,
+            "pic": 4,
+            "cxnSp": 11,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 29,
+          "part": "ppt/slides/slide29.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 11,
+            "pic": 1,
+            "cxnSp": 2,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 30,
+          "part": "ppt/slides/slide30.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 32,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 4,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 31,
+          "part": "ppt/slides/slide31.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 18,
+            "pic": 0,
+            "cxnSp": 6,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 32,
+          "part": "ppt/slides/slide32.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 18,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 33,
+          "part": "ppt/slides/slide33.xml",
+          "subjects": [
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 36,
+          "part": "ppt/slides/slide36.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 46,
+            "pic": 1,
+            "cxnSp": 8,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 38,
+          "part": "ppt/slides/slide38.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 41,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 42,
+          "part": "ppt/slides/slide42.xml",
+          "subjects": [
+            "schedule",
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 43,
+          "part": "ppt/slides/slide43.xml",
+          "subjects": [
+            "schedule",
+            "procedure",
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 3,
+            "pic": 1,
+            "cxnSp": 4,
+            "grpSp": 1,
+            "tables": 4
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/규제대응사업/착수보고_규제.pptx",
+      "sha256": "8c1405ee0af40b209a588f4cec65f8c2b67b100d94b4807cf3e211d08e638a05",
+      "slide_count": 28,
+      "candidates": [
+        {
+          "slide": 4,
+          "part": "ppt/slides/slide4.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 46,
+            "pic": 18,
+            "cxnSp": 0,
+            "grpSp": 8,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 6,
+          "part": "ppt/slides/slide6.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 8,
+          "part": "ppt/slides/slide8.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 25,
+            "pic": 20,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 10,
+          "part": "ppt/slides/slide10.xml",
+          "subjects": [
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 26,
+            "pic": 11,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 12,
+          "part": "ppt/slides/slide12.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 20,
+            "pic": 5,
+            "cxnSp": 3,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 13,
+          "part": "ppt/slides/slide13.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 2
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 16,
+          "part": "ppt/slides/slide16.xml",
+          "subjects": [
+            "schedule",
+            "detail"
+          ],
+          "counts": {
+            "sp": 47,
+            "pic": 15,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 18,
+          "part": "ppt/slides/slide18.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 37,
+            "pic": 26,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 21,
+          "part": "ppt/slides/slide21.xml",
+          "subjects": [
+            "schedule"
+          ],
+          "counts": {
+            "sp": 20,
+            "pic": 8,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 24,
+          "part": "ppt/slides/slide24.xml",
+          "subjects": [
+            "schedule",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 25,
+          "part": "ppt/slides/slide25.xml",
+          "subjects": [
+            "schedule",
+            "detail"
+          ],
+          "counts": {
+            "sp": 3,
+            "pic": 1,
+            "cxnSp": 4,
+            "grpSp": 1,
+            "tables": 4
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 26,
+          "part": "ppt/slides/slide26.xml",
+          "subjects": [
+            "schedule"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/규제대응사업/최종보고_규제.pptx",
+      "sha256": "693e54bf761b6bcee46c70a7ace91eed5d15382b9bc3e780afbfea58ab998418",
+      "slide_count": 17,
+      "candidates": [
+        {
+          "slide": 3,
+          "part": "ppt/slides/slide3.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 26,
+            "pic": 3,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 4,
+          "part": "ppt/slides/slide4.xml",
+          "subjects": [
+            "schedule",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 7,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 7,
+          "part": "ppt/slides/slide7.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 55,
+            "pic": 5,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 8,
+          "part": "ppt/slides/slide8.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 15,
+            "pic": 2,
+            "cxnSp": 3,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 10,
+          "part": "ppt/slides/slide10.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 11,
+          "part": "ppt/slides/slide11.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 12,
+          "part": "ppt/slides/slide12.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 97,
+            "pic": 13,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 14,
+          "part": "ppt/slides/slide14.xml",
+          "subjects": [
+            "schedule",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 46,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 15,
+          "part": "ppt/slides/slide15.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 92,
+            "pic": 12,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/온실가스 인벤토리/제안서.pptx",
+      "sha256": "65ae9f3c363b1b73bc1389f6f56201d38361ee84b7fbdf94536bb2f5813dc43a",
+      "slide_count": 23,
+      "candidates": [
+        {
+          "slide": 4,
+          "part": "ppt/slides/slide4.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 5,
+          "part": "ppt/slides/slide5.xml",
+          "subjects": [
+            "schedule"
+          ],
+          "counts": {
+            "sp": 25,
+            "pic": 3,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 6,
+          "part": "ppt/slides/slide6.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 13,
+            "pic": 0,
+            "cxnSp": 1,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 8,
+          "part": "ppt/slides/slide8.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 19,
+            "pic": 0,
+            "cxnSp": 2,
+            "grpSp": 6,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 10,
+          "part": "ppt/slides/slide10.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 44,
+            "pic": 0,
+            "cxnSp": 20,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 13,
+          "part": "ppt/slides/slide13.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 3,
+            "pic": 2,
+            "cxnSp": 1,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 14,
+          "part": "ppt/slides/slide14.xml",
+          "subjects": [
+            "schedule",
+            "procedure"
+          ],
+          "counts": {
+            "sp": 33,
+            "pic": 0,
+            "cxnSp": 4,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 15,
+          "part": "ppt/slides/slide15.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 0,
+            "cxnSp": 1,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 17,
+          "part": "ppt/slides/slide17.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 117,
+            "pic": 0,
+            "cxnSp": 6,
+            "grpSp": 9,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 18,
+          "part": "ppt/slides/slide18.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 18,
+            "pic": 1,
+            "cxnSp": 3,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 19,
+          "part": "ppt/slides/slide19.xml",
+          "subjects": [
+            "procedure",
+            "detail"
+          ],
+          "counts": {
+            "sp": 18,
+            "pic": 5,
+            "cxnSp": 9,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/온실가스 인벤토리/제안서_V2.pptx",
+      "sha256": "511e5286c706f4fadb912147b2e5721ac134c31778bd0caa2b48909007b08a05",
+      "slide_count": 22,
+      "candidates": [
+        {
+          "slide": 4,
+          "part": "ppt/slides/slide4.xml",
+          "subjects": [
+            "schedule",
+            "scope"
+          ],
+          "counts": {
+            "sp": 3,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 6,
+          "part": "ppt/slides/slide6.xml",
+          "subjects": [
+            "schedule"
+          ],
+          "counts": {
+            "sp": 13,
+            "pic": 0,
+            "cxnSp": 4,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 7,
+          "part": "ppt/slides/slide7.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 7,
+            "pic": 0,
+            "cxnSp": 2,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 8,
+          "part": "ppt/slides/slide8.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 3,
+            "cxnSp": 2,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 11,
+          "part": "ppt/slides/slide11.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 20,
+            "pic": 0,
+            "cxnSp": 2,
+            "grpSp": 6,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 12,
+          "part": "ppt/slides/slide12.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 7,
+            "pic": 0,
+            "cxnSp": 2,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 14,
+          "part": "ppt/slides/slide14.xml",
+          "subjects": [
+            "procedure",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 8,
+            "pic": 0,
+            "cxnSp": 2,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/온실가스 인벤토리/착수보고.pptx",
+      "sha256": "30a840be24b38c1ba0ebf01671a188fd31677fa08b5e9e580fe4d11772e67014",
+      "slide_count": 17,
+      "candidates": [
+        {
+          "slide": 1,
+          "part": "ppt/slides/slide1.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 6,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 2,
+          "part": "ppt/slides/slide2.xml",
+          "subjects": [
+            "procedure",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 54,
+            "pic": 0,
+            "cxnSp": 30,
+            "grpSp": 4,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 3,
+          "part": "ppt/slides/slide3.xml",
+          "subjects": [
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 15,
+            "pic": 7,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 2
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 4,
+          "part": "ppt/slides/slide4.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 21,
+            "pic": 0,
+            "cxnSp": 2,
+            "grpSp": 6,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 5,
+          "part": "ppt/slides/slide5.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 16,
+            "pic": 13,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 6,
+          "part": "ppt/slides/slide6.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 17,
+            "pic": 0,
+            "cxnSp": 11,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 7,
+          "part": "ppt/slides/slide7.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 24,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 3,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 8,
+          "part": "ppt/slides/slide8.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 2,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 9,
+          "part": "ppt/slides/slide9.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 24,
+            "pic": 2,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 10,
+          "part": "ppt/slides/slide10.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 24,
+            "pic": 2,
+            "cxnSp": 0,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 11,
+          "part": "ppt/slides/slide11.xml",
+          "subjects": [
+            "procedure",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 52,
+            "pic": 5,
+            "cxnSp": 6,
+            "grpSp": 6,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 12,
+          "part": "ppt/slides/slide12.xml",
+          "subjects": [
+            "procedure",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 41,
+            "pic": 3,
+            "cxnSp": 6,
+            "grpSp": 3,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 13,
+          "part": "ppt/slides/slide13.xml",
+          "subjects": [
+            "schedule",
+            "procedure",
+            "detail",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 55,
+            "pic": 0,
+            "cxnSp": 4,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 14,
+          "part": "ppt/slides/slide14.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 36,
+            "pic": 3,
+            "cxnSp": 1,
+            "grpSp": 4,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 15,
+          "part": "ppt/slides/slide15.xml",
+          "subjects": [
+            "schedule",
+            "scope"
+          ],
+          "counts": {
+            "sp": 15,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 16,
+          "part": "ppt/slides/slide16.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 16,
+            "pic": 5,
+            "cxnSp": 3,
+            "grpSp": 5,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/온실가스 인벤토리/최종보고 2.pptx",
+      "sha256": "dcd6805f6bd272a36ebb7286e02ed3b6bb09ccbe6f72a0db11506ebe24b80c36",
+      "slide_count": 38,
+      "candidates": [
+        {
+          "slide": 1,
+          "part": "ppt/slides/slide1.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 3,
+          "part": "ppt/slides/slide3.xml",
+          "subjects": [
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 17,
+            "pic": 3,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 4,
+          "part": "ppt/slides/slide4.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 37,
+            "pic": 0,
+            "cxnSp": 9,
+            "grpSp": 6,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 5,
+          "part": "ppt/slides/slide5.xml",
+          "subjects": [
+            "schedule",
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 19,
+            "pic": 4,
+            "cxnSp": 16,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 7,
+          "part": "ppt/slides/slide7.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 32,
+            "pic": 0,
+            "cxnSp": 5,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 8,
+          "part": "ppt/slides/slide8.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 35,
+            "pic": 0,
+            "cxnSp": 13,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 9,
+          "part": "ppt/slides/slide9.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 12,
+            "pic": 4,
+            "cxnSp": 1,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 10,
+          "part": "ppt/slides/slide10.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 4,
+            "cxnSp": 0,
+            "grpSp": 1,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 11,
+          "part": "ppt/slides/slide11.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 16,
+            "pic": 4,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 12,
+          "part": "ppt/slides/slide12.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 2,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 2
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 13,
+          "part": "ppt/slides/slide13.xml",
+          "subjects": [
+            "schedule",
+            "procedure",
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 37,
+            "pic": 0,
+            "cxnSp": 4,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 14,
+          "part": "ppt/slides/slide14.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 7,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 1,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 15,
+          "part": "ppt/slides/slide15.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 3,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 16,
+          "part": "ppt/slides/slide16.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 3,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 17,
+          "part": "ppt/slides/slide17.xml",
+          "subjects": [
+            "procedure"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 18,
+          "part": "ppt/slides/slide18.xml",
+          "subjects": [
+            "detail"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 19,
+          "part": "ppt/slides/slide19.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 20,
+          "part": "ppt/slides/slide20.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 21,
+          "part": "ppt/slides/slide21.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 2,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 2
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 22,
+          "part": "ppt/slides/slide22.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 23,
+          "part": "ppt/slides/slide23.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 1,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 26,
+          "part": "ppt/slides/slide26.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 17,
+            "pic": 0,
+            "cxnSp": 3,
+            "grpSp": 4,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 27,
+          "part": "ppt/slides/slide27.xml",
+          "subjects": [
+            "procedure",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 21,
+            "pic": 0,
+            "cxnSp": 5,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 28,
+          "part": "ppt/slides/slide28.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 11,
+            "pic": 5,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 29,
+          "part": "ppt/slides/slide29.xml",
+          "subjects": [
+            "procedure",
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 33,
+            "pic": 0,
+            "cxnSp": 13,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 30,
+          "part": "ppt/slides/slide30.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 33,
+            "pic": 1,
+            "cxnSp": 7,
+            "grpSp": 2,
+            "tables": 2
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 31,
+          "part": "ppt/slides/slide31.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 29,
+            "pic": 5,
+            "cxnSp": 9,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 33,
+          "part": "ppt/slides/slide33.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 9,
+            "pic": 3,
+            "cxnSp": 0,
+            "grpSp": 1,
+            "tables": 2
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 34,
+          "part": "ppt/slides/slide34.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 20,
+            "pic": 3,
+            "cxnSp": 5,
+            "grpSp": 3,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 35,
+          "part": "ppt/slides/slide35.xml",
+          "subjects": [
+            "procedure",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 21,
+            "pic": 5,
+            "cxnSp": 2,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 36,
+          "part": "ppt/slides/slide36.xml",
+          "subjects": [
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 12,
+            "pic": 4,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 37,
+          "part": "ppt/slides/slide37.xml",
+          "subjects": [
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 9,
+            "pic": 3,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    },
+    {
+      "source": "INPUTS/이너젠 PPT 장표 레퍼런스/온실가스 인벤토리/최종보고.pptx",
+      "sha256": "04fa6aa6bd0655df03b18b8d1df8c2dbe971428adc46f531f9707f90cd8960db",
+      "slide_count": 30,
+      "candidates": [
+        {
+          "slide": 1,
+          "part": "ppt/slides/slide1.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 6,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 3,
+          "part": "ppt/slides/slide3.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 15,
+            "pic": 3,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 4,
+          "part": "ppt/slides/slide4.xml",
+          "subjects": [
+            "procedure",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 48,
+            "pic": 0,
+            "cxnSp": 26,
+            "grpSp": 4,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 5,
+          "part": "ppt/slides/slide5.xml",
+          "subjects": [
+            "schedule",
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 19,
+            "pic": 4,
+            "cxnSp": 17,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 7,
+          "part": "ppt/slides/slide7.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 32,
+            "pic": 0,
+            "cxnSp": 5,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 8,
+          "part": "ppt/slides/slide8.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 9,
+            "pic": 2,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 9,
+          "part": "ppt/slides/slide9.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 12,
+            "pic": 6,
+            "cxnSp": 1,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 10,
+          "part": "ppt/slides/slide10.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 35,
+            "pic": 0,
+            "cxnSp": 13,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 11,
+          "part": "ppt/slides/slide11.xml",
+          "subjects": [
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 19,
+            "pic": 12,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 12,
+          "part": "ppt/slides/slide12.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 18,
+            "pic": 5,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 13,
+          "part": "ppt/slides/slide13.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 6,
+            "pic": 2,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 14,
+          "part": "ppt/slides/slide14.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 16,
+            "pic": 4,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 2
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 15,
+          "part": "ppt/slides/slide15.xml",
+          "subjects": [
+            "schedule",
+            "procedure",
+            "detail",
+            "scope"
+          ],
+          "counts": {
+            "sp": 38,
+            "pic": 0,
+            "cxnSp": 5,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 16,
+          "part": "ppt/slides/slide16.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 13,
+            "pic": 3,
+            "cxnSp": 4,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 17,
+          "part": "ppt/slides/slide17.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 15,
+            "pic": 3,
+            "cxnSp": 4,
+            "grpSp": 2,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 18,
+          "part": "ppt/slides/slide18.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 8,
+            "pic": 6,
+            "cxnSp": 2,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 19,
+          "part": "ppt/slides/slide19.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 20,
+          "part": "ppt/slides/slide20.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 3,
+            "pic": 1,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 2
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 21,
+          "part": "ppt/slides/slide21.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 19,
+            "pic": 3,
+            "cxnSp": 0,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 22,
+          "part": "ppt/slides/slide22.xml",
+          "subjects": [
+            "procedure",
+            "scope"
+          ],
+          "counts": {
+            "sp": 22,
+            "pic": 0,
+            "cxnSp": 11,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 23,
+          "part": "ppt/slides/slide23.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 6,
+            "pic": 3,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 24,
+          "part": "ppt/slides/slide24.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 5,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 1
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 25,
+          "part": "ppt/slides/slide25.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 4,
+            "pic": 2,
+            "cxnSp": 7,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 26,
+          "part": "ppt/slides/slide26.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 7,
+            "pic": 2,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 27,
+          "part": "ppt/slides/slide27.xml",
+          "subjects": [
+            "scope"
+          ],
+          "counts": {
+            "sp": 30,
+            "pic": 2,
+            "cxnSp": 0,
+            "grpSp": 1,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 28,
+          "part": "ppt/slides/slide28.xml",
+          "subjects": [
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 32,
+            "pic": 0,
+            "cxnSp": 0,
+            "grpSp": 0,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        },
+        {
+          "slide": 29,
+          "part": "ppt/slides/slide29.xml",
+          "subjects": [
+            "procedure",
+            "scope",
+            "monitoring"
+          ],
+          "counts": {
+            "sp": 67,
+            "pic": 0,
+            "cxnSp": 2,
+            "grpSp": 6,
+            "tables": 0
+          },
+          "status": "xml_candidate_not_visually_reviewed"
+        }
+      ]
+    }
+  ]
+}

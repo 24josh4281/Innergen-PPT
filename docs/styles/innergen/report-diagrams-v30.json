@@ -1,0 +1,82 @@
+{
+  "version": "30",
+  "date": "2026-10-21",
+  "scope": "착수·중간·최종 보고의 수행일정·추진절차·세부현황·수행범위. 현재 자료와 확정 목차 우선. 레퍼런스의 구조만 활용.",
+  "common_fields": ["과업 ID", "활동", "입력·근거", "담당", "기간·기준일", "산출물", "검토·승인 조건"],
+  "reference_learning": {
+    "index": "OUTPUTS/report-reference-learning-v30/index.json",
+    "ledger": "OUTPUTS/report-reference-learning-v30/reviews.jsonl",
+    "before_authoring": "record로 저장된 실제 검토가 있으면 recall로 주제별 이전 피드백을 읽고, 현재 사업과 맞는 구조·개선점만 적용. 기록이 없으면 새 레퍼런스 검토부터 시작."
+  },
+  "stage_semantics": {
+    "kickoff": {
+      "question": "무엇을 어떤 순서와 일정으로 수행하고, 어디까지 책임지는가?",
+      "status_rule": "예정·합의·미확정 구분. 기대효과를 달성 실적으로 쓰지 않음.",
+      "schedule": ["과업별 시작·종료", "보고·검토 마일스톤", "선행 조건", "자료 제출 기한"],
+      "procedure": ["단계별 목적", "입력 자료", "핵심 수행 활동", "산출물", "다음 단계 진입 조건"],
+      "detail": ["자료 확보 상태", "확정·미확정 사항", "자료 요청 담당·기한", "선결 결정"],
+      "scope": ["대상 조직·사업장·설비", "대상 기간", "포함·제외", "산출물과 인수 기준"]
+    },
+    "interim": {
+      "question": "기준일 현재 계획과 무엇이 다르며, 남은 업무와 필요한 결정은 무엇인가?",
+      "status_rule": "완료·진행·대기·지연·미확인 구분. 잠정 분석과 승인 결과 분리. 진행률은 분모·가중치가 있을 때만 계산.",
+      "schedule": ["기준일", "기준 계획과 실제·전망 일정", "지연 원인과 영향", "회복 조치·담당·기한"],
+      "procedure": ["완료 단계", "진행 단계", "대기·재작업 조건", "다음 단계와 검토 시점"],
+      "detail": ["과업별 계획 대비 실적", "근거 위치", "잠정 결과와 한계", "이슈·조치·결정 요청"],
+      "scope": ["최초 합의 범위", "변경 요청·승인 여부", "현재 분석 범위", "미수행·추가 범위"]
+    },
+    "final": {
+      "question": "합의한 범위에서 무엇을 완료·검증했으며, 무엇을 인계하거나 남겼는가?",
+      "status_rule": "제출·검토·승인 구분. 미완료·제외·추후 과제를 완료로 표현하지 않음.",
+      "schedule": ["계획 대비 실제 완료일", "주요 검토·제출 실적", "일정 변경 사유", "잔여 조치와 인계 기한"],
+      "procedure": ["실제로 적용한 단계", "산출물 연결", "검증·시정 절차", "운영·인계 체계"],
+      "detail": ["최종 산출물과 버전", "검증 결과·근거", "계획 대비 차이", "한계·잔여 과제·담당"],
+      "scope": ["계약·승인 범위 대비 이행", "완료·부분완료·제외", "변경 승인 근거", "인계·인수 상태"]
+    }
+  },
+  "subjects": {
+    "schedule": {
+      "label": "수행일정",
+      "preferred_structure": "과업별 간트 + 보고·검토 마일스톤",
+      "template_candidates": ["s25_gantt_schedule", "s08_phase_roadmap"],
+      "design": ["시간축은 실제 간격에 비례", "계획·실적·전망을 선·채움과 문자로 구분", "기준일 세로선과 범례", "과업 ID·담당과 일정 막대를 같은 행에 정렬"],
+      "checks": ["시작일≤종료일", "선후행 관계", "보고일과 과업 완료일 충돌", "날짜 미확정은 기간을 지어내지 않고 명시"]
+    },
+    "procedure": {
+      "label": "추진절차",
+      "preferred_structure": "단계 × 입력·활동·산출물·검토 조건 / 다주체는 스윔레인",
+      "template_candidates": ["s40_process_steps_detail", "s33_approach_matrix"],
+      "design": ["단계 번호와 핵심 동사를 먼저 표시", "단계마다 같은 정보 행 유지", "화살표는 실제 선후·전달·검토 관계만 표현", "병렬 업무는 같은 높이에, 재검토는 되돌림 경로와 조건 표시"],
+      "checks": ["입력 없는 단계", "산출물 없는 단계", "주체 간 인계 누락", "최종 승인 조건 누락"]
+    },
+    "detail": {
+      "label": "세부현황",
+      "preferred_structure": "과업별 상태 매트릭스 + 이슈·조치·결정 요청",
+      "template_candidates": ["s28_status_board", "s29_progress_plan", "s35_decision_request"],
+      "design": ["과업 ID와 기준일 고정", "상태는 문자와 색상을 함께 사용", "계획·실적·근거·이슈·조치의 비교 행 유지", "긴 증빙 목록은 부록으로 연결하고 핵심 판단 근거는 본문에 유지"],
+      "checks": ["미확인을 0%로 변환 금지", "완료 판단 근거", "조치 담당·기한", "잠정·확정 결과 혼동"]
+    },
+    "scope": {
+      "label": "수행범위",
+      "preferred_structure": "과업 분해 구조 + 범위·방법·산출물 매핑",
+      "template_candidates": ["s14_task_structure", "s42_scope_method_result", "s24_project_overview"],
+      "design": ["대상→하위 과업→산출물 포함 관계", "포함·제외·협의 중을 문자로 명시", "범위와 추진절차를 함께 보일 때 병렬 영역으로 분리", "독립 항목을 순서 화살표로 연결하지 않음"],
+      "checks": ["중복·누락 과업", "경계·기간 불일치", "산출물 연결 누락", "미승인 변경을 확정 범위로 표시 금지"]
+    }
+  },
+  "reference_anchors": [
+    {"deck_id": "D04", "slide": 7, "subject": "procedure", "observation": "단계별 추진절차 후보", "review": "xml_candidate"},
+    {"deck_id": "D04", "slide": 20, "subject": "schedule", "observation": "세부 업무와 일정의 대응 후보", "review": "xml_candidate"},
+    {"deck_id": "D11", "slide": 13, "subject": "procedure", "observation": "상위 단계 띠와 세부 활동 열·기간을 연결", "review": "reference_image_reviewed"},
+    {"deck_id": "D12", "slide": 42, "subject": "schedule", "observation": "과업군·세부 과업·시간축·보고 마일스톤을 한 표에 정렬", "review": "reference_image_reviewed"},
+    {"deck_id": "D18", "slide": 4, "subject": "scope", "observation": "왼쪽 범위와 오른쪽 단계별 추진절차의 병렬 배치", "review": "reference_image_reviewed"},
+    {"deck_id": "D19", "slide": 4, "subject": "scope", "observation": "수행범위·절차의 통합 구성 후보", "review": "xml_candidate"}
+  ],
+  "reference_rule": "source-manifest.json의 파일·SHA256·슬라이드로 추적. xml_candidate는 디자인 확인 완료가 아님. 직접 대응하는 중간보고 원본과 감축 최종보고 원본은 확인되지 않아 구성 제안으로 취급.",
+  "reduction_contract": {
+    "scenario_rows": ["베이스라인", "사업", "누출(해당 여부와 근거)", "감축량"],
+    "parameter_fields": ["인자 ID", "수식의 기호", "정의", "단위", "경계·기간", "고정값·실측·산출값 구분", "자료 출처", "측정·계산 방법", "주기", "담당", "QA/QC", "결측·불확도 처리", "사용 수식 ID"],
+    "equation_rule": "시나리오 수식과 모니터링 인자 기호는 Word m:oMath, PPT a14:m/m:oMath로 편집 가능해야 함. PNG·일반 텍스트·윤곽선만으로 완료 불가. 같은 수식 원문을 양쪽 출력에 사용하고 구조·기호·단위·인자 대응을 검증. 편집성 확인과 계산·방법론 검증은 별도.",
+    "source_rule": "현재 사업의 적용 방법론·판본·절·수식 번호 필요. 시나리오·배출계수·감축량·QA 기준을 참고 사업에서 가져오지 않음. 미제공 수치는 미확정으로 보존."
+  }
+}

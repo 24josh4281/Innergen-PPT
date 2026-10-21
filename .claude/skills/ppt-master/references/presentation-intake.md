@@ -119,6 +119,21 @@ IDs, proposed structure and why it fits, plus assumptions or missing data. Use
 native/template affordances only within the selected route. Select a diagram from
 the relationship being explained, not for decoration.
 
+**Report diagrams**: For kickoff/interim/final schedules, procedures, detailed
+status and scope, read `docs/styles/innergen/report-diagrams-v30.md` and its JSON.
+Generate content by task ID, input, activity, owner, period, deliverable and review
+condition. Use stage-specific plan/actual/provisional/accepted semantics; select
+Gantt, stage matrix, status matrix or scope tree from the relationship. Inspect
+relevant reference pages and record source/page/hash plus actual output feedback.
+Do not turn a retrieved candidate into a claim of visual validation. This adds
+neither pages nor an approval gate to the selected owner's workflow.
+
+**Reduction editability**: Include methodology/version/equation source and
+parameter symbol/definition/unit/source/method/frequency/owner/QA/QC in the content
+handoff. Scenario formulas and monitoring symbols require native editable Word/PPT
+Office Math. Images and plain text alone do not satisfy this requirement. Keep
+unprovided values unresolved; do not borrow a reference project's numerical facts.
+
 **Mandatory — complete overview**: After chapter input is read, show every planned
 slide in order, including cover/TOC/ending when part of this deck. For each slide
 show chapter, title, core message, concrete content, visual treatment and evidence

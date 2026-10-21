@@ -119,6 +119,18 @@ and records deck flow, business evidence needs and media acquisition intent in
 the same v19 content plan. Treat those as suggested plans and illustrative previews;
 preserve confirmed outline, page count, visual values and detailed image sources.
 
+For kickoff, interim and final report schedules, procedures, detailed status and
+scope, read `docs/styles/innergen/report-diagrams-v30.md` and its JSON. The v19
+content plan now carries the stage-specific report diagram and reduction-math
+contracts. Inspect the relevant reference pages, validate one representative page,
+and retain actual feedback with source/page/hash for reuse. Candidate XML matches
+are not visual review. Reduction scenario formulas and monitoring symbols require
+native Word/PPT Office Math; source facts, units and methodology remain protected.
+In the SVG route, draw these diagrams with `scripts/report_diagrams.py` (§5 of the
+v30 doc) and write formulas as `<text data-pptx-equation="LaTeX">`; Word/finished
+PPTX use `scripts/office_equations.py`. `innergen_qaqc.py` M01–M03 gate them.
+This adds content/editability requirements without selecting a template or executor.
+
 ## 1. Load and route
 
 1. Read `.claude/skills/ppt-master/workflows/routing.md` first. Load only the

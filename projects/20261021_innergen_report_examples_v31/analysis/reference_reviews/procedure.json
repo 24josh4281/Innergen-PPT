@@ -1,0 +1,12 @@
+{
+  "source": "INPUTS/이너젠 PPT 장표 레퍼런스/감축사업/착수보고 2.pptx",
+  "source_sha256": "8a2c1702ba8e40285b741b581095f815c85ae058a82c63f19d2f5b306a9be3a2",
+  "subject": "procedure",
+  "slide": 13,
+  "observation": "상위 단계와 세부 활동·기간의 연결",
+  "adaptation": "착수 장표의 4단계 절차에 입력·산출물·검토 조건을 배치",
+  "before": "projects/20261021_innergen_report_examples_v31/exports/20261021_innergen_report_examples_v31_ver1.pptx",
+  "after": "projects/20261021_innergen_report_examples_v31/exports/20261021_innergen_report_examples_v31_ver3.pptx",
+  "result": "improved",
+  "feedback": "단계의 선후관계가 명확해지고 불필요한 연결선을 제거함"
+}

@@ -32,6 +32,8 @@ from console_encoding import configure_utf8_stdio  # noqa: E402
 CATALOG_PATH = ROOT / 'docs/styles/innergen/consulting-structures-v19.json'
 EXPERIENCE_PATH = ROOT / 'docs/styles/innergen/structure-experience-v21.json'
 ARCHITECTURE_PATH = ROOT / 'docs/styles/innergen/content-architecture-v20.json'
+REPORT_DIAGRAM_PATH = ROOT / 'docs/styles/innergen/report-diagrams-v30.json'
+REFERENCE_MANIFEST_PATH = ROOT / 'docs/styles/innergen/source-manifest.json'
 
 
 def load_catalog() -> dict:
@@ -82,9 +84,36 @@ def deck_type(mode: str, report: str) -> str:
 
 def catalog_digest() -> str:
     digest = hashlib.sha256()
-    for path in (CATALOG_PATH, EXPERIENCE_PATH, ARCHITECTURE_PATH):
+    for path in (CATALOG_PATH, EXPERIENCE_PATH, ARCHITECTURE_PATH,
+                 REPORT_DIAGRAM_PATH, REFERENCE_MANIFEST_PATH):
         digest.update(path.name.encode('utf-8') + b'\0' + path.read_bytes() + b'\0')
     return digest.hexdigest()
+
+
+def report_contract(selection: dict) -> dict:
+    """Add stage-specific authoring requirements without changing confirmed layout choices."""
+    standard = json.loads(REPORT_DIAGRAM_PATH.read_text(encoding='utf-8'))
+    stage = deck_type(selection.get('style_delivery_mode', ''), selection.get('innergen_report_type', ''))
+    result = {}
+    if stage in standard['stage_semantics']:
+        manifest = json.loads(REFERENCE_MANIFEST_PATH.read_text(encoding='utf-8'))
+        sources = {deck['id']: deck for deck in manifest['decks']}
+        anchors = [{**row, 'source': sources[row['deck_id']]['source'],
+                    'source_sha256': sources[row['deck_id']]['sha256'],
+                    'fingerprint_status': 'manifest_baseline_recheck_current_file_before_use'}
+                   for row in standard['reference_anchors']]
+        result['report_diagram_contract'] = {
+            'version': standard['version'], 'stage': stage,
+            'semantics': standard['stage_semantics'][stage],
+            'common_fields': standard['common_fields'], 'subjects': standard['subjects'],
+            'reference_anchors': anchors,
+            'reference_rule': standard['reference_rule'],
+            'reference_learning': standard['reference_learning'],
+            'status': 'authoring_requirements_not_reviewed_output',
+        }
+    if selection.get('innergen_business_type') == 'reduction':
+        result['reduction_editability_contract'] = standard['reduction_contract']
+    return result
 
 
 # v24: consulting-diagram goals for business types without an earlier report-based rule.
@@ -185,6 +214,7 @@ def build_plan(selection: dict, standard: dict) -> dict:
                     deck_story=experience['deck_stories'][story_key],
                     business_requirements=standard['business_types'][selection['innergen_business_type']]['required'],
                     media_plan=media)
+    plan.update(report_contract(selection))
     return plan
 
 
@@ -212,6 +242,26 @@ def plan_markdown(plan: dict) -> str:
                   '- 상태: 아직 검색·생성·삽입하지 않음.', '', media['limit'], '', media['source_rule']]
         if media['detailed_source_override']:
             lines += ['', '상세 출처 선택이 간편 선택과 다릅니다. 확정된 상세 출처에 맞춰 작성합니다.']
+    report = plan.get('report_diagram_contract')
+    if report:
+        lines += ['', '## 보고 단계별 구조화 도표', '', report['semantics']['question'], '',
+                  report['semantics']['status_rule'], '']
+        for key, subject in report['subjects'].items():
+            lines += [f"- {subject['label']}: {subject['preferred_structure']}",
+                      '  - 넣을 내용: ' + ' · '.join(report['semantics'][key]),
+                      '  - 디자인: ' + ' · '.join(subject['design']),
+                      '  - 확인: ' + ' · '.join(subject['checks'])]
+        lines += ['', report['reference_rule'], '',
+                  '레퍼런스 후보를 실제로 읽고 대표 장표 1쪽을 검증한 뒤 적용. '
+                  '관찰·적용 이유·전후 피드백은 analysis/report_reference_review.json에 기록.']
+        learning = report['reference_learning']
+        lines += ['', learning['before_authoring'], '',
+                  '- 레퍼런스 색인: ' + learning['index'], '- 이전 검토 기록: ' + learning['ledger']]
+    reduction = plan.get('reduction_editability_contract')
+    if reduction:
+        lines += ['', '## 감축사업 수식·모니터링 인자', '', reduction['equation_rule'], '',
+                  '- 시나리오: ' + ' · '.join(reduction['scenario_rows']),
+                  '- 인자 필드: ' + ' · '.join(reduction['parameter_fields']), '', reduction['source_rule']]
     for title, values in [('필수 근거', plan['required_evidence']), ('보존 항목', plan['protect']),
                           ('정보 모드의 보존 항목', plan['mode_contract']['must_preserve']),
                           ('검수 항목', plan['qa_rules'])]:
@@ -257,6 +307,26 @@ def validate_catalog(standard: dict) -> list[str]:
             errors.append(f"{story['deck_type']}: missing opening/body/closing or required content")
     if set(standard['media_modes']) != set(catalog['experience']['media_plans']):
         errors.append('Media intent and plan catalogs differ.')
+    reports = json.loads(REPORT_DIAGRAM_PATH.read_text(encoding='utf-8'))
+    subjects = {'schedule', 'procedure', 'detail', 'scope'}
+    if set(reports['subjects']) != subjects or set(reports['stage_semantics']) != {'kickoff', 'interim', 'final'}:
+        errors.append('Report diagram catalog must cover the four subjects and three report stages.')
+    for stage, semantics in reports['stage_semantics'].items():
+        if any(not semantics.get(key) for key in subjects | {'question', 'status_rule'}):
+            errors.append(f'{stage}: incomplete report semantics.')
+    template_root = SCRIPTS.parent / 'templates/decks/innergen_lecture'
+    for subject, contract in reports['subjects'].items():
+        if any(not contract.get(key) for key in ('label', 'preferred_structure', 'design', 'checks')):
+            errors.append(f'{subject}: incomplete diagram design/check contract.')
+        for candidate in contract['template_candidates']:
+            if not any(template_root.rglob(candidate + '.svg')):
+                errors.append(f'{subject}: unknown reference template {candidate}.')
+    manifest = json.loads(REFERENCE_MANIFEST_PATH.read_text(encoding='utf-8'))
+    sources = {deck['id']: deck for deck in manifest['decks']}
+    for anchor in reports['reference_anchors']:
+        deck = sources.get(anchor['deck_id'])
+        if not deck or not 1 <= anchor['slide'] <= deck['slide_count'] or anchor['subject'] not in subjects:
+            errors.append(f'Invalid report reference anchor: {anchor}.')
     return errors
 
 

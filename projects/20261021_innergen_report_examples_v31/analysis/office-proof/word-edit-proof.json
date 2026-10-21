@@ -1,0 +1,16 @@
+﻿{
+    "sourceHashesBefore":  {
+                               "word":  "7DF588463BFA383EB26E7D830975D87D3FF9982AC95507FBD373E3980C974358",
+                               "ppt":  "324910D70427D52DE8088B4CB807277E6D5AD99A6623BABF44C8A7EE8F9AAC8F"
+                           },
+    "word":  {
+                 "textAfter":  "\r𝑄𝑅\r𝑦\r=\r𝐵𝐸\r𝑦\r−\r𝑃𝐸\r𝑦\r−\r𝐿𝐸\r𝑦\r",
+                 "textReopened":  "\r𝑄𝑅\r𝑦\r=\r𝐵𝐸\r𝑦\r−\r𝑃𝐸\r𝑦\r−\r𝐿𝐸\r𝑦\r",
+                 "countReopened":  12,
+                 "countBefore":  12,
+                 "textBefore":  "\r𝐸𝑅\r𝑦\r=\r𝐵𝐸\r𝑦\r−\r𝑃𝐸\r𝑦\r−\r𝐿𝐸\r𝑦\r"
+             },
+    "ppt":  {
+
+            }
+}

@@ -1,0 +1,12 @@
+{
+  "source": "INPUTS/이너젠 PPT 장표 레퍼런스/감축사업/착수보고.pptx",
+  "source_sha256": "2ca3bbbe56eeec89c5c6a519c40c1c15bc29e33e83ef711523c743ba6b6c6e2e",
+  "subject": "schedule",
+  "slide": 42,
+  "observation": "과업군·세부 과업·시간축·보고 마일스톤의 행 정렬",
+  "adaptation": "중간 장표에 계획·실적·보완 일정을 같은 행에 비교",
+  "before": "projects/20261021_innergen_report_examples_v31/exports/20261021_innergen_report_examples_v31_ver1.pptx",
+  "after": "projects/20261021_innergen_report_examples_v31/exports/20261021_innergen_report_examples_v31_ver3.pptx",
+  "result": "improved",
+  "feedback": "계획과 실적의 대응 및 보완 기한을 읽을 수 있음"
+}

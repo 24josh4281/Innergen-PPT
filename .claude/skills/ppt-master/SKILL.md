@@ -543,7 +543,16 @@ This line is required output every run — the user must always see the mode cho
 | `render-all` | Strategist renders every formula-worthy expression as PNG assets |
 | `text-only` | No formula rendering; formulas remain editable text / Unicode |
 
-After the Strategist confirmation stage is approved and **before outputting `design_spec.md` / `spec_lock.md`**, if the confirmed formula policy is `mixed` or `render-all` and the content contains formula-worthy expressions, Strategist MUST:
+**User-authorized reduction exception**: Reduction-project scenario formulas and
+monitoring-parameter symbols must use editable Word/PPT Office Math, as specified
+in `docs/styles/innergen/report-diagrams-v30.md` §3. This overrides the generic
+formula-PNG defaults above. Carry the requirement into the project's spec/lock;
+do not report images or plain text alone as editable equations. Use the same source
+formulas for Word and PPT, and verify structure, tokens and parameter/unit mapping.
+Actual Office rendering/editing and calculation/methodology validity are separate
+checks. Keep the chosen route and its existing gates.
+
+After the Strategist confirmation stage is approved and **before outputting `design_spec.md` / `spec_lock.md`**, if native equation editability is not required, the confirmed formula policy is `mixed` or `render-all`, and the content contains formula-worthy expressions, Strategist MUST:
 
 1. Identify explicit LaTeX and any source expressions that should be faithfully structured as formulas.
 2. Write `<project_path>/images/formula_manifest.json` with only the formulas selected for rendering.

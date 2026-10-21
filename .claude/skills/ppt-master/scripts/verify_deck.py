@@ -214,8 +214,13 @@ def _powerpoint_running() -> bool:
     if os.name != "nt":
         return False
     try:
-        out = subprocess.run(["tasklist", "/FI", "IMAGENAME eq POWERPNT.EXE", "/NH"],
-                             capture_output=True, text=True, timeout=15).stdout
+        check = subprocess.run(["tasklist", "/FI", "IMAGENAME eq POWERPNT.EXE", "/NH"],
+                               capture_output=True, text=True, timeout=15)
+        if check.returncode != 0 or check.stderr.strip():
+            return True  # access denied is unknown, never evidence that Office is closed
+        out = check.stdout
+        if out is None:
+            return True  # undecodable tasklist output is unknown, same as access denied
     except (subprocess.TimeoutExpired, OSError):
         return True  # unknown: prefer the render that cannot close the user's work
     return "powerpnt.exe" in out.lower()
