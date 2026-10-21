@@ -87,12 +87,14 @@ across pages with
 `python .claude/skills/ppt-master/scripts/innergen_story_check.py <project> --deck-type <type>`
 (`--outline <plan>` before drawing; N codes: ghost deck, TOC integrity,
 governing grounding, diagram cues, ending callback and actions). It writes
-`analysis/storyline_ghost.md` and `analysis/story_pages.json`. Then run the
-independent AI content review in `docs/styles/innergen/content-review-v32.md`:
-a reviewer that did not write the deck (a fresh subagent) scores storyline, TOC,
-governing, body, diagram and ending 1–5 into `analysis/content_review.json`;
-re-run the story check, which fails on a stale ghost hash, a score below 3 or an
-open major finding. Fix and re-review at most twice, then report what remains.
+`analysis/storyline_ghost.md` and `analysis/story_pages.json`. The independent
+AI content review in `docs/styles/innergen/content-review-v32.md` is on request
+only (2026-10-22, user decision: it lengthens every build) — run it when the
+user asks ("내용 검토해줘", "AI 검토"): a reviewer that did not write the deck (a
+fresh subagent) scores storyline, TOC, governing, body, diagram and ending 1–5
+into `analysis/content_review.json`; once that record exists the story check
+fails on a stale ghost hash, a score below 3 or an open major finding. Fix and
+re-review at most twice, then report what remains.
 
 v33 (2026-10-21) TOC and diagram alternatives: `docs/styles/innergen/content-diagrams-v33.md`.
 Build the TOC from the deck instead of retyping it:

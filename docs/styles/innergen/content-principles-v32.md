@@ -179,9 +179,9 @@ v20 §5의 문체·역할별 문장 틀·금지 표현을 그대로 쓴다. 아�
 
 1. 스토리라인 설계표(§2.1) → 장표 계획표 작성
 2. `innergen_story_check.py <project> --outline <계획표>` + `innergen_content_check.py --outline` — 계획 단계 ERROR 0
-3. 독립 AI 검토자가 고스트 덱으로 스토리라인·목차·엔딩 1차 채점(3점 이상)
+3. (요청 시) 독립 AI 검토자가 고스트 덱으로 스토리라인·목차·엔딩 1차 채점(3점 이상)
 4. SVG 작성 → `svg_quality_checker.py` → `innergen_qaqc.py` → `innergen_story_check.py` — ERROR 0
-5. 독립 AI 검토자 6항목 채점 → `analysis/content_review.json` → `innergen_story_check.py`가 해시·점수·major 지적 확인(N50–N54)
+5. (요청 시) 독립 AI 검토자 6항목 채점 → `analysis/content_review.json` → `innergen_story_check.py`가 해시·점수·major 지적 확인(N50–N54)
 6. 고객 전달 덱은 이너젠 담당자가 고스트 덱(`analysis/storyline_ghost.md`)과 엔딩을 한 번 더 읽는다
 
 ## 9. 검사 코드
