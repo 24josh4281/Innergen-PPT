@@ -148,7 +148,7 @@ v20 §5의 문체·역할별 문장 틀·금지 표현을 그대로 쓴다. 아�
 
 ### 6.3 같은 내용, 여러 도식 (v33)
 
-같은 내용도 2–3가지 도식으로 그릴 수 있다. 중요 본문 장표(덱의 약 25%)는 `content_diagrams.py`로 후보 3개를 그려 비교한 뒤 하나를 고른다. 대상 선정·관계 추론·후보 순위는 [content-diagrams-v33.md](content-diagrams-v33.md)가 정한다.
+같은 내용도 2–3가지 도식으로 그릴 수 있다. 이 기능은 선택이다. 목차 체크리스트(`analysis/diagram_select.md`)에서 "여러 도식 후보 보기"를 체크한 장·장표만 `content_diagrams.py`로 후보 3개를 그려 비교한 뒤 하나를 고르고, 나머지는 도식 1개로 쓴다. 대상 선정·관계 추론·후보 순위는 [content-diagrams-v33.md](content-diagrams-v33.md)가 정한다.
 
 ## 7. 엔딩 메시지
 

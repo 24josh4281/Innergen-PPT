@@ -109,6 +109,11 @@ def _stack(cv: Canvas, x: float, y_top: float, h: float, blocks: list[tuple], an
         y += height(size, len(lines), leading) + gap
 
 
+def _is_dark(hex_color: str) -> bool:
+    r, g, b = (int(hex_color[i:i + 2], 16) for i in (1, 3, 5))
+    return 0.299 * r + 0.587 * g + 0.114 * b < 150
+
+
 def _desc_lines(it: dict[str, Any]) -> str:
     d = it.get("desc", "")
     d = " ".join(d) if isinstance(d, list) else str(d)
@@ -137,7 +142,7 @@ def draw_chevron(cv: Canvas, data: dict[str, Any], box, fit: Fit) -> None:
         if i:
             pts.append((x + tip, Y + ch / 2))
         fill = ramp[min(len(ramp) - 1, 1 + round(i * (len(ramp) - 2) / max(1, n - 1)))]
-        dark = fill in ramp[-2:]
+        dark = _is_dark(fill)
         cv.poly("step-chevron", pts, fill)
         lines = fit.lines(f"{i + 1}. {it['label']}", body, cw - tip * 2 - body * 0.6, 2, bold=True)
         cv.text_block("step-label", x + (cw - tip * (0 if i else 1)) / 2 + (tip / 2 if i else 0), Y, lines, body, ch,
@@ -171,11 +176,11 @@ def draw_steps(cv: Canvas, data: dict[str, Any], box, fit: Fit) -> None:
         lab = fit.lines(it["label"], head, label_w - body, 2, bold=True)
         cv.text_block("steps-label", lx, y, lab, head, row, fill=cv.fam["navy"], bold=True, leading=1.15)
         dx = lx + label_w
-        if it.get("period"):
-            cv.text("steps-period", dx, y + row / 2 - body * 0.55, it["period"], small, fill=cv.fam["accent"], bold=True)
-        max_l = max(1, int((row - body * 0.6) / (body * 1.32)))
+        max_l = max(1, int((row - body * 0.6 - (small * 1.6 if it.get("period") else 0)) / (body * 1.32)))
         desc = fit.lines(_desc_lines(it), body, X + W - dx, max_l)
-        cv.text_block("steps-desc", dx, y + (small * 0.7 if it.get("period") else 0), desc, body, row)
+        _stack(cv, dx, y, row, [("steps-period", [it["period"]] if it.get("period") else [], small,
+                                 dict(fill=cv.fam["accent"], bold=True), small * 0.4),
+                                ("steps-desc", desc, body, dict(split=True), 0)])
         if i:
             cv.line("steps-rule", lx, y, X + W, y, cv.fam["rule"], 0.75)
 
@@ -704,10 +709,13 @@ def build_one(data: dict[str, Any], form: str, family: str, base: Optional[Path]
                 break
         if area is not None:
             break
+    fam = FAMILIES[family]
     if area is None or parent is None:
-        raise DiagramError(f"{base.name}: no content-area placeholder to replace")
-    X, Y, W, H = area_bounds(area, family)
-    cv = Canvas(FAMILIES[family], "content-diagram")
+        # A drawn deck page as base: keep its chrome, redraw only the body between governing and source.
+        area, parent, (X, Y, W, H), fam = _page_zone(root, fam, base)
+    else:
+        X, Y, W, H = area_bounds(area, family)
+    cv = Canvas(fam, "content-diagram")
     fit = Fit()
     box = _conclusion(cv, data, (X, Y, W, H), fit)
     FORMS[form][2](cv, data, box, fit)
@@ -733,6 +741,91 @@ def build_one(data: dict[str, Any], form: str, family: str, base: Optional[Path]
         except ValueError:
             pass
     return ET.tostring(root, encoding="unicode"), warnings
+
+
+CHROME_IDS = re.compile(r"^(header|title|page-title|content-title|governing|key-message|source|source-note|footer|"
+                        r"page-number|footer-section|logo|background|bg)", re.I)
+
+
+def _bottom(el: ET.Element) -> float:
+    ys = [0.0]
+    for e in el.iter():
+        try:
+            if e.get("height") and e.get("y") is not None:
+                ys.append(float(e.get("y") or 0) + float(e.get("height") or 0))
+            elif e.tag.endswith("text") and e.get("y"):
+                ys.append(float(e.get("y") or 0) + float(e.get("font-size") or 12) * 0.3)
+        except ValueError:
+            pass
+    return max(ys)
+
+
+def _top(el: ET.Element) -> float:
+    ys = []
+    for e in el.iter():
+        try:
+            if e.tag.endswith("text") and e.get("y"):
+                ys.append(float(e.get("y") or 0) - float(e.get("font-size") or 12))
+            elif e.get("y") is not None and e.get("height"):
+                ys.append(float(e.get("y") or 0))
+        except ValueError:
+            pass
+    return min(ys) if ys else 1e9
+
+
+def _page_zone(root: ET.Element, fam: dict[str, Any], base: Path):
+    """Body zone of a hand-drawn page: below header/governing, above source/footer."""
+    vb = (root.get("viewBox") or "0 0 960 540").split()
+    cw, ch = float(vb[2]), float(vb[3])
+    kept = [c for c in list(root) if CHROME_IDS.match(c.get("id") or "") or
+            (c.get("id") is None and c.tag.endswith("rect") and float(c.get("width") or 0) >= cw - 1)]
+    if not any(re.match(r"governing|key-message", c.get("id") or "") for c in kept):
+        raise DiagramError(f"{base.name}: no content-area placeholder and no governing group to anchor the body")
+    heads = [c for c in kept if re.match(r"header|title|page-title|content-title|governing|key-message", c.get("id") or "")]
+    tails = [c for c in kept if re.match(r"source|footer|page-number", c.get("id") or "")]
+    gov = next(c for c in kept if re.match(r"governing|key-message", c.get("id") or ""))
+    xs = [float(e.get("x") or 0) for e in gov.iter() if e.get("x") is not None]
+    left = min(xs) if xs else 34.0
+    top = max(_bottom(c) for c in heads) + 18
+    bottom = min((_top(c) for c in tails), default=ch - 40) - 14
+    for c in list(root):
+        if c not in kept:
+            root.remove(c)
+    idx = min((list(root).index(c) for c in tails), default=len(root))
+    holder = ET.Element(f"{{{SVG_NS}}}g", {"id": "content-area"})
+    root.insert(idx, holder)
+    fam = _lock_tokens(dict(fam), base)
+    if root.get("font-family") and not fam.get("_locked_font"):
+        fam["font"] = root.get("font-family")
+    return holder, root, (left, top, cw - 2 * left, bottom - top), fam
+
+
+def _lock_tokens(fam: dict[str, Any], base: Path) -> dict[str, Any]:
+    """A drawn deck keeps its own palette and type sizes: read the project's spec_lock.md."""
+    lock = next((d / "spec_lock.md" for d in list(base.resolve().parents)[:5] if (d / "spec_lock.md").is_file()), None)
+    if lock is None:
+        return fam
+    vals = dict(re.findall(r"^-\s*([a-z_]+):\s*(.+?)\s*$", lock.read_text(encoding="utf-8"), re.M))
+    hexes = {k: v for k, v in vals.items() if re.fullmatch(r"#[0-9A-Fa-f]{6}", v)}
+    # Only locked colors (qaqc C07): greys and panel stand in for the tint ramp.
+    navy = hexes.get("primary", fam["navy"])
+    panel = hexes.get("panel", fam["panel"])
+    border = hexes.get("border", fam["rule"])
+    grey = hexes.get("text_secondary", fam["muted"])
+    fam.update(navy=navy, accent=hexes.get("accent", navy), light=border, mid=border, panel=panel, zebra=panel,
+               pale=panel, rule=border, neutral=grey, muted=grey, text=hexes.get("text", fam["text"]),
+               ramp=[panel, border, grey, navy, navy])
+    try:
+        small = float(vals.get("note") or vals.get("annotation") or fam["ladder"][0])
+        body = float(vals.get("body") or fam["ladder"][1])
+        head = float(vals.get("subheading") or fam["ladder"][2])
+        fam["ladder"] = (small, body, head)
+        fam["min_px"] = float(vals.get("source") or fam["min_px"])
+    except ValueError:
+        pass
+    if vals.get("font_family"):
+        fam["font"], fam["_locked_font"] = vals["font_family"], True
+    return fam
 
 
 def build_variants(data: dict[str, Any], family: str, out: Path, count: int, forms: Optional[list[str]],
@@ -857,9 +950,58 @@ def plan(pages: list[Any], max_pages: int) -> list[dict[str, Any]]:
             score += min(5, 1 + flow // 2)
             why.append(f"순서·흐름을 글로만 표현({flow}줄)")
         rows.append({"page": p.index, "title": p.title, "score": score, "why": why})
-    limit = max(2, min(max_pages, math.ceil(len(content) * 0.25)))
+    limit = len(rows) if max_pages >= 999 else max(2, min(max_pages, math.ceil(len(content) * 0.25)))
     top = sorted(rows, key=lambda r: (-r["score"], r["page"]))[:limit]
     return sorted(top, key=lambda r: r["page"])
+
+
+# ---------------------------------------------------------------------------
+# Select: "여러 도식 후보 보기" checkboxes on the TOC
+# ---------------------------------------------------------------------------
+
+SELECT_FILE = "diagram_select.md"
+CHECK = re.compile(r"^(\s*)-\s*\[([ xX✓])\]\s*(.+)$")
+
+
+def read_select(path: Path) -> set[int]:
+    """Pages checked in the TOC checklist; a checked chapter selects all of its pages."""
+    pages: set[int] = set()
+    chapter_on = False
+    for line in path.read_text(encoding="utf-8").splitlines():
+        m = CHECK.match(line)
+        if not m:
+            continue
+        on = m.group(2) != " "
+        page = re.match(r"P(\d{1,3})\b", m.group(3))
+        if not m.group(1) and not page:  # chapter line
+            chapter_on = on
+        elif page and (on or chapter_on):
+            pages.add(int(page.group(1)))
+    return pages
+
+
+def write_select(project: Path, source: Path, recommended: dict[int, list[str]], checks: set[str]) -> Path:
+    import toc_builder
+    rows = toc_builder._page_rows(source)
+    titles = {r["page"]: r["title"] for r in rows}
+    chapters = toc_builder.chapters(rows)
+    path = project / "analysis" / SELECT_FILE
+    old = read_select(path) if path.exists() else set()
+    lines = ["# 목차 — 여러 도식 후보 보기", "",
+             "체크한 장·장표만 같은 내용을 도식 2–3개로 그려 비교합니다. 체크하지 않은 장표는 도식 1개(기본)로 둡니다.",
+             "장을 체크하면 그 장의 본문 장표 전체가 대상입니다. ★는 중요도 추천(체크는 직접)입니다.",
+             "체크 후: `content_diagrams.py plan <project>` → 대상 장표 목록(analysis/diagram_plan.md)", ""]
+    for ch in chapters:
+        key = {ch["no"], ch["name"], f"{ch['no']}.", f"{ch['no']}장"}
+        ch_on = bool(key & checks)
+        lines.append(f"- [{'x' if ch_on else ' '}] {ch['no']}. {ch['name']} ({ch['range']})")
+        for pg in ch["pages"]:
+            on = pg in old or f"P{pg:02d}" in checks or f"P{pg}" in checks
+            star = f" ★ {', '.join(recommended[pg])}" if pg in recommended else ""
+            lines.append(f"  - [{'x' if on else ' '}] P{pg:02d} {titles.get(pg, '')}{star}")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path
 
 
 # ---------------------------------------------------------------------------
@@ -954,10 +1096,15 @@ def build_parser() -> argparse.ArgumentParser:
     pk.add_argument("dir", type=Path)
     pk.add_argument("which", help="rank number or form name")
     pk.add_argument("-o", "--output", type=Path, required=True)
-    pl = sub.add_parser("plan", help="choose pages that get alternatives")
+    sl = sub.add_parser("select", help="write the TOC checklist for 여러 도식 후보 보기")
+    sl.add_argument("project", type=Path)
+    sl.add_argument("--outline", type=Path, default=None)
+    sl.add_argument("--check", default="", help="comma list to tick: chapter numbers (Ⅲ) or pages (P05)")
+    pl = sub.add_parser("plan", help="list the checked pages that get alternatives")
     pl.add_argument("project", type=Path)
     pl.add_argument("--outline", type=Path, default=None)
     pl.add_argument("--max", type=int, default=6)
+    pl.add_argument("--auto", action="store_true", help="ignore the checklist and use the importance ranking")
     xt = sub.add_parser("extract", help="draft content JSON from a drawn page")
     xt.add_argument("svg", type=Path)
     return ap
@@ -984,14 +1131,36 @@ def main(argv: Optional[list[str]] = None) -> int:
             return 1
         print(f"OK  {t}")
         return 0
-    if args.command == "plan":
+    if args.command in ("plan", "select"):
         import innergen_story_check as story
         rules = json.loads(story.RULES_PATH.read_text(encoding="utf-8"))
         pages = story.pages_from_outline(args.outline) if args.outline else story.pages_from_project(args.project, rules)
-        rows = plan(pages, args.max)
+        ranked = plan(pages, args.max if args.command == "plan" else 6)
         out = args.project / "analysis"
+        sel_path = out / SELECT_FILE
+        if args.command == "select":
+            checks = {c.strip() for c in args.check.split(",") if c.strip()}
+            path = write_select(args.project, args.outline or args.project, {r["page"]: r["why"] for r in ranked}, checks)
+            print(path.read_text(encoding="utf-8"))
+            print(f"[content_diagrams] 체크 {len(read_select(path))}장 → {path}")
+            return 0
+        if args.auto:
+            rows, how = ranked, "중요도 순위(--auto)"
+        elif sel_path.exists():
+            chosen = read_select(sel_path)
+            scored = {r["page"]: r for r in plan(pages, 999)} if chosen else {}
+            by_index = {p.index: p for p in pages}
+            rows = [scored.get(n) or {"page": n, "title": by_index[n].title if n in by_index else "", "score": 0, "why": []}
+                    for n in sorted(chosen)]
+            for r in rows:
+                r["why"] = ["목차에서 체크"] + r["why"]
+            how = f"목차 체크({sel_path.name})"
+        else:
+            rows, how = [], "체크리스트 없음"
+            print(f"[content_diagrams] {SELECT_FILE}가 없습니다 — `content_diagrams.py select {args.project}`로 목차 체크리스트를 만드세요"
+                  " (추천: " + ", ".join(f"P{r['page']:02d}" for r in ranked) + ")")
         out.mkdir(parents=True, exist_ok=True)
-        md = ["# 도식 후보 대상 장표", "", "중요도 점수가 높은 본문 장표에 도식 후보 3개를 만든다(content-diagrams-v33.md §3).", "",
+        md = ["# 도식 후보 대상 장표", "", f"선정: {how}. 여기 있는 장표만 도식 후보 3개를 만든다(content-diagrams-v33.md §3).", "",
               "| 장 | 제목 | 점수 | 이유 |", "|---|---|---|---|"]
         md += [f"| P{r['page']:02d} | {r['title']} | {r['score']} | {', '.join(r['why'])} |" for r in rows]
         (out / "diagram_plan.md").write_text("\n".join(md) + "\n", encoding="utf-8")

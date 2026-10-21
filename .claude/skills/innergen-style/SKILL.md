@@ -99,15 +99,21 @@ Build the TOC from the deck instead of retyping it:
 `python .claude/skills/ppt-master/scripts/toc_builder.py build <project> --family <family> -o <project>/svg_output/02_목차.svg --lead "<answer>"`
 (chapters from `Ⅱ. 장명 – 절명` titles, footer chapter labels or an outline
 `chapter` field; `--dividers <dir>` writes the re-inserted TOC per chapter with
-the current one highlighted for 16+ body pages). For diagrams, run
-`content_diagrams.py plan <project>` to pick the important body pages (about
-25%: text-only sequences, dense bodies, chapter openers, closing pages), write
-each page's content JSON (`extract <slide.svg>` drafts it from a drawn page),
-then `content_diagrams.py build <content.json> --family <family> -o analysis/diagram_variants/pNN`
-draws three alternatives ranked by the content's relation (e.g. chevron /
-vertical steps / timeline) with `variants.html` to compare. Put the first
-(recommended) one in the deck, tell the user which alternatives exist, and swap
-with `content_diagrams.py pick` on request. Never invent items to fill a form.
+the current one highlighted for 16+ body pages). Diagram alternatives are
+opt-in from the TOC: the TOC build also writes `analysis/diagram_select.md`, a
+checklist of chapters and pages ("여러 도식 후보 보기", ★ = importance
+recommendation, unticked by default). When confirming the TOC in chat, add one
+line asking which chapters/pages should get alternatives; no answer means none.
+Tick them with `content_diagrams.py select <project> --check Ⅲ,P11`, list them
+with `content_diagrams.py plan <project>`, write each checked page's content
+JSON (`extract <slide.svg>` drafts it from a drawn page), then
+`content_diagrams.py build <content.json> --family <family> -o analysis/diagram_variants/pNN`
+(add `--base svg_output/NN_x.svg` to keep a drawn page's own header, governing,
+source and footer and the project spec_lock palette) draws three alternatives
+ranked by the content's relation with `variants.html` to compare. Unchecked
+pages keep one diagram. Put the recommended one in the deck, keep the original
+as `pNN/original.svg`, tell the user which alternatives exist, and swap with
+`content_diagrams.py pick` on request. Never invent items to fill a form.
 
 v22 (2026-10-14, standard rev.22): the standard now carries a `fonts` catalog
 (Pretendard, IBM Plex Sans KR, NanumSquare Neo, NanumSquare, NanumSquareRound,

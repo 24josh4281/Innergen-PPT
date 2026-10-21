@@ -283,6 +283,15 @@ def main(argv: Optional[list[str]] = None) -> int:
     except TocError as exc:
         print(f"ERROR  {exc}")
         return 1
+    if args.source.is_dir():  # the TOC carries the "여러 도식 후보 보기" checklist
+        import content_diagrams
+        import innergen_story_check as story
+        sel = args.source / "analysis" / content_diagrams.SELECT_FILE
+        if not sel.exists():
+            rules = json.loads(story.RULES_PATH.read_text(encoding="utf-8"))
+            ranked = content_diagrams.plan(story.pages_from_project(args.source, rules), 6)
+            content_diagrams.write_select(args.source, args.source, {r["page"]: r["why"] for r in ranked}, set())
+        print(f"목차 체크리스트: {sel} — 여러 도식 후보를 볼 장·장표에 [x]")
     return 0
 
 

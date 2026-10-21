@@ -232,10 +232,12 @@ say in the hand-off that this was a self-review, not an independent one.
 
 Build the TOC page from the drawn pages with
 `python3 ${SKILL_DIR}/scripts/toc_builder.py build /tmp/<deck> --family <family> -o /tmp/<deck>/svg_output/02_toc.svg --lead "<answer>"`
-and, for important body pages (`content_diagrams.py plan /tmp/<deck>`), draw
-three diagram alternatives with `content_diagrams.py build <content.json> --family <family> -o /tmp/<deck>/analysis/diagram_variants/pNN`
-(`references/content-diagrams-v33.md`). Use the recommended one and mention the
-other two in the hand-off.
+and, only for the chapters or pages the user asked to see alternatives for
+(ticked in `/tmp/<deck>/analysis/diagram_select.md`, or
+`content_diagrams.py select /tmp/<deck> --check Ⅲ,P11`), draw three diagram
+alternatives with `content_diagrams.py build <content.json> --family <family> -o /tmp/<deck>/analysis/diagram_variants/pNN`
+(`references/content-diagrams-v33.md`). Other pages keep one diagram. Use the
+recommended one and mention the other two in the hand-off.
 
 Fix every ERROR in the first two. `content_balance_check --fix` re-centres
 top-heavy boxes (CB01); a TOC bottom void (CB02) is fixed by re-spacing the

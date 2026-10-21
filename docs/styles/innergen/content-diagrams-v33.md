@@ -4,15 +4,20 @@
 
 ## 1. 흐름
 
+여러 도식 후보는 **선택 기능**이다. 목차 단계에서 "여러 도식 후보 보기"를 체크한 장·장표만 후보 2–3개를 만들고, 체크하지 않은 장표는 지금처럼 도식 1개로 쓴다.
+
 | 단계 | 명령 | 산출물 |
 |---|---|---|
-| ① 대상 장표 고르기 | `content_diagrams.py plan <project>` (계획 단계는 `--outline <계획표>`) | `analysis/diagram_plan.md`·`.json` |
-| ② 내용 정리 | 새 장표: 계획표에서 JSON 작성 / 그린 장표: `content_diagrams.py extract <slide.svg>`로 초안을 뽑아 다듬기 | `analysis/diagram_variants/pNN/content.json` |
-| ③ 후보 3개 | `content_diagrams.py build content.json --family <family> -o analysis/diagram_variants/pNN` | `v1_*.svg`–`v3_*.svg`, `variants.html`(나란히 비교), `variants.json` |
-| ④ 고르기 | 작성 AI가 추천(v1)을 기본으로 넣고, 사용자·검토자가 바꾸면 `content_diagrams.py pick <dir> <번호|도식명> -o svg_output/NN_이름.svg` | 덱 장표 |
-| ⑤ 검사 | `svg_quality_checker.py` → `innergen_qaqc.py` → `innergen_story_check.py` | 기존 보고서 |
+| ① 목차 체크리스트 | `toc_builder.py build`가 목차를 만들 때 함께 쓴다. 따로 만들 때는 `content_diagrams.py select <project> [--check Ⅲ,P11]` | `analysis/diagram_select.md` |
+| ② 체크 | 사용자(또는 채팅에서 사용자가 말한 대로 작성 AI)가 장 줄이나 장표 줄에 `[x]`. 장을 체크하면 그 장의 본문 장표 전체. `★`는 중요도 추천이고 체크는 아니다 | 같은 파일 |
+| ③ 대상 확정 | `content_diagrams.py plan <project>` — 체크한 장표만 나열(체크가 없으면 0장). `--auto`는 체크 대신 중요도 상위 약 25% | `analysis/diagram_plan.md`·`.json` |
+| ④ 내용 정리 | 새 장표: 계획표에서 JSON 작성 / 그린 장표: `content_diagrams.py extract <slide.svg>`로 초안을 뽑아 다듬기 | `analysis/diagram_variants/pNN/content.json` |
+| ⑤ 후보 3개 | 템플릿 덱: `content_diagrams.py build content.json --family <family> -o analysis/diagram_variants/pNN` / 이미 그린 덱: `--base svg_output/NN_이름.svg`를 더하면 그 장표의 머리·거버닝·출처·꼬리말을 그대로 두고 본문만 다시 그린다(색·글자 크기는 프로젝트 `spec_lock.md`) | `v1_*.svg`–`v3_*.svg`, `variants.html`(나란히 비교), `variants.json` |
+| ⑥ 고르기 | 작성 AI가 추천(v1)을 넣는다. 원본은 `pNN/original.svg`로 남긴다. 바꿀 때 `content_diagrams.py pick <dir> <번호|도식명> -o svg_output/NN_이름.svg` | 덱 장표 |
+| ⑦ 검사 | `svg_quality_checker.py` → `innergen_qaqc.py` → `innergen_story_check.py` | 기존 보고서 |
 
-- 사용자에게 매번 고르게 하지 않는다. 추천 후보로 덱을 먼저 완성하고 채팅에서 "P11은 셰브런으로 넣었고 세로 단계·시간축 후보가 있습니다"처럼 알린다.
+- 체크한 장표도 사용자에게 매번 고르게 하지 않는다. 추천 후보로 덱을 먼저 완성하고 채팅에서 "P11은 셰브런으로 넣었고 세로 단계·시간축 후보가 있습니다"처럼 알린다.
+- 채팅으로 목차를 확인할 때 "여러 도식 후보를 볼 장이 있으면 말씀해 주세요(예: Ⅲ장, P11)"를 한 줄 붙이고, 답이 없으면 체크 없이 진행한다.
 - 원문에 없는 항목·수치를 후보를 채우려고 만들지 않는다. JSON의 모든 문장은 계획표나 원문에 있어야 한다.
 
 ## 2. 내용 JSON
@@ -43,9 +48,9 @@
 
 ## 3. 규칙
 
-### 3.1 후보를 만들 장표(`plan`)
+### 3.1 중요도 추천(`★`, `plan --auto`)
 
-본문 장표마다 점수를 매겨 상위 약 25%(최소 2장, 최대 `--max` 6장)를 고른다.
+대상은 목차 체크로 정한다. 아래 점수는 체크리스트의 `★` 표시와 `plan --auto`에만 쓴다. 본문 장표마다 점수를 매겨 상위 약 25%(최소 2장, 최대 `--max` 6장)에 `★`를 단다.
 
 | 신호 | 점수 |
 |---|---|
@@ -125,6 +130,7 @@ python3 .claude/skills/ppt-master/scripts/toc_builder.py build projects/<p> --fa
 | `20261016_kssb_nhn_proposal_v2`(제안 16장) `plan` | P03·P05·P11·P15 선정. 독립 AI 검토자가 "글로만 그린 절차·일정"으로 지적한 P05·P11·P15를 모두 포함 |
 | 같은 덱 P11·P15 | `extract` 초안 → 원문 문장만으로 JSON 정리 → 셰브런·세로 단계·시간축 3안. 결론 띠에 의사결정 지점 |
 | 같은 덱 `toc_builder` | 꼬리말 장 라벨에서 5개 장(제안 개요 … 일정·협의)과 쪽 범위 생성, 장별 강조 목차 5장 |
+| 같은 덱 적용(목차 체크 P05·P11·P15, `--base`로 원래 머리·꼬리말·spec_lock 색 유지) | 추천안(셰브런) 반영 후 svg_quality_checker 오류 0, innergen_qaqc는 원본과 같은 수(새 지적 0), PPTX 16장 내보내기. 독립 재검토에서 도식 2→3점, 도식 major 지적 해결(fixed). 남은 지적: 판단 지점 강조 마커, 칸 안 산출물·완료 기준 분리 |
 | `20261013_innergen_structured_showcase` | 제목 장 표시에서 만든 목차가 손으로 만든 기존 목차의 장·절·쪽과 같음 |
 | `20261014_innergen_lecture_business_v22` | 간지 장표를 장 범위에 포함, 장 표시 없는 도입 장표 제외 |
 
