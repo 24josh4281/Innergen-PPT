@@ -217,7 +217,18 @@ python3 ${SKILL_DIR}/scripts/svg_quality_checker.py /tmp/<deck> --pages 1
 python3 ${SKILL_DIR}/scripts/svg_quality_checker.py /tmp/<deck>
 python3 ${SKILL_DIR}/scripts/innergen_qaqc.py /tmp/<deck> --deck-type <type> --business-type <business> --family <family>
 python3 ${SKILL_DIR}/scripts/content_balance_check.py /tmp/<deck> --fix
+python3 ${SKILL_DIR}/scripts/innergen_story_check.py /tmp/<deck> --deck-type <type>
 ```
+
+`innergen_story_check` reads the deck as an argument (v32,
+`references/content-principles-v32.md`): governing messages alone must carry the
+story (N01–N02), TOC names must match chapter tags and numbering (N10–N17),
+governing numbers must appear in the page body (N22), diagram layouts need their
+relation cues (N30), and the last three pages must answer the opening with
+`(owner) by date` actions (N40–N44). Then re-read `analysis/storyline_ghost.md`
+as a reviewer who did not write it and score the six roles in
+`references/content-review-v32.md` §3; fix any role under 3 before hand-off and
+say in the hand-off that this was a self-review, not an independent one.
 
 Fix every ERROR in the first two. `content_balance_check --fix` re-centres
 top-heavy boxes (CB01); a TOC bottom void (CB02) is fixed by re-spacing the

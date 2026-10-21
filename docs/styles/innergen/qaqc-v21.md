@@ -130,5 +130,6 @@ python3 .claude/skills/ppt-master/scripts/innergen_qaqc.py projects/<project> \
 
 - v17 수치·v18 구조·v20 문법을 바꾸지 않는다. 그 규칙을 **검사**로 옮긴 것이다.
 - `svg_quality_checker.py` 0 errors가 먼저다. 이 검사는 그 다음이며, `verify_deck.py`를 대신하지 않는다.
+- 이 검사는 장표 한 장씩의 문법을 본다. 덱 전체의 논리(고스트 덱·목차 정합·거버닝 수치 근거·도식 관계·엔딩의 답과 다음 행동)는 v32 `innergen_story_check.py`([content-principles-v32.md](content-principles-v32.md))가, 의미 판단은 독립 AI 검토([content-review-v32.md](content-review-v32.md))가 맡는다. 순서: 이 검사 → story check → AI 검토.
 - 확정된 프로젝트 잠금값(`spec_lock.md`)이 규칙표와 다르면 잠금값이 우선이고, 다른 이유를 전달 메모에 적는다.
 - 2026-10-14 견본 결과: 구조화 장표 견본(23장, final, v20 계열) ERROR 0 · 교육형 견본(15장, lecture) v20 계열 ERROR 0 · 회사소개 계열 15장 ERROR 0 · 이너캐리 계열 15장 ERROR 0.

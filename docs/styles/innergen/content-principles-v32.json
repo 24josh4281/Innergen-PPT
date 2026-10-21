@@ -1,0 +1,84 @@
+{
+  "version": "32",
+  "date": "2026-10-21",
+  "doc": "content-principles-v32.md",
+  "story": {
+    "min_governing_share": 0.9,
+    "min_claim_share": 0.7,
+    "backup_label_regex": "^\\s*\\[(?:참고|첨부\\s*\\d*|Back-?up|Appendix|부록)\\]|^\\s*(?:첨부|Appendix|부록)\\s*\\d*\\s*[.:]",
+    "claim_ending_regex": "(?:니다|습니다|입니다|합니다|됩니다|있습니다|없습니다|음|임|됨|함|필요|예정|요청|권고|확인됨|분석됨|추정됨|높음|낮음|큼|작음|증가|감소|부족|미흡|부재|가능|불가)$"
+  },
+  "toc": {
+    "chapter_count": [2, 6],
+    "max_chars": 20,
+    "numbering_regex": "^\\s*(?:[0-9]{1,2}[.)]?|[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]+\\.?|Part\\s*\\d+\\.?|Chapter\\s*\\d+\\.?|[①-⑩])\\s*",
+    "sentence_regex": "(?:니다|습니다|해야|한다|된다|이다|\\?)\\s*$",
+    "generic_items": ["개요", "서론", "본론", "결론", "기타", "참고", "부록", "overview", "introduction", "conclusion", "appendix", "q&a"]
+  },
+  "governing": {
+    "description_regex": "(?:에 대해|을|를|에 관해)?\\s*(?:설명|소개|정리|살펴|알아|제시|검토|기술)(?:합니다|하겠습니다|함|하였습니다|봅니다)\\.?\\s*$",
+    "filler_words": ["최상의", "최선을 다해", "원활한", "성공적인", "다양한", "효과적", "적극적", "체계적", "종합적", "지속적", "선제적", "획기적", "혁신적", "최적의", "중요합니다", "필요가 있습니다", "기대됩니다", "가능합니다"],
+    "filler_max": 2,
+    "adjacent_overlap_max": 0.85,
+    "final_stage_types": ["final"],
+    "estimate_regex": "예상|추정|전망|기대|약\\s?[0-9]",
+    "caveat_regex": "가정|추정치|개략|변동|예시|Illustrative|시나리오|민감도|전제"
+  },
+  "body": {
+    "numbers_need_source": 4,
+    "source_regex": "출처|SOURCE|Source|자료\\s?:|단위|기준|※|\\*\\s",
+    "credential_regex": "(?:ID|아이디)\\s*/\\s*(?:PW|비밀번호|패스워드)|비밀번호\\s*(?:요청|제공|공유)|패스워드\\s*(?:요청|제공|공유)"
+  },
+  "diagram": {
+    "relations": {
+      "sequence": {
+        "label": "순서·단계",
+        "layouts": ["chevron", "process", "roadmap", "gantt", "steps", "timeline", "flow", "procedure", "pathway", "workplan"],
+        "cue_regex": "단계|Step|Phase|STEP|①|②|→|▶|[0-9]{1,2}\\s*[.)]|[0-9]{1,2}월|[0-9]{4}|Q[1-4]|분기|주차|착수|중간|최종|이후|다음",
+        "need": "순서 표지(단계 번호·시점·화살표)"
+      },
+      "comparison": {
+        "label": "비교·대비",
+        "layouts": ["compare", "asis-tobe", "dual", "versus", "benchmark", "harvey", "option"],
+        "cue_regex": "AS-?IS|TO-?BE|현행|목표|현재|개선|대비|vs|VS|비교|차이|Gap|갭|장점|단점|선도|당사",
+        "need": "비교 축(현행·목표, 대비 기준)"
+      },
+      "matrix": {
+        "label": "매트릭스·우선순위",
+        "layouts": ["matrix", "2x2", "priority", "heatmap", "nine-box", "materiality", "scenario", "quadrant"],
+        "cue_regex": "높음|낮음|High|Low|영향|가능성|용이|효과|중요도|축|Impact|Likelihood|우선",
+        "need": "두 축의 이름·수준(높음/낮음)"
+      },
+      "hierarchy": {
+        "label": "분해·위계",
+        "layouts": ["issue-tree", "driver-tree", "tree", "pyramid", "task-structure", "org", "operating-model"],
+        "cue_regex": "[가-힣A-Za-z]",
+        "need": "상위 질문·하위 요소"
+      },
+      "cause": {
+        "label": "증감·원인",
+        "layouts": ["waterfall", "bridge", "macc", "wedge"],
+        "cue_regex": "[0-9]",
+        "need": "수치(증감·비용·감축량)"
+      }
+    }
+  },
+  "ending": {
+    "message_slots": ["final-message", "synthesis", "conclusion", "next-action", "takeaway", "decision"],
+    "closing_window": 3,
+    "closing_exempt_types": ["memo", "report_outline"],
+    "closing_title_regex": "결론|시사점|Takeaway|핵심\\s?정리|요약|정리|제언|향후|다음\\s?단계|Next|Way\\s?forward|Wrap|과제\\s?종합|결정|요청|추진\\s?계획|자가\\s?진단|로드맵|final-message|synthesis|conclusion|next-action|takeaway|decision",
+    "opening_window": 3,
+    "callback_min_overlap": 0.08,
+    "action_deck_types": ["proposal", "kickoff", "weekly", "biweekly", "monthly", "diagnosis", "interim", "final", "briefing"],
+    "when_regex": "[0-9]{1,2}\\s*[./]\\s*[0-9]{1,2}|[0-9]{1,2}\\s*월|[0-9]{4}\\s*년|[0-9]\\s*분기|Q[1-4]|[0-9]\\s*주\\s*(?:차|내|후|이내)|차주|다음\\s?주(?!기)|금주|상반기|하반기|연내|즉시|D[-+][0-9]+|'[0-9]{2}\\.[0-9]{1,2}",
+    "who_regex": "이너젠|INNerGEN|고객|귀사|당사|담당|팀|부서|본부|PM|PL|실무|경영진|이사회|위원회|[가-힣]{1,8}(?:사|그룹)는|제안사|협의체|WG",
+    "generic_phrases": ["감사합니다", "최선을 다하겠습니다", "함께하겠습니다", "함께 하겠습니다", "노력하겠습니다", "기대합니다"]
+  },
+  "review": {
+    "roles": ["toc", "governing", "body", "diagram", "ending", "storyline"],
+    "min_score": 3,
+    "target_score": 4,
+    "scale": "1 미흡 · 2 보완 필요 · 3 기준 충족 · 4 우수 · 5 레퍼런스 수준"
+  }
+}

@@ -77,6 +77,23 @@ and writes `analysis/innergen_qaqc_report.md`. ERROR must be fixed; WARN needs a
 recorded reason; the six render-review items in that document stay a human
 check on the exported PPTX. It does not replace `verify_deck.py`.
 
+v32 (2026-10-21) content quality: `docs/styles/innergen/content-principles-v32.md`
+sets the consulting-grade content rules for the TOC, governing messages, body,
+diagrams and ending, drawn from the reference decks in `INPUTS/`. Before writing
+the page outline, fill its §2.1 storyline table (reader and decision, key
+question, one-sentence answer, three MECE arguments, chapters, ending message
+with `(owner) by date action`) and build the outline from it. Gate the argument
+across pages with
+`python .claude/skills/ppt-master/scripts/innergen_story_check.py <project> --deck-type <type>`
+(`--outline <plan>` before drawing; N codes: ghost deck, TOC integrity,
+governing grounding, diagram cues, ending callback and actions). It writes
+`analysis/storyline_ghost.md` and `analysis/story_pages.json`. Then run the
+independent AI content review in `docs/styles/innergen/content-review-v32.md`:
+a reviewer that did not write the deck (a fresh subagent) scores storyline, TOC,
+governing, body, diagram and ending 1–5 into `analysis/content_review.json`;
+re-run the story check, which fails on a stale ghost hash, a score below 3 or an
+open major finding. Fix and re-review at most twice, then report what remains.
+
 v22 (2026-10-14, standard rev.22): the standard now carries a `fonts` catalog
 (Pretendard, IBM Plex Sans KR, NanumSquare Neo, NanumSquare, NanumSquareRound,
 Noto Sans CJK KR, Malgun Gothic; bundled under `.claude/skills/ppt-master/assets/fonts/`,
