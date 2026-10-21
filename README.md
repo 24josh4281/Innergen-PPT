@@ -7,7 +7,7 @@
 [![Canvas](https://img.shields.io/badge/canvas-16%3A9%20기본%20%C2%B7%20세로형%C2%B7SNS%20포맷%20지원-4633E3)](.claude/skills/ppt-master/references/canvas-formats.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **브랜치 안내** — 이 장표 도구(Slide Master)는 기본 브랜치 `slide-master`입니다. 같은 저장소의 웹앱 *Innergen PPT Automation*을 찾는다면 `git clone -b main https://github.com/24josh4281/innergen-ppt.git`로 받으세요.
+> **브랜치 안내** — 이 장표 도구(Slide Master)는 기본 브랜치 `slide-master`입니다. 같은 저장소의 웹앱 *Innergen PPT Automation*을 찾는다면 `git clone -b main https://github.com/24josh4281/Innergen-PPT.git`로 받으세요.
 
 > 이 저장소는 [hugohe3/ppt-master](https://github.com/hugohe3/ppt-master)(MIT)를 기반으로 한 **장피엠 커스터마이즈 워크스페이스**입니다. 한국어 덱 제작에 맞춰 작업 절차 커스터마이징, 완료 PPTX 검증 워크플로우) 등이 조정·추가되어 있습니다. 원 프로젝트의 라이선스와 저작권 고지는 그대로 유지합니다.
 
@@ -75,7 +75,7 @@ projects/<프로젝트>/svg_final/                        ← 브라우저로 �
 
 ## 설치 (10분)
 
-> **처음 쓰는 분은 [`설치안내.md`](설치안내.md)만 보세요.** AI에게 "https://github.com/24josh4281/innergen-ppt/tree/slide-master 이 저장소의 slide-master 브랜치를 받아서 가상환경 설정해줘"라고 한 문장만 보내면, 설치부터 점검까지 AI가 다 합니다. 아래는 직접 설치하는 분용 상세 설명입니다.
+> **처음 쓰는 분은 [`설치안내.md`](설치안내.md)만 보세요.** AI에게 "https://github.com/24josh4281/Innergen-PPT/tree/slide-master 이 저장소의 slide-master 브랜치를 받아서 가상환경 설정해줘"라고 한 문장만 보내면, 설치부터 점검까지 AI가 다 합니다. 아래는 직접 설치하는 분용 상세 설명입니다.
 
 **1단계 — Python 3.10+**
 
@@ -100,7 +100,7 @@ projects/<프로젝트>/svg_final/                        ← 브라우저로 �
 **3단계 — 저장소 받기 + 가상환경 설정**
 
 ```bash
-git clone -b slide-master https://github.com/24josh4281/innergen-ppt.git slide-master
+git clone -b slide-master https://github.com/24josh4281/Innergen-PPT.git slide-master
 cd slide-master
 ```
 

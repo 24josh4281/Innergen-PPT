@@ -51,7 +51,7 @@ If you installed with Download ZIP:
   4. Run setup there: powershell -ExecutionPolicy Bypass -File .\\setup.ps1  (or: sh setup.sh)
 
 If you want one-command updates next time, install with Git clone:
-  git clone -b slide-master https://github.com/24josh4281/innergen-ppt.git slide-master
+  git clone -b slide-master https://github.com/24josh4281/Innergen-PPT.git slide-master
 
 If you installed through a skill marketplace, update or reinstall through the
 same marketplace / skills tool."""

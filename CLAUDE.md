@@ -60,7 +60,7 @@ Users are non-technical; they typically give only the git URL and ask to install
 to "가상환경 설정해줘". The user guide is [`설치안내.md`](설치안내.md).
 
 1. **Clone branch `slide-master`**:
-   `git clone -b slide-master https://github.com/24josh4281/innergen-ppt.git slide-master`.
+   `git clone -b slide-master https://github.com/24josh4281/Innergen-PPT.git slide-master`.
    `slide-master` is the default branch (since 2026-10-21), so a plain clone works;
    branch `main` is a different project (a web app with `package.json` and no
    `.claude/skills/ppt-master`). If a `main` checkout was made by mistake,

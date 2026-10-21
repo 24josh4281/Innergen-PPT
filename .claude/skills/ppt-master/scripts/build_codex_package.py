@@ -117,7 +117,7 @@ def build_package(output: Path, include_untracked: bool) -> dict:
     manifest = {
         "schema": "codex_workspace_package.v1",
         "created_utc": datetime.now(timezone.utc).isoformat(),
-        "repository": "https://github.com/24josh4281/innergen-ppt.git",
+        "repository": "https://github.com/24josh4281/Innergen-PPT.git",
         "deployment_branch": "slide-master",
         "source_commit": git_output("rev-parse", "HEAD").strip(),
         "source_branch": git_output("branch", "--show-current").strip(),
