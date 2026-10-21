@@ -94,6 +94,21 @@ governing, body, diagram and ending 1–5 into `analysis/content_review.json`;
 re-run the story check, which fails on a stale ghost hash, a score below 3 or an
 open major finding. Fix and re-review at most twice, then report what remains.
 
+v33 (2026-10-21) TOC and diagram alternatives: `docs/styles/innergen/content-diagrams-v33.md`.
+Build the TOC from the deck instead of retyping it:
+`python .claude/skills/ppt-master/scripts/toc_builder.py build <project> --family <family> -o <project>/svg_output/02_목차.svg --lead "<answer>"`
+(chapters from `Ⅱ. 장명 – 절명` titles, footer chapter labels or an outline
+`chapter` field; `--dividers <dir>` writes the re-inserted TOC per chapter with
+the current one highlighted for 16+ body pages). For diagrams, run
+`content_diagrams.py plan <project>` to pick the important body pages (about
+25%: text-only sequences, dense bodies, chapter openers, closing pages), write
+each page's content JSON (`extract <slide.svg>` drafts it from a drawn page),
+then `content_diagrams.py build <content.json> --family <family> -o analysis/diagram_variants/pNN`
+draws three alternatives ranked by the content's relation (e.g. chevron /
+vertical steps / timeline) with `variants.html` to compare. Put the first
+(recommended) one in the deck, tell the user which alternatives exist, and swap
+with `content_diagrams.py pick` on request. Never invent items to fill a form.
+
 v22 (2026-10-14, standard rev.22): the standard now carries a `fonts` catalog
 (Pretendard, IBM Plex Sans KR, NanumSquare Neo, NanumSquare, NanumSquareRound,
 Noto Sans CJK KR, Malgun Gothic; bundled under `.claude/skills/ppt-master/assets/fonts/`,

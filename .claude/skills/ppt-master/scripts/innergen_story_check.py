@@ -116,7 +116,7 @@ def pages_from_project(project: Path, rules: dict) -> list[StoryPage]:
     for p in raw:
         p.bind(fam)
         title = _group_text(p, ("page-title", "title")) or (p.title["text"] if p.title else "")
-        governing = _group_text(p, ("governing",)) or (p.governing["text"] if p.governing else "")
+        governing = _group_text(p, ("governing", "key-message")) or (p.governing["text"] if p.governing else "")
         skip = {id(x) for x in (p.footer_label, p.page_number, p.source) if x is not None}
         body = [t["text"] for t in p.texts if t["text"] and id(t) not in skip
                 and not re.search(r"footer|page-number|source", (t["group"] or t["id"] or "").lower())]
@@ -145,7 +145,9 @@ def pages_from_project(project: Path, rules: dict) -> list[StoryPage]:
             txt = _group_text(p, (key,), skip=())
             if txt:
                 slots[key] = txt
-        out.append(StoryPage(p.index, p.path.stem, p.layout + " " + (p.role or ""), title, governing,
+        drawn = p.root.get("data-content-diagram")  # content_diagrams.py variant picked into the deck
+        layout = p.layout + " " + (p.role or "") + (f" content-diagram-{drawn.replace('_', '-')}" if drawn else "")
+        out.append(StoryPage(p.index, p.path.stem, layout, title, governing,
                              body, toc_items, slots, has_source=p.source is not None))
     return out
 

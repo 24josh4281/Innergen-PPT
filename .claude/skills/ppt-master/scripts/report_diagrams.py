@@ -1128,10 +1128,7 @@ def build(data: dict[str, Any], family: str, base: Optional[Path], mode: str = "
             break
     if area is None:
         raise DiagramError(f"{base.name}: no content-area placeholder to replace")
-    if area.get("data-pptx-placeholder-bounds"):
-        X, Y, W, H = (float(v) for v in area.get("data-pptx-placeholder-bounds").split())
-    else:
-        X, Y, W, H = (float(area.get(k)) for k in ("x", "y", "width", "height"))
+    X, Y, W, H = area_bounds(area, family)
     kind = data["kind"]
     cv = Canvas(FAMILIES[family], "report-diagram")
     KINDS[kind][1](cv, data, (X, Y, W, H))
@@ -1171,6 +1168,50 @@ def detect_mode(output: Path) -> str:
         if m:
             return "flat" if m.group(1) == "flat" else "structured"
     return "structured"
+
+
+# Content zone per family; flat-ready scaffolds (chat bundle start_deck.py) drop the placeholder bounds.
+CONTENT_AREA = {"innergen_lecture": (48, 120, 944, 484), "innergen_business": (24, 94, 912, 392),
+                "innercarry": (56, 161.85, 912, 503.42)}
+
+
+def area_bounds(area: ET.Element, family: str) -> tuple[float, float, float, float]:
+    bounds = area.get("data-pptx-placeholder-bounds")
+    if bounds:
+        x, y, w, h = (float(v) for v in bounds.split())
+        return x, y, w, h
+    if all(area.get(k) for k in ("x", "y", "width", "height")):
+        x, y, w, h = (float(area.get(k) or 0) for k in ("x", "y", "width", "height"))
+        return x, y, w, h
+    if family in CONTENT_AREA:
+        return CONTENT_AREA[family]
+    raise DiagramError(f"content-area has no bounds and family {family!r} has no default")
+
+
+def find_template(family: str, name: str, near: Optional[Path] = None) -> Path:
+    """A family layout SVG: the deck scaffold's templates/ (chat bundle start_deck.py),
+    then the repository deck folder, then the bundle's packed <family>.json."""
+    if near is not None:
+        for d in [near, *near.parents][:6]:
+            if (d / "templates" / name).is_file():
+                return d / "templates" / name
+    path = DECKS_DIR / family / "templates" / name
+    if path.is_file():
+        return path
+    packed = DECKS_DIR / f"{family}.json"
+    if packed.is_file():
+        texts = json.loads(packed.read_text(encoding="utf-8"))
+        if f"templates/{name}" in texts:
+            import tempfile
+            out = Path(tempfile.gettempdir()) / "innergen_templates" / family / "templates" / name
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(texts[f"templates/{name}"], encoding="utf-8")
+            images = DECKS_DIR / f"{family}_images"
+            if images.is_dir() and not (out.parent.parent / "images").exists():
+                import shutil
+                shutil.copytree(images, out.parent.parent / "images")
+            return out
+    raise DiagramError(f"{family}: template {name} not found")
 
 
 def _copy_chrome_images(svg: str, base: Path, output: Path) -> None:

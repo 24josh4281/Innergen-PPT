@@ -230,6 +230,13 @@ as a reviewer who did not write it and score the six roles in
 `references/content-review-v32.md` §3; fix any role under 3 before hand-off and
 say in the hand-off that this was a self-review, not an independent one.
 
+Build the TOC page from the drawn pages with
+`python3 ${SKILL_DIR}/scripts/toc_builder.py build /tmp/<deck> --family <family> -o /tmp/<deck>/svg_output/02_toc.svg --lead "<answer>"`
+and, for important body pages (`content_diagrams.py plan /tmp/<deck>`), draw
+three diagram alternatives with `content_diagrams.py build <content.json> --family <family> -o /tmp/<deck>/analysis/diagram_variants/pNN`
+(`references/content-diagrams-v33.md`). Use the recommended one and mention the
+other two in the hand-off.
+
 Fix every ERROR in the first two. `content_balance_check --fix` re-centres
 top-heavy boxes (CB01); a TOC bottom void (CB02) is fixed by re-spacing the
 rows (build the TOC as a native table where possible); a page bottom void

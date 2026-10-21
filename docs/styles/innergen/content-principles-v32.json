@@ -39,7 +39,7 @@
       },
       "comparison": {
         "label": "비교·대비",
-        "layouts": ["compare", "asis-tobe", "dual", "versus", "benchmark", "harvey", "option"],
+        "layouts": ["compare", "asis-tobe", "dual", "versus", "benchmark", "harvey", "option", "two-column"],
         "cue_regex": "AS-?IS|TO-?BE|현행|목표|현재|개선|대비|vs|VS|비교|차이|Gap|갭|장점|단점|선도|당사",
         "need": "비교 축(현행·목표, 대비 기준)"
       },
@@ -51,7 +51,7 @@
       },
       "hierarchy": {
         "label": "분해·위계",
-        "layouts": ["issue-tree", "driver-tree", "tree", "pyramid", "task-structure", "org", "operating-model"],
+        "layouts": ["issue-tree", "driver-tree", "tree", "pyramid", "task-structure", "org", "operating-model", "content-diagram-layers"],
         "cue_regex": "[가-힣A-Za-z]",
         "need": "상위 질문·하위 요소"
       },
