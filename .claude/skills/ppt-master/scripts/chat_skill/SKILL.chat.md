@@ -34,7 +34,7 @@ and ask once for the rest:
 
 | Item | Options |
 |---|---|
-| Family | `innergen_lecture` (교육·강의 블루, 13:9, Pretendard) · `innergen_business` (회사소개·컨설팅 보고, 16:9, IBM Plex Sans KR) · `innercarry` (이너캐리 제품, 4:3, IBM Plex Sans KR) |
+| Family | `innergen_lecture` = 이너젠 뉴 · 교육/강의 유형 (13:9, Pretendard) · `innergen_business` = 이너젠 뉴 · 사업/회사 소개 유형 (컨설팅 보고 포함, 16:9, IBM Plex Sans KR) · `innercarry` = 이너캐리 (제품, 4:3, IBM Plex Sans KR). Show users these display names; keep the ids internal. |
 | Deck type | lecture · handout · seminar · proposal · kickoff · weekly · biweekly · monthly · diagnosis · interim · final · briefing · benchmark · insight |
 | Business type | `cdp_disclosure` CDP·기후공시 · `regulatory` 규제 대응 · `reduction` 감축사업·상쇄 · `inventory` 온실가스 인벤토리 · `lca_product` LCA·제품 탄소 · `climate_risk` 기후리스크·시나리오 · `esg_rating` ESG 평가 대응 · `climate_education` 기후·ESG 교육 · `climate_tech` 기후테크·소셜벤처 |
 | Size | page count or talk length |
@@ -44,8 +44,8 @@ must-have content (`references/content-requirements-v25.md`). Record both in
 `design_spec.md` as `deck_type` and `innergen_business_type`. If the work spans
 two business types, pick the main one and give the other one chapter.
 
-"소개자료" alone is ambiguous between `innergen_lecture` and `innergen_business`:
-ask which one. Never alias the two.
+"이너젠 뉴" or "소개자료" alone is ambiguous between `innergen_lecture` (이너젠 뉴 · 교육/강의) and
+`innergen_business` (이너젠 뉴 · 사업/회사 소개): ask which type. Never alias the two.
 
 ## 2. Read the rules (in this order)
 
@@ -88,6 +88,14 @@ Fix every ERROR (a missing required section) and every WARN (missing must-have
 content, order) in the plan, or keep a one-line reason for the user. Then show
 the plan, ask the user to confirm or adjust, and end the turn. Do not draw pages
 before this confirmation.
+
+Make the plan easy to edit in chat: under the table add one line per page,
+`NN 추가 제안: <1–2 short ideas>` where a useful addition is likely (a trend
+table, owner and timeline, a case photo), and tell the user they can reply
+with `NN 제목/메시지/내용: …` or `NN 추가: …` per page, or one line for the
+whole deck. Apply every such reply to `outline.md` (user wording replaces
+yours; additions become that page's content, or a one-line reason when they
+would need a new page or unsourced facts) and re-run the check before drawing.
 
 Layout ids. All three families carry the same set, except `02_toc`, which
 exists only in `innergen_lecture` (the other two use `02b_toc_pages`).
@@ -178,7 +186,22 @@ For each confirmed page:
 5. Keep the root `data-pptx-page-role` the template carries
    (`cover`/`toc`/`section`/`content`/`ending`). Do not add other `data-pptx-*`
    Master/Layout attributes — this edition exports in flat mode.
-6. Images: only the logos in `images/` or files the user supplied (copy them into
+6. Content groups sit in the middle of their box (상단 쏠림 금지): treat the
+   number, label and description inside a card/KPI tile/callout as one group,
+   measure its visible height (Hangul line: baseline − 0.78em to + 0.12em) and
+   set the first baseline so the top and bottom gaps match; keep left alignment
+   and inner spacing. A card with a heading + one rule keeps the heading on top
+   and centers only the body below the rule. TOC rows fill the TOC zone
+   (row pitch = zone height / chapters) — no empty band above the footer.
+   Content pages fill their content zone too (본문 하단 공백 금지): the gap
+   from the last object to the source line stays ≤ 6% of page height —
+   larger body text first, then taller rows/cards, then a closing message
+   strip. INNerCarry: source line y712, footer rule y728, page number y752,
+   content zone y156–696. Short one-line labels on a shape (pills, header
+   bars, badges, message strips) go inside the shape: wrap one `rect`/`circle`
+   and one `<text>` in `<g data-pptx-text-shape="ctr">`. Size rows from the
+   lines they hold so text and pills never cross a cell edge.
+7. Images: only the logos in `images/` or files the user supplied (copy them into
    `images/` and reference `../images/<file>`). If a page needs an image you do
    not have, ask or choose a layout without one — never insert placeholders.
 
@@ -193,9 +216,14 @@ python3 ${SKILL_DIR}/scripts/svg_quality_checker.py /tmp/<deck> --pages 1
 ```bash
 python3 ${SKILL_DIR}/scripts/svg_quality_checker.py /tmp/<deck>
 python3 ${SKILL_DIR}/scripts/innergen_qaqc.py /tmp/<deck> --deck-type <type> --business-type <business> --family <family>
+python3 ${SKILL_DIR}/scripts/content_balance_check.py /tmp/<deck> --fix
 ```
 
-Fix every ERROR in both. A WARN needs either a fix or a one-line reason in your
+Fix every ERROR in the first two. `content_balance_check --fix` re-centres
+top-heavy boxes (CB01); a TOC bottom void (CB02) is fixed by re-spacing the
+rows (build the TOC as a native table where possible); a page bottom void
+(CB03, last object ends more than 6% of the page height above the source line)
+is fixed by larger body text, taller rows/cards, then a closing message strip. A WARN needs either a fix or a one-line reason in your
 hand-off. `innergen_qaqc` writes `analysis/innergen_qaqc_report.md` (chrome
 geometry, governing grammar, title/TOC consistency, required pages, minimum text
 sizes, palette, source line, and the v25 TOC sections and must-have content per

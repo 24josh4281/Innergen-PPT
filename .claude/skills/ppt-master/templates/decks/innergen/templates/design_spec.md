@@ -3,8 +3,8 @@ template_id: innergen
 deck_id: innergen
 kind: deck
 category: brand
-summary: 이너젠 ESG·기후 컨설팅 보고서용 13:9 템플릿 — 격자형·단색 남색형·슬림라인형
-keywords: [이너젠, ESG, 기후, 보고서, '13:9']
+summary: 이너젠 오리지널 (ESG·기후 컨설팅 보고서 13:9) 템플릿 — 격자형·단색 남색형·슬림라인형
+keywords: [이너젠, 이너젠 오리지널, 오리지널, ESG, 기후, 보고서, '13:9']
 primary_color: "#0F243F"
 canvas_format: ppt139
 canvas_width: 1040
@@ -18,7 +18,7 @@ native_structure_mode: structured
 page_count: 15
 ---
 
-# 이너젠 13:9 보고서 템플릿 — 디자인 명세
+# 이너젠 오리지널 (컨설팅 보고서 13:9) 템플릿 — 디자인 명세
 
 ## I. Template Overview
 
@@ -56,21 +56,21 @@ page_count: 15
 
 | SVG | Layout key / picker | 화면 성격 |
 | --- | --- | --- |
-| `01a_cover_classic.svg` | `innergen-classic-cover` / 이너젠 격자 표지 | 가운데 제목·자체 로고·남색 하단 띠 |
-| `01b_cover_solid_navy.svg` | `innergen-solid-cover` / 이너젠 단색 표지 | 왼쪽 제목·절제된 남색 구조·자체 로고 |
-| `01c_cover_slim_line.svg` | `innergen-slim-cover` / 이너젠 슬림 표지 | 흰 바탕·가느다란 상단 선·간결한 제목 |
-| `02a_toc_classic.svg` | `innergen-classic-toc` / 이너젠 격자 목차 | 격자 헤더·번호별 목차 |
-| `02b_toc_solid_navy.svg` | `innergen-solid-toc` / 이너젠 단색 목차 | 단색 헤더·번호별 목차 |
-| `02c_toc_slim_line.svg` | `innergen-slim-toc` / 이너젠 슬림 목차 | 얇은 남색 구분선·번호별 목차 |
-| `03a_chapter_classic.svg` | `innergen-classic-chapter` / 이너젠 격자 장 구분 | 현재 장을 굵게 표시하는 장 구분 |
-| `03b_chapter_solid_navy.svg` | `innergen-solid-chapter` / 이너젠 단색 장 구분 | 단색 남색 제목띠의 장 구분 |
-| `03c_chapter_slim_line.svg` | `innergen-slim-chapter` / 이너젠 슬림 장 구분 | 흰 화면과 남색 선의 장 구분 |
-| `04a_content_classic.svg` | `innergen-classic-content` / 이너젠 격자 본문 | 핵심 설명·자료 프레임·출처 |
-| `04b_content_solid_navy.svg` | `innergen-solid-content` / 이너젠 단색 본문 | 핵심 설명·넓은 자료 영역·출처 |
-| `04c_content_slim_line.svg` | `innergen-slim-content` / 이너젠 슬림 본문 | 얇은 선 아래 핵심 설명·넓은 자료 영역 |
-| `05a_ending_classic.svg` | `innergen-classic-ending` / 이너젠 격자 마무리 | 핵심 결론·자체 로고·남색 하단 띠 |
-| `05b_ending_solid_navy.svg` | `innergen-solid-ending` / 이너젠 단색 마무리 | 핵심 결론·단색 남색 하단 띠 |
-| `05c_ending_slim_line.svg` | `innergen-slim-ending` / 이너젠 슬림 마무리 | 흰 여백·짧은 종료 메시지·가는 구분선 |
+| `01a_cover_classic.svg` | `innergen-classic-cover` / 이너젠 오리지널 격자 표지 | 가운데 제목·자체 로고·남색 하단 띠 |
+| `01b_cover_solid_navy.svg` | `innergen-solid-cover` / 이너젠 오리지널 단색 표지 | 왼쪽 제목·절제된 남색 구조·자체 로고 |
+| `01c_cover_slim_line.svg` | `innergen-slim-cover` / 이너젠 오리지널 슬림 표지 | 흰 바탕·가느다란 상단 선·간결한 제목 |
+| `02a_toc_classic.svg` | `innergen-classic-toc` / 이너젠 오리지널 격자 목차 | 격자 헤더·번호별 목차 |
+| `02b_toc_solid_navy.svg` | `innergen-solid-toc` / 이너젠 오리지널 단색 목차 | 단색 헤더·번호별 목차 |
+| `02c_toc_slim_line.svg` | `innergen-slim-toc` / 이너젠 오리지널 슬림 목차 | 얇은 남색 구분선·번호별 목차 |
+| `03a_chapter_classic.svg` | `innergen-classic-chapter` / 이너젠 오리지널 격자 장 구분 | 현재 장을 굵게 표시하는 장 구분 |
+| `03b_chapter_solid_navy.svg` | `innergen-solid-chapter` / 이너젠 오리지널 단색 장 구분 | 단색 남색 제목띠의 장 구분 |
+| `03c_chapter_slim_line.svg` | `innergen-slim-chapter` / 이너젠 오리지널 슬림 장 구분 | 흰 화면과 남색 선의 장 구분 |
+| `04a_content_classic.svg` | `innergen-classic-content` / 이너젠 오리지널 격자 본문 | 핵심 설명·자료 프레임·출처 |
+| `04b_content_solid_navy.svg` | `innergen-solid-content` / 이너젠 오리지널 단색 본문 | 핵심 설명·넓은 자료 영역·출처 |
+| `04c_content_slim_line.svg` | `innergen-slim-content` / 이너젠 오리지널 슬림 본문 | 얇은 선 아래 핵심 설명·넓은 자료 영역 |
+| `05a_ending_classic.svg` | `innergen-classic-ending` / 이너젠 오리지널 격자 마무리 | 핵심 결론·자체 로고·남색 하단 띠 |
+| `05b_ending_solid_navy.svg` | `innergen-solid-ending` / 이너젠 오리지널 단색 마무리 | 핵심 결론·단색 남색 하단 띠 |
+| `05c_ending_slim_line.svg` | `innergen-slim-ending` / 이너젠 오리지널 슬림 마무리 | 흰 여백·짧은 종료 메시지·가는 구분선 |
 
 ## VI. Assets
 

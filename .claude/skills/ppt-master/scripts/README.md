@@ -33,6 +33,7 @@ python3 scripts/total_md_split.py <project_path>  # only when speaker notes were
 python3 scripts/finalize_svg.py <project_path>  # on-demand: self-contained SVG previews only
 python3 scripts/animation_config.py scaffold <project_path>  # optional object-level animation overrides
 python3 scripts/svg_to_pptx.py <project_path>
+python3 scripts/content_balance_check.py <project_path> --fix  # center top-heavy box content (CB01), report TOC bottom void (CB02)
 python3 scripts/verify_deck.py <project_path>  # final verification gate + one contact-sheet render
 python3 scripts/verify_deck.py <project_path> --no-render  # same checks, render skipped while iterating
 ```

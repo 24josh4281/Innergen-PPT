@@ -23,6 +23,9 @@ Warnings (reported, non-blocking):
     - placeholder/degenerate suspects in images/ (tiny or near-uniform;
       alpha images are skipped — sliced spot illustrations are legitimate)
     - notes/*.md count differs from the SVG page count (when notes exist)
+    - content_balance_check.py: top-heavy content groups inside boxes (CB01)
+      and TOC / page bottom voids (CB02 / CB03) — fix with --fix / the
+      ppt-content-group-centering skill, then re-export
     - officecli contact-sheet render of the exported PPTX to
       _pptx_render/<stem>-grid.png — on success, Read that PNG to eyeball
       overflow / collisions in the converted deck
@@ -366,6 +369,22 @@ def run_checks(project: Path) -> tuple[list[str], list[str]]:
               "spec files unchanged since the last clean full sweep")
     elif _run_script("svg_quality_checker.py", [str(project)]) != 0:
         failures.append("svg_quality_checker.py reported errors on svg_output/")
+
+    # 6b. content balance (top-heavy boxes, TOC / page bottom voids) — warning only
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import content_balance_check as cb
+        found = [f for page in pages for f in cb.check_file(page, fix=False)]
+    except Exception as exc:  # noqa: BLE001 — advisory check must not break the gate
+        found = []
+        warnings.append(f"content_balance_check could not run: {exc}")
+    if found:
+        n1 = sum(f.code == "CB01" for f in found)
+        n2 = sum(f.code == "CB02" for f in found)
+        n3 = sum(f.code == "CB03" for f in found)
+        warnings.append(f"content balance: {n1} top-heavy box(es) (CB01), {n2} TOC bottom void(s) "
+                        f"(CB02), {n3} page bottom void(s) (CB03) — run content_balance_check.py "
+                        f"<project> [--fix], re-plan voids, re-export")
 
     # 7. notes mapping (opt-in artifact; only checked when present)
     notes = [p for p in (project / "notes").glob("*.md")

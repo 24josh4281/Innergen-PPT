@@ -53,6 +53,100 @@
             review: "全スライドの概要を確認", reviewHint: "すべてのスライドを確認し、変更はチャットで伝えてください。", core: "中心メッセージ", body: "掲載内容", visual: "表現方法", source: "根拠・状態", create: "この概要でPPT制作"
         }
     };
+    var EDIT_WORDS = {
+        ko: {hint: "장표마다 제목·핵심 메시지·내용을 바로 고치고, 더 넣고 싶은 내용을 적어 주세요. 입력은 자동 저장되고, 제작 버튼을 누르면 함께 반영됩니다.",
+             title: "제목", core: "핵심 메시지", body: "들어갈 내용 (한 줄에 하나)", add: "이 장에 더 넣을 내용",
+             addPh: "예: 최근 3년 추이 표, 담당 부서와 일정, 사례 사진 한 장", suggest: "추가 제안 (누르면 아래 칸에 들어갑니다)",
+             overall: "전체 개요에 더할 내용 (선택)", overallPh: "예: 모든 장에 실무 체크포인트를 한 줄씩 넣어 주세요.",
+             changed: "수정됨", reset: "원래대로", saving: "저장 중…", saved: "자동 저장됨 · 제작 버튼을 누르면 반영됩니다", failed: "자동 저장 실패: "},
+        en: {hint: "Edit each slide's title, core message and content here, and note anything to add. Edits save automatically and apply when you create the PPT.",
+             title: "Title", core: "Core message", body: "Planned content (one per line)", add: "Add to this slide",
+             addPh: "e.g. a 3-year trend table, owner and timeline, one case photo", suggest: "Suggestions (click to add below)",
+             overall: "Add to the whole outline (optional)", overallPh: "e.g. Add one practical checkpoint to every slide.",
+             changed: "Edited", reset: "Reset", saving: "Saving…", saved: "Saved · applied when you create the PPT", failed: "Autosave failed: "},
+        zh: {hint: "可直接修改每页的标题、核心信息和内容，并写下想补充的内容。输入会自动保存，点击制作时一并应用。",
+             title: "标题", core: "核心信息", body: "页面内容（每行一项）", add: "本页补充内容",
+             addPh: "例如：近三年趋势表、负责部门与日程", suggest: "补充建议（点击加入下方）",
+             overall: "整体大纲补充（可选）", overallPh: "例如：每页加入一条实务检查点。",
+             changed: "已修改", reset: "恢复", saving: "保存中…", saved: "已自动保存 · 制作时应用", failed: "自动保存失败："},
+        ja: {hint: "各スライドのタイトル・中心メッセージ・内容をここで直接修正し、追加したい内容を書いてください。入力は自動保存され、制作時に反映されます。",
+             title: "タイトル", core: "中心メッセージ", body: "掲載内容（1行に1項目）", add: "このスライドに追加",
+             addPh: "例：直近3年の推移表、担当部署と日程", suggest: "追加の提案（クリックで下に追加）",
+             overall: "概要全体への追加（任意）", overallPh: "例：全スライドに実務チェックポイントを1行ずつ。",
+             changed: "修正済み", reset: "元に戻す", saving: "保存中…", saved: "自動保存済み · 制作時に反映", failed: "自動保存失敗："}
+    };
+    var reviewEdits = null, saveTimer = null;
+    function editWords(lang) { return EDIT_WORDS[lang] || EDIT_WORDS.en; }
+    function lines(text) { return String(text || "").split("\n").map(function (v) { return v.trim(); }).filter(Boolean); }
+    function sameList(a, b) { return a.length === b.length && a.every(function (v, i) { return v === b[i]; }); }
+    function collectEdits() {
+        if (!reviewEdits) return null;
+        var out = {slides: {}, overall: reviewEdits.overall.trim()};
+        Object.keys(reviewEdits.slides).forEach(function (page) {
+            var cur = reviewEdits.slides[page], base = reviewEdits.base[page], item = {};
+            if (cur.title.trim() && cur.title.trim() !== base.title) item.title = cur.title.trim();
+            if (cur.core_message.trim() && cur.core_message.trim() !== base.core_message) item.core_message = cur.core_message.trim();
+            var body = lines(cur.content);
+            if (body.length && !sameList(body, base.content)) item.content = body;
+            if (cur.additions.trim()) item.additions = cur.additions.trim();
+            if (Object.keys(item).length) out.slides[page] = item;
+        });
+        return out;
+    }
+    function scheduleSave(lang) {
+        if (saveTimer) clearTimeout(saveTimer);
+        var ew = editWords(lang);
+        saveTimer = setTimeout(function () {
+            status(ew.saving);
+            send("/api/intake/review_edits", {method: "POST", headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({revision: reviewEdits.revision, edits: collectEdits()})
+            }).then(function () { status(ew.saved); }).catch(function (error) { status(ew.failed + error.message); });
+        }, 700);
+    }
+    function editorFor(slide, lang, row) {
+        var ew = editWords(lang), page = String(slide.page);
+        var base = reviewEdits.base[page], cur = reviewEdits.slides[page];
+        var box = node("div", null, "intake-edit"), badge = node("span", ew.changed, "intake-edit-badge");
+        var a = null;
+        function mark() {
+            row.classList.toggle("is-edited", Boolean(collectEdits().slides[page]));
+            if (row.titleNode) row.titleNode.textContent = String(slide.page).padStart(2, "0") + " · " + (cur.title.trim() || base.title);
+        }
+        function field(label, key, multi, rows, placeholder) {
+            var wrap = node("label", null, "intake-edit-field"), input = node(multi ? "textarea" : "input", null, "text-input");
+            wrap.appendChild(node("span", label, "intake-edit-label"));
+            if (multi) input.rows = rows; else input.type = "text";
+            input.value = cur[key]; if (placeholder) input.placeholder = placeholder;
+            input.setAttribute("aria-label", String(slide.page).padStart(2, "0") + " · " + label);
+            input.addEventListener("input", function () { cur[key] = input.value; mark(); scheduleSave(lang); });
+            wrap.appendChild(input); box.appendChild(wrap); return input;
+        }
+        var t = field(ew.title, "title", false), c = field(ew.core, "core_message", true, 2);
+        var b = field(ew.body, "content", true, Math.max(3, base.content.length + 1));
+        var sugg = Array.isArray(slide.suggested_additions) ? slide.suggested_additions : [];
+        if (sugg.length) {
+            var chips = node("div", null, "intake-suggest"); chips.appendChild(node("span", ew.suggest, "intake-edit-label"));
+            sugg.forEach(function (text) {
+                var chip = node("button", "+ " + text, "intake-chip"); chip.type = "button";
+                chip.addEventListener("click", function () {
+                    if (cur.additions.indexOf(text) >= 0) return;
+                    cur.additions = (cur.additions.trim() ? cur.additions.trim() + "\n" : "") + text;
+                    a.value = cur.additions; mark(); scheduleSave(lang);
+                });
+                chips.appendChild(chip);
+            });
+            box.appendChild(chips);
+        }
+        a = field(ew.add, "additions", true, 2, ew.addPh);
+        var reset = node("button", ew.reset, "intake-edit-reset"); reset.type = "button";
+        reset.addEventListener("click", function () {
+            cur.title = base.title; cur.core_message = base.core_message; cur.content = base.content.join("\n"); cur.additions = "";
+            t.value = cur.title; c.value = cur.core_message; b.value = cur.content; a.value = ""; mark(); scheduleSave(lang);
+        });
+        var tools = node("div", null, "intake-edit-tools"); tools.appendChild(badge); tools.appendChild(reset); box.appendChild(tools);
+        mark();
+        return box;
+    }
     function node(tag, text, cls) {
         var element = document.createElement(tag);
         if (text != null) element.textContent = String(text);
@@ -256,18 +350,35 @@
         if (pollTimer) clearTimeout(pollTimer);
         var w = words(lang), card = node("section", null, "content-intake intake-review");
         card.appendChild(steps(3, w)); card.appendChild(node("h2", w.review + " (" + (info.slides || []).length + ")"));
-        card.appendChild(node("p", w.reviewHint, "intake-intro"));
+        var ew = editWords(lang);
+        card.appendChild(node("p", ew.hint, "intake-intro"));
+        if (!reviewEdits || reviewEdits.revision !== info.view_revision) {
+            reviewEdits = {revision: info.view_revision, base: {}, slides: {}, overall: ""};
+            var saved = info.saved_edits || {}, savedSlides = saved.slides || {};
+            (info.slides || []).forEach(function (slide) {
+                var page = String(slide.page), prior = savedSlides[page] || {};
+                reviewEdits.base[page] = {title: slide.title, core_message: slide.core_message, content: (slide.content || []).slice()};
+                reviewEdits.slides[page] = {title: prior.title || slide.title, core_message: prior.core_message || slide.core_message,
+                    content: (prior.content || slide.content || []).join("\n"), additions: prior.additions || ""};
+            });
+            reviewEdits.overall = saved.overall || "";
+        }
         var chapterTitles = {}; (info.chapters || []).forEach(function (chapter) { chapterTitles[chapter.id] = chapter.title; });
         (info.slides || []).forEach(function (slide) {
             var row = node("article", null, "intake-slide");
             row.appendChild(node("p", chapterTitles[slide.chapter_id] || slide.chapter_id, "content-intake-note"));
-            row.appendChild(node("h3", String(slide.page).padStart(2, "0") + " · " + slide.title));
-            row.appendChild(node("p", w.core + ": " + slide.core_message, "intake-core"));
-            row.appendChild(node("h4", w.body)); var list = node("ul");
-            (slide.content || []).forEach(function (text) { list.appendChild(node("li", text)); }); row.appendChild(list);
+            // title, core message and content are shown in the editable fields below
+            var heading = node("h3", String(slide.page).padStart(2, "0") + " · " + reviewEdits.slides[String(slide.page)].title);
+            row.appendChild(heading); row.titleNode = heading;
             var meta = node("div", null, "intake-slide-meta"); meta.appendChild(node("p", w.visual + ": " + slide.visual));
-            meta.appendChild(node("p", w.source + ": " + slide.source_summary, "content-intake-note")); row.appendChild(meta); card.appendChild(row);
+            meta.appendChild(node("p", w.source + ": " + slide.source_summary, "content-intake-note")); row.appendChild(meta);
+            row.appendChild(editorFor(slide, lang, row)); card.appendChild(row);
         });
+        var overall = node("label", null, "intake-edit-field intake-edit-overall"), overallInput = node("textarea", null, "text-input");
+        overall.appendChild(node("span", ew.overall, "intake-edit-label")); overallInput.rows = 3;
+        overallInput.placeholder = ew.overallPh; overallInput.value = reviewEdits.overall;
+        overallInput.addEventListener("input", function () { reviewEdits.overall = overallInput.value; scheduleSave(lang); });
+        overall.appendChild(overallInput); card.appendChild(overall);
         if (info.approval_error) card.appendChild(node("p", info.approval_error, "intake-error"));
         (info.limitations || []).forEach(function (value) { card.appendChild(node("p", value, "content-intake-note")); });
         Object.keys(info.omitted_chapters || {}).forEach(function (id) { card.appendChild(node("p", id + ": " + info.omitted_chapters[id], "content-intake-note")); });
@@ -296,6 +407,10 @@
     });
     window.PPTContentIntake = {
         renderMaterials: renderMaterials, renderReview: renderReview, submitMaterials: submitMaterials,
+        reviewEdits: function () {
+            var e = collectEdits();
+            return e && (e.overall || Object.keys(e.slides).length) ? e : null;
+        },
         isBusy: function () { return pending > 0 || Boolean(activeInfo && savedState && savedState.submitted); }
     };
 })();

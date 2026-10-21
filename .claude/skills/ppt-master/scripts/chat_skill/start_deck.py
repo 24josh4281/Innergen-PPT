@@ -41,8 +41,8 @@ _SVG_ROOT_RE = re.compile(r"<svg\b")
 PAGE_ROLES = (("01_cover", "cover"), ("02c_", "section"), ("02", "toc"), ("04_ending", "ending"))
 
 FAMILIES = {
-    "innergen_lecture": "이너젠 교육·강의(블루) 13:9 · Pretendard",
-    "innergen_business": "이너젠 회사소개·컨설팅 보고 16:9 · IBM Plex Sans KR",
+    "innergen_lecture": "이너젠 뉴 · 교육/강의 (13:9) · Pretendard",
+    "innergen_business": "이너젠 뉴 · 사업/회사 소개 (16:9) · IBM Plex Sans KR",
     "innercarry": "이너캐리 제품 소개 4:3 · IBM Plex Sans KR",
 }
 

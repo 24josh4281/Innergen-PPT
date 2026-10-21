@@ -56,7 +56,8 @@ these phases retain the original design-confirmation behavior.
 | `materials` | One shared drop zone plus one optional short note; proposed chapters alongside; chapter-specific input collapsed by default; no yes/no questionnaire or design choices |
 | Material submit | Writes `intake_responses/IN-*.json` and `intake_latest.json`; status `materials_submitted_not_approved`, generation false |
 | Agent interpretation | Read the submitted chapter notes and selected files; normal converters and actual source checks still apply; no automatic content understanding in the page |
-| `review` | Every planned slide's chapter, title, core message, body content, visual and source/status; existing design settings collapse by default |
+| `review` | Every planned slide's chapter, title, visual and source/status, plus live edit fields for title, core message, content and "add to this slide" (optional `suggested_additions` chips) and one whole-outline box; existing design settings collapse by default |
+| Live edits | `POST /api/intake/review_edits` autosaves `confirm_ui/review_edits.json` (`slide_review_edits.v1`, draft, generation false) for the shown revision; reloads restore it; final submit carries `content_review_edits` into `result.json` — apply it before writing §IX |
 | Final submit | Button states “Create PPT from this outline” in the user's language; server binds approval to the current overview revision and consumed material response |
 
 The user does not choose extra-information yes/no. An empty form's explicit
@@ -121,7 +122,8 @@ the user requests revisions; preserve old snapshots.
       {"page": 1, "chapter_id": "ch01", "title": "추진 현황",
        "core_message": "확인된 상태와 미확인 항목을 구분합니다.",
        "content": ["기준일", "계획 대비 현황", "남은 검토 항목"],
-       "visual": "진행·이슈·조치 표", "source_summary": "사용자 자료와 원문 위치 / 잠정"}
+       "visual": "진행·이슈·조치 표", "source_summary": "사용자 자료와 원문 위치 / 잠정",
+       "suggested_additions": ["최근 3년 추이 표", "다음 회의 결정 안건"]}
     ],
     "blocking_gaps": [],
     "limitations": ["가정·잠정 결과는 장표에 표시합니다."],

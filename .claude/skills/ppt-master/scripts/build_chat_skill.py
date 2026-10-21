@@ -6,7 +6,7 @@ Packages the INNerGEN deck pipeline as a standalone `innergen-deck` skill that
 claude.ai chat / Cowork can run inside its sandbox (Settings → Capabilities →
 Skills → Upload skill). The bundle carries the chat procedure
 (chat_skill/SKILL.chat.md), the export engine's import closure
-(svg_to_pptx, svg_quality_checker, innergen_qaqc), the three INNerGEN family
+(svg_to_pptx, svg_quality_checker, innergen_qaqc, content_balance_check), the three INNerGEN family
 templates, per-family base spec locks, and the INNerGEN rule documents. The
 repository pipeline itself is unchanged; this only copies from it.
 
@@ -44,7 +44,7 @@ CHAT_SRC = _SCRIPTS_DIR / "chat_skill"
 SKILL_NAME = "innergen-deck"
 DEFAULT_OUT = REPO_ROOT / "OUTPUTS" / "claude-chat-skill"
 
-ENTRY_SCRIPTS = ("svg_to_pptx.py", "svg_quality_checker.py", "innergen_qaqc.py")
+ENTRY_SCRIPTS = ("svg_to_pptx.py", "svg_quality_checker.py", "innergen_qaqc.py", "content_balance_check.py")
 FAMILIES = ("innergen_lecture", "innergen_business", "innercarry")
 STYLE_DOCS = (
     "design-standard-v17.md", "design-standard-v17.json",

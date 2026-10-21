@@ -2870,6 +2870,8 @@
         if (REC.content_intake && REC.content_intake.phase === "review") {
             payload.content_outline_approved = true;
             payload.content_review_token = REC.content_intake.view_revision;
+            var reviewEdits = window.PPTContentIntake && window.PPTContentIntake.reviewEdits();
+            if (reviewEdits) payload.content_review_edits = reviewEdits;
         }
         payload.image_usage = selectedImageUsageIds(payload.image_usage);
         if (!payload.image_usage.length) {

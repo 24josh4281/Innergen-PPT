@@ -43,7 +43,7 @@ def _current_info(project: Path, read_json) -> dict:
 def content_revision(info: dict) -> str:
     """Bind a user's action to the exact agent-authored proposal shown."""
     clean = {k: v for k, v in info.items()
-             if k not in {"view_revision", "saved_response", "approval_error", "pending_attachments"}}
+             if k not in {"view_revision", "saved_response", "approval_error", "pending_attachments", "saved_edits"}}
     return hashlib.sha256(json.dumps(clean, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()
 
 
@@ -62,6 +62,49 @@ def _chapters(info: dict) -> dict:
             raise ValueError("목차 ID는 중복 없이, 제목과 함께 작성해 주세요.")
         result[cid] = chapter
     return result
+
+
+def clean_review_edits(raw, slide_count: int) -> dict:
+    """Validate live per-slide edits from the outline review (never an approval)."""
+    if raw is None:
+        return {"slides": {}, "overall": ""}
+    if not isinstance(raw, dict):
+        raise ValueError("개요 수정 내용 형식이 잘못되었습니다.")
+    overall = raw.get("overall", "")
+    if not isinstance(overall, str) or len(overall) > 5000:
+        raise ValueError("전체 추가 내용은 5,000자 이하로 입력해 주세요.")
+    slides = raw.get("slides", {})
+    if not isinstance(slides, dict):
+        raise ValueError("장표별 수정 내용 형식이 잘못되었습니다.")
+    clean = {}
+    for page, item in slides.items():
+        if not (isinstance(page, str) and page.isdecimal() and 1 <= int(page) <= slide_count):
+            raise ValueError("수정한 장표 번호가 개요와 맞지 않습니다. 화면을 새로고침해 주세요.")
+        if not isinstance(item, dict) or set(item) - {"title", "core_message", "content", "additions"}:
+            raise ValueError(f"{page}번 장표의 수정 항목을 확인해 주세요.")
+        out = {}
+        for key, limit in (("title", 200), ("core_message", 1000), ("additions", 5000)):
+            if key in item:
+                if not isinstance(item[key], str) or len(item[key]) > limit:
+                    raise ValueError(f"{page}번 장표의 입력 형식이나 길이(제목 200자·핵심 메시지 1,000자·추가 내용 5,000자)를 확인해 주세요.")
+                if item[key].strip():
+                    out[key] = item[key].strip()
+        if "content" in item:
+            body = item["content"]
+            if not isinstance(body, list) or len(body) > 40 or any(not isinstance(t, str) or len(t) > 1000 for t in body):
+                raise ValueError(f"{page}번 장표의 들어갈 내용을 확인해 주세요.")
+            body = [t.strip() for t in body if t.strip()]
+            if body:
+                out["content"] = body
+        if out:
+            clean[page] = out
+    return {"slides": clean, "overall": overall.strip()}
+
+
+def _saved_edits(project: Path, read_json, revision: str) -> dict:
+    path = project / "confirm_ui/review_edits.json"
+    record = read_json(path) if path.is_file() else {}
+    return record.get("edits", {}) if record.get("revision") == revision else {}
 
 
 def _latest(project: Path, read_json) -> dict:
@@ -86,6 +129,10 @@ def prepare_content_payload(data: dict, project: Path, read_json) -> None:
     latest = _latest(project, read_json)
     if latest:
         info["saved_response"] = latest
+    if info.get("phase") == "review":
+        saved = _saved_edits(project, read_json, info["view_revision"])
+        if saved:
+            info["saved_edits"] = saved
     error = _review_error(info, latest) if info.get("phase") == "review" else None
     if error:
         info["approval_error"] = error
@@ -142,6 +189,10 @@ def content_confirmation_error(payload: dict, project: Path, read_json) -> str |
         return "슬라이드별 개요에 대한 최종 확인이 필요합니다."
     if payload.get("content_review_token") != content_revision(info):
         return "개요가 변경되었습니다. 화면을 새로고침하여 최신 개요를 확인해 주세요."
+    try:
+        clean_review_edits(payload.get("content_review_edits"), len(info["slides"]))
+    except ValueError as exc:
+        return str(exc)
     count = str(payload.get("page_count", "")).strip()
     if count.isdecimal() and int(count) != len(info["slides"]):
         return "장수를 변경하셨습니다. 변경한 장수에 맞춰 슬라이드 개요를 다시 구성한 뒤 최종 확인해 주세요."
@@ -164,6 +215,31 @@ def register_content_routes(app, project: Path, read_json, write_json) -> None:
         if payload.get("revision") != content_revision(info):
             raise ValueError("목차가 변경되었습니다. 최신 목차를 다시 확인해 주세요.")
         return info, _chapters(info)
+
+    @app.route("/api/intake/review_edits", methods=["POST"])
+    def review_edits():
+        try:
+            if request.content_length and request.content_length > 1024 * 1024:
+                return jsonify({"error": "수정 내용은 1MB 이하로 입력해 주세요."}), 413
+            if request.headers.get("Origin") and request.headers["Origin"] != request.host_url.rstrip("/"):
+                raise ValueError("현재 제작 화면에서만 수정할 수 있습니다.")
+            payload = request.get_json(silent=True)
+            if not isinstance(payload, dict):
+                raise ValueError("개요 수정 내용 형식이 잘못되었습니다.")
+            info = _current_info(project, read_json)
+            if info.get("phase") != "review":
+                raise ValueError("슬라이드 개요 확인 단계에서만 수정할 수 있습니다.")
+            if payload.get("revision") != content_revision(info):
+                raise ValueError("개요가 변경되었습니다. 화면을 새로고침해 주세요.")
+            edits = clean_review_edits(payload.get("edits"), len(info.get("slides", [])))
+            record = {"schema": "slide_review_edits.v1", "revision": payload["revision"], "edits": edits,
+                      "saved_at": datetime.now(timezone.utc).isoformat(),
+                      "status": "draft_not_approved", "generation_authorized": False}
+            with lock:
+                write_json(project / "confirm_ui/review_edits.json", record)
+            return jsonify({"status": record["status"], "slides": len(edits["slides"])})
+        except (OSError, ValueError, KeyError) as exc:
+            return jsonify({"error": str(exc)}), 400
 
     @app.route("/api/intake/upload", methods=["POST"])
     def upload():

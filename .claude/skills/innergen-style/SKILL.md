@@ -19,7 +19,9 @@ visual defaults. Its four current families are `innergen_basic`,
 template `.claude/skills/ppt-master/templates/decks/innergen_lecture/`), and
 `innercarry` (260916 v4.1 product sections, 4:3). Never alias
 `innergen_lecture` and `innergen_business` to each other; if a request says only
-"소개자료", ask which one. The separate 2026-10-07 13:9 education template keeps
+"소개자료" or only "이너젠 뉴", ask which type. User-facing names (2026-10-21):
+이너젠 오리지널 = `innergen_basic`; 이너젠 뉴 · 교육/강의 = `innergen_lecture`;
+이너젠 뉴 · 사업/회사 소개 = `innergen_business`. The separate 2026-10-07 13:9 education template keeps
 its own explicit project values. Current user choices and confirmed
 project values win. Source-backed named fonts override the generic Pretendard
 lock as authorized in AGENTS.md: Malgun Gothic for basic, IBM Plex Sans KR for

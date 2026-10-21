@@ -207,6 +207,17 @@ publishing `review`. While the browser waits, the agent authors the new overview
 the page displays it when recommendations change. Use `--wait-only` for the existing
 final confirmation; verify the overview revision and response ID before continuing.
 
+**Live outline edits**: the `review` page gives every slide editable title, core
+message and content fields, an "add to this slide" box, optional chips from the
+agent's `suggested_additions` (author 1–3 per slide when a useful addition is
+likely), and one whole-outline box. Edits autosave to
+`confirm_ui/review_edits.json` (draft, never an approval) and travel with the final
+confirmation as `result.json.content_review_edits` (`slides.{page}.{title,
+core_message, content, additions}`, `overall`). Before authoring §IX, apply every
+edit: user wording replaces the outline wording; additions become planned content
+on that page (or a reason in chat if they would need a new page or unsourced facts).
+Facts in additions still need a source or an "example" label.
+
 If the selected owner's project/source prerequisites are not yet satisfied, keep
 the initial classification, proposed TOC and chapter input in chat. Do not initialize
 a main-pipeline project solely to show a form or invent facts to satisfy its source

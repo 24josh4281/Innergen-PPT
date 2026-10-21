@@ -3,8 +3,8 @@ template_id: innergen_business
 deck_id: innergen_business
 kind: deck
 category: brand
-summary: 이너젠 회사소개 16:9(720×405pt) 컴팩트 템플릿 — 거버닝 1줄·본문 12pt 내외(v22 컴팩트), 기본 레이아웃 + 구조화 장표 s01–s58(v24 컨설팅 도식 16종 포함) + 목차·장 구분·교육 장표
-keywords: [이너젠, 회사소개, 사업소개, 제안, '16:9', 컴팩트, 구조화, IBM Plex]
+summary: 이너젠 뉴 · 사업/회사 소개 (16:9, 720×405pt) 컴팩트 템플릿 — 거버닝 1줄·본문 12pt 내외(v22 컴팩트), 기본 레이아웃 + 구조화 장표 s01–s58(v24 컨설팅 도식 16종 포함) + 목차·장 구분·교육 장표
+keywords: [이너젠, 이너젠 뉴 사업소개, 뉴 사업소개, 회사소개, 사업소개, 제안, '16:9', 컴팩트, 구조화, IBM Plex]
 primary_color: "#518FFF"
 canvas_format: ppt169s
 canvas_width: 960
@@ -88,7 +88,7 @@ placeholders:
   s58_operating_model: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{VISION}}", "{{LAYER_1}}", "{{DESIGN_1}}", "{{GAP_1}}", "{{LAYER_2}}"]
 ---
 
-# 이너젠 회사소개 16:9(720×405pt) 컴팩트 템플릿 — 디자인 명세
+# 이너젠 뉴 · 사업/회사 소개 (16:9, 720×405pt) 컴팩트 템플릿 — 디자인 명세
 
 ## I. Template Overview
 
@@ -136,79 +136,79 @@ placeholders:
 
 ## V. Page Roster
 
-모든 원형은 Master `innergen-biz-master-16x9`(이너젠 회사소개 16:9)를 쓴다.
+모든 원형은 Master `innergen-biz-master-16x9`(이너젠 뉴 사업소개 16:9)를 쓴다.
 
 | SVG | Layout key / picker | 화면 성격 |
 | --- | --- | --- |
-| `01_cover.svg` | `innergen-biz-cover` / 이너젠 회사소개 표지 | 슬롯 7개 |
-| `02b_toc_pages.svg` | `innergen-biz-toc-pages` / 이너젠 회사소개 목차(쪽수) | 슬롯 28개 |
-| `02c_section_divider.svg` | `innergen-biz-section-divider` / 이너젠 회사소개 장 구분(학습 포인트) | 슬롯 15개 |
-| `03a_content.svg` | `innergen-biz-content` / 이너젠 회사소개 본문 | 슬롯 6개 |
-| `03b_content_final.svg` | `innergen-biz-content-final` / 이너젠 회사소개 본문+결론 | 슬롯 7개 |
-| `03c_content_split.svg` | `innergen-biz-split` / 이너젠 회사소개 좌우 분할(설명+근거) | 슬롯 8개 |
-| `03d_content_dual.svg` | `innergen-biz-dual` / 이너젠 회사소개 2단 비교 | 슬롯 9개 |
-| `03e_content_table.svg` | `innergen-biz-evidence` / 이너젠 회사소개 표·차트 근거 | 슬롯 8개 |
-| `03f_content_kpi.svg` | `innergen-biz-kpi` / 이너젠 회사소개 핵심 수치 | 슬롯 12개 |
-| `03g_content_process.svg` | `innergen-biz-process` / 이너젠 회사소개 단계·프로세스 | 슬롯 15개 |
-| `04_ending.svg` | `innergen-biz-ending` / 이너젠 회사소개 맺음 | 슬롯 3개 |
-| `s01_exec_summary.svg` | `innergen-biz-exec-summary` / 이너젠 회사소개 핵심 요약 카드 | 슬롯 15개 |
-| `s02_findings_insights.svg` | `innergen-biz-findings-insights` / 이너젠 회사소개 발견·시사점 2단 | 슬롯 13개 |
-| `s03_chart_insight.svg` | `innergen-biz-chart-insight` / 이너젠 회사소개 차트+시사점 | 슬롯 11개 |
-| `s04_chart_table_strip.svg` | `innergen-biz-chart-table` / 이너젠 회사소개 차트+데이터표+해설 | 슬롯 10개 |
-| `s05_entity_matrix.svg` | `innergen-biz-entity-matrix` / 이너젠 회사소개 대상 비교 매트릭스 | 슬롯 30개 |
-| `s06_principle_matrix.svg` | `innergen-biz-principle-matrix` / 이너젠 회사소개 원칙+기준 매트릭스 | 슬롯 19개 |
-| `s07_asis_tobe_effect.svg` | `innergen-biz-asis-tobe` / 이너젠 회사소개 현행→개선→효과 | 슬롯 23개 |
-| `s08_phase_roadmap.svg` | `innergen-biz-phase-roadmap` / 이너젠 회사소개 단계별 추진 로드맵 | 슬롯 21개 |
-| `s09_year_timeline.svg` | `innergen-biz-year-timeline` / 이너젠 회사소개 연도별 제도 연혁 | 슬롯 20개 |
-| `s10_maturity_heatmap.svg` | `innergen-biz-maturity-heatmap` / 이너젠 회사소개 단계별 성숙도 히트맵 | 슬롯 26개 |
-| `s11_list_zoom.svg` | `innergen-biz-list-zoom` / 이너젠 회사소개 목록→상세 확대 | 슬롯 21개 |
-| `s12_actor_checklist.svg` | `innergen-biz-actor-checklist` / 이너젠 회사소개 주체별 실행 체크 | 슬롯 13개 |
-| `s13_key_takeaways.svg` | `innergen-biz-key-takeaways` / 이너젠 회사소개 질문+전략 방향 | 슬롯 12개 |
-| `s14_task_structure.svg` | `innergen-biz-task-structure` / 이너젠 회사소개 과업 구조도 | 슬롯 25개 |
-| `s15_vertical_chevron.svg` | `innergen-biz-vertical-chevron` / 이너젠 회사소개 세로 단계 흐름 | 슬롯 15개 |
-| `s16_period_applicability.svg` | `innergen-biz-period-applicability` / 이너젠 회사소개 대상별 적용 시기표 | 슬롯 21개 |
-| `s17_decision_tree.svg` | `innergen-biz-decision-tree` / 이너젠 회사소개 판단 트리 | 슬롯 17개 |
-| `s18_keyword_grid.svg` | `innergen-biz-keyword-grid` / 이너젠 회사소개 질문형 키워드 지도 | 슬롯 25개 |
-| `s19_compare_implication.svg` | `innergen-biz-compare-implication` / 이너젠 회사소개 기준 비교+시사점 | 슬롯 26개 |
-| `s20_self_check.svg` | `innergen-biz-self-check` / 이너젠 회사소개 자가진단 체크리스트 | 슬롯 24개 |
-| `s21_guidance_focus.svg` | `innergen-biz-guidance-focus` / 이너젠 회사소개 요구사항+핵심 Focus | 슬롯 15개 |
-| `s22_case_capture.svg` | `innergen-biz-case-capture` / 이너젠 회사소개 사례 캡처+해설 | 슬롯 10개 |
-| `s23_key_summary.svg` | `innergen-biz-key-summary` / 이너젠 회사소개 핵심 정리 | 슬롯 22개 |
-| `s24_project_overview.svg` | `innergen-biz-project-overview` / 이너젠 회사소개 프로젝트 개요+과업 카드 | 슬롯 17개 |
-| `s25_gantt_schedule.svg` | `innergen-biz-gantt-schedule` / 이너젠 회사소개 추진 일정 간트 | 슬롯 19개 |
-| `s26_data_request.svg` | `innergen-biz-data-request` / 이너젠 회사소개 자료 요청 목록 | 슬롯 25개 |
-| `s27_team_roles.svg` | `innergen-biz-team-roles` / 이너젠 회사소개 수행 체계·역할 | 슬롯 16개 |
-| `s28_status_board.svg` | `innergen-biz-status-board` / 이너젠 회사소개 과업 현황판 | 슬롯 26개 |
-| `s29_progress_plan.svg` | `innergen-biz-progress-plan` / 이너젠 회사소개 진행현황·향후계획 2열 | 슬롯 20개 |
-| `s30_radar_benchmark.svg` | `innergen-biz-radar-benchmark` / 이너젠 회사소개 벤치마킹 레이더+Key Findings | 슬롯 20개 |
-| `s31_diagnosis_table.svg` | `innergen-biz-diagnosis-table` / 이너젠 회사소개 진단표(기준·현황·과제 묶음) | 슬롯 22개 |
-| `s32_priority_matrix.svg` | `innergen-biz-priority-matrix` / 이너젠 회사소개 과제 우선순위표+2×2 | 슬롯 34개 |
-| `s33_approach_matrix.svg` | `innergen-biz-approach-matrix` / 이너젠 회사소개 접근방법 매트릭스 | 슬롯 20개 |
-| `s34_exec_one_pager.svg` | `innergen-biz-exec-one-pager` / 이너젠 회사소개 경영진 요약 1장 | 슬롯 12개 |
-| `s35_decision_request.svg` | `innergen-biz-decision-request` / 이너젠 회사소개 안건·선택지·권고(결정 요청) | 슬롯 22개 |
-| `s36_meeting_log.svg` | `innergen-biz-meeting-log` / 이너젠 회사소개 회의·교육 실적표 | 슬롯 36개 |
-| `s37_purpose_effects.svg` | `innergen-biz-purpose-effects` / 이너젠 회사소개 추진 배경·기대효과 | 슬롯 17개 |
-| `s38_issue_cards.svg` | `innergen-biz-issue-cards` / 이너젠 회사소개 이슈·토픽 카드 6 | 슬롯 17개 |
-| `s39_challenges_considerations.svg` | `innergen-biz-challenges-considerations` / 이너젠 회사소개 과제·고려사항 2열 | 슬롯 17개 |
-| `s40_process_steps_detail.svg` | `innergen-biz-process-steps` / 이너젠 회사소개 단계 프로세스 상세(번호·소단계) | 슬롯 21개 |
-| `s41_quote_opener.svg` | `innergen-biz-quote-opener` / 이너젠 회사소개 양극 인용+질문 | 슬롯 12개 |
-| `s42_scope_method_result.svg` | `innergen-biz-scope-method-result` / 이너젠 회사소개 범위·방법·결과 3열 | 슬롯 14개 |
-| `s43_issue_tree.svg` | `innergen-biz-issue-tree` / 이너젠 회사소개 이슈 트리(MECE 질문 분해) | 슬롯 26개 |
-| `s44_hypothesis_workplan.svg` | `innergen-biz-hypothesis-workplan` / 이너젠 회사소개 가설·분석 작업계획표 | 슬롯 42개 |
-| `s45_scqa_storyline.svg` | `innergen-biz-scqa-storyline` / 이너젠 회사소개 SCQA 스토리라인+지지 근거 | 슬롯 15개 |
-| `s46_driver_tree.svg` | `innergen-biz-driver-tree` / 이너젠 회사소개 KPI 동인 트리(값 분해) | 슬롯 30개 |
-| `s47_waterfall_bridge.svg` | `innergen-biz-waterfall-bridge` / 이너젠 회사소개 워터폴 브리지+해석 | 슬롯 24개 |
-| `s48_macc_curve.svg` | `innergen-biz-macc-curve` / 이너젠 회사소개 한계감축비용곡선(MACC)+수단 목록 | 슬롯 24개 |
-| `s49_pathway_wedge.svg` | `innergen-biz-pathway-wedge` / 이너젠 회사소개 감축 경로 웨지(BAU→목표) | 슬롯 22개 |
-| `s50_materiality_matrix.svg` | `innergen-biz-materiality-matrix` / 이너젠 회사소개 이중 중대성 매트릭스+이슈 목록 | 슬롯 33개 |
-| `s51_risk_heatmap.svg` | `innergen-biz-risk-heatmap` / 이너젠 회사소개 리스크 히트맵 5×5+리스크 목록 | 슬롯 34개 |
-| `s52_scenario_matrix.svg` | `innergen-biz-scenario-matrix` / 이너젠 회사소개 2×2 시나리오+공통 대응 | 슬롯 22개 |
-| `s53_harvey_compare.svg` | `innergen-biz-harvey-compare` / 이너젠 회사소개 하비볼 대안 평가표+권고 | 슬롯 27개 |
-| `s54_raci_matrix.svg` | `innergen-biz-raci-matrix` / 이너젠 회사소개 RACI 역할 매트릭스 | 슬롯 47개 |
-| `s55_stakeholder_map.svg` | `innergen-biz-stakeholder-map` / 이너젠 회사소개 이해관계자 영향력·관심도 지도 | 슬롯 27개 |
-| `s56_three_horizons.svg` | `innergen-biz-three-horizons` / 이너젠 회사소개 성장 3지평(H1·H2·H3) | 슬롯 14개 |
-| `s57_nine_box.svg` | `innergen-biz-nine-box` / 이너젠 회사소개 포트폴리오 9-box(매력도×경쟁우위) | 슬롯 26개 |
-| `s58_operating_model.svg` | `innergen-biz-operating-model` / 이너젠 회사소개 운영모델 하우스(전략·계층·기반) | 슬롯 28개 |
+| `01_cover.svg` | `innergen-biz-cover` / 이너젠 뉴 사업소개 표지 | 슬롯 7개 |
+| `02b_toc_pages.svg` | `innergen-biz-toc-pages` / 이너젠 뉴 사업소개 목차(쪽수) | 슬롯 28개 |
+| `02c_section_divider.svg` | `innergen-biz-section-divider` / 이너젠 뉴 사업소개 장 구분(학습 포인트) | 슬롯 15개 |
+| `03a_content.svg` | `innergen-biz-content` / 이너젠 뉴 사업소개 본문 | 슬롯 6개 |
+| `03b_content_final.svg` | `innergen-biz-content-final` / 이너젠 뉴 사업소개 본문+결론 | 슬롯 7개 |
+| `03c_content_split.svg` | `innergen-biz-split` / 이너젠 뉴 사업소개 좌우 분할(설명+근거) | 슬롯 8개 |
+| `03d_content_dual.svg` | `innergen-biz-dual` / 이너젠 뉴 사업소개 2단 비교 | 슬롯 9개 |
+| `03e_content_table.svg` | `innergen-biz-evidence` / 이너젠 뉴 사업소개 표·차트 근거 | 슬롯 8개 |
+| `03f_content_kpi.svg` | `innergen-biz-kpi` / 이너젠 뉴 사업소개 핵심 수치 | 슬롯 12개 |
+| `03g_content_process.svg` | `innergen-biz-process` / 이너젠 뉴 사업소개 단계·프로세스 | 슬롯 15개 |
+| `04_ending.svg` | `innergen-biz-ending` / 이너젠 뉴 사업소개 맺음 | 슬롯 3개 |
+| `s01_exec_summary.svg` | `innergen-biz-exec-summary` / 이너젠 뉴 사업소개 핵심 요약 카드 | 슬롯 15개 |
+| `s02_findings_insights.svg` | `innergen-biz-findings-insights` / 이너젠 뉴 사업소개 발견·시사점 2단 | 슬롯 13개 |
+| `s03_chart_insight.svg` | `innergen-biz-chart-insight` / 이너젠 뉴 사업소개 차트+시사점 | 슬롯 11개 |
+| `s04_chart_table_strip.svg` | `innergen-biz-chart-table` / 이너젠 뉴 사업소개 차트+데이터표+해설 | 슬롯 10개 |
+| `s05_entity_matrix.svg` | `innergen-biz-entity-matrix` / 이너젠 뉴 사업소개 대상 비교 매트릭스 | 슬롯 30개 |
+| `s06_principle_matrix.svg` | `innergen-biz-principle-matrix` / 이너젠 뉴 사업소개 원칙+기준 매트릭스 | 슬롯 19개 |
+| `s07_asis_tobe_effect.svg` | `innergen-biz-asis-tobe` / 이너젠 뉴 사업소개 현행→개선→효과 | 슬롯 23개 |
+| `s08_phase_roadmap.svg` | `innergen-biz-phase-roadmap` / 이너젠 뉴 사업소개 단계별 추진 로드맵 | 슬롯 21개 |
+| `s09_year_timeline.svg` | `innergen-biz-year-timeline` / 이너젠 뉴 사업소개 연도별 제도 연혁 | 슬롯 20개 |
+| `s10_maturity_heatmap.svg` | `innergen-biz-maturity-heatmap` / 이너젠 뉴 사업소개 단계별 성숙도 히트맵 | 슬롯 26개 |
+| `s11_list_zoom.svg` | `innergen-biz-list-zoom` / 이너젠 뉴 사업소개 목록→상세 확대 | 슬롯 21개 |
+| `s12_actor_checklist.svg` | `innergen-biz-actor-checklist` / 이너젠 뉴 사업소개 주체별 실행 체크 | 슬롯 13개 |
+| `s13_key_takeaways.svg` | `innergen-biz-key-takeaways` / 이너젠 뉴 사업소개 질문+전략 방향 | 슬롯 12개 |
+| `s14_task_structure.svg` | `innergen-biz-task-structure` / 이너젠 뉴 사업소개 과업 구조도 | 슬롯 25개 |
+| `s15_vertical_chevron.svg` | `innergen-biz-vertical-chevron` / 이너젠 뉴 사업소개 세로 단계 흐름 | 슬롯 15개 |
+| `s16_period_applicability.svg` | `innergen-biz-period-applicability` / 이너젠 뉴 사업소개 대상별 적용 시기표 | 슬롯 21개 |
+| `s17_decision_tree.svg` | `innergen-biz-decision-tree` / 이너젠 뉴 사업소개 판단 트리 | 슬롯 17개 |
+| `s18_keyword_grid.svg` | `innergen-biz-keyword-grid` / 이너젠 뉴 사업소개 질문형 키워드 지도 | 슬롯 25개 |
+| `s19_compare_implication.svg` | `innergen-biz-compare-implication` / 이너젠 뉴 사업소개 기준 비교+시사점 | 슬롯 26개 |
+| `s20_self_check.svg` | `innergen-biz-self-check` / 이너젠 뉴 사업소개 자가진단 체크리스트 | 슬롯 24개 |
+| `s21_guidance_focus.svg` | `innergen-biz-guidance-focus` / 이너젠 뉴 사업소개 요구사항+핵심 Focus | 슬롯 15개 |
+| `s22_case_capture.svg` | `innergen-biz-case-capture` / 이너젠 뉴 사업소개 사례 캡처+해설 | 슬롯 10개 |
+| `s23_key_summary.svg` | `innergen-biz-key-summary` / 이너젠 뉴 사업소개 핵심 정리 | 슬롯 22개 |
+| `s24_project_overview.svg` | `innergen-biz-project-overview` / 이너젠 뉴 사업소개 프로젝트 개요+과업 카드 | 슬롯 17개 |
+| `s25_gantt_schedule.svg` | `innergen-biz-gantt-schedule` / 이너젠 뉴 사업소개 추진 일정 간트 | 슬롯 19개 |
+| `s26_data_request.svg` | `innergen-biz-data-request` / 이너젠 뉴 사업소개 자료 요청 목록 | 슬롯 25개 |
+| `s27_team_roles.svg` | `innergen-biz-team-roles` / 이너젠 뉴 사업소개 수행 체계·역할 | 슬롯 16개 |
+| `s28_status_board.svg` | `innergen-biz-status-board` / 이너젠 뉴 사업소개 과업 현황판 | 슬롯 26개 |
+| `s29_progress_plan.svg` | `innergen-biz-progress-plan` / 이너젠 뉴 사업소개 진행현황·향후계획 2열 | 슬롯 20개 |
+| `s30_radar_benchmark.svg` | `innergen-biz-radar-benchmark` / 이너젠 뉴 사업소개 벤치마킹 레이더+Key Findings | 슬롯 20개 |
+| `s31_diagnosis_table.svg` | `innergen-biz-diagnosis-table` / 이너젠 뉴 사업소개 진단표(기준·현황·과제 묶음) | 슬롯 22개 |
+| `s32_priority_matrix.svg` | `innergen-biz-priority-matrix` / 이너젠 뉴 사업소개 과제 우선순위표+2×2 | 슬롯 34개 |
+| `s33_approach_matrix.svg` | `innergen-biz-approach-matrix` / 이너젠 뉴 사업소개 접근방법 매트릭스 | 슬롯 20개 |
+| `s34_exec_one_pager.svg` | `innergen-biz-exec-one-pager` / 이너젠 뉴 사업소개 경영진 요약 1장 | 슬롯 12개 |
+| `s35_decision_request.svg` | `innergen-biz-decision-request` / 이너젠 뉴 사업소개 안건·선택지·권고(결정 요청) | 슬롯 22개 |
+| `s36_meeting_log.svg` | `innergen-biz-meeting-log` / 이너젠 뉴 사업소개 회의·교육 실적표 | 슬롯 36개 |
+| `s37_purpose_effects.svg` | `innergen-biz-purpose-effects` / 이너젠 뉴 사업소개 추진 배경·기대효과 | 슬롯 17개 |
+| `s38_issue_cards.svg` | `innergen-biz-issue-cards` / 이너젠 뉴 사업소개 이슈·토픽 카드 6 | 슬롯 17개 |
+| `s39_challenges_considerations.svg` | `innergen-biz-challenges-considerations` / 이너젠 뉴 사업소개 과제·고려사항 2열 | 슬롯 17개 |
+| `s40_process_steps_detail.svg` | `innergen-biz-process-steps` / 이너젠 뉴 사업소개 단계 프로세스 상세(번호·소단계) | 슬롯 21개 |
+| `s41_quote_opener.svg` | `innergen-biz-quote-opener` / 이너젠 뉴 사업소개 양극 인용+질문 | 슬롯 12개 |
+| `s42_scope_method_result.svg` | `innergen-biz-scope-method-result` / 이너젠 뉴 사업소개 범위·방법·결과 3열 | 슬롯 14개 |
+| `s43_issue_tree.svg` | `innergen-biz-issue-tree` / 이너젠 뉴 사업소개 이슈 트리(MECE 질문 분해) | 슬롯 26개 |
+| `s44_hypothesis_workplan.svg` | `innergen-biz-hypothesis-workplan` / 이너젠 뉴 사업소개 가설·분석 작업계획표 | 슬롯 42개 |
+| `s45_scqa_storyline.svg` | `innergen-biz-scqa-storyline` / 이너젠 뉴 사업소개 SCQA 스토리라인+지지 근거 | 슬롯 15개 |
+| `s46_driver_tree.svg` | `innergen-biz-driver-tree` / 이너젠 뉴 사업소개 KPI 동인 트리(값 분해) | 슬롯 30개 |
+| `s47_waterfall_bridge.svg` | `innergen-biz-waterfall-bridge` / 이너젠 뉴 사업소개 워터폴 브리지+해석 | 슬롯 24개 |
+| `s48_macc_curve.svg` | `innergen-biz-macc-curve` / 이너젠 뉴 사업소개 한계감축비용곡선(MACC)+수단 목록 | 슬롯 24개 |
+| `s49_pathway_wedge.svg` | `innergen-biz-pathway-wedge` / 이너젠 뉴 사업소개 감축 경로 웨지(BAU→목표) | 슬롯 22개 |
+| `s50_materiality_matrix.svg` | `innergen-biz-materiality-matrix` / 이너젠 뉴 사업소개 이중 중대성 매트릭스+이슈 목록 | 슬롯 33개 |
+| `s51_risk_heatmap.svg` | `innergen-biz-risk-heatmap` / 이너젠 뉴 사업소개 리스크 히트맵 5×5+리스크 목록 | 슬롯 34개 |
+| `s52_scenario_matrix.svg` | `innergen-biz-scenario-matrix` / 이너젠 뉴 사업소개 2×2 시나리오+공통 대응 | 슬롯 22개 |
+| `s53_harvey_compare.svg` | `innergen-biz-harvey-compare` / 이너젠 뉴 사업소개 하비볼 대안 평가표+권고 | 슬롯 27개 |
+| `s54_raci_matrix.svg` | `innergen-biz-raci-matrix` / 이너젠 뉴 사업소개 RACI 역할 매트릭스 | 슬롯 47개 |
+| `s55_stakeholder_map.svg` | `innergen-biz-stakeholder-map` / 이너젠 뉴 사업소개 이해관계자 영향력·관심도 지도 | 슬롯 27개 |
+| `s56_three_horizons.svg` | `innergen-biz-three-horizons` / 이너젠 뉴 사업소개 성장 3지평(H1·H2·H3) | 슬롯 14개 |
+| `s57_nine_box.svg` | `innergen-biz-nine-box` / 이너젠 뉴 사업소개 포트폴리오 9-box(매력도×경쟁우위) | 슬롯 26개 |
+| `s58_operating_model.svg` | `innergen-biz-operating-model` / 이너젠 뉴 사업소개 운영모델 하우스(전략·계층·기반) | 슬롯 28개 |
 
 ## VI. Assets
 

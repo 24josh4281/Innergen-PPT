@@ -254,17 +254,17 @@ def write_readme(bundle: Path, tokens: dict, standard: dict, version: dict, font
 
 ## 색 토큰
 
-| 역할 | 교육(lecture) | 회사소개(business) | 이너캐리(innercarry) |
+| 역할 | 뉴 · 교육/강의(lecture) | 뉴 · 사업/회사 소개(business) | 이너캐리(innercarry) |
 |---|---|---|---|
 {color_rows}
 
 ## 글자 크기 (컴팩트, px)
 
-| 역할 | 교육 | 회사소개 | 이너캐리 |
+| 역할 | 뉴 · 교육/강의 | 뉴 · 사업/회사 소개 | 이너캐리 |
 |---|---|---|---|
 {type_rows}
 
-## 레이아웃 카탈로그 (회사소개 기준, 세 계열 공통 파일명)
+## 레이아웃 카탈로그 (이너젠 뉴 사업소개 기준, 세 계열 공통 파일명)
 
 {catalog}
 

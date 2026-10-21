@@ -997,3 +997,19 @@ body.intake-focus {
     .intake-focus .intake-slide { padding: 18px; }
 }
 @media (prefers-reduced-motion: reduce) { .intake-dropzone { transition: none; } }
+
+/* Live per-slide edits on the outline review */
+.intake-edit { margin-top: 14px; padding: 14px; border: 1px dashed #b8cbf9; border-radius: 8px; background: #f8faff; display: grid; gap: 10px; }
+.intake-edit-field { display: grid; gap: 4px; }
+.intake-edit-label { font-size: 12px; font-weight: 700; color: #475569; }
+.intake-edit .text-input, .intake-edit-overall .text-input { width: 100%; box-sizing: border-box; font: inherit; font-size: 14px; }
+.intake-suggest { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.intake-suggest .intake-edit-label { flex-basis: 100%; }
+.intake-chip { border: 1px solid #b8cbf9; background: #ffffff; color: #2f62f0; border-radius: 999px; padding: 4px 10px; font-size: 13px; cursor: pointer; }
+.intake-chip:hover { background: #eef2ff; }
+.intake-edit-tools { display: flex; justify-content: flex-end; gap: 8px; align-items: center; }
+.intake-edit-badge { display: none; font-size: 12px; font-weight: 700; color: #ffffff; background: #2f62f0; border-radius: 999px; padding: 2px 8px; }
+.intake-slide.is-edited .intake-edit-badge { display: inline-block; }
+.intake-slide.is-edited { border-color: #2f62f0; }
+.intake-edit-reset { border: 1px solid #cbd5e1; background: #ffffff; border-radius: 6px; padding: 4px 10px; font-size: 12px; cursor: pointer; }
+.intake-edit-overall { margin-top: 20px; }

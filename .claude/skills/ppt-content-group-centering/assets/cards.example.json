@@ -1,0 +1,16 @@
+{
+  "cards": [
+    {
+      "slide_number": 1,
+      "background_shape_name": "KPI01_BG",
+      "content_shape_names": ["KPI01_VALUE", "KPI01_DESC"],
+      "padding_inches": {"top": 0.12, "bottom": 0.12, "left": 0.18, "right": 0.18}
+    },
+    {
+      "slide_number": 1,
+      "background_shape_name": "KPI02_BG",
+      "content_shape_names": ["KPI02_VALUE", "KPI02_DESC"],
+      "padding_inches": {"top": 0.12, "bottom": 0.12, "left": 0.18, "right": 0.18}
+    }
+  ]
+}

@@ -267,6 +267,66 @@ def _append_shape_text(
     )
 
 
+# Authored text-in-shape: <g data-pptx-text-shape="ctr|t|b"> holding exactly one
+# rect/circle/ellipse and one <text>. The text becomes the shape's own txBody, so
+# the label is typed straight into the shape in PowerPoint. The SVG text position
+# sets the insets; the shape box keeps wrapping and vertical anchoring.
+TEXT_SHAPE_ATTR = 'data-pptx-text-shape'
+_TEXT_SHAPE_GEOMETRY = {'rect', 'circle', 'ellipse'}
+_PX_EMU = 9525
+
+
+def _text_shape_box(shape: ET.Element) -> tuple[float, float, float, float] | None:
+    tag = _local_tag(shape)
+    num = lambda key: float(shape.get(key) or 0)  # noqa: E731
+    if tag == 'rect':
+        return num('x'), num('y'), num('width'), num('height')
+    rx = num('r') or num('rx')
+    ry = num('r') or num('ry')
+    return num('cx') - rx, num('cy') - ry, 2 * rx, 2 * ry
+
+
+def _convert_text_shape(elem: ET.Element, ctx: ConvertContext) -> ShapeResult | None:
+    """Merge one geometry child and one text child into a single p:sp, or None."""
+    children = [c for c in elem if _local_tag(c) not in {'title', 'desc', 'metadata'}]
+    shapes = [c for c in children if _local_tag(c) in _TEXT_SHAPE_GEOMETRY]
+    texts = [c for c in children if _local_tag(c) == 'text']
+    if len(children) != 2 or len(shapes) != 1 or len(texts) != 1 or elem.get('transform'):
+        return None
+    shape, text = shapes[0], texts[0]
+    box = _text_shape_box(shape)
+    if box is None or box[2] <= 0 or box[3] <= 0:
+        return None
+    shape_result = convert_element(shape, ctx)
+    text_result = convert_element(text, ctx)
+    if shape_result is None or text_result is None:
+        return None
+    body = re.search(r'<p:txBody>.*</p:txBody>', text_result.xml, re.S)
+    if body is None or not shape_result.xml.lstrip().startswith('<p:sp>'):
+        return None
+    x, _, w, _ = box
+    anchor = (text.get('text-anchor') or 'start').strip()
+    tx = float(text.get('x') or x)
+    # The anchored side keeps the authored inset; the free side gets a small one
+    # so PowerPoint's font metrics never force a wrap the SVG did not have.
+    if anchor == 'middle':
+        left = right = 2.0
+    elif anchor == 'end':
+        left, right = 2.0, max(0.0, x + w - tx)
+    else:
+        left, right = max(0.0, tx - x), 2.0
+    left, right = min(left, w / 3), min(right, w / 3)
+    v_anchor = elem.get(TEXT_SHAPE_ATTR, '').strip().lower()
+    v_anchor = v_anchor if v_anchor in {'t', 'ctr', 'b'} else 'ctr'
+    l_ins, r_ins = round(left * _PX_EMU), round(right * _PX_EMU)
+    body_pr = (
+        f'<a:bodyPr wrap="square" lIns="{l_ins}" tIns="0" rIns="{r_ins}" bIns="0" '
+        f'anchor="{v_anchor}" anchorCtr="0"><a:noAutofit/></a:bodyPr>'
+    )
+    txbody = re.sub(r'<a:bodyPr\b[^>]*?(?:/>|>.*?</a:bodyPr>)', body_pr, body.group(0), count=1, flags=re.S)
+    return _append_shape_text(shape_result, txbody)
+
+
 # ---------------------------------------------------------------------------
 # Group handling
 # ---------------------------------------------------------------------------
@@ -391,6 +451,16 @@ def convert_g(elem: ET.Element, ctx: ConvertContext) -> ShapeResult | None:
                     + '; '.join(authoring_errors)
                 )
         _require_unchanged_preset_preview(elem)
+
+    if elem.get(TEXT_SHAPE_ATTR) is not None:
+        merged = _convert_text_shape(elem, child_ctx)
+        if merged is not None:
+            ctx.sync_from_child(child_ctx)
+            if should_animate_group and elem_id:
+                shape_match = re.search(r'<p:cNvPr id="(\d+)"', merged.xml)
+                if shape_match:
+                    ctx.anim_targets.append((int(shape_match.group(1)), elem_id))
+            return merged
 
     txbody_meta = _txbody_metadata(elem)
     logical_text_shape = (

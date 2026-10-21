@@ -5,7 +5,7 @@
   "doc": "docs/styles/innergen/qaqc-v21.md",
   "families": {
     "innergen_lecture": {
-      "label": "이너젠 교육·강의(블루) 13:9 — v22 컴팩트",
+      "label": "이너젠 뉴 · 교육/강의 (13:9) — v22 컴팩트",
       "canvas": [
         1040,
         720
@@ -94,7 +94,7 @@
       }
     },
     "innergen_lecture_v20": {
-      "label": "이너젠 교육·강의(블루) 13:9 — v20 표준(거버닝 2줄)",
+      "label": "이너젠 뉴 · 교육/강의 (13:9) — v20 표준(거버닝 2줄)",
       "canvas": [
         1040,
         720
@@ -184,7 +184,7 @@
       }
     },
     "innergen_business": {
-      "label": "이너젠 회사소개 16:9(720×405pt) — v22 컴팩트",
+      "label": "이너젠 뉴 · 사업/회사 소개 (16:9, 720×405pt) — v22 컴팩트",
       "canvas": [
         960,
         540
@@ -286,7 +286,7 @@
         "tolerance": 3
       },
       "source": {
-        "baseline": 640,
+        "baseline": 712,
         "size": 10.67,
         "prefix": "출처",
         "tolerance": 3
@@ -299,7 +299,7 @@
         },
         "page_number": {
           "x": 968,
-          "baseline": 732,
+          "baseline": 752,
           "anchor": "end"
         }
       },
@@ -315,14 +315,14 @@
         {
           "id": "footer-line",
           "type": "line",
-          "y": 704
+          "y": 728
         }
       ],
       "content_zone": [
         56,
         156,
         912,
-        460
+        540
       ],
       "min_px": {
         "content": 10.67,

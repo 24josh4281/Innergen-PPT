@@ -740,6 +740,39 @@ def _read_decks_index() -> dict:
 # arbitrary index keys from leaking into the front-end overlay.
 _TEMPLATE_DEFAULT_FIELDS = {'mode', 'visual_style', 'delivery_purpose', 'template_adherence'}
 
+# Human-readable card titles for the INNerGEN families (user decision
+# 2026-10-21). Deck ids stay unchanged; only the shown label differs.
+_DECK_DISPLAY_LABELS = {
+    'innergen': {
+        'label': 'INNerGEN Original',
+        'label_en': 'INNerGEN Original',
+        'label_ja': 'INNerGEN Original',
+        'label_zh': 'INNerGEN Original',
+        'label_ko': '이너젠 오리지널 (컨설팅 보고서 13:9)',
+    },
+    'innergen_lecture': {
+        'label': 'INNerGEN New · Education',
+        'label_en': 'INNerGEN New · Education',
+        'label_ja': 'INNerGEN New · Education',
+        'label_zh': 'INNerGEN New · Education',
+        'label_ko': '이너젠 뉴 · 교육/강의 (13:9)',
+    },
+    'innergen_business': {
+        'label': 'INNerGEN New · Business',
+        'label_en': 'INNerGEN New · Business',
+        'label_ja': 'INNerGEN New · Business',
+        'label_zh': 'INNerGEN New · Business',
+        'label_ko': '이너젠 뉴 · 사업/회사 소개 (16:9)',
+    },
+    'innercarry': {
+        'label': 'INNerCarry',
+        'label_en': 'INNerCarry',
+        'label_ja': 'INNerCarry',
+        'label_zh': 'INNerCarry',
+        'label_ko': '이너캐리 (4:3)',
+    },
+}
+
 
 def _template_catalog_entries() -> list[dict]:
     """Deck entries for the Stage-1 template card, synced live from
@@ -765,14 +798,9 @@ def _template_catalog_entries() -> list[dict]:
             'primary_color': info.get('primary_color', ''),
             'defaults': defaults,
         }
-        if deck_id == 'innergen':
-            entry.update({
-                'label': 'INNerGEN',
-                'label_en': 'INNerGEN',
-                'label_ja': 'INNerGEN',
-                'label_zh': 'INNerGEN',
-                'label_ko': '이너젠 (INNerGEN)',
-            })
+        labels = _DECK_DISPLAY_LABELS.get(deck_id)
+        if labels:
+            entry.update(labels)
         entries.append(entry)
     return entries
 
