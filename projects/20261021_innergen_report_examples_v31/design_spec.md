@@ -69,7 +69,7 @@ Formula LaTeX remains in SVG `data-pptx-equation`; preview and native OMML must 
 ## V. Layout Principles
 
 - Fixed source-backed chrome and shared vertical zones on all three pages.
-- P01: left scope zone and four phase columns with purpose, input, activity, output and gate.
+- P01: left scope zone and four phase columns. Each phase has three activity nodes; vertical and cross-phase orthogonal arrows express actual sequence and handoff. Detailed inputs, outputs and gates remain in the traceable source/brief.
 - P02: task-owner-state schedule table, six relative weeks, planned and actual bars, as-of line.
 - P03: scenario equation block and monitoring-symbol definition rows above review/handover steps.
 - Common task IDs and status words; no invented percent progress or actual legal deadlines.
@@ -86,12 +86,12 @@ Catalog read: 76 templates
 
 | Page | Template | Path | Summary-quote | Usage |
 | --- | --- | --- | --- | --- |
-| P01 | pipeline_with_stages | templates/charts/pipeline_with_stages.svg | "Pick for 3-5 horizontal pipeline stages, each = title + 1-line description + output artifact, connected by arrows (data pipelines, ETL, build pipelines). Skip if any stage lacks an artifact (use process_flow or numbered_steps)." | Four phases with explicit outputs, adapted to source-backed report matrix |
+| P01 | process_flow | templates/charts/process_flow.svg | "Pick for 3-8 sequential steps connected by simple arrows — approval workflows, customer onboarding, request handling, lifecycle stages. Skip if cyclical (use circular_stages) or stages produce named outputs (use pipeline_with_stages)." | Four phase columns with three editable activity nodes and orthogonal connections |
 | P02 | project_schedule_table | templates/charts/project_schedule_table.svg | "Pick for table-style task tracker (task / owner / status / timeline). Skip for true Gantt with dependencies (use gantt_chart) or schedule without ownership (use roadmap_vertical)." | Four task rows with ownership, state and six relative week columns; not a quantitative percentage chart |
 | P03 | no-template-match | — | — | Scenario equations and math-bearing parameter definitions require native Office Math; custom composed rows |
 
 Runners-up considered:
-- process_flow: rejected for P01 because every phase produces an explicit named output.
+- pipeline_with_stages: superseded for P01 by the user's graph-type clarification and the directly inspected CDP procedure reference.
 - gantt_chart: rejected for P02 because the example has four tasks and no dependency graph.
 - basic_table: rejected for P03 because native equation carriers and review flow are central, not plain text cells.
 
@@ -104,11 +104,12 @@ No image rows. No formula PNGs. No AI or web image acquisition.
 #### Slide 01 - 수행범위와 단계별 추진절차
 - Filename: 01_kickoff_cdp.svg
 - **Title**: 수행범위와 단계별 추진절차
-- **Core message**: CDP 대응의 합의 범위와 단계별 입력·활동·산출물·검토 조건.
+- **Core message**: CDP 대응의 합의 범위와 단계별 작업·선후·인계 흐름.
+- **Cover impact**: 승인 범위의 개요와 실제 작업 흐름을 첫 장에서 함께 읽게 한다. 별도 표지는 없음.
 - Governing: CDP 대응은 요구사항 확인부터 답변 확정까지 단계별로 수행할 예정입니다.
-- **Layout**: Left scope + four stage matrix.
+- **Layout**: Left scope + four-stage process graph with three activity nodes per stage and orthogonal arrows.
 - Content: 대상 조직·기간·문항 범위는 미확정; 요구사항 확인 → 근거 수집 → 답변 작성·검토 → 고객 확정.
-- Evidence: sources/brief.md and approved overview; source D11 slide13, D18 slide4 are design only.
+- Evidence: sources/brief.md and approved overview; user-supplied `INPUTS/이너젠 PPT 장표 레퍼런스/CDP/추진절차.pptx` slide 1 is structural design only. Its source hash and observed structure are in the editor's `analysis/reference_structure.md`.
 - Status: 가상 예시 · CDP 착수.
 
 #### Slide 02 - 기준일별 수행일정과 보완 현황

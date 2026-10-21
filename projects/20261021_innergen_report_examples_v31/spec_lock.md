@@ -55,7 +55,7 @@
 - mode: flat
 
 ## page_charts
-- P01: pipeline_with_stages
+- P01: process_flow
 - P02: project_schedule_table
 
 ## style_standard

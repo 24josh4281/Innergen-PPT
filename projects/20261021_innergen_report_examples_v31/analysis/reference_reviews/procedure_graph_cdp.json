@@ -1,0 +1,12 @@
+{
+  "source": "INPUTS/이너젠 PPT 장표 레퍼런스/CDP/추진절차.pptx",
+  "source_sha256": "dd540448a98bc5e09cb10431c4891a64987a24ecf8379a7f23739e29cd49c1db",
+  "subject": "procedure",
+  "slide": 1,
+  "observation": "단계 구역마다 여러 작업 상자를 배치하고 세로 화살표와 단계 간 직각 연결로 절차를 표현",
+  "adaptation": "CDP 착수 예시의 장문 단계 카드를 4단계×3개 작업 상자와 직각 연결선으로 수정하고 원본 고객 문구·로고는 재사용하지 않음",
+  "before": "projects/20261021_innergen_report_examples_v31/exports/20261021_innergen_report_examples_v31_ver3.pptx",
+  "after": "projects/20261021_innergen_report_examples_v31/exports/20261021_innergen_report_examples_v31_ver6.pptx",
+  "result": "improved",
+  "feedback": "PowerPoint 자체 렌더에서 단계별 상자와 연결선이 겹침 없이 표시됨. 웹 편집기에도 같은 단계·상자·연결 구조를 적용하고 36개 조합 QA를 통과함"
+}
