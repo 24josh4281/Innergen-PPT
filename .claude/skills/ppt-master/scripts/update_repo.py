@@ -45,13 +45,13 @@ Repository path:
   {REPO_ROOT}
 
 If you installed with Download ZIP:
-  1. Download the latest ZIP from GitHub or AtomGit.
+  1. Download the latest ZIP of branch slide-master from GitHub.
   2. Unzip it into a new folder.
-  3. Copy your old .env and projects/ folder into the new folder.
-  4. Run: pip install -r requirements.txt
+  3. Copy your old .env, projects/, INPUTS/ and OUTPUTS/ folders into the new folder.
+  4. Run setup there: powershell -ExecutionPolicy Bypass -File .\\setup.ps1  (or: sh setup.sh)
 
 If you want one-command updates next time, install with Git clone:
-  git clone https://github.com/hugohe3/ppt-master.git
+  git clone -b slide-master https://github.com/24josh4281/innergen-ppt.git slide-master
 
 If you installed through a skill marketplace, update or reinstall through the
 same marketplace / skills tool."""

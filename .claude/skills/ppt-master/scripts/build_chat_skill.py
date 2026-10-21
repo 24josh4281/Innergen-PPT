@@ -54,6 +54,7 @@ STYLE_DOCS = (
     "design-governing-v11.md", "design-wrapping-v15.md",
     "innergen-profile-matrix-v16.md", "report-profiles.json",
     "qaqc-v21.md", "qaqc-v21.json",
+    "content-requirements-v25.md", "content-requirements-v25.json",
 )
 ENGINE_DOCS = ("shared-standards.md", "executor-cheatcard.md", "semantic-svg.md")
 _IGNORE = shutil.ignore_patterns("__pycache__", "*.pyc")

@@ -2475,6 +2475,46 @@
         host.appendChild(sec);
     }
 
+    // The agent interprets sources and asks gaps in chat. This card shows one
+    // proposed story without adding another selection surface or approving facts.
+    function renderContentIntake(host) {
+        var info = REC && REC.content_intake;
+        if (!info || typeof info !== "object" || Array.isArray(info)) return;
+        var labels = {
+            ko: ["자료 해석과 권장 구성", "확인된 정보", "권장 목차", "주요 장표", "보완할 정보", "자료 읽기·출처 기록", "구성 제안이며, 변경한 조건은 제작 전에 반영합니다."],
+            en: ["Source interpretation & proposed story", "Known context", "Proposed outline", "Key slides", "Open information", "Source coverage", "This is a proposal; changed choices are reconciled before authoring."],
+            zh: ["材料解读与建议结构", "已知信息", "建议目录", "主要页面", "待补充信息", "材料读取与来源", "此为结构建议；制作前将调整变更条件。"],
+            ja: ["資料の解釈と構成案", "確認済み情報", "推奨目次", "主なスライド", "不足情報", "資料の確認・出典", "構成案です。変更した条件は制作前に反映します。"]
+        };
+        var words = labels[LANG] || labels.en;
+        var card = el("section", "content-intake");
+        card.setAttribute("aria-label", info.title || words[0]);
+        card.appendChild(el("h2", "", info.title || words[0]));
+        card.appendChild(el("p", "content-intake-note", info.note || words[6]));
+        function list(key, label, limit) {
+            if (!Array.isArray(info[key]) || !info[key].length) return;
+            card.appendChild(el("h3", "", label));
+            var ul = el("ul", "");
+            info[key].slice(0, limit).forEach(function (value) {
+                ul.appendChild(el("li", "", String(value)));
+            });
+            card.appendChild(ul);
+        }
+        list("known", words[1], 4);
+        list("outline", words[2], 12);
+        list("key_slides", words[3], 6);
+        list("gaps", words[4], 3);
+        if (Array.isArray(info.sources) && info.sources.length) {
+            var details = el("details", "");
+            details.appendChild(el("summary", "", words[5] + " (" + info.sources.length + ")"));
+            var ul = el("ul", "");
+            info.sources.forEach(function (value) { ul.appendChild(el("li", "", String(value))); });
+            details.appendChild(ul);
+            card.appendChild(details);
+        }
+        host.appendChild(card);
+    }
+
     // Stage of the staged confirm flow:
     // 1 = direction anchors, 2 = design system, 3 = images/execution,
     // "all" = legacy single-pass (recommendations.json carried no stage).
@@ -2512,48 +2552,80 @@
         refreshSizeInputs = function () {};
         var previewHost = document.getElementById("topbar-preview");
         if (previewHost) previewHost.innerHTML = "";
+        var contentInfo = REC && REC.content_intake;
+        document.body.classList.toggle("intake-focus", Boolean(contentInfo && (contentInfo.phase === "materials" || contentInfo.phase === "review")));
+        var topbarHint = document.getElementById("topbar-hint");
+        if (topbarHint && contentInfo && contentInfo.phase === "materials") {
+            topbarHint.textContent = ({ko: "파일이나 짧은 메모만 넣으면 됩니다. 추가 입력 없이 진행해도 괜찮아요.", en: "Add files or a short note, or continue with existing information.", zh: "添加文件或简短说明，也可直接使用现有信息。", ja: "資料や短いメモを追加するか、既存情報で進められます。"})[LANG] || "Add files or continue with existing information.";
+        } else if (topbarHint && contentInfo && contentInfo.phase === "review") {
+            if (heading) heading.textContent = ({ko: "PPT 제작 · 최종 개요 확인", en: "PPT production · Final outline review", zh: "PPT制作 · 最终大纲确认", ja: "PPT制作・最終概要の確認"})[LANG] || "Final outline review";
+            topbarHint.textContent = ({ko: "전체 슬라이드 내용을 검토한 뒤 수정 사항을 알려주시거나 최종 확인하세요.", en: "Review every slide, request changes in chat, or confirm the final outline.", zh: "检查所有页面，提出修改或确认最终大纲。", ja: "全スライドを確認し、変更点を伝えるか最終確認してください。"})[LANG] || "Review all slides before confirming.";
+        } else if (topbarHint) { topbarHint.textContent = t("topbar_hint"); }
+        if (contentInfo && contentInfo.phase === "materials" && window.PPTContentIntake) {
+            if (heading) heading.textContent = contentInfo.title || t("page_title");
+            var materialLabel = window.PPTContentIntake.renderMaterials(host, contentInfo, LANG, function (payload) {
+                REC = payload; STAGE = stageNumber(REC); initState(); renderAll();
+                document.getElementById("confirm-status").textContent = "";
+            });
+            var materialButton = document.getElementById("btn-confirm");
+            materialButton.textContent = materialLabel;
+            materialButton.disabled = window.PPTContentIntake.isBusy();
+            return;
+        }
+        if ((stage === 1 || stage === "all") && (!contentInfo || contentInfo.phase !== "review")) renderContentIntake(host);
+        var fieldHost = host;
+        if (contentInfo && contentInfo.phase === "review" && window.PPTContentIntake) {
+            window.PPTContentIntake.renderReview(host, contentInfo, LANG);
+            var settings = el("details", "intake-settings");
+            settings.appendChild(el("summary", "", ({ko: "디자인·장수 설정 보기 / 수정", en: "View / adjust design and page count", zh: "查看或修改设计与页数", ja: "デザイン・枚数の確認／変更"})[LANG] || "Design settings"));
+            fieldHost = el("div", ""); settings.appendChild(fieldHost); host.appendChild(settings);
+        }
         if (stage === 1) {
             if (previewHost) renderDirectionPreview(previewHost);
             // Direction anchors — Stage 2 is re-derived from these.
             // Template leads: picking a deck re-defaults the questions below it.
             // Delivery purpose rides inside renderAudience (§c key info).
-            renderTemplate(host);
-            renderCanvas(host);
-            renderAudience(host);
-            renderStyle(host);
+            renderTemplate(fieldHost);
+            renderCanvas(fieldHost);
+            renderAudience(fieldHost);
+            renderStyle(fieldHost);
         } else if (stage === 2) {
             if (previewHost) renderStylePreview(previewHost);
-            renderPages(host);
+            renderPages(fieldHost);
             // Group the three sections reflected by the fixed preview strip.
             var styleGroup = el("div", "style-group");
             renderColor(styleGroup);
             renderIcons(styleGroup);
             renderTypography(styleGroup);
-            host.appendChild(styleGroup);
+            fieldHost.appendChild(styleGroup);
         } else if (stage === 3) {
             if (previewHost) renderImageStrategyPreview(previewHost);
-            renderImages(host);
-            renderMode(host);
-            renderRefine(host);
+            renderImages(fieldHost);
+            renderMode(fieldHost);
+            renderRefine(fieldHost);
         } else {
             // Legacy single-pass: show every section on one page.
             if (previewHost) renderStylePreview(previewHost);
-            renderTemplate(host);
-            renderCanvas(host);
-            renderAudience(host);
-            renderStyle(host);
-            renderPages(host);
+            renderTemplate(fieldHost);
+            renderCanvas(fieldHost);
+            renderAudience(fieldHost);
+            renderStyle(fieldHost);
+            renderPages(fieldHost);
             var legacyStyleGroup = el("div", "style-group");
             renderColor(legacyStyleGroup);
             renderIcons(legacyStyleGroup);
             renderTypography(legacyStyleGroup);
-            host.appendChild(legacyStyleGroup);
-            renderImages(host);
-            renderMode(host);
-            renderRefine(host);
+            fieldHost.appendChild(legacyStyleGroup);
+            renderImages(fieldHost);
+            renderMode(fieldHost);
+            renderRefine(fieldHost);
         }
-        renderInnergenStudio(host, stage);
+        renderInnergenStudio(fieldHost, stage);
         updateActionBar(stage);
+        if (contentInfo && contentInfo.phase === "review" && window.PPTContentIntake) {
+            document.getElementById("btn-confirm").textContent = ({ko: "이 개요로 PPT 제작", en: "Create PPT from this outline", zh: "按此大纲制作PPT", ja: "この概要でPPT制作"})[LANG] || "Create PPT from this outline";
+            document.getElementById("btn-confirm").disabled = Boolean(contentInfo.approval_error);
+        }
     }
 
     function renderAll() { renderForStage(STAGE); }
@@ -2795,6 +2867,10 @@
         var payload = JSON.parse(JSON.stringify(STATE));
         normalizeTypographyForSubmit(payload);
         payload.stage = "final";
+        if (REC.content_intake && REC.content_intake.phase === "review") {
+            payload.content_outline_approved = true;
+            payload.content_review_token = REC.content_intake.view_revision;
+        }
         payload.image_usage = selectedImageUsageIds(payload.image_usage);
         if (!payload.image_usage.length) {
             document.getElementById("confirm-status").textContent = t("image_usage_required");
@@ -2815,7 +2891,7 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         }).then(function (r) {
-            if (!r.ok) throw new Error("confirm failed");
+            if (!r.ok) return r.json().then(function (data) { throw new Error(data.error || "confirm failed"); });
             showConfirmedOverlay();
             fetch("/api/shutdown", {
                 method: "POST",
@@ -2823,9 +2899,9 @@
                 body: JSON.stringify({ reason: "confirmed" })
             }).catch(function () { /* server already gone — fine */ });
             setTimeout(function () { try { window.close(); } catch (e) { /* ignore */ } }, 400);
-        }).catch(function () {
+        }).catch(function (error) {
             btn.disabled = false;
-            document.getElementById("confirm-status").textContent = t("error_retry");
+            document.getElementById("confirm-status").textContent = (error && error.message) || t("error_retry");
         });
     }
 
@@ -2948,6 +3024,14 @@
             if (!langMenu.hidden) setMenuOpen(false);
         });
         document.getElementById("btn-confirm").addEventListener("click", function () {
+            if (REC.content_intake && REC.content_intake.phase === "materials" && window.PPTContentIntake) {
+                window.PPTContentIntake.submitMaterials(REC.content_intake, LANG, function (data) {
+                    REC = data; STAGE = stageNumber(REC); initState(); renderAll();
+                    document.getElementById("confirm-status").textContent = "";
+                });
+                return;
+            }
+            if (REC.content_intake && REC.content_intake.phase === "review") { confirm(); return; }
             if (STAGE === 1) submitStage1();
             else if (STAGE === 2) submitStage2();
             else confirm();

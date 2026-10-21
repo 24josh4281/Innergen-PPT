@@ -190,6 +190,13 @@ unreachable identities; never drop them or invent a carrier page.
 
 🚧 **GATE**: User has provided source material (PDF / DOCX / EPUB / URL / Markdown file / text description / conversation content — any form is acceptable).
 
+**Adaptive content intake**: For new-content authoring or re-architecture, read
+[`references/presentation-intake.md`](references/presentation-intake.md). Interpret
+existing answers and actual source content first, ask only consequential gaps in
+small bundles, and recommend a type-specific story. Keep supplied originals in
+place using working copies where an import would move them. This is content
+planning within Steps 1–4, not another route or design-approval gate.
+
 > **No source content?** When the user supplies only a topic name or requirements without any file or substantive description, run the [`topic-research`](workflows/topic-research.md) workflow first, then return here with its products as input.
 
 When the user provides non-Markdown content, convert immediately through the
@@ -428,6 +435,23 @@ Read references/strategist.md
 **Channel ownership — read each fact once from its owning channel.** In the main pipeline the **content contract is the content-type files in `sources/`** — primarily `<stem>.md`, but also any user-supplied content the import archived there: `.md` / `.markdown` / `.txt` / `.csv` / `.tsv` / `.json` / `.jsonl` / `.yaml` / `.yml` (a `metrics.json` or `data.csv` may carry core content — judge by what the file holds). Text, tables, chart data values, and SmartArt node wording come from these (`ppt_to_md` transcribes native charts as Markdown tables and SmartArt nodes as hierarchical bullets). **Do NOT read pipeline sidecars in `sources/` as content**: `*.conversion_profile.json` (conversion audit) and `*_files/image_manifest.json` (asset index) are process metadata — open them only to audit a conversion or resolve assets, never as slide content. Converted-source originals archived in `sources/` (`.pdf` / `.pptx` / `.docx` / `.xlsx` / `.html` / `.epub` / `.tex` / `.rst` / `.ipynb` / `.typ`, etc.) are read via their converted `<stem>.md`, not scanned directly in the main pipeline. The `analysis/` chart / table / diagram entries are a **structural digest** for outline decisions (which slides carried charts, tables, or SmartArt; chart types / series names; SmartArt layout and hierarchy) — not a second copy of the content values; do NOT also pull chart values or SmartArt wording from `<stem>.slide_library.json` in the main pipeline. The `<stem>.slide_library.json` full structured data is owned by the direct-PPTX workflows: template-fill uses it as the native fill contract while preserving SmartArt unchanged; beautify uses it for native chart / table data and SmartArt relationships while keeping all wording from the Markdown.
 
 **Strategist confirmation stage** (full template: `templates/design_spec_reference.md`):
+
+Include the recommended TOC, representative slide purposes, source interpretation
+and remaining assumptions from adaptive intake in this existing confirmation.
+For persisted briefs, read the latest `analysis/intake_plan_v26*.json` and
+agent-written outline. Do not treat helper recommendations as source facts or a
+confirmed outline; reconcile current user answers before writing §IX.
+
+**User-confirmed content flow v29**: Ask report form/business character first,
+propose the TOC, and accept optional files or one short note before final confirmation.
+Do not require an extra-information yes/no choice or every chapter field. Read
+the files first; ask only a consequential missing item. Chapter inputs are optional.
+After interpreting these inputs, show every slide's title, core message, concrete
+content, visual and source status. This Step's existing confirmation is the final
+approval of that complete overview and design. Material submission is not approval.
+The same Confirm UI can collect chapters in `materials` mode and later show the
+agent-written `review` overview; the exact contract is in `confirm_ui.md`. Do not
+begin SVG authoring until the current overview is confirmed.
 
 ⛔ **BLOCKING**: present the Strategist confirmation stage and **wait for explicit user confirmation or modification** before outputting Design Specification & Content Outline. This is the single core confirmation gate — once the final confirmation lands, all subsequent steps proceed automatically. The default Confirm UI delivers the gate in **one single-pass page** (every field authored up front, confirmed at once; see below); the chat fallback mirrors the same single bundle. The staged three-stage flow remains available only when the user explicitly asks to confirm stage by stage ([`scripts/docs/confirm_ui.md`](scripts/docs/confirm_ui.md)).
 

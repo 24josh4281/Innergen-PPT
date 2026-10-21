@@ -1,5 +1,7 @@
 # Slide Master — 문서를 넣으면, PowerPoint에서 진짜 편집되는 PPT가 나옵니다
 
+> **다른 PC·Codex에서 시작하기**: [사용방법·기능 안내](사용방법.md)에서 Git 설치, Codex용 ZIP 설치, 기능별 요청 예시와 업데이트 방법을 확인하세요. Windows에서는 이 폴더의 `setup-codex.cmd`를 실행하면 기존 통합 설치기가 가상환경을 만듭니다. ZIP은 작업폴더 설치 패키지이며 Codex 앱 자체는 별도로 준비합니다.
+
 [![Output](https://img.shields.io/badge/output-native%20PPTX%20(DrawingML)-217346)](#faq)
 [![Font](https://img.shields.io/badge/font-Pretendard-0b1f3a)](#한글-폰트--pretendard-고정)
 [![Canvas](https://img.shields.io/badge/canvas-16%3A9%20기본%20%C2%B7%20세로형%C2%B7SNS%20포맷%20지원-4633E3)](.claude/skills/ppt-master/references/canvas-formats.md)

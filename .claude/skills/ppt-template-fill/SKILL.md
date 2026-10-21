@@ -72,6 +72,22 @@ directly and uses its own plan, apply, OfficeCLI, and native-render gates.
 
 If the content material is only a topic with no supporting facts, gather or ask for source material first. Do not invent detailed factual content.
 
+**Adaptive content intake**: Read
+[`presentation-intake.md`](../ppt-master/references/presentation-intake.md) for
+source interpretation, concise missing-information questions, and type-specific
+story recommendations. Use current content and scope to select the target story
+before mapping it to this deck's native layouts. This adds no main-SVG commands,
+Confirm UI or extra gate: include the resulting source gaps and planned page
+purposes in this skill's existing `fill_plan` review. Preserve supported native
+editing limits and source fonts. Keep supplied originals in place with working
+copies or the shared importer's `--copy` option.
+
+For the user-selected v27 content flow, ask report/business intent first, propose
+the TOC, accept chapter-specific notes/files in chat, and show every planned slide's
+content and native-layout fit. Use this skill's existing `fill_plan` confirmation
+as the final approval; do not treat material submission as approval or load the
+main Confirm UI. Preserve direct-PPTX editing limits and final native verification.
+
 ---
 
 ## Step 2: Create the Project Workspace

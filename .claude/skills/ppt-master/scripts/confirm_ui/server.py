@@ -55,6 +55,12 @@ if str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
 
 from console_encoding import configure_utf8_stdio  # noqa: E402
+from confirm_ui.content_intake import (  # noqa: E402
+    content_confirmation_error,
+    content_revision,
+    prepare_content_payload,
+    register_content_routes,
+)
 from style_standard import load_standard, validate_selection  # noqa: E402
 from server_common import (  # noqa: E402
     claim_lock as _claim_lock,
@@ -642,7 +648,15 @@ def _wait_only_for_result(
     logger.info('waiting for browser confirmation stage=%s...', target_stage)
     deadline = None if timeout <= 0 else time.time() + timeout
     while True:
-        if _result_stage(result_file) == target_stage:
+        current_result = _result_stage(result_file) == target_stage
+        if current_result and target_stage == 'final':
+            try:
+                current_result = content_confirmation_error(
+                    _read_json_object(result_file), result_file.parent.parent, _read_json_object,
+                ) is None
+            except (OSError, ValueError):
+                current_result = False
+        if current_result:
             logger.info('confirmation stage=%s received: %s', target_stage, result_file)
             return 0
 
@@ -945,6 +959,7 @@ def create_app(
     app.config['LOCK_FILE'] = lock_file
     app.config['SERVER_PORT'] = server_port
     app.config['LAST_REQUEST_TIME'] = time.time()
+    register_content_routes(app, project_path, _read_json_object, _write_json_atomic)
 
     @app.before_request
     def _update_activity():
@@ -1118,6 +1133,15 @@ def create_app(
         # The page polls this endpoint after a stage-1 confirm until the AI
         # overwrites the file with the re-derived stage-2 recommendations, so it
         # must never be served from a cache.
+        prepare_content_payload(data, project_path, _read_json_object)
+        active_content = data.get('content_intake')
+        if isinstance(active_content, dict) and active_content.get('phase') in {'materials', 'review'}:
+            data['_already_confirmed'] = False
+            if result_file.is_file():
+                prior = _read_json_object(result_file)
+                data['_already_confirmed'] = content_confirmation_error(
+                    prior, project_path, _read_json_object,
+                ) is None
         resp = jsonify(data)
         resp.headers['Cache-Control'] = 'no-store'
         return resp
@@ -1128,6 +1152,9 @@ def create_app(
         payload = request.get_json(silent=True)
         if not isinstance(payload, dict):
             return jsonify({'error': 'invalid payload'}), 400
+        intake_error = content_confirmation_error(payload, project_path, _read_json_object)
+        if intake_error:
+            return jsonify({'error': intake_error}), 409
         selection_errors = validate_selection(payload)
         if selection_errors:
             return jsonify({'error': '; '.join(selection_errors)}), 400
@@ -1157,6 +1184,34 @@ def create_app(
     return app
 
 
+def _wait_for_intake(project: Path, timeout: int) -> int:
+    """Wait for material input matching this proposal; never report PPT approval."""
+    deadline = None if timeout <= 0 else time.time() + timeout
+    rec_file = project / CONFIRM_DIR_NAME / RECOMMENDATIONS_NAME
+    latest_file = project / CONFIRM_DIR_NAME / 'intake_latest.json'
+    logger.info('waiting for chapter material input (not generation approval)...')
+    while True:
+        try:
+            info = _read_json_object(rec_file).get('content_intake', {})
+            if latest_file.is_file():
+                latest = _read_json_object(latest_file)
+                if (latest.get('revision') == content_revision(info)
+                        and latest.get('id') != info.get('previous_response_id')
+                        and latest.get('status') == 'materials_submitted_not_approved'):
+                    logger.info('chapter inputs received: %s; generation is not approved', latest.get('id'))
+                    return 0
+        except (OSError, ValueError):
+            pass
+        if deadline is not None and time.time() >= deadline:
+            logger.info('chapter input still pending; the browser may remain open')
+            return 1
+        lock = _read_lock(project / LOCK_FILE_NAME)
+        if not _process_alive(_lock_pid(lock)):
+            logger.error('confirm server stopped before chapter input was received')
+            return 1
+        time.sleep(0.5)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description='PPT Master Strategist confirmation stage UI',
@@ -1176,6 +1231,8 @@ def build_parser() -> argparse.ArgumentParser:
         '--wait', action='store_true',
         help='With --daemon, wait until a fresh result.json is written',
     )
+    parser.add_argument('--wait-intake', action='store_true',
+                        help='With --daemon or --wait-only, wait for chapter inputs, not final approval.')
     parser.add_argument(
         '--wait-only', action='store_true',
         help='Attach to the confirm server for this project and wait for an '
@@ -1228,6 +1285,9 @@ def main(argv: Optional[list[str]] = None) -> int:
     # recommendations.json (the page may never have been confirmed).
     if args.shutdown:
         return _shutdown_existing(project_path / LOCK_FILE_NAME)
+    if args.wait_intake and not (args.daemon or args.wait_only):
+        logger.error('--wait-intake requires --daemon or --wait-only')
+        return 2
 
     # Staged wait: attach to the server launched by the first --wait and block
     # until the page writes the requested intermediate or final result.json.
@@ -1257,6 +1317,8 @@ def main(argv: Optional[list[str]] = None) -> int:
                 'recovered confirm UI for wait-only at %s; the browser polling should resume',
                 _server_url(actual_port),
             )
+        if args.wait_intake:
+            return _wait_for_intake(project_path, args.wait_timeout)
         return _wait_only_for_result(
             project_path / CONFIRM_DIR_NAME / RESULT_NAME,
             lock_file,
@@ -1298,6 +1360,8 @@ def main(argv: Optional[list[str]] = None) -> int:
         except RuntimeError as exc:
             logger.error('%s', exc)
             return 1
+        if args.wait_intake:
+            return _wait_for_intake(project_path, args.wait_timeout)
         if args.wait:
             return _wait_for_result(result_file, proc, started_at, args.wait_timeout)
         return 0

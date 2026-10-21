@@ -45,6 +45,13 @@ not make a direct route inherit the main SVG skill.
 
 **Forbidden - route-choice prompts**: Do not present multiple implementation paths when this file already defines the route. Ordinary style choices and finite options belong at the next existing confirmation gate.
 
+**Content intake after selection**: New-content main generation, topic research
+and native template fill apply
+[`presentation-intake.md`](../references/presentation-intake.md) through their
+selected owner. Content/audience/source-gap questions improve the chosen route's
+story; they are not route-choice prompts. Strict 1:1 or enhancement-only work and
+unchanged execution resumes retain their already locked content.
+
 ### 1.1 SVG Page-Design Scope
 
 | Route family | SVG contract |

@@ -872,3 +872,128 @@ body {
     gap: 12px;
 }
 .innergen-frame-card .option-preview-template { aspect-ratio: 13 / 9; }
+/* Optional v26 source/story summary: one proposal, no additional controls. */
+.content-intake {
+    margin: 0 0 24px;
+    padding: 20px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    background: #f8fafc;
+    color: #172033;
+    overflow-wrap: anywhere;
+}
+.content-intake h2 { margin: 0 0 10px; font-size: 20px; }
+.content-intake h3 { margin: 16px 0 6px; font-size: 14px; }
+.content-intake ul { padding-left: 22px; margin: 6px 0; line-height: 1.6; }
+.content-intake li { margin: 4px 0; }
+.content-intake-note { font-size: 13px; color: #475569; line-height: 1.5; }
+.content-intake summary { cursor: pointer; margin-top: 16px; font-size: 13px; }
+.intake-choice { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; cursor: pointer; }
+.intake-choice input { margin-top: 4px; }
+.intake-inputs[hidden] { display: none; }
+.intake-chapter { border-top: 1px solid #cbd5e1; margin-top: 18px; padding: 4px 0 14px; }
+.intake-chapter summary { font-size: 16px; font-weight: 600; }
+.intake-chapter label { display: block; margin-top: 16px; font-size: 14px; }
+.intake-notes { display: block; width: 100%; margin-top: 6px; box-sizing: border-box; }
+.intake-chapter input[type=file] { display: block; max-width: 100%; margin-top: 8px; }
+.intake-remove { margin-left: 10px; padding: 0 7px; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer; }
+.intake-slide { border-top: 1px solid #cbd5e1; margin-top: 20px; padding-top: 4px; }
+.intake-slide h3 { font-size: 17px; }
+.intake-slide h4 { margin: 12px 0 4px; font-size: 14px; }
+.intake-slide p { line-height: 1.6; }
+.intake-error { color: #b91c1c; font-weight: 600; line-height: 1.5; }
+.intake-focus #preview-panel { display: none; }
+.intake-focus #sections { max-width: 1000px; margin: 0 auto; }
+.intake-settings > summary { color: #e2e8f0; cursor: pointer; padding: 18px 4px; }
+
+/* v29 file-first intake. INNerGEN education palette; no change to PPT style choices. */
+body.intake-focus {
+    --shell: #ffffff; --shell-2: #f5f7fd; --shell-line: #e2e8f0;
+    --shell-ink: #0b1739; --shell-muted: #64748b; --shell-hover: #eef2ff;
+    --accent: #2f62f0; --accent-soft: #eef2ff;
+    --shadow: 0 4px 18px rgba(11, 23, 57, .04);
+    background: #f5f7fd; color: #475569;
+    font-family: "Pretendard", "Malgun Gothic", sans-serif;
+    word-break: keep-all; overflow-wrap: anywhere;
+}
+.intake-focus #topbar { border-top: 3px solid #2f62f0; }
+.intake-focus #topbar-inner { max-width: 1168px; margin: auto; padding: 18px 28px; }
+.intake-focus .topbar-titles::before { content: "INNerGEN / SLIDE MASTER"; display: block; color: #2f62f0; font-size: 11px; font-weight: 700; letter-spacing: .05em; margin-bottom: 5px; }
+.intake-focus .topbar-titles h1 { font-size: 17px; font-weight: 700; }
+.intake-focus .topbar-titles p { margin-top: 4px; }
+.intake-focus #sections { width: 100%; max-width: 1100px; margin: 0 auto; }
+.intake-focus #form { padding: 28px; }
+.intake-focus #actionbar { padding: 16px 28px; min-height: 76px; }
+.intake-focus #confirm-status { margin-right: auto; max-width: 680px; color: #475569; }
+.intake-focus #btn-confirm { background: #2f62f0; color: #ffffff; font-family: inherit; font-size: 15px; border-radius: 8px; padding: 13px 24px; min-height: 46px; }
+.intake-focus #btn-confirm:hover { background: #244ecc; }
+.intake-focus #btn-confirm:disabled { background: #e2e8f0; color: #64748b; cursor: default; }
+.intake-focus .lang-select-btn { background: #f8faff; color: #475569; border-color: #e2e8f0; }
+.intake-focus .lang-menu { background: #ffffff; color: #475569; border-color: #e2e8f0; }
+.intake-focus .lang-menu li { color: #475569; }
+.intake-focus .lang-menu li:hover { background: #eef2ff; }
+.intake-focus .content-intake { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 30px; box-shadow: var(--shadow); color: #475569; margin-bottom: 20px; }
+.intake-focus .content-intake h2 { color: #0b1739; font-size: 26px; font-weight: 700; margin: 8px 0; letter-spacing: -.02em; }
+.intake-focus .content-intake h3, .intake-focus .content-intake h4 { color: #0b1739; }
+.intake-focus .content-intake-note { color: #64748b; font-size: 13px; }
+.intake-steps { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 22px; font-size: 12px; color: #64748b; }
+.intake-steps span { padding: 6px 11px; border-radius: 6px; background: #f8faff; }
+.intake-steps .is-active { color: #2f62f0; background: #eef2ff; font-weight: 700; }
+.intake-context { font-size: 13px; font-weight: 600; color: #64748b; margin: 0 0 6px; }
+.intake-intro { font-size: 15px; margin: 0 0 24px; line-height: 1.6; }
+.intake-workspace { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 24px; }
+.intake-main { min-width: 0; }
+.intake-toc { padding: 20px; background: #f8faff; border: 1px solid #e2e8f0; border-radius: 10px; align-self: start; }
+.intake-focus .intake-toc h3 { margin: 0 0 14px; font-size: 14px; }
+.intake-toc ol { margin: 0; padding-left: 22px; font-size: 14px; }
+.intake-toc li { padding: 5px 0 9px 5px; }
+.intake-toc .content-intake-note { padding-top: 12px; border-top: 1px solid #e2e8f0; margin: 12px 0 0; }
+.intake-dropzone { border: 1.5px dashed #bacaf6; border-radius: 10px; min-height: 225px; padding: 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; background: #f8faff; text-align: center; transition: border-color .15s, background .15s; }
+.intake-dropzone strong { color: #0b1739; font-size: 17px; font-weight: 600; }
+.intake-dropzone.is-dragging { background: #eef2ff; border: 2px solid #2f62f0; }
+.intake-dropzone.is-locked { opacity: .7; }
+.intake-drop-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 9px; background: #eef2ff; color: #2f62f0; font-size: 26px; line-height: 1; margin-bottom: 4px; }
+.intake-drop-formats { color: #64748b; font-size: 12px; }
+.intake-browse { background: #ffffff; color: #2f62f0; border: 1px solid #cbd7fa; border-radius: 7px; padding: 8px 16px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 7px; min-height: 38px; }
+.intake-browse:hover { background: #eef2ff; }
+.intake-file-input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); clip-path: inset(50%); }
+.intake-focus .intake-file-list { list-style: none; padding: 0; margin: 12px 0 0; }
+.intake-file-list li { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 7px; font-size: 13px; }
+.intake-file-badge { padding: 4px 6px; background: #eef2ff; color: #2f62f0; font-size: 10px; font-weight: 700; border-radius: 4px; max-width: 54px; overflow: hidden; }
+.intake-file-name { min-width: 0; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.intake-file-status { color: #64748b; font-size: 12px; }
+.intake-focus .intake-remove { display: inline-grid; place-items: center; padding: 0; width: 30px; height: 30px; flex: none; border: 0; color: #64748b; background: #f8faff; font-size: 17px; border-radius: 5px; margin: 0; }
+.intake-focus .intake-remove:hover { color: #0b1739; background: #eef2ff; }
+.intake-upload-error { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; margin: 6px 0; color: #b91c1c; background: #fff7f7; border-radius: 7px; font-size: 13px; }
+.intake-focus .intake-shared label, .intake-focus .intake-chapter label { display: block; font-size: 14px; font-weight: 600; margin: 20px 0 0; }
+.intake-focus .intake-notes { font-family: inherit; font-size: 14px; font-weight: 400; line-height: 1.7; color: #475569; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 14px; resize: vertical; min-height: 84px; }
+.intake-focus .intake-notes::placeholder { color: #64748b; }
+.intake-focus .intake-detail { border-top: 1px solid #e2e8f0; margin-top: 26px; }
+.intake-focus .intake-detail > summary { font-size: 14px; color: #475569; margin: 0; padding: 18px 0; font-weight: 600; }
+.intake-focus .intake-chapter { border: 1px solid #e2e8f0; border-radius: 8px; padding: 0 18px 18px; margin: 12px 0; }
+.intake-focus .intake-chapter > summary { font-size: 15px; padding: 0; margin-top: 16px; }
+.intake-focus .intake-chapter:not([open]) { padding-bottom: 16px; }
+.intake-optional-hint { margin: 0; font-size: 12px; color: #64748b; }
+.intake-focus .intake-slide { margin: 18px 0; padding: 22px; border: 1px solid #e2e8f0; border-radius: 10px; background: #ffffff; }
+.intake-focus .intake-slide > .content-intake-note { margin: 0 0 8px; }
+.intake-focus .intake-slide h3 { margin: 0 0 14px; font-size: 19px; }
+.intake-focus .intake-slide h4 { margin: 16px 0 6px; }
+.intake-core { background: #f3f6ff; padding: 12px 15px; color: #2f62f0; font-size: 15px; border-radius: 6px; }
+.intake-slide-meta { border-top: 1px solid #e2e8f0; padding-top: 8px; font-size: 13px; }
+.intake-focus .intake-settings > summary { color: #475569; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px; font-size: 14px; }
+.intake-focus :is(button, summary, textarea, .intake-dropzone):focus-visible { outline: 3px solid #2f62f0; outline-offset: 3px; }
+@media (max-width: 760px) {
+    .intake-focus #form { padding: 16px; }
+    .intake-focus #topbar-inner { padding: 14px 18px; }
+    .intake-focus .content-intake { padding: 22px 18px; border-radius: 12px; }
+    .intake-focus .content-intake h2 { font-size: 22px; }
+    .intake-workspace { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .intake-toc { padding: 16px; }
+    .intake-toc ol { font-size: 13px; }
+    .intake-dropzone { min-height: 200px; padding: 20px 14px; }
+    .intake-focus #actionbar { padding: 12px 18px; flex-wrap: wrap; gap: 8px; }
+    .intake-focus #confirm-status { flex-basis: 100%; font-size: 12px; min-height: 0; }
+    .intake-focus #btn-confirm { width: 100%; }
+    .intake-focus .intake-slide { padding: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .intake-dropzone { transition: none; } }

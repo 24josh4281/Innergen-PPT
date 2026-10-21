@@ -21,6 +21,18 @@ This workflow is **independent**: it owns the source-acquisition step when no fi
 
 ## Step 1: Confirm topic
 
+Read [`presentation-intake.md`](../references/presentation-intake.md) for adaptive
+scope questions. Start with known conversation context; bundle only missing
+outcome/audience/scope questions that change the research. Do not repeat the same
+clarifier later in main planning. Public research may establish general background,
+but private company results, project progress and approval facts require user data.
+
+For the user's v27 flow, use the report/business answers to propose a preliminary
+TOC and request chapter-specific input before research when private materials are
+needed. Collect these in chat until the main project's source prerequisites exist.
+If substantive files/text arrive, return to the router and continue from those
+sources; do not search the web for private progress or invent project evidence.
+
 ⛔ **BLOCKING**: confirm scope as a single bundled clarifier. Skip when the user's initial message already covers it.
 
 | Item | Default if user did not specify |
@@ -60,6 +72,11 @@ python3 ${SKILL_DIR}/scripts/source_to_md/web_to_md.py <URL>
 | Targeted fill | Search for subtopics the deep fetch flagged |
 
 **Source priority**:
+
+For ESG, CDP, regulations, accounting or other time-sensitive professional topics,
+use current official standards, regulator/program-owner publications and primary
+evidence first. Record jurisdiction, source version and access date; Wikipedia is
+not the authority for legal applicability, reporting deadlines or calculation factors.
 
 | Tier | Source |
 |---|---|

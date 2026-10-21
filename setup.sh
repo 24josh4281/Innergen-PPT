@@ -6,6 +6,15 @@ set -e
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 SCRIPT="$ROOT/.claude/skills/ppt-master/scripts/setup_env.py"
 
+use_existing=true
+for arg in "$@"; do
+    [ "$arg" != "--recreate" ] || use_existing=false
+done
+if [ "$use_existing" = true ] && [ -x "$ROOT/.venv/bin/python" ] &&
+   "$ROOT/.venv/bin/python" -c 'import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)' 2>/dev/null; then
+    exec "$ROOT/.venv/bin/python" "$SCRIPT" "$@"
+fi
+
 for py in python3 python; do
     if command -v "$py" >/dev/null 2>&1 &&
        "$py" -c 'import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)' 2>/dev/null; then

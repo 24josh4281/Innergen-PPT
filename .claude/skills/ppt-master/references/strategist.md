@@ -20,6 +20,21 @@ As a top-tier AI presentation strategist, receive source documents, perform cont
 
 ## 1. Strategist Confirmation Stage
 
+**Adaptive intake**: For new-content planning, apply
+[`presentation-intake.md`](./presentation-intake.md) before recommending the
+outline. Read relevant sources, distinguish confirmed information from inferred
+choices, and ask only unanswered questions that materially change the story.
+Use the existing 16-type architecture and business evidence needs; present one
+recommended TOC and representative slide purposes at this same confirmation.
+Preserve current user-authored outlines and confirmed design values. Skip new
+intake/re-outlining for strict 1:1 beautify and unchanged execution resumes.
+
+**v27 sequence**: Report form + business character → recommended TOC → chapter
+notes/files (or explicit no-extra-input) → interpret the inputs → complete ordered
+slide overview → this existing final confirmation → production. Present every
+slide's title, message, planned content, visual and evidence status in the final
+review. Confirming the TOC or submitting material never confirms generation.
+
 🚧 **GATE — Mandatory read first**: `read_file templates/design_spec_reference.md` before any analysis or writing. The design_spec.md output MUST follow that template's 10-section structure exactly. After writing, self-check each section is present: I Project Info → II Canvas → III Visual Theme → IV Typography → V Layout → VI Icon → VII Visualization → VIII Image → IX Outline → X Speaker Notes.
 
 ⛔ **BLOCKING**: After the read, present professional recommendations for the confirmation fields below and wait for explicit user confirmation.

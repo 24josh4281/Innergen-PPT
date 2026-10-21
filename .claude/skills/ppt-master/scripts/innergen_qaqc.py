@@ -6,11 +6,14 @@ Checks a finished (or in-progress) SVG deck against the INNerGEN design rules
 in docs/styles/innergen: family chrome geometry (v17/v22), governing grammar
 (v11/v20, one line since v22), title system (v4/v5/v20), TOC ↔ chapter
 consistency (v5/v20), structure and closing set per deck type (v20), minimum
-text sizes (v18/v22), citation line (v16). It complements svg_quality_checker.py
-(SVG/PPTX contract) with the *content* and *uniformity* layer.
+text sizes (v18/v22), citation line (v16), and - since v25 - the table of
+contents and must-have content per report type and business type
+(content-requirements-v25.json, via innergen_content_check.py). It complements
+svg_quality_checker.py (SVG/PPTX contract) with the *content* and *uniformity* layer.
 
 Usage:
-    python3 scripts/innergen_qaqc.py <project_path> [--deck-type lecture] [--register auto|external|internal]
+    python3 scripts/innergen_qaqc.py <project_path> [--deck-type lecture] [--business-type inventory]
+                                     [--register auto|external|internal]
                                      [--family innergen_lecture|innergen_lecture_v20|innergen_business|innercarry]
                                      [--strict] [--json <out.json>]
 
@@ -35,6 +38,7 @@ _SCRIPTS_DIR = Path(__file__).resolve().parent
 if str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
 from console_encoding import configure_utf8_stdio  # noqa: E402
+import innergen_content_check as content_check  # noqa: E402
 
 REPO = _SCRIPTS_DIR.parents[min(3, len(_SCRIPTS_DIR.parents) - 1)]
 RULES_PATH = REPO / "docs/styles/innergen/qaqc-v21.json"
@@ -108,12 +112,22 @@ def _near(a, b, tol):
     return a is not None and b is not None and abs(a - b) <= tol
 
 
+def _layout_from_filename(stem: str) -> str:
+    """Flat (chat) edition: SVGs carry no data-pptx-layout, so read the layout id
+    from the page file name `NN_<layout_id>.svg` (e.g. `05_s24_project_overview`)
+    and return it hyphenated (`s24-project-overview`) for substring matching."""
+    m = re.match(r"^\d+_((?:0\d[a-z]?|s\d{2})_[a-z0-9_]+?)(?:__.*)?$", stem)
+    if not m:
+        return ""
+    return re.sub(r"^(?:0\d[a-z]?)_", "", m.group(1)).replace("_", "-")
+
+
 # ---------------------------------------------------------------- page model
 class Page:
     def __init__(self, path: Path, index: int, fam: dict | None = None):
         self.path, self.index = path, index
         self.root = ET.parse(str(path)).getroot()
-        self.layout = self.root.get("data-pptx-layout") or ""
+        self.layout = self.root.get("data-pptx-layout") or _layout_from_filename(path.stem)
         self.role = self.root.get("data-pptx-page-role") or ""
         self.texts: list[dict] = []
         self.rects: list[dict] = []
@@ -239,7 +253,8 @@ def _layout_in(layout: str, group: str) -> bool:
     return any(x in layout for x in group.split("|"))
 
 
-def run(project: Path, deck_type: str | None, register: str, family: str | None, rules: dict) -> tuple[Report, dict]:
+def run(project: Path, deck_type: str | None, register: str, family: str | None, rules: dict,
+        business_type: str | None = None) -> tuple[Report, dict]:
     rep = Report()
     svg_dir = project / "svg_output"
     pages = [Page(p, i + 1) for i, p in enumerate(sorted(svg_dir.glob("*.svg")))]
@@ -257,11 +272,18 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
     fam = rules["families"][family]
     for p in pages:
         p.bind(fam)
-    if deck_type is None:
-        spec = (project / "design_spec.md")
-        if spec.exists():
-            m = re.search(r"deck_type\*{0,2}\s*\|?\s*[:|]\s*\**(\w+)", spec.read_text(encoding="utf-8"))
-            deck_type = m.group(1) if m else None
+    spec = project / "design_spec.md"
+    spec_text = spec.read_text(encoding="utf-8") if spec.exists() else ""
+    if deck_type is None and spec_text:
+        m = (re.search(r"deck_type\*{0,2}\s*\|?\s*[:|]\s*\**(\w+)", spec_text)
+             or re.search(r"innergen_report_type\*{0,2}\s*\|?\s*[:|]\s*`?\**(\w+)", spec_text))
+        deck_type = m.group(1) if m else None
+    if business_type is None and spec_text:
+        m = re.search(r"innergen_business_type\*{0,2}\s*\|?\s*[:|]\s*`?\**(\w+)", spec_text)
+        business_type = m.group(1) if m else None
+    content_spec = content_check.load_spec()
+    if content_spec is not None:
+        deck_type = content_check.resolve(content_spec, deck_type, None)[0]
     exempt = fam["exempt_layout_keywords"]
     content = [p for p in pages if not p.is_exempt(exempt)]
 
@@ -404,7 +426,7 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
 
     # ---- O: TOC ↔ chapters
     def _is_toc(layout):
-        return any(layout.startswith(x) for x in rules["toc"]["layouts"])
+        return any(layout.startswith(x) for x in rules["toc"]["layouts"]) or layout in ("toc", "toc-pages")
 
     toc_pages = [p for p in pages if _is_toc(p.layout)]
     if toc_pages:
@@ -430,7 +452,8 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
             if a < last or b > len(pages) or a > b:
                 rep.add("WARN", "O02", toc.index, f"목차 쪽 범위 '{r}'가 순서·총 장수({len(pages)})와 맞지 않습니다")
             last = b
-    elif deck_type in ("lecture", "handout", "kickoff", "final", "seminar", "insight"):
+    elif deck_type in ("lecture", "handout", "kickoff", "final", "seminar", "insight") and not (
+            content_spec is not None and deck_type in content_spec["report_types"]):  # R01 reports it
         rep.add("WARN", "O01", 0, "목차 장표가 없습니다(교육·착수·최종·세미나·리포트는 목차 필수)")
 
     # ---- S: structure
@@ -446,9 +469,11 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
         top, c = Counter(layouts).most_common(1)[0]
         if c / len(layouts) > st["max_share_single_layout"] and len(layouts) >= 6:
             rep.add("WARN", "S01", 0, f"본문의 {c/len(layouts):.0%}가 한 레이아웃({top})입니다")
+    # R01 (content-requirements) supersedes S03 for the report types it covers.
+    covered = content_spec is not None and deck_type in content_spec["report_types"]
     if deck_type:
         all_layouts = set(p.layout for p in pages)
-        for group in st["required_layouts"].get(deck_type, []):
+        for group in ([] if covered else st["required_layouts"].get(deck_type, [])):
             if not any(_layout_in(l, group) for l in all_layouts):
                 rep.add("WARN", "S03", 0, f"{deck_type} 덱 필수 레이아웃 없음: {group.replace('|', ' 또는 ')}")
         closing = st["closing_layouts"].get(deck_type, [])
@@ -460,8 +485,16 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
         if fm and p.governing and _similar(fm["text"], p.governing["text"]) >= 0.6:
             rep.add("WARN", "S04", p.index, "결론 박스가 거버닝과 거의 같습니다 — '그래서 무엇을 할지'만")
 
+    # ---- R/B/Q: TOC and must-have content per report type × business type (v25)
+    content_res = {}
+    if content_spec is not None:
+        content_res = content_check.check(content_check.pages_from_svg(pages), deck_type, business_type,
+                                          content_spec, rep.add)
+        business_type = content_res.get("business_type") or business_type
+
     summary = {
-        "project": str(project), "family": family, "deck_type": deck_type, "register": main_reg,
+        "project": str(project), "family": family, "deck_type": deck_type, "business_type": business_type,
+        "register": main_reg, "sections_missing": content_res.get("sections_missing", []),
         "pages": len(pages), "content_pages": len(content),
         "errors": rep.count("ERROR"), "warnings": rep.count("WARN"), "infos": rep.count("INFO"),
         "layouts": dict(Counter(p.layout for p in pages)),
@@ -473,13 +506,14 @@ def write_report(project: Path, rep: Report, summary: dict, json_out: Path | Non
     out_dir = project / "analysis"
     out_dir.mkdir(exist_ok=True)
     md = [f"# INNerGEN QA/QC 보고 — {project.name}", "",
-          f"- 계열: {summary.get('family')} · 덱 유형: {summary.get('deck_type') or '미지정'} · 거버닝 문체 기준: {summary.get('register')}",
+          f"- 계열: {summary.get('family')} · 덱 유형: {summary.get('deck_type') or '미지정'} · 사업 성격: {summary.get('business_type') or '미지정'} · 거버닝 문체 기준: {summary.get('register')}",
           f"- 장수 {summary.get('pages')} (본문 {summary.get('content_pages')}) · ERROR {summary.get('errors')} · WARN {summary.get('warnings')} · INFO {summary.get('infos')}", "",
           "| 수준 | 코드 | 장 | 내용 |", "|---|---|---|---|"]
     order = {"ERROR": 0, "WARN": 1, "INFO": 2}
     for it in sorted(rep.items, key=lambda i: (order[i["level"]], i["page"], i["code"])):
         md.append(f"| {it['level']} | {it['code']} | {('P%02d' % it['page']) if it['page'] else '덱'} | {it['message']} |")
-    md += ["", "코드: C 화면 고정 요소 · G 거버닝 · T 제목 · O 목차 · S 구조. 규칙표: docs/styles/innergen/qaqc-v21.json, 설명: qaqc-v21.md"]
+    md += ["", "코드: C 화면 고정 요소 · G 거버닝 · T 제목 · O 목차 · S 구조 · R 보고 유형 목차·필수 내용 · B 사업 성격 필수 내용 · Q 잔재·금지 표현. "
+           "규칙표: qaqc-v21.json(C·G·T·O·S), content-requirements-v25.json(R·B·Q), 설명: qaqc-v21.md, content-requirements-v25.md"]
     (out_dir / "innergen_qaqc_report.md").write_text("\n".join(md) + "\n", encoding="utf-8")
     data = {"summary": summary, "items": rep.items}
     (out_dir / "innergen_qaqc_report.json").write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -492,19 +526,20 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("project", type=Path)
     ap.add_argument("--deck-type", default=None, help="lecture|handout|seminar|proposal|kickoff|weekly|biweekly|monthly|diagnosis|interim|final|briefing|benchmark|insight")
+    ap.add_argument("--business-type", default=None, help="cdp_disclosure|regulatory|reduction|inventory|lca_product|climate_risk|esg_rating|climate_education|climate_tech (default: design_spec.md innergen_business_type)")
     ap.add_argument("--register", default="auto", choices=["auto", "external", "internal"])
     ap.add_argument("--family", default=None, help="innergen_lecture|innergen_lecture_v20|innergen_business|innercarry (default: design_profile_v17.json + chrome detection)")
     ap.add_argument("--strict", action="store_true")
     ap.add_argument("--json", type=Path, default=None)
     args = ap.parse_args(argv)
     rules = json.loads(RULES_PATH.read_text(encoding="utf-8"))
-    rep, summary = run(args.project, args.deck_type, args.register, args.family, rules)
+    rep, summary = run(args.project, args.deck_type, args.register, args.family, rules, args.business_type)
     write_report(args.project, rep, summary, args.json)
     for it in rep.items:
         if it["level"] == "INFO":
             continue
         print(f"[{it['level']}] {it['code']} P{it['page']:02d} {it['message']}")
-    print(f"[innergen_qaqc] family {summary.get('family')} · {summary.get('pages')} pages · ERROR {summary.get('errors')} · WARN {summary.get('warnings')} · INFO {summary.get('infos')} · report: {args.project / 'analysis/innergen_qaqc_report.md'}")
+    print(f"[innergen_qaqc] family {summary.get('family')} · {summary.get('deck_type') or '-'} × {summary.get('business_type') or '-'} · {summary.get('pages')} pages · ERROR {summary.get('errors')} · WARN {summary.get('warnings')} · INFO {summary.get('infos')} · report: {args.project / 'analysis/innergen_qaqc_report.md'}")
     if summary.get("errors") or (args.strict and summary.get("warnings")):
         print("[innergen_qaqc] FAIL")
         return 1

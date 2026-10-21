@@ -1,0 +1,2392 @@
+{
+ "version": "25",
+ "date": "2026-10-15",
+ "purpose": "보고 유형(deck_type)과 사업 성격(business_type)별로 목차 골격과 꼭 들어갈 내용을 기계가 검사할 수 있게 적은 표. innergen_content_check.py(장표 계획·완성 덱)와 innergen_qaqc.py(R·B·Q 코드)가 읽는다.",
+ "doc": "content-requirements-v25.md",
+ "sources": [
+  "content-architecture-v20.md §2 유형별 목차 골격 · §8 마무리 세트 · §6.6 셀 문법",
+  "innergen-profile-matrix-v16.md §3 업무 성격별 필수 장표 · §4 보고 단계별 반드시 들어갈 것",
+  "report-profiles.json business_types.focus · evidence_rule · report_types.flow",
+  "docs/standard-deck-flows.json (reduction-kickoff, disclosure-proposal, ghg-inventory-final)",
+  "structured-slides-v18.md §3d (v27 s59–s64, PR #2)"
+ ],
+ "matching": {
+  "section": "한 절은 레이아웃 id가 layouts 중 하나를 포함하거나, 장표의 제목·거버닝·큰 글씨(20px 이상) 텍스트가 keywords 정규식에 걸리면 있다고 본다. 표지·목차·장 구분·맺음 장표의 텍스트와 푸터 라벨은 키워드 판정에서 뺀다(목차·장 구분·푸터가 장 이름을 담기 때문).",
+  "item": "pattern(하나라도) 또는 all_of(모두)가 덱 본문 전체 텍스트에 걸리면 있다고 본다. where가 section:<id>이면 그 절로 판정된 장표 안에서만 찾는다. where가 titles면 본문 장표 제목만 본다. 대소문자 무시.",
+  "order": "order에 적힌 절은 처음 나타나는 장 번호가 이 순서를 따라야 한다(같은 장은 허용).",
+  "stages": "business item의 stages가 없으면 모든 보고 유형에 적용한다. 있으면 그 보고 유형에서만 검사한다."
+ },
+ "levels": {
+  "section_required_missing": "ERROR",
+  "order_violation": "WARN",
+  "item_default": "WARN",
+  "FORBID": "pattern이 걸리면 WARN"
+ },
+ "aliases": {
+  "deck_type": {
+   "training": "lecture",
+   "education": "lecture",
+   "executive": "briefing",
+   "review": "interim",
+   "progress": "weekly"
+  }
+ },
+ "report_types": {
+  "lecture": {
+   "label_ko": "교육·강의(투사)",
+   "basis": "v20 §2.1·§8, v16 §4 education",
+   "pages": [
+    30,
+    90
+   ],
+   "sections": [
+    {
+     "id": "cover",
+     "label": "표지",
+     "required": true,
+     "layouts": [
+      "cover"
+     ]
+    },
+    {
+     "id": "toc",
+     "label": "목차",
+     "required": true,
+     "layouts": [
+      "toc"
+     ]
+    },
+    {
+     "id": "objectives",
+     "label": "학습 목표",
+     "required": true,
+     "keywords": "학습\\s?목표|Learning\\s?Objective"
+    },
+    {
+     "id": "background",
+     "label": "배경·제도(왜 지금인가)",
+     "required": true,
+     "layouts": [
+      "chart-insight",
+      "keyword-grid",
+      "year-timeline",
+      "content-kpi",
+      "quote-opener"
+     ],
+     "keywords": "배경|왜 지금|제도|동향|현황"
+    },
+    {
+     "id": "requirements",
+     "label": "요소별 요구사항 + 핵심 Focus",
+     "required": true,
+     "layouts": [
+      "guidance-focus"
+     ],
+     "keywords": "요구\\s?사항|핵심\\s?Focus"
+    },
+    {
+     "id": "cases",
+     "label": "사례",
+     "required": true,
+     "layouts": [
+      "case-capture"
+     ],
+     "keywords": "사례|배울\\s?점|Case"
+    },
+    {
+     "id": "self_assessment",
+     "label": "우리 과제(자가진단·과제 목록)",
+     "required": false,
+     "keywords": "우리\\s?(회사|과제)|과제\\s?목록"
+    },
+    {
+     "id": "key_summary",
+     "label": "핵심 정리",
+     "required": true,
+     "layouts": [
+      "key-summary"
+     ],
+     "keywords": "핵심\\s?정리|Key\\s?Summary"
+    },
+    {
+     "id": "key_questions",
+     "label": "Key Questions 자가진단",
+     "required": true,
+     "layouts": [
+      "self-check"
+     ],
+     "keywords": "Key\\s?Questions|자가\\s?진단"
+    },
+    {
+     "id": "qa_next",
+     "label": "Q&A·다음 단계",
+     "required": true,
+     "keywords": "Q\\s?&\\s?A|질의|다음\\s?단계|2차\\s?교육|자문\\s?안내"
+    },
+    {
+     "id": "ending",
+     "label": "맺음",
+     "required": true,
+     "layouts": [
+      "ending"
+     ]
+    }
+   ],
+   "order": [
+    "toc",
+    "objectives",
+    "background",
+    "requirements",
+    "key_summary",
+    "key_questions",
+    "qa_next"
+   ],
+   "items": [
+    {
+     "id": "basis_date",
+     "label": "최신 수치의 기준일",
+     "level": "WARN",
+     "pattern": "기준\\s?(일|시점|연도)|'\\d{2}\\.\\s?\\d{1,2}\\s?월?\\s?기준|\\d{4}년\\s?(말|결산)?\\s?기준|\\d{4}\\.\\d{1,2}\\s?기준",
+     "basis": "v16 §4 education 반드시"
+    },
+    {
+     "id": "focus_box",
+     "label": "요구사항 장표의 핵심 Focus 칸",
+     "level": "WARN",
+     "pattern": "핵심\\s?Focus|Focus",
+     "where": "section:requirements",
+     "basis": "v20 §6.4"
+    },
+    {
+     "id": "lesson_box",
+     "label": "사례 장표의 배울 점 칸",
+     "level": "WARN",
+     "pattern": "배울\\s?점|시사점|Lesson",
+     "where": "section:cases",
+     "basis": "v20 §6.4"
+    }
+   ]
+  },
+  "handout": {
+   "label_ko": "교육·배포 교재",
+   "basis": "v20 §2.1·§8 (lecture와 같은 골격)",
+   "pages": [
+    30,
+    90
+   ],
+   "sections": [
+    {
+     "id": "cover",
+     "label": "표지",
+     "required": true,
+     "layouts": [
+      "cover"
+     ]
+    },
+    {
+     "id": "toc",
+     "label": "목차",
+     "required": true,
+     "layouts": [
+      "toc"
+     ]
+    },
+    {
+     "id": "objectives",
+     "label": "학습 목표",
+     "required": true,
+     "keywords": "학습\\s?목표|Learning\\s?Objective"
+    },
+    {
+     "id": "background",
+     "label": "배경·제도(왜 지금인가)",
+     "required": true,
+     "layouts": [
+      "chart-insight",
+      "keyword-grid",
+      "year-timeline",
+      "content-kpi",
+      "quote-opener"
+     ],
+     "keywords": "배경|왜 지금|제도|동향|현황"
+    },
+    {
+     "id": "requirements",
+     "label": "요소별 요구사항 + 핵심 Focus",
+     "required": true,
+     "layouts": [
+      "guidance-focus"
+     ],
+     "keywords": "요구\\s?사항|핵심\\s?Focus"
+    },
+    {
+     "id": "cases",
+     "label": "사례",
+     "required": true,
+     "layouts": [
+      "case-capture"
+     ],
+     "keywords": "사례|배울\\s?점|Case"
+    },
+    {
+     "id": "self_assessment",
+     "label": "우리 과제(자가진단·과제 목록)",
+     "required": false,
+     "keywords": "우리\\s?(회사|과제)|과제\\s?목록"
+    },
+    {
+     "id": "key_summary",
+     "label": "핵심 정리",
+     "required": true,
+     "layouts": [
+      "key-summary"
+     ],
+     "keywords": "핵심\\s?정리|Key\\s?Summary"
+    },
+    {
+     "id": "key_questions",
+     "label": "Key Questions 자가진단",
+     "required": true,
+     "layouts": [
+      "self-check"
+     ],
+     "keywords": "Key\\s?Questions|자가\\s?진단"
+    },
+    {
+     "id": "qa_next",
+     "label": "Q&A·다음 단계",
+     "required": true,
+     "keywords": "Q\\s?&\\s?A|질의|다음\\s?단계|2차\\s?교육|자문\\s?안내"
+    },
+    {
+     "id": "ending",
+     "label": "맺음",
+     "required": true,
+     "layouts": [
+      "ending"
+     ]
+    }
+   ],
+   "order": [
+    "toc",
+    "objectives",
+    "background",
+    "requirements",
+    "key_summary",
+    "key_questions",
+    "qa_next"
+   ],
+   "items": [
+    {
+     "id": "basis_date",
+     "label": "최신 수치의 기준일",
+     "level": "WARN",
+     "pattern": "기준\\s?(일|시점|연도)|'\\d{2}\\.\\s?\\d{1,2}\\s?월?\\s?기준|\\d{4}년\\s?(말|결산)?\\s?기준|\\d{4}\\.\\d{1,2}\\s?기준",
+     "basis": "v16 §4 education 반드시"
+    },
+    {
+     "id": "focus_box",
+     "label": "요구사항 장표의 핵심 Focus 칸",
+     "level": "WARN",
+     "pattern": "핵심\\s?Focus|Focus",
+     "where": "section:requirements",
+     "basis": "v20 §6.4"
+    },
+    {
+     "id": "lesson_box",
+     "label": "사례 장표의 배울 점 칸",
+     "level": "WARN",
+     "pattern": "배울\\s?점|시사점|Lesson",
+     "where": "section:cases",
+     "basis": "v20 §6.4"
+    }
+   ]
+  },
+  "seminar": {
+   "label_ko": "세미나·강연·발표",
+   "basis": "v20 §2.2·§8",
+   "pages": [
+    15,
+    30
+   ],
+   "sections": [
+    {
+     "id": "cover",
+     "label": "표지",
+     "required": true,
+     "layouts": [
+      "cover"
+     ]
+    },
+    {
+     "id": "opener",
+     "label": "개념 정의 또는 질문 1장",
+     "required": false,
+     "layouts": [
+      "quote-opener",
+      "issue-cards"
+     ],
+     "keywords": "정의|무엇인가|\\?"
+    },
+    {
+     "id": "toc",
+     "label": "목차",
+     "required": true,
+     "layouts": [
+      "toc"
+     ]
+    },
+    {
+     "id": "background",
+     "label": "배경·개념",
+     "required": true,
+     "layouts": [
+      "content-kpi",
+      "chart-insight"
+     ],
+     "keywords": "배경|개념|정의|왜 지금|리스크"
+    },
+    {
+     "id": "regime",
+     "label": "제도·동향",
+     "required": true,
+     "layouts": [
+      "keyword-grid",
+      "entity-matrix",
+      "period-applicability",
+      "year-timeline"
+     ],
+     "keywords": "제도|동향|요구\\s?사항|적용\\s?시기|규제"
+    },
+    {
+     "id": "analysis",
+     "label": "분석·사례",
+     "required": true,
+     "layouts": [
+      "case-capture",
+      "vertical-chevron",
+      "compare-implication",
+      "challenges-considerations",
+      "process-steps-detail"
+     ],
+     "keywords": "사례|분석|고려\\s?사항|어려움"
+    },
+    {
+     "id": "response",
+     "label": "대응·준비",
+     "required": true,
+     "layouts": [
+      "phase-roadmap",
+      "process-steps-detail",
+      "vertical-chevron"
+     ],
+     "keywords": "대응|준비|로드맵"
+    },
+    {
+     "id": "conclusion",
+     "label": "결론(질문 + 방향 3개)",
+     "required": true,
+     "layouts": [
+      "key-takeaways"
+     ],
+     "keywords": "결론|방향|Takeaway"
+    },
+    {
+     "id": "ending",
+     "label": "감사·연락처",
+     "required": true,
+     "layouts": [
+      "ending"
+     ]
+    }
+   ],
+   "order": [
+    "toc",
+    "background",
+    "regime",
+    "analysis",
+    "response",
+    "conclusion"
+   ],
+   "items": [
+    {
+     "id": "no_qa_slide",
+     "label": "Q&A 장표를 따로 두지 않음(질문은 본문 자가진단으로)",
+     "level": "FORBID",
+     "pattern": "^\\s*Q\\s?&\\s?A\\s*$",
+     "where": "titles",
+     "basis": "v20 §2.2"
+    }
+   ]
+  },
+  "proposal": {
+   "label_ko": "제안서·제안 발표",
+   "basis": "v20 §2.3·§8, v16 §4 proposal, report-profiles proposal",
+   "pages": [
+    12,
+    25
+   ],
+   "sections": [
+    {
+     "id": "cover",
+     "label": "표지",
+     "required": true,
+     "layouts": [
+      "cover"
+     ]
+    },
+    {
+     "id": "client_issue",
+     "label": "고객 과제·배경",
+     "required": true,
+     "layouts": [
+      "issue-tree",
+      "scqa-storyline",
+      "content-final"
+     ],
+     "keywords": "고객\\s?과제|과제|배경|목적|Issue"
+    },
+    {
+     "id": "evidence",
+     "label": "제도·시장 근거",
+     "required": false,
+     "layouts": [
+      "chart-insight",
+      "content-table",
+      "year-timeline"
+     ],
+     "keywords": "제도|시장|근거|동향"
+    },
+    {
+     "id": "key_issues",
+     "label": "핵심 쟁점",
+     "required": false,
+     "layouts": [
+      "exec-summary",
+      "issue-cards"
+     ],
+     "keywords": "쟁점|핵심\\s?이슈"
+    },
+    {
+     "id": "scope",
+     "label": "목표와 범위(안/밖)",
+     "required": true,
+     "layouts": [
+      "scope-method-result",
+      "content-dual",
+      "project-overview"
+     ],
+     "keywords": "범위|목표|Scope"
+    },
+    {
+     "id": "approach",
+     "label": "접근 방법·단계",
+     "required": true,
+     "layouts": [
+      "task-structure",
+      "vertical-chevron",
+      "approach-matrix",
+      "hypothesis-workplan",
+      "process-steps-detail"
+     ],
+     "keywords": "접근|방법론|추진\\s?(방안|전략)|수행\\s?(방안|방법)|단계"
+    },
+    {
+     "id": "deliverables",
+     "label": "산출물",
+     "required": true,
+     "keywords": "산출물|성과품|납품|Deliverable"
+    },
+    {
+     "id": "schedule",
+     "label": "일정",
+     "required": true,
+     "layouts": [
+      "gantt-schedule",
+      "phase-roadmap"
+     ],
+     "keywords": "일정|마일스톤|Schedule"
+    },
+    {
+     "id": "team",
+     "label": "수행 체계·인력",
+     "required": true,
+     "layouts": [
+      "team-roles",
+      "raci-matrix"
+     ],
+     "keywords": "수행\\s?체계|투입\\s?인력|참여\\s?인력|조직|PM|역할"
+    },
+    {
+     "id": "credentials",
+     "label": "이너젠 실적·차별점",
+     "required": true,
+     "keywords": "실적|차별|강점|레퍼런스|Why\\s?INNerGEN|수행\\s?경험"
+    },
+    {
+     "id": "effects",
+     "label": "기대효과",
+     "required": true,
+     "layouts": [
+      "asis-tobe-effect",
+      "purpose-effects"
+     ],
+     "keywords": "기대\\s?효과|효과"
+    },
+    {
+     "id": "way_forward",
+     "label": "다음 단계(Way forward)",
+     "required": false,
+     "layouts": [
+      "key-takeaways"
+     ],
+     "keywords": "Way\\s?forward|다음\\s?단계|향후"
+    },
+    {
+     "id": "ending",
+     "label": "맺음",
+     "required": true,
+     "layouts": [
+      "ending"
+     ]
+    }
+   ],
+   "order": [
+    "client_issue",
+    "scope",
+    "approach",
+    "deliverables",
+    "schedule",
+    "team"
+   ],
+   "items": [
+    {
+     "id": "in_out_scope",
+     "label": "범위 안/밖 구분",
+     "level": "ERROR",
+     "pattern": "범위\\s?(밖|외)|제외\\s?(범위|대상|사항)|In[-\\s]?scope|Out[-\\s]?of[-\\s]?scope|미포함",
+     "basis": "v16 §4 proposal 반드시"
+    },
+    {
+     "id": "deliverable_list",
+     "label": "산출물 목록",
+     "level": "ERROR",
+     "pattern": "산출물|성과품|보고서|매뉴얼|툴|Deliverable",
+     "basis": "v16 §4 proposal 반드시"
+    },
+    {
+     "id": "cooperation",
+     "label": "필요한 협조(고객 역할)",
+     "level": "WARN",
+     "pattern": "협조|요청\\s?사항|고객\\s?(역할|지원)|지원\\s?요청|자료\\s?제공",
+     "basis": "v16 §4 proposal 반드시, report-profiles flow"
+    }
+   ]
+  },
+  "kickoff": {
+   "label_ko": "착수보고",
+   "basis": "v20 §2.4·§8·§10, v16 §4 kickoff, report-profiles kickoff",
+   "pages": [
+    10,
+    20
+   ],
+   "sections": [
+    {
+     "id": "cover",
+     "label": "표지",
+     "required": true,
+     "layouts": [
+      "cover"
+     ]
+    },
+    {
+     "id": "toc",
+     "label": "목차",
+     "required": true,
+     "layouts": [
+      "toc"
+     ]
+    },
+    {
+     "id": "background",
+     "label": "배경·현황(As-Is)",
+     "required": true,
+     "layouts": [
+      "chart-insight",
+      "purpose-effects",
+      "scqa-storyline"
+     ],
+     "keywords": "배경|현황|As[-\\s]?Is"
+    },
+    {
+     "id": "scope",
+     "label": "대상·범위·기준",
+     "required": true,
+     "layouts": [
+      "project-overview",
+      "task-structure",
+      "content-dual"
+     ],
+     "keywords": "범위|대상|기준\\s?연도|경계|Scope"
+    },
+    {
+     "id": "objectives",
+     "label": "목적·기대효과",
+     "required": true,
+     "layouts": [
+      "purpose-effects"
+     ],
+     "keywords": "목적|기대\\s?효과|목표"
+    },
+    {
+     "id": "approach",
+     "label": "추진방안(과업별 접근·상세)",
+     "required": true,
+     "layouts": [
+      "vertical-chevron",
+      "process-steps-detail",
+      "approach-matrix",
+      "hypothesis-workplan",
+      "task-structure"
+     ],
+     "keywords": "추진\\s?방안|접근|수행\\s?계획|방법론|과업\\s?[①②③]"
+    },
+    {
+     "id": "schedule",
+     "label": "수행 일정(간트)",
+     "required": true,
+     "layouts": [
+      "gantt-schedule",
+      "phase-roadmap"
+     ],
+     "keywords": "일정|마일스톤|간트|Schedule"
+    },
+    {
+     "id": "data_request",
+     "label": "데이터 수집 요청",
+     "required": true,
+     "layouts": [
+      "data-request",
+      "actor-checklist"
+     ],
+     "keywords": "자료\\s?요청|데이터\\s?(수집\\s?)?요청|요청\\s?자료|Data\\s?Request"
+    },
+    {
+     "id": "team",
+     "label": "참여 인력·역할",
+     "required": true,
+     "layouts": [
+      "team-roles",
+      "raci-matrix",
+      "stakeholder-map"
+     ],
+     "keywords": "인력|역할|담당|수행\\s?체계|커뮤니케이션|R&R"
+    },
+    {
+     "id": "management",
+     "label": "관리방안(QA/QC·보안·성과품)",
+     "required": false,
+     "keywords": "QA\\s?/?\\s?QC|품질|보안|성과품|관리\\s?방안"
+    },
+    {
+     "id": "decision",
+     "label": "결정 요청·다음 일정",
+     "required": true,
+     "layouts": [
+      "decision-request"
+     ],
+     "keywords": "결정|의사\\s?결정|안건|다음\\s?일정"
+    },
+    {
+     "id": "ending",
+     "label": "맺음",
+     "required": true,
+     "layouts": [
+      "ending"
+     ]
+    }
+   ],
+   "order": [
+    "toc",
+    "background",
+    "scope",
+    "approach",
+    "schedule",
+    "data_request",
+    "decision"
+   ],
+   "items": [
+    {
+     "id": "baseline_scope",
+     "label": "기준연도·경계·적용 기준",
+     "level": "ERROR",
+     "pattern": "기준\\s?연도|기준\\s?년|경계|적용\\s?기준|산정\\s?기준",
+     "basis": "v16 §4 kickoff 반드시"
+    },
+    {
+     "id": "request_deadline",
+     "label": "자료 요청 항목의 기한",
+     "level": "ERROR",
+     "pattern": "\\d{1,2}[./]\\d{1,2}|\\d{1,2}월|\\d{4}[./-]\\d{1,2}|기한|까지",
+     "where": "section:data_request",
+     "basis": "v16 §4 kickoff 반드시"
+    },
+    {
+     "id": "request_owner",
+     "label": "자료 요청 담당자",
+     "level": "ERROR",
+     "pattern": "담당|담당자|책임|R&R|Owner",
+     "where": "section:data_request",
+     "basis": "v16 §4 kickoff 반드시"
+    },
+    {
+     "id": "decision_agenda",
+     "label": "의사결정 안건",
+     "level": "ERROR",
+     "pattern": "안건|결정\\s?(요청|사항)|의사\\s?결정|승인",
+     "basis": "v16 §4 kickoff 반드시"
+    },
+    {
+     "id": "milestones",
+     "label": "착수·중간·최종 마일스톤",
+     "level": "WARN",
+     "pattern": "중간\\s?보고|최종\\s?보고|마일스톤|Milestone",
+     "basis": "v20 §2.4"
+    }
+   ]
+  },
+  "weekly": {
+   "label_ko": "주간 진행보고",
+   "basis": "v20 §2.5·§8",
+   "pages": [
+    10,
+    20
+   ],
+   "sections": [
+    {
+     "id": "cover",
+     "label": "표지",
+     "required": true,
+     "layouts": [
+      "cover"
+     ]
+    },
+    {
+     "id": "toc",
+     "label": "목차",
+     "required": false,
+     "layouts": [
+      "toc"
+     ]
+    },
+    {
+     "id": "context",
+     "label": "이번 주 맥락",
+     "required": false,
+     "layouts": [
+      "chart-insight"
+     ],
+     "keywords": "맥락|동향|이번\\s?주"
+    },
+    {
+     "id": "progress",
+     "label": "이번 주 진행",
+     "required": true,
+     "layouts": [
+      "progress-plan",
+      "status-board"
+     ],
+     "keywords": "진행|현황|완료|수행\\s?내용"
+    },
+    {
+     "id": "wrap_up",
+     "label": "Wrap-up 비교·판단",
+     "required": false,
+     "layouts": [
+      "compare-implication",
+      "period-applicability"
+     ],
+     "keywords": "Wrap[-\\s]?up|비교|정리"
+    },
+    {
+     "id": "next_plan",
+     "label": "향후 추진 계획",
+     "required": true,
+     "layouts": [
+      "progress-plan",
+      "actor-checklist"
+     ],
+     "keywords": "향후|다음\\s?주|추진\\s?계획|예정"
+    },
+    {
+     "id": "decision",
+     "label": "고객 판단·요청 사항",
+     "required": true,
+     "layouts": [
+      "decision-request"
+     ],
+     "keywords": "요청|결정|판단\\s?사항|확인\\s?사항"
+    }
+   ],
+   "order": [
+    "progress",
+    "next_plan"
+   ],
+   "items": [
+    {
+     "id": "status_dates",
+     "label": "상태·일자 괄호 표기",
+     "level": "WARN",
+     "pattern": "\\(\\s?\\d{1,2}[./]\\d{1,2}\\s?(완료|예정)?|완료|진행\\s?중|예정",
+     "basis": "v20 §5.3 진행 상태, §9-5"
+    },
+    {
+     "id": "extra_request",
+     "label": "추가 요청 항목",
+     "level": "WARN",
+     "pattern": "요청|추가\\s?자료",
+     "basis": "v20 §2.5"
+    }
+   ]
+  },
+  "biweekly": {
+   "label_ko": "격주 미팅 자료",
+   "basis": "v20 §2.6·§8",
+   "pages": [
+    2,
+    3
+   ],
+   "sections": [
+    {
+     "id": "cover",
+     "label": "표지",
+     "required": true,
+     "layouts": [
+      "cover"
+     ]
+    },
+    {
+     "id": "progress_plan",
+     "label": "진행현황 | 향후계획 2열표",
+     "required": true,
+     "layouts": [
+      "progress-plan",
+      "content-dual",
+      "status-board"
+     ],
+     "keywords": "진행\\s?현황|향후\\s?계획"
+    },
+    {
+     "id": "schedule",
+     "label": "수행 일정 간트(현재 주차)",
+     "required": true,
+     "layouts": [
+      "gantt-schedule",
+      "phase-roadmap"
+     ],
+     "keywords": "일정|간트"
+    },
+    {
+     "id": "attachment",
+     "label": "첨부 산출물",
+     "required": false,
+     "keywords": "첨부|산출물|Appendix"
+    }
+   ],
+   "order": [
+    "progress_plan",
+    "schedule"
+   ],
+   "items": [
+    {
+     "id": "request_row",
+     "label": "요청·결정 행",
+     "level": "WARN",
+     "pattern": "요청|결정",
+     "basis": "v20 §8 격주"
+    },
+    {
+     "id": "status_dates",
+     "label": "상태·일자 괄호 표기",
+     "level": "WARN",
+     "pattern": "\\(\\s?\\d{1,2}[./]\\d{1,2}|완료|진행\\s?중|예정",
+     "basis": "v20 §2.6"
+    }
+   ]
+  },
+  "monthly": {
+   "label_ko": "월간 WG·진행현황",
+   "basis": "v20 §2.7·§8",
+   "pages": [
+    25,
+    50
+   ],
+   "sections": [
+    {
+     "id": "cover",
+     "label": "표지",
+     "required": true,
+     "layouts": [
+      "cover"
+     ]
+    },
+    {
+     "id": "status_board",
+     "label": "과업 현황판",
+     "required": true,
+     "layouts": [
+      "status-board",
+      "phase-roadmap"
+     ],
+     "keywords": "현황판|과업\\s?현황|추진\\s?현황"
+    },
+    {
+     "id": "education",
+     "label": "교육 장(동향·기준·사례)",
+     "required": false,
+     "layouts": [
+      "guidance-focus",
+      "case-capture"
+     ],
+     "keywords": "동향|기준|사례"
+    },
+    {
+     "id": "task_progress",
+     "label": "과업별 수행 현황·결과",
+     "required": true,
+     "layouts": [
+      "vertical-chevron",
+      "chart-insight",
+      "entity-matrix",
+      "compare-implication",
+      "content-table"
+     ],
+     "keywords": "수행\\s?현황|분석\\s?결과|결과|Gap"
+    },
+    {
+     "id": "operation",
+     "label": "운영 현황(WG·교육·상담 실적)",
+     "required": true,
+     "layouts": [
+      "meeting-log"
+     ],
+     "keywords": "운영|교육\\s?실적|상담|회의\\s?실적|WG|워킹\\s?그룹"
+    },
+    {
+     "id": "schedule",
+     "label": "향후 추진 일정",
+     "required": true,
+     "layouts": [
+      "gantt-schedule",
+      "phase-roadmap"
+     ],
+     "keywords": "향후\\s?(추진\\s?)?일정|간트|일정"
+    },
+    {
+     "id": "appendix",
+     "label": "Appendix",
+     "required": false,
+     "keywords": "Appendix|부록"
+    }
+   ],
+   "order": [
+    "status_board",
+    "task_progress",
+    "operation",
+    "schedule"
+   ],
+   "items": [
+    {
+     "id": "status_badge",
+     "label": "상태 배지(완료/진행 중/예정)",
+     "level": "ERROR",
+     "pattern": "완료|진행\\s?중|예정|完",
+     "basis": "v20 §2.7·§6.6"
+    },
+    {
+     "id": "meeting_log_cols",
+     "label": "실적표(회차·일자·참석·주제·의견)",
+     "level": "WARN",
+     "pattern": "회차|참석|주요\\s?의견",
+     "where": "section:operation",
+     "basis": "v20 §8"
+    }
+   ]
+  },
+  "diagnosis": {
+   "label_ko": "진단·개선과제 도출",
+   "basis": "v20 §2.8·§8",
+   "pages": [
+    30,
+    50
+   ],
+   "sections": [
+    {
+     "id": "cover",
+     "label": "표지",
+     "required": true,
+     "layouts": [
+      "cover"
+     ]
+    },
+    {
+     "id": "framework",
+     "label": "진단 Framework·Key Questions",
+     "required": true,
+     "layouts": [
+      "keyword-grid",
+      "self-check",
+      "issue-tree",
+      "driver-tree",
+      "seven-s-alignment"
+     ],
+     "keywords": "진단\\s?(관점|프레임|Framework)|Framework|Key\\s?Questions|분석\\s?프레임"
+    },
+    {
+     "id": "summary_table",
+     "label": "기준 × 현황 × 개선과제 요약",
+     "required": true,
+     "layouts": [
+      "diagnosis-table",
+      "principle-matrix",
+      "maturity-heatmap"
+     ],
+     "keywords": "기준|현황|Gap|갭|진단"
+    },
+    {
+     "id": "task_detail",
+     "label": "개선과제 상세(AS-IS → TO-BE)",
+     "required": true,
+     "layouts": [
+      "asis-tobe-effect",
+      "vertical-chevron",
+      "operating-model",
+      "swimlane-controls"
+     ],
+     "keywords": "AS[-\\s]?IS|TO[-\\s]?BE|개선\\s?과제"
+    },
+    {
+     "id": "area_sets",
+     "label": "영역별 진단·실행과제·사례",
+     "required": false,
+     "layouts": [
+      "actor-checklist",
+      "case-capture"
+     ],
+     "keywords": "실행\\s?과제|\\[?참고\\]?|사례"
+    },
+    {
+     "id": "priority",
+     "label": "개선과제 종합(우선순위)",
+     "required": true,
+     "layouts": [
+      "priority-matrix",
+      "entity-matrix",
+      "nine-box"
+     ],
+     "keywords": "우선\\s?순위|용이성|효과성|추진\\s?여부|종합"
+    },
+    {
+     "id": "appendix",
+     "label": "Appendix",
+     "required": false,
+     "keywords": "Appendix|부록"
+    }
+   ],
+   "order": [
+    "framework",
+    "summary_table",
+    "task_detail",
+    "priority"
+   ],
+   "items": [
+    {
+     "id": "go_decision",
+     "label": "추진여부 선택란(금년/차년/검토)",
+     "level": "ERROR",
+     "pattern": "금년|차년|검토|추진\\s?여부",
+     "basis": "v20 §8 진단"
+    },
+    {
+     "id": "gap_grammar",
+     "label": "Gap 셀 문법(부재/미흡/미제시/불일치)",
+     "level": "WARN",
+     "pattern": "부재|미흡|미제시|불일치",
+     "basis": "v20 §6.6"
+    }
+   ]
+  },
+  "interim": {
+   "label_ko": "중간보고",
+   "basis": "v20 §2.9, v16 §4 interim (원본 레퍼런스 없음: 구성 제안)",
+   "pages": [
+    10,
+    18
+   ],
+   "sections": [
+    {
+     "id": "cover",
+     "label": "표지",
+     "required": true,
+     "layouts": [
+      "cover"
+     ]
+    },
+    {
+     "id": "summary",
+     "label": "요약",
+     "required": true,
+     "layouts": [
+      "exec-summary",
+      "exec-one-pager",
+      "content-kpi",
+      "scqa-storyline"
+     ],
+     "keywords": "요약|Summary"
+    },
+    {
+     "id": "progress",
+     "label": "진행 현황",
+     "required": true,
+     "layouts": [
+      "status-board",
+      "phase-roadmap",
+      "progress-plan"
+     ],
+     "keywords": "진행\\s?(현황|률)|진척|추진\\s?현황"
+    },
+    {
+     "id": "provisional",
+     "label": "잠정 결과",
+     "required": true,
+     "layouts": [
+      "chart-insight",
+      "entity-matrix",
+      "content-table",
+      "waterfall-bridge",
+      "value-chain-hotspot"
+     ],
+     "keywords": "잠정|중간\\s?결과|분석\\s?결과|결과"
+    },
+    {
+     "id": "facts_vs_open",
+     "label": "확인된 사실 vs 미확정",
+     "required": true,
+     "layouts": [
+      "content-dual",
+      "compare-implication"
+     ],
+     "keywords": "확인된|미확정|확정\\s?사항"
+    },
+    {
+     "id": "issues",
+     "label": "이슈·리스크",
+     "required": true,
+     "layouts": [
+      "risk-heatmap",
+      "challenges-considerations",
+      "content-final"
+     ],
+     "keywords": "이슈|리스크|쟁점"
+    },
+    {
+     "id": "decision",
+     "label": "결정 요청",
+     "required": true,
+     "layouts": [
+      "decision-request"
+     ],
+     "keywords": "결정\\s?요청|의사\\s?결정|승인\\s?요청"
+    },
+    {
+     "id": "next_steps",
+     "label": "다음 단계",
+     "required": true,
+     "layouts": [
+      "vertical-chevron",
+      "phase-roadmap",
+      "gantt-schedule"
+     ],
+     "keywords": "다음\\s?단계|향후|Next"
+    },
+    {
+     "id": "ending",
+     "label": "맺음",
+     "required": false,
+     "layouts": [
+      "ending"
+     ]
+    }
+   ],
+   "order": [
+    "summary",
+    "progress",
+    "provisional",
+    "issues",
+    "decision",
+    "next_steps"
+   ],
+   "items": [
+    {
+     "id": "progress_basis",
+     "label": "진행률 근거",
+     "level": "ERROR",
+     "pattern": "\\d+\\s?%|진행률|\\d+\\s?/\\s?\\d+|완료",
+     "basis": "v16 §4 interim 반드시"
+    },
+    {
+     "id": "provisional_mark",
+     "label": "잠정 수치의 상태 표기(잠정·검증 전)",
+     "level": "ERROR",
+     "pattern": "잠정|검증\\s?전|Draft|초안|미확정",
+     "basis": "v16 §4 interim 반드시"
+    },
+    {
+     "id": "decision_sentence",
+     "label": "결정 요청 문장",
+     "level": "ERROR",
+     "pattern": "결정|승인|요청드립니다",
+     "basis": "v16 §4 interim 반드시"
+    }
+   ]
+  },
+  "final": {
+   "label_ko": "최종보고",
+   "basis": "v20 §2.9·§8, v16 §4 final, report-profiles final",
+   "pages": [
+    20,
+    40
+   ],
+   "sections": [
+    {
+     "id": "cover",
+     "label": "표지",
+     "required": true,
+     "layouts": [
+      "cover"
+     ]
+    },
+    {
+     "id": "summary",
+     "label": "요약(결론 먼저)",
+     "required": true,
+     "layouts": [
+      "exec-summary",
+      "exec-one-pager",
+      "content-kpi",
+      "scqa-storyline"
+     ],
+     "keywords": "요약|결론|Summary"
+    },
+    {
+     "id": "toc",
+     "label": "목차",
+     "required": true,
+     "layouts": [
+      "toc"
+     ]
+    },
+    {
+     "id": "overview",
+     "label": "과업 개요(배경·목적·범위)",
+     "required": true,
+     "layouts": [
+      "task-structure",
+      "project-overview",
+      "purpose-effects"
+     ],
+     "keywords": "과업\\s?개요|추진\\s?배경|목적|범위"
+    },
+    {
+     "id": "method",
+     "label": "방법·기준",
+     "required": true,
+     "layouts": [
+      "vertical-chevron",
+      "scope-method-result",
+      "process-steps-detail",
+      "swimlane-controls"
+     ],
+     "keywords": "방법|기준|방법론|산정\\s?기준|접근"
+    },
+    {
+     "id": "results",
+     "label": "결과",
+     "required": true,
+     "layouts": [
+      "chart-insight",
+      "entity-matrix",
+      "content-table",
+      "waterfall-bridge",
+      "value-chain-hotspot",
+      "profit-pool",
+      "sensitivity-tornado",
+      "chart-table-strip"
+     ],
+     "keywords": "결과|분석|산정\\s?결과"
+    },
+    {
+     "id": "implications",
+     "label": "시사점(종합 → 개별)",
+     "required": false,
+     "layouts": [
+      "key-takeaways"
+     ],
+     "keywords": "시사점|Implication"
+    },
+    {
+     "id": "validation",
+     "label": "검증·한계",
+     "required": true,
+     "keywords": "검증|한계|제약|불확실"
+    },
+    {
+     "id": "remaining",
+     "label": "잔여 과제·인계·로드맵",
+     "required": true,
+     "layouts": [
+      "priority-matrix",
+      "phase-roadmap",
+      "pathway-wedge",
+      "three-horizons"
+     ],
+     "keywords": "잔여|인계|향후\\s?과제|로드맵|개선\\s?과제|Roadmap"
+    },
+    {
+     "id": "appendix",
+     "label": "부록",
+     "required": false,
+     "keywords": "부록|Appendix"
+    },
+    {
+     "id": "ending",
+     "label": "맺음",
+     "required": true,
+     "layouts": [
+      "ending"
+     ]
+    }
+   ],
+   "order": [
+    "summary",
+    "method",
+    "results",
+    "validation",
+    "remaining"
+   ],
+   "items": [
+    {
+     "id": "units",
+     "label": "결과 수치의 단위",
+     "level": "ERROR",
+     "pattern": "단위|tCO2|tCO₂|%|백만|억\\s?원|MWh|TJ|톤",
+     "where": "section:results",
+     "basis": "v16 §4 final 반드시(결과마다 근거 출처·단위)"
+    },
+    {
+     "id": "limits",
+     "label": "한계 명시",
+     "level": "ERROR",
+     "pattern": "한계|제약|불확실|가정",
+     "basis": "v16 §4 final 반드시"
+    },
+    {
+     "id": "owner",
+     "label": "잔여 과제의 담당",
+     "level": "WARN",
+     "pattern": "담당|책임|Owner|주관",
+     "basis": "v16 §4 final 반드시"
+    }
+   ]
+  },
+  "briefing": {
+   "label_ko": "경영진 요약·브리핑",
+   "basis": "v20 §2.10, v16 §4 briefing",
+   "pages": [
+    1,
+    8
+   ],
+   "sections": [
+    {
+     "id": "one_pager",
+     "label": "한 장 요약(결과 요약)",
+     "required": true,
+     "layouts": [
+      "exec-one-pager",
+      "exec-summary",
+      "content-kpi",
+      "scqa-storyline"
+     ],
+     "keywords": "요약|Summary|결과"
+    },
+    {
+     "id": "options",
+     "label": "선택지 비교",
+     "required": false,
+     "layouts": [
+      "harvey-compare",
+      "compare-implication",
+      "scenario-matrix",
+      "decision-tree"
+     ],
+     "keywords": "선택지|대안|옵션|Option"
+    },
+    {
+     "id": "recommendation",
+     "label": "권고안",
+     "required": true,
+     "keywords": "권고|제안|추천|Recommendation"
+    },
+    {
+     "id": "decision",
+     "label": "결정 요청",
+     "required": true,
+     "layouts": [
+      "decision-request"
+     ],
+     "keywords": "결정|승인"
+    }
+   ],
+   "order": [
+    "one_pager",
+    "recommendation",
+    "decision"
+   ],
+   "items": [
+    {
+     "id": "decision_sentence",
+     "label": "결정해야 할 것 1문장",
+     "level": "ERROR",
+     "pattern": "결정|승인",
+     "basis": "v16 §4 briefing 반드시"
+    },
+    {
+     "id": "option_tradeoffs",
+     "label": "선택지별 비용·효과·리스크",
+     "level": "WARN",
+     "all_of": [
+      "비용|투자|원",
+      "효과|감축|절감",
+      "리스크|위험|단서|단,"
+     ],
+     "basis": "v16 §4 briefing 반드시"
+    }
+   ]
+  },
+  "benchmark": {
+   "label_ko": "벤치마킹",
+   "basis": "v20 §2.11",
+   "pages": [
+    10,
+    20
+   ],
+   "sections": [
+    {
+     "id": "cover",
+     "label": "표지",
+     "required": true,
+     "layouts": [
+      "cover"
+     ]
+    },
+    {
+     "id": "approach",
+     "label": "Approach(대상·방법·프레임)",
+     "required": true,
+     "layouts": [
+      "approach-matrix",
+      "content-split"
+     ],
+     "keywords": "Approach|대상|방법|프레임"
+    },
+    {
+     "id": "key_questions",
+     "label": "분석 주안점 Key Questions",
+     "required": true,
+     "layouts": [
+      "self-check"
+     ],
+     "keywords": "Key\\s?Questions|주안점"
+    },
+    {
+     "id": "overview",
+     "label": "결과 Overview(Key Findings)",
+     "required": true,
+     "layouts": [
+      "radar-benchmark",
+      "chart-insight"
+     ],
+     "keywords": "Overview|Key\\s?Findings|결과"
+    },
+    {
+     "id": "heatmap",
+     "label": "비교 히트맵",
+     "required": false,
+     "layouts": [
+      "maturity-heatmap",
+      "harvey-compare"
+     ],
+     "keywords": "히트맵|비교"
+    },
+    {
+     "id": "gap",
+     "label": "영역별 Gap표",
+     "required": true,
+     "layouts": [
+      "compare-implication",
+      "diagnosis-table"
+     ],
+     "keywords": "Gap|갭"
+    },
+    {
+     "id": "backup",
+     "label": "[Back-up] 사례",
+     "required": false,
+     "layouts": [
+      "case-capture"
+     ],
+     "keywords": "Back[-\\s]?up|사례"
+    }
+   ],
+   "order": [
+    "approach",
+    "key_questions",
+    "overview",
+    "gap"
+   ],
+   "items": [
+    {
+     "id": "gap_grammar",
+     "label": "Gap 셀 문법(부재/미흡/미제시/불일치)",
+     "level": "ERROR",
+     "pattern": "부재|미흡|미제시|불일치",
+     "basis": "v20 §6.6"
+    }
+   ]
+  },
+  "insight": {
+   "label_ko": "인사이트 리포트",
+   "basis": "v20 §2.12·§8",
+   "pages": [
+    20,
+    45
+   ],
+   "sections": [
+    {
+     "id": "cover",
+     "label": "표지",
+     "required": true,
+     "layouts": [
+      "cover"
+     ]
+    },
+    {
+     "id": "toc",
+     "label": "목차",
+     "required": true,
+     "layouts": [
+      "toc"
+     ]
+    },
+    {
+     "id": "background",
+     "label": "배경 장(개념·경쟁·연혁·지표)",
+     "required": true,
+     "layouts": [
+      "keyword-grid",
+      "year-timeline",
+      "chart-insight"
+     ],
+     "keywords": "배경|경쟁|연혁|동향|개념"
+    },
+    {
+     "id": "issue_overview",
+     "label": "이슈 개요 카드",
+     "required": true,
+     "layouts": [
+      "exec-summary",
+      "issue-cards"
+     ],
+     "keywords": "이슈|Issue"
+    },
+    {
+     "id": "mapping",
+     "label": "범주 매핑",
+     "required": false,
+     "layouts": [
+      "entity-matrix",
+      "materiality-matrix"
+     ],
+     "keywords": "매핑|범주"
+    },
+    {
+     "id": "issue_detail",
+     "label": "이슈별 현황·제도·영향",
+     "required": true,
+     "layouts": [
+      "content-table",
+      "chart-insight",
+      "period-applicability",
+      "experience-curve"
+     ],
+     "keywords": "현황|제도|영향|전망"
+    },
+    {
+     "id": "takeaways",
+     "label": "Key Takeaways",
+     "required": true,
+     "layouts": [
+      "key-takeaways",
+      "key-summary"
+     ],
+     "keywords": "Takeaway|시사점|대응\\s?방향"
+    },
+    {
+     "id": "contacts",
+     "label": "저자·연락처",
+     "required": false,
+     "layouts": [
+      "ending"
+     ],
+     "keywords": "연락처|저자|Contact"
+    }
+   ],
+   "order": [
+    "toc",
+    "background",
+    "issue_overview",
+    "issue_detail",
+    "takeaways"
+   ],
+   "items": [
+    {
+     "id": "disclaimer",
+     "label": "면책 문구",
+     "level": "WARN",
+     "pattern": "면책|Disclaimer|일반적인\\s?정보",
+     "basis": "v20 §2.12·§8"
+    }
+   ]
+  }
+ },
+ "business_types": {
+  "cdp_disclosure": {
+   "label_ko": "CDP·기후공시",
+   "aliases": [
+    "disclosure",
+    "cdp"
+   ],
+   "basis": "v16 §3 cdp_disclosure, report-profiles focus·evidence_rule",
+   "reader_question": "어떤 항목을 어떤 근거로 공시해야 하고, 지금 어디가 부족한가",
+   "items": [
+    {
+     "id": "standard_year",
+     "label": "적용 기준·공시 연도",
+     "level": "ERROR",
+     "all_of": [
+      "CDP|ISSB|IFRS\\s?S[12]|KSSB|ESRS|SB\\s?25[13]|SB\\s?261|TCFD|공시\\s?기준",
+      "20\\d{2}"
+     ],
+     "basis": "v16 필수 · evidence_rule(공시 연도·평가 기준 확인)"
+    },
+    {
+     "id": "requirement_map",
+     "label": "문항·요구사항 지도",
+     "level": "WARN",
+     "pattern": "문항|요구\\s?사항|모듈|공시\\s?항목|Disclosure\\s?Requirement|지표",
+     "stages": [
+      "proposal",
+      "kickoff",
+      "diagnosis",
+      "interim",
+      "final",
+      "lecture",
+      "handout",
+      "seminar"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "evidence",
+     "label": "항목별 근거 자료",
+     "level": "WARN",
+     "pattern": "근거|증빙|Evidence|출처",
+     "stages": [
+      "kickoff",
+      "diagnosis",
+      "interim",
+      "final"
+     ],
+     "basis": "report-profiles focus"
+    },
+    {
+     "id": "gap",
+     "label": "현황 진단(답변 현황·Gap)",
+     "level": "WARN",
+     "pattern": "진단|Gap|갭|미흡|부재|답변\\s?현황|준비\\s?(도|수준)",
+     "stages": [
+      "proposal",
+      "diagnosis",
+      "interim",
+      "final",
+      "benchmark"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "score_trend",
+     "label": "점수·등급 추이",
+     "level": "WARN",
+     "pattern": "점수|등급|Score|평가\\s?결과|Leadership|Management\\s?level",
+     "stages": [
+      "proposal",
+      "final",
+      "benchmark",
+      "briefing"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "remediation",
+     "label": "보완 과제·일정",
+     "level": "WARN",
+     "all_of": [
+      "보완|개선\\s?과제|대응\\s?과제",
+      "\\d{1,2}[./]\\d{1,2}|\\d{1,2}월|\\d{4}[./-]\\d{1,2}|기한|까지"
+     ],
+     "stages": [
+      "diagnosis",
+      "interim",
+      "final",
+      "briefing"
+     ],
+     "basis": "v16 필수"
+    }
+   ]
+  },
+  "regulatory": {
+   "label_ko": "규제 대응",
+   "aliases": [
+    "regulation",
+    "kets",
+    "ets"
+   ],
+   "basis": "v16 §3 regulatory, report-profiles focus·evidence_rule",
+   "reader_question": "어떤 의무가 언제부터 누구에게 적용되며, 놓치면 무엇이 생기는가",
+   "items": [
+    {
+     "id": "regime",
+     "label": "적용 제도",
+     "level": "ERROR",
+     "pattern": "K[-\\s]?ETS|배출권\\s?거래제|목표\\s?관리제|CBAM|탄소국경|EU\\s?ETS|공급망\\s?실사|CSDDD|명세서|배출권",
+     "basis": "v16 필수"
+    },
+    {
+     "id": "applicability",
+     "label": "적용 대상·기준값",
+     "level": "WARN",
+     "pattern": "적용\\s?대상|대상\\s?업체|기준\\s?값|임계|할당\\s?대상|의무\\s?대상|\\d[\\d,.]*\\s?(tCO|천\\s?톤|만\\s?톤)",
+     "basis": "v16 필수"
+    },
+    {
+     "id": "obligation_timeline",
+     "label": "의무 시점(시행·제출 기한)",
+     "level": "ERROR",
+     "all_of": [
+      "의무|시행|제출|이행|기한",
+      "20\\d{2}|\\d{1,2}월"
+     ],
+     "basis": "v16 필수 · evidence_rule(기한 재확인)"
+    },
+    {
+     "id": "mrv_procedure",
+     "label": "산정·보고·검증 절차",
+     "level": "WARN",
+     "pattern": "산정|보고|검증|MRV|명세서|산정\\s?계획서",
+     "stages": [
+      "proposal",
+      "kickoff",
+      "interim",
+      "final",
+      "lecture",
+      "handout",
+      "seminar",
+      "diagnosis"
+     ],
+     "basis": "v16 필수 · report-profiles focus"
+    },
+    {
+     "id": "cost_impact",
+     "label": "비용·가격 영향",
+     "level": "WARN",
+     "pattern": "비용|가격|원\\s?/\\s?t|원/톤|유로|€|부담|재무\\s?영향",
+     "stages": [
+      "final",
+      "briefing",
+      "seminar",
+      "lecture",
+      "handout",
+      "insight"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "checklist",
+     "label": "대응 체크리스트·쟁점",
+     "level": "WARN",
+     "pattern": "체크리스트|대응\\s?(방안|과제|계획)|점검|쟁점",
+     "stages": [
+      "kickoff",
+      "interim",
+      "final",
+      "seminar",
+      "lecture",
+      "handout",
+      "diagnosis"
+     ],
+     "basis": "v16 필수 · report-profiles focus(일정과 쟁점)"
+    },
+    {
+     "id": "official_source",
+     "label": "공식 기관 출처",
+     "level": "WARN",
+     "pattern": "기후에너지환경부|환경부|온실가스종합정보센터|GIR|한국거래소|KRX|국가법령정보센터|법제처|European\\s?Commission|EU\\s?집행위|ICAP|관보",
+     "basis": "v16 1차 출처 · evidence_rule"
+    }
+   ]
+  },
+  "reduction": {
+   "label_ko": "감축사업·상쇄",
+   "aliases": [
+    "offset"
+   ],
+   "basis": "v16 §3 reduction, report-profiles focus·evidence_rule, standard-deck-flows reduction-kickoff",
+   "reader_question": "얼마를 어떤 수단으로 언제까지 줄이며, 비용·인정 여부는 어떤가",
+   "items": [
+    {
+     "id": "baseline_boundary",
+     "label": "기준선·사업 경계",
+     "level": "ERROR",
+     "pattern": "기준선|베이스라인|Baseline|사업\\s?경계|프로젝트\\s?경계|경계",
+     "basis": "v16 필수 · report-profiles focus"
+    },
+    {
+     "id": "levers",
+     "label": "감축 수단별 감축량",
+     "level": "WARN",
+     "pattern": "감축\\s?수단|감축량|감축\\s?잠재량|감축\\s?효과|수단별",
+     "stages": [
+      "proposal",
+      "kickoff",
+      "interim",
+      "final",
+      "briefing"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "methodology_mrv",
+     "label": "방법론·MRV",
+     "level": "WARN",
+     "pattern": "방법론|MRV|모니터링|PDD|검증",
+     "stages": [
+      "proposal",
+      "kickoff",
+      "interim",
+      "final"
+     ],
+     "basis": "v16 필수 · report-profiles focus"
+    },
+    {
+     "id": "pathway",
+     "label": "감축 경로·로드맵",
+     "level": "WARN",
+     "pattern": "로드맵|경로|Pathway|웨지",
+     "stages": [
+      "interim",
+      "final",
+      "briefing"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "abatement_cost",
+     "label": "한계감축비용",
+     "level": "WARN",
+     "pattern": "한계\\s?감축\\s?비용|MACC|감축\\s?비용|원\\s?/\\s?tCO",
+     "stages": [
+      "final",
+      "briefing"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "recognition_risk",
+     "label": "인정·추가성·리스크",
+     "level": "WARN",
+     "pattern": "인정|승인|등록|추가성|리스크|인증",
+     "stages": [
+      "proposal",
+      "kickoff",
+      "interim",
+      "final"
+     ],
+     "basis": "v16 필수 · standard-deck-flows(추가성/대안)"
+    },
+    {
+     "id": "units_period",
+     "label": "감축량 단위·기준기간",
+     "level": "ERROR",
+     "all_of": [
+      "tCO2|tCO₂|톤\\s?CO|CO2[-\\s]?eq|tCO2e",
+      "20\\d{2}|기준\\s?기간|연간|/\\s?년"
+     ],
+     "stages": [
+      "kickoff",
+      "interim",
+      "final",
+      "briefing"
+     ],
+     "basis": "standard-deck-flows generationRules · evidence_rule"
+    }
+   ]
+  },
+  "inventory": {
+   "label_ko": "온실가스 인벤토리",
+   "aliases": [
+    "ghg",
+    "ghg_inventory"
+   ],
+   "basis": "v16 §3 inventory, report-profiles focus·evidence_rule, standard-deck-flows ghg-inventory-final",
+   "reader_question": "경계 안의 배출량이 얼마이고, 어디서 나오며, 숫자를 믿을 수 있는가",
+   "items": [
+    {
+     "id": "boundary",
+     "label": "조직·운영 경계",
+     "level": "ERROR",
+     "pattern": "조직\\s?경계|운영\\s?경계|산정\\s?범위|경계|통제\\s?접근|지분\\s?접근|사업장\\s?범위",
+     "basis": "v16 필수 · report-profiles focus"
+    },
+    {
+     "id": "sources",
+     "label": "배출원·활동자료 목록",
+     "level": "WARN",
+     "pattern": "배출원|배출\\s?시설|활동\\s?자료",
+     "stages": [
+      "kickoff",
+      "interim",
+      "final",
+      "diagnosis"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "scope_emissions",
+     "label": "Scope별 배출량",
+     "level": "ERROR",
+     "all_of": [
+      "Scope\\s?[123]|스코프\\s?[123]",
+      "배출량"
+     ],
+     "stages": [
+      "interim",
+      "final",
+      "briefing"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "yoy_drivers",
+     "label": "연도 증감 요인",
+     "level": "WARN",
+     "pattern": "증감|전년\\s?대비|증가\\s?요인|감소\\s?요인|변동\\s?요인",
+     "stages": [
+      "final",
+      "briefing"
+     ],
+     "basis": "v16 필수 · standard-deck-flows(증감 요인)"
+    },
+    {
+     "id": "factors_quality",
+     "label": "배출계수·데이터 품질",
+     "level": "WARN",
+     "pattern": "배출\\s?계수|Emission\\s?Factor|데이터\\s?품질|QA\\s?/?\\s?QC|불확도|검증",
+     "stages": [
+      "kickoff",
+      "interim",
+      "final",
+      "diagnosis"
+     ],
+     "basis": "v16 필수 · evidence_rule"
+    },
+    {
+     "id": "data_request",
+     "label": "데이터 요청",
+     "level": "WARN",
+     "pattern": "(자료|데이터)\\s?(수집\\s?)?요청|요청\\s?자료|요청드립니다",
+     "stages": [
+      "kickoff"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "units",
+     "label": "배출량 단위",
+     "level": "ERROR",
+     "pattern": "tCO2|tCO₂|CO2[-\\s]?eq|tCO2e",
+     "stages": [
+      "interim",
+      "final",
+      "briefing"
+     ],
+     "basis": "evidence_rule(단위 추적)"
+    }
+   ]
+  },
+  "lca_product": {
+   "label_ko": "LCA·제품 탄소발자국",
+   "aliases": [
+    "lca",
+    "pcf"
+   ],
+   "basis": "v16 §3 lca_product",
+   "reader_question": "제품 하나의 배출이 생애주기 어디에 몰려 있고, 무엇을 바꾸면 줄어드는가",
+   "items": [
+    {
+     "id": "functional_unit",
+     "label": "기능단위·시스템 경계",
+     "level": "ERROR",
+     "pattern": "기능\\s?단위|Functional\\s?Unit|시스템\\s?경계|Cradle|요람",
+     "basis": "v16 필수"
+    },
+    {
+     "id": "stage_emissions",
+     "label": "단계별 배출",
+     "level": "WARN",
+     "pattern": "단계별|생애\\s?주기|원료|제조|운송|폐기",
+     "stages": [
+      "interim",
+      "final",
+      "briefing",
+      "lecture",
+      "handout",
+      "seminar"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "hotspot",
+     "label": "핫스팟",
+     "level": "WARN",
+     "pattern": "핫스팟|Hotspot|기여도",
+     "stages": [
+      "interim",
+      "final",
+      "briefing"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "sensitivity",
+     "label": "민감도",
+     "level": "WARN",
+     "pattern": "민감도|Sensitivity|토네이도",
+     "stages": [
+      "final"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "verification",
+     "label": "인증·검증 경로",
+     "level": "WARN",
+     "pattern": "인증|검증|EPD|환경성적표지|ISO\\s?1406[47]|ISO\\s?1404[04]|PEF",
+     "stages": [
+      "proposal",
+      "kickoff",
+      "final"
+     ],
+     "basis": "v16 필수"
+    }
+   ]
+  },
+  "climate_risk": {
+   "label_ko": "기후리스크·시나리오",
+   "aliases": [
+    "risk",
+    "tcfd_risk"
+   ],
+   "basis": "v16 §3 climate_risk",
+   "reader_question": "어떤 시나리오에서 어느 사업장·사업이 얼마나 영향을 받는가",
+   "items": [
+    {
+     "id": "scenarios",
+     "label": "시나리오 정의",
+     "level": "ERROR",
+     "pattern": "NGFS|SSP|RCP|STEPS|APS|NZE|시나리오",
+     "basis": "v16 필수"
+    },
+    {
+     "id": "risk_list",
+     "label": "리스크 목록·평가 기준",
+     "level": "WARN",
+     "pattern": "물리적|전환|리스크\\s?(목록|Pool|풀|평가\\s?기준)",
+     "stages": [
+      "kickoff",
+      "diagnosis",
+      "interim",
+      "final",
+      "lecture",
+      "handout",
+      "seminar"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "impact",
+     "label": "영향 평가(히트맵)",
+     "level": "WARN",
+     "pattern": "영향|히트맵|노출|취약",
+     "stages": [
+      "interim",
+      "final",
+      "briefing"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "financial",
+     "label": "재무 영향 범위",
+     "level": "WARN",
+     "pattern": "재무\\s?영향|억\\s?원|백만|손실|비용",
+     "stages": [
+      "final",
+      "briefing"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "response",
+     "label": "대응 전략",
+     "level": "WARN",
+     "pattern": "대응\\s?(전략|방안)|적응|완화",
+     "stages": [
+      "final",
+      "briefing"
+     ],
+     "basis": "v16 필수"
+    }
+   ]
+  },
+  "esg_rating": {
+   "label_ko": "ESG 평가 대응",
+   "aliases": [
+    "esg",
+    "ecovadis"
+   ],
+   "basis": "v16 §3 esg_rating",
+   "reader_question": "평가 기준 대비 우리 근거가 무엇이 있고, 점수를 올릴 항목은 무엇인가",
+   "items": [
+    {
+     "id": "framework",
+     "label": "평가 체계",
+     "level": "ERROR",
+     "pattern": "EcoVadis|MSCI|KCGS|한국ESG기준원|SBTi|Sustainalytics|평가\\s?체계",
+     "basis": "v16 필수"
+    },
+    {
+     "id": "evidence_map",
+     "label": "항목별 근거 매핑",
+     "level": "WARN",
+     "pattern": "근거|증빙|매핑",
+     "stages": [
+      "kickoff",
+      "diagnosis",
+      "interim",
+      "final"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "gap",
+     "label": "갭 진단",
+     "level": "WARN",
+     "pattern": "Gap|갭|미흡|부재",
+     "stages": [
+      "diagnosis",
+      "interim",
+      "final",
+      "benchmark"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "priority",
+     "label": "개선 우선순위",
+     "level": "WARN",
+     "pattern": "우선\\s?순위|개선\\s?과제|점수\\s?향상",
+     "stages": [
+      "diagnosis",
+      "final",
+      "briefing"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "schedule",
+     "label": "일정",
+     "level": "WARN",
+     "pattern": "일정|20\\d{2}|\\d{1,2}월",
+     "stages": [
+      "proposal",
+      "kickoff",
+      "final"
+     ],
+     "basis": "v16 필수"
+    }
+   ]
+  },
+  "climate_education": {
+   "label_ko": "기후·ESG 교육",
+   "aliases": [
+    "education",
+    "training"
+   ],
+   "basis": "v16 §3 climate_education",
+   "reader_question": "기후 상황과 제도가 어떻게 움직이며, 나와 회사는 무엇을 해야 하는가",
+   "items": [
+    {
+     "id": "facts",
+     "label": "관측 사실",
+     "level": "WARN",
+     "pattern": "기온|CO2|CO₂|농도|관측|°C|℃",
+     "basis": "v16 필수"
+    },
+    {
+     "id": "agreements",
+     "label": "국제 합의",
+     "level": "WARN",
+     "pattern": "파리\\s?협정|UNFCCC|COP\\d*|IPCC",
+     "basis": "v16 필수"
+    },
+    {
+     "id": "national_target",
+     "label": "국가 목표",
+     "level": "WARN",
+     "pattern": "NDC|탄소\\s?중립|국가\\s?(감축\\s?)?목표|2050",
+     "basis": "v16 필수"
+    },
+    {
+     "id": "regime",
+     "label": "제도 흐름",
+     "level": "WARN",
+     "pattern": "제도|배출권|공시|규제|CBAM",
+     "basis": "v16 필수"
+    },
+    {
+     "id": "job_link",
+     "label": "산업·직무 연결",
+     "level": "WARN",
+     "pattern": "산업|직무|실무|우리\\s?회사|기업",
+     "basis": "v16 필수"
+    },
+    {
+     "id": "questions",
+     "label": "질문·정리",
+     "level": "WARN",
+     "pattern": "질문|Q\\s?&\\s?A|자가\\s?진단|핵심\\s?정리|Key\\s?Questions",
+     "basis": "v16 필수"
+    }
+   ]
+  },
+  "climate_tech": {
+   "label_ko": "기후테크·소셜벤처",
+   "aliases": [
+    "climatetech"
+   ],
+   "basis": "v16 §3 climate_tech",
+   "reader_question": "어떤 분야에 돈이 몰리고, 국내 생태계와 기회는 무엇인가",
+   "items": [
+    {
+     "id": "definition",
+     "label": "정의·분류",
+     "level": "WARN",
+     "pattern": "정의|분류|기후\\s?테크|Climate\\s?Tech",
+     "basis": "v16 필수"
+    },
+    {
+     "id": "investment",
+     "label": "투자 추이",
+     "level": "WARN",
+     "pattern": "투자|VC|펀딩|억\\s?달러|\\$",
+     "basis": "v16 필수"
+    },
+    {
+     "id": "sector_share",
+     "label": "분야별 비중",
+     "level": "WARN",
+     "pattern": "분야|비중|섹터",
+     "basis": "v16 필수"
+    },
+    {
+     "id": "support",
+     "label": "국내 지원 제도",
+     "level": "WARN",
+     "pattern": "지원\\s?(제도|사업)|중소벤처기업부|정책\\s?자금|사회적기업진흥원|모태\\s?펀드",
+     "stages": [
+      "lecture",
+      "handout",
+      "seminar",
+      "insight",
+      "proposal",
+      "final",
+      "briefing"
+     ],
+     "basis": "v16 필수"
+    },
+    {
+     "id": "cases",
+     "label": "사례",
+     "level": "WARN",
+     "pattern": "사례|Case",
+     "basis": "v16 필수"
+    },
+    {
+     "id": "risk",
+     "label": "리스크",
+     "level": "WARN",
+     "pattern": "리스크|위험|한계",
+     "basis": "v16 필수"
+    }
+   ]
+  }
+ },
+ "hygiene": [
+  {
+   "id": "placeholder",
+   "label": "채우지 않은 자리표시자",
+   "level": "ERROR",
+   "pattern": "\\{\\{[A-Z0-9_]+\\}\\}",
+   "basis": "SKILL.md §5-2"
+  },
+  {
+   "id": "draft_residue",
+   "label": "리뷰어 메모·TBD·/// 잔재",
+   "level": "ERROR",
+   "pattern": "\\bTBD\\b|///|\\bXXX\\b|lorem\\s?ipsum|확인\\s?요망\\s?\\(작성자\\)",
+   "basis": "v20 §9-6"
+  },
+  {
+   "id": "stage_name_in_title",
+   "label": "보고 단계명은 표지에만",
+   "level": "FORBID",
+   "pattern": "착수\\s?보고|중간\\s?보고|최종\\s?보고|주간\\s?보고|격주\\s?미팅",
+   "where": "titles",
+   "basis": "v20 §3 보고 단계명"
+  }
+ ],
+ "not_covered": [
+  "report_outline(보고서 구성안)",
+  "memo(A4 요약 메모)"
+ ]
+}

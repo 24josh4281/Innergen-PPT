@@ -18,6 +18,150 @@
 
 **Fallback rule**: Browser failure never cancels Step 4. Re-check `result.json` once, then use the chat confirmation path with the same single-bundle semantics (staged in chat only when the user asked for the staged flow).
 
+## Adaptive Content Summary (v26)
+
+`recommendations.json` may include an optional `content_intake` object at the
+top level. Stage 1 and single-pass confirmation show this compact read-only
+summary before design choices; old payloads remain unchanged. Agent-authored
+content is rendered as text, never executed as HTML.
+
+| Field | Shape and use |
+|---|---|
+| `revision` | Brief/plan fingerprint; review provenance, not a source-verification status |
+| `title` | Localized summary heading |
+| `known` | Array of concise confirmed-context strings; not inferred facts |
+| `outline` | One recommended chapter sequence; agent may refine catalog chapter labels |
+| `key_slides` | Representative slide purposes/structures |
+| `gaps` | Remaining assumptions or material gaps; resolve critical gaps before final plan review |
+| `sources` | Read-coverage/source-location strings, collapsed by default |
+| `note` | Proposed-outline and reconciliation notice |
+
+Write this from the reviewed intake plan plus the agent's actual source synthesis,
+not merely from file names. Ask missing information in chat first. This card adds
+no dropdown, questionnaire, popup or new confirmation gate. It is a proposed
+content view; the Strategist reconciles changed anchors and transcribes the final
+reviewed outline into §IX. In staged mode retain `content_intake` in the author's
+next recommendations payload when its summary is still relevant.
+
+## Optional File-first Input and Complete Review (v29)
+
+Use the user's sequence: report/business question in chat → proposed TOC →
+optional files or one short note → agent interpretation → complete slide overview →
+the existing final confirmation. `content_intake.phase` selects `materials` or
+`review`; omit top-level `stage` for this content flow. Existing payloads without
+these phases retain the original design-confirmation behavior.
+
+| Phase | Surface and result |
+|---|---|
+| `materials` | One shared drop zone plus one optional short note; proposed chapters alongside; chapter-specific input collapsed by default; no yes/no questionnaire or design choices |
+| Material submit | Writes `intake_responses/IN-*.json` and `intake_latest.json`; status `materials_submitted_not_approved`, generation false |
+| Agent interpretation | Read the submitted chapter notes and selected files; normal converters and actual source checks still apply; no automatic content understanding in the page |
+| `review` | Every planned slide's chapter, title, core message, body content, visual and source/status; existing design settings collapse by default |
+| Final submit | Button states “Create PPT from this outline” in the user's language; server binds approval to the current overview revision and consumed material response |
+
+The user does not choose extra-information yes/no. An empty form's explicit
+"Outline with existing information" action sends legacy `additional_information:
+no`; any non-empty note/attachment sends `yes`. Only non-empty chapter entries
+are submitted. A file alone or a short note alone is sufficient. Individual
+chapter input is optional, not a checklist to complete. Missing project facts
+remain pending; collect only a consequential unresolved fact after reading files.
+Material submit leads to a proposed overview, not an approved PPT.
+A file is stored locally under the current project's
+`sources/intake/UP-<uuid>.<ext>`, retains its original filename in metadata, and
+starts `unread`. A common file is attached once. Removing a file from the form
+removes its use association, not the saved original. Uploads are capped at 100MB
+per file, extension-limited and prevented from writing outside the project.
+
+Browse and drag/drop use the same native file upload API for shared and chapter
+areas. Queue multiple files sequentially, keep successes if another file fails,
+show failed names/reasons, and disable submission until queued uploads finish.
+Reloading a saved submission keeps it locked and resumes overview polling.
+Language changes preserve typed notes, file associations and submission state.
+The scoped INNerGEN education theme uses navy `#0B1739`, blue `#2F62F0`, pale
+panels `#EEF2FF`, and white, with Pretendard / Malgun Gothic UI fonts. This UI
+theme never changes the confirmed deck's design family, font or color selection.
+
+### Materials payload
+
+```json
+{
+  "content_intake": {
+    "phase": "materials",
+    "revision": "agent-proposal-1",
+    "title": "권장 목차와 추가 자료",
+    "chapters": [
+      {"id": "ch01", "title": "추진 현황", "purpose": "계획 대비 현재 상태",
+       "requests": ["기준일·확인된 진행 상태", "관련 계획·산출물·검토 파일"]}
+    ]
+  }
+}
+```
+
+IDs use ASCII letters/numbers/underscore/hyphen and are unique; `shared` is
+reserved for cross-chapter materials. Keep IDs stable when revising the same
+chapter. The server adds `view_revision` plus any saved response/pending uploads.
+The client sends this revision to `POST /api/intake/upload` (multipart:
+`revision`, `chapter_id`, `file`) and `POST /api/intake/materials` (JSON:
+`revision`, `additional_information: yes/no`, `entries[]` with chapter ID, text and
+attachment IDs). Stale proposals, unknown chapter/file IDs and incompatible
+no-extra-input submissions are rejected. Inputs lock after submission while the
+agent builds the overview. Reopen materials with a new proposal revision when
+the user requests revisions; preserve old snapshots.
+
+### Complete-review payload
+
+```json
+{
+  "content_intake": {
+    "phase": "review",
+    "revision": "agent-overview-2",
+    "materials_response_id": "IN-latest-response-id",
+    "chapters": [{"id": "ch01", "title": "추진 현황"}],
+    "slides": [
+      {"page": 1, "chapter_id": "ch01", "title": "추진 현황",
+       "core_message": "확인된 상태와 미확인 항목을 구분합니다.",
+       "content": ["기준일", "계획 대비 현황", "남은 검토 항목"],
+       "visual": "진행·이슈·조치 표", "source_summary": "사용자 자료와 원문 위치 / 잠정"}
+    ],
+    "blocking_gaps": [],
+    "limitations": ["가정·잠정 결과는 장표에 표시합니다."],
+    "anchor_values": {"audience": "고객 실무진"}
+  }
+}
+```
+
+Write the full page roster, not examples or the first few slides. Every chapter
+needs a slide or a reason in `omitted_chapters`; display omission reasons. Read
+the latest material response before writing `materials_response_id`. Include the
+exact audience/mode/delivery/template values used to outline in `anchor_values`
+when a change would alter the story. Keep actual source pointers and numerical
+metadata in the normal brief/outline artifacts; source_summary is a user-readable
+digest, not source validation.
+
+`POST /api/confirm` rejects material-phase requests. Review requests require
+`content_outline_approved: true` and `content_review_token` matching the served
+`view_revision`, a complete ordered roster, no declared blocking gaps and the
+latest consumed material response. Changed page count or pinned story anchors
+require a revised overview. Confirming or submitting on an old view never approves
+the new one. The API records approval; it does not generate slides.
+
+### Agent continuation and fallback
+
+```bash
+python3 scripts/confirm_ui/server.py <project> --daemon --wait-intake --wait-timeout 50
+python3 scripts/confirm_ui/server.py <project> --wait-only --wait-intake --wait-timeout 50
+# After reading the response, write recommendations with the complete review.
+python3 scripts/confirm_ui/server.py <project> --wait-only --wait-timeout 50
+```
+
+`--wait-intake` returns only for the matching chapter input and never interprets
+it as generation approval. Set `previous_response_id` when collecting another
+round of inputs. The page polls for an agent-authored review and updates within
+the same window. Keep host waits bounded and communicate progress. Final result
+waits disregard outdated overview approvals. Use the normal chat fallback if the
+local server cannot open: chapter table + attachments + full slide overview + one
+final confirmation. Native fill retains its chat/fill-plan gate.
+
 ## `confirm_ui/server.py`
 
 ```bash
