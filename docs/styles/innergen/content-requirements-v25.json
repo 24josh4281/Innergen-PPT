@@ -1898,6 +1898,29 @@
      "basis": "v16 필수 · report-profiles focus"
     },
     {
+     "id": "scenario_formulas",
+     "label": "시나리오별 산정식(편집 가능 수식)",
+     "level": "WARN",
+     "pattern": "산정식|산정\\s?방법|ER_?y|BE_?y|PE_?y|베이스라인\\s?배출량|사업\\s?배출량",
+     "stages": [
+      "kickoff",
+      "interim",
+      "final"
+     ],
+     "basis": "v30 editable-equations · 감축사업 방법론 개발 보고 레퍼런스"
+    },
+    {
+     "id": "monitoring_parameters",
+     "label": "모니터링 인자(단위·출처·주기·QA/QC)",
+     "level": "WARN",
+     "pattern": "모니터링\\s?(인자|변수|항목)|Monitoring\\s+Parameter|측정\\s?주기",
+     "stages": [
+      "interim",
+      "final"
+     ],
+     "basis": "v30 editable-equations · MRV 필수 표"
+    },
+    {
      "id": "pathway",
      "label": "감축 경로·로드맵",
      "level": "WARN",

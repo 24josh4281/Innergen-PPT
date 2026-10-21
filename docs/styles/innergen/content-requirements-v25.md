@@ -366,6 +366,8 @@
 | 기준선·사업 경계 | ERROR | 전체 |
 | 감축 수단별 감축량 | WARN | proposal, kickoff, interim, final, briefing |
 | 방법론·MRV | WARN | proposal, kickoff, interim, final |
+| 시나리오별 산정식(편집 가능 수식) | WARN | kickoff, interim, final |
+| 모니터링 인자(단위·출처·주기·QA/QC) | WARN | interim, final |
 | 감축 경로·로드맵 | WARN | interim, final, briefing |
 | 한계감축비용 | WARN | final, briefing |
 | 인정·추가성·리스크 | WARN | proposal, kickoff, interim, final |

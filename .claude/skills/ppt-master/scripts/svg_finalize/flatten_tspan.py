@@ -501,6 +501,10 @@ def flatten_text_with_tspans(
     candidates = []
     for el in root.iter():
         if is_svg_tag(el, "text"):
+            if el.get("data-pptx-equation"):
+                # Native equation carriers keep their preview tspans intact;
+                # svg_to_pptx replaces the whole <text> with OMML.
+                continue
             has_tspan_child = any(is_svg_tag(c, "tspan") for c in list(el))
             if has_tspan_child:
                 candidates.append(el)

@@ -87,6 +87,16 @@ python3 .claude/skills/ppt-master/scripts/innergen_qaqc.py projects/<project> \
 | S03 | 덱 유형별 필수 레이아웃 없음(예: lecture = 목차 + 요구사항/사례 + 자가진단/핵심 정리) | WARN |
 | S04 | 결론 박스·다음 행동이 거버닝과 거의 같음 | WARN |
 
+### M. 편집 가능 수식 (v30)
+
+| 코드 | 검사 | 수준 |
+|---|---|---|
+| M01 | `data-pptx-equation` 원문이 지원 LaTeX 부분집합으로 해석되지 않음 | ERROR |
+| M02 | 수식으로 보이는 일반 텍스트(`=`·Σ·첨자 기호 조합, 분수 명령 등). 감축사업(`business_type` = reduction*)은 ERROR, 그 밖은 WARN. 한글 단어 수식은 감축사업에서도 WARN | ERROR / WARN |
+| M03 | 모니터링 인자 페이지에 수식 객체가 하나도 없음 | WARN |
+
+수식은 `<text data-pptx-equation="LaTeX">`로 작성하면 내보내기에서 PowerPoint 수식(`a14:m`)이 된다. Word·완성 PPTX는 `office_equations.py`로 만들고 `verify`로 개수를 확인한다.
+
 ## 4. 자동 검사가 못 보는 것 — 렌더 리뷰 6항
 
 스크립트는 SVG 좌표와 글자 폭 추정으로 판단한다. PowerPoint 렌더(`verify_deck.py`의 contact sheet 또는 PowerPoint 내보내기 PNG)를 열어 다음을 사람이 확인한다.

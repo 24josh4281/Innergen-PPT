@@ -39,6 +39,7 @@ if str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
 from console_encoding import configure_utf8_stdio  # noqa: E402
 import innergen_content_check as content_check  # noqa: E402
+from omml_math import FORMULA_LIKE, WORD_FORMULA, EquationError, parse_latex  # noqa: E402
 
 REPO = _SCRIPTS_DIR.parents[min(3, len(_SCRIPTS_DIR.parents) - 1)]
 RULES_PATH = REPO / "docs/styles/innergen/qaqc-v21.json"
@@ -485,6 +486,31 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
         if fm and p.governing and _similar(fm["text"], p.governing["text"]) >= 0.6:
             rep.add("WARN", "S04", p.index, "결론 박스가 거버닝과 거의 같습니다 — '그래서 무엇을 할지'만")
 
+    # ---- M: editable equations (v30). Formulas must be data-pptx-equation
+    # carriers so they export as native OMML; reduction decks are strict.
+    strict_math = (business_type or "").startswith("reduction")
+    for p in pages:
+        carriers = 0
+        for t in p.texts:
+            latex = t["el"].get("data-pptx-equation")
+            if latex is not None:
+                carriers += 1
+                try:
+                    parse_latex(latex)
+                except EquationError as exc:
+                    rep.add("ERROR", "M01", p.index, f"수식 LaTeX를 OMML로 바꿀 수 없습니다({t['id'] or '-'}): {exc}")
+                continue
+            for line in t["lines"]:
+                if FORMULA_LIKE.search(line):
+                    rep.add("ERROR" if strict_math else "WARN", "M02", p.index,
+                            f"수식이 일반 텍스트입니다 — data-pptx-equation으로 바꾸세요: '{line[:40]}'")
+                elif strict_math and len(line) <= 120 and WORD_FORMULA.search(line):
+                    rep.add("WARN", "M02", p.index,
+                            f"말로 쓴 산정식으로 보입니다 — 편집 가능한 수식(data-pptx-equation)으로 바꾸세요: '{line[:40]}'")
+        page_text = " ".join(t["text"] for t in p.texts)
+        if strict_math and carriers == 0 and re.search(r"모니터링\s?(인자|변수|항목)|Monitoring\s+Parameter", page_text):
+            rep.add("WARN", "M03", p.index, "모니터링 인자 장표에 수식 기호가 없습니다 — 인자 열은 data-pptx-equation 기호로")
+
     # ---- R/B/Q: TOC and must-have content per report type × business type (v25)
     content_res = {}
     if content_spec is not None:
@@ -512,7 +538,7 @@ def write_report(project: Path, rep: Report, summary: dict, json_out: Path | Non
     order = {"ERROR": 0, "WARN": 1, "INFO": 2}
     for it in sorted(rep.items, key=lambda i: (order[i["level"]], i["page"], i["code"])):
         md.append(f"| {it['level']} | {it['code']} | {('P%02d' % it['page']) if it['page'] else '덱'} | {it['message']} |")
-    md += ["", "코드: C 화면 고정 요소 · G 거버닝 · T 제목 · O 목차 · S 구조 · R 보고 유형 목차·필수 내용 · B 사업 성격 필수 내용 · Q 잔재·금지 표현. "
+    md += ["", "코드: C 화면 고정 요소 · G 거버닝 · T 제목 · O 목차 · S 구조 · R 보고 유형 목차·필수 내용 · B 사업 성격 필수 내용 · Q 잔재·금지 표현 · M 편집 가능 수식. "
            "규칙표: qaqc-v21.json(C·G·T·O·S), content-requirements-v25.json(R·B·Q), 설명: qaqc-v21.md, content-requirements-v25.md"]
     (out_dir / "innergen_qaqc_report.md").write_text("\n".join(md) + "\n", encoding="utf-8")
     data = {"summary": summary, "items": rep.items}

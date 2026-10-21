@@ -2194,6 +2194,9 @@ def _build_run_xml(
 
 def convert_text(elem: ET.Element, ctx: ConvertContext) -> ShapeResult | None:
     """Convert SVG <text> to DrawingML text shape with multi-run support."""
+    from .equation import convert_equation, is_equation_text
+    if is_equation_text(elem):
+        return convert_equation(elem, ctx)
     x = ctx_x(svg_length_x(elem.get('x'), ctx), ctx)
     y = ctx_y(svg_length_y(elem.get('y'), ctx), ctx)
     font_size = (
