@@ -3,7 +3,7 @@ template_id: innergen_business
 deck_id: innergen_business
 kind: deck
 category: brand
-summary: 이너젠 회사소개 16:9(720×405pt) 컴팩트 템플릿 — 거버닝 1줄·본문 12pt 내외(v22 컴팩트), 기본 레이아웃 + 구조화 장표 s01–s58(v24 컨설팅 도식 16종 포함) + 목차·장 구분·교육 장표
+summary: 이너젠 회사소개 16:9(720×405pt) 컴팩트 템플릿 — 거버닝 1줄·본문 12pt 내외(v22 컴팩트), 기본 레이아웃 + 구조화 장표 s01–s64(v24 컨설팅 도식 16종·v27 6종 포함) + 목차·장 구분·교육 장표
 keywords: [이너젠, 회사소개, 사업소개, 제안, '16:9', 컴팩트, 구조화, IBM Plex]
 primary_color: "#518FFF"
 canvas_format: ppt169s
@@ -15,7 +15,7 @@ source_canvas_height: 540
 source_viewbox: "0 0 960 540"
 replication_mode: standard
 native_structure_mode: structured
-page_count: 69
+page_count: 75
 placeholders:
   01_cover: ["{{EVENT_NAME}}", "{{SUBTITLE}}", "{{TITLE}}", "{{COVER_MESSAGE}}", "{{KEY_FIGURES}}", "{{DATE}}", "{{AUTHOR}}"]
   02b_toc_pages: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{TOC_1_NO}}", "{{TOC_1_TITLE}}", "{{TOC_1_DESC}}", "{{TOC_1_PAGES}}", "{{TOC_2_NO}}"]
@@ -86,6 +86,12 @@ placeholders:
   s56_three_horizons: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{H1_TITLE}}", "{{H1_BODY}}", "{{H1_KPI}}", "{{H2_TITLE}}", "{{H2_BODY}}"]
   s57_nine_box: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{HEAD_1}}", "{{HEAD_2}}", "{{HEAD_3}}", "{{UNIT_1}}", "{{CALL_1}}"]
   s58_operating_model: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{VISION}}", "{{LAYER_1}}", "{{DESIGN_1}}", "{{GAP_1}}", "{{LAYER_2}}"]
+  s59_value_chain_hotspot: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{CORNER}}", "{{STAGE_1}}", "{{STAGE_2}}", "{{STAGE_3}}", "{{STAGE_4}}"]
+  s60_profit_pool: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{AXIS_Y}}", "{{VAL_1}}", "{{VAL_2}}", "{{VAL_3}}", "{{VAL_4}}"]
+  s61_experience_curve: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{AXIS_Y}}", "{{Y_TICK_1}}", "{{Y_TICK_2}}", "{{Y_TICK_3}}", "{{Y_TICK_4}}"]
+  s62_sensitivity_tornado: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{HEAD_1}}", "{{HEAD_2}}", "{{HEAD_3}}", "{{HEAD_4}}", "{{HEAD_5}}"]
+  s63_swimlane_controls: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{STEP_1}}", "{{STEP_2}}", "{{STEP_3}}", "{{STEP_4}}", "{{STEP_5}}"]
+  s64_seven_s_alignment: ["{{PAGE_TITLE}}", "{{KEY_MESSAGE}}", "{{S_1}}", "{{S_2}}", "{{S_3}}", "{{S_4}}", "{{S_5}}"]
 ---
 
 # 이너젠 회사소개 16:9(720×405pt) 컴팩트 템플릿 — 디자인 명세
@@ -94,8 +100,9 @@ placeholders:
 
 - 캔버스 960×540px (ppt169s), 글꼴 `"IBM Plex Sans KR", "Malgun Gothic", sans-serif`.
 - 모든 본문 레이아웃은 제목 → 거버닝 1줄 → 구조물 1개 → 출처 → 페이지 번호 순서로 읽힌다(v20 content architecture, v22 compact density).
-- 구조화 장표 s01–s58은 세 계열(`innergen_lecture`·`innergen_business`·`innercarry`)이 같은 파일명·슬롯 토큰을 쓰므로 한 덱의 내용을 계열 간에 옮길 수 있다.
+- 구조화 장표 s01–s64는 세 계열(`innergen_lecture`·`innergen_business`·`innercarry`)이 같은 파일명·슬롯 토큰을 쓰므로 한 덱의 내용을 계열 간에 옮길 수 있다.
 - v24 컨설팅 도식 s43–s58(이슈 트리·가설 작업계획·SCQA·동인 트리·워터폴·MACC·감축 웨지·이중 중대성·리스크 히트맵·시나리오·하비볼·RACI·이해관계자·3지평·9-box·운영모델)은 막대·점·곡선·하비볼이 슬라이드 로컬 도형이라 값에 맞춰 길이·위치를 고쳐 쓴다(`structured-slides-v18.md` §3c).
+- v27 컨설팅 도식 s59–s64(가치사슬 핫스팟·프로핏 풀 가변폭 막대·학습곡선·민감도 토네이도·스윔레인 통제·7-S 정합성)은 비중 막대·가변폭 막대·점·추세선·토네이도 막대·활동 상자·통제 표식이 슬라이드 로컬 도형이라 값과 흐름에 맞춰 고쳐 쓴다(`structured-slides-v18.md` §3d).
 - 세부 규칙: `docs/styles/innergen/design-standard-v17.md` v22 절, `structured-slides-v18.md`, `content-architecture-v20.md`.
 
 ## II. Color Scheme
@@ -209,6 +216,12 @@ placeholders:
 | `s56_three_horizons.svg` | `innergen-biz-three-horizons` / 이너젠 회사소개 성장 3지평(H1·H2·H3) | 슬롯 14개 |
 | `s57_nine_box.svg` | `innergen-biz-nine-box` / 이너젠 회사소개 포트폴리오 9-box(매력도×경쟁우위) | 슬롯 26개 |
 | `s58_operating_model.svg` | `innergen-biz-operating-model` / 이너젠 회사소개 운영모델 하우스(전략·계층·기반) | 슬롯 28개 |
+| `s59_value_chain_hotspot.svg` | `innergen-biz-value-chain-hotspot` / 이너젠 회사소개 가치사슬 단계별 핫스팟(비중·활동·기회) | 슬롯 30개 |
+| `s60_profit_pool.svg` | `innergen-biz-profit-pool` / 이너젠 회사소개 가변폭 막대(비중×강도) 프로핏 풀+시사점 | 슬롯 21개 |
+| `s61_experience_curve.svg` | `innergen-biz-experience-curve` / 이너젠 회사소개 학습곡선(누적 생산×단위 비용, 로그 축)+핵심 수치 | 슬롯 23개 |
+| `s62_sensitivity_tornado.svg` | `innergen-biz-sensitivity-tornado` / 이너젠 회사소개 민감도 토네이도(가정별 하한·상한 영향) | 슬롯 36개 |
+| `s63_swimlane_controls.svg` | `innergen-biz-swimlane-controls` / 이너젠 회사소개 스윔레인 프로세스+통제 지점 | 슬롯 25개 |
+| `s64_seven_s_alignment.svg` | `innergen-biz-seven-s-alignment` / 이너젠 회사소개 7-S 정합성 진단(연결망+요소별 현황) | 슬롯 36개 |
 
 ## VI. Assets
 

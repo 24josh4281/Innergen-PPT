@@ -262,11 +262,11 @@ Confirm UI(`innergen_studio.js`)의 **결과물 조정** 묶음에서 고르고 
 
 | 계열 | 템플릿 | 캔버스 | 글꼴 | 레이아웃 |
 |---|---|---|---|---|
-| `innergen_lecture` | `templates/decks/innergen_lecture/` | ppt139 1040×720 | Pretendard | 70 (v23 s24–s42·v24 s43–s58 포함, 컴팩트 재생성: 제목 24px, 거버닝 22px 한 줄, 본문 16px) |
-| `innergen_business` | `templates/decks/innergen_business/` | **ppt169s** 960×540 (720×405pt) | IBM Plex Sans KR | 69 (v23·v24 포함, 왼쪽 바+섹션 제목 16px, 거버닝 21.33px 한 줄, 본문 16px, 쪽번호 우상단) |
-| `innercarry` | `templates/decks/innercarry/` | ppt43 1024×768 | IBM Plex Sans KR | 69 (v23·v24 포함, 섹션 라벨 12px, 제목 26.67px, 거버닝 21.33px 한 줄, 본문 16px) |
+| `innergen_lecture` | `templates/decks/innergen_lecture/` | ppt139 1040×720 | Pretendard | 76 (v23 s24–s42·v24 s43–s58·v27 s59–s64 포함, 컴팩트 재생성: 제목 24px, 거버닝 22px 한 줄, 본문 16px) |
+| `innergen_business` | `templates/decks/innergen_business/` | **ppt169s** 960×540 (720×405pt) | IBM Plex Sans KR | 75 (v23·v24·v27 포함, 왼쪽 바+섹션 제목 16px, 거버닝 21.33px 한 줄, 본문 16px, 쪽번호 우상단) |
+| `innercarry` | `templates/decks/innercarry/` | ppt43 1024×768 | IBM Plex Sans KR | 75 (v23·v24·v27 포함, 섹션 라벨 12px, 제목 26.67px, 거버닝 21.33px 한 줄, 본문 16px) |
 
-세 계열은 같은 파일명·슬롯 토큰(s01–s58, 02b·02c, 03a–03g)을 쓰므로 한 덱의 내용을 계열 간에 옮길 수 있다. 캔버스 `ppt169s`는 PowerPoint 기본 16:9(10in)와 같아 pt 값이 회사소개 원본과 일치한다.
+세 계열은 같은 파일명·슬롯 토큰(s01–s64, 02b·02c, 03a–03g)을 쓰므로 한 덱의 내용을 계열 간에 옮길 수 있다. 캔버스 `ppt169s`는 PowerPoint 기본 16:9(10in)와 같아 pt 값이 회사소개 원본과 일치한다.
 
 ### 견본 (2026-10-14, OUTPUTS/example-decks-v22)
 

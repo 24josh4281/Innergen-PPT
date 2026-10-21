@@ -76,7 +76,7 @@ GALLERIES = (
     ("기본 장표", "표지·목차·장 구분·본문·마무리", lambda n: not n.startswith("s")),
     ("구조화 장표", "s01–s23 보고·진단 구조", lambda n: n.startswith("s") and int(n[1:3]) <= 23),
     ("구조화 장표", "s24–s42 보고 생애주기·세미나", lambda n: n.startswith("s") and 24 <= int(n[1:3]) <= 42),
-    ("컨설팅 도식", "s43–s58 컨설팅 도식 16종", lambda n: n.startswith("s") and int(n[1:3]) >= 43),
+    ("컨설팅 도식", "s43–s64 컨설팅 도식 22종", lambda n: n.startswith("s") and int(n[1:3]) >= 43),
 )
 ROSTER_ROW = re.compile(r"^\| `([\w.]+\.svg)` \| `([\w-]+)` / ([^|]+?) \|", re.M)
 
@@ -249,7 +249,7 @@ def write_readme(bundle: Path, tokens: dict, standard: dict, version: dict, font
 4. **색은 역할로만**: primary·band_dark는 제목 바·머리행·기준값, accent는 판단·핵심 수치 한두 곳,
    panel·pale·governing_fill은 배경·보조 계열입니다. alert는 경고에만 씁니다. 장식용 그라데이션·그림자는 쓰지 않습니다.
 5. **출처·기준 시점·단위**를 장 하단 출처 영역에 적습니다. 고객명·수치·로고는 예시로 재사용하지 않습니다.
-6. 컨설팅 도식(s43–s58)은 구조만 빌립니다. 막대·점·웨지는 실제 수치 비례로 그리고, 산식이 안 맞으면 막대 차트로 바꿉니다.
+6. 컨설팅 도식(s43–s64)은 구조만 빌립니다. 막대·점·웨지는 실제 수치 비례로 그리고, 산식이 안 맞으면 막대 차트로 바꿉니다.
 7. 수평 논리: 거버닝만 이어 읽어도 결론이 나와야 합니다. 수직 논리: 본문은 그 장 거버닝만 지지합니다.
 
 ## 색 토큰
