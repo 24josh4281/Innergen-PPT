@@ -61,8 +61,9 @@ to "가상환경 설정해줘". The user guide is [`설치안내.md`](설치안�
 
 1. **Clone branch `slide-master`**:
    `git clone -b slide-master https://github.com/24josh4281/innergen-ppt.git slide-master`.
-   The default branch `main` is a different project (a web app with `package.json`
-   and no `.claude/skills/ppt-master`). If a `main` checkout was made by mistake,
+   `slide-master` is the default branch (since 2026-10-21), so a plain clone works;
+   branch `main` is a different project (a web app with `package.json` and no
+   `.claude/skills/ppt-master`). If a `main` checkout was made by mistake,
    clone `slide-master` beside it and work there. A user who wants that web app
    (*Innergen PPT Automation*) needs `git clone -b main …` instead. On Windows without git:
    `winget install -e --id Git.Git`.
