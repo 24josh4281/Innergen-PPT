@@ -114,6 +114,10 @@ ranked by the content's relation with `variants.html` to compare. Unchecked
 pages keep one diagram. Put the recommended one in the deck, keep the original
 as `pNN/original.svg`, tell the user which alternatives exist, and swap with
 `content_diagrams.py pick` on request. Never invent items to fill a form.
+For step pages, give items `out` (산출물) and `done` (완료 기준) instead of one
+`desc` so each cell shows two labelled rows; mark the one decision point with
+`gate` on the step before it (single accent marker, steps in one tone) and put
+client duties in `client` (separate 고객 결정 row with approval markers).
 
 v22 (2026-10-14, standard rev.22): the standard now carries a `fonts` catalog
 (Pretendard, IBM Plex Sans KR, NanumSquare Neo, NanumSquare, NanumSquareRound,

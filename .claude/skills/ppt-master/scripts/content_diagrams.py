@@ -117,6 +117,8 @@ def _is_dark(hex_color: str) -> bool:
 def _desc_lines(it: dict[str, Any]) -> str:
     d = it.get("desc", "")
     d = " ".join(d) if isinstance(d, list) else str(d)
+    if not d and (it.get("out") or it.get("done")):
+        d = " · ".join(f"{tag}: {it[key]}" for key, tag in (("out", "산출물"), ("done", "완료 기준")) if it.get(key))
     if not d and it.get("a") and it.get("b"):
         d = f"{it['a']} → {it['b']}"
     return d
@@ -126,22 +128,64 @@ def _desc_lines(it: dict[str, Any]) -> str:
 # Forms
 # ---------------------------------------------------------------------------
 
+ROW_TAGS = (("out", "산출물"), ("done", "완료 기준"))
+
+
+def _cell_rows(it: dict[str, Any]) -> list[tuple[str, str]]:
+    """Labelled rows (산출물 / 완료 기준) when the item carries them, else the plain description."""
+    rows = [(tag, str(it[key])) for key, tag in ROW_TAGS if it.get(key)]
+    return rows or [("", _desc_lines(it))]
+
+
+def _draw_cell(cv: Canvas, fit: Fit, x: float, top: float, w: float, h: float, rows: list[tuple[str, str]],
+               name: str) -> None:
+    """Split a panel into equal labelled rows; each row's tag and text are centred as one group."""
+    small, body, _ = _fs(cv)
+    rh = h / len(rows)
+    for j, (tag, text) in enumerate(rows):
+        y = top + j * rh
+        if j:
+            cv.line(f"{name}-rule", x + body * 0.5, y, x + w - body * 0.5, y, cv.fam["rule"], 0.75)
+        room = rh - body * 0.6 - (small * 1.5 if tag else 0)
+        lines = fit.lines(text, body, w - body * 1.5, max(1, int(room / (body * 1.32))))
+        _stack(cv, x + body * 0.5, y, rh, [(f"{name}-tag", [tag] if tag else [], small,
+                                            dict(fill=cv.fam["muted"], bold=True), small * 0.45),
+                                           (f"{name}-desc", lines, body, dict(split=True), 0)])
+
+
+def _diamond(cv: Canvas, name: str, cx: float, cy: float, r: float, fill: str) -> None:
+    cv.poly(name, [(cx, cy - r), (cx + r, cy), (cx, cy + r), (cx - r, cy)], fill)
+
+
 def draw_chevron(cv: Canvas, data: dict[str, Any], box, fit: Fit) -> None:
+    """Ordered chevrons. Optional per item: out/done (two labelled rows), gate (decision point after
+    this step, the only accent on the page) and client (separate 고객 결정 row with approval markers)."""
     X, Y, W, H = box
     small, body, head = _fs(cv)
     items = data["items"]
     n = len(items)
-    gap = body * 0.35
+    gates = [i for i, it in enumerate(items[:-1]) if it.get("gate")]
+    client = any(it.get("client") for it in items)
+    if gates:
+        Y, H = Y + small * 2.4, H - small * 2.4
+    gap = body * (1.6 if gates else 0.35)
     cw = (W - gap * (n - 1)) / n
     ch = head * 3.2
     ramp = cv.fam["ramp"]
+    client_h = 0.0
+    if client:
+        pw0 = cw - min(ch * 0.35, cw * 0.18) * 0.5 - body
+        need = max(len(wrap(str(it.get("client", "")), body, pw0, max_lines=4)) for it in items)
+        client_h = small * 1.95 + body * (1 + 1.32 * (need - 1)) + body * 1.2
+        client_h = max(client_h, (H - ch - body * 0.9 - small * 1.8) * 0.42)
     for i, it in enumerate(items):
         x = X + i * (cw + gap)
         tip = min(ch * 0.35, cw * 0.18)
         pts = [(x, Y), (x + cw - tip, Y), (x + cw, Y + ch / 2), (x + cw - tip, Y + ch), (x, Y + ch)]
         if i:
             pts.append((x + tip, Y + ch / 2))
-        fill = ramp[min(len(ramp) - 1, 1 + round(i * (len(ramp) - 2) / max(1, n - 1)))]
+        # With a gate the steps share one tone so the gate is the single emphasis.
+        fill = cv.fam["navy"] if gates else ramp[min(len(ramp) - 1, 1 + round(i * (len(ramp) - 2) / max(1, n - 1)))]
         dark = _is_dark(fill)
         cv.poly("step-chevron", pts, fill)
         lines = fit.lines(f"{i + 1}. {it['label']}", body, cw - tip * 2 - body * 0.6, 2, bold=True)
@@ -151,10 +195,23 @@ def draw_chevron(cv: Canvas, data: dict[str, Any], box, fit: Fit) -> None:
         if it.get("period"):
             cv.text("step-period", x + cw / 2, top + small * 0.9, it["period"], small, fill=cv.fam["muted"], anchor="middle")
             top += small * 1.8
-        cv.rect("step-panel", x, top, cw - tip * 0.5, Y + H - top, fill=cv.fam["zebra"])
-        max_l = max(2, int((Y + H - top - body) / (body * 1.32)))
-        desc = fit.lines(_desc_lines(it), body, cw - tip * 0.5 - body * 1.0, max_l)
-        _stack(cv, x + body * 0.5, top, Y + H - top, [("step-desc", desc, body, dict(split=True), 0)])
+        pw = cw - tip * 0.5
+        bottom = Y + H - (client_h + body * 0.5 if client else 0)
+        cv.rect("step-panel", x, top, pw, bottom - top, fill=cv.fam["zebra"])
+        _draw_cell(cv, fit, x, top, pw, bottom - top, _cell_rows(it), "step")
+        if client:
+            cy = Y + H - client_h
+            cv.rect("client-cell", x, cy, pw, client_h, fill=cv.fam["white"], stroke=cv.fam["mid"])
+            _draw_cell(cv, fit, x, cy, pw, client_h, [("고객 결정", str(it.get("client", "")))], "client")
+            # Approval marker sits on the cell's top-right corner: the stage ends with the client's decision.
+            _diamond(cv, "client-approval", x + pw - body * 0.6, cy, body * 0.42, cv.fam["navy"])
+        if i in gates:
+            gx = x + cw + gap / 2
+            r = min(gap * 0.42, body * 0.7)
+            cv.line("gate-rule", gx, Y - small * 0.9, gx, Y + H, cv.fam["accent"], 1.5, dash=True)
+            _diamond(cv, "gate-marker", gx, Y + ch / 2, r, cv.fam["accent"])
+            tag = fit.lines(str(it["gate"]), small, cw, 1, bold=True)
+            cv.text("gate-label", gx, Y - small * 1.2, tag, small, fill=cv.fam["accent"], bold=True, anchor="middle")
 
 
 def draw_steps(cv: Canvas, data: dict[str, Any], box, fit: Fit) -> None:

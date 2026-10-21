@@ -236,7 +236,8 @@ and, only for the chapters or pages the user asked to see alternatives for
 (ticked in `/tmp/<deck>/analysis/diagram_select.md`, or
 `content_diagrams.py select /tmp/<deck> --check Ⅲ,P11`), draw three diagram
 alternatives with `content_diagrams.py build <content.json> --family <family> -o /tmp/<deck>/analysis/diagram_variants/pNN`
-(`references/content-diagrams-v33.md`). Other pages keep one diagram. Use the
+(`references/content-diagrams-v33.md`; step items take `out`/`done` rows,
+`gate` for the one decision point and `client` for a 고객 결정 row). Other pages keep one diagram. Use the
 recommended one and mention the other two in the hand-off.
 
 Fix every ERROR in the first two. `content_balance_check --fix` re-centres
