@@ -67,10 +67,32 @@ class Fit:
         self.clipped: list[str] = []
 
     def lines(self, text: str, size: float, width: float, max_lines: int, bold: bool = False) -> list[str]:
-        out = wrap(str(text or ""), size, width, bold=bold, max_lines=max_lines)
+        """Wrap with balanced line lengths; a newline in the text is an author-chosen break."""
+        out: list[str] = []
+        for part in str(text or "").split("\n"):
+            out += _balanced(part, size, width, bold, max_lines)
+        if len(out) > max_lines:
+            out = out[:max_lines]
+            out[-1] = out[-1].rstrip(" ,") + "…"
         if out and out[-1].endswith("…") and not str(text).endswith("…"):
             self.clipped.append(str(text)[:24])
+        return out or [""]
+
+
+def _balanced(text: str, size: float, width: float, bold: bool, max_lines: int) -> list[str]:
+    """Narrowest width that keeps the greedy line count, so no line is left with one short word."""
+    out = wrap(text, size, width, bold=bold, max_lines=max_lines)
+    if len(out) < 2 or out[-1].endswith("…"):
         return out
+    lo, hi = width * 0.5, width
+    for _ in range(12):
+        mid = (lo + hi) / 2
+        trial = wrap(text, size, mid, bold=bold, max_lines=99)
+        if len(trial) == len(out) and max(text_width(t, size, bold) for t in trial) <= mid + 0.5:
+            hi = mid
+        else:
+            lo = mid
+    return wrap(text, size, hi, bold=bold, max_lines=max_lines)
 
 
 def _fs(cv: Canvas) -> tuple[float, float, float]:
@@ -118,7 +140,8 @@ def _desc_lines(it: dict[str, Any]) -> str:
     d = it.get("desc", "")
     d = " ".join(d) if isinstance(d, list) else str(d)
     if not d and (it.get("out") or it.get("done")):
-        d = " · ".join(f"{tag}: {it[key]}" for key, tag in (("out", "산출물"), ("done", "완료 기준")) if it.get(key))
+        d = " · ".join(f"{tag}: {' '.join(str(it[key]).split())}" for key, tag in (("out", "산출물"), ("done", "완료 기준"))
+                       if it.get(key))
     if not d and it.get("a") and it.get("b"):
         d = f"{it['a']} → {it['b']}"
     return d
@@ -147,7 +170,7 @@ def _draw_cell(cv: Canvas, fit: Fit, x: float, top: float, w: float, h: float, r
         if j:
             cv.line(f"{name}-rule", x + body * 0.5, y, x + w - body * 0.5, y, cv.fam["rule"], 0.75)
         room = rh - body * 0.6 - (small * 1.5 if tag else 0)
-        lines = fit.lines(text, body, w - body * 1.5, max(1, int(room / (body * 1.32))))
+        lines = fit.lines(text, body, w - body * 1.0, max(1, int(room / (body * 1.32))))
         _stack(cv, x + body * 0.5, y, rh, [(f"{name}-tag", [tag] if tag else [], small,
                                             dict(fill=cv.fam["muted"], bold=True), small * 0.45),
                                            (f"{name}-desc", lines, body, dict(split=True), 0)])
@@ -202,9 +225,11 @@ def draw_chevron(cv: Canvas, data: dict[str, Any], box, fit: Fit) -> None:
         if client:
             cy = Y + H - client_h
             cv.rect("client-cell", x, cy, pw, client_h, fill=cv.fam["white"], stroke=cv.fam["mid"])
-            _draw_cell(cv, fit, x, cy, pw, client_h, [("고객 결정", str(it.get("client", "")))], "client")
-            # Approval marker sits on the cell's top-right corner: the stage ends with the client's decision.
-            _diamond(cv, "client-approval", x + pw - body * 0.6, cy, body * 0.42, cv.fam["navy"])
+            _draw_cell(cv, fit, x, cy, pw, client_h, [(data.get("client_label", "고객 결정"), str(it.get("client", "")))],
+                       "client")
+            # Approval marker on the cell's top-right corner; with a gate only the gate carries emphasis.
+            if not gates:
+                _diamond(cv, "client-approval", x + pw - body * 0.6, cy, body * 0.42, cv.fam["navy"])
         if i in gates:
             gx = x + cw + gap / 2
             r = min(gap * 0.42, body * 0.7)
@@ -862,6 +887,7 @@ def _lock_tokens(fam: dict[str, Any], base: Path) -> dict[str, Any]:
     lock = next((d / "spec_lock.md" for d in list(base.resolve().parents)[:5] if (d / "spec_lock.md").is_file()), None)
     if lock is None:
         return fam
+    fam = dict(fam)
     vals = dict(re.findall(r"^-\s*([a-z_]+):\s*(.+?)\s*$", lock.read_text(encoding="utf-8"), re.M))
     hexes = {k: v for k, v in vals.items() if re.fullmatch(r"#[0-9A-Fa-f]{6}", v)}
     # Only locked colors (qaqc C07): greys and panel stand in for the tint ramp.
@@ -883,6 +909,91 @@ def _lock_tokens(fam: dict[str, Any], base: Path) -> dict[str, Any]:
     if vals.get("font_family"):
         fam["font"], fam["_locked_font"] = vals["font_family"], True
     return fam
+
+
+ARROW = re.compile(r"\s*→\s*")
+
+
+def arrows(svg: Path, family: str, group_id: str, accent: str = "", out: Optional[Path] = None) -> Path:
+    """Replace a one-line text flow ('A → B → C') in a drawn page with native chevron steps in the same place.
+    A band (one rect holding only this line) becomes the strip itself; inside a panel the strip takes the
+    line's height. `accent` names the one step to highlight (the decision point)."""
+    ET.register_namespace("", SVG_NS)
+    ET.register_namespace("xlink", "http://www.w3.org/1999/xlink")
+    tree = ET.parse(str(svg))
+    root = tree.getroot()
+    group = next((g for g in root.iter() if g.get("id") == group_id), None)
+    if group is None:
+        raise DiagramError(f"no element id={group_id!r} in {svg.name}")
+    texts = list(group.iter(f"{{{SVG_NS}}}text"))
+    line = next((t for t in texts if "".join(t.itertext()).count("→") >= 2), None)
+    if line is None:
+        raise DiagramError(f"no text with two or more '→' in #{group_id}")
+    labels = [x for x in ARROW.split("".join(line.itertext()).strip()) if x]
+    size, x0, base = float(line.get("font-size", "16")), float(line.get("x", "0")), float(line.get("y", "0"))
+    fam = _lock_tokens(FAMILIES[family], svg)
+    rect = next((r for r in group if r.tag == f"{{{SVG_NS}}}rect"), None)
+    band = rect is not None and len(texts) == 1
+    if band:
+        X, Y, W, H = (float(rect.get(k)) for k in ("x", "y", "width", "height"))
+        group.remove(rect)
+    else:
+        vb = [float(v) for v in root.get("viewBox", "0 0 1040 720").split()]
+        right = (float(rect.get("x")) + float(rect.get("width")) - (x0 - float(rect.get("x")))
+                 if rect is not None else vb[2] - x0)
+        H = size * 1.75
+        X, Y, W = x0, base - size * 0.35 - H / 2, right - x0
+        # The strip is taller than the text line: push later lines down and grow the panel to match.
+        push = H - size * 1.2 + size * 0.5
+        for t in texts:
+            if t is not line and float(t.get("y", "0")) > base:
+                t.set("y", f"{float(t.get('y', '0')) + push:g}")
+        Y += push * 0.4
+        if rect is not None:
+            bottom = float(rect.get("y", "0")) + float(rect.get("height", "0"))
+            rect.set("height", f"{float(rect.get('height', '0')) + push:g}")
+            # Body text after the panel moves with it; the source and footer stay put.
+            for top in list(root)[list(root).index(group) + 1:] if group in list(root) else []:
+                if CHROME_IDS.match(top.get("id", "")):
+                    continue
+                for el in top.iter():
+                    if el.get("y") and float(el.get("y", "0")) > bottom:
+                        el.set("y", f"{float(el.get('y', '0')) + push:g}")
+    n = len(labels)
+    gap = size * 0.2
+    cw = (W - gap * (n - 1)) / n
+    tip = min(H * 0.32, cw * 0.12)
+    room = cw - tip * 2 - size * 0.4
+    fs = size
+    while fs > fam["min_px"] and max(text_width(t, fs, True) for t in labels) > room:
+        fs -= 0.5
+    cv = Canvas(fam, f"{group_id}-flow")
+    for i, lab in enumerate(labels):
+        x = X + i * (cw + gap)
+        pts = [(x, Y), (x + cw - tip, Y), (x + cw, Y + H / 2), (x + cw - tip, Y + H), (x, Y + H)]
+        if i:
+            pts.append((x + tip, Y + H / 2))
+        if accent and accent in lab:
+            fill, ink, stroke = fam["accent"], fam["white"], None
+        elif band:
+            fill, ink, stroke = fam["navy"], fam["white"], None
+        else:
+            fill, ink, stroke = fam["white"], fam["navy"], fam["navy"]
+        cv.poly("step", pts, fill, stroke=stroke)
+        cx = x + (cw - (0 if i else tip)) / 2 + (tip / 2 if i else 0)
+        cv.text_block("step-label", cx, Y, fit_one(lab, fs, room), fs, H, fill=ink, bold=True, anchor="middle")
+    frag = ET.fromstring(f'<svg xmlns="{SVG_NS}">{cv.svg("flow-strip")}</svg>')[0]
+    parent = next(p for p in group.iter() if line in list(p))
+    idx = list(parent).index(line)
+    parent.remove(line)
+    parent.insert(idx, frag)
+    target = out or svg
+    tree.write(str(target), encoding="unicode")
+    return target
+
+
+def fit_one(text: str, size: float, width: float) -> list[str]:
+    return wrap(text, size, width, bold=True, max_lines=1)
 
 
 def build_variants(data: dict[str, Any], family: str, out: Path, count: int, forms: Optional[list[str]],
@@ -1162,6 +1273,12 @@ def build_parser() -> argparse.ArgumentParser:
     pl.add_argument("--outline", type=Path, default=None)
     pl.add_argument("--max", type=int, default=6)
     pl.add_argument("--auto", action="store_true", help="ignore the checklist and use the importance ranking")
+    ar = sub.add_parser("arrows", help="turn a text flow 'A → B → C' on a drawn page into native chevron steps")
+    ar.add_argument("svg", type=Path)
+    ar.add_argument("--group", required=True, help="id of the group that holds the arrow line")
+    ar.add_argument("--family", default="innergen_lecture", choices=sorted(FAMILIES))
+    ar.add_argument("--accent", default="", help="label (or part) of the one step to highlight")
+    ar.add_argument("-o", "--output", type=Path, default=None)
     xt = sub.add_parser("extract", help="draft content JSON from a drawn page")
     xt.add_argument("svg", type=Path)
     return ap
@@ -1179,6 +1296,14 @@ def main(argv: Optional[list[str]] = None) -> int:
         return 0
     if args.command == "extract":
         print(json.dumps(extract(args.svg), ensure_ascii=False, indent=2))
+        return 0
+    if args.command == "arrows":
+        try:
+            t = arrows(args.svg, args.family, args.group, args.accent, args.output)
+        except DiagramError as exc:
+            print(f"ERROR  {exc}")
+            return 1
+        print(f"OK  {t}")
         return 0
     if args.command == "pick":
         try:
