@@ -177,7 +177,7 @@ are not visual review. Reduction scenario formulas and monitoring symbols requir
 native Word/PPT Office Math; source facts, units and methodology remain protected.
 In the SVG route, draw these diagrams with `scripts/report_diagrams.py` (§5 of the
 v30 doc) and write formulas as `<text data-pptx-equation="LaTeX">`; Word/finished
-PPTX use `scripts/office_equations.py`. `innergen_qaqc.py` M01–M03 gate them.
+PPTX use `scripts/office_equations.py` (methodology/business-plan Word: `docx --kind`, or `inject-docx` on the user's draft). `innergen_qaqc.py` M01–M03 gate them.
 This adds content/editability requirements without selecting a template or executor.
 
 ## 1. Load and route

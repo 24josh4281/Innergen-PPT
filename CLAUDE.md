@@ -68,8 +68,10 @@ remain native editable Office Math in Word and PPT (`m:oMath`, PPT `a14:m`).
 PNG, outline shapes and plain text alone do not meet this requirement. Use the
 same source formulas in both formats; verify equation structure, parameter/unit
 mapping, and actual rendering/editing separately from calculation correctness.
-This user-authorized requirement takes precedence over the generic formula-PNG
-default. Preserve originals and do not invent methodology, coefficients or results.
+For a methodology or business plan in Word, build it with `office_equations.py docx
+--kind methodology|business_plan`, or run `inject-docx` on the user's own draft
+(see the v30 doc). This user-authorized requirement takes precedence over the
+generic formula-PNG default. Preserve originals and do not invent methodology, coefficients or results.
 
 ## Setup and Update Requests (new PC)
 

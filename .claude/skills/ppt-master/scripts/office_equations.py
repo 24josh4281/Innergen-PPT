@@ -17,6 +17,12 @@ Subcommands:
                              replace text runs holding {{eq:<id>}} or
                              {{sym:<parameter id>}} tokens with OMML (for
                              direct-PPTX routes such as ppt-template-fill)
+    inject-docx <in.docx> [spec.json] -o X [--convert-plain] [--no-number]
+                             turn markers in a drafted Word methodology or
+                             business plan into OMML: {{eq:id}}, {{sym:id}},
+                             {{where:scenario}}, {{monitoring}}, {{fixed}},
+                             $$LaTeX$$, $LaTeX$; --convert-plain also converts
+                             formulas typed as text with Word subscripts
     verify <file.docx|file.pptx> [--expect N]
                              count OMML equations and flag formula-like plain
                              text (e.g. "ER_y = BE_y - PE_y") that escaped
@@ -26,6 +32,8 @@ Usage:
     python3 scripts/office_equations.py example > equations.json
     python3 scripts/office_equations.py docx equations.json -o exports/monitoring.docx
     python3 scripts/office_equations.py inject-pptx deck.pptx equations.json -o deck_eq.pptx
+    python3 scripts/office_equations.py inject-docx 사업계획서.docx equations.json -o 사업계획서_수식.docx
+    python3 scripts/office_equations.py inject-docx 방법론_초안.docx -o 방법론_수식.docx --convert-plain
     python3 scripts/office_equations.py verify exports/monitoring.docx
 
 Examples:
@@ -150,6 +158,22 @@ EXAMPLE_SPEC: dict[str, Any] = {
 }
 
 
+def example_spec(kind: Optional[str] = None) -> dict[str, Any]:
+    """EXAMPLE_SPEC plus, for a document kind, the blocks that kind reads."""
+    spec = json.loads(json.dumps(EXAMPLE_SPEC))
+    if kind not in DOC_KINDS:
+        return spec
+    layout = DOC_KINDS[kind]
+    spec["title"] = layout["title"]
+    texts = {heading: "" for heading, content, *_ in layout["sections"] if content == "text"}
+    texts["모니터링 절차 및 QA/QC"] = ""
+    spec["document"] = {"kind": kind, "meta": {key: "" for key in layout["meta"]}, "texts": texts}
+    if kind == "business_plan":
+        spec["expected_reductions"] = [{"year": "", "be": "", "pe": "", "le": "", "er": ""}]
+        spec["expected_total"] = {"be": "", "pe": "", "le": "", "er": ""}
+    return spec
+
+
 # ---------------------------------------------------------------------------
 # Spec validation
 # ---------------------------------------------------------------------------
@@ -235,7 +259,10 @@ def _table(rows: list[str], widths: list[int], borders: bool = True) -> str:
 
 def _tr(cells: list[str], header: bool = False) -> str:
     hdr = "<w:trPr><w:tblHeader/><w:cantSplit/></w:trPr>" if header else "<w:trPr><w:cantSplit/></w:trPr>"
-    return f"<w:tr>{hdr}{''.join(cells)}</w:tr>"
+    body = "".join(cells)
+    if header:  # keep the header row on the same page as the first data row
+        body = body.replace("<w:pPr><w:spacing", "<w:pPr><w:keepNext/><w:spacing")
+    return f"<w:tr>{hdr}{body}</w:tr>"
 
 
 def _param_table(params: list[dict[str, Any]], columns: list[tuple[str, str, int]],
@@ -257,62 +284,219 @@ def _param_table(params: list[dict[str, Any]], columns: list[tuple[str, str, int
     return _table(rows, [w for _, _, w in columns])
 
 
+def _scaled(widths: list[int], total: Optional[int]) -> list[int]:
+    if not total:
+        return widths
+    factor = total / sum(widths)
+    return [max(200, int(w * factor)) for w in widths]
+
+
+def where_table(where: list[dict[str, Any]], font: str, size: float,
+                total: Optional[int] = None) -> str:
+    """Borderless "symbol : description [unit]" list under an equation."""
+    rpr_sym = docx_rpr(size, ea_font=font)
+    widths = _scaled([1900, 300, 5000, 1800], total)
+    rows = []
+    for item in where:
+        rows.append(_tr([
+            _tc(omml_math(item["symbol"], rpr_sym), widths[0], align="left", borders=False),
+            _tc(_w_run(":", font, size), widths[1], align="center", borders=False),
+            _tc(_w_run(item.get("desc", ""), font, size), widths[2], borders=False),
+            _tc(_w_run(f"[{item['unit']}]" if item.get("unit") else "", font, size),
+                widths[3], align="left", borders=False),
+        ]))
+    return _table(rows, widths, borders=False)
+
+
+MONITORING_COLUMNS = [("symbol", "인자", 1400), ("name", "설명", 1600), ("unit", "단위", 900),
+                      ("source", "자료 출처", 1500), ("method", "측정 방법", 1500),
+                      ("frequency", "주기", 900), ("qaqc", "QA/QC", 1700)]
+FIXED_COLUMNS = [("symbol", "인자", 1600), ("name", "설명", 2400), ("value", "값", 1400),
+                 ("unit", "단위", 1200), ("source", "출처", 2900)]
+
+
+def param_table(params: list[dict[str, Any]], fixed: bool, font: str, size: float,
+                total: Optional[int] = None) -> str:
+    columns = FIXED_COLUMNS if fixed else MONITORING_COLUMNS
+    widths = _scaled([w for _, _, w in columns], total)
+    return _param_table(params, [(k, label, w) for (k, label, _), w in zip(columns, widths)],
+                        font, size)
+
+
+# Section skeletons for whole documents. "text" sections take the user's text
+# from spec["document"]["texts"][heading] or show a grey placeholder to fill in.
+# They follow the usual order of Korean offset methodologies and project plans;
+# match them to the scheme's official form before submission.
+DOC_KINDS: dict[str, dict[str, Any]] = {
+    "methodology": {
+        "title": "감축 방법론",
+        "meta": ["방법론명", "버전", "적용 분야", "사업 유형", "작성 기관", "작성일"],
+        "sections": [
+            ("방법론 개요", "meta"),
+            ("적용 조건", "text", "이 방법론을 적용할 수 있는 사업 조건을 항목별로 작성"),
+            ("사업 경계", "text", "사업 경계에 포함되는 배출원과 온실가스(CO2·CH4·N2O 등)를 정리"),
+            ("베이스라인 시나리오 설정", "text", "사업이 없을 때의 대안 시나리오와 선정 근거를 작성"),
+            ("추가성 입증", "text", "법적·경제적 추가성 등 입증 방법과 근거를 작성"),
+            ("배출량 및 감축량 산정", "scenarios"),
+            ("모니터링 계획", "monitoring"),
+            ("참고 문헌", "text", "인용한 지침·계수 출처를 작성"),
+        ],
+    },
+    "business_plan": {
+        "title": "외부사업 사업계획서",
+        "meta": ["사업명", "사업자", "사업 위치", "사업 유형", "적용 방법론", "사업 기간",
+                 "인증 유효기간", "예상 연평균 감축량"],
+        "sections": [
+            ("사업 개요", "meta"),
+            ("사업 내용 및 기술 설명", "text", "설비 구성, 적용 기술, 가동 계획을 작성"),
+            ("사업 경계", "text", "사업 경계 도식과 포함 배출원·온실가스를 작성"),
+            ("베이스라인 시나리오 및 추가성", "text", "베이스라인 시나리오와 추가성 입증 내용을 작성"),
+            ("감축량 산정", "scenarios"),
+            ("모니터링 계획", "monitoring"),
+            ("환경영향 및 이해관계자 의견", "text", "환경영향과 이해관계자 의견 수렴 결과를 작성"),
+        ],
+    },
+}
+PLACEHOLDER = "7F8794"
+
+
+def _heading(text: str, level: int, font: str, size: float) -> str:
+    if level == 1:
+        return _w_para(_w_run(text, font, size + 3, bold=True), before=280, after=120,
+                       style="Heading1", keep_next=True)
+    return _w_para(_w_run(text, font, size + 1.5, bold=True, color=HEADER_FILL),
+                   before=160, after=60, style="Heading2", keep_next=True)
+
+
+def _texts(value: Any, font: str, size: float, hint: str) -> list[str]:
+    if not value:
+        return [_w_para(_w_run(f"(작성: {hint})", font, size, color=PLACEHOLDER))]
+    items = value if isinstance(value, list) else [value]
+    return [_w_para(_w_run(str(item), font, size)) for item in items]
+
+
+def _scenario_blocks(spec: dict[str, Any], prefix: str, font: str, size: float) -> list[str]:
+    rpr_eq = docx_rpr(float(spec.get("equation_size_pt") or size + 1.5), ea_font=font)
+    body: list[str] = []
+    for s_idx, scenario in enumerate(spec.get("scenarios", []), start=1):
+        body.append(_heading(f"{prefix}{s_idx} {scenario.get('name', '')}", 2, font, size))
+        if scenario.get("description"):
+            body.append(_w_para(_w_run(scenario["description"], font, size), after=80, keep_next=True))
+        for eq in scenario.get("equations", []):
+            eq_par = f"<w:p><w:pPr><w:spacing w:before=\"60\" w:after=\"60\"/><w:jc w:val=\"center\"/></w:pPr>" \
+                     f"{omml_para(eq['latex'], rpr_eq)}</w:p>"
+            label = _w_run(f"({eq.get('label', '')})" if eq.get("label") else "", font, size)
+            body.append(_table([_tr([_tc(eq_par, 8000, borders=False),
+                                     _tc(label, 1000, align="right", borders=False)])],
+                               [8000, 1000], borders=False))
+        where = scenario.get("where", [])
+        if where:
+            body.append(_w_para(_w_run("여기서,", font, size), before=60, after=40, keep_next=True))
+            body.append(where_table(where, font, size))
+    return body
+
+
+def _value_run(value: Any, font: str, size: float) -> str:
+    if value in (None, ""):
+        return _w_run("(입력)", font, size, color=PLACEHOLDER)
+    return _w_run(str(value), font, size)
+
+
+def _meta_table(keys: list[str], meta: dict[str, Any], font: str, size: float) -> str:
+    rows = [_tr([_tc(_w_run(key, font, size, bold=True), 2600, fill=BAND_FILL),
+                 _tc(_value_run(meta.get(key), font, size), 6400)]) for key in keys]
+    return _table(rows, [2600, 6400])
+
+
+def _expected_table(spec: dict[str, Any], font: str, size: float) -> str:
+    """Yearly expected reductions; values come only from the spec, never computed here."""
+    rpr = docx_rpr(size, color=HEADER_TEXT, ea_font=font)
+    cols = [("year", "", 1400), ("be", "BE_y", 1900), ("pe", "PE_y", 1900),
+            ("le", "LE_y", 1900), ("er", "ER_y", 1900)]
+    header = [_tc(_w_run("연도", font, size, bold=True, color=HEADER_TEXT), cols[0][2],
+                  fill=HEADER_FILL, align="center")]
+    header += [_tc(omml_math(sym, rpr), w, fill=HEADER_FILL, align="center") for _, sym, w in cols[1:]]
+    rows = [_tr(header, header=True)]
+    for idx, item in enumerate(spec.get("expected_reductions") or [{} for _ in range(3)]):
+        fill = BAND_FILL if idx % 2 else None
+        rows.append(_tr([_tc(_value_run(item.get(key), font, size), w, fill=fill, align="center")
+                         for key, _, w in cols]))
+    total = spec.get("expected_total") or {}
+    rows.append(_tr([_tc(_w_run("합계", font, size, bold=True), cols[0][2], fill=BAND_FILL, align="center")]
+                    + [_tc(_value_run(total.get(key), font, size), w, fill=BAND_FILL, align="center")
+                       for key, _, w in cols[1:]]))
+    unit = _w_para(_w_run("단위: tCO2eq/yr", font, size - 1, color=PLACEHOLDER), align="right", after=40)
+    return unit + _table(rows, [w for _, _, w in cols])
+
+
+def _monitoring_blocks(spec: dict[str, Any], prefix: str, font: str, size: float,
+                       texts: dict[str, Any]) -> list[str]:
+    body: list[str] = []
+    sub = 0
+    if spec.get("monitoring_parameters"):
+        sub += 1
+        body.append(_heading(f"{prefix}{sub} 모니터링 인자", 2, font, size))
+        body.append(param_table(spec["monitoring_parameters"], False, font, size - 1))
+    if spec.get("fixed_parameters"):
+        sub += 1
+        body.append(_heading(f"{prefix}{sub} 사전 고정 인자", 2, font, size))
+        body.append(param_table(spec["fixed_parameters"], True, font, size - 1))
+    sub += 1
+    body.append(_heading(f"{prefix}{sub} 모니터링 절차 및 QA/QC", 2, font, size))
+    body += _texts(texts.get("모니터링 절차 및 QA/QC"), font, size,
+                   "측정·기록·검교정·자료 보관 절차와 담당 조직을 작성")
+    return body
+
+
+def _kind_body(spec: dict[str, Any], kind: str, font: str, size: float) -> list[str]:
+    layout = DOC_KINDS[kind]
+    doc = spec.get("document") or {}
+    texts = doc.get("texts") or {}
+    body: list[str] = []
+    for n, (heading, content, *hint) in enumerate(layout["sections"], start=1):
+        body.append(_heading(f"{n}. {heading}", 1, font, size))
+        if content == "meta":
+            body.append(_meta_table(layout["meta"], doc.get("meta") or {}, font, size))
+        elif content == "text":
+            body += _texts(texts.get(heading), font, size, hint[0] if hint else "내용")
+        elif content == "scenarios":
+            if texts.get(heading):
+                body += _texts(texts[heading], font, size, "")
+            body += _scenario_blocks(spec, f"{n}.", font, size)
+            if kind == "business_plan":
+                body.append(_heading(f"{n}.{len(spec.get('scenarios', [])) + 1} 연도별 예상 감축량",
+                                     2, font, size))
+                body.append(_expected_table(spec, font, size - 1))
+        elif content == "monitoring":
+            body += _monitoring_blocks(spec, f"{n}.", font, size, texts)
+    return body
+
+
 def build_document_xml(spec: dict[str, Any]) -> str:
     font = spec.get("font") or DEFAULT_FONT
     size = float(spec.get("font_size_pt") or 10.5)
-    eq_size = float(spec.get("equation_size_pt") or size + 1.5)
-    rpr_eq = docx_rpr(eq_size, ea_font=font)
-    rpr_sym = docx_rpr(size, ea_font=font)
+    kind = (spec.get("document") or {}).get("kind") or "monitoring"
     body: list[str] = []
-    if spec.get("title"):
-        body.append(_w_para(_w_run(spec["title"], font, size + 5, bold=True, color=HEADER_FILL),
+    title = spec.get("title") or (DOC_KINDS[kind]["title"] if kind in DOC_KINDS else "")
+    if title:
+        body.append(_w_para(_w_run(title, font, size + 5, bold=True, color=HEADER_FILL),
                             after=200, style="Title"))
-    section = 0
-    if spec.get("scenarios"):
-        section += 1
-        body.append(_w_para(_w_run(f"{section}. 시나리오별 산정식", font, size + 3, bold=True),
-                            before=200, after=120, style="Heading1", keep_next=True))
-        for s_idx, scenario in enumerate(spec["scenarios"], start=1):
-            body.append(_w_para(_w_run(f"{section}.{s_idx} {scenario.get('name', '')}", font, size + 1.5,
-                                       bold=True, color=HEADER_FILL),
-                                before=160, after=60, style="Heading2", keep_next=True))
-            if scenario.get("description"):
-                body.append(_w_para(_w_run(scenario["description"], font, size), after=80, keep_next=True))
-            for eq in scenario.get("equations", []):
-                eq_par = f"<w:p><w:pPr><w:spacing w:before=\"60\" w:after=\"60\"/><w:jc w:val=\"center\"/></w:pPr>" \
-                         f"{omml_para(eq['latex'], rpr_eq)}</w:p>"
-                label = _w_run(f"({eq.get('label', '')})" if eq.get("label") else "", font, size)
-                body.append(_table([_tr([_tc(eq_par, 8000, borders=False),
-                                         _tc(label, 1000, align="right", borders=False)])],
-                                   [8000, 1000], borders=False))
-            where = scenario.get("where", [])
-            if where:
-                body.append(_w_para(_w_run("여기서,", font, size), before=60, after=40, keep_next=True))
-                rows = []
-                for item in where:
-                    rows.append(_tr([
-                        _tc(omml_math(item["symbol"], rpr_sym), 1900, align="left", borders=False),
-                        _tc(_w_run(":", font, size), 300, align="center", borders=False),
-                        _tc(_w_run(item.get("desc", ""), font, size), 5000, borders=False),
-                        _tc(_w_run(f"[{item['unit']}]" if item.get("unit") else "", font, size),
-                            1800, align="left", borders=False),
-                    ]))
-                body.append(_table(rows, [1900, 300, 5000, 1800], borders=False))
-    if spec.get("monitoring_parameters"):
-        section += 1
-        body.append(_w_para(_w_run(f"{section}. 모니터링 인자", font, size + 3, bold=True),
-                            before=280, after=120, style="Heading1", keep_next=True))
-        cols = [("symbol", "인자", 1400), ("name", "설명", 1600), ("unit", "단위", 900),
-                ("source", "자료 출처", 1500), ("method", "측정 방법", 1500),
-                ("frequency", "주기", 900), ("qaqc", "QA/QC", 1700)]
-        body.append(_param_table(spec["monitoring_parameters"], cols, font, size - 1))
-    if spec.get("fixed_parameters"):
-        section += 1
-        body.append(_w_para(_w_run(f"{section}. 사전 고정 인자", font, size + 3, bold=True),
-                            before=280, after=120, style="Heading1", keep_next=True))
-        cols = [("symbol", "인자", 1600), ("name", "설명", 2400), ("value", "값", 1400),
-                ("unit", "단위", 1200), ("source", "출처", 2900)]
-        body.append(_param_table(spec["fixed_parameters"], cols, font, size - 1))
+    if kind in DOC_KINDS:
+        body += _kind_body(spec, kind, font, size)
+    else:
+        section = 0
+        if spec.get("scenarios"):
+            section += 1
+            body.append(_heading(f"{section}. 시나리오별 산정식", 1, font, size))
+            body += _scenario_blocks(spec, f"{section}.", font, size)
+        if spec.get("monitoring_parameters"):
+            section += 1
+            body.append(_heading(f"{section}. 모니터링 인자", 1, font, size))
+            body.append(param_table(spec["monitoring_parameters"], False, font, size - 1))
+        if spec.get("fixed_parameters"):
+            section += 1
+            body.append(_heading(f"{section}. 사전 고정 인자", 1, font, size))
+            body.append(param_table(spec["fixed_parameters"], True, font, size - 1))
     sect = ('<w:sectPr><w:pgSz w:w="11906" w:h="16838"/>'
             '<w:pgMar w:top="1440" w:right="1200" w:bottom="1440" w:left="1200" w:header="708" '
             'w:footer="708" w:gutter="0"/></w:sectPr>')
@@ -480,9 +664,9 @@ def _inject_slide(xml: str, table: dict[tuple[str, str], str], font: str,
 
 
 def _wrap_alternate_content(xml: str) -> str:
-    """Wrap each <p:sp> holding a14:m in mc:AlternateContent (PowerPoint's own form)."""
+    """Wrap each <p:sp> or table <p:graphicFrame> holding a14:m in mc:AlternateContent (PowerPoint's own form)."""
     out, pos = [], 0
-    for match in re.finditer(r"<p:sp>.*?</p:sp>", xml, re.S):
+    for match in re.finditer(r"<p:sp>.*?</p:sp>|<p:graphicFrame>.*?</p:graphicFrame>", xml, re.S):
         shape = match.group(0)
         out.append(xml[pos:match.start()])
         if "<a14:m" in shape and "mc:AlternateContent" not in xml[max(0, match.start() - 200):match.start()]:
@@ -575,14 +759,27 @@ def build_parser() -> argparse.ArgumentParser:
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     sub = parser.add_subparsers(dest="command", required=True)
-    sub.add_parser("example", help="print a sample spec")
+    ex = sub.add_parser("example", help="print a sample spec")
+    ex.add_argument("--kind", choices=["monitoring", *DOC_KINDS],
+                    help="add the document block for a methodology or business plan")
     docx = sub.add_parser("docx", help="write a Word document")
     docx.add_argument("spec", type=Path)
     docx.add_argument("-o", "--output", type=Path, required=True)
+    docx.add_argument("--kind", choices=["monitoring", *DOC_KINDS],
+                      help="document skeleton (default: spec document.kind, else monitoring)")
     inj = sub.add_parser("inject-pptx", help="replace {{eq:id}} / {{sym:id}} tokens in a PPTX")
     inj.add_argument("pptx", type=Path)
     inj.add_argument("spec", type=Path)
     inj.add_argument("-o", "--output", type=Path, required=True)
+    injd = sub.add_parser("inject-docx", help="turn equation markers in a Word draft into OMML")
+    injd.add_argument("docx", type=Path)
+    injd.add_argument("spec", type=Path, nargs="?", default=None,
+                      help="equation spec (needed for {{eq:}}, {{sym:}}, {{where:}}, tables)")
+    injd.add_argument("-o", "--output", type=Path, required=True)
+    injd.add_argument("--convert-plain", action="store_true",
+                      help="also convert formulas typed as plain text (Word subscripts)")
+    injd.add_argument("--no-number", action="store_true", help="display equations without (n) labels")
+    injd.add_argument("--font", default=None, help="East Asian font for Hangul inside equations")
     ver = sub.add_parser("verify", help="count OMML and flag plain-text formulas")
     ver.add_argument("file", type=Path)
     ver.add_argument("--expect", type=int, default=None, help="minimum equation count")
@@ -592,10 +789,12 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: Optional[list[str]] = None) -> int:
     args = build_parser().parse_args(argv)
     if args.command == "example":
-        print(json.dumps(EXAMPLE_SPEC, ensure_ascii=False, indent=2))
+        print(json.dumps(example_spec(args.kind), ensure_ascii=False, indent=2))
         return 0
     if args.command == "docx":
         spec = _load_spec(args.spec)
+        if args.kind:
+            spec.setdefault("document", {})["kind"] = args.kind
         write_docx(spec, args.output)
         report = verify_office(args.output)
         print(f"OK  {args.output}  equations={report['equations']}")
@@ -607,6 +806,24 @@ def main(argv: Optional[list[str]] = None) -> int:
             print(f"ERROR  {problem}", file=sys.stderr)
         print(f"{'OK' if not problems else 'FAIL'}  {args.output}  injected={count}")
         return 1 if problems else 0
+    if args.command == "inject-docx":
+        from docx_equations import inject_docx
+        spec = _load_spec(args.spec) if args.spec else {}
+        rep = inject_docx(args.docx, spec, args.output, number=not args.no_number,
+                          convert_plain=args.convert_plain, font=args.font)
+        for problem in rep.errors:
+            print(f"ERROR  {problem}", file=sys.stderr)
+        for note in rep.skipped:
+            print(f"NOTE   {note}")
+        if rep.errors:
+            print(f"FAIL  {args.output} not written")
+            return 1
+        check = verify_office(args.output)
+        for item in check["plain_formulas"]:
+            print(f"WARN   plain-text formula left in {item['part']}: {item['text']}")
+        print(f"OK  {args.output}  display={rep.display} inline={rep.inline} tables={rep.tables} "
+              f"converted={rep.converted} equations={check['equations']}")
+        return 0
     report = verify_office(args.file)
     failed = bool(report["plain_formulas"]) or (
         args.expect is not None and report["equations"] < args.expect)

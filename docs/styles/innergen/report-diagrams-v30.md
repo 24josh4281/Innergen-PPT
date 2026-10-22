@@ -104,6 +104,25 @@ PPT의 전용 수식·인자 슬롯을 치환한다. SVG 경로는 `data-pptx-eq
 .venv/Scripts/python.exe .claude/skills/ppt-master/scripts/office_equations.py verify <새버전.pptx>
 ```
 
+방법론·사업계획서 Word는 두 방식으로 만든다. 새로 쓰는 문서는 `docx --kind methodology`
+또는 `--kind business_plan`으로 장 구성(개요 표, 산정식, 연도별 예상 감축량 표, 모니터링
+인자 표)을 만들고, 비어 있는 칸은 회색 `(입력)`·`(작성: …)`으로 남긴다. 장 구성은 일반적인
+상쇄 방법론·사업계획서 순서이므로 제출 전 해당 제도의 공식 서식과 대조한다. 예상 감축량
+값은 명세에 적은 값만 넣고 계산하지 않는다. `example --kind <종류>`가 명세 틀을 출력한다.
+
+이미 작성 중인 Word 초안은 `inject-docx`로 처리한다. 수식 자리에 `{{eq:식ID}}`(단독 문단은
+번호 붙은 수식, 문장 안은 인라인), `{{sym:인자ID}}`, `{{where:시나리오ID}}`(여기서 목록),
+`{{monitoring}}`·`{{fixed}}`(인자 표), `$$LaTeX$$`, `$LaTeX$`를 적는다. `--convert-plain`은
+Word 아래첨자로 입력한 기존 텍스트 수식(예: `ERy = BEy − PEy (식 3)`)과 문장 속 기호(`BEy`)도
+변환한다. CO2·CH4 같은 화학식은 텍스트로 둔다. 번호는 문서의 `(식 n)` 형식을 이어 붙인다.
+나머지 문단·스타일·표·그림은 바꾸지 않고, 원본이 아닌 새 파일에만 저장한다.
+
+```powershell
+.venv/Scripts/python.exe .claude/skills/ppt-master/scripts/office_equations.py example --kind business_plan > <사업_수식명세.json>
+.venv/Scripts/python.exe .claude/skills/ppt-master/scripts/office_equations.py docx <사업_수식명세.json> -o <사업계획서_v1.docx>
+.venv/Scripts/python.exe .claude/skills/ppt-master/scripts/office_equations.py inject-docx <방법론_초안.docx> [<수식명세.json>] -o <방법론_수식_v1.docx> --convert-plain
+```
+
 `verify`의 객체 개수·일반 텍스트 탐지는 수식별 원문 일치 검사를 대신하지 않는다.
 특히 `--expect`를 사용하더라도 누락한 식과 중복된 다른 식이 상쇄되지 않는지 별도로
 대조한다. 이 문서와 작성 계획의 수식 규칙은 유지하되, 동시 작업 중인 수식 구현 파일은
