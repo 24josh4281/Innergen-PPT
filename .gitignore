@@ -11,3 +11,5 @@ docs/backups/
 !.env.example
 __pycache__/
 *.pyc
+
+.card-tests-*/

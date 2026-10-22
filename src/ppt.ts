@@ -1,4 +1,5 @@
 import pptxgen from "pptxgenjs";
+import { layoutCard, type CardItem, type CardFrame } from "./cardLayout";
 import { INNGEN_COLORS } from "./patterns";
 import { shouldUseBulletsForBox, splitBoxTextToBullets } from "./qualityPolicy";
 import type { DeckMeta, PlannedSlide } from "./types";
@@ -204,30 +205,14 @@ function renderCards(slide: Slide, pptx: pptxgen, item: PlannedSlide) {
       color: INNGEN_COLORS.white,
       align: "center"
     });
-    addText(slide, keyPhrase(value, 18), x + 0.24, BODY_TOP + 0.88, cardW - 0.48, 0.34, {
-      size: 14.2,
-      bold: true,
-      color: INNGEN_COLORS.navy,
-      align: "center",
-      valign: "middle"
-    });
-    line(slide, x + 0.24, BODY_TOP + 1.78, cardW - 0.48, INNGEN_COLORS.line, 0.8);
-    addText(slide, "검토 포인트", x + 0.24, BODY_TOP + 2.02, cardW - 0.48, 0.16, {
-      size: 11.5,
-      bold: true,
-      color: INNGEN_COLORS.sky
-    });
-    addBulletList(slide, uniqueItems([value, item.bullets[idx + 1] ?? ""]), x + 0.24, BODY_TOP + 2.34, cardW - 0.48, 1.28, {
-      size: 11.5,
-      maxChars: 54,
-      maxItems: 2
-    });
-    addText(slide, singleLine(actionCue(item, idx), 24), x + 0.24, BODY_TOP + 3.88, cardW - 0.48, 0.26, {
-      size: 12,
-      bold: true,
-      color: idx === 0 ? INNGEN_COLORS.red : INNGEN_COLORS.blue,
-      align: "center"
-    });
+    addCardContent(slide, { x, y: BODY_TOP + 0.48, w: cardW, h: 4.07 }, [
+      { id: `card-${idx}-title`, text: keyPhrase(value, Infinity), size: 14.2, bold: true, color: INNGEN_COLORS.navy, gapAfter: 0.18 },
+      { id: `card-${idx}-rule`, height: 0.01, gapAfter: 0.18 },
+      { id: `card-${idx}-label`, text: "검토 포인트", size: 11.5, bold: true, color: INNGEN_COLORS.sky },
+      { id: `card-${idx}-body`, text: uniqueItems([value, item.bullets[idx + 1] ?? ""]).map(v => `• ${v}`).join("\n"), size: 11.5, gapAfter: 0.18 },
+      { id: `card-${idx}-action`, text: actionCue(item, idx), size: 12, bold: true, color: idx === 0 ? INNGEN_COLORS.red : INNGEN_COLORS.blue }
+    ], 0.24);
+
   });
   addImplication(slide, item);
 }
@@ -412,8 +397,10 @@ function renderIssueTree(slide: Slide, pptx: pptxgen, item: PlannedSlide) {
 function renderMetric(slide: Slide, pptx: pptxgen, item: PlannedSlide) {
   const metric = extractMetric(item.bullets.join(" ") || item.governingMessage);
   rect(slide, BODY_X, BODY_TOP, 4.25, 4.55, INNGEN_COLORS.paleBlue, INNGEN_COLORS.sky);
-  addText(slide, metric.value, BODY_X + 0.35, BODY_TOP + 1.3, 3.55, 0.72, { size: 38, bold: true, color: INNGEN_COLORS.navy, align: "center" });
-  addText(slide, metricCaption(item, metric.context), BODY_X + 0.45, BODY_TOP + 2.25, 3.35, 0.95, { size: 14, bold: true, color: INNGEN_COLORS.text, align: "center", valign: "middle" });
+  addCardContent(slide, { x: BODY_X, y: BODY_TOP, w: 4.25, h: 4.55 }, [
+    { id: "metric-value", text: metric.value, size: 38, bold: true, color: INNGEN_COLORS.navy, gapAfter: 0.22 },
+    { id: "metric-caption", text: metricCaption(item, metric.context), size: 14, bold: true, color: INNGEN_COLORS.text }
+  ], 0.35);
   drawSidePanel(slide, pptx, 5.25, BODY_TOP, 7.47, 4.55, "관리 해석", item.bullets.slice(0, 5));
   addImplication(slide, item);
 }
@@ -517,12 +504,27 @@ function addMiniRow(slide: Slide, pptx: pptxgen, x: number, y: number, w: number
 
 function drawSidePanel(slide: Slide, pptx: pptxgen, x: number, y: number, w: number, h: number, title: string, rows: string[], wide = false) {
   rect(slide, x, y, w, h, INNGEN_COLORS.paleBlue, INNGEN_COLORS.sky);
-  addText(slide, singleLine(title, 24), x + 0.25, y + 0.24, w - 0.5, 0.24, { size: 14.2, bold: true, color: INNGEN_COLORS.navy, align: "center" });
-  addBulletList(slide, rows, x + 0.34, y + 0.78, w - 0.68, Math.max(0.28, h - 1.18), {
-    size: wide ? 12.2 : 12,
-    maxItems: wide ? 3 : 5,
-    maxChars: wide ? 92 : 58
-  });
+  addCardContent(slide, { x, y, w, h }, [
+    { id: "panel-title", text: title, size: 14.2, bold: true, color: INNGEN_COLORS.navy, gapAfter: 0.22 },
+    { id: "panel-body", text: rows.map(clean).filter(Boolean).slice(0, wide ? 3 : 5).map(v => `• ${v}`).join("\n"), size: wide ? 12.2 : 12, color: INNGEN_COLORS.text }
+  ], 0.34);
+}
+
+/** Draw only after a full stack fits; each element remains a native editable object. */
+function addCardContent(slide: Slide, frame: CardFrame, items: CardItem[], padding: number) {
+  for (const item of layoutCard(frame, items, padding)) {
+    if (item.lines.length) {
+      slide.addText(item.lines.join("\n"), {
+        x: item.x, y: item.y, w: item.w, h: item.h,
+        objectName: item.id, fontFace: FONT, fontSize: item.size ?? 12,
+        bold: item.bold ?? false, color: item.color ?? INNGEN_COLORS.text,
+        align: item.align ?? "left", valign: "top", margin: 0,
+        lineSpacingMultiple: 1.5, paraSpaceAfter: 0,
+        // No fit/shrink: the planner owns measured frames and explicit breaks.
+        breakLine: false
+      });
+    } else line(slide, item.x, item.y + item.h / 2, item.w, INNGEN_COLORS.line);
+  }
 }
 
 function addBulletList(slide: Slide, items: string[], x: number, y: number, w: number, h: number, opt: { size?: number; color?: string; maxItems?: number; maxChars?: number } = {}) {

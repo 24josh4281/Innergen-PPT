@@ -2368,6 +2368,16 @@ def convert_text(elem: ET.Element, ctx: ConvertContext) -> ShapeResult | None:
     box_w = text_width + padding * 2
     box_h = text_height + padding
 
+    # Card planner owns these frames. Do not add inferred glyph padding or
+    # spAutoFit slack, which would undo balanced margins and permit overlap.
+    card_frame = elem.get('data-card-frame')
+    if card_frame:
+        card_x, card_y, card_w, card_h = map(float, card_frame.split())
+        box_x = ctx.translate_x + card_x * ctx.scale_x
+        box_y = ctx.translate_y + card_y * ctx.scale_y
+        box_w = card_w * (ctx.scale_x or 1.0)
+        box_h = card_h * (ctx.scale_y or 1.0)
+
     text_transform = elem.get('transform', '')
     if text_transform and 'rotate' not in text_transform and not ctx.use_transform_matrix:
         try:
@@ -2485,7 +2495,7 @@ def convert_text(elem: ET.Element, ctx: ConvertContext) -> ShapeResult | None:
     # write below is the longest source SVG line without single-line renderer
     # headroom; PowerPoint wraps long paragraphs inside this design width.
     # Single-line text keeps wrap="none" + spAutoFit for tight fidelity.
-    if paragraph_runs is not None:
+    if paragraph_runs is not None or card_frame:
         body_pr_xml = (
             '<a:bodyPr wrap="square" lIns="0" tIns="0" rIns="0" bIns="0" '
             'anchor="t" anchorCtr="0"/>'

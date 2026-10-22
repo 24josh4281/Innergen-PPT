@@ -155,8 +155,16 @@ def fill(svg: str, values: dict) -> str:
         return f"{open_tag}{spans}</text>"
     svg = re.sub(r'(<text [^>]*>)\{\{([A-Z0-9_]+)\}\}</text>', repl_text, svg)
     # drop placeholders left empty or unknown
-    svg = re.sub(r'<g id="[^"]+"[^>]*><text [^>]*>(?:\{\{[A-Z0-9_]+\}\})?</text></g>\n?', "", svg)
-    return svg
+    card_members = set(" ".join(re.findall(r'data-card-members="([^\"]+)"', svg)).split())
+    def drop_unused(match):
+        return match.group(0) if match.group(1) in card_members else ""
+    svg = re.sub(r'<g id="([^\"]+)"[^>]*><text [^>]*>(?:\{\{[A-Z0-9_]+\}\})?</text></g>\n?', drop_unused, svg)
+    # Same pass as export, so SVG previews and native objects agree.
+    scripts = Path(__file__).resolve().parents[2] / "claude-skills/innergen-deck/scripts"
+    if str(scripts) not in sys.path:
+        sys.path.insert(0, str(scripts))
+    from card_layout import layout_svg
+    return layout_svg(svg)
 
 
 def main(argv=None) -> int:

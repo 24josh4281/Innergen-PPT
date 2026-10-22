@@ -19,7 +19,8 @@
     "generate:pdf": "powershell -ExecutionPolicy Bypass -File scripts/generate-deck-from-pdf.ps1",
     "references:index": "node scripts/build-reference-slide-index.mjs",
     "references:topn": "node scripts/build-reference-topn.mjs",
-    "references:refresh": "npm run references:index && npm run references:topn"
+    "references:refresh": "npm run references:index && npm run references:topn",
+    "test:cards": "node scripts/test-card-layout.mjs && python3 -m unittest discover -s tests -p \"test_*.py\" -v"
   },
   "dependencies": {
     "jszip": "^3.10.1",

@@ -1070,6 +1070,8 @@ def convert_svg_to_slide_shapes(
     """
     tree = ET.parse(str(svg_path))
     root = tree.getroot()
+    from card_layout import apply_card_layout
+    apply_card_layout(root)
     if root.get('transform'):
         raise SvgNativeConversionError(
             'Root <svg> transform is unsupported; apply transforms to child '
