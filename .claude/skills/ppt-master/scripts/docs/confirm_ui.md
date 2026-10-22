@@ -156,6 +156,11 @@ python3 scripts/confirm_ui/server.py <project> --wait-only --wait-intake --wait-
 python3 scripts/confirm_ui/server.py <project> --wait-only --wait-timeout 50
 ```
 
+Keep re-running the short `--wait-only` while the server is alive; a timeout alone
+means the user is still reading or editing, not that the page failed. Uploaded
+files reach the agent through this wait (`intake_latest.json` → `sources/intake/`),
+so the user never has to paste them into chat.
+
 `--wait-intake` returns only for the matching chapter input and never interprets
 it as generation approval. Set `previous_response_id` when collecting another
 round of inputs. The page polls for an agent-authored review and updates within
@@ -185,7 +190,9 @@ python3 scripts/confirm_ui/server.py <project_path> --shutdown    # Step 4 clean
 - `--shutdown` stops a confirm server left running for this project and exits — **idempotent** (a no-op when nothing is running). Tries a graceful `/api/shutdown`, falls back to killing the recorded pid, then clears the lock. SKILL.md Step 4 runs this on every path (page-confirm or chat-fallback) so the page never lingers on the shared port before live preview starts.
 - Refuses to start unless `<project_path>/confirm_ui/recommendations.json` exists (except `--shutdown`, which needs no recommendations).
 - Per-project lock at `<project_path>/.confirm_ui.lock` — duplicate launches are refused; stale locks (dead pid) are overwritten.
-- Idle auto-shutdown after 900 s by default; `/api/shutdown` exits gracefully and releases the lock.
+- Idle auto-shutdown after 900 s by default; `/api/shutdown` exits gracefully and releases the lock. An open page posts `/api/heartbeat` every 30 s, so the idle timer only runs out after the page is closed — a user reading the outline for a long time can still press the button.
+- **Auto-confirm**: the final view (single-pass, staged Stage 3, or content-intake `review`) counts down 3 minutes in the action bar and then submits the shown values with `confirm_trigger: "auto_timeout"` (a click records `"button"`). Any edit — an input/change event or a state difference from the first snapshot — or the "Stop auto-create" button stops it for that view; a language switch keeps the same countdown. It never runs in `materials`, Stage 1/2, on an `approval_error`, or on an already-confirmed reopen. A network failure on submit is retried four times before the page tells the user to type "confirm" in chat.
+- **Chat start**: "이대로 시작해줘" / "start as is" in chat is the same final confirmation — the agent writes `result.json` (`confirm_trigger: "chat"`) from the recommended values plus any autosaved `review_edits.json`, then runs `--shutdown`. Owner rule: SKILL.md Step 4.
 - `/api/recommendations` derives `_template_adherence_enabled` from `<project>/templates/design_spec.md` frontmatter. Only `kind: deck` / `kind: layout` enables the Stage-1 field; no template and `kind: brand` force it off even if a stale recommendation contains the key. When enabled but no recommendation was authored, the server supplies `adaptive` as the default recommendation.
 - `/api/recommendations` also injects `_template_field`: `{"mode": "selector"}` when no template is installed (the Stage-1 card is an active decks-only selector; picking a deck reveals the `template_adherence` subfield client-side, default `adaptive`), or `{"mode": "locked", "kind", "name"}` when `<project>/templates/design_spec.md` exists (the card renders as a read-only badge of the installed template; `name` is the spec's first H1). `result.json.template` folds back into `recommend.template` on later stages like the other anchors.
 - `/api/template_preview/<deck_id>?lang=<zh|en|ja|ko>` serves the deck's first roster shell SVG with `{{TOKEN}}` slots substituted by fixed role sample copy (same principle as the visual-style previews — users compare visual treatment, not project content). `deck_id` is validated against `decks_index.json`; unknown ids 404; the response is `no-store`. Unresolvable external references degrade gracefully (that element simply does not render).

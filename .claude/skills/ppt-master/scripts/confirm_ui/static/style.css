@@ -550,6 +550,18 @@ body {
 }
 #btn-confirm:hover { background: #e5b532; }
 #btn-confirm:disabled { background: #6d6450; color: #b8b0a0; cursor: default; }
+.btn-auto-stop {
+    border: 1px solid var(--shell-line);
+    background: transparent;
+    color: var(--shell-muted);
+    font: inherit;
+    font-size: 13px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.btn-auto-stop:hover { color: inherit; border-color: currentColor; }
+.intake-focus .btn-auto-stop { color: #475569; border-color: #cbd5e1; }
 
 /* ---- custom input ---- */
 .custom-input { margin-top: 8px; }

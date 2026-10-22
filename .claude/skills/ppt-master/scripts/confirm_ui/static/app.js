@@ -128,7 +128,11 @@
             off_default: "Off",
             on: "On",
             option_prefix: "Option",
-            error_retry: "Error - retry"
+            error_retry: "Error - retry",
+            auto_countdown: "No changes: creating automatically in {time}. Editing anything stops the countdown.",
+            auto_stopped: "Auto-create stopped. Click the button when you are done.",
+            auto_stop: "Stop auto-create",
+            confirm_offline: "Lost connection to the confirm server. Type \"confirm\" in the chat to continue with these choices."
         },
         ja: {
             page_title: "PPT Master - デザイン確認",
@@ -248,7 +252,11 @@
             off_default: "オフ",
             on: "オン",
             option_prefix: "案",
-            error_retry: "エラー - 再試行"
+            error_retry: "エラー - 再試行",
+            auto_countdown: "変更がなければ {time} 後に自動で制作します。どこかを編集するとカウントダウンは止まります。",
+            auto_stopped: "自動制作を停止しました。編集が終わったらボタンを押してください。",
+            auto_stop: "自動制作を止める",
+            confirm_offline: "確認ページのサーバーに接続できません。チャットで「確定」と入力すると、この内容で進みます。"
         },
         ko: {
             page_title: "PPT Master - 디자인 확인",
@@ -368,7 +376,11 @@
             off_default: "끔",
             on: "켬",
             option_prefix: "옵션",
-            error_retry: "오류 - 다시 시도"
+            error_retry: "오류 - 다시 시도",
+            auto_countdown: "수정이 없으면 {time} 뒤 자동으로 제작을 시작합니다. 내용을 고치면 자동 제작이 멈춥니다.",
+            auto_stopped: "자동 제작을 멈췄습니다. 수정을 마치면 버튼을 눌러 주세요.",
+            auto_stop: "자동 제작 멈추기",
+            confirm_offline: "확인 페이지 서버에 연결할 수 없습니다. 채팅에 \"확정\"이라고 입력하면 이 내용으로 진행합니다."
         },
         zh: {
             page_title: "确认设计方案",
@@ -488,7 +500,11 @@
             off_default: "关",
             on: "开",
             option_prefix: "方案",
-            error_retry: "出错，请重试"
+            error_retry: "出错，请重试",
+            auto_countdown: "若无修改，将在 {time} 后自动开始制作；修改任意内容即停止倒计时。",
+            auto_stopped: "已停止自动制作。修改完成后请点击按钮。",
+            auto_stop: "停止自动制作",
+            confirm_offline: "无法连接确认页服务。在聊天中输入“确认”即可按当前选择继续。"
         }
     };
 
@@ -2562,6 +2578,7 @@
             topbarHint.textContent = ({ko: "전체 슬라이드 내용을 검토한 뒤 수정 사항을 알려주시거나 최종 확인하세요.", en: "Review every slide, request changes in chat, or confirm the final outline.", zh: "检查所有页面，提出修改或确认最终大纲。", ja: "全スライドを確認し、変更点を伝えるか最終確認してください。"})[LANG] || "Review all slides before confirming.";
         } else if (topbarHint) { topbarHint.textContent = t("topbar_hint"); }
         if (contentInfo && contentInfo.phase === "materials" && window.PPTContentIntake) {
+            clearAutoTimer();
             if (heading) heading.textContent = contentInfo.title || t("page_title");
             var materialLabel = window.PPTContentIntake.renderMaterials(host, contentInfo, LANG, function (payload) {
                 REC = payload; STAGE = stageNumber(REC); initState(); renderAll();
@@ -2626,9 +2643,103 @@
             document.getElementById("btn-confirm").textContent = ({ko: "이 개요로 PPT 제작", en: "Create PPT from this outline", zh: "按此大纲制作PPT", ja: "この概要でPPT制作"})[LANG] || "Create PPT from this outline";
             document.getElementById("btn-confirm").disabled = Boolean(contentInfo.approval_error);
         }
+        armAutoConfirm(stage, contentInfo);
     }
 
     function renderAll() { renderForStage(STAGE); }
+
+    // ---- auto-confirm ----------------------------------------------------
+    // The final view confirms itself when nothing was changed for
+    // AUTO_CONFIRM_MS, so a user who only reads the outline is not left
+    // waiting. Any edit (state differs from the first snapshot, or an input
+    // event) stops the countdown for good; the button then stays manual.
+    var AUTO_CONFIRM_MS = 180000;
+    var AUTO = { key: null, deadline: 0, snapshot: null, timer: null, stopped: false };
+
+    function autoSnapshot() {
+        var edits = window.PPTContentIntake && window.PPTContentIntake.reviewEdits();
+        return JSON.stringify({ state: STATE, edits: edits || null });
+    }
+
+    function autoStopLink() {
+        var link = document.getElementById("btn-auto-stop");
+        if (!link) {
+            link = document.createElement("button");
+            link.id = "btn-auto-stop";
+            link.type = "button";
+            link.className = "btn-auto-stop";
+            link.addEventListener("click", function () { stopAutoConfirm(true); });
+            var bar = document.getElementById("actionbar");
+            bar.insertBefore(link, document.getElementById("btn-confirm"));
+        }
+        link.textContent = t("auto_stop");
+        return link;
+    }
+
+    function clearAutoTimer() {
+        if (AUTO.timer) clearInterval(AUTO.timer);
+        AUTO.timer = null;
+        var link = document.getElementById("btn-auto-stop");
+        if (link) link.style.display = "none";
+    }
+
+    function stopAutoConfirm(announce) {
+        if (AUTO.stopped) return;
+        AUTO.stopped = true;
+        clearAutoTimer();
+        if (announce) document.getElementById("confirm-status").textContent = t("auto_stopped");
+    }
+
+    function armAutoConfirm(stage, contentInfo) {
+        var review = contentInfo && contentInfo.phase === "review";
+        var eligible = !(contentInfo && contentInfo.phase === "materials")
+            && (review || (stage !== 1 && stage !== 2))
+            && !(review && contentInfo.approval_error)
+            && !(REC && REC._already_confirmed);
+        if (!eligible) { clearAutoTimer(); return; }
+        // A language switch re-renders the same view: keep its countdown.
+        var key = review ? "review:" + contentInfo.view_revision : "stage:" + stage;
+        if (AUTO.key !== key) {
+            AUTO = { key: key, deadline: Date.now() + AUTO_CONFIRM_MS, snapshot: null, timer: null, stopped: false };
+        }
+        if (AUTO.stopped) return;
+        clearAutoTimer();
+        autoStopLink().style.display = "";
+        var tick = function () {
+            // The first tick takes the snapshot, after render-time defaults settle.
+            var now = autoSnapshot();
+            if (AUTO.snapshot === null) AUTO.snapshot = now;
+            else if (now !== AUTO.snapshot) { stopAutoConfirm(true); return; }
+            var left = Math.max(0, AUTO.deadline - Date.now());
+            if (left <= 0) {
+                clearAutoTimer();
+                AUTO.stopped = true;
+                confirm("auto_timeout");
+                return;
+            }
+            var sec = Math.ceil(left / 1000);
+            var time = Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0");
+            document.getElementById("confirm-status").textContent = t("auto_countdown").replace("{time}", time);
+        };
+        tick();
+        AUTO.timer = setInterval(tick, 1000);
+    }
+
+    ["input", "change"].forEach(function (type) {
+        document.addEventListener(type, function (event) {
+            var sections = document.getElementById("sections");
+            if (AUTO.timer && sections && sections.contains(event.target)) stopAutoConfirm(true);
+        }, true);
+    });
+
+    // ---- heartbeat -------------------------------------------------------
+    // Every request resets the server's idle timer, so an open page keeps the
+    // server alive however long the user reads; only a closed page lets it
+    // time out.
+    setInterval(function () {
+        fetch("/api/heartbeat", { method: "POST", cache: "no-store", keepalive: true })
+            .catch(function () { /* server gone or restarting — confirm() retries */ });
+    }, 30000);
 
     function updateActionBar(stage) {
         var btn = document.getElementById("btn-confirm");
@@ -2862,11 +2973,27 @@
         renderForStage(stage);
     }
 
-    function confirm() {
+    // A network failure (server restarting) is retried; a server-side
+    // rejection is shown at once.
+    function postConfirm(payload, attempt) {
+        return fetch("/api/confirm", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        }).catch(function () {
+            if (attempt >= 4) throw new Error(t("confirm_offline"));
+            return new Promise(function (resolve) { setTimeout(resolve, 2500); })
+                .then(function () { return postConfirm(payload, attempt + 1); });
+        });
+    }
+
+    function confirm(trigger) {
         var btn = document.getElementById("btn-confirm");
+        stopAutoConfirm(false);
         var payload = JSON.parse(JSON.stringify(STATE));
         normalizeTypographyForSubmit(payload);
         payload.stage = "final";
+        payload.confirm_trigger = trigger === "auto_timeout" ? "auto_timeout" : "button";
         if (REC.content_intake && REC.content_intake.phase === "review") {
             payload.content_outline_approved = true;
             payload.content_review_token = REC.content_intake.view_revision;
@@ -2888,11 +3015,7 @@
             delete payload.image_strategy;
         }
         btn.disabled = true;
-        fetch("/api/confirm", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-        }).then(function (r) {
+        postConfirm(payload, 1).then(function (r) {
             if (!r.ok) return r.json().then(function (data) { throw new Error(data.error || "confirm failed"); });
             showConfirmedOverlay();
             fetch("/api/shutdown", {
@@ -3033,10 +3156,10 @@
                 });
                 return;
             }
-            if (REC.content_intake && REC.content_intake.phase === "review") { confirm(); return; }
+            if (REC.content_intake && REC.content_intake.phase === "review") { confirm("button"); return; }
             if (STAGE === 1) submitStage1();
             else if (STAGE === 2) submitStage2();
-            else confirm();
+            else confirm("button");
         });
 
         Promise.all([

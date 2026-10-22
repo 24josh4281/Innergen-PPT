@@ -1024,6 +1024,11 @@ def create_app(
         threading.Thread(target=_stop, daemon=True).start()
         return jsonify({'status': 'ok'})
 
+    @app.route('/api/heartbeat', methods=['POST'])
+    def heartbeat():
+        """An open page pings here so idle shutdown only follows a closed page."""
+        return jsonify({'status': 'ok'})
+
     @app.route('/')
     def index():
         return send_from_directory(app.static_folder, 'index.html')
