@@ -335,6 +335,10 @@ function collectSparseContainerRisks(boxes: ShapeBox[]) {
     if (!contents.length) continue;
     if (contents.length === 1 && contents[0] === container) continue;
 
+    // A deliberately centred native card may have short content. Validate its
+    // actual geometry instead of forcing extra copy into balanced whitespace.
+    if (isBalancedCardStack(container, contents)) continue;
+
     const area = container.w * container.h;
     const totalTextWeight = contents.reduce((sum, box) => sum + meaningfulTextLength(box.text), 0);
     const structureUnitCount = contents.reduce((sum, box) => sum + estimateStructureUnits(box.text), 0);
@@ -352,6 +356,16 @@ function collectSparseContainerRisks(boxes: ShapeBox[]) {
   }
 
   return issues;
+}
+
+function isBalancedCardStack(container: ShapeBox, contents: ShapeBox[]) {
+  if (!contents.length || contents.some(b => !/^(?:card-\d+-|metric-|panel-)/.test(b.objectName ?? ""))) return false;
+  const sorted = [...contents].sort((a, b) => a.y - b.y);
+  if (sorted.some((b, i) => b.x < container.x + 0.1 || b.x + b.w > container.x + container.w - 0.1 || (i > 0 && b.y < sorted[i-1].y + sorted[i-1].h - .001))) return false;
+  const top = sorted[0].y - container.y;
+  const last = sorted[sorted.length - 1];
+  const bottom = container.y + container.h - last.y - last.h;
+  return top >= .1 && bottom >= .1 && Math.abs(top - bottom) < .03;
 }
 
 function isLargeBodyContainer(box: ShapeBox) {

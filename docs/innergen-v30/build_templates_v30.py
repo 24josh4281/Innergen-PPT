@@ -110,7 +110,24 @@ class Svg:
         self.tokens.append(token)
         self.slots.append(
             f'<g id="{id_}" data-pptx-placeholder="body" data-pptx-placeholder-idx="{self.idx}" data-pptx-placeholder-bounds="{r1(x)} {r1(y)} {r1(w)} {r1(h)}">'
-            f'<text id="{id_}-carrier" data-pptx-placeholder-carrier="true" x="{r1(tx)}" y="{r1(by)}"{a} font-family=\'{self.f["font"]}\' font-size="{size}" font-weight="{weight}" fill="{fill or self.f["text"]}">{{{{{token}}}}}</text></g>')
+            f'<text id="{id_}-carrier" data-pptx-placeholder-carrier="true" data-card-slot-bounds="{r1(x)} {r1(y)} {r1(w)} {r1(h)}" x="{r1(tx)}" y="{r1(by)}"{a} font-family=\'{self.f["font"]}\' font-size="{size}" font-weight="{weight}" fill="{fill or self.f["text"]}">{{{{{token}}}}}</text></g>')
+
+    def card(self, background, members, gap=6, padding=8):
+        """Declare an ordered stack without changing native object identities."""
+        # A static label that travels with the stack belongs to the slide, not
+        # the shared Layout. Keep Layout geometry stable across content lengths.
+        for member in members:
+            for atom in list(self.layout):
+                if f'id="{member}"' in atom:
+                    self.layout.remove(atom)
+                    self.slots.append(atom.replace(self._attrs(), ""))
+        for i, rect in enumerate(self.layout):
+            if f'id="{background}"' in rect:
+                attrs = (f' data-card-members="{" ".join(members)}"'
+                         f' data-card-gap="{gap}" data-card-padding="{padding}"')
+                self.layout[i] = rect.replace('/>', attrs + '/>')
+                return
+        raise ValueError(f"Missing card background: {background}")
 
     def render(self, layout_id: str, layout_name: str, canvas: tuple[int, int]) -> str:
         f = self.f
@@ -156,6 +173,9 @@ def s65(s: Svg):
         s.slot(f"resp-{i+1}-title", f"RESP_{i+1}_TITLE", s.X(0.65) + 6, s.Y(v), 0.25 * s.w, 0.08 * s.h, weight=700, fill=f["accent"])
         s.slot(f"resp-{i+1}-module", f"RESP_{i+1}_MODULE", s.X(0.9), s.Y(v), 0.1 * s.w, 0.08 * s.h, size=f["small"], fill=f["muted"], anchor="end")
         s.slot(f"resp-{i+1}-body", f"RESP_{i+1}_BODY", s.X(0.65) + 6, s.Y(v + 0.07), 0.35 * s.w - 6, (rh - 0.07) * s.h)
+    s.card("situation-bg", ["situation-title", "situation-body"])
+    for i in range(1, 4):
+        s.card(f"issue-{i}-box", [f"issue-{i}-title", f"issue-{i}-body"])
     s.rect("end-strip", s.X(0), s.Y(0.89), s.w, 0.11 * s.h, f["strip"])
     s.label("end-label", s.X(0) + 10, s.Y(0.945) + f["label"] * 0.35, "제안 범위", fill=f["accent"])
     s.slot("scope", "SCOPE", s.X(0.12), s.Y(0.89), 0.87 * s.w, 0.11 * s.h, valign="middle")
@@ -178,6 +198,8 @@ def s66(s: Svg):
         s.label(f"proof-{i+1}-tag", s.X(u) + 8, s.Y(0.64) + f["small"] + 6, "근거", size=f["small"], fill=f["muted"])
         s.slot(f"proof-{i+1}-num", f"PROOF_{i+1}_NUM", s.X(u), s.Y(0.665), pw * s.w, 0.09 * s.h, size=f["big"], weight=700, fill=f["accent"], anchor="middle", valign="middle")
         s.slot(f"proof-{i+1}-label", f"PROOF_{i+1}_LABEL", s.X(u), s.Y(0.755), pw * s.w, 0.08 * s.h, anchor="middle", valign="middle")
+        s.card(f"proof-{i+1}-bg", [f"proof-{i+1}-tag", f"proof-{i+1}-num", f"proof-{i+1}-label"], gap=3, padding=3)
+        s.card(f"pillar-{i+1}-body-bg", [f"pillar-{i+1}-body"])
     s.rect("foundation", s.X(0), s.Y(0.87), s.w, 0.13 * s.h, f["strip"])
     s.label("foundation-label", s.X(0) + 10, s.Y(0.935) + f["label"] * 0.35, "공통 기반", fill=f["accent"])
     s.slot("foundation-body", "FOUNDATION", s.X(0.12), s.Y(0.87), 0.87 * s.w, 0.13 * s.h, valign="middle")
@@ -305,6 +327,7 @@ def s70(s: Svg):
         s.rect(f"key-{i+1}-bar", s.X(u), s.Y(0.23), kw * s.w, 3, f["accent"])
         s.slot(f"key-{i+1}-title", f"KEY_{i+1}_TITLE", s.X(u), s.Y(0.235), kw * s.w, 0.07 * s.h, size=f["label"], weight=700, fill=f["accent"])
         s.slot(f"key-{i+1}-body", f"KEY_{i+1}_BODY", s.X(u), s.Y(0.30), kw * s.w, 0.10 * s.h)
+        s.card(f"key-{i+1}-bg", [f"key-{i+1}-title", f"key-{i+1}-body"], gap=4, padding=5)
         for j in range(3):
             v = 0.43 + j * 0.15
             s.rect(f"support-{i+1}-{j+1}-bar", s.X(u), s.Y(v), 3, 0.12 * s.h, f["tint"])
@@ -361,6 +384,7 @@ def s72(s: Svg):
         s.rect(f"{id_}-bar", s.X(0), s.Y(v), 3, h * s.h, f["accent"])
         s.label(f"{id_}-label", s.X(0) + 10, s.Y(v) + f["label"] + 6, name, fill=f["accent"])
         s.slot(id_, tok, s.X(0) + 4, s.Y(v + 0.055), 0.48 * s.w - 4, (h - 0.055) * s.h)
+        s.card(f"{id_}-bg", [f"{id_}-label", id_], gap=6, padding=8)
     # KPI mini table
     u0 = 0.50
     s.label("kpi-label", s.X(u0) + 2, s.Y(0.12) + f["label"] + 6, "KPI", fill=f["accent"])
@@ -485,9 +509,11 @@ def s74(s: Svg):
         s.rect(f"kpi-{i+1}-bar", s.X(u0), s.Y(v), 3, 0.18 * s.h, f["accent"])
         s.slot(f"kpi-{i+1}-value", f"KPI_{i+1}_VALUE", s.X(u0) + 4, s.Y(v), pw * s.w - 4, 0.11 * s.h, size=f["big"], weight=700, fill=f["accent"], valign="middle")
         s.slot(f"kpi-{i+1}-label", f"KPI_{i+1}_LABEL", s.X(u0) + 4, s.Y(v + 0.1), pw * s.w - 4, 0.08 * s.h, fill=f["dark"], valign="middle")
+        s.card(f"kpi-{i+1}-bg", [f"kpi-{i+1}-value", f"kpi-{i+1}-label"], gap=4, padding=5)
     s.rect("assume-bg", s.X(u0), s.Y(0.61), pw * s.w, 0.25 * s.h, "#FFFFFF", stroke=f["line"])
     s.label("assume-label", s.X(u0) + 8, s.Y(0.61) + f["label"] + 6, "주요 가정", fill=f["dark"])
     s.slot("assumptions", "ASSUMPTIONS", s.X(u0), s.Y(0.66), pw * s.w, 0.2 * s.h)
+    s.card("assume-bg", ["assume-label", "assumptions"], gap=6, padding=8)
     s.rect("end-strip", s.X(0), s.Y(0.89), s.w, 0.11 * s.h, f["strip"])
     s.label("end-label", s.X(0) + 10, s.Y(0.945) + f["label"] * 0.35, "판단", fill=f["accent"])
     s.slot("verdict", "VERDICT", s.X(0.08), s.Y(0.89), 0.91 * s.w, 0.11 * s.h, valign="middle")

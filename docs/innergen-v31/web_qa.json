@@ -1,0 +1,17 @@
+{
+  "score": 100,
+  "status": "pass",
+  "slideCount": 5,
+  "minFontSize": 11,
+  "belowMinFontCount": 0,
+  "rawHyphenCount": 0,
+  "ellipsisCount": 0,
+  "overflowRiskCount": 0,
+  "overlapRiskCount": 0,
+  "narrowTextRiskCount": 0,
+  "sparseContainerCount": 0,
+  "tableWhitespaceRiskCount": 0,
+  "alignmentRiskCount": 0,
+  "warnings": [],
+  "issues": []
+}

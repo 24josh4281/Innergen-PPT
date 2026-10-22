@@ -1,0 +1,27 @@
+name: Card content layout
+on:
+  pull_request:
+  push:
+    branches: ['codex/card-content-center']
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: python -m pip install python-pptx Pillow lxml
+      - run: npm run build
+      - run: npm run test:cards
+      - uses: actions/upload-artifact@v4
+        with:
+          name: card-before-after
+          path: docs/generated/cards-v31/web/
