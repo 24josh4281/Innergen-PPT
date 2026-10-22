@@ -80,11 +80,16 @@ def popen_detached(
     caller's Job Object. ``CREATE_BREAKAWAY_FROM_JOB`` lets the local UI server
     survive after the launcher command returns; when that flag is forbidden, the
     function falls back to the previous detached-process flags.
+
+    ``CREATE_NO_WINDOW`` rather than ``DETACHED_PROCESS``: a venv
+    ``python.exe`` is a launcher that starts the real interpreter as a child,
+    and a console-less launcher makes that child open a new visible console
+    window. Users close that "black window" and kill the server with it.
     """
     if os.name != 'nt':
         return subprocess.Popen(args, start_new_session=True, **kwargs)
 
-    base_flags = subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS
+    base_flags = subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.CREATE_NO_WINDOW
     breakaway_flag = getattr(subprocess, 'CREATE_BREAKAWAY_FROM_JOB', 0x01000000)
     try:
         return subprocess.Popen(
