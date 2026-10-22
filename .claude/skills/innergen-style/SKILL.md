@@ -178,6 +178,10 @@ native Word/PPT Office Math; source facts, units and methodology remain protecte
 In the SVG route, draw these diagrams with `scripts/report_diagrams.py` (§5 of the
 v30 doc) and write formulas as `<text data-pptx-equation="LaTeX">`; Word/finished
 PPTX use `scripts/office_equations.py` (methodology/business-plan Word: `docx --kind`, or `inject-docx` on the user's draft). `innergen_qaqc.py` M01–M03 gate them.
+For any 감축 work type, offer the [`reduction-equations`](../reduction-equations/SKILL.md)
+add-on in the first reply: rough-text formulas or the user's existing 방법론·사업계획서·
+발표 PPT become editable equations plus symbol, monitoring and 데이터/인자 tables in the
+KCS or 환경부 외부사업 form, as Word and as PPT slides.
 This adds content/editability requirements without selecting a template or executor.
 
 ## 1. Load and route

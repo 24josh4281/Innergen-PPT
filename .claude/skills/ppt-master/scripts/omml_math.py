@@ -708,6 +708,62 @@ def svg_preview_tspans(latex: str, font_size: float) -> str:
     return "".join(out)
 
 
+def _mathml_seq(nodes: list) -> str:
+    inner = "".join(_mathml(n) for n in nodes)
+    return inner if len(nodes) == 1 else f"<mrow>{inner}</mrow>"
+
+
+def _mathml(node: Node) -> str:
+    if isinstance(node, Run):
+        text = escape(node.text)
+        if node.kind == "num":
+            return f"<mn>{text}</mn>"
+        if node.kind == "op":
+            return f"<mo>{text}</mo>" if node.text.strip() else "<mspace width='0.25em'/>"
+        if node.kind == "var":
+            # A multi-letter <mi> renders upright by default; symbols stay italic.
+            return f"<mi>{text}</mi>" if len(node.text) == 1 else f"<mi mathvariant='italic'>{text}</mi>"
+        return f"<mtext>{text}</mtext>" if node.kind == "text" else f"<mi mathvariant='normal'>{text}</mi>"
+    if isinstance(node, Frac):
+        return f"<mfrac>{_mathml_seq(node.num)}{_mathml_seq(node.den)}</mfrac>"
+    if isinstance(node, Script):
+        base = _mathml_seq(node.base)
+        if node.sub is not None and node.sup is not None:
+            return f"<msubsup>{base}{_mathml_seq(node.sub)}{_mathml_seq(node.sup)}</msubsup>"
+        if node.sub is not None:
+            return f"<msub>{base}{_mathml_seq(node.sub)}</msub>"
+        return f"<msup>{base}{_mathml_seq(node.sup or [])}</msup>"
+    if isinstance(node, Nary):
+        op = f"<mo largeop='true' movablelimits='false'>{node.chr}</mo>"
+        if node.sub is not None and node.sup is not None:
+            op = f"<munderover>{op}{_mathml_seq(node.sub)}{_mathml_seq(node.sup)}</munderover>"
+        elif node.sub is not None:
+            op = f"<munder>{op}{_mathml_seq(node.sub)}</munder>"
+        elif node.sup is not None:
+            op = f"<mover>{op}{_mathml_seq(node.sup)}</mover>"
+        return f"<mrow>{op}{''.join(_mathml(n) for n in node.body)}</mrow>"
+    if isinstance(node, Rad):
+        if node.deg:
+            return f"<mroot>{_mathml_seq(node.body)}{_mathml_seq(node.deg)}</mroot>"
+        return f"<msqrt>{''.join(_mathml(n) for n in node.body)}</msqrt>"
+    if isinstance(node, Delim):
+        inner = "".join(_mathml(n) for n in node.body)
+        if not node.open and not node.close:
+            return f"<mrow>{inner}</mrow>"
+        return (f"<mrow><mo fence='true'>{escape(node.open)}</mo>{inner}"
+                f"<mo fence='true'>{escape(node.close)}</mo></mrow>")
+    if isinstance(node, Accent):
+        return f"<mover accent='true'>{_mathml_seq(node.body)}<mo>{node.chr or '‾'}</mo></mover>"
+    raise EquationError(f"unknown node {node!r}")
+
+
+def mathml(latex: str, display: bool = True) -> str:
+    """Presentation MathML for browser previews (web equation editor)."""
+    body = "".join(_mathml(n) for n in parse_latex(latex))
+    mode = "block" if display else "inline"
+    return f'<math xmlns="http://www.w3.org/1998/Math/MathML" display="{mode}">{body}</math>'
+
+
 def equation_height_factor(latex: str) -> float:
     """Approximate rendered height in multiples of the font size."""
     def depth(nodes: list) -> float:

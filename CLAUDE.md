@@ -72,6 +72,8 @@ For a methodology or business plan in Word, build it with `office_equations.py d
 --kind methodology|business_plan`, or run `inject-docx` on the user's own draft
 (see the v30 doc). This user-authorized requirement takes precedence over the
 generic formula-PNG default. Preserve originals and do not invent methodology, coefficients or results.
+Rough-text formulas, auto symbol/monitoring tables, KCS or 환경부 외부사업 form,
+and the web editor: skill [`reduction-equations`](.claude/skills/reduction-equations/SKILL.md).
 
 ## Setup and Update Requests (new PC)
 
