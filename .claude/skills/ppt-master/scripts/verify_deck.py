@@ -62,6 +62,7 @@ _SCRIPTS_DIR = Path(__file__).resolve().parent
 if str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
 
+import pptx_safe_render  # noqa: E402
 from console_encoding import configure_utf8_stdio  # noqa: E402
 from project_utils import CANVAS_FORMATS  # noqa: E402
 
@@ -278,6 +279,18 @@ def officecli_checks(project: Path, render: bool = True) -> tuple[list[str], lis
     if not failures:
         out = project / "_pptx_render" / f"{pptx.stem}-grid.png"
         out.parent.mkdir(parents=True, exist_ok=True)
+        # PowerPoint-exact wraps without closing the user's PowerPoint; the
+        # HTML engine below is the fallback when PowerPoint is unavailable.
+        code, pngs, detail = pptx_safe_render.render(
+            pptx, project / "_pptx_render" / "slides")
+        if code == 0:
+            pptx_safe_render.contact_sheet(pngs, out)
+            print(f"[verify_deck] pptx render (PowerPoint): {out} — Read it to "
+                  f"eyeball overflow/collision issues in the exported deck")
+            return failures, warnings
+        if code != pptx_safe_render.UNAVAILABLE:
+            warnings.append(f"PowerPoint render failed, used the HTML engine "
+                            f"(wraps may shift ~1 character): {detail}")
         rs = _run_officecli([binary, "view", str(pptx), "screenshot",
                              "--grid", "auto", "--out", str(out), "--json",
                              *render_args()],

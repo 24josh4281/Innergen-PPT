@@ -21,10 +21,10 @@ process.stdin.on('end', () => {
   if (findUnsafeRender(command)) {
     process.stderr.write(
       'Blocked: officecli view screenshot/pdf without `--render html`. The native '
-      + 'render quits PowerPoint and closes the user\'s open decks unsaved. Add '
-      + '`--render html` to the call. Use the native path only when the user asks '
-      + 'for a PowerPoint-exact render after saving and closing every PowerPoint '
-      + 'window, by prefixing SLIDE_MASTER_NATIVE_RENDER=1.\n');
+      + 'render quits PowerPoint and closes the user\'s open decks unsaved. For '
+      + 'PowerPoint-exact wraps use .claude/skills/ppt-master/scripts/'
+      + 'pptx_safe_render.py (leaves PowerPoint open); otherwise add '
+      + '`--render html`.\n');
     process.exit(2);
   }
   process.exit(0);

@@ -394,12 +394,13 @@ Save the `issues --json` output to `<project_dir>/validation/officecli_issues.js
 
 ### 7.3 Native render pass
 
-Render every output page with `--render html` and read the images. The native path (`--render auto`) quits the PowerPoint it drives, and a deck the user has open or opens during the render closes unsaved; use it only when the user asks for a PowerPoint-exact render after saving and closing every PowerPoint window.
+Render every output page with `pptx_safe_render.py` and read the images: it renders through PowerPoint (exact line wraps) from a read-only, windowless copy and never closes the user's decks. When it exits 3 (no PowerPoint), use `officecli ... --render html`. Never run OfficeCLI's native render (`officecli view ... screenshot|pdf` without `--render html`): it quits PowerPoint and closes the user's open decks unsaved.
 
 ```bash
-officecli view "<project_dir>/exports/<file>.pptx" screenshot --page 1-<N> --render html \
-  -o "<project_dir>/validation/pptx_render/deck.png"
-# per page: --page <k> -o .../p<k>.png ; whole-deck contact sheet: --grid
+python3 .claude/skills/ppt-master/scripts/pptx_safe_render.py "<project_dir>/exports/<file>.pptx" \
+  -o "<project_dir>/validation/pptx_render" --grid "<project_dir>/validation/pptx_render/deck.png"
+# writes p<k>.png per slide; --pages 1-3,5 for a subset
+# exit 3 (no PowerPoint) → officecli view <file> screenshot --page 1-<N> --render html -o .../deck.png
 ```
 
 | Check | Signal |

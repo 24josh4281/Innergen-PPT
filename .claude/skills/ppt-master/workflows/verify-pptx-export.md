@@ -38,10 +38,10 @@ officecli --version
 
 | Environment | Behavior | Trust level |
 |---|---|---|
-| Default — every call passes `--render html` | OfficeCLI built-in HTML engine | High fidelity; apply the Step 3 known-deviation table |
-| Native opt-in (`--render auto`, Windows with PowerPoint) | Drives native PowerPoint | Ground truth — pixels are what PowerPoint shows |
+| Default on Windows with PowerPoint — `pptx_safe_render.py` | Read-only, windowless copy in PowerPoint; never closes the user's decks | Ground truth — pixels and line wraps are what PowerPoint shows |
+| Fallback (exit 3, no PowerPoint) — `officecli ... --render html` | OfficeCLI built-in HTML engine | High fidelity; apply the Step 3 known-deviation table |
 
-> **Always pass `--render html` (Mandatory).** The native path drives PowerPoint and quits it afterwards. A deck the user has open — or opens while the render runs — joins that instance and closes without saving. Use the native path only when the user asks for a PowerPoint-exact render, after they confirm every PowerPoint window is saved and closed, and keep it closed until the render ends. `verify_deck.py` renders with the HTML engine unless `SLIDE_MASTER_NATIVE_RENDER=1` is set and no PowerPoint is running.
+> **Never use OfficeCLI's native render (Mandatory).** `officecli view ... screenshot|pdf` without `--render html` drives PowerPoint and quits it afterwards; a deck the user has open — or opens while the render runs — closes without saving. Render with `pptx_safe_render.py` (exact wraps, leaves PowerPoint and the user's decks open); when it exits 3, use `officecli ... --render html`. `verify_deck.py` does this automatically.
 
 ---
 
@@ -80,9 +80,10 @@ Detects per-frame text overflow with measured need-vs-usable heights and a sugge
 ## Step 3: Rendered-Slide Visual Pass
 
 ```bash
-officecli view "<project>/exports/<file>.pptx" screenshot --page 1-<N> --render html \
-  -o "<project>/validation/pptx_render/deck.png"
-# per page: --page <k> -o .../p<k>.png ; whole-deck contact sheet: --grid
+python3 .claude/skills/ppt-master/scripts/pptx_safe_render.py "<project>/exports/<file>.pptx" \
+  -o "<project>/validation/pptx_render" --grid "<project>/validation/pptx_render/deck.png"
+# writes p<k>.png per slide; --pages 1-3,5 for a subset
+# exit 3 (no PowerPoint) → officecli view <file> screenshot --page 1-<N> --render html -o .../deck.png
 ```
 
 Read the rendered output and check every page:

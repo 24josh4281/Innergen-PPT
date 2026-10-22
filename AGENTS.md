@@ -91,11 +91,11 @@ following Codex enforcement remains mandatory for that route only:
   final pre-hand-off run must render. That lightweight scan is not
   `verify-pptx-export`: on a suspected issue, report it and recommend the
   workflow, but never enter it without explicit user approval.
-- Every manual `officecli view <file> screenshot|pdf` passes `--render html`.
-  The default native render quits PowerPoint and closes the user's open decks
-  unsaved, including one opened while the render runs. Native only when the
-  user asks for a PowerPoint-exact render after saving and closing every
-  PowerPoint window (`SLIDE_MASTER_NATIVE_RENDER=1`).
+- Render PPTX slides with `scripts/pptx_safe_render.py` (PowerPoint-exact
+  wraps; leaves PowerPoint and the user's decks open). When it exits 3, use
+  `officecli view <file> screenshot|pdf --render html`. Never run OfficeCLI's
+  native render (no `--render html`): it quits PowerPoint and closes the
+  user's open decks unsaved, including one opened while the render runs.
 
 Direct-PPTX routes use only their own native validation loops and preserve their
 source fonts. Pretendard applies to SVG-authoring routes. `docs/rules/` style
