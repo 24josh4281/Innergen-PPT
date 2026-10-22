@@ -69,8 +69,9 @@ FAMILIES: dict[str, dict[str, Any]] = {
         pale="#EEF2FF", zebra="#F3F6FF", rule="#E2E8F0", text="#475569", muted="#64748B",
         neutral="#94A3B8", alert="#FF0000", white="#FFFFFF",
         ramp=["#DFE7FF", "#B8CBF9", "#7B9BF7", "#2F62F0", "#0B1739"]),
+    # innercarry body text is 14.67px (user readability decision 2026-10-22); 12px only for labels.
     "innercarry": dict(
-        font='"IBM Plex Sans KR", "Malgun Gothic", sans-serif', min_px=10.67, ladder=(10.67, 12, 13.33),
+        font='"IBM Plex Sans KR", "Malgun Gothic", sans-serif', min_px=12, ladder=(13.33, 14.67, 16),
         navy="#0B1739", accent="#2F62F0", light="#7B9BF7", mid="#B8CBF9", panel="#DFE7FF",
         pale="#EEF2FF", zebra="#F3F6FF", rule="#E2E8F0", text="#475569", muted="#64748B",
         neutral="#94A3B8", alert="#991B1B", white="#FFFFFF",
