@@ -230,8 +230,13 @@ def _powerpoint_running() -> bool:
 
 
 def render_args() -> list[str]:
-    """Screenshot render flag: native PowerPoint only when no PowerPoint is open."""
-    return ["--render", "html"] if _powerpoint_running() else []
+    """Screenshot render flag: the HTML engine by default. Native PowerPoint
+    quits the instance it drives, and a deck the user opens while the render
+    runs joins that instance and is closed unsaved, so the native path needs an
+    explicit opt-in (SLIDE_MASTER_NATIVE_RENDER=1) and no PowerPoint open."""
+    if os.environ.get("SLIDE_MASTER_NATIVE_RENDER") == "1" and not _powerpoint_running():
+        return []
+    return ["--render", "html"]
 
 
 def officecli_checks(project: Path, render: bool = True) -> tuple[list[str], list[str]]:

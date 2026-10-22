@@ -38,10 +38,10 @@ officecli --version
 
 | Environment | Behavior | Trust level |
 |---|---|---|
-| Windows with PowerPoint installed (default `--render auto`) | Drives native PowerPoint | Ground truth — pixels are what PowerPoint shows |
-| No Office available (`--render html` fallback) | OfficeCLI built-in HTML engine | High fidelity; apply the Step 3 known-deviation table |
+| Default — every call passes `--render html` | OfficeCLI built-in HTML engine | High fidelity; apply the Step 3 known-deviation table |
+| Native opt-in (`--render auto`, Windows with PowerPoint) | Drives native PowerPoint | Ground truth — pixels are what PowerPoint shows |
 
-> **PowerPoint already open → `--render html` (Mandatory).** The native path drives the running PowerPoint instance and quits it afterwards, closing the user's open decks. Check first (`tasklist /FI "IMAGENAME eq POWERPNT.EXE"`); when PowerPoint is running, add `--render html` to every `view screenshot` / `view pdf` call. `verify_deck.py` applies this automatically.
+> **Always pass `--render html` (Mandatory).** The native path drives PowerPoint and quits it afterwards. A deck the user has open — or opens while the render runs — joins that instance and closes without saving. Use the native path only when the user asks for a PowerPoint-exact render, after they confirm every PowerPoint window is saved and closed, and keep it closed until the render ends. `verify_deck.py` renders with the HTML engine unless `SLIDE_MASTER_NATIVE_RENDER=1` is set and no PowerPoint is running.
 
 ---
 
@@ -80,7 +80,7 @@ Detects per-frame text overflow with measured need-vs-usable heights and a sugge
 ## Step 3: Rendered-Slide Visual Pass
 
 ```bash
-officecli view "<project>/exports/<file>.pptx" screenshot --page 1-<N> \
+officecli view "<project>/exports/<file>.pptx" screenshot --page 1-<N> --render html \
   -o "<project>/validation/pptx_render/deck.png"
 # per page: --page <k> -o .../p<k>.png ; whole-deck contact sheet: --grid
 ```
