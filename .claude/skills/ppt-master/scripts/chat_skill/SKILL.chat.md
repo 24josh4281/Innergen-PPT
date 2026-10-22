@@ -1,6 +1,6 @@
 ---
 name: innergen-deck
-description: 이너젠·이너캐리 스타일 컨설팅·교육 장표를 편집 가능한 PPTX로 만든다. "이너젠 스타일", "이너젠 장표", "이너캐리 소개자료", "INNerGEN deck" 요청이나 CDP·규제·감축 보고 장표 요청에 사용.
+description: 이너젠·이너캐리 스타일 컨설팅·교육 장표를 편집 가능한 PPTX로 만든다. "이너젠 디자인(해줘/으로 만들어줘)", "이너젠 스타일", "이너젠 장표", "이너젠 PPT", "이너캐리 디자인", "이너캐리 소개자료", "INNerGEN deck/design" 등 이너젠·이너캐리를 언급한 장표 요청이나 CDP·규제·감축 보고 장표 요청에 사용.
 ---
 
 # INNerGEN Deck (claude.ai chat edition)

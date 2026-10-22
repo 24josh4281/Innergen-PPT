@@ -42,6 +42,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -81,6 +82,7 @@ NPM_TOOLS = (
     ("officecli", "@officecli/officecli@1.0.135"),
     ("codex", "@openai/codex"),
 )
+MIN_CODEX = (0, 148, 0)
 WINGET_NODE = ["winget", "install", "-e", "--id", "OpenJS.NodeJS.LTS", "--silent",
                "--accept-source-agreements", "--accept-package-agreements"]
 
@@ -259,11 +261,46 @@ def install_extras(py: Path) -> bool:
         return installed
     installed |= not had_npm
     for binary, package in NPM_TOOLS:
-        if _find(binary):
+        if binary == "codex" and _codex_outdated():
+            installed |= upgrade_codex(npm, package)
+        elif _find(binary):
             print(f"  {binary}: already installed")
         else:
             installed |= _run([npm, "install", "-g", package]) == 0
     return installed
+
+
+def _codex_outdated() -> bool:
+    """True when the Codex CLI first on PATH is older than MIN_CODEX.
+
+    The Codex desktop app writes newer settings (e.g. service_tier = "default")
+    to ~/.codex/config.toml; 0.129 rejects them, so every `codex exec` fails
+    before the prompt runs. 0.148 is the oldest release checked to read them.
+    """
+    codex = _find("codex")
+    if not codex:
+        return False
+    try:
+        out = subprocess.run([codex, "--version"], capture_output=True, text=True,
+                             encoding="utf-8", errors="replace", timeout=60).stdout
+    except (OSError, subprocess.TimeoutExpired):
+        return False
+    found = re.search(r"(\d+)\.(\d+)\.(\d+)", out)
+    return bool(found) and tuple(int(x) for x in found.groups()) < MIN_CODEX
+
+
+def upgrade_codex(npm: str, package: str) -> bool:
+    """Upgrade the shadowing Codex CLI (winget copy first on Windows, else npm)."""
+    print("  codex: older than %d.%d.%d, which ~/.codex/config.toml needs — upgrading" % MIN_CODEX)
+    codex = _find("codex") or ""
+    if os.name == "nt" and "winget" in codex.lower() and _find("winget"):
+        _run(["winget", "upgrade", "-e", "--id", "OpenAI.Codex", "--silent",
+              "--accept-source-agreements", "--accept-package-agreements"])
+    else:
+        _run([npm, "install", "-g", package])
+    ok = not _codex_outdated()
+    print(f"  codex: {'ok' if ok else 'still too old — reinstall Codex CLI'}")
+    return ok
 
 
 def smoke_test(py: Path) -> int:

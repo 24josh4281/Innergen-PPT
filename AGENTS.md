@@ -107,8 +107,9 @@ standing repository conventions from [`CLAUDE.md`](CLAUDE.md).
 
 ## User-authorized persistent style: 이너젠 / INNerGEN
 
-When the user requests "이너젠 스타일", "이너젠처럼", "INNerGEN style", or
-"innergen style", or explicitly names a PPTX under `INPUTS/이너젠 PPT 장표 레퍼런스/`
+When a presentation request names 이너젠 / INNerGEN in any wording — "이너젠
+디자인(으로 만들어줘/해줘)", "이너젠 스타일", "이너젠처럼", "이너젠 장표", "이너젠
+PPT", "이너젠 양식", "이너젠 템플릿", "INNerGEN design/style/deck" — or explicitly names a PPTX under `INPUTS/이너젠 PPT 장표 레퍼런스/`
 as a design/style reference, read [the canonical style adapter](.claude/skills/innergen-style/SKILL.md)
 and its linked `docs/styles/innergen/` rules before planning the presentation.
 This is a user-authorized persistent style preference for this workspace.
@@ -124,8 +125,9 @@ fallback. Other styles retain the standing font policy.
 
 ## User-authorized persistent style: 이너캐리 / INNerCarry
 
-When the user requests "이너캐리 스타일", "이너캐리처럼", "INNerCarry style", or
-"InnerCarry style", or names `(이너젠) 이너캐리 소개 자료_260820_v2.3.pptx`
+When a presentation request names 이너캐리 / INNerCarry in any wording —
+"이너캐리 디자인(해줘)", "이너캐리 스타일", "이너캐리처럼", "이너캐리 장표",
+"INNerCarry design/style/deck" — or names `(이너젠) 이너캐리 소개 자료_260820_v2.3.pptx`
 as a design reference, read [the canonical style adapter](.claude/skills/innercarry-style/SKILL.md)
 and its `docs/styles/innercarry/` design rules. Route first through the existing
 `routing.md`; this adapter supplies style decisions, not an executor or implicit

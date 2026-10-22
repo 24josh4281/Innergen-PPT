@@ -1,6 +1,6 @@
 ---
 name: innercarry-style
-description: Apply the source-backed INNerCarry presentation style when the user requests 이너캐리 스타일, 이너캐리처럼, INNerCarry style, or names the supplied 이너캐리 소개 자료 PPTX as a design reference. Keeps source claims and client assets out of new work.
+description: Apply the source-backed INNerCarry presentation style whenever a presentation request names 이너캐리 / INNerCarry — 이너캐리 디자인, 이너캐리 디자인해줘, 이너캐리 스타일, 이너캐리처럼, 이너캐리 장표, 이너캐리 PPT, 이너캐리 양식, INNerCarry design/style/deck, or names the supplied 이너캐리 소개 자료 PPTX as a design reference. Keeps source claims and client assets out of new work.
 ---
 
 # INNerCarry Style Adapter

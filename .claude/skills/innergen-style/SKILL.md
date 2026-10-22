@@ -1,6 +1,6 @@
 ---
 name: innergen-style
-description: Apply the locally extracted INNerGEN presentation design when the user requests 이너젠 스타일, 이너젠처럼, 이너젠 소개자료 스타일, 이너젠 강의자료, INNerGEN style, or names a PPTX in INPUTS/이너젠 PPT 장표 레퍼런스 as a design reference. Selects style family, work type (CDP·규제·감축·인벤토리 등), report stage (제안·착수·중간·최종) and delivery mode (발표·교육·제안·보고) via the v16 matrix, without reusing old client facts.
+description: Apply the locally extracted INNerGEN presentation design whenever a presentation request names 이너젠 / INNerGEN — 이너젠 디자인, 이너젠 디자인으로 만들어줘, 이너젠 디자인해줘, 이너젠 스타일, 이너젠처럼, 이너젠 장표, 이너젠 PPT, 이너젠 양식, 이너젠 템플릿, 이너젠 소개자료, 이너젠 강의자료, 이너젠 보고서, INNerGEN design/style/deck, or names a PPTX in INPUTS/이너젠 PPT 장표 레퍼런스 as a design reference. Selects style family, work type (CDP·규제·감축·인벤토리 등), report stage (제안·착수·중간·최종) and delivery mode (발표·교육·제안·보고) via the v16 matrix, without reusing old client facts.
 ---
 
 # INNerGEN Style Adapter
