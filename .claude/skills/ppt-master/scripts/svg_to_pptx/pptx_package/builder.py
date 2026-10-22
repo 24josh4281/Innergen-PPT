@@ -3213,6 +3213,23 @@ def _create_writable_work_dir(output_path: Path) -> Path:
     )
 
 
+def _move_unless_locked(source: Path, target: Path) -> tuple[Path, str]:
+    """Move the built PPTX into place. When the target is open in PowerPoint
+    (Windows locks it), save beside it as <stem>_new<N>.pptx instead of failing,
+    so the user's open deck is never touched."""
+    try:
+        shutil.move(str(source), str(target))
+        return target, ''
+    except PermissionError:
+        for n in range(1, 100):
+            alt = target.with_name(f'{target.stem}_new{n}{target.suffix}')
+            if not alt.exists():
+                shutil.move(str(source), str(alt))
+                return alt, (f'{target.name} is open in another program (PowerPoint?); '
+                             f'saved as {alt.name} instead')
+        raise
+
+
 def _relax_output_permissions(output_path: Path) -> list[str]:
     """Make exported files readable outside the sandbox owner where possible."""
     warnings: list[str] = []
@@ -4845,8 +4862,10 @@ def create_pptx_with_native_svg(
             raise RuntimeError(
                 f'PPTX animation package validation failed: {exc}'
             ) from exc
-        shutil.move(str(temp_output_path), str(output_path))
+        output_path, locked_note = _move_unless_locked(temp_output_path, output_path)
         permission_warnings = _relax_output_permissions(output_path)
+        if locked_note:
+            permission_warnings.insert(0, locked_note)
 
         if conversion_trace_path and conversion_trace is not None:
             conversion_trace_path.parent.mkdir(parents=True, exist_ok=True)

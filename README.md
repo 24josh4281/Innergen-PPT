@@ -134,6 +134,7 @@ sh setup.sh
 |---|---|---|
 | claude.ai 채팅·Cowork | `OUTPUTS/claude-chat-skill/innergen-deck.zip` — 세 계열 템플릿(이너젠 뉴 교육/강의·사업/회사 소개, 이너캐리), SVG→PPTX 변환기, 이너젠 QA/QC, 규칙 문서 | **설정 → Capabilities(기능) → Skills → Upload skill** (기존 `innergen-deck`이 있으면 지우고 새로 올림) |
 | Claude Design | `OUTPUTS/claude-design/innergen-design-system.zip` — 색·글자 토큰(CSS/JSON), 로고, 세 계열(이너젠 뉴 교육/강의·사업/회사 소개, 이너캐리) 레이아웃 SVG, 미리보기 카드 18장, 규칙 문서. 폰트 파일은 업로드 한도(10 MB) 때문에 빼고, 대체 글꼴은 맑은 고딕입니다 | **claude.ai/design → 디자인 시스템** 새로 만들기(처음) 또는 INNerGEN 업데이트에 ZIP·폴더 첨부 |
+| ChatGPT 채팅·Work 프로젝트 | `OUTPUTS/chatgpt-package/innergen-deck-chatgpt.zip`(채팅 스킬 + ChatGPT 실행 안내) · `chatgpt-project-instructions.txt` — `build_chatgpt_package.py`로 생성. 코드 실행 기능이 켜져 있어야 합니다 | ChatGPT **프로젝트** 지침에 txt 붙여 넣기, 파일에 ZIP 올리기 |
 
 - **자동 갱신**: 설정 스크립트가 `git config core.hooksPath .githooks`를 켭니다. 이후 `git pull`마다 원본이 바뀌었으면 두 파일을 다시 만들고(바뀐 게 없으면 1초 안에 넘어감) "업로드 필요"를 출력합니다. 직접 확인은 `python .claude/skills/ppt-master/scripts/claude_bundles.py status`.
 - **올린 뒤**: `python .claude/skills/ppt-master/scripts/claude_bundles.py mark-uploaded all` — 다음 변경 전까지 알림이 멈춥니다(이 PC 기준 기록, `OUTPUTS/claude-bundles-state.json`).

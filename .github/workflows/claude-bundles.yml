@@ -1,7 +1,8 @@
 # Builds the claude.ai chat skill (innergen-deck.zip) and the Claude Design design
-# system (innergen-design-system.zip) on every push to slide-master and publishes
-# them to the rolling release `claude-bundles`, so org admins always download the
-# current files. Source of truth: .claude/skills/ppt-master/scripts/claude_bundles.py
+# system (innergen-design-system.zip) plus the ChatGPT package (build_chatgpt_package.py)
+# on every push to slide-master and publishes them to the rolling release
+# `claude-bundles`, so org admins always download the current files.
+# Source of truth: .claude/skills/ppt-master/scripts/claude_bundles.py
 name: claude-bundles
 
 on:
@@ -34,7 +35,9 @@ jobs:
         with:
           python-version: "3.12"
       - name: Build bundles
-        run: python .claude/skills/ppt-master/scripts/claude_bundles.py build
+        run: |
+          python .claude/skills/ppt-master/scripts/claude_bundles.py build
+          python .claude/skills/ppt-master/scripts/build_chatgpt_package.py
       - name: Publish rolling release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -44,7 +47,8 @@ jobs:
           notes="커밋 ${GITHUB_SHA::7} · 채팅 스킬 ${chat} · 디자인 시스템 ${design}
 
           - innergen-deck.zip → claude.ai 설정 → Capabilities → Skills (조직 관리자는 조직 스킬로 배포)
-          - innergen-design-system.zip → claude.ai/design 디자인 시스템 INNerGEN 업데이트"
+          - innergen-design-system.zip → claude.ai/design 디자인 시스템 INNerGEN 업데이트
+          - innergen-deck-chatgpt.zip + chatgpt-project-instructions.txt → ChatGPT 프로젝트 파일 · 지침"
           if ! gh release view claude-bundles >/dev/null 2>&1; then
             gh release create claude-bundles --target "$GITHUB_SHA" --title "claude.ai 번들 (최신)" \
               --notes "$notes" --latest=false
@@ -53,4 +57,6 @@ jobs:
           fi
           gh release upload claude-bundles --clobber \
             OUTPUTS/claude-chat-skill/innergen-deck.zip \
-            OUTPUTS/claude-design/innergen-design-system.zip
+            OUTPUTS/claude-design/innergen-design-system.zip \
+            OUTPUTS/chatgpt-package/innergen-deck-chatgpt.zip \
+            OUTPUTS/chatgpt-package/chatgpt-project-instructions.txt
