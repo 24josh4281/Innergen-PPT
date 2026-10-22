@@ -63,6 +63,7 @@ from confirm_ui.content_intake import (  # noqa: E402
 )
 from style_standard import load_standard, validate_selection  # noqa: E402
 from server_common import (  # noqa: E402
+    localhost_blocked_hint as _localhost_blocked_hint,
     claim_lock as _claim_lock,
     clear_lock as _clear_lock,
     find_free_port as _find_free_port,
@@ -180,10 +181,11 @@ def _wait_for_server_ready(
             last_error = str(exc)
         time.sleep(0.2)
     logger.error(
-        'confirm UI did not become ready at %s within %ss%s',
+        'confirm UI did not become ready at %s within %ss%s%s',
         health_url,
         timeout,
         f' (last error: {last_error})' if last_error else '',
+        _localhost_blocked_hint(last_error),
     )
     return False
 
@@ -971,6 +973,39 @@ def _build_ai_image_comparison() -> dict:
 
 # --- app --------------------------------------------------------------------
 
+def _align_review_defaults(data: dict) -> None:
+    """Start the outline review from values that match the outline itself.
+
+    The final confirm rejects a page count or story anchor that differs from
+    the reviewed outline. When the agent grew the outline but left the old
+    page_count / anchors in recommendations.json, every untouched click was
+    rejected (409), so the served defaults follow the outline instead.
+    """
+    info = data.get('content_intake')
+    if not isinstance(info, dict) or info.get('phase') != 'review':
+        return
+    slides = info.get('slides')
+    if isinstance(slides, list) and slides:
+        current = data.get('page_count')
+        value = current.get('value') if isinstance(current, dict) else current
+        if str(value or '').strip() != str(len(slides)):
+            logger.warning('page_count %s differs from the %d-slide outline; serving %d',
+                           value, len(slides), len(slides))
+            data['page_count'] = {**(current if isinstance(current, dict) else {}),
+                                  'value': str(len(slides))}
+    anchors = info.get('anchor_values')
+    recommend = data.get('recommend')
+    if not isinstance(anchors, dict):
+        return
+    for key, expected in anchors.items():
+        if isinstance(recommend, dict) and key in recommend:
+            recommend[key] = expected
+        elif isinstance(data.get(key), dict):
+            data[key]['value'] = expected
+        else:
+            data[key] = {'value': expected}
+
+
 def create_app(
     project_dir: str,
     idle_timeout: int = 900,
@@ -1167,6 +1202,7 @@ def create_app(
         # overwrites the file with the re-derived stage-2 recommendations, so it
         # must never be served from a cache.
         prepare_content_payload(data, project_path, _read_json_object)
+        _align_review_defaults(data)
         active_content = data.get('content_intake')
         if isinstance(active_content, dict) and active_content.get('phase') in {'materials', 'review'}:
             data['_already_confirmed'] = False

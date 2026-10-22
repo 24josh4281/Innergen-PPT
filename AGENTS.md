@@ -28,6 +28,9 @@ below add Codex-side enforcement; they never override the selected owner.
   exists (created by `setup.ps1` / `setup.sh`), use its interpreter
   (`.venv\Scripts\python.exe` on Windows, `.venv/bin/python` elsewhere). Otherwise,
   if `python3` is missing (common on Windows), rerun the same command with `python`.
+- Windows consoles default to cp949: printing Korean or `–`/`−` from ad-hoc Python
+  crashes with `UnicodeEncodeError`. Run Python with `PYTHONUTF8=1` (setup sets it
+  for the user) or `-X utf8`; read PDFs with PyMuPDF (`fitz`), not pypdf/pdftoppm.
 
 ## Setup requests
 

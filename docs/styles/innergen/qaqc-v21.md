@@ -77,8 +77,11 @@ python3 .claude/skills/ppt-master/scripts/innergen_qaqc.py projects/<project> \
 |---|---|---|
 | O01 | 목차 항목에 대응하는 본문 제목·장 구분 없음, 목차 자체가 없음(교육·착수·최종·세미나·리포트) | WARN |
 | O02 | 목차 쪽 범위가 순서·총 장수와 맞지 않음 | WARN |
+| O03 | 목차 장표에 표(`data-pptx-native="table"`)가 없음 — 글상자를 행 간격으로 늘어놓은 목차 | ERROR |
 
-목차 레이아웃은 `toc.layouts` 접두로 찾으므로 장 수 변형(`…-toc-pages-4`, `innergen-classic-toc-5` 등)도 목차로 본다. 목차 아래 빈 띠(CB02)와 카드 안 상단 쏠림(CB01)은 `content_balance_check.py`가 검사한다([구조화 장표 v18 §7](structured-slides-v18.md)).
+목차 레이아웃은 `toc.layouts` 접두로 찾으므로 장 수 변형(`…-toc-pages-4`, `innergen-classic-toc-5` 등)도 목차로 본다. 레이아웃 표지가 없는 손그림 장표는 `data-pptx-page-role="toc"`나 파일 이름(`toc.file_keywords`: `toc`, `목차`)으로 찾는다.
+
+O03(2026-10-22): 목차는 표 하나로 만든다. 셀은 세로 가운데 정렬(`valign: ctr`)이고 행 높이가 목차 영역을 바닥선(이너캐리 y696, 교육 y632, 사업 y500)까지 나눠 가진다. 모든 목차 템플릿(`02b_toc_pages*`, `02a/02b/02c_toc_*`, 교육 `02_toc`)이 이 표를 들고 있으므로 템플릿을 쓰거나 `toc_builder.py`로 채우면 통과한다. 내보낼 때 `--native-objects`를 붙여야 PowerPoint 표(`a:tbl`)가 된다. 수준과 사용 여부는 `toc.native_table`(`required`, `level`)에서 바꾼다. 목차 아래 빈 띠(CB02)와 카드 안 상단 쏠림(CB01)은 `content_balance_check.py`가 검사한다([구조화 장표 v18 §7](structured-slides-v18.md)).
 
 ### S. 구조 (v18·v20)
 

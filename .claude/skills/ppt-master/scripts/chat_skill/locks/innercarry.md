@@ -7,7 +7,7 @@
 
 ## visual_style
 - visual_style: custom
-- visual_style_behavior: Use the INNerCarry product-story look: a 4px blue top rule, a blue section label, a bold navy page title, one regular governing sentence on a single line, one structured exhibit, a grey source line and a thin footer rule with the page number. Navy cover and pale-blue closing. Compact v22 density: body 16px, cells 12px, badges 10.67px. Flat rectangles, aligned grid, 예시 on every fictional figure.
+- visual_style_behavior: Use the INNerCarry product-story look: a 4px blue top rule, a blue section label, a bold navy page title, one regular governing sentence on a single line, one structured exhibit, a grey source line and a thin footer rule with the page number. Navy cover and pale-blue closing. Compact v22 density: body 17.33px, cells 13.33px, badges 10.67px. Flat rectangles, aligned grid, 예시 on every fictional figure.
 
 ## colors
 - bg: #FFFFFF

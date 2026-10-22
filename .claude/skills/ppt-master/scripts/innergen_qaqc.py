@@ -5,7 +5,7 @@ PPT Master - INNerGEN QA/QC gate (uniformity + writing rules)
 Checks a finished (or in-progress) SVG deck against the INNerGEN design rules
 in docs/styles/innergen: family chrome geometry (v17/v22), governing grammar
 (v11/v20, one line since v22), title system (v4/v5/v20), TOC ↔ chapter
-consistency (v5/v20), structure and closing set per deck type (v20), minimum
+consistency (v5/v20) and the TOC built as one native table (O03, ERROR), structure and closing set per deck type (v20), minimum
 text sizes (v18/v22), citation line (v16), and - since v25 - the table of
 contents and must-have content per report type and business type
 (content-requirements-v25.json, via innergen_content_check.py). It complements
@@ -429,10 +429,27 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
     def _is_toc(layout):
         return any(layout.startswith(x) for x in rules["toc"]["layouts"]) or layout in ("toc", "toc-pages")
 
-    toc_pages = [p for p in pages if _is_toc(p.layout)]
+    def _toc_page(p):
+        """Layout key, page role or file name (flat hand-drawn pages carry no layout)."""
+        name = p.path.stem.lower().split("__")[0]  # `NN_<layout>__<label>`: the label may say 목차도식
+        parts = re.split(r"[_\-\s]+", name)
+        return (_is_toc(p.layout) or "toc" in p.role.lower()
+                or any(k in parts for k in rules["toc"].get("file_keywords", ["toc", "목차"])))
+
+    def _slot(t, rx):
+        return any(re.match(rx, s or "") for s in (t["group"], t["id"]))
+
+    toc_pages = [p for p in pages if _toc_page(p)]
+    nt = rules["toc"].get("native_table", {"required": True, "level": "ERROR"})
+    if nt.get("required", True):
+        for p in toc_pages:
+            if not any((el.get("data-pptx-native") or "").strip() == "table" for el in p.root.iter()):
+                rep.add(nt.get("level", "ERROR"), "O03", p.index,
+                        "목차가 표가 아닙니다 — 행 간격으로 놓은 글상자는 아래가 비고 세로 가운데 정렬이 안 됩니다. "
+                        "목차 템플릿(표) 또는 data-pptx-native=\"table\"(셀 valign ctr, 행이 바닥선까지)로 바꾸세요")
     if toc_pages:
         toc = toc_pages[0]
-        items = [t["text"] for t in toc.texts if re.match(r"toc-(item-)?\d+-title", t["group"] or t["id"] or "")]
+        items = [t["text"] for t in toc.texts if _slot(t, r"toc-(item-)?\d+-title")]
         chapter_titles = [t for _, t in titles]
         for item in items:
             core = re.sub(tr["numbering_regex"], "", item).strip(" ./-–")
@@ -443,7 +460,7 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
                                       or (p.is_exempt(exempt) and not _is_toc(p.layout) and t["size"] >= 14)]
             if not any(core[:6] in ct or _similar(core, ct.split("/")[0]) > 0.5 for ct in cands):
                 rep.add("WARN", "O01", toc.index, f"목차 항목 '{item}'에 대응하는 장 제목·장 구분을 찾지 못했습니다")
-        ranges = [t["text"] for t in toc.texts if re.match(r"toc-\d+-pages", t["group"] or "")]
+        ranges = [t["text"] for t in toc.texts if _slot(t, r"toc-\d+-pages")]
         last = 0
         for r in ranges:
             m = re.findall(r"\d+", r)

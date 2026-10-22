@@ -87,11 +87,12 @@ Behavior:
   - `backup/<timestamp>/svg_output/` — copy of Executor SVG source, always written so the pptx can be rebuilt via `svg_to_pptx` without re-running the LLM; finalize first only when previews are also needed
 - When requested, `finalize_svg.py` creates `svg_final/` independently of export. This directory is the self-contained SVG visual preview; it is not packaged as a second PPTX.
 - Explicit `-o/--output` changes the native PPTX destination and skips `backup/`.
-- Paragraph merging is enabled by default and trades some SVG line-layout fidelity for PowerPoint editability:
-  - Default: mergeable paragraph blocks (same x, dy clustered around one base line-height) collapse into one editable text frame. Equal effective font sizes may join as flowing prose; a font-size change, list marker, or accepted larger gap starts a new `<a:p>` with precise `<a:lnSpc>` / `<a:spcBef>`. Resizing the box reflows text inside it without erasing those paragraph boundaries.
-  - With `--no-merge`: every dy-stacked `<tspan>` becomes its own text frame — exact SVG line layout is preserved but a 12-line paragraph is 12 separate textboxes
-  - Side effect: PowerPoint may wrap merged paragraphs to a different line count than the SVG source. Long body text (abstracts, multi-paragraph sections, reference lists) usually benefits from the default; pages with tight typographic alignment (covers, charts, tables) usually want `--no-merge`
+- Paragraph merging is enabled by default and keeps the SVG's authored line breaks:
+  - Default: mergeable paragraph blocks (same x, dy clustered around one base line-height) collapse into one editable text frame. Lines at the base line-height continue the same `<a:p>` after an explicit `<a:br/>`; a font-size change, list marker, `data-pptx-preserve-line-breaks="true"`, or accepted larger gap starts a new `<a:p>` with precise `<a:lnSpc>` / `<a:spcBef>`.
+  - The merged frame uses `wrap="none"` like single-line text, so PowerPoint never re-wraps a line when its Korean font metrics (IBM Plex Sans KR, Pretendard, Malgun Gothic) measure wider than the SVG estimate. Text typed later does not auto-wrap; press Enter / Shift+Enter or turn on wrapping in PowerPoint. A `<text>` with `data-pptx-text-width` keeps `wrap="square"` inside that authored column.
+  - With `--no-merge`: every dy-stacked `<tspan>` becomes its own text frame (a 12-line paragraph is 12 separate textboxes); the line layout is the same as the default
   - Mergeable detection is conservative: only fires when the children form a clean paragraph block; mixed-layout `<text>` falls through to the default per-line path
+  - `verify_deck.py` (PowerPoint render) warns for any text frame whose rendered line count differs from the authored lines; `pptx_safe_render.py --lines <json>` writes the per-frame counts
 - Native release export reads `svg_output/`. `-s final` is an explicit diagnostic override for comparing conversion behavior against post-processed SVGs; it does not change artifact ownership or create a supported release path.
 - `svg_final/` may be opened directly or inserted into PowerPoint as an SVG picture. PowerPoint's manual Convert-to-Shape operation is outside the compatibility contract.
 - On every SVG-authoring route, each file in `svg_output/` is the complete visible

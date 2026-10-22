@@ -10,6 +10,13 @@ and the family's 02b_toc_pages_N template (N = 3–6) is filled. `--dividers`
 also writes the re-inserted TOC per chapter with the current chapter
 highlighted (content-principles-v32.md §3.3, reports with 16+ body pages).
 
+Since 2026-10-22 the TOC templates hold one native table
+(data-pptx-native="table"): tokens are filled in its metadata JSON as well as
+in the fallback, rows beyond the chapter count are dropped and the remaining
+rows share the zone, the current chapter is highlighted in the table cells,
+and the SVG fallback is redrawn from the metadata (`table_fallback`). Export
+with `svg_to_pptx.py --native-objects` to get a PowerPoint table.
+
 Usage:
     python3 scripts/toc_builder.py chapters <project | outline.md | outline.json>
     python3 scripts/toc_builder.py build <project | outline> --family <family> -o <svg_output/02_목차.svg>
@@ -168,6 +175,157 @@ def validate(chs: list[dict[str, Any]]) -> list[tuple[str, str]]:
 
 
 # ---------------------------------------------------------------------------
+# Native-table TOC (data-pptx-native="table")
+# ---------------------------------------------------------------------------
+# The TOC templates hold one native table: its <metadata> JSON is the source
+# of truth (rows share the zone down to the footer, cells valign ctr) and the
+# visible SVG children are its fallback, regenerated here after every change.
+# `data-toc-cols` on the table group names the column roles (no/title/pages)
+# and `data-toc-prefix` the row id prefix, so QA can find `toc-1-title` etc.
+
+LINE_HEIGHT = 1.2      # PowerPoint single spacing, as a multiple of the font size
+BASELINE = 0.92        # first baseline below the line top, as a multiple of the size
+
+
+def _font_stack(family: str) -> str:
+    name = f'"{family}"' if " " in family else family
+    return f'{name}, "Malgun Gothic", sans-serif'
+
+
+def _cell_paragraphs(cell: dict[str, Any], default_size: float) -> list[dict[str, Any]]:
+    """[{text, size, bold, color}] for a cell (`text` or one-run `paragraphs`)."""
+    base = {"size": float(cell.get("font_size", default_size)), "bold": bool(cell.get("bold", False)),
+            "color": cell.get("color", "#000000")}
+    if "paragraphs" not in cell:
+        return [dict(base, text=str(cell.get("text", "")))]
+    out = []
+    for para in cell["paragraphs"]:
+        runs = para.get("runs") if isinstance(para, dict) else None
+        run = runs[0] if runs else {}
+        text = "".join(r.get("text", "") for r in runs) if runs else (para.get("text", "") if isinstance(para, dict) else str(para))
+        out.append({"text": text, "size": float(run.get("font_size", base["size"])),
+                    "bold": bool(run.get("bold", base["bold"])), "color": run.get("color", base["color"])})
+    return out
+
+
+def _scaled(total: float, weights: list[float]) -> list[float]:
+    s = sum(weights)
+    return [total * w / s for w in weights]
+
+
+def table_fallback(meta: dict[str, Any], roles: list[str], prefix: str) -> list[ET.Element]:
+    """SVG fallback for a native-table payload: cell fills, borders and centered text."""
+    q = "{%s}" % SVG_NS
+    style = meta.get("style", {})
+    stack = _font_stack(style.get("font_family", "Pretendard"))
+    default_size = float(style.get("font_size", 16))
+    rows = ([meta["columns"]] if meta.get("columns") else []) + list(meta["rows"])
+    header_rows = int(meta.get("header_rows", 1 if meta.get("columns") else 0))
+    widths = _scaled(meta["width"], meta.get("column_widths") or [1] * len(rows[0]))
+    heights = _scaled(meta["height"], meta.get("row_heights") or [1] * len(rows))
+    fills: list[ET.Element] = []
+    rules: list[ET.Element] = []
+    texts: list[ET.Element] = []
+    y = float(meta["y"])
+    for r, row in enumerate(rows):
+        h = heights[r]
+        row_id = f"{prefix}head" if r < header_rows else f"{prefix}{r - header_rows + 1}"
+        x = float(meta["x"])
+        for c, cell in enumerate(row):
+            cell = cell if isinstance(cell, dict) else {"text": str(cell)}
+            w = widths[c]
+            if cell.get("fill"):
+                fills.append(ET.Element(q + "rect", {"x": f"{x:g}", "y": f"{y:.1f}", "width": f"{w:.1f}",
+                                                     "height": f"{h:.1f}", "fill": cell["fill"]}))
+            for side, (x1, y1, x2, y2) in {"top": (x, y, x + w, y), "bottom": (x, y + h, x + w, y + h),
+                                           "left": (x, y, x, y + h), "right": (x + w, y, x + w, y + h)}.items():
+                b = (cell.get("borders") or {}).get(side)
+                if b and b.get("style") == "solid":
+                    rules.append(ET.Element(q + "line", {"x1": f"{x1:.1f}", "y1": f"{y1:.1f}", "x2": f"{x2:.1f}",
+                                                         "y2": f"{y2:.1f}", "stroke": b["color"],
+                                                         "stroke-width": f"{b['width']:g}"}))
+            pad = cell.get("padding", 0)
+            pad = pad if isinstance(pad, dict) else {"left": pad, "right": pad, "top": pad, "bottom": pad}
+            paras = [p for p in _cell_paragraphs(cell, default_size) if p["text"]]
+            block = sum(LINE_HEIGHT * p["size"] for p in paras)
+            top = y + (h - block) / 2 if cell.get("valign", "ctr") in ("ctr", "middle") else y + float(pad.get("top", 0))
+            align = cell.get("align", "l")
+            tx, anchor = {"l": (x + float(pad.get("left", 0)), None), "ctr": (x + w / 2, "middle"),
+                          "r": (x + w - float(pad.get("right", 0)), "end")}[align]
+            role = roles[c] if c < len(roles) else f"c{c + 1}"
+            for k, p in enumerate(paras):
+                name = role if k == 0 else ("desc" if role == "title" and k == 1 else f"{role}{k + 1}")
+                attrs = {"id": f"{row_id}-{name}",
+                         "x": f"{tx:.1f}", "y": f"{top + BASELINE * p['size']:.1f}", "font-family": stack,
+                         "font-size": f"{p['size']:g}", "font-weight": "700" if p["bold"] else "400", "fill": p["color"]}
+                if anchor:
+                    attrs["text-anchor"] = anchor
+                el = ET.Element(q + "text", attrs)
+                el.text = p["text"]
+                texts.append(el)
+                top += LINE_HEIGHT * p["size"]
+            x += w
+        y += h
+    return fills + rules + texts
+
+
+def _table_group(root: ET.Element) -> Optional[ET.Element]:
+    for el in root.iter():
+        if el.get("data-pptx-native") == "table" and el.get("data-toc-cols"):
+            return el
+    return None
+
+
+def _fill_table(group: ET.Element, n: int, current: Optional[int]) -> None:
+    """Keep n chapter rows (the rest share their height), highlight `current`, redraw the fallback."""
+    q = "{%s}" % SVG_NS
+    meta_el = group.find(q + "metadata")
+    meta = json.loads(meta_el.text or "{}")
+    roles = group.get("data-toc-cols", "").split()
+    body = meta["rows"]
+    header = 1 if meta.get("columns") else 0
+    heights = meta.get("row_heights") or [1] * (header + len(body))
+    body_total = sum(heights[header:])
+    on, off = json.loads(json.dumps(body[0])), json.loads(json.dumps(body[1] if len(body) > 1 else body[0]))
+    meta["rows"] = body = body[:n]
+    meta["row_heights"] = heights[:header] + [round(body_total / n, 2)] * n
+    if current:
+        muted = None
+        for cell in off:
+            for para in cell.get("paragraphs", [])[1:2]:
+                muted = para["runs"][0].get("color")
+        for i, row in enumerate(body, 1):
+            src = on if i == current else off
+            for c, cell in enumerate(row):
+                for key in ("fill", "color"):
+                    if key in src[c]:
+                        cell[key] = src[c][key]
+                if i != current and muted and roles[c] in ("title", "pages"):
+                    if "paragraphs" in cell:
+                        cell["paragraphs"][0]["runs"][0]["color"] = muted
+                    else:
+                        cell["color"] = muted
+    meta_el.text = json.dumps(meta, ensure_ascii=False)
+    for child in list(group):
+        if child is not meta_el:
+            group.remove(child)
+    group.extend(table_fallback(meta, roles, group.get("data-toc-prefix", "toc-")))
+
+
+def _fill_tokens(raw: str, values: dict[str, str]) -> str:
+    """Replace {{TOKENS}}: JSON-escaped inside <metadata>, XML-escaped elsewhere."""
+    def sub(text: str, json_safe: bool) -> str:
+        def one(m: re.Match) -> str:
+            if m.group(1) not in values:
+                return m.group(0)
+            v = values[m.group(1)]
+            return escape(json.dumps(v, ensure_ascii=False)[1:-1] if json_safe else v)
+        return re.sub(r"\{\{([A-Z0-9_]+)\}\}", one, text)
+    parts = re.split(r"(<metadata\b[^>]*>.*?</metadata>)", raw, flags=re.S)
+    return "".join(sub(p, p.startswith("<metadata")) for p in parts)
+
+
+# ---------------------------------------------------------------------------
 # Fill
 # ---------------------------------------------------------------------------
 
@@ -195,10 +353,22 @@ def render(chs: list[dict[str, Any]], family: str, title: str, lead: str, page: 
     for i, c in enumerate(chs, 1):
         values.update({f"TOC_{i}_NO": c["no"], f"TOC_{i}_TITLE": c["name"], f"TOC_{i}_DESC": c["desc"],
                        f"TOC_{i}_PAGES": c["range"]})
-    raw = re.sub(r"\{\{([A-Z0-9_]+)\}\}", lambda m: escape(values.get(m.group(1), m.group(0))), raw)
+    raw = _fill_tokens(raw, values)
     ET.register_namespace("", SVG_NS)
     ET.register_namespace("xlink", "http://www.w3.org/1999/xlink")
     root = ET.fromstring(raw)
+    table = _table_group(root)
+    if table is not None:
+        _fill_table(table, len(chs), current)
+        try:  # fallback baseline, so a later hand edit of the fallback is caught as stale
+            from pptx_shapes import NATIVE_FALLBACK_SHA256_ATTR, svg_native_fallback_fingerprint
+            table.set(NATIVE_FALLBACK_SHA256_ATTR, svg_native_fallback_fingerprint(table, document_root=root))
+        except ImportError:
+            pass
+        if current:
+            root.set("data-toc-current", str(current))
+        root.set("data-toc-builder", "v33")
+        return ET.tostring(root, encoding="unicode")
     parents = {ch: p for p in root.iter() for ch in p}
     by_id = {str(el.get("id")): el for el in root.iter() if el.get("id")}
     for k in range(len(chs) + 1, slots + 1):  # drop unused slots (2 chapters on the 3-slot page)

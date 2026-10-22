@@ -401,7 +401,7 @@
           30
         ]
       },
-      "source_geometry": "2026-10-07 서강대 특강 56장에서 확정한 13:9 1040×720px 좌표를 2026-10-14 v22 컴팩트(제목 24px·거버닝 22px 1줄·본문 16px)로 조정.",
+      "source_geometry": "2026-10-07 서강대 특강 56장에서 확정한 13:9 1040×720px 좌표를 2026-10-14 v22 컴팩트(제목 24px·거버닝 22px 1줄·본문 17.33px(2026-10-22 한 단계 상향))로 조정.",
       "template": ".claude/skills/ppt-master/templates/decks/innergen_lecture/",
       "template_note": "사용자가 '이너젠 소개자료 스타일(지금 자료)'로 지정한 v4.2 블루 교육·강의 계열. 260929 사업소개서(innergen_business)와 다른 계열이며 서로 대체하지 않음. 템플릿은 이 계열을 명시적으로 고른 경우에만 Step 3에서 경로를 지정해 사용.",
       "zones_px": {
@@ -551,7 +551,7 @@
           0.75
         ]
       },
-      "source_geometry": "v17 S22 영역을 2026-10-14 v22 컴팩트로 조정: 섹션 라벨 12px, 제목 26.67px(20pt), 거버닝 21.33px(16pt) 1줄, 본문 16px(12pt).",
+      "source_geometry": "v17 S22 영역을 2026-10-14 v22 컴팩트로 조정: 섹션 라벨 12px, 제목 26.67px(20pt), 거버닝 21.33px(16pt) 1줄, 본문 17.33px(2026-10-22 한 단계 상향)(12pt).",
       "template_note": "v4.1 제품 부분을 우선. 홈페이지 시각 검토는 브라우저 접근 거절로 미완료. 과거 제품 실적·화면은 새 사실로 복사하지 않음.",
       "zones_px": {
         "section_label": [
@@ -3499,15 +3499,15 @@
       "default": true,
       "reference": "(주)이너젠_회사소개자료_260518_외부 발송용1.pptx (720×405pt, IBM Plex Sans KR): 섹션 제목 12pt SemiBold, 거버닝 15–16pt(최대 18), 본문 10–12pt, 표·라벨 9–10pt, 출처 8–9pt",
       "governing_max_lines": 1,
-      "body_pt_target": "12 내외",
+      "body_pt_target": "13 내외",
       "governing_pt_max": 18,
       "pt_by_canvas": {
         "ppt169s": {
           "title": 12,
           "governing": 16,
-          "body": 11,
-          "table": 9.5,
-          "subheading": 12,
+          "body": 13,
+          "table": 10,
+          "subheading": 14,
           "note": 9,
           "source": 8,
           "page": 8,
@@ -3517,9 +3517,9 @@
         "ppt139": {
           "title": 18,
           "governing": 16.5,
-          "body": 12,
+          "body": 13,
           "table": 10.5,
-          "subheading": 13,
+          "subheading": 14,
           "note": 10,
           "source": 9,
           "page": 10,
@@ -3529,9 +3529,9 @@
         "ppt43": {
           "title": 20,
           "governing": 16,
-          "body": 12,
+          "body": 13,
           "table": 10.5,
-          "subheading": 13,
+          "subheading": 14,
           "note": 10,
           "source": 8,
           "page": 9,
@@ -3541,9 +3541,9 @@
         "ppt169": {
           "title": 16,
           "governing": 18,
-          "body": 14,
+          "body": 15,
           "table": 12,
-          "subheading": 15,
+          "subheading": 16,
           "note": 11,
           "source": 10,
           "page": 10.5,
@@ -3555,9 +3555,9 @@
         "ppt169s": {
           "title": 16.0,
           "governing": 21.3333,
-          "body": 14.6667,
-          "table": 12.6667,
-          "subheading": 16.0,
+          "body": 17.3333,
+          "table": 13.3333,
+          "subheading": 18.6667,
           "note": 12.0,
           "source": 10.6667,
           "page": 10.6667,
@@ -3567,9 +3567,9 @@
         "ppt139": {
           "title": 24.0,
           "governing": 22.0,
-          "body": 16.0,
+          "body": 17.3333,
           "table": 14.0,
-          "subheading": 17.3333,
+          "subheading": 18.6667,
           "note": 13.3333,
           "source": 12.0,
           "page": 13.3333,
@@ -3579,9 +3579,9 @@
         "ppt43": {
           "title": 26.6667,
           "governing": 21.3333,
-          "body": 16.0,
+          "body": 17.3333,
           "table": 14.0,
-          "subheading": 17.3333,
+          "subheading": 18.6667,
           "note": 13.3333,
           "source": 10.6667,
           "page": 12.0,
@@ -3591,9 +3591,9 @@
         "ppt169": {
           "title": 21.3333,
           "governing": 24.0,
-          "body": 18.6667,
+          "body": 20.0,
           "table": 16.0,
-          "subheading": 20.0,
+          "subheading": 21.3333,
           "note": 14.6667,
           "source": 13.3333,
           "page": 14.0,
@@ -3605,7 +3605,8 @@
         "cell": 9,
         "note": 8
       },
-      "note": "캔버스마다 720pt 폭 기준을 폭 비율로 환산해 0.5pt로 반올림. px = pt / 0.75."
+      "note": "캔버스마다 720pt 폭 기준을 폭 비율로 환산해 0.5pt로 반올림. px = pt / 0.75.",
+      "body_note": "2026-10-22 사용자 결정: 본문이 작다는 피드백(10-14~10-22 4회)으로 본문을 한 단계(16px→17.33px, 13pt) 올림. 도식 본문 14.67px·보조 13.33px보다 크게 유지. 소제목도 본문보다 크게 한 단계(14pt) 올림."
     }
   },
   "feedback_options": [

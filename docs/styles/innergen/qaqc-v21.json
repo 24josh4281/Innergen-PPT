@@ -448,7 +448,16 @@
       "innergen-biz-section-divider",
       "innercarry-section-divider"
     ],
-    "match_min_chars": 4
+    "match_min_chars": 4,
+    "file_keywords": [
+      "toc",
+      "목차"
+    ],
+    "native_table": {
+      "required": true,
+      "level": "ERROR",
+      "note": "목차는 표(data-pptx-native=\"table\", 셀 valign ctr, 행이 목차 영역을 바닥선까지 나눠 가짐)로 만든다. 2026-10-22 사용자 지적(목차 하단 공백·가운데 정렬 안 됨)"
+    }
   },
   "structure": {
     "max_consecutive_same_layout": 4,

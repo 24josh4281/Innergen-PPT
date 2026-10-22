@@ -59,15 +59,15 @@ page_count: 21
 | `01a_cover_classic.svg` | `innergen-classic-cover` / 이너젠 오리지널 격자 표지 | 가운데 제목·자체 로고·남색 하단 띠 |
 | `01b_cover_solid_navy.svg` | `innergen-solid-cover` / 이너젠 오리지널 단색 표지 | 왼쪽 제목·절제된 남색 구조·자체 로고 |
 | `01c_cover_slim_line.svg` | `innergen-slim-cover` / 이너젠 오리지널 슬림 표지 | 흰 바탕·가느다란 상단 선·간결한 제목 |
-| `02a_toc_classic.svg` | `innergen-classic-toc` / 이너젠 오리지널 격자 목차 | 격자 헤더·번호별 목차 |
-| `02a_toc_classic_4.svg` | `innergen-classic-toc-4` / 이너젠 오리지널 격자 목차 4장 | 격자 헤더·번호별 목차·4장 |
-| `02a_toc_classic_5.svg` | `innergen-classic-toc-5` / 이너젠 오리지널 격자 목차 5장 | 격자 헤더·번호별 목차·5장 |
-| `02b_toc_solid_navy.svg` | `innergen-solid-toc` / 이너젠 오리지널 단색 목차 | 단색 헤더·번호별 목차 |
-| `02b_toc_solid_navy_4.svg` | `innergen-solid-toc-4` / 이너젠 오리지널 단색 목차 4장 | 단색 헤더·번호별 목차·4장 |
-| `02b_toc_solid_navy_5.svg` | `innergen-solid-toc-5` / 이너젠 오리지널 단색 목차 5장 | 단색 헤더·번호별 목차·5장 |
-| `02c_toc_slim_line.svg` | `innergen-slim-toc` / 이너젠 오리지널 슬림 목차 | 얇은 남색 구분선·번호별 목차 |
-| `02c_toc_slim_line_4.svg` | `innergen-slim-toc-4` / 이너젠 오리지널 슬림 목차 4장 | 얇은 남색 구분선·번호별 목차·4장 |
-| `02c_toc_slim_line_5.svg` | `innergen-slim-toc-5` / 이너젠 오리지널 슬림 목차 5장 | 얇은 남색 구분선·번호별 목차·5장 |
+| `02a_toc_classic.svg` | `innergen-classic-toc` / 이너젠 오리지널 격자 목차 | 격자 헤더·번호별 목차 · 표 3행 |
+| `02a_toc_classic_4.svg` | `innergen-classic-toc-4` / 이너젠 오리지널 격자 목차 4장 | 격자 헤더·번호별 목차·4장 · 표 4행 |
+| `02a_toc_classic_5.svg` | `innergen-classic-toc-5` / 이너젠 오리지널 격자 목차 5장 | 격자 헤더·번호별 목차·5장 · 표 5행 |
+| `02b_toc_solid_navy.svg` | `innergen-solid-toc` / 이너젠 오리지널 단색 목차 | 단색 헤더·번호별 목차 · 표 3행 |
+| `02b_toc_solid_navy_4.svg` | `innergen-solid-toc-4` / 이너젠 오리지널 단색 목차 4장 | 단색 헤더·번호별 목차·4장 · 표 4행 |
+| `02b_toc_solid_navy_5.svg` | `innergen-solid-toc-5` / 이너젠 오리지널 단색 목차 5장 | 단색 헤더·번호별 목차·5장 · 표 5행 |
+| `02c_toc_slim_line.svg` | `innergen-slim-toc` / 이너젠 오리지널 슬림 목차 | 얇은 남색 구분선·번호별 목차 · 표 3행 |
+| `02c_toc_slim_line_4.svg` | `innergen-slim-toc-4` / 이너젠 오리지널 슬림 목차 4장 | 얇은 남색 구분선·번호별 목차·4장 · 표 4행 |
+| `02c_toc_slim_line_5.svg` | `innergen-slim-toc-5` / 이너젠 오리지널 슬림 목차 5장 | 얇은 남색 구분선·번호별 목차·5장 · 표 5행 |
 | `03a_chapter_classic.svg` | `innergen-classic-chapter` / 이너젠 오리지널 격자 장 구분 | 현재 장을 굵게 표시하는 장 구분 |
 | `03b_chapter_solid_navy.svg` | `innergen-solid-chapter` / 이너젠 오리지널 단색 장 구분 | 단색 남색 제목띠의 장 구분 |
 | `03c_chapter_slim_line.svg` | `innergen-slim-chapter` / 이너젠 오리지널 슬림 장 구분 | 흰 화면과 남색 선의 장 구분 |
@@ -77,6 +77,8 @@ page_count: 21
 | `05a_ending_classic.svg` | `innergen-classic-ending` / 이너젠 오리지널 격자 마무리 | 핵심 결론·자체 로고·남색 하단 띠 |
 | `05b_ending_solid_navy.svg` | `innergen-solid-ending` / 이너젠 오리지널 단색 마무리 | 핵심 결론·단색 남색 하단 띠 |
 | `05c_ending_slim_line.svg` | `innergen-slim-ending` / 이너젠 오리지널 슬림 마무리 | 흰 여백·짧은 종료 메시지·가는 구분선 |
+
+목차(`02a/02b/02c_toc_*`, 2026-10-22)는 표 하나(`data-pptx-native="table"`, 번호·제목/설명 2열)다. 셀은 세로 가운데 정렬이고 행이 머리띠 아래부터 바닥 띠 위(y100–640)를 나눠 가진다. `{{TOC_ITEM_n_*}}` 토큰은 표 메타데이터와 대체 그림에 함께 있으니 둘 다 채운다. PowerPoint 표로 내보내려면 `--native-objects`를 붙인다.
 
 ## VI. Assets
 

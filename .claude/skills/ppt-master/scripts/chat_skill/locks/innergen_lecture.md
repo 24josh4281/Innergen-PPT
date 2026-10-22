@@ -7,7 +7,7 @@
 
 ## visual_style
 - visual_style: custom
-- visual_style_behavior: Use the INNerGEN education-and-lecture blue look with compact v22 density: 24px title, one-line 22px bold blue governing sentence in a 44px pale box, body 16px, cells 12px, deep-navy cover and closing, quiet footer with the logo. Mark fictional figures 예시.
+- visual_style_behavior: Use the INNerGEN education-and-lecture blue look with compact v22 density: 24px title, one-line 22px bold blue governing sentence in a 44px pale box, body 17.33px, cells 13.33px, deep-navy cover and closing, quiet footer with the logo. Mark fictional figures 예시.
 
 ## colors
 - bg: #FFFFFF

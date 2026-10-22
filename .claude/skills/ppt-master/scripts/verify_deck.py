@@ -29,6 +29,9 @@ Warnings (reported, non-blocking):
     - officecli contact-sheet render of the exported PPTX to
       _pptx_render/<stem>-grid.png — on success, Read that PNG to eyeball
       overflow / collisions in the converted deck
+    - with the PowerPoint render: text frames whose rendered line count
+      differs from the SVG-authored lines (PowerPoint re-wrapped them);
+      per-frame counts in _pptx_render/<stem>-lines.json
 
 Usage:
     python3 scripts/verify_deck.py <project_path> [--strict] [--no-render]
@@ -95,7 +98,8 @@ def _native_pptx_files(project: Path) -> list[Path]:
     exports = project / "exports"
     if not exports.is_dir():
         return []
-    return sorted(p for p in exports.glob("*.pptx") if not p.stem.endswith("_svg"))
+    return sorted(p for p in exports.glob("*.pptx")
+                  if not p.stem.endswith("_svg") and not p.name.startswith("~$"))
 
 
 def _tag_count(xml: str, local_name: str) -> int:
@@ -240,6 +244,22 @@ def render_args() -> list[str]:
     return ["--render", "html"]
 
 
+def line_break_warnings(lines_json: Path) -> list[str]:
+    """Warn for text frames PowerPoint lays out in more or fewer lines than
+    the SVG authored (paragraphs plus a:br breaks), i.e. re-wrapped text."""
+    rows = pptx_safe_render.line_mismatches(lines_json)
+    if not rows:
+        return []
+    head = "; ".join(
+        f"p{row.get('slide')} {row.get('shape')} "
+        f"{row.get('authored')}→{row.get('rendered')} lines "
+        f"\"{' / '.join(str(t).strip() for t in row.get('lines') or [])[:60]}\""
+        for row in rows[:5]
+    )
+    return [f"{len(rows)} text frame(s) re-wrapped by PowerPoint (rendered line "
+            f"count ≠ SVG lines; details in {lines_json.name}): {head}"]
+
+
 def officecli_checks(project: Path, render: bool = True) -> tuple[list[str], list[str]]:
     """OpenXML validation + converted-PPTX contact sheet. Measurement-only:
     skipped entirely when officecli is absent. render=False keeps the
@@ -281,12 +301,14 @@ def officecli_checks(project: Path, render: bool = True) -> tuple[list[str], lis
         out.parent.mkdir(parents=True, exist_ok=True)
         # PowerPoint-exact wraps without closing the user's PowerPoint; the
         # HTML engine below is the fallback when PowerPoint is unavailable.
+        lines_json = project / "_pptx_render" / f"{pptx.stem}-lines.json"
         code, pngs, detail = pptx_safe_render.render(
-            pptx, project / "_pptx_render" / "slides")
+            pptx, project / "_pptx_render" / "slides", lines_out=lines_json)
         if code == 0:
             pptx_safe_render.contact_sheet(pngs, out)
             print(f"[verify_deck] pptx render (PowerPoint): {out} — Read it to "
                   f"eyeball overflow/collision issues in the exported deck")
+            warnings.extend(line_break_warnings(lines_json))
             return failures, warnings
         if code != pptx_safe_render.UNAVAILABLE:
             warnings.append(f"PowerPoint render failed, used the HTML engine "

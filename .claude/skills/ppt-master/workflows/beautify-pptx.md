@@ -138,6 +138,8 @@ If `images/image_manifest.json` does not exist because the source deck has no ex
 
 ## 5. Beautify Plan — Recommend & Confirm
 
+**Build first, then revise (user default since 2026-10-21)**: present the plan below with the recommended values and proceed in the same turn; the confirm page's 3-minute auto-confirm (or the chat bundle, continued without waiting) stands in for the reply. Stop only when the user asked to review first or a flagged item cannot be built without an answer. The blocking wording below describes what the plan must contain and honor, not a wait.
+
 ⛔ **BLOCKING**: the scope is not hard-coded — same spirit as the Strategist confirmation stage. Recommend each item below from what the deck actually contains (the Step 4 inventory), present the plan, and **wait for the user to confirm or adjust** before writing any spec. Chat is the canonical channel; the confirm UI below is the visual convenience surface over it for the palette + typography review (its result is honored identically to a chat reply).
 
 This step has two halves:

@@ -207,6 +207,21 @@ publishing `review`. While the browser waits, the agent authors the new overview
 the page displays it when recommendations change. Use `--wait-only` for the existing
 final confirmation; verify the overview revision and response ID before continuing.
 
+**Time budget (user-set 2026-10-22: the decision part stays within 6 minutes)**.
+Past runs took a median of 18 minutes from request to the first page; that wait is
+what this budget removes.
+
+| Step | Owner | Limit | How |
+|---|---|---|---|
+| Request → materials page | agent | 3 min | Propose the TOC from the request, file names and a first-page skim; do not convert or summarize whole sources, run web research or subagents before the page is up. Start heavy conversions (large PDFs/PPTX) in the background right after launch |
+| Materials page → submit | user | 3 min | The page submits "no additional material" itself after 3 min without input |
+| Submit → review page | agent | 3 min | Use the background conversions; outline from what is read, mark unread parts as pending source checks rather than holding the page |
+| Review page → confirm | user | 3 min | The page confirms itself after 3 min without edits |
+
+When a limit cannot hold (dozens of large files, a 100+ slide deck), say so in chat
+with an estimate before starting instead of going silent. Generation, live preview
+and export follow the confirmation and are not part of this budget.
+
 **Live outline edits**: the `review` page gives every slide editable title, core
 message and content fields, an "add to this slide" box, optional chips from the
 agent's `suggested_additions` (author 1–3 per slide when a useful addition is

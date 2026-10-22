@@ -61,6 +61,7 @@ if str(_ROOT_SCRIPTS_DIR) not in sys.path:
 
 from console_encoding import configure_utf8_stdio  # noqa: E402
 from server_common import (  # noqa: E402
+    localhost_blocked_hint as _localhost_blocked_hint,
     claim_lock as _claim_lock,
     clear_lock as _clear_lock,
     find_free_port as _find_free_port,
@@ -1026,10 +1027,11 @@ def _wait_for_ready(
             last_error = str(exc)
         time.sleep(0.25)
     logger.error(
-        'live preview did not become ready at %s within %ss%s',
+        'live preview did not become ready at %s within %ss%s%s',
         health_url,
         timeout,
         f' (last error: {last_error})' if last_error else '',
+        _localhost_blocked_hint(last_error),
     )
     return False
 

@@ -24,6 +24,19 @@ from pathlib import Path
 from typing import Optional
 
 
+def localhost_blocked_hint(error_text: str) -> str:
+    """Explain a readiness failure caused by a sandbox that forbids localhost.
+
+    Codex's Windows sandbox refuses local sockets with WinError 10013, so the
+    page can never open there; the agent should confirm in chat instead of
+    retrying or troubleshooting.
+    """
+    if '10013' not in (error_text or ''):
+        return ''
+    return ('; this host blocks localhost sockets (WinError 10013, e.g. the Codex '
+            'sandbox); do not retry: confirm in chat, or run the page from Claude Code')
+
+
 def port_has_listener(host: str, port: int, timeout: float = 0.3) -> bool:
     """Return True if a server is actively accepting connections on host:port.
 

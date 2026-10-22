@@ -2,7 +2,7 @@
 """
 PPT Master - Content Balance Check
 
-Finds two recurring spacing defects in authored SVG pages, before PPTX export:
+Finds recurring spacing defects in authored SVG pages, before PPTX export:
 
   CB01 상단 쏠림 (top-heavy content block) — the content inside a background
        box (card, KPI tile, callout, row) is anchored to the top, so the gap
@@ -15,6 +15,10 @@ Finds two recurring spacing defects in authored SVG pages, before PPTX export:
        element ends far above the source line (or the footer line when there is
        none). Enlarge body text, give rows and cards more height, or add a
        closing message strip so the content zone is used to its floor.
+  CB04 목차가 표가 아님 (TOC not a table) — the TOC page has no
+       data-pptx-native="table"; rows drawn as spaced text boxes leave a band
+       under the last row and cannot center vertically. Use the TOC template
+       table (cells valign ctr, rows sharing the zone down to the footer line).
 
 Gaps are measured on visible glyph bounds, not on text-box bounds: a line's
 ink spans baseline - 0.78em to baseline + 0.12em for Hangul (0.72em / 0.02em
@@ -371,14 +375,30 @@ def analyse_card(c: Item, items: list[Item], page: str) -> list[Finding]:
     return out
 
 
-def analyse_toc(items: list[Item], cw: float, ch: float, page: str) -> Optional[Finding]:
-    footer = [it for it in items if it.kind == "line" and it.h < 1 and it.w >= cw * 0.5 and it.y0 > ch * 0.8]
+def _native_table_bottom(root) -> Optional[float]:
+    """Lowest edge of the native tables on a page (metadata y + height), or None."""
+    bottoms = []
+    for el in root.iter():
+        if _tag(el) == "metadata" and (el.get("data-pptx-native") or "").strip() == "table":
+            try:
+                meta = json.loads(el.text or "{}")
+                bottoms.append(float(meta["y"]) + float(meta["height"]))
+            except (ValueError, KeyError, TypeError):
+                continue
+    return max(bottoms) if bottoms else None
+
+
+def analyse_toc(items: list[Item], cw: float, ch: float, page: str,
+                table_bottom: Optional[float] = None) -> Optional[Finding]:
+    # A native table's own row rules are body, not the footer line.
+    above = table_bottom + 0.5 if table_bottom is not None else 0.0
+    footer = [it for it in items if it.kind == "line" and it.h < 1 and it.w >= cw * 0.5 and it.y0 > max(ch * 0.8, above)]
     floor = min((it.y0 for it in footer), default=ch * 0.92)
     body = [it for it in items if it.y1 < floor - 0.5 and it.y0 > ch * 0.15
             and not (it.kind == "rect" and it.w >= cw * 0.95)]
-    if not body:
+    if not body and table_bottom is None:
         return None
-    last = max(it.y1 for it in body)
+    last = max([it.y1 for it in body] + ([min(table_bottom, floor)] if table_bottom is not None else []))
     void = floor - last
     if void <= TOC_VOID_RATIO * ch:
         return None
@@ -528,9 +548,15 @@ def check_file(path: Path, fix: bool, template: bool = False) -> list[Finding]:
     findings: list[Finding] = []
     role = (root.get("data-pptx-page-role") or "") + " " + (root.get("data-pptx-layout") or "") + " " + path.stem
     if "toc" in role.lower() or "목차" in path.stem:
-        f = analyse_toc(items, cw, ch, path.name)
+        f = analyse_toc(items, cw, ch, path.name, _native_table_bottom(root))
         if f:
             findings.append(f)
+        strict = (root.get("data-pptx-page-role") or "") + " " + (root.get("data-pptx-layout") or "") + " " + path.stem.split("__")[0]
+        if (re.search(r"(^|[\s_\-])(toc|목차)([\s_\-]|$)", strict.lower())
+                and not any((el.get("data-pptx-native") or "").strip() == "table" for el in root.iter())):
+            findings.append(Finding("CB04", path.name, (0, 0, round(cw, 1), round(ch, 1)), 0.0, 0.0,
+                                    note="목차가 표가 아님 — 목차 템플릿의 표(data-pptx-native=\"table\", "
+                                         "셀 valign ctr, 행이 바닥선까지)로 바꾸고 --native-objects로 내보내세요"))
     elif not any(r in role.lower() for r in NO_BODY_ROLES) and not root.get("data-balance-exempt"):
         f = analyse_page_bottom(items, cw, ch, path.name, _path_bottoms(root, ch))
         if f:
@@ -568,7 +594,7 @@ def resolve(target: Path) -> list[Path]:
 
 
 def main(argv: Optional[list[str]] = None) -> int:
-    ap = argparse.ArgumentParser(description="Detect top-heavy content blocks (CB01), TOC bottom voids (CB02) and page bottom voids (CB03).")
+    ap = argparse.ArgumentParser(description="Detect top-heavy content blocks (CB01), TOC bottom voids (CB02), page bottom voids (CB03) and TOC pages that are not a table (CB04).")
     ap.add_argument("target", type=Path, help="project path, svg directory or a single SVG")
     ap.add_argument("--fix", action="store_true", help="center flagged CB01 content groups in place")
     ap.add_argument("--template", action="store_true",
@@ -601,6 +627,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     open_n = sum(1 for f in all_f if not f.fixed)
     print(f"[content_balance] {len(files)} pages · CB01 {sum(f.code == 'CB01' for f in all_f)} · "
           f"CB02 {sum(f.code == 'CB02' for f in all_f)} · CB03 {sum(f.code == 'CB03' for f in all_f)} · "
+          f"CB04 {sum(f.code == 'CB04' for f in all_f)} · "
           f"fixed {len(all_f) - open_n} · open {open_n} · exempt {len(exempt)}")
     if args.json:
         args.json.write_text(json.dumps([{k: v for k, v in f.__dict__.items() if k != "items"} for f in all_f],

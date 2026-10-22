@@ -36,7 +36,7 @@ from .utils import (
     rect_to_dml_xfrm,
     combine_opacity, parse_hex_color, parse_svg_color,
     resolve_url_id, get_effective_filter_id,
-    parse_inline_style, parse_font_family, is_cjk_char, estimate_text_width,
+    parse_inline_style, parse_font_family, estimate_text_width,
     detect_text_lang, font_px_to_hpt, resolve_text_run_fonts,
     matrix_multiply, parse_transform_matrix, transform_point, _xml_escape,
 )
@@ -2137,6 +2137,20 @@ def _build_text_outline_xml(
     )
 
 
+def _line_break_run(next_run: dict[str, Any]) -> dict[str, Any]:
+    """Return a pseudo-run that renders as ``<a:br/>`` before ``next_run``.
+
+    Its text is a newline so run-text helpers (bullet stripping, emptiness
+    checks) still see one character at the break position.
+    """
+    return {
+        **next_run,
+        'text': '\n',
+        'line_break': True,
+        'lang': detect_text_lang(str(next_run.get('text', ''))),
+    }
+
+
 def _build_run_xml(
     run: dict[str, Any],
     default_fonts: dict[str, str],
@@ -2144,6 +2158,11 @@ def _build_run_xml(
     effect_xml: str = '',
 ) -> str:
     """Build a single <a:r> XML from a run dict. Supports gradient fills on text."""
+    if run.get('line_break'):
+        # The break carries the next line's size so PowerPoint keeps the
+        # authored line height around it.
+        sz = font_px_to_hpt(run.get('font_size', 16))
+        return f'<a:br><a:rPr lang="{run.get("lang", "en-US")}" sz="{sz}" dirty="0"/></a:br>'
     text = run['text']
     fill = run.get('fill', '000000')
     fill_raw = run.get('fill_raw', '')
@@ -2260,8 +2279,8 @@ def convert_text(elem: ET.Element, ctx: ConvertContext) -> ShapeResult | None:
     paragraph_space_before: list[float] = []
     paragraph_bullets: list[dict[str, Any] | None] = []
     # Per-tspan widths (visual lines as the deck author drew them) regardless
-    # of how many merge into one <a:p>; used to size the textbox so PowerPoint
-    # has room to wrap text to the SVG's original line widths.
+    # of how many merge into one <a:p>; used to size the textbox to the SVG's
+    # original line widths.
     visual_line_widths: list[float] = []
     if line_height_px is not None and line_height_px > 0:
         preserve_space = _preserves_space(elem)
@@ -2279,22 +2298,11 @@ def convert_text(elem: ET.Element, ctx: ConvertContext) -> ShapeResult | None:
             visual_line_widths.append(_estimate_bullet_line_width(line_runs))
             soft_break = child.get('data-paragraph-soft-break') == '1'
             if soft_break and paragraph_runs:
-                # Append to the previous paragraph. A Latin line-wrap needs a
-                # space to keep two words apart (SVG used a dy break, not
-                # punctuation); CJK wraps mid-sentence with no inter-character
-                # space, so a joining space there is a spurious artifact.
-                prev = paragraph_runs[-1]
-                prev_text = prev[-1]['text'] if prev else ''
-                next_text = line_runs[0]['text']
-                boundary_is_cjk = (
-                    (prev_text and is_cjk_char(prev_text[-1]))
-                    or (next_text and is_cjk_char(next_text[0]))
-                )
-                if prev and not prev_text.endswith(' ') \
-                        and not next_text.startswith(' ') \
-                        and not boundary_is_cjk:
-                    prev[-1] = {**prev[-1], 'text': prev_text + ' '}
-                prev.extend(line_runs)
+                # Continue the previous paragraph after an explicit <a:br/>.
+                # Joining the line text instead let PowerPoint re-wrap it with
+                # its own font metrics, moving the author's breaks.
+                paragraph_runs[-1].append(_line_break_run(line_runs[0]))
+                paragraph_runs[-1].extend(line_runs)
             else:
                 paragraph_runs.append(line_runs)
                 sb_attr = child.get('data-paragraph-space-before')
@@ -2327,13 +2335,12 @@ def convert_text(elem: ET.Element, ctx: ConvertContext) -> ShapeResult | None:
     # Estimate text dimensions
     if paragraph_runs is not None:
         # Use the WIDEST visual line (per-tspan as the deck author drew it),
-        # not the joined-up paragraph: soft-broken paragraphs concatenate
-        # many lines into one <a:p>, and measuring the joined string would
-        # blow the textbox past the canvas.
+        # not the joined-up paragraph: soft-broken lines share one <a:p>
+        # (split by <a:br/>), and measuring the joined string would blow the
+        # textbox past the canvas.
         text_width = max(visual_line_widths) if visual_line_widths else 0.0
-        # Total height assumes the visual line count from the SVG source;
-        # if PowerPoint wraps to more or fewer lines after the user resizes,
-        # the user resizes the height accordingly.
+        # Total height is the visual line count from the SVG source, which
+        # the explicit paragraph / line breaks reproduce one to one.
         text_height = (
             line_height_px * (len(visual_line_widths) - 1)
             + sum(paragraph_space_before)
@@ -2482,13 +2489,14 @@ def convert_text(elem: ET.Element, ctx: ConvertContext) -> ShapeResult | None:
     ext_cx = px_to_emu(box_w)
     ext_cy = px_to_emu(box_h)
 
-    # Paragraph mode: wrap="square" so text reflows when the user resizes,
-    # but NO spAutoFit — otherwise PowerPoint expands the frame to fit a
-    # long joined-up <a:p> on one line, blowing past the canvas. The cx we
-    # write below is the longest source SVG line without single-line renderer
-    # headroom; PowerPoint wraps long paragraphs inside this design width.
-    # Single-line text keeps wrap="none" + spAutoFit for tight fidelity.
-    if paragraph_runs is not None:
+    # Every authored SVG line is already an explicit <a:p> or <a:br/>, so the
+    # frame must not wrap again: the cx below is the SVG width estimate, and
+    # PowerPoint's Korean font metrics (IBM Plex Sans KR, Pretendard, Malgun
+    # Gothic) often measure a line wider than that, which re-broke lines at
+    # other words. wrap="none" + spAutoFit keeps the authored breaks, the
+    # same as single-line text. An explicit data-pptx-text-width is the
+    # author's column contract and keeps wrap="square" inside that width.
+    if paragraph_runs is not None and authored_text_width is not None:
         body_pr_xml = (
             '<a:bodyPr wrap="square" lIns="0" tIns="0" rIns="0" bIns="0" '
             'anchor="t" anchorCtr="0"/>'

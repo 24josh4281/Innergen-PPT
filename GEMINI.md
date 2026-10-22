@@ -33,7 +33,8 @@ Route selection belongs to
   and no-substitution rules are unchanged.
 - **Python.** Run repository scripts with the `.venv` interpreter when it exists
   (`.venv\Scripts\python.exe` on Windows, `.venv/bin/python` elsewhere). Create
-  it with `setup.ps1` / `setup.sh`.
+  it with `setup.ps1` / `setup.sh`. Run Python with `PYTHONUTF8=1` or `-X utf8`:
+  Windows consoles default to cp949 and crash on Korean output.
 
 Every confirmation, validation, export and completion gate of the selected owner
 applies to Gemini CLI exactly as written.

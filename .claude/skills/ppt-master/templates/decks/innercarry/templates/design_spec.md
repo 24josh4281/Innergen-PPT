@@ -144,10 +144,10 @@ placeholders:
 | SVG | Layout key / picker | 화면 성격 |
 | --- | --- | --- |
 | `01_cover.svg` | `innercarry-cover` / 이너캐리 표지 | 슬롯 7개 |
-| `02b_toc_pages.svg` | `innercarry-toc-pages` / 이너캐리 목차(쪽수) | 슬롯 28개 |
-| `02b_toc_pages_3.svg` | `innercarry-toc-pages-3` / 이너캐리 목차(쪽수·3장) | 슬롯 16개·3장 |
-| `02b_toc_pages_4.svg` | `innercarry-toc-pages-4` / 이너캐리 목차(쪽수·4장) | 슬롯 20개·4장 |
-| `02b_toc_pages_5.svg` | `innercarry-toc-pages-5` / 이너캐리 목차(쪽수·5장) | 슬롯 24개·5장 |
+| `02b_toc_pages.svg` | `innercarry-toc-pages` / 이너캐리 목차(쪽수) | 표 6행(장·제목/내용·쪽) + 자리 4개 |
+| `02b_toc_pages_3.svg` | `innercarry-toc-pages-3` / 이너캐리 목차(쪽수·3장) | 표 3행(장·제목/내용·쪽) + 자리 4개 |
+| `02b_toc_pages_4.svg` | `innercarry-toc-pages-4` / 이너캐리 목차(쪽수·4장) | 표 4행(장·제목/내용·쪽) + 자리 4개 |
+| `02b_toc_pages_5.svg` | `innercarry-toc-pages-5` / 이너캐리 목차(쪽수·5장) | 표 5행(장·제목/내용·쪽) + 자리 4개 |
 | `02c_section_divider.svg` | `innercarry-section-divider` / 이너캐리 장 구분(학습 포인트) | 슬롯 15개 |
 | `03a_content.svg` | `innercarry-content` / 이너캐리 본문 | 슬롯 6개 |
 | `03b_content_final.svg` | `innercarry-content-final` / 이너캐리 본문+결론 | 슬롯 7개 |
@@ -215,6 +215,8 @@ placeholders:
 | `s56_three_horizons.svg` | `innercarry-three-horizons` / 이너캐리 성장 3지평(H1·H2·H3) | 슬롯 14개 |
 | `s57_nine_box.svg` | `innercarry-nine-box` / 이너캐리 포트폴리오 9-box(매력도×경쟁우위) | 슬롯 26개 |
 | `s58_operating_model.svg` | `innercarry-operating-model` / 이너캐리 운영모델 하우스(전략·계층·기반) | 슬롯 28개 |
+
+목차(`02b_toc_pages*`, 2026-10-22)는 표 하나(`data-pptx-native="table"`, 장·제목/내용·쪽 3열)다. 셀은 세로 가운데 정렬이고 행이 목차 영역을 바닥선까지 나눠 가지므로 아래에 빈 띠가 남지 않는다. `{{TOC_n_*}}` 토큰은 표 메타데이터와 대체 그림에 함께 있고, `toc_builder.py`가 채우며 남는 행을 지우고 행 높이를 다시 나눈다. 손으로 채우면 메타데이터 JSON과 대체 그림의 글자를 같이 바꾼다. PowerPoint 표로 내보내려면 `--native-objects`를 붙인다.
 
 ## VI. Assets
 

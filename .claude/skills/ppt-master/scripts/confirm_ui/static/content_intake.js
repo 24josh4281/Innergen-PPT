@@ -411,6 +411,12 @@
             var e = collectEdits();
             return e && (e.overall || Object.keys(e.slides).length) ? e : null;
         },
-        isBusy: function () { return pending > 0 || Boolean(activeInfo && savedState && savedState.submitted); }
+        isBusy: function () { return pending > 0 || Boolean(activeInfo && savedState && savedState.submitted); },
+        // What the user has added so far; the auto-proceed countdown stops when it changes.
+        materialsSnapshot: function () {
+            if (!activeInfo) return "";
+            var data = state(activeInfo);
+            return JSON.stringify({entries: entries(data), pending: pending, submitted: data.submitted});
+        }
     };
 })();

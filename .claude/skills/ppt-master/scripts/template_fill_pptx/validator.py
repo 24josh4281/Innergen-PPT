@@ -21,7 +21,8 @@ _TOTAL_SLIDES_RE = re.compile(r"^- Total slides:\s*(\d+)\s*$", re.MULTILINE)
 
 def _latest_export(project_path: Path) -> Path:
     exports_dir = project_path / "exports"
-    candidates = [path for path in exports_dir.glob("*.pptx") if path.is_file()]
+    candidates = [path for path in exports_dir.glob("*.pptx")
+                  if path.is_file() and not path.name.startswith("~$")]
     if not candidates:
         raise RuntimeError(f"No PPTX exports found in: {exports_dir}")
     return max(candidates, key=lambda path: path.stat().st_mtime)

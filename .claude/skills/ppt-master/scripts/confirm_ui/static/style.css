@@ -537,6 +537,16 @@ body {
     color: var(--shell-muted);
 }
 #confirm-status.done { color: #067647; font-weight: 600; }
+#confirm-status.is-error,
+.intake-focus #confirm-status.is-error {
+    color: #b42318;
+    background: #fef3f2;
+    border: 1px solid #fda29b;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 600;
+}
 #btn-confirm {
     border: none;
     background: var(--warning);

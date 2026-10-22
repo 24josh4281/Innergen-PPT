@@ -37,8 +37,9 @@ there), ask the user to attach `innergen-deck-chatgpt.zip` to this chat and stop
 
 ## 3. Working rhythm
 
-- Keep the one confirmation stop of `SKILL.md` §3: show the outline table and
-  end the turn. Draw pages only after the user confirms.
+- Follow `SKILL.md` §3: show the outline table, then start drawing in the same
+  turn with the recommended defaults; the user revises afterwards. Stop for a
+  reply only when the user asked to review the outline first.
 - Write pages in batches of four to six per turn and run
   `svg_quality_checker.py` after each batch, so a sandbox reset loses little.
 - Export the PPTX after the last batch and again after each requested change;

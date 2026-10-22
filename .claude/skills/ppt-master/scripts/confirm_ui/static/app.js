@@ -132,6 +132,7 @@
             auto_countdown: "No changes: creating automatically in {time}. Editing anything stops the countdown.",
             auto_stopped: "Auto-create stopped. Click the button when you are done.",
             auto_stop: "Stop auto-create",
+            auto_materials_countdown: "No input: outlining with existing information in {time}. Adding a file or note stops the countdown.",
             confirm_offline: "Lost connection to the confirm server. Type \"confirm\" in the chat to continue with these choices."
         },
         ja: {
@@ -256,6 +257,7 @@
             auto_countdown: "変更がなければ {time} 後に自動で制作します。どこかを編集するとカウントダウンは止まります。",
             auto_stopped: "自動制作を停止しました。編集が終わったらボタンを押してください。",
             auto_stop: "自動制作を止める",
+            auto_materials_countdown: "入力がなければ {time} 後に既存情報で概要を作成します。資料やメモを追加するとカウントダウンは止まります。",
             confirm_offline: "確認ページのサーバーに接続できません。チャットで「確定」と入力すると、この内容で進みます。"
         },
         ko: {
@@ -380,6 +382,7 @@
             auto_countdown: "수정이 없으면 {time} 뒤 자동으로 제작을 시작합니다. 내용을 고치면 자동 제작이 멈춥니다.",
             auto_stopped: "자동 제작을 멈췄습니다. 수정을 마치면 버튼을 눌러 주세요.",
             auto_stop: "자동 제작 멈추기",
+            auto_materials_countdown: "입력이 없으면 {time} 뒤 기존 정보로 개요를 만듭니다. 파일이나 메모를 넣으면 멈춥니다.",
             confirm_offline: "확인 페이지 서버에 연결할 수 없습니다. 채팅에 \"확정\"이라고 입력하면 이 내용으로 진행합니다."
         },
         zh: {
@@ -504,6 +507,7 @@
             auto_countdown: "若无修改，将在 {time} 后自动开始制作；修改任意内容即停止倒计时。",
             auto_stopped: "已停止自动制作。修改完成后请点击按钮。",
             auto_stop: "停止自动制作",
+            auto_materials_countdown: "若无输入，将在 {time} 后用现有信息生成大纲；添加文件或说明即停止倒计时。",
             confirm_offline: "无法连接确认页服务。在聊天中输入“确认”即可按当前选择继续。"
         }
     };
@@ -2578,7 +2582,6 @@
             topbarHint.textContent = ({ko: "전체 슬라이드 내용을 검토한 뒤 수정 사항을 알려주시거나 최종 확인하세요.", en: "Review every slide, request changes in chat, or confirm the final outline.", zh: "检查所有页面，提出修改或确认最终大纲。", ja: "全スライドを確認し、変更点を伝えるか最終確認してください。"})[LANG] || "Review all slides before confirming.";
         } else if (topbarHint) { topbarHint.textContent = t("topbar_hint"); }
         if (contentInfo && contentInfo.phase === "materials" && window.PPTContentIntake) {
-            clearAutoTimer();
             if (heading) heading.textContent = contentInfo.title || t("page_title");
             var materialLabel = window.PPTContentIntake.renderMaterials(host, contentInfo, LANG, function (payload) {
                 REC = payload; STAGE = stageNumber(REC); initState(); renderAll();
@@ -2587,6 +2590,7 @@
             var materialButton = document.getElementById("btn-confirm");
             materialButton.textContent = materialLabel;
             materialButton.disabled = window.PPTContentIntake.isBusy();
+            armAutoConfirm(stage, contentInfo);
             return;
         }
         if ((stage === 1 || stage === "all") && (!contentInfo || contentInfo.phase !== "review")) renderContentIntake(host);
@@ -2649,16 +2653,27 @@
     function renderAll() { renderForStage(STAGE); }
 
     // ---- auto-confirm ----------------------------------------------------
-    // The final view confirms itself when nothing was changed for
-    // AUTO_CONFIRM_MS, so a user who only reads the outline is not left
-    // waiting. Any edit (state differs from the first snapshot, or an input
-    // event) stops the countdown for good; the button then stays manual.
+    // The two decision views each proceed by themselves after AUTO_CONFIRM_MS
+    // without input, so the whole decision part takes at most 6 minutes: the
+    // materials view continues with existing information, the final view
+    // confirms the shown outline. Any edit (state differs from the first
+    // snapshot, or an input event) stops the countdown for good; the button
+    // then stays manual.
     var AUTO_CONFIRM_MS = 180000;
-    var AUTO = { key: null, deadline: 0, snapshot: null, timer: null, stopped: false };
+    var AUTO = { key: null, deadline: 0, snapshot: null, timer: null, stopped: false, materials: false };
 
     function autoSnapshot() {
+        if (AUTO.materials) return window.PPTContentIntake.materialsSnapshot();
         var edits = window.PPTContentIntake && window.PPTContentIntake.reviewEdits();
         return JSON.stringify({ state: STATE, edits: edits || null });
+    }
+
+    function autoExpire() {
+        if (!AUTO.materials) { confirm("auto_timeout"); return; }
+        window.PPTContentIntake.submitMaterials(REC.content_intake, LANG, function (data) {
+            REC = data; STAGE = stageNumber(REC); initState(); renderAll();
+            document.getElementById("confirm-status").textContent = "";
+        });
     }
 
     function autoStopLink() {
@@ -2692,15 +2707,19 @@
 
     function armAutoConfirm(stage, contentInfo) {
         var review = contentInfo && contentInfo.phase === "review";
-        var eligible = !(contentInfo && contentInfo.phase === "materials")
-            && (review || (stage !== 1 && stage !== 2))
-            && !(review && contentInfo.approval_error)
-            && !(REC && REC._already_confirmed);
+        var materials = Boolean(contentInfo && contentInfo.phase === "materials" && window.PPTContentIntake);
+        var eligible = materials
+            ? !window.PPTContentIntake.isBusy()
+            : (review || (stage !== 1 && stage !== 2))
+                && !(review && contentInfo.approval_error)
+                && !(REC && REC._already_confirmed);
         if (!eligible) { clearAutoTimer(); return; }
         // A language switch re-renders the same view: keep its countdown.
-        var key = review ? "review:" + contentInfo.view_revision : "stage:" + stage;
+        var key = materials ? "materials:" + contentInfo.view_revision
+            : review ? "review:" + contentInfo.view_revision : "stage:" + stage;
         if (AUTO.key !== key) {
-            AUTO = { key: key, deadline: Date.now() + AUTO_CONFIRM_MS, snapshot: null, timer: null, stopped: false };
+            AUTO = { key: key, deadline: Date.now() + AUTO_CONFIRM_MS, snapshot: null, timer: null,
+                     stopped: false, materials: materials };
         }
         if (AUTO.stopped) return;
         clearAutoTimer();
@@ -2714,12 +2733,13 @@
             if (left <= 0) {
                 clearAutoTimer();
                 AUTO.stopped = true;
-                confirm("auto_timeout");
+                autoExpire();
                 return;
             }
             var sec = Math.ceil(left / 1000);
             var time = Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0");
-            document.getElementById("confirm-status").textContent = t("auto_countdown").replace("{time}", time);
+            var message = AUTO.materials ? "auto_materials_countdown" : "auto_countdown";
+            document.getElementById("confirm-status").textContent = t(message).replace("{time}", time);
         };
         tick();
         AUTO.timer = setInterval(tick, 1000);
@@ -3015,6 +3035,7 @@
             delete payload.image_strategy;
         }
         btn.disabled = true;
+        document.getElementById("confirm-status").classList.remove("is-error");
         postConfirm(payload, 1).then(function (r) {
             if (!r.ok) return r.json().then(function (data) { throw new Error(data.error || "confirm failed"); });
             showConfirmedOverlay();
@@ -3026,7 +3047,12 @@
             setTimeout(function () { try { window.close(); } catch (e) { /* ignore */ } }, 400);
         }).catch(function (error) {
             btn.disabled = false;
-            document.getElementById("confirm-status").textContent = (error && error.message) || t("error_retry");
+            // A rejected confirm must be impossible to miss: the user may have
+            // clicked and walked away, or the countdown submitted for them.
+            var status = document.getElementById("confirm-status");
+            status.textContent = (error && error.message) || t("error_retry");
+            status.classList.add("is-error");
+            status.setAttribute("role", "alert");
         });
     }
 

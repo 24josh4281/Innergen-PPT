@@ -193,6 +193,22 @@ def build_claude_bundles() -> int:
     return 0
 
 
+def enable_python_utf8() -> None:
+    """Set PYTHONUTF8=1 for the user so agent-run Python never crashes on cp949."""
+    _step("enabling Python UTF-8 mode for this user (PYTHONUTF8=1)")
+    if os.name != "nt":
+        print("  skipped: only Windows consoles default to a legacy code page")
+        return
+    if os.environ.get("PYTHONUTF8") == "1":
+        print("  already enabled")
+        return
+    if subprocess.run(["setx", "PYTHONUTF8", "1"], capture_output=True).returncode:
+        print("  failed: run `setx PYTHONUTF8 1` once by hand")
+        return
+    os.environ["PYTHONUTF8"] = "1"
+    print("  enabled (applies to terminals and agents started from now on)")
+
+
 def install_git_hooks() -> None:
     """Point this clone at .githooks unless the user already has hooks of their own."""
     _step("enabling .githooks (rebuild claude.ai bundles and update .venv after git pull)")
@@ -394,6 +410,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         return 1
     if smoke_test(py):
         return 1
+    enable_python_utf8()
     restart = install_extras(py) if not args.skip_extras else False
     if not args.skip_claude_bundles:
         build_claude_bundles()

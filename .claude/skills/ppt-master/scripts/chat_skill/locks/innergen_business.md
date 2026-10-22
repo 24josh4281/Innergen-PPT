@@ -7,7 +7,7 @@
 
 ## visual_style
 - visual_style: custom
-- visual_style_behavior: Use the INNerGEN company-profile look (260518 reference) on a white field: a small blue bar with a 16px section title, one bold black governing sentence on a single line over a thin grey rule, one structured exhibit, a small grey source line and the page number at the top right. Blue bands and badges carry hierarchy; green is reserved for a single positive accent. Education pages follow the v20 content architecture with compact v22 density: body 16px, cells 12px, badges 10.67px. Keep shapes rectangular and flat, align columns and rows, and mark every fictional figure and mock capture as 예시.
+- visual_style_behavior: Use the INNerGEN company-profile look (260518 reference) on a white field: a small blue bar with a 16px section title, one bold black governing sentence on a single line over a thin grey rule, one structured exhibit, a small grey source line and the page number at the top right. Blue bands and badges carry hierarchy; green is reserved for a single positive accent. Education pages follow the v20 content architecture with compact v22 density: body 17.33px, cells 13.33px, badges 10.67px. Keep shapes rectangular and flat, align columns and rows, and mark every fictional figure and mock capture as 예시.
 
 ## colors
 - bg: #FFFFFF
