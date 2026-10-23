@@ -181,8 +181,8 @@ def install_fonts(py: Path) -> int:
 
 
 def sync_stubs() -> int:
-    _step("regenerating host skill stubs (.codex/skills, .gemini/skills)")
-    return sync_codex_stubs.main([])
+    _step("regenerating host skill stubs (.codex/skills, .gemini/skills, user-level Codex)")
+    return sync_codex_stubs.main([]) or sync_codex_stubs.main(["--user"])
 
 
 def build_claude_bundles() -> int:
