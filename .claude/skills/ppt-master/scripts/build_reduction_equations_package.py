@@ -56,7 +56,7 @@ SKILL_SRC = REPO / ".claude" / "skills" / "reduction-equations" / "SKILL.md"
 NAME = "reduction-equations"
 SCRIPTS = ["math_shorthand.py", "monitoring_plan.py", "omml_math.py", "office_equations.py",
            "docx_equations.py", "console_encoding.py", "server_common.py"]
-EDITOR = ["server.py", "start_equation_editor.ps1", "static/index.html", "static/app.js", "static/style.css"]
+EDITOR = ["server.py", "start_equation_editor.ps1", "serve_tailscale.ps1","static/index.html", "static/app.js", "static/style.css"]
 # (text in the repo SKILL.md, replacement in the package). Each must exist, so a
 # SKILL.md edit that breaks the rewrite fails the build instead of shipping repo paths.
 SKILL_REWRITES = [
@@ -129,6 +129,18 @@ Python 3.10 이상이 필요합니다. `.venv`를 만들고 `python-pptx`를 설
 | Codex CLI (GPT) | `git clone <이 저장소> %USERPROFILE%\\.codex\\skills\\reduction-equations` 후 `setup.ps1`. 이 저장소 안에서 Codex를 열면 `AGENTS.md`도 읽습니다 |
 | claude.ai 채팅·Cowork | 설정 → 기능 → 스킬에서 `reduction-equations.zip` 업로드 |
 | ChatGPT 채팅·프로젝트 | `dist/reduction-equations-chatgpt/설치방법.md` — 같은 폴더의 ZIP과 프로젝트 지침 |
+
+## 팀용 웹 편집기 (Tailscale 주소)
+
+항상 켜 두는 PC에 Tailscale을 설치·로그인한 뒤, 이 저장소를 받아 `setup.ps1`을 실행하고 아래를 한 번 실행합니다.
+
+```
+powershell -ExecutionPolicy Bypass -File scripts\\equation_editor\\serve_tailscale.ps1 -Install
+```
+
+같은 Tailscale 네트워크의 누구나 `https://<PC이름>.<tailnet>.ts.net:10001/`에서 수식을 입력하고
+**Word 내보내기·PPT 내보내기** 버튼으로 바로 받습니다. 그 PC에 로그인할 때마다 자동으로 켜집니다.
+포트는 `-HttpsPort 10002`처럼 바꿀 수 있고, 해제는 `-Uninstall`입니다.
 
 ZIP은 `dist/` 폴더에 있습니다. GitHub에서 파일을 열고 다운로드 버튼(Download raw file)을 누르면 됩니다.
 
