@@ -2471,6 +2471,34 @@
         host.appendChild(sec);
     }
 
+    function renderWorkMode(host) {
+        var ko = LANG === "ko";
+        var card = el("section", "content-intake work-mode-panel");
+        card.setAttribute("aria-label", ko ? "작성 전 작업 모드" : "Work mode before authoring");
+        card.appendChild(el("h2", "", ko ? "작업 모드 선택" : "Choose a work mode"));
+        card.appendChild(el("p", "content-intake-note", ko
+            ? "조사 범위와 제작 방식을 선택하세요. 모델·추론 노력은 현재 선택을 유지하며, 수치·출처 확인과 최종 PPT 검수는 모든 모드에서 수행합니다."
+            : "Choose research scope and workflow. Your model and effort stay unchanged; factual checks and final PPT validation apply to every mode."));
+        var options = [
+            ["fast_track", ko ? "패스트 트랙 모드" : "Fast track", ko ? "제공 자료·기존 디자인 중심. 선택적 조사와 대안 탐색을 줄여 빠르게 제작합니다." : "Use supplied sources and the existing design; minimize optional research and alternatives."],
+            ["standard", ko ? "일반 모드 (기본)" : "Standard (default)", ko ? "제공 자료를 분석하고 부족한 핵심 근거를 필요한 범위에서 보완합니다." : "Analyze supplied sources and fill essential evidence gaps."],
+            ["additional_research", ko ? "추가 조사 모드" : "Additional research", ko ? "최신 공식 자료·사례·대안을 추가 조사하고 출처·기준일과 함께 개요에 반영합니다. 조사 범위에 따라 시간이 늘어납니다." : "Research current official sources, cases and alternatives, then reconcile the outline with dated references. Allow more time."]
+        ];
+        var group = el("div", "work-mode-options");
+        options.forEach(function (option) {
+            var label = el("label", "work-mode-choice");
+            var input = document.createElement("input");
+            input.type = "radio"; input.name = "work_mode"; input.value = option[0];
+            input.checked = STATE.work_mode === option[0];
+            input.addEventListener("change", function () { if (input.checked) STATE.work_mode = option[0]; });
+            label.appendChild(input);
+            label.appendChild(el("strong", "", option[1]));
+            label.appendChild(el("p", "", option[2]));
+            group.appendChild(label);
+        });
+        card.appendChild(group); host.appendChild(card);
+    }
+
     function renderMode(host) {
         var sec = section("M", "sec_mode");
         function refresh() {
@@ -2595,6 +2623,7 @@
             return;
         }
         if ((stage === 1 || stage === "all") && (!contentInfo || contentInfo.phase !== "review")) renderContentIntake(host);
+        if (stage === 1 || stage === "all" || (contentInfo && contentInfo.phase === "review")) renderWorkMode(host);
         var fieldHost = host;
         if (contentInfo && contentInfo.phase === "review" && window.PPTContentIntake) {
             window.PPTContentIntake.renderReview(host, contentInfo, LANG);
@@ -2891,6 +2920,8 @@
     }
 
     function initState() {
+        var workMode = (REC.recommend && REC.recommend.work_mode) || (REC.work_mode && REC.work_mode.value) || "standard";
+        STATE.work_mode = ["fast_track", "standard", "additional_research"].indexOf(workMode) >= 0 ? workMode : "standard";
         initStage1State();
         initStage2State();
         initStage3State();
@@ -2909,6 +2940,7 @@
     function stage1Payload() {
         var payload = {
             stage: "stage1",
+            work_mode: STATE.work_mode,
             canvas: STATE.canvas,
             audience: STATE.audience,
             content_divergence: STATE.content_divergence,

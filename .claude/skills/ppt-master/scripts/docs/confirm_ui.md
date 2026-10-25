@@ -74,6 +74,30 @@ the user then submits manually. Uploading disables submit. Failed save keeps the
 page open with the error and permits retry. Manual submit follows the same close
 path. The completed deck's preview remains a later production output.
 
+## Work mode decision (2026-10-25)
+
+The same pre-authoring page shows three mutually exclusive `work_mode` options,
+separate from `generation_mode` (continuous/split), visual style, and model effort.
+Set `recommend.work_mode` to the user's previously stated preference; otherwise
+use `standard`. Final and stage-1 submissions persist it in `result.json`; reload
+and later stages restore it. Unknown IDs are rejected. Selecting a mode cancels
+the no-input countdown, just like any other change. No extra confirmation window.
+
+| ID | Label | Required execution behavior |
+|---|---|---|
+| `fast_track` | 패스트 트랙 모드 | Prioritize supplied sources and the confirmed existing design. Reduce optional research and alternative exploration. Do not skip mandatory source/current-fact checks, numerical validation, sequential authoring or final PPT QA. Report consequential missing facts instead of inventing them. |
+| `standard` | 일반 모드 | Default. Analyze supplied sources, fill essential evidence gaps with focused checks, and perform normal authoring and validation. |
+| `additional_research` | 추가 조사 모드 | Before authoring, investigate relevant current official sources, cases and alternatives. Record source URLs, dates, scope and limitations; reconcile the outline after research, then generate and validate. This adds time depending on scope, not a guaranteed multiplier. |
+
+The agent must read the submitted work mode before research expansion or slide
+authoring and record it with the reconciled plan. Optional broad research waits
+until selection; preliminary source reading and necessary accuracy checks do not.
+These choices NEVER change the user's model, effort or speed setting and do not
+invoke a separate plugin's fast-track approval bypass. All owner-required gates
+and source, financial/emissions value and final export checks remain mandatory.
+Never claim a web page itself performs research: it stores the execution choice
+for the agent. No guarantee of elapsed time or identical rework across modes.
+
 ## Optional File-first Input and Complete Review (v29)
 
 Use the user's sequence: report/business question in chat → proposed TOC →

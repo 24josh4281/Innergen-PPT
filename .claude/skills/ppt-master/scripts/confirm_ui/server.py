@@ -522,6 +522,7 @@ def _sync_session_state(
 # served recommendations lets a refresh / reopen re-initialize from the user's
 # actual choices instead of catalog defaults.
 _ANCHOR_RECOMMEND_KEYS = (
+    'work_mode',
     'canvas',
     'mode',
     'visual_style',
@@ -1221,6 +1222,10 @@ def create_app(
         payload = request.get_json(silent=True)
         if not isinstance(payload, dict):
             return jsonify({'error': 'invalid payload'}), 400
+        # Old clients retain standard behavior; reject unrecognized explicit choices.
+        if payload.get('work_mode', 'standard') not in ('fast_track', 'standard', 'additional_research'):
+            return jsonify({'error': 'Unknown work_mode'}), 400
+        payload.setdefault('work_mode', 'standard')
         intake_error = content_confirmation_error(payload, project_path, _read_json_object)
         if intake_error:
             return jsonify({'error': intake_error}), 409

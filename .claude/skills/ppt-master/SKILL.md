@@ -450,6 +450,10 @@ show per-slide input forms or separate materials/outline/design gates by default
 Keep complete slides as the internal outline. After the single submission, read
 selected uploads and reconcile overall edits and changed design conditions before
 writing §IX or authoring SVGs. See `scripts/docs/confirm_ui.md` for the contract.
+The same page includes `work_mode`: `fast_track`, `standard` (default), or
+`additional_research`. Read the saved value before expanding research or authoring;
+apply its scope from `scripts/docs/confirm_ui.md` and record it in the plan.
+Keep the user's chosen model/effort/speed and every required validation gate.
 
 
 ⛔ **BLOCKING**: present the Strategist confirmation stage and **wait for explicit user confirmation or modification** before outputting Design Specification & Content Outline. The page's 3-minute auto-confirm and, without the page, the build-first rule below count as that confirmation — the wait is never open-ended. This is the single core confirmation gate — once the final confirmation lands, all subsequent steps proceed automatically. The default Confirm UI delivers the gate in **one single-pass page** (every field authored up front, confirmed at once; see below); the chat fallback mirrors the same single bundle. The staged three-stage flow remains available only when the user explicitly asks to confirm stage by stage ([`scripts/docs/confirm_ui.md`](scripts/docs/confirm_ui.md)).
