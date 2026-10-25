@@ -197,41 +197,23 @@ main planning. Keep native fill's exact wording/layout constraints and supported
 editing boundary. Strict 1:1 beautify, narration and unchanged split-mode resume
 do not re-question or re-outline existing locked content.
 
-**Main SVG surface**: The existing Confirm UI supports `content_intake.phase:
-materials` for chapter input and `review` for the complete overview. Material input
-happens during Steps 1–4; final review uses the existing Step 4 gate, not another
-approval. Launch the materials page with `--daemon --wait-intake --wait-timeout 50`
-and continue from the saved response. Keep waits bounded and provide updates. Read
-new uploads using the selected source converters, and record read coverage before
-publishing `review`. While the browser waits, the agent authors the new overview;
-the page displays it when recommendations change. Use `--wait-only` for the existing
-final confirmation; verify the overview revision and response ID before continuing.
+**Main SVG surface (2026-10-25 user preference)**: Draft the outline first,
+then use ONE Confirm UI page: `content_intake.phase: "review", unified: true`.
+Show chapter-level summaries, one overall revision/additions field, one optional
+shared upload area, and design choices together. No per-slide form and no
+separate material, overview or design gate. Supply complete internal slides and
+all design recommendations up front; exact schema and lifecycle are owned by
+`scripts/docs/confirm_ui.md`. Aim to show the proposed overview promptly; report
+if source volume requires more time rather than silently waiting.
 
-**Time budget (user-set 2026-10-22: the decision part stays within 6 minutes)**.
-Past runs took a median of 18 minutes from request to the first page; that wait is
-what this budget removes.
-
-| Step | Owner | Limit | How |
-|---|---|---|---|
-| Request → materials page | agent | 3 min | Propose the TOC from the request, file names and a first-page skim; do not convert or summarize whole sources, run web research or subagents before the page is up. Start heavy conversions (large PDFs/PPTX) in the background right after launch |
-| Materials page → submit | user | 3 min | The page submits "no additional material" itself after 3 min without input |
-| Submit → review page | agent | 3 min | Use the background conversions; outline from what is read, mark unread parts as pending source checks rather than holding the page |
-| Review page → confirm | user | 3 min | The page confirms itself after 3 min without edits |
-
-When a limit cannot hold (dozens of large files, a 100+ slide deck), say so in chat
-with an estimate before starting instead of going silent. Generation, live preview
-and export follow the confirmation and are not part of this budget.
-
-**Live outline edits**: the `review` page gives every slide editable title, core
-message and content fields, an "add to this slide" box, optional chips from the
-agent's `suggested_additions` (author 1–3 per slide when a useful addition is
-likely), and one whole-outline box. Edits autosave to
-`confirm_ui/review_edits.json` (draft, never an approval) and travel with the final
-confirmation as `result.json.content_review_edits` (`slides.{page}.{title,
-core_message, content, additions}`, `overall`). Before authoring §IX, apply every
-edit: user wording replaces the outline wording; additions become planned content
-on that page (or a reason in chat if they would need a new page or unsourced facts).
-Facts in additions still need a source or an "example" label.
+One 3-minute no-input countdown submits and closes on success. Any input cancels
+that countdown. Read `result.json` once submitted, including overall edits and
+`content_material_files`; read the selected originals, reconcile new facts,
+chosen design/page count and requested additions BEFORE the final spec/§IX and
+SVG authoring. Preserve provenance and label unsupported claims. A changed
+condition is incorporated in that pass, not rejected with a request to repeat
+the whole approval. Keep updates concise while reconciling. Legacy separate
+stages are available only when explicitly requested.
 
 If the selected owner's project/source prerequisites are not yet satisfied, keep
 the initial classification, proposed TOC and chapter input in chat. Do not initialize

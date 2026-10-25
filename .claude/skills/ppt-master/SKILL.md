@@ -443,15 +443,14 @@ agent-written outline. Do not treat helper recommendations as source facts or a
 confirmed outline; reconcile current user answers before writing §IX.
 
 **User-confirmed content flow v29**: Ask report form/business character first,
-propose the TOC, and accept optional files or one short note before final confirmation.
-Do not require an extra-information yes/no choice or every chapter field. Read
-the files first; ask only a consequential missing item. Chapter inputs are optional.
-After interpreting these inputs, show every slide's title, core message, concrete
-content, visual and source status. This Step's existing confirmation is the final
-approval of that complete overview and design. Material submission is not approval.
-The same Confirm UI can collect chapters in `materials` mode and later show the
-agent-written `review` overview; the exact contract is in `confirm_ui.md`. Do not
-begin SVG authoring until the current overview is confirmed.
+draft the outline first, then show one unified confirmation page containing
+chapter-level overall summaries, one changes/additions box, shared file upload
+and design choices (`content_intake.phase: "review", unified: true`). Do not
+show per-slide input forms or separate materials/outline/design gates by default.
+Keep complete slides as the internal outline. After the single submission, read
+selected uploads and reconcile overall edits and changed design conditions before
+writing §IX or authoring SVGs. See `scripts/docs/confirm_ui.md` for the contract.
+
 
 ⛔ **BLOCKING**: present the Strategist confirmation stage and **wait for explicit user confirmation or modification** before outputting Design Specification & Content Outline. The page's 3-minute auto-confirm and, without the page, the build-first rule below count as that confirmation — the wait is never open-ended. This is the single core confirmation gate — once the final confirmation lands, all subsequent steps proceed automatically. The default Confirm UI delivers the gate in **one single-pass page** (every field authored up front, confirmed at once; see below); the chat fallback mirrors the same single bundle. The staged three-stage flow remains available only when the user explicitly asks to confirm stage by stage ([`scripts/docs/confirm_ui.md`](scripts/docs/confirm_ui.md)).
 
@@ -490,7 +489,16 @@ Steps:
    ```
    **Idempotent and required regardless of whether Confirm was clicked**: clicking Confirm already shuts the page down (then a no-op); the chat-fallback path leaves it running. Run it after reading the confirmation, before Step 5.
 
-**Auto-confirm and "start as is" (user-authorized 2026-10-22).** The two decision views each proceed by themselves after **3 minutes** without user input, so the decision part never exceeds 6 minutes: the content-intake `materials` view submits "no additional material" (the same request as its button), and the final view (single-pass confirmation or the `review` outline) writes `result.json` with `confirm_trigger: "auto_timeout"`, shuts the server down and closes. Any input stops that view's countdown and leaves its button manual. While the page is open it heartbeats the server, so reading for a long time never lets the idle timeout kill the button. A chat reply such as "이대로 시작해줘" / "이대로 진행" / "start as is" is a final confirmation on either surface: in `review` (or a design-only page) take the recommended values plus any autosaved `confirm_ui/review_edits.json`, write `result.json` yourself with `confirm_trigger: "chat"`, run `--shutdown` and continue; in `materials` treat it as "no additional material", write the slide outline into §IX and go straight to generation without opening a review stop (state the outline briefly in chat). If the user's reply comes while a `--wait` is still blocking, re-check `result.json` first — the page may already have confirmed.
+**Auto-confirm and "start as is" (user-authorized, updated 2026-10-25).**
+The unified page submits once after 3 minutes without input, saves `result.json`
+with `confirm_trigger: "auto_timeout"`, and closes after success. Any input
+cancels the countdown; manual submit uses the same path. Read all submitted
+edits and files and reconcile the plan before generation. A chat instruction
+"이대로 시작해줘" / "start as is" also confirms the displayed bundle: preserve
+saved edits and uploaded selections, write the result with `confirm_trigger:
+"chat"`, shut down that confirmation server and continue. Re-check `result.json`
+first to avoid duplicate confirmation. Keep legacy separate stages only on an
+explicit user request.
 
 **Build first, then revise (user default since 2026-10-21, every host).** A chat confirmation is never an open-ended stop: when the page is not used (chat fallback, opt-out, a host that blocks localhost) present the bundle with the recommended values and continue in the same turn, unless the user asked to review first or a fact the deck cannot stand without is missing. The router's single discriminator question still applies. The user revises the built deck afterwards.
 

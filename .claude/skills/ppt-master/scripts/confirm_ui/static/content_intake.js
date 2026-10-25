@@ -200,8 +200,8 @@
         redraw.forEach(function (draw) { draw(); });
         if (!activeInfo) return;
         var w = words(activeLang), data = state(activeInfo), button = document.getElementById("btn-confirm");
-        button.textContent = data.submitted ? w.waiting : entries(data).length ? w.filled : w.empty;
-        button.disabled = pending > 0 || data.submitted;
+        button.textContent = activeInfo.unified ? w.create : data.submitted ? w.waiting : entries(data).length ? w.filled : w.empty;
+        button.disabled = pending > 0 || data.submitted || Boolean(activeInfo.approval_error);
         if (data.submitted) status(w.wait);
         else if (pending) status(w.saving + " · " + pending);
         else {
@@ -310,6 +310,7 @@
             zone.classList.toggle("is-locked", data.submitted); zone.tabIndex = data.submitted ? -1 : 0;
         }
         redraw.push(drawFiles); drawFiles();
+        if (info.unified) return host;
         var noteLabel = node("label", w.optional), notes = node("textarea", null, "text-input intake-notes");
         notes.rows = shared ? 2 : 3; notes.value = item.text;
         notes.placeholder = chapter.input_hint || (shared ? w.placeholder : (chapter.requests || [])[0] || w.placeholder);
@@ -346,12 +347,13 @@
         return data.submitted ? w.waiting : entries(data).length ? w.filled : w.empty;
     }
     function renderReview(host, info, lang) {
-        activeInfo = null; redraw = [];
+        activeInfo = info.unified ? info : null; activeLang = lang; redraw = [];
         if (pollTimer) clearTimeout(pollTimer);
         var w = words(lang), card = node("section", null, "content-intake intake-review");
-        card.appendChild(steps(3, w)); card.appendChild(node("h2", w.review + " (" + (info.slides || []).length + ")"));
+        if (!info.unified) card.appendChild(steps(3, w));
+        card.appendChild(node("h2", info.unified ? (lang === "ko" ? "전체 개요 요약" : "Outline summary") : w.review + " (" + (info.slides || []).length + ")"));
         var ew = editWords(lang);
-        card.appendChild(node("p", ew.hint, "intake-intro"));
+        card.appendChild(node("p", info.unified ? (lang === "ko" ? "개요를 확인하고 수정 요청, 추가 자료, 디자인을 한 번에 제출하세요." : "Review the summary and submit changes, files and design together.") : ew.hint, "intake-intro"));
         if (!reviewEdits || reviewEdits.revision !== info.view_revision) {
             reviewEdits = {revision: info.view_revision, base: {}, slides: {}, overall: ""};
             var saved = info.saved_edits || {}, savedSlides = saved.slides || {};
@@ -363,8 +365,18 @@
             });
             reviewEdits.overall = saved.overall || "";
         }
+        if (info.unified) {
+            var summary = node("ol", null, "intake-summary");
+            (info.chapters || []).forEach(function (chapter) {
+                var item = node("li"); item.appendChild(node("h3", chapter.title));
+                var messages = (info.slides || []).filter(function (slide) { return slide.chapter_id === chapter.id; }).map(function (slide) { return slide.core_message; });
+                item.appendChild(node("p", chapter.summary || chapter.purpose || messages.slice(0, 2).join(" ")));
+                summary.appendChild(item);
+            });
+            card.appendChild(summary);
+        }
         var chapterTitles = {}; (info.chapters || []).forEach(function (chapter) { chapterTitles[chapter.id] = chapter.title; });
-        (info.slides || []).forEach(function (slide) {
+        (info.unified ? [] : info.slides || []).forEach(function (slide) {
             var row = node("article", null, "intake-slide");
             row.appendChild(node("p", chapterTitles[slide.chapter_id] || slide.chapter_id, "content-intake-note"));
             // title, core message and content are shown in the editable fields below
@@ -375,16 +387,20 @@
             row.appendChild(editorFor(slide, lang, row)); card.appendChild(row);
         });
         var overall = node("label", null, "intake-edit-field intake-edit-overall"), overallInput = node("textarea", null, "text-input");
-        overall.appendChild(node("span", ew.overall, "intake-edit-label")); overallInput.rows = 3;
+        overall.appendChild(node("span", info.unified && lang === "ko" ? "수정 사항 / 추가로 넣을 내용" : ew.overall, "intake-edit-label")); overallInput.rows = 3;
         overallInput.placeholder = ew.overallPh; overallInput.value = reviewEdits.overall;
         overallInput.addEventListener("input", function () { reviewEdits.overall = overallInput.value; scheduleSave(lang); });
         overall.appendChild(overallInput); card.appendChild(overall);
         if (info.approval_error) card.appendChild(node("p", info.approval_error, "intake-error"));
         (info.limitations || []).forEach(function (value) { card.appendChild(node("p", value, "content-intake-note")); });
         Object.keys(info.omitted_chapters || {}).forEach(function (id) { card.appendChild(node("p", id + ": " + info.omitted_chapters[id], "content-intake-note")); });
+        if (info.unified) {
+            card.appendChild(node("h2", lang === "ko" ? "추가 자료 입력 (선택)" : "Additional files (optional)"));
+            card.appendChild(editor({id: "shared", title: w.shared}, info, w, true));
+        }
         host.appendChild(card); return w.create;
     }
-    function submitMaterials(info, lang, onUpdate) {
+    function submitMaterials(info, lang, onUpdate, onSubmitted) {
         var w = words(lang), data = state(info), button = document.getElementById("btn-confirm");
         if (pending || data.submitted) { refresh(); return; }
         button.disabled = true;
@@ -394,7 +410,9 @@
         }).then(function () {
             data.submitted = true;
             document.querySelectorAll(".intake-materials input, .intake-materials textarea, .intake-materials button").forEach(function (element) { element.disabled = true; });
-            refresh(); status(w.wait); poll(info, onUpdate);
+            refresh(); status(w.wait);
+            if (onSubmitted) onSubmitted();
+            else poll(info, onUpdate);
         }).catch(function (error) { button.disabled = false; status(error.message); });
     }
     // Prevent browser navigation when a file misses the drop area. Text drags remain normal.
@@ -411,6 +429,7 @@
             var e = collectEdits();
             return e && (e.overall || Object.keys(e.slides).length) ? e : null;
         },
+        selectedMaterials: function () { return activeInfo ? entries(state(activeInfo)) : []; },
         isBusy: function () { return pending > 0 || Boolean(activeInfo && savedState && savedState.submitted); },
         // What the user has added so far; the auto-proceed countdown stops when it changes.
         materialsSnapshot: function () {

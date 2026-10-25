@@ -1607,7 +1607,7 @@
         (CAT.canvas || []).forEach(function (o) { if (o.id === canvasVal) dim = o.dim; });
         var raw = String(dim || canvasVal || "");
         var id = String(canvasVal || "").toLowerCase();
-        var isPpt = id === "ppt169" || id === "ppt43" || id === "ppt139" ||
+        var isPpt = id === "ppt169" || id === "ppt169s" || id === "ppt43" || id === "ppt139" ||
             /1280\s*[×xX*]\s*720/.test(raw) ||
             /1024\s*[×xX*]\s*768/.test(raw);
         return isPpt ? { lo: 0.031, hi: 0.047 } : { lo: 0.025, hi: 0.033 };
@@ -1620,7 +1620,7 @@
         (CAT.canvas || []).forEach(function (o) { if (o.id === canvasVal) dim = o.dim; });
         var raw = String(dim || canvasVal || "");
         var id = String(canvasVal || "").toLowerCase();
-        return id === "ppt169" || id === "ppt43" || id === "ppt139" ||
+        return id === "ppt169" || id === "ppt169s" || id === "ppt43" || id === "ppt139" ||
             /1280\s*[×xX*]\s*720/.test(raw) ||
             /1024\s*[×xX*]\s*768/.test(raw);
     }
@@ -2541,6 +2541,7 @@
     var STAGE = 1;
 
     function stageNumber(data) {
+        if (data && data.content_intake && data.content_intake.unified) return "all";
         var raw = data && data.stage != null ? data.stage : (data && data.tier);
         raw = String(raw == null ? "" : raw).toLowerCase();
         if (raw === "1" || raw === "stage1" || raw === "tier1") return 1;
@@ -2578,8 +2579,8 @@
         if (topbarHint && contentInfo && contentInfo.phase === "materials") {
             topbarHint.textContent = ({ko: "파일이나 짧은 메모만 넣으면 됩니다. 추가 입력 없이 진행해도 괜찮아요.", en: "Add files or a short note, or continue with existing information.", zh: "添加文件或简短说明，也可直接使用现有信息。", ja: "資料や短いメモを追加するか、既存情報で進められます。"})[LANG] || "Add files or continue with existing information.";
         } else if (topbarHint && contentInfo && contentInfo.phase === "review") {
-            if (heading) heading.textContent = ({ko: "PPT 제작 · 최종 개요 확인", en: "PPT production · Final outline review", zh: "PPT制作 · 最终大纲确认", ja: "PPT制作・最終概要の確認"})[LANG] || "Final outline review";
-            topbarHint.textContent = ({ko: "전체 슬라이드 내용을 검토한 뒤 수정 사항을 알려주시거나 최종 확인하세요.", en: "Review every slide, request changes in chat, or confirm the final outline.", zh: "检查所有页面，提出修改或确认最终大纲。", ja: "全スライドを確認し、変更点を伝えるか最終確認してください。"})[LANG] || "Review all slides before confirming.";
+            if (heading) heading.textContent = ({ko: "PPT 제작 · 개요와 디자인 확인", en: "PPT production · Final outline review", zh: "PPT制作 · 最终大纲确认", ja: "PPT制作・最終概要の確認"})[LANG] || "Final outline review";
+            topbarHint.textContent = ({ko: "전체 개요, 수정 요청, 추가 자료와 디자인을 한 페이지에서 확인하세요.", en: "Review every slide, request changes in chat, or confirm the final outline.", zh: "检查所有页面，提出修改或确认最终大纲。", ja: "全スライドを確認し、変更点を伝えるか最終確認してください。"})[LANG] || "Review all slides before confirming.";
         } else if (topbarHint) { topbarHint.textContent = t("topbar_hint"); }
         if (contentInfo && contentInfo.phase === "materials" && window.PPTContentIntake) {
             if (heading) heading.textContent = contentInfo.title || t("page_title");
@@ -2598,6 +2599,8 @@
         if (contentInfo && contentInfo.phase === "review" && window.PPTContentIntake) {
             window.PPTContentIntake.renderReview(host, contentInfo, LANG);
             var settings = el("details", "intake-settings");
+            if (contentInfo.unified) settings.open = true;
+            if (!contentInfo.unified && contentInfo.next_step === "design") settings.hidden = true;
             settings.appendChild(el("summary", "", ({ko: "디자인·장수 설정 보기 / 수정", en: "View / adjust design and page count", zh: "查看或修改设计与页数", ja: "デザイン・枚数の確認／変更"})[LANG] || "Design settings"));
             fieldHost = el("div", ""); settings.appendChild(fieldHost); host.appendChild(settings);
         }
@@ -2646,6 +2649,10 @@
         if (contentInfo && contentInfo.phase === "review" && window.PPTContentIntake) {
             document.getElementById("btn-confirm").textContent = ({ko: "이 개요로 PPT 제작", en: "Create PPT from this outline", zh: "按此大纲制作PPT", ja: "この概要でPPT制作"})[LANG] || "Create PPT from this outline";
             document.getElementById("btn-confirm").disabled = Boolean(contentInfo.approval_error);
+            if (!contentInfo.unified && contentInfo.next_step === "design") {
+                document.getElementById("btn-confirm").textContent = ({ko: "개요 확정 · 다음은 디자인 선택", en: "Confirm outline · Design next", zh: "确认大纲 · 下一步设计", ja: "概要を確定・次はデザイン"})[LANG] || "Confirm outline · Design next";
+                topbarHint.textContent = ({ko: "개요 확정 후 이 창은 닫히고 별도의 디자인 선택 창이 열립니다.", en: "This window closes after confirmation; a separate design selection opens next.", zh: "确认后关闭此窗口，再打开设计选择。", ja: "確定後この画面を閉じ、別のデザイン選択を開きます。"})[LANG] || "Design selection follows outline confirmation.";
+            }
         }
         armAutoConfirm(stage, contentInfo);
     }
@@ -2665,7 +2672,7 @@
     function autoSnapshot() {
         if (AUTO.materials) return window.PPTContentIntake.materialsSnapshot();
         var edits = window.PPTContentIntake && window.PPTContentIntake.reviewEdits();
-        return JSON.stringify({ state: STATE, edits: edits || null });
+        return JSON.stringify({ state: STATE, edits: edits || null, materials: window.PPTContentIntake && window.PPTContentIntake.materialsSnapshot() });
     }
 
     function autoExpire() {
@@ -2673,7 +2680,19 @@
         window.PPTContentIntake.submitMaterials(REC.content_intake, LANG, function (data) {
             REC = data; STAGE = stageNumber(REC); initState(); renderAll();
             document.getElementById("confirm-status").textContent = "";
-        });
+        }, function () { closeSubmittedWindow("materials_submitted"); });
+    }
+
+    function closeSubmittedWindow(reason) {
+        clearAutoTimer();
+        fetch("/api/shutdown", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ reason: reason })
+        }).catch(function () { /* Submission is saved even if shutdown already completed. */ });
+        setTimeout(function () {
+            try { window.close(); } catch (e) { /* Browser may require manual close. */ }
+        }, 400);
     }
 
     function autoStopLink() {
@@ -2706,6 +2725,11 @@
     }
 
     function armAutoConfirm(stage, contentInfo) {
+        // Reopened material collection can require explicit submission.
+        if (contentInfo && contentInfo.auto_advance === false) {
+            clearAutoTimer();
+            return;
+        }
         var review = contentInfo && contentInfo.phase === "review";
         var materials = Boolean(contentInfo && contentInfo.phase === "materials" && window.PPTContentIntake);
         var eligible = materials
@@ -2740,6 +2764,9 @@
             var time = Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0");
             var message = AUTO.materials ? "auto_materials_countdown" : "auto_countdown";
             document.getElementById("confirm-status").textContent = t(message).replace("{time}", time);
+            if (review && !contentInfo.unified && contentInfo.next_step === "design") {
+                document.getElementById("confirm-status").textContent = ({ko: "수정이 없으면 {time} 뒤 개요를 확정하고 디자인 선택으로 넘어갑니다.", en: "Without edits, the outline is confirmed in {time}; design selection follows.", zh: "若无修改，{time} 后确认大纲并进入设计选择。", ja: "変更がなければ{time}後に概要を確定し、デザイン選択へ進みます。"})[LANG].replace("{time}", time);
+            }
         };
         tick();
         AUTO.timer = setInterval(tick, 1000);
@@ -3015,6 +3042,8 @@
         payload.stage = "final";
         payload.confirm_trigger = trigger === "auto_timeout" ? "auto_timeout" : "button";
         if (REC.content_intake && REC.content_intake.phase === "review") {
+            if (window.PPTContentIntake.isBusy()) return;
+            if (REC.content_intake.unified) payload.content_materials = window.PPTContentIntake.selectedMaterials();
             payload.content_outline_approved = true;
             payload.content_review_token = REC.content_intake.view_revision;
             var reviewEdits = window.PPTContentIntake && window.PPTContentIntake.reviewEdits();
@@ -3039,12 +3068,7 @@
         postConfirm(payload, 1).then(function (r) {
             if (!r.ok) return r.json().then(function (data) { throw new Error(data.error || "confirm failed"); });
             showConfirmedOverlay();
-            fetch("/api/shutdown", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ reason: "confirmed" })
-            }).catch(function () { /* server already gone — fine */ });
-            setTimeout(function () { try { window.close(); } catch (e) { /* ignore */ } }, 400);
+            closeSubmittedWindow("confirmed");
         }).catch(function (error) {
             btn.disabled = false;
             // A rejected confirm must be impossible to miss: the user may have
@@ -3179,7 +3203,7 @@
                 window.PPTContentIntake.submitMaterials(REC.content_intake, LANG, function (data) {
                     REC = data; STAGE = stageNumber(REC); initState(); renderAll();
                     document.getElementById("confirm-status").textContent = "";
-                });
+                }, function () { closeSubmittedWindow("materials_submitted"); });
                 return;
             }
             if (REC.content_intake && REC.content_intake.phase === "review") { confirm("button"); return; }

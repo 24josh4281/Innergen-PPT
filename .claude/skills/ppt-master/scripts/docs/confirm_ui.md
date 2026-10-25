@@ -43,6 +43,37 @@ content view; the Strategist reconciles changed anchors and transcribes the fina
 reviewed outline into §IX. In staged mode retain `content_intake` in the author's
 next recommendations payload when its summary is still relevant.
 
+## Unified outline, files and design (default, 2026-10-25)
+
+For new main-SVG projects, author the proposed outline FIRST, then launch ONE
+single-pass page with `content_intake.phase: "review"`, `unified: true`, complete
+`chapters` and `slides`, and all design recommendations. Omit top-level `stage`
+and `next_step`. Supply each chapter's concise `summary` (or `purpose`); the UI
+shows these overall summaries, one overall changes/additions box, one shared file
+upload area, and expanded design settings. It does not show per-slide editors or
+open separate materials, outline or design pages. Complete slides remain the
+agent's internal working outline, not a questionnaire. Keep original facts and
+unresolved assumptions explicit. Legacy materials/review modes below are only
+for an explicitly requested separate workflow.
+
+One final submission atomically records design, `content_review_edits.overall`,
+`content_materials` and validated `content_material_files` in `result.json`.
+Uploaded originals stay in `sources/intake/` with provenance and unread status.
+No preceding material response is required. A changed audience, purpose, design
+or page count is a revision request, not an error requiring another approval.
+Stale outline tokens, incomplete outlines and unknown uploads still block save.
+Before writing spec/§IX or generating, the agent MUST read the selected uploaded
+files, apply the overall requests and selected conditions, reconcile the outline,
+and record source coverage. `content_reconciliation_required: true` is that
+handoff, not evidence the files have already been understood. Ask only if new
+input creates a consequential unresolved conflict; do not reopen routine gates.
+
+After 3 minutes with NO input, submit the current recommendations once and close
+only after successful saving. Any note, upload or design change cancels the timer;
+the user then submits manually. Uploading disables submit. Failed save keeps the
+page open with the error and permits retry. Manual submit follows the same close
+path. The completed deck's preview remains a later production output.
+
 ## Optional File-first Input and Complete Review (v29)
 
 Use the user's sequence: report/business question in chat → proposed TOC →
@@ -160,6 +191,22 @@ Keep re-running the short `--wait-only` while the server is alive; a timeout alo
 means the user is still reading or editing, not that the page failed. Uploaded
 files reach the agent through this wait (`intake_latest.json` → `sources/intake/`),
 so the user never has to paste them into chat.
+
+After a successful manual or timed material submission, the page requests server
+shutdown and closes its browser window. The agent consumes the saved response,
+authors the complete overview, and launches the review page as a new window.
+Successful manual or timed review confirmation likewise closes the window.
+When the user requests a separate outline and design-selection sequence, set
+`content_intake.next_step: "design"` on the review payload. The review hides
+design fields and labels its action as outline confirmation followed by design
+selection. The agent must preserve that outline response, apply its edits, then
+launch a separate design-selection payload without `content_intake` and wait for
+its confirmation before authoring. The outline response alone does not authorize
+generation in this explicitly separated flow.
+Submission errors keep the page open. Browser restrictions may require the host
+to close the submitted tab. `content_intake.auto_advance: false` disables the
+timer for an explicitly manual collection; omit it for the normal three-minute
+flow. Do not leave a submitted material page polling with disabled inputs.
 
 `--wait-intake` returns only for the matching chapter input and never interprets
 it as generation approval. Set `previous_response_id` when collecting another

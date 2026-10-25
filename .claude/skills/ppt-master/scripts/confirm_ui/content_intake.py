@@ -123,7 +123,7 @@ def prepare_content_payload(data: dict, project: Path, read_json) -> None:
     if not isinstance(info, dict) or info.get("phase") not in {"materials", "review"}:
         return
     info["view_revision"] = content_revision(info)
-    if info.get("phase") == "materials":
+    if info.get("phase") == "materials" or info.get("unified"):
         info["pending_attachments"] = [f for f in _attachment_index(project, read_json)["files"]
                                        if f.get("revision") == info["view_revision"]]
     latest = _latest(project, read_json)
@@ -139,9 +139,9 @@ def prepare_content_payload(data: dict, project: Path, read_json) -> None:
 
 
 def _review_error(info: dict, latest: dict) -> str | None:
-    if not latest or latest.get("status") != "materials_submitted_not_approved":
+    if not info.get("unified") and (not latest or latest.get("status") != "materials_submitted_not_approved"):
         return "목차별 추가 입력 또는 '추가 자료 없음' 응답을 먼저 확인해 주세요."
-    if info.get("materials_response_id") != latest.get("id"):
+    if not info.get("unified") and info.get("materials_response_id") != latest.get("id"):
         return "목차별 최신 입력을 반영한 개요가 필요합니다. 채팅으로 돌아가 개요 갱신을 요청해 주세요."
     if info.get("blocking_gaps"):
         return "제작 전에 확인할 정보가 남아 있습니다. 개요의 확인 필요 항목을 먼저 정리해 주세요."
@@ -193,12 +193,36 @@ def content_confirmation_error(payload: dict, project: Path, read_json) -> str |
         clean_review_edits(payload.get("content_review_edits"), len(info["slides"]))
     except ValueError as exc:
         return str(exc)
+    if info.get("unified"):
+        entries = payload.get("content_materials", [])
+        if not isinstance(entries, list) or len(entries) > 1:
+            return "추가 자료 형식이 잘못되었습니다."
+        index = {f["id"]: f for f in _attachment_index(project, read_json)["files"]}
+        selected = []
+        for entry in entries:
+            if not isinstance(entry, dict) or entry.get("chapter_id") != "shared":
+                return "추가 자료는 전체 개요에 첨부해 주세요."
+            if not isinstance(entry.get("text", ""), str) or len(entry.get("text", "")) > 100000:
+                return "추가 내용이 너무 깁니다."
+            ids = entry.get("attachments", [])
+            if not isinstance(ids, list) or any(not isinstance(fid, str) or fid not in index for fid in ids):
+                return "첨부 파일을 다시 확인해 주세요."
+            for fid in ids:
+                f = index[fid]
+                if f.get("revision") != content_revision(info) or f.get("chapter_id") != "shared":
+                    return "변경 전 개요에 첨부한 파일입니다. 다시 첨부해 주세요."
+                if not (project / f["path"]).is_file():
+                    return "첨부 파일을 찾을 수 없습니다. 다시 첨부해 주세요."
+                selected.append(f)
+        payload["content_material_files"] = selected
+        payload["content_reconciliation_required"] = True
+        return None
     count = str(payload.get("page_count", "")).strip()
     if count.isdecimal() and int(count) != len(info["slides"]):
         return "장수를 변경하셨습니다. 변경한 장수에 맞춰 슬라이드 개요를 다시 구성한 뒤 최종 확인해 주세요."
     for key, expected in info.get("anchor_values", {}).items():
         if payload.get(key) != expected:
-            return "대상·용도 등 구성 조건이 변경되었습니다. 변경한 조건으로 개요를 갱신한 뒤 최종 확인해 주세요."
+            return f"개요 조건 불일치 ({key}): 개요 기준 '{expected}', 현재 선택 '{payload.get(key)}'. 변경한 조건으로 개요를 갱신한 뒤 최종 확인해 주세요."
     return None
 
 
@@ -210,7 +234,7 @@ def register_content_routes(app, project: Path, read_json, write_json) -> None:
         if request.headers.get("Origin") and request.headers["Origin"] != request.host_url.rstrip("/"):
             raise ValueError("현재 제작 화면에서만 자료를 제출해 주세요.")
         info = _current_info(project, read_json)
-        if info.get("phase") != "materials":
+        if info.get("phase") != "materials" and not (info.get("phase") == "review" and info.get("unified")):
             raise ValueError("목차별 자료 입력 단계에서만 제출할 수 있습니다.")
         if payload.get("revision") != content_revision(info):
             raise ValueError("목차가 변경되었습니다. 최신 목차를 다시 확인해 주세요.")
