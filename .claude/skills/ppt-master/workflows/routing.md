@@ -33,6 +33,16 @@ not make a direct route inherit the main SVG skill.
 
 ---
 
+## Local named-style package route (2026-10-23)
+
+For a new deck explicitly requesting INNerGEN/이너젠 or INNerCarry/이너캐리,
+select [innergen-package.md](./innergen-package.md) as the execution owner before
+the generic main-route matrix. Read that owner and its pinned package SKILL.md;
+do not load the main SVG owner's confirmation workflow for this route.
+Existing project resumes, supplied PPTX editing/template operations, explicit
+workspace templates and explicit requests for the full repository pipeline keep
+their existing routes below. A style name alone does not reroute those operations.
+
 ## 1. Routing Discipline
 
 | Rule | Behavior |

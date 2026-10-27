@@ -119,7 +119,7 @@ placeholders:
 | PANEL | `#1F355E` |
 | ON_DARK | `#D9E7FD` |
 | INK | `#000000` |
-| GREEN | `#61D835` |
+| GREEN | `#A4C700` |
 
 ## III. Typography (compact)
 
@@ -226,3 +226,9 @@ placeholders:
 | images/innergen-logo-footer-white.png | 로고(흰색) |
 | images/innergen_isometric.png | 표지·목차 일러스트 |
 | images/sample_capture.png | 사례 캡처 자리표시 |
+
+## 뉴비즈 거버닝·도식 규칙 (2026-10-25)
+
+`docs/styles/innergen/newbiz-governing-diagrams-v34.md`를 적용한다. 거버닝은 본문 폭의 가운데(x=480)에 정렬하고, 검정 문장에서 중요한 1–2개 어구만 #A4C700 Bold로 표시한다. `{{KEY_MESSAGE}}`는 전체 문장 슬롯이며, 실제 문장을 채울 때 강조 어구를 같은 text 안의 tspan으로 나눈다. 속성만 기록하고 강조를 생략한 결과는 완성본이 아니다.
+
+병렬 근거 도식은 `03d_content_dual`을 기준으로 연두 #A4C700 / 파랑 #4285F4 제목 띠, 흰색 패널, 회색 테두리를 쓴다. 제목은 가운데, 본문은 좌측 정렬하고 핵심 근거만 파랑 Bold로 처리한다. 파랑 #518FFF는 기존 제목 바·브랜드 표식에 유지한다. 기본 한 줄과 기존 폰트·크기는 유지하며, 두 줄 요청 시 본문 시작점까지 함께 재배치한다.

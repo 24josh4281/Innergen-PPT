@@ -168,7 +168,9 @@
       "label": "이너젠 뉴 · 사업/회사 소개 (16:9)",
       "aliases": [
         "이너젠 사업소개서",
-        "이너젠 회사소개"
+        "이너젠 회사소개",
+        "이너젠 뉴비즈",
+        "뉴비즈"
       ],
       "font": "IBM Plex Sans KR",
       "fallback": "Malgun Gothic",
@@ -183,11 +185,12 @@
       ],
       "source_ids": [
         "(주)이너젠_회사소개자료_260518_외부 발송용1.pptx (2026-10-14 사용자 첨부, 720×405pt)",
-        "S23"
+        "S23",
+        "(주)이너젠_회사소개자료_260619_외부 발송용.pptx, p7: 2026-10-25 사용자 지정"
       ],
       "colors": {
         "primary": "#518FFF",
-        "accent": "#61D835",
+        "accent": "#A4C700",
         "background": "#FFFFFF",
         "text": "#000000",
         "muted": "#595959",
@@ -294,10 +297,39 @@
         "neutral_series": "#A6A6A6",
         "tint_mid": "#B9CFFF",
         "navy_panel": "#1F355E",
-        "on_dark": "#D9E7FD"
+        "on_dark": "#D9E7FD",
+        "evidence_blue": "#4285F4"
       },
       "density_default": "compact",
-      "template": ".claude/skills/ppt-master/templates/decks/innergen_business/"
+      "template": ".claude/skills/ppt-master/templates/decks/innergen_business/",
+      "governing_design": {
+        "align": "center",
+        "base_color": "#000000",
+        "emphasis_color": "#A4C700",
+        "emphasis_phrases": [
+          1,
+          2
+        ],
+        "max_lines": 1,
+        "reference_max_lines": 2,
+        "rule": "핵심 판단 어구만 연두색 Bold. 한 줄 우선, 현재 사용자 요청 또는 프로젝트 확정 시 두 줄을 가운데 배치하고 본문 영역을 재배분한다. 빨강은 경고에만 사용한다."
+      },
+      "diagram_design": {
+        "paired_headers": [
+          "#A4C700",
+          "#4285F4"
+        ],
+        "header_text": "#FFFFFF",
+        "body_fill": "#FFFFFF",
+        "border": "#D9D9D9",
+        "body_emphasis": "#4285F4",
+        "source_pages": [
+          7,
+          13,
+          17
+        ],
+        "rule": "병렬 비교는 같은 높이의 연두/파랑 제목 띠, 흰 근거 패널과 얇은 회색 선. 실제 순서가 있는 절차만 화살표로 연결. 로고는 현재 사용 허용 자료만 사용."
+      }
     },
     "innergen_lecture": {
       "label": "이너젠 뉴 · 교육/강의 (13:9)",
@@ -338,7 +370,9 @@
         "governing_stroke": "#DFE7FF",
         "neutral_series": "#94A3B8",
         "navy_panel": "#152959",
-        "on_navy": "#B8CBF9"
+        "on_navy": "#B8CBF9",
+        "green": "#A4C700",
+        "evidence_blue": "#4285F4"
       },
       "frame": "lecture_blue",
       "safe_margin_pt": 36,
@@ -439,7 +473,7 @@
       "text_colors": {
         "title": "#0B1739",
         "page": "#64748B",
-        "governing": "#2F62F0",
+        "governing": "#000000",
         "body": "#475569",
         "table": "#475569",
         "source": "#64748B"
@@ -468,7 +502,35 @@
         "case_capture": "s22_case_capture",
         "key_summary": "s23_key_summary"
       },
-      "density_default": "compact"
+      "density_default": "compact",
+      "governing_design": {
+        "align": "center",
+        "base_color": "#000000",
+        "emphasis_color": "#A4C700",
+        "emphasis_phrases": [
+          1,
+          2
+        ],
+        "max_lines": 1,
+        "reference_max_lines": 2,
+        "rule": "핵심 판단 어구만 연두색 Bold. 한 줄 우선, 현재 사용자 요청 또는 프로젝트 확정 시 두 줄을 가운데 배치하고 본문 영역을 재배분한다. 빨강은 경고에만 사용한다."
+      },
+      "diagram_design": {
+        "paired_headers": [
+          "#A4C700",
+          "#4285F4"
+        ],
+        "header_text": "#FFFFFF",
+        "body_fill": "#FFFFFF",
+        "border": "#D9D9D9",
+        "body_emphasis": "#4285F4",
+        "source_pages": [
+          7,
+          13,
+          17
+        ],
+        "rule": "병렬 비교는 같은 높이의 연두/파랑 제목 띠, 흰 근거 패널과 얇은 회색 선. 실제 순서가 있는 절차만 화살표로 연결. 로고는 현재 사용 허용 자료만 사용."
+      }
     },
     "innercarry": {
       "label": "이너캐리",

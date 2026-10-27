@@ -47,7 +47,7 @@ if str(_SCRIPTS_DIR) not in sys.path:
 
 from console_encoding import configure_utf8_stdio  # noqa: E402
 from report_diagrams import (FAMILIES, area_bounds, find_template, SVG_NS, Canvas, DiagramError, _copy_chrome_images,  # noqa: E402
-                             _fill_placeholder, _flatten_structure, detect_mode, text_width, wrap)
+                             _fill_placeholder, _flatten_structure, apply_governing_emphasis, detect_mode, text_width, wrap)
 
 RELATIONS = ("sequence", "parallel", "hierarchy", "comparison", "matrix", "quantity", "cause")
 RELATION_KO = {"sequence": "순서·절차", "parallel": "병렬·구성", "hierarchy": "위계·분해", "comparison": "비교·대비",
@@ -808,6 +808,8 @@ def build_one(data: dict[str, Any], form: str, family: str, base: Optional[Path]
     root.set("data-content-diagram", form)
     _fill_placeholder(root, "content-title", data.get("title"))
     _fill_placeholder(root, "key-message", data.get("governing"))
+    if family in ("innergen_business", "innergen_lecture"):
+        apply_governing_emphasis(root, data.get("governing_emphasis", []))
     _fill_placeholder(root, "source-note", data.get("source", ""))
     _fill_placeholder(root, "footer-section", data.get("section", ""))
     _fill_placeholder(root, "page-number", str(data.get("page", "")))

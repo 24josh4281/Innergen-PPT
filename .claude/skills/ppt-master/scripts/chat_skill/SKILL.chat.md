@@ -273,3 +273,8 @@ Compared with the Slide Master repository pipeline (Claude Code / Codex / Gemini
 CLI): no browser confirmation UI, no AI image generation, no speaker-note audio,
 flat PowerPoint structure (no custom Masters/Layouts) and no PowerPoint-rendered
 verification. For those, run the full pipeline in the repository.
+
+
+## 2026-10-25 — NewBiz
+
+For `innergen_business` and `innergen_lecture`, read `references/newbiz-governing-diagrams-v34.md` after older visual rules. Center the governing sentence and use #A4C700 only on its key phrase(s); pair lime and #4285F4 blue evidence headers. Preserve explicit project choices.

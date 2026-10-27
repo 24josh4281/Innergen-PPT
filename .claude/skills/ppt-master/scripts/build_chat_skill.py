@@ -49,6 +49,7 @@ ENTRY_SCRIPTS = ("svg_to_pptx.py", "svg_quality_checker.py", "innergen_qaqc.py",
 FAMILIES = ("innergen_lecture", "innergen_business", "innercarry")
 STYLE_DOCS = (
     "design-standard-v17.md", "design-standard-v17.json",
+    "newbiz-governing-diagrams-v34.md",
     "content-architecture-v20.md", "content-architecture-v20.json",
     "structured-slides-v18.md", "structured-slides-v18.json",
     "consulting-structures-v19.md",
@@ -96,6 +97,9 @@ def build(out_dir: Path) -> Path:
     shutil.copy2(CHAT_SRC / "SKILL.chat.md", bundle / "SKILL.md")
     shutil.copytree(CHAT_SRC / "locks", bundle / "locks")
     shutil.copy2(CHAT_SRC / "start_deck.py", scripts / "start_deck.py")
+    examples = CHAT_SRC / "examples"
+    if examples.is_dir():
+        shutil.copytree(examples, bundle / "examples", ignore=_IGNORE)
 
     modules, packages = _local_modules()
     for name in sorted(modules):

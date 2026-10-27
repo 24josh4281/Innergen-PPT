@@ -7,7 +7,7 @@
 
 ## visual_style
 - visual_style: custom
-- visual_style_behavior: Use the INNerGEN education-and-lecture blue look with compact v22 density: 24px title, one-line 22px bold blue governing sentence in a 44px pale box, body 17.33px, cells 13.33px, deep-navy cover and closing, quiet footer with the logo. Mark fictional figures 예시.
+- visual_style_behavior: Use the INNerGEN education-and-lecture blue look with compact v22 density: 24px title, one-line centered 22px bold black governing sentence with one or two key phrases in lime #A4C700 in a 44px pale box, body 17.33px, cells 13.33px, deep-navy cover and closing, quiet footer with the logo. Mark fictional figures 예시.
 
 ## colors
 - bg: #FFFFFF
@@ -26,6 +26,9 @@
 - on_dark: #B8CBF9
 - ink: #0B1739
 - white: #FFFFFF
+- green: #A4C700
+- evidence_blue: #4285F4
+- governing_text: #000000
 
 ## typography
 - font_family: Pretendard, "Malgun Gothic", sans-serif
@@ -54,3 +57,7 @@
 
 ## pptx_structure
 - mode: flat
+
+## governing_and_diagrams
+- Governing: center the whole sentence, emphasize only the key phrase(s) in #A4C700.
+- Paired evidence headers: lime #A4C700 and blue #4285F4, white centered labels.

@@ -7,3 +7,5 @@
 5. 패키지의 검사(svg_quality_checker, innergen_qaqc, content_balance_check, innergen_story_check)를 돌려 ERROR를 0으로 만든 뒤 내보낸다. WARN은 고치거나 한 줄 이유를 남긴다.
 6. 결과 PPTX는 다운로드 링크로 주고, 쪽 목록·검사 결과·'예시' 항목·글꼴 안내(이 PC에 Pretendard·IBM Plex Sans KR 필요)를 함께 알린다.
 7. 답변은 한국어로 짧게 한다.
+
+8. 이너젠 뉴비즈와 교육자료 모두 거버닝을 가운데 정렬하고 검정 문장의 핵심 어구만 연두 #A4C700로 강조한다. 병렬 근거 도식은 연두/파랑 #4285F4 제목 띠를 쓴다. references/newbiz-governing-diagrams-v34.md와 examples/를 참고하되 예시 문구를 실제 사실로 복사하지 않는다.

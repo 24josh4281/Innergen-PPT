@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-balance-exempt="자유 배치 틀 — 덱에서 본문을 채워 하단까지 씀" viewBox="0 0 1040 720" data-pptx-page-role="content">
+<rect id="master-bg" x="0" y="0" width="1040" height="720" fill="#FFFFFF"/>
+<rect id="top-rule" x="0" y="0" width="1040" height="3" fill="#2F62F0"/>
+<rect id="governing-box" x="48" y="60" width="944" height="44" rx="5" ry="5" fill="#F3F6FF" stroke="#DFE7FF" stroke-width="1"/>
+<rect id="card-1" x="48" y="120" width="460" height="484" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<rect id="card-1-head" x="48" y="120" width="460" height="57.2" fill="#A4C700"/>
+<rect id="card-2" x="532" y="120" width="460" height="484" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<rect id="card-2-head" x="532" y="120" width="460" height="57.2" fill="#4285F4"/>
+<line id="footer-line" x1="48" y1="648" x2="992" y2="648" stroke="#E2E8F0" stroke-width="1"/>
+<image id="footer-logo" x="48" y="660" width="40" height="40" xlink:href="innergen-logo-cover-blue.png" preserveAspectRatio="xMidYMid meet"/>
+<g id="content-title"><text id="content-title-carrier" x="48" y="44" font-family="Pretendard, &quot;Malgun Gothic&quot;, sans-serif" font-size="24" font-weight="700" fill="#0B1739">교육자료 디자인 적용 예시</text></g>
+<g id="key-message"><text id="key-message-carrier" x="520" y="90" font-family="Pretendard, &quot;Malgun Gothic&quot;, sans-serif" font-size="22" font-weight="700" fill="#000000" text-anchor="middle" data-governing-emphasis-color="#A4C700">교육은 핵심 개념을 <tspan fill="#A4C700">실무 판단과 행동</tspan>으로 연결합니다</text></g>
+<g id="card-1-title"><text id="card-1-title-carrier" x="278" text-anchor="middle" y="157.4" font-family="Pretendard, &quot;Malgun Gothic&quot;, sans-serif" font-size="14.67" font-weight="700" fill="#FFFFFF">핵심 개념</text></g>
+<g id="card-1-body"><text id="card-1-body-carrier" x="72" y="325" font-family="Pretendard, &quot;Malgun Gothic&quot;, sans-serif" font-size="17.33" font-weight="400" fill="#475569">개념과 적용 범위를 이해합니다<tspan x="72" dy="43" fill="#4285F4" font-weight="700">핵심 용어와 판단 기준을 확인합니다</tspan><tspan x="72" dy="43" fill="#475569">조건과 예외를 함께 정리합니다</tspan><tspan x="72" dy="43" fill="#475569">질문으로 이해 수준을 점검합니다</tspan></text></g>
+<g id="card-2-title"><text id="card-2-title-carrier" x="762" text-anchor="middle" y="157.4" font-family="Pretendard, &quot;Malgun Gothic&quot;, sans-serif" font-size="14.67" font-weight="700" fill="#FFFFFF">실무 적용</text></g>
+<g id="card-2-body"><text id="card-2-body-carrier" x="556" y="325" font-family="Pretendard, &quot;Malgun Gothic&quot;, sans-serif" font-size="17.33" font-weight="400" fill="#475569">상황에 맞는 판단 기준을 고릅니다<tspan x="556" dy="43" fill="#4285F4" font-weight="700">근거와 판단 과정을 설명합니다</tspan><tspan x="556" dy="43" fill="#475569">적용 결과를 점검합니다</tspan><tspan x="556" dy="43" fill="#475569">다음 행동과 확인 자료를 정합니다</tspan></text></g>
+<g id="source-note"><text id="source-note-carrier" x="48" y="630" font-family="Pretendard, &quot;Malgun Gothic&quot;, sans-serif" font-size="12" font-weight="400" fill="#64748B">디자인 예시 · 실제 고객 정보와 실적을 포함하지 않음</text></g>
+<g id="footer-section"><text id="footer-section-carrier" x="98" y="686" font-family="Pretendard, &quot;Malgun Gothic&quot;, sans-serif" font-size="12" font-weight="400" fill="#64748B">INNerGEN · EDUCATION</text></g>
+<g id="page-number"><text id="page-number-carrier" x="992" y="686" text-anchor="end" font-family="Pretendard, &quot;Malgun Gothic&quot;, sans-serif" font-size="13.33" font-weight="400" fill="#64748B">1</text></g>
+</svg>

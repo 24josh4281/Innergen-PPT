@@ -59,13 +59,13 @@ DECKS_DIR = _SCRIPTS_DIR.parent / "templates" / "decks"
 FAMILIES: dict[str, dict[str, Any]] = {
     "innergen_business": dict(
         font='"IBM Plex Sans KR", "Malgun Gothic", sans-serif', min_px=10.67, ladder=(10.67, 12, 13.33),
-        navy="#2B4C7E", accent="#518FFF", light="#8FB3FF", mid="#B9CFFF", panel="#D9E7FD",
+        navy="#2B4C7E", accent="#4285F4", green="#A4C700", light="#8FB3FF", mid="#B9CFFF", panel="#D9E7FD",
         pale="#EEF3FF", zebra="#F3F7FF", rule="#D9D9D9", text="#000000", muted="#595959",
         neutral="#A6A6A6", alert="#FF0000", white="#FFFFFF",
         ramp=["#EEF3FF", "#B9CFFF", "#8FB3FF", "#518FFF", "#2B4C7E"]),
     "innergen_lecture": dict(
         font='Pretendard, "Malgun Gothic", sans-serif', min_px=12, ladder=(12, 13.33, 14.67),
-        navy="#0B1739", accent="#2F62F0", light="#7B9BF7", mid="#B8CBF9", panel="#DFE7FF",
+        navy="#0B1739", accent="#4285F4", green="#A4C700", light="#7B9BF7", mid="#B8CBF9", panel="#DFE7FF",
         pale="#EEF2FF", zebra="#F3F6FF", rule="#E2E8F0", text="#475569", muted="#64748B",
         neutral="#94A3B8", alert="#FF0000", white="#FFFFFF",
         ramp=["#DFE7FF", "#B8CBF9", "#7B9BF7", "#2F62F0", "#0B1739"]),
@@ -1090,6 +1090,38 @@ def _fill_placeholder(root: ET.Element, gid: str, value: Optional[str]) -> None:
                 return
 
 
+def apply_governing_emphasis(root: ET.Element, phrases: list[str]) -> None:
+    """Color explicitly supplied INNerGEN New phrases without changing the sentence."""
+    if not phrases:
+        return
+    if not isinstance(phrases, list) or not 1 <= len(phrases) <= 2:
+        raise DiagramError("governing_emphasis must contain one or two phrases")
+    text = next((t for t in root.iter(f"{{{SVG_NS}}}text")
+                 if t.get("id") == "key-message-carrier"), None)
+    if text is None:
+        raise DiagramError("governing emphasis requires key-message-carrier")
+    sentence = "".join(text.itertext())
+    spans = []
+    for phrase in phrases:
+        if not isinstance(phrase, str) or not phrase.strip() or sentence.count(phrase) != 1:
+            raise DiagramError("each governing emphasis phrase must occur exactly once")
+        start = sentence.index(phrase)
+        spans.append((start, start + len(phrase)))
+    spans.sort()
+    if any(a[1] > b[0] for a, b in zip(spans, spans[1:])):
+        raise DiagramError("governing emphasis phrases must not overlap")
+    if sum(end - start for start, end in spans) == len(sentence):
+        raise DiagramError("do not color the entire governing sentence")
+    for child in list(text):
+        text.remove(child)
+    text.text = sentence[:spans[0][0]]
+    for i, (start, end) in enumerate(spans):
+        run = ET.SubElement(text, f"{{{SVG_NS}}}tspan", {"fill": "#A4C700"})
+        run.text = sentence[start:end]
+        next_start = spans[i + 1][0] if i + 1 < len(spans) else len(sentence)
+        run.tail = sentence[end:next_start]
+
+
 def check(data: dict[str, Any]) -> tuple[list[str], list[str]]:
     """Return (errors, warnings) for one diagram data file."""
     kind = data.get("kind")
@@ -1140,6 +1172,8 @@ def build(data: dict[str, Any], family: str, base: Optional[Path], mode: str = "
     root.set("data-report-diagram", kind)
     _fill_placeholder(root, "content-title", data.get("title"))
     _fill_placeholder(root, "key-message", data.get("governing"))
+    if family in ("innergen_business", "innergen_lecture"):
+        apply_governing_emphasis(root, data.get("governing_emphasis", []))
     _fill_placeholder(root, "source-note", data.get("source", ""))
     _fill_placeholder(root, "footer-section", data.get("section", ""))
     _fill_placeholder(root, "page-number", str(data.get("page", "")))

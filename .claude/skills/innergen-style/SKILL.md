@@ -3,6 +3,15 @@ name: innergen-style
 description: Apply the locally extracted INNerGEN presentation design whenever a presentation request names 이너젠 / INNerGEN — 이너젠 디자인, 이너젠 디자인으로 만들어줘, 이너젠 디자인해줘, 이너젠 스타일, 이너젠처럼, 이너젠 장표, 이너젠 PPT, 이너젠 양식, 이너젠 템플릿, 이너젠 소개자료, 이너젠 강의자료, 이너젠 보고서, INNerGEN design/style/deck, or names a PPTX in INPUTS/이너젠 PPT 장표 레퍼런스 as a design reference. Selects style family, work type (CDP·규제·감축·인벤토리 등), report stage (제안·착수·중간·최종) and delivery mode (발표·교육·제안·보고) via the v16 matrix, without reusing old client facts.
 ---
 
+## Local package update (2026-10-23)
+
+Read `.claude/skills/ppt-master/workflows/routing.md` first. New named-style
+decks use its local package route and pinned runtime; follow that route's
+recommended-default intake and checks. The older adapter rules below remain
+applicable to the full repository pipeline and existing project edits, and do
+not add confirmation stops to the package route.
+
+
 # INNerGEN Style Adapter
 
 Use the saved style for presentation requests in this repository. This adapter
@@ -308,3 +317,8 @@ aspect-ratio or asset limitation that materially changes the match.
 The source manifest allows checking originals by SHA-256. Keep reference client
 logos, names, financial/emissions values and historical dates out of new decks
 unless they are explicitly supplied as content for that new task.
+
+
+## 2026-10-25 — NewBiz
+
+For `innergen_business` / 이너젠 뉴비즈 and `innergen_lecture` / 교육자료, read `docs/styles/innergen/newbiz-governing-diagrams-v34.md` before authoring. Center governing text and color only the key phrase(s) #A4C700; paired diagrams use lime and #4285F4 blue headers. Preserve each family's canvas/font and Carry defaults and explicit project locks.

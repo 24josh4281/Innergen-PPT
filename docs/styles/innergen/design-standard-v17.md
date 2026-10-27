@@ -273,3 +273,8 @@ Confirm UI(`innergen_studio.js`)의 **결과물 조정** 묶음에서 고르고 
 ### 견본 (2026-10-14, OUTPUTS/example-decks-v22)
 
 교육형 15장을 회사소개·이너캐리 계열로 재생성했다. `svg_quality_checker` 0 errors, `verify_deck` PASS, `innergen_qaqc --strict` PASS.
+
+
+## 2026-10-25 — 뉴비즈
+
+뉴비즈(`innergen_business`)의 거버닝 정렬·강조와 도식 색은 [v34 규칙](newbiz-governing-diagrams-v34.md)을 우선한다. 연두색은 #A4C700, 근거 강조 파랑은 #4285F4이다. 후속 사용자 요청에 따라 교육/강의(`innergen_lecture`)도 같은 정렬·강조·도식 색을 적용하며, 캔버스와 글꼴은 유지한다.

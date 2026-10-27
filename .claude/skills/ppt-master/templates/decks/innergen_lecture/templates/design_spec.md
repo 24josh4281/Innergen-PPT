@@ -227,3 +227,7 @@ placeholders:
 | images/innergen-logo-footer-white.png | 로고(흰색) |
 | images/innergen_isometric.png | 표지·목차 일러스트 |
 | images/sample_capture.png | 사례 캡처 자리표시 |
+
+## 2026-10-25 교육형 적용
+
+거버닝은 x=520, 가운데 정렬, 기본 검정 #000000에 핵심 어구만 연두 #A4C700 Bold로 표시한다. 전체 문장 슬롯은 유지하고 실제 작성 시 tspan으로 강조한다. 2단 근거 도식은 연두 #A4C700 / 파랑 #4285F4 제목 띠와 흰색 가운데 제목을 사용한다. 기존 13:9 캔버스·Pretendard·크기·푸터를 유지한다. `docs/styles/innergen/newbiz-governing-diagrams-v34.md`의 교육형 확장을 따른다.

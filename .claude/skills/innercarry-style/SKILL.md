@@ -3,6 +3,15 @@ name: innercarry-style
 description: Apply the source-backed INNerCarry presentation style whenever a presentation request names 이너캐리 / INNerCarry — 이너캐리 디자인, 이너캐리 디자인해줘, 이너캐리 스타일, 이너캐리처럼, 이너캐리 장표, 이너캐리 PPT, 이너캐리 양식, INNerCarry design/style/deck, or names the supplied 이너캐리 소개 자료 PPTX as a design reference. Keeps source claims and client assets out of new work.
 ---
 
+## Local package update (2026-10-23)
+
+Read `.claude/skills/ppt-master/workflows/routing.md` first. New named-style
+decks use its local package route and pinned runtime; follow that route's
+recommended-default intake and checks. The older adapter rules below remain
+applicable to the full repository pipeline and existing project edits, and do
+not add confirmation stops to the package route.
+
+
 # INNerCarry Style Adapter
 
 This adapter supplies design decisions for presentations in this repository. It
