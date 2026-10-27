@@ -33,6 +33,10 @@ The deck skill uses `python-pptx`, `lxml`, `Pillow`, `openpyxl`, `XlsxWriter` an
 these libraries without assuming internet access. Do not call external APIs or
 use API keys as an automatic fallback.
 
+If a host denies access to its default temporary folder, set `TEMP`, `TMP` and
+`TMPDIR` only in the child process environment to a new temporary directory
+inside the writable task workspace. Keep that change local to this task.
+
 Font availability depends on the host. Preserve the family's Pretendard or IBM
 Plex Sans KR names. Inspect actual fonts when rendering; disclose fallback and
 the need for the opening PC to have the intended fonts. Fonts are not embedded.

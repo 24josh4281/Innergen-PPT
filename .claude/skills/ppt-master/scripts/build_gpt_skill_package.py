@@ -80,6 +80,8 @@ def deck_workflow() -> str:
                           'infer the family from the task; ask only if the distinction materially affects the result.')
     body = brief + body[end_brief:]
     body = body.replace('`\n` breaks a cell line by meaning', '`\\n` breaks a cell line by meaning')
+    body = body.replace('scripts/svg_to_pptx.py /tmp/<deck> -o ',
+                        'scripts/svg_to_pptx.py /tmp/<deck> --native-objects -o ')
     return ("# Portable deck workflow\n\nRead `ENVIRONMENT.md` at the skill root first. "
             "Resolve all `references/`, `scripts/` and `${SKILL_DIR}` paths from that root. "
             "The root `SKILL.md` controls environment, scope, intake defaults and latest-rule precedence.\n\n" + body)
@@ -90,6 +92,7 @@ def equation_workflow() -> str:
     text = re.sub(r"\A---\n.*?\n---\n", "", text, count=1, flags=re.S)
     text = text.replace("도구 위치: `.claude/skills/ppt-master/scripts/`. `.venv`가 있으면 `.venv\\Scripts\\python.exe`로 실행한다.",
                         "도구 위치: 이 스킬 폴더의 `scripts/`. 실행 환경은 루트 `ENVIRONMENT.md`를 따른다.")
+    text = re.sub(r"^\| `equation_editor/server.py`.*\n", "", text, flags=re.M)
     text = re.sub(r"7\. \*\*사용자가 직접 고치고 싶어 하면\*\*.*?(?=\n\n기존 Word)",
                   "7. 사용자가 고치고 싶어 하면 수식·인자 표를 채팅으로 보여 주고 계획 파일을 수정한다. "
                   "웹 편집기·상시 서비스는 이 패키지에 포함하지 않는다.", text, count=1, flags=re.S)
@@ -225,8 +228,8 @@ Skills의 새 스킬·업로드 기능이 제공되는 계정에서는 필요한
 
 ## 5. 공식 형식 참고
 
-- https://learn.chatgpt.com/docs/build-skills
-- https://developers.openai.com/plugins/build/plugins
+- [스킬 작성·실행](https://learn.chatgpt.com/docs/build-skills)
+- [플러그인 패키지 형식](https://developers.openai.com/plugins/build/plugins)
 
 재생성은 저장소의 `.claude/skills/ppt-master/scripts/build_gpt_skill_package.py`에
 새 `--out OUTPUTS/<새 버전 폴더>`와 `--version`을 지정합니다. 기존 배포물 덮어쓰기는 거부합니다.
