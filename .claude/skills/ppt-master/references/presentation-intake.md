@@ -199,9 +199,9 @@ do not re-question or re-outline existing locked content.
 
 **Main SVG surface (2026-10-25 user preference)**: Draft the outline first,
 then use ONE Confirm UI page: `content_intake.phase: "review", unified: true`.
-Show chapter-level summaries, one overall revision/additions field, one optional
-shared upload area, and design choices together. No per-slide form and no
-separate material, overview or design gate. Supply complete internal slides and
+Show chapter-level summaries with a read-only per-page plan (page title, message, concrete content bullets, visual), one overall revision/additions field, one optional
+shared upload area, and design choices together. No per-slide input form and no
+separate material, overview or design gate. Supply complete slides with concrete per-page content and
 all design recommendations up front; exact schema and lifecycle are owned by
 `scripts/docs/confirm_ui.md`. Aim to show the proposed overview promptly; report
 if source volume requires more time rather than silently waiting.

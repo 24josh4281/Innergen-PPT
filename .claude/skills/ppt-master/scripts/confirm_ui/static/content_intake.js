@@ -353,7 +353,7 @@
         if (!info.unified) card.appendChild(steps(3, w));
         card.appendChild(node("h2", info.unified ? (lang === "ko" ? "전체 개요 요약" : "Outline summary") : w.review + " (" + (info.slides || []).length + ")"));
         var ew = editWords(lang);
-        card.appendChild(node("p", info.unified ? (lang === "ko" ? "개요를 확인하고 수정 요청, 추가 자료, 디자인을 한 번에 제출하세요." : "Review the summary and submit changes, files and design together.") : ew.hint, "intake-intro"));
+        card.appendChild(node("p", info.unified ? (lang === "ko" ? "쪽별 들어갈 내용을 확인하고, 바꿀 쪽은 아래 수정 요청에 쪽 번호와 함께 적어 수정 요청, 추가 자료, 디자인을 한 번에 제출하세요." : "Review the summary and submit changes, files and design together.") : ew.hint, "intake-intro"));
         if (!reviewEdits || reviewEdits.revision !== info.view_revision) {
             reviewEdits = {revision: info.view_revision, base: {}, slides: {}, overall: ""};
             var saved = info.saved_edits || {}, savedSlides = saved.slides || {};
@@ -371,6 +371,21 @@
                 var item = node("li"); item.appendChild(node("h3", chapter.title));
                 var messages = (info.slides || []).filter(function (slide) { return slide.chapter_id === chapter.id; }).map(function (slide) { return slide.core_message; });
                 item.appendChild(node("p", chapter.summary || chapter.purpose || messages.slice(0, 2).join(" ")));
+                // Read-only per-page plan: which content goes on each page. Edits go in the overall box below.
+                var pages = node("ul", null, "intake-pages");
+                (info.slides || []).filter(function (slide) { return slide.chapter_id === chapter.id; }).forEach(function (slide) {
+                    var row = node("li", null, "intake-page");
+                    row.appendChild(node("strong", (lang === "ko" ? "P" : "P") + String(slide.page).padStart(2, "0") + " · " + slide.title));
+                    if (slide.core_message) row.appendChild(node("span", slide.core_message, "intake-page-message"));
+                    if ((slide.content || []).length) {
+                        var bullets = node("ul", null, "intake-page-content");
+                        slide.content.forEach(function (text) { bullets.appendChild(node("li", text)); });
+                        row.appendChild(bullets);
+                    }
+                    if (slide.visual) row.appendChild(node("em", (lang === "ko" ? "표현: " : "Visual: ") + slide.visual, "intake-page-visual"));
+                    pages.appendChild(row);
+                });
+                if (pages.childNodes.length) item.appendChild(pages);
                 summary.appendChild(item);
             });
             card.appendChild(summary);

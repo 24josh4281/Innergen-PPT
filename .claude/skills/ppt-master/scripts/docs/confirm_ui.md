@@ -49,10 +49,15 @@ For new main-SVG projects, author the proposed outline FIRST, then launch ONE
 single-pass page with `content_intake.phase: "review"`, `unified: true`, complete
 `chapters` and `slides`, and all design recommendations. Omit top-level `stage`
 and `next_step`. Supply each chapter's concise `summary` (or `purpose`); the UI
-shows these overall summaries, one overall changes/additions box, one shared file
-upload area, and expanded design settings. It does not show per-slide editors or
-open separate materials, outline or design pages. Complete slides remain the
-agent's internal working outline, not a questionnaire. Keep original facts and
+shows these overall summaries, then under each chapter a read-only per-page plan
+(page number, title, core message, the content bullets for that page, and the
+visual form), one overall changes/additions box, one shared file
+upload area, and expanded design settings. Every slide therefore needs `title`,
+`core_message`, a concrete `content` list (what goes on that page, not a topic
+label) and `visual`; a thin outline is not acceptable. Page edits are typed in the
+overall box with the page number. It does not show per-slide editors or
+open separate materials, outline or design pages. The per-page plan is
+shown for review only, never as a questionnaire. Keep original facts and
 unresolved assumptions explicit. Legacy materials/review modes below are only
 for an explicitly requested separate workflow.
 

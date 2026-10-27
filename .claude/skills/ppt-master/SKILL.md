@@ -444,10 +444,10 @@ confirmed outline; reconcile current user answers before writing §IX.
 
 **User-confirmed content flow v29**: Ask report form/business character first,
 draft the outline first, then show one unified confirmation page containing
-chapter-level overall summaries, one changes/additions box, shared file upload
+chapter-level overall summaries with a read-only per-page plan (what content goes on each page), one changes/additions box, shared file upload
 and design choices (`content_intake.phase: "review", unified: true`). Do not
 show per-slide input forms or separate materials/outline/design gates by default.
-Keep complete slides as the internal outline. After the single submission, read
+Write each page's concrete content, not topic labels. After the single submission, read
 selected uploads and reconcile overall edits and changed design conditions before
 writing §IX or authoring SVGs. See `scripts/docs/confirm_ui.md` for the contract.
 The same page includes `work_mode`: `fast_track`, `standard` (default), or
