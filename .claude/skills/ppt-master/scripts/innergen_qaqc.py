@@ -5,7 +5,8 @@ PPT Master - INNerGEN QA/QC gate (uniformity + writing rules)
 Checks a finished (or in-progress) SVG deck against the INNerGEN design rules
 in docs/styles/innergen: family chrome geometry (v17/v22), governing grammar
 (v11/v20, one line since v22), title system (v4/v5/v20), TOC ↔ chapter
-consistency (v5/v20) and the TOC built as one native table (O03, ERROR), structure and closing set per deck type (v20), minimum
+consistency (v5/v20) and the TOC built as one native table (O03, ERROR), body tables drawn as loose
+shapes without a native table payload (O04, WARN), structure and closing set per deck type (v20), minimum
 text sizes (v18/v22), citation line (v16), and - since v25 - the table of
 contents and must-have content per report type and business type
 (content-requirements-v25.json, via innergen_content_check.py). It complements
@@ -210,6 +211,62 @@ class Page:
         if kind == "image":
             return any(_near(i["x"], atom["x"], tol) and _near(i["y"], atom["y"], tol) for i in self.images)
         return True
+
+
+def _shape_tables(page: Page, cfg: dict) -> list[str]:
+    """Innermost groups drawn as a table (named one, or a ruled text grid) without a native table payload."""
+    id_rx = re.compile(cfg.get("id_regex", r"(^|[-_])(table|tbl)([-_\d]|$)"), re.I)
+    min_rows, min_cols = cfg.get("min_rows", 3), cfg.get("min_cols", 3)
+
+    def cluster(vals, tol):
+        keys: list[float] = []
+        counts: dict[float, int] = {}
+        for v in vals:
+            k = next((k for k in keys if abs(k - v) <= tol), None)
+            if k is None:
+                keys.append(v)
+                k = v
+            counts[k] = counts.get(k, 0) + 1
+        return counts
+
+    def is_table(g) -> bool:
+        pts, spans = [], {}
+        for el in g.iter():
+            tag = _local(el.tag)
+            if tag == "text":
+                x = el.get("x")
+                if x is None:
+                    sub = next((c for c in el if c.get("x") is not None), None)
+                    x = sub.get("x") if sub is not None else None
+                pts.append((_num(x, 0.0), _num(el.get("y"), 0.0)))
+            elif tag == "line" and _num(el.get("y1"), 0.0) == _num(el.get("y2"), 1.0) \
+                    and abs(_num(el.get("x2"), 0.0) - _num(el.get("x1"), 0.0)) >= 100:
+                span = (round(_num(el.get("x1"), 0.0)), round(_num(el.get("x2"), 0.0)))
+                spans[span] = spans.get(span, 0) + 1
+        if id_rx.search(g.get("id") or "") and len(pts) >= min_rows:
+            return True
+        cols = [k for k, n in cluster([x for x, _ in pts], 3).items() if n >= min_rows]
+        rows = [k for k, n in cluster([y for _, y in pts], 2).items() if n >= 2]
+        # Row rules repeat one span; chart gridlines, flows and card grids rarely do
+        ruled = max(spans.values(), default=0) >= min_rows - 1
+        return ruled and len(cols) >= min_cols and len(rows) >= min_rows
+
+    found: list[str] = []
+
+    def visit(el) -> bool:
+        if (el.get("data-pptx-native") or "").strip():
+            return True  # native objects (tables, charts) are exported as such
+        hit = False
+        for ch in el:
+            if _local(ch.tag) == "g":
+                hit = visit(ch) or hit
+        if not hit and _local(el.tag) == "g" and el is not page.root and is_table(el):
+            found.append(el.get("id") or "(id 없음)")
+            return True
+        return hit
+
+    visit(page.root)
+    return found
 
 
 # ---------------------------------------------------------------- report
@@ -447,6 +504,16 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
                 rep.add(nt.get("level", "ERROR"), "O03", p.index,
                         "목차가 표가 아닙니다 — 행 간격으로 놓은 글상자는 아래가 비고 세로 가운데 정렬이 안 됩니다. "
                         "목차 템플릿(표) 또는 data-pptx-native=\"table\"(셀 valign ctr, 행이 바닥선까지)로 바꾸세요")
+    # Body tables: a header band and ruled rows drawn as rect+text export as loose shapes, not a PowerPoint table
+    st = rules.get("native_objects", {}).get("shape_table", {"enabled": True, "level": "WARN"})
+    if st.get("enabled", True):
+        for p in pages:
+            if p in toc_pages:
+                continue
+            for gid in _shape_tables(p, st):
+                rep.add(st.get("level", "WARN"), "O04", p.index,
+                        f"표 그룹 '{gid}'에 data-pptx-native=\"table\"이 없어 PPTX에서 표가 아닌 도형·글상자로 나옵니다 — "
+                        "표 페이로드(<metadata data-pptx-native=\"table\">)로 감싸고 --native-objects로 내보내세요")
     if toc_pages:
         toc = toc_pages[0]
         items = [t["text"] for t in toc.texts if _slot(t, r"toc-(item-)?\d+-title")]

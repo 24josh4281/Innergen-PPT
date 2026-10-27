@@ -459,6 +459,16 @@
       "note": "목차는 표(data-pptx-native=\"table\", 셀 valign ctr, 행이 목차 영역을 바닥선까지 나눠 가짐)로 만든다. 2026-10-22 사용자 지적(목차 하단 공백·가운데 정렬 안 됨)"
     }
   },
+  "native_objects": {
+    "shape_table": {
+      "enabled": true,
+      "level": "WARN",
+      "id_regex": "(^|[-_])(table|tbl)([-_\\d]|$)",
+      "min_rows": 3,
+      "min_cols": 3,
+      "note": "본문 표를 rect+text+line으로 그리면 PPTX에서 표가 아닌 개체로 나온다(O04). 2026-10-27 사용자 지적(KSSB 제안서 표가 개체로 내보내짐)"
+    }
+  },
   "structure": {
     "max_consecutive_same_layout": 4,
     "max_share_single_layout": 0.6,
