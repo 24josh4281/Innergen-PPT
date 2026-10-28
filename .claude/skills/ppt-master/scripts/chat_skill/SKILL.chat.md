@@ -193,7 +193,13 @@ For each confirmed page:
    number, label and description inside a card/KPI tile/callout as one group,
    measure its visible height (Hangul line: baseline − 0.78em to + 0.12em) and
    set the first baseline so the top and bottom gaps match; keep left alignment
-   and inner spacing. A card with a heading + one rule keeps the heading on top
+   and inner spacing. A text list fills about 75% of its card body — widen
+   line pitch (≤ 1.9em) and paragraph gaps before leaving wide bands above
+   and below it. Write a card's bullets as ONE `<text>` with one `<tspan x dy>`
+   per line and the bullet as the character `▪ ` (never a drawn square plus a
+   `<text>` per line), so PowerPoint gets one text box with native bullets and
+   editable line spacing. Wrap only when the next word does not fit the box's
+   measured free width. A card with a heading + one rule keeps the heading on top
    and centers only the body below the rule. TOC rows fill the TOC zone
    (row pitch = zone height / chapters) — no empty band above the footer.
    Content pages fill their content zone too (본문 하단 공백 금지): the gap
@@ -246,8 +252,10 @@ Other pages keep one diagram. Turn any leftover `A → B → C` text line into c
 `content_diagrams.py arrows <slide.svg> --group <id> [--accent <step>]`. Use the
 recommended one and mention the other two in the hand-off.
 
-Fix every ERROR in the first two. `content_balance_check --fix` re-centres
-top-heavy boxes (CB01); a TOC bottom void (CB02) is fixed by re-spacing the
+Fix every ERROR in the first two. `content_balance_check --fix` merges
+per-line text objects and drawn bullet squares into one text (CB06), pulls
+back lines wrapped with width to spare (CB07), widens line and paragraph
+spacing in sparse cards (CB05), then re-centres top-heavy boxes (CB01); a TOC bottom void (CB02) is fixed by re-spacing the
 rows (build the TOC as a native table where possible); a page bottom void
 (CB03, last object ends more than 6% of the page height above the source line)
 is fixed by larger body text, taller rows/cards, then a closing message strip. A WARN needs either a fix or a one-line reason in your

@@ -196,7 +196,7 @@ DY_TOLERANCE_PX = 0.5
 # as a real section break that shouldn't merge into one text frame.
 MAX_DY_MULTIPLIER = 3.0
 LIST_MARKER_RE = re.compile(
-    r"^\s*(?:[•·・]\s*|[-–—*]\s+|\d+[.)、]\s+|[（(]\d+[）)]\s*)\S+"
+    r"^\s*(?:[•·・▪■●◆]\s*|[-–—*]\s+|\d+[.)、]\s+|[（(]\d+[）)]\s*)\S+"
 )
 
 
@@ -341,7 +341,18 @@ def _classify_paragraph_block(
         t_x_raw = get_attr(tspan, "x")
         if t_x_raw is not None:
             t_x = parse_first_number(t_x_raw)
-            if base_x is None or t_x is None or abs(t_x - base_x) > 1e-6:
+            if base_x is None or t_x is None:
+                return None
+            # A wrapped line under a bullet may hang at the text indent
+            # (x > base by at most two em); PowerPoint's bullet indent
+            # reproduces it, so it still merges into the bullet paragraph.
+            hanging = (
+                idx > 0
+                and 0 < t_x - base_x <= 2 * (_get_font_size_px(text_el) or 16.0)
+                and not _starts_with_list_marker(group)
+                and any(_starts_with_list_marker(g) for g in line_groups[:idx])
+            )
+            if abs(t_x - base_x) > 1e-6 and not hanging:
                 return None
 
         t_dy_raw = get_attr(tspan, "dy")

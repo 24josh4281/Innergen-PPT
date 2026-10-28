@@ -19,6 +19,17 @@ Finds recurring spacing defects in authored SVG pages, before PPTX export:
        data-pptx-native="table"; rows drawn as spaced text boxes leave a band
        under the last row and cannot center vertically. Use the TOC template
        table (cells valign ctr, rows sharing the zone down to the footer line).
+  CB05 카드 안 내용 부족 (sparse card) — a centered text list fills less than
+       60% of its card body. `--fix` widens line pitch (≤ 1.9em) and one shared
+       paragraph gap until it fills about 75%, then re-centers it.
+  CB06 줄마다 개별 개체 (split text lines) — lines or bullets of one card are
+       separate <text> objects next to drawn bullet squares, so PowerPoint
+       cannot change their line spacing. `--fix` merges them into one <text>
+       (bullet → `▪ `/`• ` character, wrapped lines keep the text indent), which
+       exports as one text box with native bullets.
+  CB07 불필요한 줄바꿈 (premature wrap) — a wrapped line would fit on the line
+       above within 95% of the box's free width. `--fix` joins it and keeps the
+       block's vertical center. Wide one-line rows (Q1–Q8) are checked too.
 
 Gaps are measured on visible glyph bounds, not on text-box bounds: a line's
 ink spans baseline - 0.78em to baseline + 0.12em for Hangul (0.72em / 0.02em
@@ -52,6 +63,7 @@ Dependencies:
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 import re
 import sys
@@ -76,6 +88,16 @@ SOURCE_PREFIXES = ("출처", "자료:", "Source", "source")
 NO_BODY_ROLES = ("cover", "ending", "closing", "section", "chapter", "divider", "toc", "표지", "맺음", "간지", "목차")
 FULL_SLOT_RATIO = 0.75                  # a slot this tall (vs. its zone) centers on its own
 SHIFTABLE = {"text", "rect", "circle", "ellipse", "image", "line", "polygon", "polyline"}
+# Card text tidy (CB05–CB07)
+SPARSE_FILL = 0.60                      # CB05: a text list filling less than this of its zone
+FILL_TARGET = 0.75                      # spread until the list fills this much
+MAX_LINE_PITCH = 1.9                    # line pitch cap while spreading (× font size)
+MAX_PARA_GAP = 1.8                      # extra paragraph gap cap (× font size)
+WRAP_PITCH = 1.75                       # CB07: only lines this close (× size) are a wrapped sentence
+LINE_PITCH_MAX = 3.2                    # CB06: same-x texts this close (× size) are one block
+MARKER_MAX = 12.0                       # a drawn bullet square/dot is at most this big
+WRAP_MARGIN = 0.95                      # CB07: joined line must fit 95% of the free width
+BULLET_CHARS = "▪■•●◆·"
 
 
 def _tag(el) -> str:
@@ -333,6 +355,326 @@ def _balance(c: Item, zone: tuple[float, float], content: list[Item], page: str)
                    round(gap_top, 1), round(gap_bottom, 1), round(imbalance / 2, 2), items=content)
 
 
+def _card_zones(c: Item, items: list[Item]) -> list[tuple[tuple[float, float], list[Item]]]:
+    """Text zones of a card for the tidy pass: the body under a header band, or the
+    zone below a single heading rule. Cards with list separators keep one zone."""
+    inside = [it for it in items if it is not c and it.inside(c)]
+    top, bottom = c.y0, c.y1
+    content, cuts = [], []
+    for it in inside:
+        if not it.is_text and _touches_edge(it, c):
+            if it.w >= c.w * 0.9 and abs(it.y0 - c.y0) <= EDGE_TOL and it.h < c.h * 0.5:
+                top = max(top, it.y1)
+            elif it.w >= c.w * 0.9 and abs(it.y1 - c.y1) <= EDGE_TOL and it.h < c.h * 0.5:
+                bottom = min(bottom, it.y0)
+            continue
+        if _is_divider(it, c):
+            cuts.append(it.y0)
+            continue
+        content.append(it)
+    content = [it for it in content if it.y0 >= top - 0.6 and it.y1 <= bottom + 0.6]
+    cuts = sorted({round(y, 1) for y in cuts if top < y < bottom})
+    if len(cuts) == 1:
+        lower = [it for it in content if it.y0 >= cuts[0] - 0.6]
+        return [((cuts[0], bottom), lower)] if lower else []
+    if cuts:
+        return []
+    return [((top, bottom), content)] if content else []
+
+
+def _is_line_tspan(ts) -> bool:
+    return _tag(ts) == "tspan" and any(ts.get(k) is not None for k in ("x", "y", "dy"))
+
+
+def _plain_text(el) -> bool:
+    """Lines are direct tspans only: no transform, no positioned nested tspan."""
+    if el.get("transform") or (el.get("text-anchor") or "start") != "start":
+        return False
+    for ts in el:
+        if _tag(ts) != "tspan":
+            return False
+        for sub in ts.iter():
+            if sub is not ts and _tag(sub) == "tspan" and any(sub.get(k) is not None for k in ("x", "y", "dy")):
+                return False
+    return True
+
+
+def _canon(el) -> list[list]:
+    """Rewrite a plain <text> so each visual line is a direct tspan with x and dy
+    (the first line has no dy; its baseline is the text's y). Inline runs fold
+    into their line. Returns [[tspan, baseline], ...]."""
+    x, y = el.get("x") or "0", _f(el.get("y"))
+    lines: list[list] = []
+    head = (el.text or "").strip()
+    el.text = None
+    if head:
+        ts = ET.Element(f"{{{SVG_NS}}}tspan", {"x": x})
+        ts.text = head
+        el.insert(0, ts)
+        lines.append([ts, y])
+    cy = y
+    for ts in list(el):
+        if lines and ts is lines[0][0]:
+            continue
+        if ts.get("y") is not None:
+            cy = _f(ts.get("y"))
+        elif ts.get("dy") is not None:
+            cy += _f(ts.get("dy"))
+        elif lines:
+            el.remove(ts)
+            lines[-1][0].append(ts)
+            continue
+        lines.append([ts, cy])
+    for i, (ts, b) in enumerate(lines):
+        ts.set("x", ts.get("x") or x)        # keeps a bullet's hanging indent
+        ts.attrib.pop("y", None)
+        if i == 0:
+            ts.attrib.pop("dy", None)
+        else:
+            ts.set("dy", f"{b - lines[i - 1][1]:g}")
+        if not (ts.tail or "").strip():
+            ts.tail = None
+    if lines:
+        el.set("y", f"{lines[0][1]:g}")
+    return lines
+
+
+def _line_text(ts) -> str:
+    return "".join(ts.itertext()).strip()
+
+
+def _size(el) -> float:
+    return _f(el.get("font-size"), 16.0)
+
+
+def _marker_for(t: Item, items: list[Item]) -> Optional[Item]:
+    """A small square/dot just left of the text's first line (a drawn bullet)."""
+    size = _size(t.el)
+    first = t.y0 + HANGUL_ASCENT * size
+    for m in items:
+        if m.is_text or m.kind not in ("rect", "circle", "ellipse") or m.w > MARKER_MAX or m.h > MARKER_MAX:
+            continue
+        cy = (m.y0 + m.y1) / 2
+        if 0 <= t.ax - m.x1 <= 2.5 * size and first - HANGUL_ASCENT * size - 2 <= cy <= first + 2:
+            return m
+    return None
+
+
+def _text_blocks(content: list[Item]) -> list[list[Item]]:
+    """Runs of left-aligned texts at one x and one size, stacked at line/paragraph pitch."""
+    texts = sorted((it for it in content if it.is_text and _plain_text(it.el)), key=lambda it: (round(it.ax), it.y0))
+    blocks: list[list[Item]] = []
+    for t in texts:
+        prev = blocks[-1][-1] if blocks else None
+        if (prev is not None and abs(prev.ax - t.ax) <= 1 and _size(prev.el) == _size(t.el)
+                and 0 < t.y0 - prev.y1 <= (LINE_PITCH_MAX - 1) * _size(t.el)):
+            blocks[-1].append(t)
+        else:
+            blocks.append([t])
+    return [b for b in blocks if len(b) >= 2]
+
+
+STYLE_DEFAULTS = {"fill": "#000000", "font-weight": "400", "font-style": "normal",
+                  "fill-opacity": "1", "text-decoration": "none"}
+
+
+def _style(ts) -> tuple:
+    return tuple(ts.get(k) for k in STYLE_DEFAULTS)
+
+
+def merge_block(block: list[Item], items: list[Item]) -> None:
+    """CB06 fix: one <text> per block; drawn bullet squares become text bullets
+    (▪/•) so PowerPoint gets one text box with native bullets and line spacing.
+    Text-level styles that differ inside the block move onto each line."""
+    base = block[0].el
+    markers = [_marker_for(t, items) for t in block]
+    x = min([m.x0 for m in markers if m] + [block[0].ax]) if any(markers) else block[0].ax
+    mixed = [k for k in STYLE_DEFAULTS if len({t.el.get(k) or STYLE_DEFAULTS[k] for t in block}) > 1]
+    all_lines: list[list] = []
+    heads: set[int] = set()
+    for t, m in zip(block, markers):
+        lines = _canon(t.el)
+        for ts, _b in lines:
+            for k in mixed:
+                if ts.get(k) is None:
+                    ts.set(k, t.el.get(k) or STYLE_DEFAULTS[k])
+        if m is not None and lines:
+            ts = lines[0][0]
+            heads.add(id(ts))
+            dot = ET.Element(f"{{{SVG_NS}}}tspan", {"fill": m.el.get("fill") or "#000000"})
+            dot.text = "▪ " if m.kind == "rect" else "• "
+            dot.tail, ts.text = ts.text, None
+            ts.insert(0, dot)
+        all_lines += lines
+    for t in block[1:]:
+        for parent in _parents(t.el):
+            parent.remove(t.el)
+    for m in markers:
+        if m is not None:
+            for parent in _parents(m.el):
+                parent.remove(m.el)
+    for ts in list(base):
+        base.remove(ts)
+    base.set("x", f"{x:g}")
+    base.set("y", f"{all_lines[0][1]:g}")
+    for i, (ts, b) in enumerate(all_lines):
+        if id(ts) in heads or not any(markers):
+            ts.set("x", f"{x:g}")            # bullet line starts at the marker; wrapped lines keep the text indent
+        ts.attrib.pop("dy", None)
+        if i:
+            ts.set("dy", f"{b - all_lines[i - 1][1]:g}")
+        base.append(ts)
+
+
+_PARENTS: dict = {}
+
+
+def _parents(el) -> list:
+    p = _PARENTS.get(id(el))
+    return [p] if p is not None else []
+
+
+def _starts_marker(ts) -> bool:
+    return _line_text(ts)[:1] in BULLET_CHARS
+
+
+def rejoin_lines(el, t: Item, c: Item, content: list[Item]) -> int:
+    """CB07 fix: pull a wrapped line back up when the whole line fits the frame
+    (`el` is the text itself, or a copy when only reporting)."""
+    if _n_lines(el) < 2:
+        return 0
+    lines = _canon(el)
+    size, x = _size(el), _f(el.get("x"))
+    if any(o is not t and o.x0 > x + 4 for o in content):
+        return 0                             # a table row / column layout: the cell edge is unknown
+    pad = max(8.0, min(24.0, x - c.x0))
+    right = c.x1 - pad
+    dys = [_f(ts.get("dy")) for ts, _ in lines[1:]]
+    pitch = min(dys)
+    joined, i, removed = 0, 0, 0.0
+    while i < len(lines) - 1:
+        cur, nxt = lines[i][0], lines[i + 1][0]
+        soft = (abs(_f(nxt.get("dy")) - pitch) <= 0.5 and pitch <= WRAP_PITCH * size and not _starts_marker(nxt)
+                and _style(cur) == _style(nxt))  # a bold heading line never joins its body
+        if soft and _text_width(_line_text(cur) + " " + _line_text(nxt), size) <= (right - x) * WRAP_MARGIN:
+            if len(cur):
+                cur[-1].tail = (cur[-1].tail or "") + " " + (nxt.text or "")
+            else:
+                cur.text = (cur.text or "") + " " + (nxt.text or "")
+            for ch in list(nxt):
+                nxt.remove(ch)
+                cur.append(ch)
+            removed += _f(nxt.get("dy"))
+            el.remove(nxt)
+            del lines[i + 1]
+            joined += 1
+            continue
+        i += 1
+    if removed:                              # keep the block's vertical center
+        el.set("y", f"{_f(el.get('y')) + removed / 2:g}")
+    return joined
+
+
+def spread_zone(zone: tuple[float, float], content: list[Item]) -> Optional[float]:
+    """CB05 fix: widen line and paragraph spacing of a text list until it fills
+    FILL_TARGET of its zone (line pitch ≤ MAX_LINE_PITCH em, paragraph gap
+    ≤ MAX_PARA_GAP em). Returns the new fill ratio, or None when not a text list."""
+    z0, z1 = zone
+    texts = [it for it in content if it.is_text]
+    if any(not it.is_text and (it.w > MARKER_MAX or it.h > MARKER_MAX) for it in content):
+        return None
+    if not texts or any(not _plain_text(t.el) for t in texts):
+        return None
+    g0, g1 = min(it.y0 for it in content), max(it.y1 for it in content)
+    if sum(_n_lines(t.el) for t in texts) < 3 or (g1 - g0) >= SPARSE_FILL * (z1 - z0):
+        return None
+    canon = {id(t): _canon(t.el) for t in texts}
+    size = max(_size(t.el) for t in texts)
+    clusters: list[list[Item]] = []
+    for it in sorted(content, key=lambda it: it.y0):
+        if clusters and it.y0 < max(o.y1 for o in clusters[-1]) - 0.5:
+            clusters[-1].append(it)
+        else:
+            clusters.append([it])
+    soft, para = [], []
+    for t in texts:
+        lines = canon[id(t)]
+        if len(lines) < 2:
+            continue
+        pitch = min(_f(ts.get("dy")) for ts, _ in lines[1:])
+        for ts, _ in lines[1:]:
+            (soft if abs(_f(ts.get("dy")) - pitch) <= 0.5 and not _starts_marker(ts) else para).append((ts, pitch))
+    n_between = len(clusters) - 1
+    extra = FILL_TARGET * (z1 - z0) - (g1 - g0)
+    base_pitch = min((p for _, p in soft + para), default=1.4 * size)
+    s = min(max(0.0, MAX_LINE_PITCH * size - base_pitch), extra * 0.35 / len(soft)) if soft else 0.0
+    n_para = len(para) + n_between
+    p = min(MAX_PARA_GAP * size, (extra - s * len(soft)) / n_para) if n_para else 0.0
+    p = max(p, s)
+    total = s * len(soft) + p * n_para
+    if total > extra > 0:
+        s, p = s * extra / total, p * extra / total
+    if s + p <= 0.5:
+        return None
+    gap = sum(_f(ts.get("dy")) - pitch for ts, pitch in para) / len(para) if para else 0.0
+    new_dy = {id(ts): _f(ts.get("dy")) + s for ts, _ in soft}
+    new_dy.update({id(ts): pitch + gap + s + p for ts, pitch in para})   # one shared paragraph gap
+    grow = {id(t): sum(new_dy[id(ts)] - _f(ts.get("dy")) for ts, _ in canon[id(t)][1:]) for t in texts}
+    cl_grow = [max((grow[id(it)] for it in cl if it.is_text), default=0.0) for cl in clusters]
+    new_h = (g1 - g0) + sum(cl_grow) + p * n_between
+    for ts, _ in soft + para:
+        ts.set("dy", f"{new_dy[id(ts)]:.2f}".rstrip("0").rstrip("."))
+    offset = z0 + (z1 - z0 - new_h) / 2 - g0     # spread and re-center in one move
+    for cl, g in zip(clusters, cl_grow):
+        shift(cl, offset)
+        offset += g + p
+    return new_h / (z1 - z0)
+
+
+def tidy_card(c: Item, items: list[Item], page: str, fix: bool,
+              spread: bool = True) -> tuple[list[Finding], bool]:
+    """CB06 → CB07 → CB05 on one card; CB01 centering runs afterwards.
+    `spread=False` once the card was spread, so the caps hold across passes."""
+    out: list[Finding] = []
+    changed = False
+    box = (round(c.x0, 1), round(c.y0, 1), round(c.w, 1), round(c.h, 1))
+    for (z0, z1), content in _card_zones(c, items):
+        for block in _text_blocks(content):
+            out.append(Finding("CB06", page, box, 0.0, 0.0, fixed=fix,
+                               note=f"본문 {len(block)}줄/문단이 개별 텍스트 개체 — PPT에서 줄간격 조정 불가"
+                                    + (", 한 텍스트(네이티브 불릿)로 합침" if fix else ", 한 <text>+tspan으로 합치세요")))
+            if fix:
+                merge_block(block, items)
+                changed = True
+        if changed:
+            return out, True                  # re-measure before the next pass
+        for t in content:
+            if not t.is_text or not _plain_text(t.el):
+                continue
+            n = rejoin_lines(t.el if fix else copy.deepcopy(t.el), t, c, content)
+            if n:
+                out.append(Finding("CB07", page, box, 0.0, 0.0, fixed=fix,
+                                   note=f"폭이 남는데 줄바꿈 {n}곳 — " + ("한 줄로 합침" if fix else "한 줄로 합치세요")))
+                changed = changed or fix
+        if changed:
+            return out, True
+        g0 = min((it.y0 for it in content), default=z0)
+        g1 = max((it.y1 for it in content), default=z0)
+        fill = (g1 - g0) / (z1 - z0) if z1 > z0 else 1.0
+        n_lines = sum(_n_lines(it.el) for it in content if it.is_text)
+        if spread and z1 - z0 >= 120 and fill < SPARSE_FILL and n_lines >= 3:
+            new = spread_zone((z0, z1), content) if fix else None
+            note = (f"내용이 영역의 {fill:.0%}만 채움 — 줄·문단 간격을 넓혀 {new:.0%}로 채움" if new
+                    else f"내용이 영역의 {fill:.0%}만 채움 — 줄간격·문단 간격을 넓히거나 글자 크기를 키우세요")
+            out.append(Finding("CB05", page, box, round(g0 - z0, 1), round(z1 - g1, 1), fixed=bool(new), note=note))
+            changed = changed or bool(new)
+    return out, changed
+
+
+def _n_lines(el) -> int:
+    return int(bool((el.text or "").strip())) + sum(1 for ts in el if _is_line_tspan(ts)) or 1
+
+
 def analyse_card(c: Item, items: list[Item], page: str) -> list[Finding]:
     """Check one background box. A single internal full-width rule splits it into
     a heading zone (kept in place when it hugs the rule) and a body zone that is
@@ -562,6 +904,26 @@ def check_file(path: Path, fix: bool, template: bool = False) -> list[Finding]:
         if f:
             findings.append(f)
     changed = False
+    if not template:
+        # Row bands count here: a wide one-line box (Q1–Q8 rows) can still wrap too early.
+        boxes = [it.el for it in items if it.kind == "rect" and it.fill not in ("NONE", "TRANSPARENT")
+                 and it.w >= 40 and it.h >= 24 and not (it.w >= cw * 0.95 and it.h >= ch * 0.95)
+                 and not it.el.get("data-balance-exempt")]
+        for rect in boxes:
+            spread = True
+            for _ in range(4):                   # merge → rejoin → spread, re-measuring between
+                _PARENTS.clear()
+                _PARENTS.update({id(k): p for p in root.iter() for k in p})
+                c = next((it for it in items if it.el is rect), None)
+                if c is None:
+                    break
+                found, moved = tidy_card(c, items, path.name, fix, spread)
+                findings.extend(found)
+                spread = spread and not any(f.code == "CB05" and f.fixed for f in found)
+                if not moved:
+                    break
+                changed = True
+                items, _ = collect(root)
     for c in _containers(items, cw, ch):
         for f in analyse_card(c, items, path.name):
             if fix and _can_shift(f.items, template):
