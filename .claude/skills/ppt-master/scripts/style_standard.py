@@ -79,6 +79,8 @@ def validate_selection(payload, data=None):
         errors.append(f'Unknown font_family: {payload.get("font_family")} (have: {", ".join(fonts)})')
     if payload.get('content_detail') not in (None, 'concise', 'specific'):
         errors.append(f'Unknown content_detail: {payload.get("content_detail")}')
+    if payload.get('governing_size') not in (None, 'large', 'standard', 'small'):
+        errors.append(f'Unknown governing_size: {payload.get("governing_size")}')
     ty = payload.get('typography') or {}
     if isinstance(ty, dict):
         sizes = ty.get('sizes') or {}
@@ -103,7 +105,7 @@ def validate_selection(payload, data=None):
 def source_digest(payload):
     keys = ('style_family','style_delivery_mode','innergen_business_type','innergen_report_type',
             'layout_choice','media_mode','canvas','typography','color','image_usage','image_notes',
-            'structure_goal','structure_standard_version','density','font_family','content_detail','governing_lines')
+            'structure_goal','structure_standard_version','density','font_family','content_detail','governing_lines','governing_size')
     values = {k:payload[k] for k in keys if k in payload}
     return hashlib.sha256(json.dumps(values,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
 
@@ -140,6 +142,15 @@ def resolve(payload, data=None):
         for role, pt in (profile.get('typography_pt_overrides') or {}).get(payload['style_delivery_mode'], {}).items():
             result['typography_pt'][role] = float(pt)
             result['typography_px'][role] = float(pt) / .75
+    # v35 governing size option: scale the governing role, clamped to the option's pt range.
+    gsize = payload.get('governing_size') or 'standard'
+    gopt = next((o for o in data.get('feedback_options') or [] if o.get('id') == 'governing_size'), {})
+    gscale = (gopt.get('scale') or {}).get(gsize, 1.0)
+    if gscale != 1.0 and 'governing' in result['typography_pt']:
+        gpt = min(max(result['typography_pt']['governing'] * gscale, gopt.get('min_pt', 0)), gopt.get('max_pt', 999))
+        gpt = round(gpt * 2) / 2
+        result['typography_pt']['governing'] = gpt
+        result['typography_px']['governing'] = gpt / .75
     font_key = payload.get('font_family') or 'family_default'
     fonts = data.get('fonts') or {}
     chosen_font = fonts[font_key]['family'] if font_key in fonts else None
@@ -147,6 +158,7 @@ def resolve(payload, data=None):
     result['heading_font'] = chosen_font or (ty.get('heading') or {}).get('cjk') or result['font']
     result['adjustments'] = {
         'density': density, 'font_family': font_key, 'content_detail': payload.get('content_detail') or 'specific',
+        'governing_size': gsize,
         'governing_max_lines': int(payload.get('governing_lines') or data['text'].get('governing_max_lines', 1)),
         'note': 'feedback_options in the standard; density replaces mode sizes, font replaces profile.font, content_detail steers Strategist body density and QA strictness.'}
     result['text_rules'] = dict(result['text_rules'], governing_max_lines=result['adjustments']['governing_max_lines'])

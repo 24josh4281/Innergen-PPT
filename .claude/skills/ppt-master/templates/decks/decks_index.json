@@ -17,9 +17,9 @@
     "primary_color": "#0B1739"
   },
   "innergen": {
-    "summary": "이너젠 오리지널 (ESG·기후 컨설팅 보고서 13:9) 템플릿 — 격자형·단색 남색형·슬림라인형",
+    "summary": "이너젠 오리지널 (ESG·기후 컨설팅 보고서 13:9) 템플릿 — 격자형·단색 남색형·슬림라인형·제안서형(v35)",
     "canvas_format": "ppt139",
-    "page_count": 21,
+    "page_count": 26,
     "primary_color": "#0F243F",
     "defaults": {
       "mode": "briefing",

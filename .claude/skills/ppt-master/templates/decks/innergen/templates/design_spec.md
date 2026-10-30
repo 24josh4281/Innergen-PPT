@@ -3,7 +3,7 @@ template_id: innergen
 deck_id: innergen
 kind: deck
 category: brand
-summary: 이너젠 오리지널 (ESG·기후 컨설팅 보고서 13:9) 템플릿 — 격자형·단색 남색형·슬림라인형
+summary: 이너젠 오리지널 (ESG·기후 컨설팅 보고서 13:9) 템플릿 — 격자형·단색 남색형·슬림라인형·제안서형(v35)
 keywords: [이너젠, 이너젠 오리지널, 오리지널, ESG, 기후, 보고서, '13:9']
 primary_color: "#0F243F"
 canvas_format: ppt139
@@ -15,14 +15,14 @@ source_canvas_height: 720
 source_viewbox: "0 0 1040 720"
 replication_mode: standard
 native_structure_mode: structured
-page_count: 21
+page_count: 26
 ---
 
 # 이너젠 오리지널 (컨설팅 보고서 13:9) 템플릿 — 디자인 명세
 
 ## I. Template Overview
 
-이너젠의 자체 로고와 남색·흰색·회색 구조색을 사용하는 ESG·기후 컨설팅 보고서용 덱 템플릿이다. 원본 PPTX에서 관찰된 `classic-grid`, `solid-navy`, `slim-line` 세 프레임을 각각 독립된 화면 계열로 제공한다. 한 덱에서는 선택한 프레임을 일관되게 사용한다. 사업 성격과 보고 성격은 별도 구성 프로필에서 정하며, 이 템플릿은 재사용할 화면 형식을 제공한다.
+이너젠의 자체 로고와 남색·흰색·회색 구조색을 사용하는 ESG·기후 컨설팅 보고서용 덱 템플릿이다. 원본 PPTX에서 관찰된 `classic-grid`, `solid-navy`, `slim-line` 세 프레임과 최종 제안서(OCI 261030)에서 잰 `proposal` 프레임(v35)을 각각 독립된 화면 계열로 제공한다. 한 덱에서는 선택한 프레임을 일관되게 사용한다. 사업 성격과 보고 성격은 별도 구성 프로필에서 정하며, 이 템플릿은 재사용할 화면 형식을 제공한다.
 
 ## II. Color Scheme
 
@@ -78,6 +78,12 @@ page_count: 21
 | `05b_ending_solid_navy.svg` | `innergen-solid-ending` / 이너젠 오리지널 단색 마무리 | 핵심 결론·단색 남색 하단 띠 |
 | `05c_ending_slim_line.svg` | `innergen-slim-ending` / 이너젠 오리지널 슬림 마무리 | 흰 여백·짧은 종료 메시지·가는 구분선 |
 
+| `01d_cover_proposal.svg` | `innergen-proposal-cover` / 이너젠 오리지널 제안 표지 | 우상단 날짜·가운데 제목·자체 로고·격자 하단 띠(CO₂ │ Consulting │ Client) |
+| `02d_toc_proposal.svg` | `innergen-proposal-toc` / 이너젠 오리지널 제안 목차 | CONTENTS 제목·왼쪽 자체 로고·오른쪽 Ⅰ–Ⅳ 목록(모두 남색) |
+| `03d_chapter_proposal.svg` | `innergen-proposal-chapter` / 이너젠 오리지널 제안 장 구분 | 목차와 같은 화면, 현재 장만 남색 Bold·나머지 회색 |
+| `04d_content_proposal.svg` | `innergen-proposal-content` / 이너젠 오리지널 제안 본문 | 검은 제목·남색 격자 띠·원 아이콘 거버닝·넓은 본문·흰 푸터 |
+| `05d_ending_proposal.svg` | `innergen-proposal-ending` / 이너젠 오리지널 제안 마무리 | Thank you!·연락처·명함 카드·남색 주소 띠 |
+
 목차(`02a/02b/02c_toc_*`, 2026-10-22)는 표 하나(`data-pptx-native="table"`, 번호·제목/설명 2열)다. 셀은 세로 가운데 정렬이고 행이 머리띠 아래부터 바닥 띠 위(y100–640)를 나눠 가진다. `{{TOC_ITEM_n_*}}` 토큰은 표 메타데이터와 대체 그림에 함께 있으니 둘 다 채운다. PowerPoint 표로 내보내려면 `--native-objects`를 붙인다.
 
 ## VI. Assets
@@ -88,3 +94,13 @@ page_count: 21
 | `../images/innergen-logo-footer-white.png` | 남색 푸터, 160×101 원본 |
 
 두 파일 모두 이너젠 원본에서 확인한 자체 로고이다. 과거 고객 로고·연락처·수치·일러스트는 포함하지 않는다.
+
+## VII. 제안서 프레임 (v35, 2026-10-30)
+
+최종 제안서 `(제안자료) OCI 탄소중립 로드맵 재수립 및 기후공시 연계 컨설팅_v3.0_261030.pdf`의 실측값으로 만든 `d` 계열이다. 규칙 원문: `docs/styles/innergen/design-standard-v17.md` v35 절, JSON `profiles.innergen_basic.proposal_frame_v35`.
+
+- 글꼴은 IBM Plex Sans KR(없으면 맑은 고딕). 제목 26.67px(20pt) Bold 검정, 거버닝 17.33px(13pt) Bold + 원 아이콘, 본문 16px(12pt).
+- 거버닝 예시 크기는 최종본(작게)이다. Confirm UI `governing_size`가 표준·크게면 그 크기로 바꾸고 한 줄 폭을 다시 잰다.
+- 우상단(784–1040px, y0–50)은 고객 로고 자리다. 템플릿에는 고객 로고를 넣지 않고 프로젝트에서 넣는다.
+- 장 구분(`03d`)은 목차 화면을 반복하며 현재 장만 `#0F243F` Bold, 나머지는 `#A6A6A6` Regular로 바꾼다.
+- 생성 스크립트: `.claude/skills/ppt-master/scripts/build_innergen_proposal_templates.py (인자 없으면 이 폴더에 다시 씀)`.

@@ -54,6 +54,12 @@
     }
     function applyTypography(data, state, p, m) {
         var px = densityPx(data, state, p, m), family = fontName(data, state, p);
+        var gopt = (data.feedback_options || []).filter(function (o) { return o.id === "governing_size"; })[0];
+        var gscale = gopt && gopt.scale ? (gopt.scale[state.governing_size || "standard"] || 1) : 1;
+        if (gscale !== 1 && px.governing) {
+            var gpt = Math.min(Math.max(px.governing * 0.75 * gscale, gopt.min_pt || 0), gopt.max_pt || 999);
+            px.governing = Math.round(gpt * 2) / 2 / 0.75;
+        }
         state.typography = { name: "v17-" + state.style_family + "-" + (state.density || p.density_default || "standard"),
             heading: { cjk: family, latin: family }, body: { cjk: family, latin: family },
             body_size: px.body, body_size_unit: "px",
@@ -77,10 +83,11 @@
             if (!state.density) state.density = p.density_default || "compact";
             if (!state.content_detail) state.content_detail = "specific";
             if (!state.font_family) state.font_family = "family_default";
+            if (!state.governing_size) state.governing_size = "standard";
             state.governing_lines = "1";
             applyTypography(data, state, p, m);
         }
-        if (field === "density" || field === "font_family") applyTypography(data, state, p, m);
+        if (field === "density" || field === "font_family" || field === "governing_size") applyTypography(data, state, p, m);
         if (field === "media_mode") state.image_usage = data.media_modes[value].image_usage.slice();
         if (!state.layout_choice || field === "structure_goal" || field === "innergen_report_type" ||
                 field === "innergen_business_type" || field === "style_delivery_mode") {
@@ -319,7 +326,7 @@
                 select(adjustFields, opt.label, entries, current, function (v) { onChange(opt.id, v); }, opt.id === "governing_lines");
             });
             adjust.appendChild(adjustFields);
-            adjust.appendChild(node("p", "ig-caption", "컴팩트: 본문 12pt 내외, 거버닝 최대 18pt 한 줄. 구체형: 수치·근거·사례를 명시. 글꼴은 설치된 가족만 선택(install_fonts.py)."));
+            adjust.appendChild(node("p", "ig-caption", "컴팩트: 본문 12pt 내외, 거버닝 최대 18pt 한 줄. 거버닝 크기: 크게 ×1.15(최대 20pt)·작게 ×0.8(최소 13pt). 구체형: 수치·근거·사례를 명시. 글꼴은 설치된 가족만 선택(install_fonts.py)."));
             root.appendChild(adjust);
         }
         var catalog = data.consulting_structure;
