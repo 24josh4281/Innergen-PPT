@@ -11,6 +11,7 @@ on:
     paths:
       - ".claude/skills/ppt-master/scripts/**"
       - ".claude/skills/ppt-master/references/**"
+      - ".claude/skills/ppt-master/templates/decks/innergen/**"
       - ".claude/skills/ppt-master/templates/decks/innergen_lecture/**"
       - ".claude/skills/ppt-master/templates/decks/innergen_business/**"
       - ".claude/skills/ppt-master/templates/decks/innercarry/**"
@@ -47,6 +48,7 @@ jobs:
           notes="커밋 ${GITHUB_SHA::7} · 채팅 스킬 ${chat} · 디자인 시스템 ${design}
 
           - innergen-deck.zip → claude.ai 설정 → Capabilities → Skills (조직 관리자는 조직 스킬로 배포)
+          - innergen-deck-plugin.zip → 플러그인 업로드 화면만 있는 워크스페이스용(같은 스킬을 플러그인으로 포장)
           - innergen-design-system.zip → claude.ai/design 디자인 시스템 INNerGEN 업데이트
           - innergen-deck-chatgpt.zip + chatgpt-project-instructions.txt → ChatGPT 프로젝트 파일 · 지침"
           if ! gh release view claude-bundles >/dev/null 2>&1; then
@@ -57,6 +59,7 @@ jobs:
           fi
           gh release upload claude-bundles --clobber \
             OUTPUTS/claude-chat-skill/innergen-deck.zip \
+            OUTPUTS/claude-chat-skill/innergen-deck-plugin.zip \
             OUTPUTS/claude-design/innergen-design-system.zip \
             OUTPUTS/chatgpt-package/innergen-deck-chatgpt.zip \
             OUTPUTS/chatgpt-package/chatgpt-project-instructions.txt
