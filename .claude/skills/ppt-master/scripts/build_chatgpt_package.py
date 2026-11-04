@@ -21,6 +21,7 @@ Dependencies:
 from __future__ import annotations
 
 import argparse
+import json
 import shutil
 import sys
 import tempfile
@@ -38,6 +39,13 @@ from console_encoding import configure_utf8_stdio  # noqa: E402
 GPT_SRC = _SCRIPTS_DIR / "chat_skill" / "chatgpt"
 DEFAULT_OUT = REPO_ROOT / "OUTPUTS" / "chatgpt-package"
 ARCHIVE = "innergen-deck-chatgpt.zip"
+PLUGIN_ARCHIVE = "innergen-deck-chatgpt-plugin.zip"
+PLUGIN_MANIFEST = {
+    "name": SKILL_NAME,
+    "version": "1.0.0",
+    "description": "이너젠·이너캐리 스타일 편집 가능 PPTX 장표 (이너젠 오리지널·뉴·이너캐리)",
+    "skills": "./skills/",
+}
 INSTRUCTIONS = "chatgpt-project-instructions.txt"
 GUIDE = "설치방법.md"
 # ChatGPT project instructions accept about 8,000 characters.
@@ -53,6 +61,14 @@ def package(out_dir: Path) -> Path:
         work = Path(tmp)
         build(work)
         bundle = work / SKILL_NAME
+        files = [p for p in sorted(bundle.rglob("*")) if p.is_file()]
+        # Plugin edition for ChatGPT/Codex "새 플러그인" upload: the skill runs from
+        # its install folder (${SKILL_DIR}), so the /mnt/data unpack adapter is left out.
+        with zipfile.ZipFile(out_dir / PLUGIN_ARCHIVE, "w", zipfile.ZIP_DEFLATED) as zf:
+            zf.writestr(".codex-plugin/plugin.json",
+                        json.dumps(PLUGIN_MANIFEST, ensure_ascii=False, indent=2) + "\n")
+            for path in files:
+                zf.write(path, f"skills/{path.relative_to(work).as_posix()}")
         shutil.copy2(GPT_SRC / "CHATGPT.md", bundle / "CHATGPT.md")
         archive = out_dir / ARCHIVE
         with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as zf:
@@ -82,6 +98,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     archive = package(out_dir)
     size_mb = archive.stat().st_size / 1_000_000
     print(f"[build_chatgpt_package] wrote {archive} ({size_mb:.1f} MB)")
+    print(f"[build_chatgpt_package] wrote {out_dir / PLUGIN_ARCHIVE} (plugin upload)")
     print(f"[build_chatgpt_package] paste {INSTRUCTIONS} into the project instructions; "
           f"see {GUIDE}")
     return 0

@@ -50,7 +50,8 @@ jobs:
           - innergen-deck.zip → claude.ai 설정 → Capabilities → Skills (조직 관리자는 조직 스킬로 배포)
           - innergen-deck-plugin.zip → 플러그인 업로드 화면만 있는 워크스페이스용(같은 스킬을 플러그인으로 포장)
           - innergen-design-system.zip → claude.ai/design 디자인 시스템 INNerGEN 업데이트
-          - innergen-deck-chatgpt.zip + chatgpt-project-instructions.txt → ChatGPT 프로젝트 파일 · 지침"
+          - innergen-deck-chatgpt.zip + chatgpt-project-instructions.txt → ChatGPT 프로젝트 파일 · 지침
+          - innergen-deck-chatgpt-plugin.zip → ChatGPT·Codex '새 플러그인' 업로드용"
           if ! gh release view claude-bundles >/dev/null 2>&1; then
             gh release create claude-bundles --target "$GITHUB_SHA" --title "claude.ai 번들 (최신)" \
               --notes "$notes" --latest=false
@@ -62,4 +63,5 @@ jobs:
             OUTPUTS/claude-chat-skill/innergen-deck-plugin.zip \
             OUTPUTS/claude-design/innergen-design-system.zip \
             OUTPUTS/chatgpt-package/innergen-deck-chatgpt.zip \
+            OUTPUTS/chatgpt-package/innergen-deck-chatgpt-plugin.zip \
             OUTPUTS/chatgpt-package/chatgpt-project-instructions.txt
