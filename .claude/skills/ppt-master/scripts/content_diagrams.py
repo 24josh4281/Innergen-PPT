@@ -11,7 +11,7 @@ draws two or three of them as editable family slides, so the author or the
 reviewer can pick. `plan` picks which pages of a deck deserve alternatives.
 
 Every shape is a <rect>/<polygon>/<line>, every label a <text>, inside the
-family's 03a_content chrome (title, governing, source, footer filled from the
+family content chrome (03a_content; 오리지널 04x_content_<frame>) (title, governing, source, footer filled from the
 data), so the exported PPTX stays editable. Rules: docs/styles/innergen/
 content-principles-v32.md §6 (relation → diagram) and content-diagrams-v33.md.
 
@@ -46,7 +46,7 @@ if str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
 
 from console_encoding import configure_utf8_stdio  # noqa: E402
-from report_diagrams import (FAMILIES, area_bounds, find_template, SVG_NS, Canvas, DiagramError, _copy_chrome_images,  # noqa: E402
+from report_diagrams import (FAMILIES, content_template, find_template, prepare_body, SVG_NS, Canvas, DiagramError, _copy_chrome_images,  # noqa: E402
                              _fill_placeholder, _flatten_structure, apply_governing_emphasis, detect_mode, text_width, wrap)
 
 RELATIONS = ("sequence", "parallel", "hierarchy", "comparison", "matrix", "quantity", "cause")
@@ -779,7 +779,7 @@ def build_one(data: dict[str, Any], form: str, family: str, base: Optional[Path]
               near: Optional[Path] = None) -> tuple[str, list[str]]:
     if family not in FAMILIES:
         raise DiagramError(f"unknown family {family!r}; use one of {sorted(FAMILIES)}")
-    base = base or find_template(family, "03a_content.svg", near)
+    base = base or find_template(family, content_template(family, near), near)
     ET.register_namespace("", SVG_NS)
     ET.register_namespace("xlink", "http://www.w3.org/1999/xlink")
     root = ET.parse(str(base)).getroot()
@@ -796,7 +796,7 @@ def build_one(data: dict[str, Any], form: str, family: str, base: Optional[Path]
         # A drawn deck page as base: keep its chrome, redraw only the body between governing and source.
         area, parent, (X, Y, W, H), fam = _page_zone(root, fam, base)
     else:
-        X, Y, W, H = area_bounds(area, family)
+        X, Y, W, H = prepare_body(root, area, family)
     cv = Canvas(fam, "content-diagram")
     fit = Fit()
     box = _conclusion(cv, data, (X, Y, W, H), fit)
@@ -1021,7 +1021,7 @@ def build_variants(data: dict[str, Any], family: str, out: Path, count: int, for
     for i, r in enumerate(results, 1):
         path = out / f"v{i}_{r['form']}.svg"
         path.write_text(r["svg"], encoding="utf-8")
-        _copy_chrome_images(r["svg"], base or find_template(family, "03a_content.svg", out), path)
+        _copy_chrome_images(r["svg"], base or find_template(family, content_template(family, out), out), path)
         index.append({"rank": i, "form": r["form"], "file": path.name, "desc": r["desc"],
                       "fits_relation": r["fits_relation"], "warnings": r["warnings"]})
     summary = {"title": data.get("title", ""), "page": data.get("page"), "family": family, "relation": rec["relation"],

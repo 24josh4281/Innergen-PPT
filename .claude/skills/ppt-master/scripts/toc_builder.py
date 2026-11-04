@@ -42,7 +42,7 @@ if str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
 
 from console_encoding import configure_utf8_stdio  # noqa: E402
-from report_diagrams import FAMILIES, DiagramError, _copy_chrome_images, find_template  # noqa: E402
+from report_diagrams import BASIC_FRAMES, FAMILIES, DiagramError, _copy_chrome_images, basic_frame, find_template  # noqa: E402
 
 SVG_NS = "http://www.w3.org/2000/svg"
 ROMAN = "ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ"
@@ -329,22 +329,33 @@ def _fill_tokens(raw: str, values: dict[str, str]) -> str:
 # Fill
 # ---------------------------------------------------------------------------
 
-def _template(family: str, n: int, near: Optional[Path] = None) -> Path:
-    for name in ([f"02b_toc_pages_{max(3, n)}.svg"] if n <= 5 else []) + ["02b_toc_pages.svg"]:
+def _template(family: str, n: int, near: Optional[Path] = None, current: Optional[int] = None) -> Path:
+    if family == "innergen_basic":
+        # 오리지널: the deck's frame; a–c TOC tables come in 3/4/5 rows, the proposal
+        # frame lists four chapters and its chapter divider (03d) repeats that list.
+        frame = basic_frame(near)
+        stem = f"02{frame}_toc_{BASIC_FRAMES[frame]}"
+        if frame == "d":
+            names = ["03d_chapter_proposal.svg"] if current else [f"{stem}.svg"]
+        else:
+            names = [f"{stem}.svg" if n <= 3 else f"{stem}_{n}.svg"] if n <= 5 else []
+    else:
+        names = ([f"02b_toc_pages_{max(3, n)}.svg"] if n <= 5 else []) + ["02b_toc_pages.svg"]
+    for name in names:
         try:
             return find_template(family, name, near)
         except DiagramError:
             continue
-    raise TocError(f"{family}: 02b_toc_pages 템플릿이 없습니다")
+    raise TocError(f"{family}: 목차 템플릿({', '.join(names) or f'{n}장'})이 없습니다")
 
 
 def _slots(text: str) -> int:
-    return len(set(re.findall(r"\{\{TOC_(\d+)_TITLE\}\}", text)))
+    return len(set(re.findall(r"\{\{TOC_(?:ITEM_)?(\d+)_TITLE\}\}", text)))
 
 
 def render(chs: list[dict[str, Any]], family: str, title: str, lead: str, page: str,
            current: Optional[int] = None, section: str = "", near: Optional[Path] = None) -> str:
-    path = _template(family, len(chs), near)
+    path = _template(family, len(chs), near, current)
     raw = path.read_text(encoding="utf-8")
     slots = _slots(raw)
     if slots < len(chs):
@@ -353,6 +364,9 @@ def render(chs: list[dict[str, Any]], family: str, title: str, lead: str, page: 
     for i, c in enumerate(chs, 1):
         values.update({f"TOC_{i}_NO": c["no"], f"TOC_{i}_TITLE": c["name"], f"TOC_{i}_DESC": c["desc"],
                        f"TOC_{i}_PAGES": c["range"]})
+        # 오리지널: the templates number the rows themselves (01 · Ⅰ.), so only the name goes in.
+        values.update({f"TOC_ITEM_{i}_TITLE": c["name"], f"TOC_ITEM_{i}_DESC": c["desc"]})
+    values.setdefault("TITLE", title)
     raw = _fill_tokens(raw, values)
     ET.register_namespace("", SVG_NS)
     ET.register_namespace("xlink", "http://www.w3.org/1999/xlink")
@@ -373,9 +387,20 @@ def render(chs: list[dict[str, Any]], family: str, title: str, lead: str, page: 
     by_id = {str(el.get("id")): el for el in root.iter() if el.get("id")}
     for k in range(len(chs) + 1, slots + 1):  # drop unused slots (2 chapters on the 3-slot page)
         for eid, el in list(by_id.items()):
-            if eid.startswith(f"toc-{k}-") and el in parents and el in list(parents[el]):
+            if (eid.startswith((f"toc-{k}-", f"toc-item-{k}-")) or eid in (f"toc-item-{k}", f"toc-rule-{k}")) \
+                    and el in parents and el in list(parents[el]):
                 parents[el].remove(el)
-    if current:
+    if current and "toc-item-1-carrier" in by_id:  # 오리지널 제안서 장 구분(03d): current navy bold, rest grey
+        style = {k: (el.get("fill") or "#0F243F", el.get("font-weight") or "700") for k, el in
+                 (("on", by_id["toc-item-1-carrier"]), ("off", by_id.get("toc-item-2-carrier", by_id["toc-item-1-carrier"])))}
+        for i in range(1, len(chs) + 1):
+            el = by_id.get(f"toc-item-{i}-carrier")
+            if el is not None:
+                colour, weight = style["on" if i == current else "off"]
+                el.set("fill", colour)
+                el.set("font-weight", weight)
+        root.set("data-toc-current", str(current))
+    elif current:
         def fill(*ids: str) -> str:
             return next((str(by_id[i].get("fill")) for i in ids if i in by_id and by_id[i].get("fill")), "#999999")
         accent, pale = fill("toc-1-badge"), fill("toc-2-badge", "toc-1-badge")

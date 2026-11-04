@@ -2,7 +2,7 @@
 """
 PPT Master - Claude Design System Builder
 
-Packages the INNerGEN presentation design (three template families) as a
+Packages the INNerGEN presentation design (four template families) as a
 design-system folder for Claude Design (claude.ai/design): a README with the
 brand rules, colour/type tokens as CSS and JSON (fallback font Malgun Gothic;
 font files only with --with-fonts), the logos,
@@ -49,7 +49,9 @@ FALLBACK_FONT = "Malgun Gothic"  # default when the family font is not installed
 BUNDLE_NAME = "innergen-design-system"
 DEFAULT_OUT = REPO_ROOT / "OUTPUTS" / "claude-design"
 
-FAMILIES = ("innergen_lecture", "innergen_business", "innercarry")
+FAMILIES = ("innergen_basic", "innergen_lecture", "innergen_business", "innercarry")
+# innergen_basic (이너젠 오리지널) keeps its original template folder name.
+DECK_DIRS = {"innergen_basic": "innergen"}
 FONT_FILES = {
     "IBMPlexSansKR": ("IBMPlexSansKR-Regular.ttf", "IBMPlexSansKR-Medium.ttf",
                       "IBMPlexSansKR-SemiBold.ttf", "IBMPlexSansKR-Bold.ttf", "LICENSE.txt"),
@@ -109,8 +111,12 @@ def family_tokens(standard: dict) -> dict:
     return out
 
 
+def deck_dir(fam: str) -> Path:
+    return DECKS / DECK_DIRS.get(fam, fam)
+
+
 def roster(fam: str) -> list[tuple[str, str]]:
-    spec = (DECKS / fam / "templates" / "design_spec.md").read_text(encoding="utf-8")
+    spec = (deck_dir(fam) / "templates" / "design_spec.md").read_text(encoding="utf-8")
     return [(f, name.strip()) for f, _key, name in ROSTER_ROW.findall(spec)]
 
 
@@ -144,7 +150,7 @@ def copy_templates(bundle: Path) -> None:
     for fam in FAMILIES:
         dst = bundle / "templates" / fam
         dst.mkdir(parents=True)
-        for src in sorted((DECKS / fam / "templates").glob("*")):
+        for src in sorted((deck_dir(fam) / "templates").glob("*")):
             if src.suffix == ".svg":
                 text = src.read_text(encoding="utf-8").replace('href="../images/', 'href="../../assets/images/')
                 (dst / src.name).write_text(text, encoding="utf-8")
@@ -233,7 +239,8 @@ def write_readme(bundle: Path, tokens: dict, standard: dict, version: dict, font
 `build_design_system.py`를 다시 실행하세요.
 
 - 버전: 표준 v{standard.get('version')} rev.{standard.get('revision')} · 커밋 `{version['commit']}` · 내용 해시 `{version['hash']}`
-- 세 계열은 같은 파일명·같은 슬롯 토큰을 쓰고 캔버스·글꼴·색만 다릅니다.
+- 이너젠 뉴 두 유형과 이너캐리는 같은 파일명·같은 슬롯 토큰을 쓰고 캔버스·글꼴·색만 다릅니다.
+  이너젠 오리지널(`innergen_basic`, 기본값)은 격자·단색 남색·슬림라인·제안서(v35) 네 프레임의 자체 파일명(`01a_cover_classic` …)을 씁니다.
 
 ## 계열
 
@@ -254,17 +261,17 @@ def write_readme(bundle: Path, tokens: dict, standard: dict, version: dict, font
 
 ## 색 토큰
 
-| 역할 | 뉴 · 교육/강의(lecture) | 뉴 · 사업/회사 소개(business) | 이너캐리(innercarry) |
-|---|---|---|---|
+| 역할 | 오리지널(basic) | 뉴 · 교육/강의(lecture) | 뉴 · 사업/회사 소개(business) | 이너캐리(innercarry) |
+|---|---|---|---|---|
 {color_rows}
 
 ## 글자 크기 (컴팩트, px)
 
-| 역할 | 뉴 · 교육/강의 | 뉴 · 사업/회사 소개 | 이너캐리 |
-|---|---|---|---|
+| 역할 | 오리지널 | 뉴 · 교육/강의 | 뉴 · 사업/회사 소개 | 이너캐리 |
+|---|---|---|---|---|
 {type_rows}
 
-## 레이아웃 카탈로그 (이너젠 뉴 사업소개 기준, 세 계열 공통 파일명)
+## 레이아웃 카탈로그 (이너젠 뉴 사업소개 기준, 뉴·이너캐리 공통 파일명)
 
 {catalog}
 

@@ -76,7 +76,7 @@ def source_fingerprint() -> str:
     """Cheap stat-based fingerprint of every input the two builders read."""
     skill = build_chat_skill.SKILL_ROOT
     roots = [skill / "scripts", skill / "references", build_design_system.STYLE_DIR,
-             build_design_system.FONT_DIR] + [build_design_system.DECKS / f for f in build_design_system.FAMILIES]
+             build_design_system.FONT_DIR] + [build_design_system.deck_dir(f) for f in build_design_system.FAMILIES]
     h = hashlib.sha256()
     for root in roots:
         for path in sorted(root.rglob("*")):

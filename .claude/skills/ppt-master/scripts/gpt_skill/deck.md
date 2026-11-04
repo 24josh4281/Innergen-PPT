@@ -12,9 +12,13 @@ plugin. Read [`ENVIRONMENT.md`](./ENVIRONMENT.md) before running a command and
 Read the workflow's design references only for the selected family and task.
 
 Use the user's requested language, model, reasoning level and output location.
-Infer routine choices from their brief. When no family is specified, recommend
-business for consulting/company material, lecture for training, or innercarry
-for product material, and proceed with the stated assumption. Ask only for
+Infer routine choices from their brief. "이너젠" alone (or 이너젠 오리지널) means
+`innergen_basic` (INNerGEN Original, navy consulting-report frames; proposal
+frame `d` for proposals) — never default it to business. Use business only for
+뉴비즈 / 사업·회사 소개, lecture only for 뉴 교육·강의, innercarry only when
+INNerCarry is named, and proceed with the stated assumption. Cite public
+sources only; never name INNerGEN internal material or CDP responses as a
+source (CDP figures are reference values). Ask only for
 missing facts that materially prevent the task. Show the outline and continue
 unless the user explicitly requested outline approval.
 

@@ -35,12 +35,19 @@ LOCKS_DIR = SKILL_DIR / "locks"
 DECKS_DIR = SKILL_DIR / "templates" / "decks"
 
 # Flat export (pptx_structure: flat) rejects the templates' Master/Layout metadata
-# and instead expects one root data-pptx-page-role per page.
-_STRUCTURE_ATTR_RE = re.compile(r"""\s+data-pptx-[\w-]+=(?:"[^"]*"|'[^']*')""")
+# and instead expects one root data-pptx-page-role per page. Native-object markers
+# (data-pptx-native table/chart payloads, text-shape groups) stay so a TOC exports
+# as a PowerPoint table.
+_STRUCTURE_ATTR_RE = re.compile(
+    r"""\s+data-pptx-(?:master|layout|layer|placeholder|editable)[\w-]*=(?:"[^"]*"|'[^']*')""")
 _SVG_ROOT_RE = re.compile(r"<svg\b")
-PAGE_ROLES = (("01_cover", "cover"), ("02c_", "section"), ("02", "toc"), ("04_ending", "ending"))
+# Matched by keyword so both layout naming sets work: 01_cover / 02c_section_divider /
+# 04_ending (뉴·이너캐리) and 01a_cover_* / 02c_toc_* / 03a_chapter_* / 05a_ending_* (오리지널).
+PAGE_ROLES = (("_cover", "cover"), ("_toc", "toc"), ("_section", "section"),
+              ("_chapter", "section"), ("_ending", "ending"))
 
 FAMILIES = {
+    "innergen_basic": "이너젠 오리지널 (13:9) · Malgun Gothic (제안서 d 계열은 IBM Plex Sans KR)",
     "innergen_lecture": "이너젠 뉴 · 교육/강의 (13:9) · Pretendard",
     "innergen_business": "이너젠 뉴 · 사업/회사 소개 (16:9) · IBM Plex Sans KR",
     "innercarry": "이너캐리 제품 소개 4:3 · IBM Plex Sans KR",
@@ -48,8 +55,8 @@ FAMILIES = {
 
 
 def page_role(layout_name: str) -> str:
-    for prefix, role in PAGE_ROLES:
-        if layout_name.startswith(prefix):
+    for keyword, role in PAGE_ROLES:
+        if keyword in layout_name:
             return role
     return "content"
 

@@ -6,11 +6,11 @@ PPTX editing, native template fill, existing project locks or an explicitly requ
 
 ## Runtime
 
-Read `B:/CODEX/Slide Master/runtime/chatgpt-package/0e45f96fcc4c9f74/innergen-deck/SKILL.md` in full. Its sections 2–7 own content,
+Read `B:/CODEX/Slide Master/runtime/chatgpt-package/e29b9ec3e3c29358/innergen-deck/SKILL.md` in full. Its sections 2–7 own content,
 SVG authoring, checks and editable PPTX export, with the local substitutions below.
-The original 2026-10-23 ZIP and runtime are preserved. The current 2026-10-25 v34 package includes the user-requested NewBiz and education updates, rebuilt from repository sources. Current ZIP SHA-256: `0e45f96fcc4c9f74267db11196d2b6c206f9eada2fc59aca4850c69f5921a147`.
+The original 2026-10-23 ZIP and the 2026-10-25 v34 runtime (`0e45f96fcc4c9f74`) are preserved. The current 2026-11-03 package adds the 이너젠 오리지널 family (`innergen_basic`, frames a–d including the v35 proposal frame) on top of the v34 NewBiz and education updates, rebuilt from repository sources (`OUTPUTS/chatgpt-package-v36_20261103/`). Current ZIP SHA-256: `e29b9ec3e3c2935888760d05ed369d491437d6ffb82dc8e29834990806484dff`.
 
-- `${SKILL_DIR}` is `B:/CODEX/Slide Master/runtime/chatgpt-package/0e45f96fcc4c9f74/innergen-deck`. Run scripts with
+- `${SKILL_DIR}` is `B:/CODEX/Slide Master/runtime/chatgpt-package/e29b9ec3e3c29358/innergen-deck`. Run scripts with
   `B:/CODEX/Slide Master/.venv/Scripts/python.exe -X utf8` from the repository root.
 - Create a unique deck directory under `B:/CODEX/Slide Master/projects/`.
   Resolve source files against the calling chat's workspace, using absolute paths.
@@ -18,8 +18,10 @@ The original 2026-10-23 ZIP and runtime are preserved. The current 2026-10-25 v3
   workspace without overwriting an original. Use `_ver2`, `_ver3` for revisions.
 - The supplied project instructions govern intake: infer missing family,
   deck type, business type and length; briefly state recommendations, show the
-  checked outline and continue in the same turn. Choose lecture for education,
-  business for consulting/company/report work, Carry when explicitly named.
+  checked outline and continue in the same turn. "이너젠" alone means
+  `innergen_basic` (이너젠 오리지널; proposal frame `d` for proposals); choose
+  business only for 뉴비즈 / 사업·회사 소개, lecture only for 뉴 교육·강의,
+  Carry only when explicitly named.
   Ask only for facts essential to valid content, or stop when the user explicitly
   wants to review the outline first. This overrides package section 1's generic
   request to ask about missing preferences.

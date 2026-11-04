@@ -76,7 +76,19 @@ FAMILIES: dict[str, dict[str, Any]] = {
         pale="#EEF2FF", zebra="#F3F6FF", rule="#E2E8F0", text="#475569", muted="#64748B",
         neutral="#94A3B8", alert="#991B1B", white="#FFFFFF",
         ramp=["#DFE7FF", "#B8CBF9", "#7B9BF7", "#2F62F0", "#0B1739"]),
+    # 이너젠 오리지널: navy/grey structure colours only (lock: chat_skill/locks/innergen_basic.md);
+    # #2F6DB5 is the v35 proposal secondary blue, red stays for real risks.
+    "innergen_basic": dict(
+        font='Malgun Gothic, sans-serif', min_px=12, ladder=(13.33, 14.67, 16),
+        navy="#0F243F", accent="#2F6DB5", light="#52657B", mid="#BFBFBF", panel="#BFBFBF",
+        pale="#F2F2F2", zebra="#F2F2F2", rule="#BFBFBF", text="#000000", muted="#595959",
+        neutral="#A6A6A6", alert="#FF0000", white="#FFFFFF",
+        ramp=["#F2F2F2", "#BFBFBF", "#808080", "#52657B", "#0F243F"]),
 }
+# innergen_basic keeps its original template folder name.
+DECK_DIRS = {"innergen_basic": "innergen"}
+# 이너젠 오리지널 frames: a 격자 · b 단색 남색 · c 슬림라인 · d 제안서(v35).
+BASIC_FRAMES = {"a": "classic", "b": "solid_navy", "c": "slim_line", "d": "proposal"}
 
 STATES = ["완료", "진행 중", "예정", "보완", "지연", "n/a"]
 SCOPE_MARKS = {"포함": "●", "선택": "◐", "제외": "–"}
@@ -1078,11 +1090,16 @@ EXAMPLES: dict[str, dict[str, Any]] = {
 }
 
 
+# Slot group ids the 이너젠 오리지널 templates use for the same roles.
+SLOT_ALIASES = {"key-message": ("content-key-message",), "source-note": ("content-source",)}
+
+
 def _fill_placeholder(root: ET.Element, gid: str, value: Optional[str]) -> None:
     if value is None:
         return
+    ids = (gid, *SLOT_ALIASES.get(gid, ()))
     for g in root.iter(f"{{{SVG_NS}}}g"):
-        if g.get("id") == gid:
+        if g.get("id") in ids:
             for t in g.iter(f"{{{SVG_NS}}}text"):
                 for ch in list(t):
                     t.remove(ch)
@@ -1145,7 +1162,7 @@ def check(data: dict[str, Any]) -> tuple[list[str], list[str]]:
 def build(data: dict[str, Any], family: str, base: Optional[Path], mode: str = "structured") -> str:
     if family not in FAMILIES:
         raise DiagramError(f"unknown family {family!r}; use one of {sorted(FAMILIES)}")
-    base = base or DECKS_DIR / family / "templates" / "03a_content.svg"
+    base = base or find_template(family, content_template(family))
     ET.register_namespace("", SVG_NS)
     ET.register_namespace("xlink", "http://www.w3.org/1999/xlink")
     tree = ET.parse(str(base))
@@ -1161,7 +1178,7 @@ def build(data: dict[str, Any], family: str, base: Optional[Path], mode: str = "
             break
     if area is None:
         raise DiagramError(f"{base.name}: no content-area placeholder to replace")
-    X, Y, W, H = area_bounds(area, family)
+    X, Y, W, H = prepare_body(root, area, family)
     kind = data["kind"]
     cv = Canvas(FAMILIES[family], "report-diagram")
     KINDS[kind][1](cv, data, (X, Y, W, H))
@@ -1207,7 +1224,48 @@ def detect_mode(output: Path) -> str:
 
 # Content zone per family; flat-ready scaffolds (chat bundle start_deck.py) drop the placeholder bounds.
 CONTENT_AREA = {"innergen_lecture": (48, 120, 944, 484), "innergen_business": (24, 94, 912, 392),
-                "innercarry": (56, 161.85, 912, 503.42)}
+                "innercarry": (56, 161.85, 912, 503.42),
+                # 오리지널 a–c: key message (y135) to source line (y624), grey material band removed.
+                "innergen_basic": (45, 160, 945, 450)}
+BASIC_PROPOSAL_AREA = (44, 112, 952, 528)
+
+
+def basic_frame(near: Optional[Path]) -> str:
+    """Frame letter of an 이너젠 오리지널 deck: the most used `0Nx_` layout letter among
+    the deck's page files (`07_04a_content_classic.svg`), default `a`."""
+    counts: dict[str, int] = {}
+    if near is not None:
+        for d in [near, *near.parents][:5]:
+            for folder in (d, d / "svg_output"):
+                if folder.is_dir():
+                    for f in folder.glob("*.svg"):
+                        m = re.match(r"^\d+_0[1-5]([a-d])_", f.name)
+                        if m:
+                            counts[m.group(1)] = counts.get(m.group(1), 0) + 1
+            if counts:
+                break
+    return max(counts, key=lambda k: counts[k]) if counts else "a"
+
+
+def content_template(family: str, near: Optional[Path] = None) -> str:
+    if family == "innergen_basic":
+        frame = basic_frame(near)
+        return f"04{frame}_content_{BASIC_FRAMES[frame]}.svg"
+    return "03a_content.svg"
+
+
+def prepare_body(root: ET.Element, area: ET.Element, family: str) -> tuple[float, float, float, float]:
+    """Content bounds for a diagram. 오리지널 a–c drop the grey material band and frame
+    so the diagram gets the whole body; the proposal frame keeps its own body zone."""
+    if family != "innergen_basic":
+        return area_bounds(area, family)
+    if any(el.get("id") == "header-strip" for el in root.iter()):
+        return BASIC_PROPOSAL_AREA
+    parents = {ch: p for p in root.iter() for ch in p}
+    for el in list(root.iter()):
+        if (el.get("id") or "").startswith("content-material") and el in parents:
+            parents[el].remove(el)
+    return CONTENT_AREA[family]
 
 
 def area_bounds(area: ET.Element, family: str) -> tuple[float, float, float, float]:
@@ -1230,7 +1288,7 @@ def find_template(family: str, name: str, near: Optional[Path] = None) -> Path:
         for d in [near, *near.parents][:6]:
             if (d / "templates" / name).is_file():
                 return d / "templates" / name
-    path = DECKS_DIR / family / "templates" / name
+    path = DECKS_DIR / DECK_DIRS.get(family, family) / "templates" / name
     if path.is_file():
         return path
     packed = DECKS_DIR / f"{family}.json"
@@ -1308,7 +1366,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         return 1
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(svg, encoding="utf-8")
-    _copy_chrome_images(svg, args.base or DECKS_DIR / args.family / "templates" / "03a_content.svg", args.output)
+    _copy_chrome_images(svg, args.base or find_template(args.family, content_template(args.family)), args.output)
     print(f"OK  {args.output}  kind={data['kind']}  family={args.family}")
     return 0
 

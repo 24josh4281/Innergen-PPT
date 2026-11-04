@@ -15,7 +15,7 @@ svg_quality_checker.py (SVG/PPTX contract) with the *content* and *uniformity* l
 Usage:
     python3 scripts/innergen_qaqc.py <project_path> [--deck-type lecture] [--business-type inventory]
                                      [--register auto|external|internal]
-                                     [--family innergen_lecture|innergen_lecture_v20|innergen_business|innercarry]
+                                     [--family innergen_basic|innergen_lecture|innergen_business|innercarry|…]
                                      [--strict] [--json <out.json>]
 
 Outputs:
@@ -117,10 +117,16 @@ def _near(a, b, tol):
 def _layout_from_filename(stem: str) -> str:
     """Flat (chat) edition: SVGs carry no data-pptx-layout, so read the layout id
     from the page file name `NN_<layout_id>.svg` (e.g. `05_s24_project_overview`)
-    and return it hyphenated (`s24-project-overview`) for substring matching."""
-    m = re.match(r"^\d+_((?:0\d[a-z]?|s\d{2})_[a-z0-9_]+?)(?:__.*)?$", stem)
+    and return it hyphenated (`s24-project-overview`) for substring matching.
+    A frame content page (이너젠 오리지널 `04a_content_classic`) names the structure
+    it draws after a double underscore (`07_04a_content_classic__s08_phase_roadmap`);
+    that structure id is the page's layout."""
+    m = re.match(r"^\d+_((?:0\d[a-z]?|s\d{2})_[a-z0-9_]+?)(?:__(.*))?$", stem)
     if not m:
         return ""
+    s = re.match(r"^(s\d{2}_[a-z0-9_]+)$", m.group(2) or "")
+    if s and re.match(r"^0\d[a-z]?_content", m.group(1)):
+        return s.group(1).replace("_", "-")
     return re.sub(r"^(?:0\d[a-z]?)_", "", m.group(1)).replace("_", "-")
 
 
@@ -144,10 +150,13 @@ class Page:
     def bind(self, fam: dict):
         t, gv, src, ft = fam["title"], fam["governing"], fam["source"], fam["footer"]
         tol = t.get("tolerance", 3)
-        self.title = self._pick(lambda x: _near(x["y"], t["baseline"], tol) and _near(x["size"], t["size"], 1.5) and x["x"] < fam["canvas"][0] * 0.6)
-        g_baselines = [gv["baseline"]] + ([gv["baseline_two_lines"]] if gv.get("baseline_two_lines") else [])
+        # alt_baselines: other user-approved positions of the same slot (e.g. a finished deck that moved it).
+        t_baselines = [t["baseline"]] + t.get("alt_baselines", [])
+        self.title = self._pick(lambda x: any(_near(x["y"], b, tol) for b in t_baselines) and _near(x["size"], t["size"], 1.5) and x["x"] < fam["canvas"][0] * 0.6)
+        g_baselines = [gv["baseline"]] + ([gv["baseline_two_lines"]] if gv.get("baseline_two_lines") else []) + gv.get("alt_baselines", [])
         self.governing = self._pick(lambda x: any(_near(x["y"], b, gv.get("tolerance", 3)) for b in g_baselines) and _near(x["size"], gv["size"], 1.5) and x["x"] >= gv["text_x"] - 4)
-        self.source = self._pick(lambda x: _near(x["y"], src["baseline"], src.get("tolerance", 3)) and x["size"] <= src["size"] + 2)
+        s_baselines = [src["baseline"]] + src.get("alt_baselines", [])
+        self.source = self._pick(lambda x: any(_near(x["y"], b, src.get("tolerance", 3)) for b in s_baselines) and x["size"] <= src["size"] + 2)
         self.footer_label = self._pick(lambda x: _near(x["y"], ft["label"]["baseline"], 3) and _near(x["x"], ft["label"]["x"], 6))
         self.page_number = self._pick(lambda x: _near(x["y"], ft["page_number"]["baseline"], 3) and x["anchor"] == ft["page_number"].get("anchor", "end") and _near(x["x"], ft["page_number"]["x"], 6))
 
@@ -293,18 +302,24 @@ def detect_register(ending: str, rules: dict) -> str:
 
 
 def detect_family(pages: list[Page], declared: str | None, rules: dict) -> str:
+    """A family with chrome variants (lecture v22/v20, original frames a·b / c / d)
+    is resolved to the variant whose title baseline and size the content pages use;
+    with no declared family every variant is tried."""
     fams = rules["families"]
-    if declared in fams and declared != "innergen_lecture":
+    variants = rules.get("family_variants", {"innergen_lecture": ["innergen_lecture", "innergen_lecture_v20"]})
+    group = next((g for g, keys in variants.items() if declared == g or declared in keys), None)
+    if declared in fams and group is None:
         return declared
-    # innergen_lecture: tell the v22 compact chrome from the v20 two-line chrome by the title baseline.
-    content = [p for p in pages if not p.is_exempt(fams["innergen_lecture"]["exempt_layout_keywords"])]
+    keys = variants[group] if group else [k for ks in variants.values() for k in ks]
+    exempt = {k for key in keys for k in fams[key]["exempt_layout_keywords"]}
+    content = [p for p in pages if not p.is_exempt(exempt)]
     sample = content[:3] or pages[:3]
-    for key in ("innergen_lecture", "innergen_lecture_v20"):
+    for key in keys:
         det = fams[key]["detect"]
         hits = sum(1 for p in sample if any(_near(t["y"], det["title_baseline"], 3) and _near(t["size"], det["title_size"], 1.5) for t in p.texts))
         if hits >= max(1, len(sample) // 2):
             return key
-    return declared or "innergen_lecture"
+    return declared if declared in fams else (keys[0] if group else "innergen_lecture")
 
 
 def _layout_in(layout: str, group: str) -> bool:
@@ -498,7 +513,7 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
 
     toc_pages = [p for p in pages if _toc_page(p)]
     nt = rules["toc"].get("native_table", {"required": True, "level": "ERROR"})
-    if nt.get("required", True):
+    if nt.get("required", True) and fam.get("toc_native_table", True):
         for p in toc_pages:
             if not any((el.get("data-pptx-native") or "").strip() == "table" for el in p.root.iter()):
                 rep.add(nt.get("level", "ERROR"), "O03", p.index,
@@ -516,7 +531,7 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
                         "표 페이로드(<metadata data-pptx-native=\"table\">)로 감싸고 --native-objects로 내보내세요")
     if toc_pages:
         toc = toc_pages[0]
-        items = [t["text"] for t in toc.texts if _slot(t, r"toc-(item-)?\d+-title")]
+        items = [t["text"] for t in toc.texts if _slot(t, fam.get("toc_item_regex", r"toc-(item-)?\d+-title"))]
         chapter_titles = [t for _, t in titles]
         for item in items:
             core = re.sub(tr["numbering_regex"], "", item).strip(" ./-–")
@@ -638,7 +653,7 @@ def main(argv=None) -> int:
     ap.add_argument("--deck-type", default=None, help="lecture|handout|seminar|proposal|kickoff|weekly|biweekly|monthly|diagnosis|interim|final|briefing|benchmark|insight")
     ap.add_argument("--business-type", default=None, help="cdp_disclosure|regulatory|reduction|inventory|lca_product|climate_risk|esg_rating|climate_education|climate_tech (default: design_spec.md innergen_business_type)")
     ap.add_argument("--register", default="auto", choices=["auto", "external", "internal"])
-    ap.add_argument("--family", default=None, help="innergen_lecture|innergen_lecture_v20|innergen_business|innercarry (default: design_profile_v17.json + chrome detection)")
+    ap.add_argument("--family", default=None, help="innergen_basic|innergen_basic_slim|innergen_basic_proposal|innergen_lecture|innergen_lecture_v20|innergen_business|innercarry (default: design_profile_v17.json + chrome detection)")
     ap.add_argument("--strict", action="store_true")
     ap.add_argument("--json", type=Path, default=None)
     args = ap.parse_args(argv)

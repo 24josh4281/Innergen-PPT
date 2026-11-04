@@ -1,7 +1,7 @@
 {
   "version": "23",
   "date": "2026-10-14",
-  "purpose": "Rule table for innergen_qaqc.py — uniformity gate for INNerGEN decks (v4/v5 hierarchy, v11/v20 governing, v16 citation, v17 geometry, v18 density, v20 TOC/closing, v22 compact density · one-line governing · three family templates).",
+  "purpose": "Rule table for innergen_qaqc.py — uniformity gate for INNerGEN decks (v4/v5 hierarchy, v11/v20 governing, v16 citation, v17 geometry, v18 density, v20 TOC/closing, v22 compact density · one-line governing · family templates incl. INNerGEN Original frames a–d).",
   "doc": "docs/styles/innergen/qaqc-v21.md",
   "families": {
     "innergen_lecture": {
@@ -338,6 +338,245 @@
         "title_baseline": 96,
         "title_size": 26.67
       }
+    },
+    "innergen_basic": {
+      "label": "이너젠 오리지널 (13:9) — 격자(a)·단색 남색(b) 프레임",
+      "canvas": [
+        1040,
+        720
+      ],
+      "title": {
+        "x": 40,
+        "baseline": 41,
+        "size": 29,
+        "fill": "#FFFFFF",
+        "tolerance": 3,
+        "alt_baselines": [
+          45
+        ]
+      },
+      "governing": {
+        "box": null,
+        "text_x": 45,
+        "baseline": 135,
+        "size": 22,
+        "fill": "#000000",
+        "weight_bold": true,
+        "max_lines": 1,
+        "inner_width": 945,
+        "tolerance": 3,
+        "alt_baselines": [
+          118
+        ]
+      },
+      "source": {
+        "baseline": 624,
+        "size": 13,
+        "prefix": "출처",
+        "tolerance": 3,
+        "alt_baselines": [
+          652
+        ]
+      },
+      "footer": {
+        "label": {
+          "x": 150,
+          "baseline": 698,
+          "size": 13
+        },
+        "page_number": {
+          "x": 1005,
+          "baseline": 698,
+          "anchor": "end"
+        }
+      },
+      "atoms": [
+        {
+          "id": "footer-panel",
+          "type": "rect",
+          "x": 0,
+          "y": 665,
+          "w": 1040,
+          "h": 55
+        },
+        {
+          "id": "footer-logo",
+          "type": "image",
+          "x": 28,
+          "y": 675
+        }
+      ],
+      "content_zone": [
+        45,
+        150,
+        945,
+        460
+      ],
+      "min_px": {
+        "content": 12,
+        "footer": 13
+      },
+      "exempt_layout_keywords": [
+        "cover",
+        "ending",
+        "toc",
+        "chapter"
+      ],
+      "detect": {
+        "title_baseline": 41,
+        "title_size": 29
+      },
+      "alt_baselines_note": "45/118/652 = 2026-11-03 OCI KSSB 교육 덱(사용자 확정 오리지널 a 프레임) 실측. 템플릿 기준은 41/135/624."
+    },
+    "innergen_basic_slim": {
+      "label": "이너젠 오리지널 (13:9) — 슬림라인(c) 프레임",
+      "canvas": [
+        1040,
+        720
+      ],
+      "title": {
+        "x": 40,
+        "baseline": 52,
+        "size": 29,
+        "fill": "#000000",
+        "tolerance": 3
+      },
+      "governing": {
+        "box": null,
+        "text_x": 45,
+        "baseline": 135,
+        "size": 22,
+        "fill": "#000000",
+        "weight_bold": true,
+        "max_lines": 1,
+        "inner_width": 945,
+        "tolerance": 3
+      },
+      "source": {
+        "baseline": 624,
+        "size": 13,
+        "prefix": "출처",
+        "tolerance": 3
+      },
+      "footer": {
+        "label": {
+          "x": 150,
+          "baseline": 696,
+          "size": 13
+        },
+        "page_number": {
+          "x": 520,
+          "baseline": 696,
+          "anchor": "middle"
+        }
+      },
+      "atoms": [
+        {
+          "id": "footer-slim-rule",
+          "type": "line",
+          "y": 661
+        },
+        {
+          "id": "footer-logo",
+          "type": "image",
+          "x": 33,
+          "y": 672
+        }
+      ],
+      "content_zone": [
+        45,
+        150,
+        945,
+        460
+      ],
+      "min_px": {
+        "content": 12,
+        "footer": 13
+      },
+      "exempt_layout_keywords": [
+        "cover",
+        "ending",
+        "toc",
+        "chapter"
+      ],
+      "detect": {
+        "title_baseline": 52,
+        "title_size": 29
+      }
+    },
+    "innergen_basic_proposal": {
+      "label": "이너젠 오리지널 (13:9) — 제안서(d) 프레임 v35",
+      "canvas": [
+        1040,
+        720
+      ],
+      "title": {
+        "x": 23,
+        "baseline": 39,
+        "size": 26.67,
+        "fill": "#000000",
+        "tolerance": 3
+      },
+      "governing": {
+        "box": null,
+        "text_x": 64,
+        "baseline": 94,
+        "size": 17.33,
+        "fill": "#000000",
+        "weight_bold": true,
+        "max_lines": 1,
+        "inner_width": 946,
+        "tolerance": 3
+      },
+      "source": {
+        "baseline": 653,
+        "size": 10.67,
+        "prefix": "출처",
+        "tolerance": 3
+      },
+      "footer": {
+        "label": {
+          "x": 116,
+          "baseline": 693,
+          "size": 10.67
+        },
+        "page_number": {
+          "x": 520,
+          "baseline": 693,
+          "anchor": "middle"
+        }
+      },
+      "atoms": [
+        {
+          "id": "footer-logo",
+          "type": "image",
+          "x": 30,
+          "y": 666
+        }
+      ],
+      "content_zone": [
+        44,
+        112,
+        966,
+        530
+      ],
+      "min_px": {
+        "content": 10.67,
+        "footer": 10.67
+      },
+      "exempt_layout_keywords": [
+        "cover",
+        "ending",
+        "toc",
+        "chapter"
+      ],
+      "detect": {
+        "title_baseline": 39,
+        "title_size": 26.67
+      },
+      "toc_native_table": false,
+      "toc_item_regex": "toc-item-\\d+-carrier",
+      "toc_note": "v35 제안서 목차는 최종본 실측 목록형(CONTENTS·Ⅰ–Ⅳ)이라 표 의무(O03)를 적용하지 않는다."
     }
   },
   "font": {
@@ -441,12 +680,17 @@
       "innercarry-toc-pages",
       "innergen-classic-toc",
       "innergen-solid-toc",
-      "innergen-slim-toc"
+      "innergen-slim-toc",
+      "innergen-proposal-toc"
     ],
     "divider_layouts": [
       "innergen-intro-section-divider",
       "innergen-biz-section-divider",
-      "innercarry-section-divider"
+      "innercarry-section-divider",
+      "innergen-classic-chapter",
+      "innergen-solid-chapter",
+      "innergen-slim-chapter",
+      "innergen-proposal-chapter"
     ],
     "match_min_chars": 4,
     "file_keywords": [
@@ -584,5 +828,16 @@
     "강조는 장표당 한 곳인가",
     "같은 질문의 장표가 같은 구조·색·위치인가",
     "사례·예시 수치에 '예시' 표기가 있는가"
-  ]
+  ],
+  "family_variants": {
+    "innergen_lecture": [
+      "innergen_lecture",
+      "innergen_lecture_v20"
+    ],
+    "innergen_basic": [
+      "innergen_basic",
+      "innergen_basic_slim",
+      "innergen_basic_proposal"
+    ]
+  }
 }

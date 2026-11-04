@@ -6,8 +6,8 @@ Packages the INNerGEN deck pipeline as a standalone `innergen-deck` skill that
 claude.ai chat / Cowork can run inside its sandbox (Settings → Capabilities →
 Skills → Upload skill). The bundle carries the chat procedure
 (chat_skill/SKILL.chat.md), the export engine's import closure
-(svg_to_pptx, svg_quality_checker, innergen_qaqc, innergen_story_check, content_balance_check), the three INNerGEN family
-templates, per-family base spec locks, and the INNerGEN rule documents. The
+(svg_to_pptx, svg_quality_checker, innergen_qaqc, innergen_story_check, content_balance_check), the four INNerGEN family
+templates (오리지널 · 뉴 교육/강의 · 뉴 사업/회사 소개 · 이너캐리), per-family base spec locks, and the INNerGEN rule documents. The
 repository pipeline itself is unchanged; this only copies from it.
 
 Usage:
@@ -46,7 +46,9 @@ DEFAULT_OUT = REPO_ROOT / "OUTPUTS" / "claude-chat-skill"
 
 ENTRY_SCRIPTS = ("svg_to_pptx.py", "svg_quality_checker.py", "innergen_qaqc.py", "innergen_story_check.py",
                  "content_balance_check.py", "toc_builder.py", "content_diagrams.py")
-FAMILIES = ("innergen_lecture", "innergen_business", "innercarry")
+FAMILIES = ("innergen_basic", "innergen_lecture", "innergen_business", "innercarry")
+# innergen_basic (이너젠 오리지널) keeps its original template folder name.
+DECK_DIRS = {"innergen_basic": "innergen"}
 STYLE_DOCS = (
     "design-standard-v17.md", "design-standard-v17.json",
     "newbiz-governing-diagrams-v34.md",
@@ -112,7 +114,7 @@ def build(out_dir: Path) -> Path:
     decks = bundle / "templates" / "decks"
     decks.mkdir(parents=True)
     for family in FAMILIES:
-        src = SKILL_ROOT / "templates" / "decks" / family
+        src = SKILL_ROOT / "templates" / "decks" / DECK_DIRS.get(family, family)
         texts = {f"templates/{p.name}": p.read_text(encoding="utf-8")
                  for p in sorted((src / "templates").iterdir()) if p.is_file()}
         (decks / f"{family}.json").write_text(
@@ -135,6 +137,14 @@ def build(out_dir: Path) -> Path:
     with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as zf:
         for path in files:
             zf.write(path, path.relative_to(out_dir).as_posix())
+    # The same skill as a plugin, for workspaces whose upload page takes plugins
+    # (.claude-plugin/plugin.json + skills/<name>/) instead of bare skills.
+    manifest = {"name": SKILL_NAME, "version": "1.0.0",
+                "description": "이너젠·이너캐리 스타일 편집 가능 PPTX 장표 (이너젠 오리지널·뉴·이너캐리)"}
+    with zipfile.ZipFile(out_dir / f"{SKILL_NAME}-plugin.zip", "w", zipfile.ZIP_DEFLATED) as zf:
+        zf.writestr(".claude-plugin/plugin.json", json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
+        for path in files:
+            zf.write(path, f"skills/{path.relative_to(out_dir).as_posix()}")
     print(f"[build_chat_skill] {len(modules)} module(s), {len(packages)} package(s), "
           f"{len(FAMILIES)} famil(ies), {len(STYLE_DOCS) + len(ENGINE_DOCS)} reference(s)")
     return archive

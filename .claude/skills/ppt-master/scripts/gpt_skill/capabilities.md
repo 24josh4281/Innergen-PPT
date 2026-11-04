@@ -5,7 +5,7 @@ replacement installation of the entire Slide Master repository.
 
 | Repository capability | This package |
 |---|---|
-| INNerGEN business, lecture and INNerCarry decks | Included: source templates, locks, examples, design rules and editable SVG-to-PPTX engine. |
+| INNerGEN Original (basic, default), business, lecture and INNerCarry decks | Included: source templates, locks, examples, design rules and editable SVG-to-PPTX engine. |
 | Content outline, story, diagram, centering and SVG QA | Included; checker success is distinct from visual rendering. |
 | GHG equations and monitoring tables | Included as `reduction-equations`: native Office Math, DOCX/PPTX import/export and verification. |
 | Raw PPTX template filling with original design | Requires the full repository `ppt-template-fill` route and its OfficeCLI loop. |

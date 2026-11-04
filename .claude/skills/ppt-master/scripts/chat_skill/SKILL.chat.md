@@ -1,6 +1,6 @@
 ---
 name: innergen-deck
-description: 이너젠·이너캐리 스타일 컨설팅·교육 장표를 편집 가능한 PPTX로 만든다. "이너젠 디자인(해줘/으로 만들어줘)", "이너젠 스타일", "이너젠 장표", "이너젠 PPT", "이너캐리 디자인", "이너캐리 소개자료", "INNerGEN deck/design" 등 이너젠·이너캐리를 언급한 장표 요청이나 CDP·규제·감축 보고 장표 요청에 사용.
+description: 이너젠·이너캐리 스타일 컨설팅·교육 장표를 편집 가능한 PPTX로 만든다. 이너젠 오리지널(기본)·이너젠 뉴(교육/강의, 사업/회사 소개)·이너캐리 4계열. "이너젠 디자인(해줘/으로 만들어줘)", "이너젠 오리지널", "이너젠 스타일", "이너젠 장표", "이너젠 PPT", "이너캐리 디자인", "이너캐리 소개자료", "INNerGEN deck/design" 등 이너젠·이너캐리를 언급한 장표 요청이나 CDP·규제·감축 보고 장표 요청에 사용.
 ---
 
 # INNerGEN Deck (claude.ai chat edition)
@@ -23,7 +23,7 @@ repository source, not an unpacked copy.
 - Work in a scratch folder (for example `/tmp/<deck>`). Save the final PPTX to
   the chat's downloadable output folder (`/mnt/user-data/outputs/` when it
   exists) and give the user that file.
-- The sandbox lacks Pretendard / IBM Plex Sans KR. Keep the font names from the
+- The sandbox lacks Malgun Gothic / Pretendard / IBM Plex Sans KR. Keep the font names from the
   lock anyway: PowerPoint renders them on the user's PC. Mention that the PC
   needs those fonts (bundled in the Slide Master repository, `setup.ps1`).
 
@@ -34,7 +34,7 @@ and ask once for the rest:
 
 | Item | Options |
 |---|---|
-| Family | `innergen_lecture` = 이너젠 뉴 · 교육/강의 유형 (13:9, Pretendard) · `innergen_business` = 이너젠 뉴 · 사업/회사 소개 유형 (컨설팅 보고 포함, 16:9, IBM Plex Sans KR) · `innercarry` = 이너캐리 (제품, 4:3, IBM Plex Sans KR). Show users these display names; keep the ids internal. |
+| Family | `innergen_basic` = 이너젠 오리지널 (컨설팅 보고서·제안서, 13:9, Malgun Gothic / 제안서 프레임은 IBM Plex Sans KR) · `innergen_lecture` = 이너젠 뉴 · 교육/강의 유형 (13:9, Pretendard) · `innergen_business` = 이너젠 뉴 · 사업/회사 소개 유형 (컨설팅 보고 포함, 16:9, IBM Plex Sans KR) · `innercarry` = 이너캐리 (제품, 4:3, IBM Plex Sans KR). Show users these display names; keep the ids internal. |
 | Deck type | lecture · handout · seminar · proposal · kickoff · weekly · biweekly · monthly · diagnosis · interim · final · briefing · benchmark · insight |
 | Business type | `cdp_disclosure` CDP·기후공시 · `regulatory` 규제 대응 · `reduction` 감축사업·상쇄 · `inventory` 온실가스 인벤토리 · `lca_product` LCA·제품 탄소 · `climate_risk` 기후리스크·시나리오 · `esg_rating` ESG 평가 대응 · `climate_education` 기후·ESG 교육 · `climate_tech` 기후테크·소셜벤처 |
 | Size | page count or talk length |
@@ -44,8 +44,16 @@ must-have content (`references/content-requirements-v25.md`). Record both in
 `design_spec.md` as `deck_type` and `innergen_business_type`. If the work spans
 two business types, pick the main one and give the other one chapter.
 
+"이너젠" alone (이너젠 디자인/스타일/장표/PPT/양식) or "이너젠 오리지널" means
+`innergen_basic` — the default; do not recommend 뉴비즈 (`innergen_business`) for it.
+Switch only when the user names 뉴비즈·사업/회사 소개 (`innergen_business`),
+뉴 교육/강의 (`innergen_lecture`) or 이너캐리 (`innercarry`).
 "이너젠 뉴" or "소개자료" alone is ambiguous between `innergen_lecture` (이너젠 뉴 · 교육/강의) and
 `innergen_business` (이너젠 뉴 · 사업/회사 소개): ask which type. Never alias the two.
+
+Sources: cite public material only (정부·금융위·KSSB·ISSB·공시된 통합/지속가능경영보고서
+등). Never name INNerGEN internal material or CDP responses as a source; CDP figures
+are reference values only.
 
 ## 2. Read the rules (in this order)
 
@@ -100,7 +108,33 @@ whole deck. Apply every such reply to `outline.md` (user wording replaces
 yours; additions become that page's content, or a one-line reason when they
 would need a new page or unsourced facts) and re-run the check before drawing.
 
-Layout ids. All three families carry the same set, except `02_toc`, which
+Layout ids — 이너젠 오리지널 (`innergen_basic`). It ships frame layouts only, in
+four frames; pick ONE frame per deck and never mix them:
+
+| Frame | Cover | TOC (3/4/5 chapters) | Chapter | Content | Ending |
+|---|---|---|---|---|---|
+| a 격자 (classic grid, Malgun Gothic) | `01a_cover_classic` | `02a_toc_classic`, `_4`, `_5` | `03a_chapter_classic` | `04a_content_classic` | `05a_ending_classic` |
+| b 단색 남색 (solid navy) | `01b_cover_solid_navy` | `02b_toc_solid_navy`, `_4`, `_5` | `03b_chapter_solid_navy` | `04b_content_solid_navy` | `05b_ending_solid_navy` |
+| c 슬림라인 (slim line) | `01c_cover_slim_line` | `02c_toc_slim_line`, `_4`, `_5` | `03c_chapter_slim_line` | `04c_content_slim_line` | `05c_ending_slim_line` |
+| d 제안서 (v35 proposal) | `01d_cover_proposal` | `02d_toc_proposal` | `03d_chapter_proposal` | `04d_content_proposal` | `05d_ending_proposal` |
+
+Default frame: `d` for a proposal (제안서), `a` for reports and education
+material, unless the user names another. Every content page copies the frame's
+`04x_content_*` file and draws the exhibit (table, matrix, roadmap, chevrons,
+chart) inside `{{CONTENT_AREA}}` with plain SVG, choosing the structure from
+v18/v19/v24 by name (write it in the outline's layout column as
+`04a_content_classic · s08 로드맵` and in the file name as
+`NN_04a_content_classic__s08_phase_roadmap.svg`). Frames a–c: a 29px white title in the navy
+header, 22px bold key message, optional grey `{{MATERIAL_TITLE}}` band (delete it
+when unused), 19px body. Frame d (`references/design-standard-v17.md` v35):
+`III. 과업 수행 방안`-style numbered 26.67px title, 17.33px governing sentence next
+to the round marker, 16px `•` body, navy table header with white bold text; the
+top-right 784–1040 × 0–50 area is reserved for a client logo the user supplies
+— leave it empty otherwise; `03d` repeats the TOC with only the current chapter
+navy bold. The v34 NewBiz rules (centered governing, lime/blue headers) do not
+apply to this family.
+
+Layout ids — 이너젠 뉴 · 이너캐리. All three families carry the same set, except `02_toc`, which
 exists only in `innergen_lecture` (the other two use `02b_toc_pages`).
 
 - Frame: `01_cover`, `02_toc`, `02b_toc_pages`, `02c_section_divider`,
@@ -251,6 +285,17 @@ alternatives with `content_diagrams.py build <content.json> --family <family> -o
 Other pages keep one diagram. Turn any leftover `A → B → C` text line into chevron steps with
 `content_diagrams.py arrows <slide.svg> --group <id> [--accent <step>]`. Use the
 recommended one and mention the other two in the hand-off.
+
+For `innergen_basic` pass `--family innergen_basic` to every tool: `innergen_qaqc`
+resolves the frame (a·b, c 슬림라인 or d 제안서) from the page chrome, `toc_builder`
+fills the deck frame's TOC (a–c: table of 3/4/5 rows; d: the CONTENTS list, and
+with `--dividers` the 03d chapter pages with the current chapter navy bold), and
+`content_diagrams` draws into the frame's `04x_content` page (a–c without the grey
+material band). The frame is read from the page file names, so write the cover
+and first content page before building the TOC. Name a content page that draws
+a structure `NN_04a_content_classic__s08_phase_roadmap.svg`: qaqc then counts it
+as that structure for the TOC skeleton and closing set. The d frame's TOC is a
+list by design, so the TOC-as-table rule (O03) does not apply to it.
 
 Fix every ERROR in the first two. `content_balance_check --fix` merges
 per-line text objects and drawn bullet squares into one text (CB06), pulls
