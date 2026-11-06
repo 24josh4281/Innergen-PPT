@@ -13,8 +13,8 @@ Finds recurring spacing defects in authored SVG pages, before PPTX export:
        leave an empty band above the footer line.
   CB03 본문 하단 공백 (page bottom void) — on a content page the lowest body
        element ends far above the source line (or the footer line when there is
-       none). Enlarge body text, give rows and cards more height, or add a
-       closing message strip so the content zone is used to its floor.
+       none). Enlarge body text and give rows, cards and tables more height so
+       the content zone is used to its floor; do not add a closing message strip.
   CB04 목차가 표가 아님 (TOC not a table) — the TOC page has no
        data-pptx-native="table"; rows drawn as spaced text boxes leave a band
        under the last row and cannot center vertically. Use the TOC template
@@ -797,7 +797,7 @@ def analyse_page_bottom(items: list[Item], cw: float, ch: float, page: str,
     target = "출처 줄" if sources else "바닥선"
     return Finding("CB03", page, (0, round(last, 1), round(cw, 1), round(void, 1)), 0.0, round(void, 1),
                    note=f"본문이 y{last:.0f}에서 끝나 {target}(y{floor:.0f})까지 {void:.0f}px가 비어 있음 "
-                        f"(허용 {PAGE_VOID_RATIO * ch:.0f}px) — 본문 글자·행 높이를 키우거나 맺음 메시지 띠를 넣으세요")
+                        f"(허용 {PAGE_VOID_RATIO * ch:.0f}px) — 본문 글자·행·카드·표 높이를 키우세요 (맺음 메시지 띠는 넣지 않음)")
 
 
 def _can_shift(content: list[Item], template: bool) -> bool:

@@ -238,12 +238,16 @@ For each confirmed page:
    (row pitch = zone height / chapters) — no empty band above the footer.
    Content pages fill their content zone too (본문 하단 공백 금지): the gap
    from the last object to the source line stays ≤ 6% of page height —
-   larger body text first, then taller rows/cards, then a closing message
-   strip. INNerCarry: source line y712, footer rule y728, page number y752,
-   content zone y156–696. Short one-line labels on a shape (pills, header
-   bars, badges, message strips) go inside the shape: wrap one `rect`/`circle`
-   and one `<text>` in `<g data-pptx-text-shape="ctr">`. Size rows from the
-   lines they hold so text and pills never cross a cell edge.
+   larger body text first, then stretch rows/cards/tables to the floor. Never
+   add a closing message strip at the page bottom: its "~합니다" sentence
+   clashes with the short-answer governing line; put that point in a table
+   row, a cell or a card bullet instead. INNerCarry: source line y712, footer
+   rule y728, page number y752, content zone y156–696. Text on a shape goes
+   inside the shape — pills, header bars, badges and also a card body with
+   multi-line bullets: wrap one `rect`/`circle` and one `<text>` (one
+   `<tspan x dy>` per line) in `<g data-pptx-text-shape="ctr">`. Never lay a
+   free text box over a card. Size rows from the lines they hold so text and
+   pills never cross a cell edge.
 7. Images: only the logos in `images/` or files the user supplied (copy them into
    `images/` and reference `../images/<file>`). If a page needs an image you do
    not have, ask or choose a layout without one — never insert placeholders.
@@ -303,7 +307,7 @@ back lines wrapped with width to spare (CB07), widens line and paragraph
 spacing in sparse cards (CB05), then re-centres top-heavy boxes (CB01); a TOC bottom void (CB02) is fixed by re-spacing the
 rows (build the TOC as a native table where possible); a page bottom void
 (CB03, last object ends more than 6% of the page height above the source line)
-is fixed by larger body text, taller rows/cards, then a closing message strip. A WARN needs either a fix or a one-line reason in your
+is fixed by larger body text, then taller rows/cards/tables (no closing message strip). A WARN needs either a fix or a one-line reason in your
 hand-off. `innergen_qaqc` writes `analysis/innergen_qaqc_report.md` (chrome
 geometry, governing grammar, title/TOC consistency, required pages, minimum text
 sizes, palette, source line, and the v25 TOC sections and must-have content per
