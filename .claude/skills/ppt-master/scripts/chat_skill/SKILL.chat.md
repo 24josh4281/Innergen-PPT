@@ -312,8 +312,12 @@ deck type × business type).
 ## 7. Export and hand off
 
 ```bash
-python3 ${SKILL_DIR}/scripts/svg_to_pptx.py /tmp/<deck> -o /mnt/user-data/outputs/<제목>.pptx
+python3 ${SKILL_DIR}/scripts/svg_to_pptx.py /tmp/<deck> --native-objects -o /mnt/user-data/outputs/<제목>.pptx
 ```
+
+`--native-objects` is required: it turns every `data-pptx-native="table"` marker
+into a PowerPoint table, so table text sits inside the cells instead of in
+separate text boxes.
 
 If LibreOffice (`soffice`) is available, convert the PPTX to PDF, render two or
 three pages to images and look at them for overflow or overlap; fix and
