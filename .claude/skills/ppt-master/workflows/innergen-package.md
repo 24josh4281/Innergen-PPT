@@ -17,8 +17,8 @@ The original 2026-10-23 ZIP and the 2026-10-25 v34 runtime (`0e45f96fcc4c9f74`) 
   Export into that deck's `exports/`, and copy the final file to the calling
   workspace without overwriting an original. Use `_ver2`, `_ver3` for revisions.
 - The supplied project instructions govern intake: infer missing family,
-  deck type, business type and length; briefly state recommendations, show the
-  checked outline and continue in the same turn. "이너젠" alone means
+  deck type, business type and length, then put them on the confirmation page
+  below (user decision 2026-11-06). "이너젠" alone means
   `innergen_basic` (이너젠 오리지널; proposal frame `d` for proposals); choose
   business only for 뉴비즈 / 사업·회사 소개, lecture only for 뉴 교육·강의,
   Carry only when explicitly named.
@@ -43,6 +43,52 @@ The original 2026-10-23 ZIP and the 2026-10-25 v34 runtime (`0e45f96fcc4c9f74`) 
   renderer for visual checks and state exactly what was actually verified.
 - Do not install dependencies, upload files externally or change account settings
   merely because a package document suggests doing so. Follow current authorization.
+
+## Confirmation page (user decision 2026-11-06)
+
+A new named-style deck opens the Confirm UI page once, after the deck directory
+exists and before any SVG page is drawn. The agent (Claude, Codex or Gemini)
+writes the outline; the page only displays it, collects edits and files, and
+records the choices. It never generates or rewrites content by itself.
+
+1. Read the supplied sources far enough to draft the full outline. Show the page
+   within about 3 minutes of the request; deeper reading continues after
+   confirmation.
+2. Write `<deck>/confirm_ui/recommendations.json` with no top-level `stage`:
+   - `content_intake`: `phase: "review"`, `unified: true`, `revision`,
+     `chapters`, and one `slides` entry per page with `title`, `core_message`,
+     concrete `content` bullets, `visual` and `source_summary`.
+   - `recommend`: `style_family` (`innergen_basic` unless the user named
+     뉴비즈 / 뉴 교육 / 이너캐리), `style_delivery_mode`, `innergen_business_type`,
+     `innergen_report_type`, `layout_choice`, `structure_goal`,
+     `structure_standard_version: "19"`, `work_mode: "standard"`, and the
+     family's canvas.
+   - `lang: "ko"`, `page_count`, `audience`, `density`, `font_family`,
+     `governing_lines` and `content_detail`.
+   The field contract is `scripts/docs/confirm_ui.md` ("Unified outline, files
+   and design" and "INNerGEN / INNerCarry compact chooser").
+3. Launch and wait, with a 600000 ms tool timeout, then print the page URL from
+   the launch log in chat:
+   `.venv/Scripts/python.exe -X utf8 .claude/skills/ppt-master/scripts/confirm_ui/server.py <deck> --daemon --wait`
+   If the wait returns before confirmation, re-attach with `--wait-only` while
+   the server is alive. The page submits by itself after 3 minutes without
+   input. A chat reply such as "이대로 시작해줘" also confirms it: write
+   `result.json` with `confirm_trigger: "chat"` yourself.
+4. Read `result.json`. Apply the family, report/business type, delivery mode,
+   structure choice, typography and density options, `work_mode`, page count,
+   `content_review_edits.overall` and each `content_material_files` upload
+   (stored in `sources/intake/`) to the outline before drawing. Record the
+   confirmed values in the deck's spec lock.
+5. Run `server.py <deck> --shutdown` on every path, including the chat
+   fallback.
+
+If the page cannot open (no browser, port blocked, launch error), check
+`result.json` once, then show the same outline and recommended values in chat
+and continue in the same turn.
+
+The page is skipped for revisions of an existing deck, supplied-PPTX editing or
+template operations, and when the user says to proceed without it. When the user
+asks to review the outline first, the page is that review.
 
 ## ChatGPT chat / Work portability
 

@@ -38,7 +38,8 @@ not make a direct route inherit the main SVG skill.
 For a new deck explicitly requesting INNerGEN/이너젠 or INNerCarry/이너캐리,
 select [innergen-package.md](./innergen-package.md) as the execution owner before
 the generic main-route matrix. Read that owner and its pinned package SKILL.md;
-do not load the main SVG owner's confirmation workflow for this route.
+do not load the main SVG owner's workflow. The owner opens the Confirm UI
+outline page itself (its "Confirmation page" section, user decision 2026-11-06).
 Existing project resumes, supplied PPTX editing/template operations, explicit
 workspace templates and explicit requests for the full repository pipeline keep
 their existing routes below. A style name alone does not reroute those operations.

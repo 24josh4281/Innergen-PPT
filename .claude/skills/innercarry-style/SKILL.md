@@ -7,9 +7,10 @@ description: Apply the source-backed INNerCarry presentation style whenever a pr
 
 Read `.claude/skills/ppt-master/workflows/routing.md` first. New named-style
 decks use its local package route and pinned runtime; follow that route's
-recommended-default intake and checks. The older adapter rules below remain
-applicable to the full repository pipeline and existing project edits, and do
-not add confirmation stops to the package route.
+recommended-default intake, its single Confirm UI outline page and its checks.
+The older adapter rules below remain applicable to the full repository pipeline
+and existing project edits, and add no further confirmation stops to the
+package route.
 
 
 # INNerCarry Style Adapter
