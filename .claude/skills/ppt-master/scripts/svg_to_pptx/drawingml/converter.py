@@ -267,13 +267,40 @@ def _append_shape_text(
     )
 
 
-# Authored text-in-shape: <g data-pptx-text-shape="ctr|t|b"> holding exactly one
+# Authored text-in-shape: <g data-pptx-text-shape="ctr|t|b|pos"> holding exactly one
 # rect/circle/ellipse and one <text>. The text becomes the shape's own txBody, so
 # the label is typed straight into the shape in PowerPoint. The SVG text position
-# sets the insets; the shape box keeps wrapping and vertical anchoring.
+# sets the insets; the shape box keeps wrapping and vertical anchoring ("pos"
+# keeps the authored vertical position as a top inset).
 TEXT_SHAPE_ATTR = 'data-pptx-text-shape'
-_TEXT_SHAPE_GEOMETRY = {'rect', 'circle', 'ellipse'}
+_TEXT_SHAPE_GEOMETRY = {'rect', 'circle', 'ellipse', 'path'}
 _PX_EMU = 9525
+
+
+def _path_box(d: str | None) -> tuple[float, float, float, float] | None:
+    """Bounding box of a straight-line path (absolute M/L/H/V/Z only), e.g. a chevron label."""
+    toks = re.findall(r'[A-Za-z]|-?\d+(?:\.\d+)?', d or '')
+    xs, ys, cmd, pend = [], [], None, []
+    for tok in toks:
+        if tok.isalpha():
+            if tok not in 'MLHVZ':
+                return None  # curves / relative commands: no reliable box
+            cmd, pend = tok, []
+            continue
+        v = float(tok)
+        if cmd == 'H':
+            xs.append(v)
+        elif cmd == 'V':
+            ys.append(v)
+        elif cmd in ('M', 'L'):
+            pend.append(v)
+            if len(pend) == 2:
+                xs.append(pend[0])
+                ys.append(pend[1])
+                pend = []
+    if not xs or not ys:
+        return None
+    return min(xs), min(ys), max(xs) - min(xs), max(ys) - min(ys)
 
 
 def _text_shape_box(shape: ET.Element) -> tuple[float, float, float, float] | None:
@@ -281,6 +308,8 @@ def _text_shape_box(shape: ET.Element) -> tuple[float, float, float, float] | No
     num = lambda key: float(shape.get(key) or 0)  # noqa: E731
     if tag == 'rect':
         return num('x'), num('y'), num('width'), num('height')
+    if tag == 'path':
+        return _path_box(shape.get('d'))
     rx = num('r') or num('rx')
     ry = num('r') or num('ry')
     return num('cx') - rx, num('cy') - ry, 2 * rx, 2 * ry
@@ -315,12 +344,25 @@ def _convert_text_shape(elem: ET.Element, ctx: ConvertContext) -> ShapeResult | 
         left, right = 2.0, max(0.0, x + w - tx)
     else:
         left, right = max(0.0, tx - x), 2.0
-    left, right = min(left, w / 3), min(right, w / 3)
+    left, right = min(left, w * 0.6), min(right, w * 0.6)
     v_anchor = elem.get(TEXT_SHAPE_ATTR, '').strip().lower()
+    t_ins = 0
+    if v_anchor == 'pos':
+        # Keep the authored vertical position: top-anchor the text and inset it
+        # by the gap between the shape top and the converted text box top, so a
+        # card's body text can sit below a header drawn inside the same card.
+        off = re.search(r'<a:off x="-?\d+" y="(-?\d+)"', text_result.xml)
+        shape_off = re.search(r'<a:off x="-?\d+" y="(-?\d+)"', shape_result.xml)
+        if off and shape_off:
+            t_ins = max(0, int(off.group(1)) - int(shape_off.group(1)))
+        v_anchor = 't'
     v_anchor = v_anchor if v_anchor in {'t', 'ctr', 'b'} else 'ctr'
     l_ins, r_ins = round(left * _PX_EMU), round(right * _PX_EMU)
+    # An ellipse's text area is its inscribed rectangle (~70% of the box), so a
+    # short label such as "10" in a number dot would wrap; keep circle text unwrapped.
+    wrap_mode = 'none' if _local_tag(shape) in {'circle', 'ellipse'} else 'square'
     body_pr = (
-        f'<a:bodyPr wrap="square" lIns="{l_ins}" tIns="0" rIns="{r_ins}" bIns="0" '
+        f'<a:bodyPr wrap="{wrap_mode}" lIns="{l_ins}" tIns="{t_ins}" rIns="{r_ins}" bIns="0" '
         f'anchor="{v_anchor}" anchorCtr="0"><a:noAutofit/></a:bodyPr>'
     )
     txbody = re.sub(r'<a:bodyPr\b[^>]*?(?:/>|>.*?</a:bodyPr>)', body_pr, body.group(0), count=1, flags=re.S)

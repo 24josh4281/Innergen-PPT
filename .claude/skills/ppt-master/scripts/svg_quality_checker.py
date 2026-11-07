@@ -2358,9 +2358,9 @@ class SVGQualityChecker:
         ls = gf(text_el.get('letter-spacing'), 0.0) or 0.0
 
         mixed_sizes = False
-        lines = []  # (content, x_abs, baseline)
+        lines = []  # (content, x_abs, baseline, line font-size)
         cur_text = (text_el.text or '').strip()
-        cur_x, cur_y = x, y
+        cur_x, cur_y, cur_fs = x, y, fs
         started = bool(cur_text)
         for child in list(text_el):
             if not self._is_tspan(child):
@@ -2370,11 +2370,13 @@ class SVGQualityChecker:
             seg = (child.text or '').strip()
             if self._is_line_tspan(child):
                 if started and cur_text:
-                    lines.append((cur_text, cur_x, cur_y))
+                    lines.append((cur_text, cur_x, cur_y, cur_fs))
                 ty = gf(child.get('y'))
                 dy_v = gf(child.get('dy'), 0.0) or 0.0
                 cur_y = ty if ty is not None else cur_y + dy_v
                 cur_x = gf(child.get('x'), x)
+                # a line tspan with its own size is measured at that size
+                cur_fs = gf(child.get('font-size'), fs) or fs
                 cur_text = seg
                 started = True
             elif seg:
@@ -2383,13 +2385,13 @@ class SVGQualityChecker:
             if tail:
                 cur_text = (cur_text + ' ' + tail).strip()
         if started and cur_text:
-            lines.append((cur_text, cur_x, cur_y))
+            lines.append((cur_text, cur_x, cur_y, cur_fs))
         if not lines:
             return None
 
         line_boxes = []
-        for content, lx, baseline in lines:
-            w = _geom_text_width(content, fs, ls)
+        for content, lx, baseline, lfs in lines:
+            w = _geom_text_width(content, lfs, ls)
             if anchor == 'middle':
                 x0 = lx - w / 2.0
             elif anchor == 'end':
@@ -2401,8 +2403,8 @@ class SVGQualityChecker:
                 'width': w,
                 'x0': x0 + dx,
                 'x1': x0 + w + dx,
-                'top': baseline - GEOM_ASCENT * fs + dy,
-                'bottom': baseline + GEOM_DESCENT * fs + dy,
+                'top': baseline - GEOM_ASCENT * lfs + dy,
+                'bottom': baseline + GEOM_DESCENT * lfs + dy,
             })
         return {
             'font_size': fs,
