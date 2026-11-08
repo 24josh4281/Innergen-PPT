@@ -202,6 +202,13 @@ ESG 평가), fill the `[ ]` client facts, and re-check every `재확인` fact an
 fact table against the original public source before use. Its §5 lists reference-deck
 sentences that are now outdated. Public sources only; client CDP answers stay 참고치.
 
+v36 (2026-11-08) four core pages by business type: for the 과업 배경, 세부 추진절차,
+상세 일정 and 과업 상세 pages of a proposal or kickoff report, read
+`docs/styles/innergen/task-package-by-type-v36.md`. It maps each business type to the
+INNerGEN reference design for each page, gives standard schedule rows and scope
+(포함, 범위 밖, 인수 산출물), and links the four pages through shared task names.
+Periods are examples; adjust them to the client's start date and re-check statutory dates.
+
 ## 1. Load and route
 
 1. Read `.claude/skills/ppt-master/workflows/routing.md` first. Load only the

@@ -60,7 +60,7 @@ STYLE_DOCS = (
     "qaqc-v21.md", "qaqc-v21.json", "content-diagrams-v33.md",
     "content-requirements-v25.md", "content-requirements-v25.json",
     "content-principles-v32.md", "content-principles-v32.json", "content-review-v32.md",
-    "task-background-v35.md",
+    "task-background-v35.md", "task-package-by-type-v36.md",
 )
 ENGINE_DOCS = ("shared-standards.md", "executor-cheatcard.md", "semantic-svg.md")
 _IGNORE = shutil.ignore_patterns("__pycache__", "*.pyc")
