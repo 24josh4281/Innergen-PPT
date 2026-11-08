@@ -194,6 +194,14 @@ add-on in the first reply: rough-text formulas or the user's existing 방법론�
 KCS or 환경부 외부사업 form, as Word and as PPT slides.
 This adds content/editability requirements without selecting a template or executor.
 
+v35 (2026-11-08) task background and necessity: for the 과업 배경 / 과업 필요성 /
+컨설팅 목적 / 시기 적정성 pages of a proposal or kickoff report, read
+`docs/styles/innergen/task-background-v35.md`. Pick the block for the business type
+(CDP, K-ETS, SBTi, 감축사업, 인벤토리, KSSB, 넷제로, RE100, CBAM, LCA, 기후리스크,
+ESG 평가), fill the `[ ]` client facts, and re-check every `재확인` fact and the §6
+fact table against the original public source before use. Its §5 lists reference-deck
+sentences that are now outdated. Public sources only; client CDP answers stay 참고치.
+
 ## 1. Load and route
 
 1. Read `.claude/skills/ppt-master/workflows/routing.md` first. Load only the
