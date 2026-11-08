@@ -2722,6 +2722,21 @@
         setTimeout(function () {
             try { window.close(); } catch (e) { /* Browser may require manual close. */ }
         }, 400);
+        // Browsers ignore window.close() for a tab the script did not open
+        // (or one with back history). The inputs must still disappear, so
+        // cover the page with the submitted notice when the tab stays open.
+        setTimeout(function () {
+            if (window.closed) return;
+            if (reason === "materials_submitted") {
+                var ov = document.getElementById("confirmed-overlay");
+                ov.querySelector(".cf-title").textContent = ({ko: "✓ 제출됨", en: "✓ Submitted", zh: "✓ 已提交", ja: "✓ 送信しました"})[LANG] || "✓ Submitted";
+                ov.querySelector(".cf-hint").textContent = ({ko: "입력이 저장됐습니다. 개요는 새 창으로 열립니다. 이 창은 닫아도 됩니다.", en: "Your input is saved. The outline opens in a new window; you can close this one.", zh: "输入已保存，大纲将在新窗口打开，可关闭此窗口。", ja: "入力を保存しました。概要は新しいウィンドウで開きます。この画面は閉じてかまいません。"})[LANG] || "Saved. You can close this window.";
+                ov.style.display = "flex";
+            } else {
+                showConfirmedOverlay();
+            }
+            document.body.classList.add("is-submitted");
+        }, 1200);
     }
 
     function autoStopLink() {
@@ -2737,6 +2752,20 @@
         }
         link.textContent = t("auto_stop");
         return link;
+    }
+
+    var OUTLINE_FIX_TIMER = null;
+    function watchOutlineFix(revision) {
+        if (OUTLINE_FIX_TIMER) clearTimeout(OUTLINE_FIX_TIMER);
+        OUTLINE_FIX_TIMER = setTimeout(function () {
+            OUTLINE_FIX_TIMER = null;
+            fetchJson("/api/recommendations", "recommendations").then(function (data) {
+                var next = data.content_intake || {};
+                if (next.view_revision === revision && next.approval_error) { watchOutlineFix(revision); return; }
+                document.getElementById("confirm-status").classList.remove("is-error");
+                REC = data; STAGE = stageNumber(REC); initState(); renderAll();
+            }).catch(function () { watchOutlineFix(revision); });
+        }, 3000);
     }
 
     function clearAutoTimer() {
@@ -2766,6 +2795,15 @@
             : (review || (stage !== 1 && stage !== 2))
                 && !(review && contentInfo.approval_error)
                 && !(REC && REC._already_confirmed);
+        if (review && contentInfo.approval_error) {
+            // Neither the button nor the countdown can confirm this outline.
+            // Say so where the countdown would be, and pick up the agent's
+            // corrected outline in this same window as soon as it is written.
+            var errorStatus = document.getElementById("confirm-status");
+            errorStatus.textContent = contentInfo.approval_error + " " + (({ko: "채팅에서 개요 수정을 요청하면 이 화면이 자동으로 갱신됩니다.", en: "Ask for an outline fix in chat; this page updates by itself.", zh: "请在聊天中要求修正大纲，此页面会自动更新。", ja: "チャットで概要の修正を依頼すると、この画面は自動で更新されます。"})[LANG] || "");
+            errorStatus.classList.add("is-error");
+            watchOutlineFix(contentInfo.view_revision);
+        }
         if (!eligible) { clearAutoTimer(); return; }
         // A language switch re-renders the same view: keep its countdown.
         var key = materials ? "materials:" + contentInfo.view_revision

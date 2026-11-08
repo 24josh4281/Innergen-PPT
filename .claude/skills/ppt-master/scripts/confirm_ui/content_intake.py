@@ -34,10 +34,44 @@ ALLOWED_SUFFIXES = {
 }
 
 
+def normalize_outline(info: dict) -> None:
+    """Repair harmless authoring slips in review slides, in place.
+
+    A slide written with ``chapter`` instead of ``chapter_id``, or without a
+    ``page`` number, used to fail review validation. The page then disabled
+    its button and the three-minute auto-confirm, so it stayed open forever.
+    Only missing values are filled; a wrong explicit page still fails.
+    """
+    slides = info.get("slides")
+    if not isinstance(slides, list):
+        return
+    for number, slide in enumerate(slides, 1):
+        if not isinstance(slide, dict):
+            continue
+        if "chapter_id" not in slide and isinstance(slide.get("chapter"), str):
+            slide["chapter_id"] = slide.pop("chapter")
+        page = slide.get("page")
+        if page is None:
+            slide["page"] = number
+        elif isinstance(page, str) and page.strip().isdecimal():
+            slide["page"] = int(page.strip())
+
+
 def _current_info(project: Path, read_json) -> dict:
     payload = read_json(project / "confirm_ui/recommendations.json")
     info = payload.get("content_intake", {})
-    return info if isinstance(info, dict) else {}
+    if not isinstance(info, dict):
+        return {}
+    normalize_outline(info)
+    return info
+
+
+def launch_outline_error(project: Path, read_json) -> str | None:
+    """Return the review error a freshly launched page would show, if any."""
+    info = _current_info(project, read_json)
+    if info.get("phase") != "review":
+        return None
+    return _review_error(info, _latest(project, read_json))
 
 
 def content_revision(info: dict) -> str:
@@ -122,6 +156,7 @@ def prepare_content_payload(data: dict, project: Path, read_json) -> None:
     info = data.get("content_intake")
     if not isinstance(info, dict) or info.get("phase") not in {"materials", "review"}:
         return
+    normalize_outline(info)
     info["view_revision"] = content_revision(info)
     if info.get("phase") == "materials" or info.get("unified"):
         info["pending_attachments"] = [f for f in _attachment_index(project, read_json)["files"]

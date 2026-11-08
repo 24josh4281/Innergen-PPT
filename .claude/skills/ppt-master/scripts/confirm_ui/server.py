@@ -58,6 +58,7 @@ from console_encoding import configure_utf8_stdio  # noqa: E402
 from confirm_ui.content_intake import (  # noqa: E402
     content_confirmation_error,
     content_revision,
+    launch_outline_error,
     prepare_content_payload,
     register_content_routes,
 )
@@ -1405,6 +1406,17 @@ def main(argv: Optional[list[str]] = None) -> int:
         logger.error(
             '%s not found — Strategist must write recommendations.json before launch',
             rec_file,
+        )
+        return 1
+
+    # A review page with an approval error can neither be confirmed nor
+    # auto-confirmed, so it would sit open with a disabled button. Fail here
+    # so the agent fixes the outline before the user ever sees that page.
+    outline_error = launch_outline_error(project_path, _read_json_object)
+    if outline_error:
+        logger.error(
+            'content_intake review is not confirmable — fix %s and relaunch: %s',
+            rec_file, outline_error,
         )
         return 1
 

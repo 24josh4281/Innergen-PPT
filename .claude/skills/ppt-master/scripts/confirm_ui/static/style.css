@@ -650,6 +650,9 @@ body {
     justify-content: center;
     z-index: 50;
 }
+/* The tab stayed open after submission: remove the inputs, keep the notice. */
+body.is-submitted #app { display: none; }
+body.is-submitted #confirmed-overlay { background: #f4f5f8; }
 .cf-card {
     background: var(--card);
     border: 1px solid var(--line);
