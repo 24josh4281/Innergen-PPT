@@ -139,3 +139,21 @@
 | 세부 추진절차 | `20261108_procedure_by_type_innergen_original` | `사업유형별_세부추진절차_장표모음.pptx` |
 | 상세 일정 | `20261108_schedule_by_type_innergen_original` | `사업유형별_상세일정_장표모음.pptx` |
 | 과업 상세 | `20261108_task_detail_by_type_innergen_original` | `사업유형별_과업상세_장표모음.pptx` |
+
+### 7.1 계열별 장표 모음 (2026-11-08)
+
+같은 사업유형 13쪽·디자인 구조를 네 계열로 만들었다. 폴더 이름의 뒷부분만 계열별로 다르고, 파일 이름 끝에 계열 표시를 붙인다.
+
+| 계열 | `style_family` | 프로젝트 폴더 끝 | 파일 끝 | 캔버스 · 글꼴 |
+|---|---|---|---|---|
+| 이너젠 오리지널 | `innergen_basic` | `_innergen_original` | 없음 | 1040×720 · IBM Plex Sans KR |
+| 이너젠 뉴비즈 | `innergen_business` | `_innergen_business` | `_뉴비즈` | 960×540 · IBM Plex Sans KR |
+| 이너젠 뉴교육 | `innergen_lecture` | `_innergen_lecture` | `_뉴교육` | 1040×720 · Pretendard |
+| 이너캐리 | `innercarry` | `_innercarry` | `_이너캐리` | 1024×768 · IBM Plex Sans KR |
+
+계열별 적용 규칙:
+
+- 뉴비즈·뉴교육은 `newbiz-governing-diagrams-v34.md`를 따른다. 거버닝은 가운데 정렬 검정, 핵심 어구 1개(필요하면 2개)만 같은 글상자 안의 연두 `#A4C700` 런으로 칠한다. 머리띠와 단계는 파랑 `#4285F4`, 도착점·두 번째 축만 연두로 둔다.
+- 이너캐리에는 v34를 적용하지 않는다. 남색 `#0B1739` 머리띠, 파랑 `#2F62F0` 강조, 왼쪽 정렬 일반 굵기 거버닝을 쓴다.
+- 한 계열로 옮길 때 도식의 구조·문구는 그대로 두고 캔버스, 글자 크기, 색 역할만 바꾼다. 실제 글자 폭으로 다시 줄바꿈을 계산한다.
+- 표는 계열이 달라도 PowerPoint 표 셀 안의 글자로 유지하고, 간트 막대는 셀 채우기로 둔다.
