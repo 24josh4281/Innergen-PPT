@@ -38,8 +38,8 @@ page_count: 26
 
 ## III. Typography
 
-- 기본형은 Malgun Gothic, 단색 남색형과 슬림라인형은 IBM Plex Sans KR를 우선한다. 이는 각 대표 원본의 본문 서체 관측에 따른다.
-- 다른 장치에 IBM Plex Sans KR가 없으면 Malgun Gothic으로 대체하고 글자 폭·줄바꿈을 다시 확인한다. 프로젝트에서 확인한 글자 크기가 이 템플릿의 예시 크기보다 우선한다.
+- 네 프레임 모두 IBM Plex Sans KR를 쓴다(2026-11-08 사용자 결정). 맑은 고딕은 대체 글꼴로도 쓰지 않는다.
+- 다른 장치에 IBM Plex Sans KR가 없으면 설치를 안내하고, 대체 글꼴을 쓴 경우 명세에 기록한 뒤 글자 폭·줄바꿈을 다시 확인한다. 프로젝트에서 확인한 글자 크기가 이 템플릿의 예시 크기보다 우선한다.
 - 템플릿의 텍스트는 모두 편집 가능한 SVG 텍스트로 저작한다.
 
 ## IV. Signature Design Elements
@@ -99,7 +99,7 @@ page_count: 26
 
 최종 제안서 `(제안자료) OCI 탄소중립 로드맵 재수립 및 기후공시 연계 컨설팅_v3.0_261030.pdf`의 실측값으로 만든 `d` 계열이다. 규칙 원문: `docs/styles/innergen/design-standard-v17.md` v35 절, JSON `profiles.innergen_basic.proposal_frame_v35`.
 
-- 글꼴은 IBM Plex Sans KR(없으면 맑은 고딕). 제목 26.67px(20pt) Bold 검정, 거버닝 17.33px(13pt) Bold + 원 아이콘, 본문 16px(12pt).
+- 글꼴은 IBM Plex Sans KR. 제목 26.67px(20pt) Bold 검정, 거버닝 17.33px(13pt) Bold + 원 아이콘, 본문 16px(12pt).
 - 거버닝 예시 크기는 최종본(작게)이다. Confirm UI `governing_size`가 표준·크게면 그 크기로 바꾸고 한 줄 폭을 다시 잰다.
 - 우상단(784–1040px, y0–50)은 고객 로고 자리다. 템플릿에는 고객 로고를 넣지 않고 프로젝트에서 넣는다.
 - 장 구분(`03d`)은 목차 화면을 반복하며 현재 장만 `#0F243F` Bold, 나머지는 `#A6A6A6` Regular로 바꾼다.

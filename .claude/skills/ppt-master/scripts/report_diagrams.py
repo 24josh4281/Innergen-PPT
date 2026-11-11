@@ -79,7 +79,7 @@ FAMILIES: dict[str, dict[str, Any]] = {
     # 이너젠 오리지널: navy/grey structure colours only (lock: chat_skill/locks/innergen_basic.md);
     # #2F6DB5 is the v35 proposal secondary blue, red stays for real risks.
     "innergen_basic": dict(
-        font='Malgun Gothic, sans-serif', min_px=12, ladder=(13.33, 14.67, 16),
+        font='"IBM Plex Sans KR", sans-serif', min_px=12, ladder=(13.33, 14.67, 16),
         navy="#0F243F", accent="#2F6DB5", light="#52657B", mid="#BFBFBF", panel="#BFBFBF",
         pale="#F2F2F2", zebra="#F2F2F2", rule="#BFBFBF", text="#000000", muted="#595959",
         neutral="#A6A6A6", alert="#FF0000", white="#FFFFFF",

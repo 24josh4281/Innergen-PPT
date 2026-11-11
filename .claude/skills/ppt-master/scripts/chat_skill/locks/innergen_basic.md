@@ -7,7 +7,7 @@
 
 ## visual_style
 - visual_style: custom
-- visual_style_behavior: Use the INNerGEN Original consulting-report look (design-standard-v17 innergen_basic). Pick ONE frame per deck — a classic grid (Malgun Gothic), b solid navy, c slim line, d proposal (v35, IBM Plex Sans KR) — and use only that frame's 01–05 files. a–c: navy #0F243F header band with a 29px white title, 22px bold black key message under it, 19px body, #808080 material-title band, 13px source, navy footer. d: 26.67px black title over a navy grid strip, 17.33px bold governing sentence with the round marker (a trailing ` – ` scope in #2F6DB5), 16px body with `•` bullets, white footer. Square corners, #BFBFBF table rules, #F2F2F2 panels, navy table headers with white bold text; red #FF0000 only for a real risk, gap or decision. No lime/blue NewBiz rules. Mark fictional figures 예시.
+- visual_style_behavior: Use the INNerGEN Original consulting-report look (design-standard-v17 innergen_basic). Pick ONE frame per deck — a classic grid, b solid navy, c slim line, d proposal (v35), all in IBM Plex Sans KR — and use only that frame's 01–05 files. a–c: navy #0F243F header band with a 29px white title, 22px bold black key message under it, 19px body, #808080 material-title band, 13px source, navy footer. d: 26.67px black title over a navy grid strip, 17.33px bold governing sentence with the round marker (a trailing ` – ` scope in #2F6DB5), 16px body with `•` bullets, white footer. Square corners, #BFBFBF table rules, #F2F2F2 panels, navy table headers with white bold text; red #FF0000 only for a real risk, gap or decision. No lime/blue NewBiz rules. Mark fictional figures 예시.
 
 ## colors
 - bg: #FFFFFF
@@ -27,8 +27,8 @@
 - white: #FFFFFF
 
 ## typography
-- font_family: Malgun Gothic, sans-serif
-- plex_family: IBM Plex Sans KR, Malgun Gothic, sans-serif
+- font_family: IBM Plex Sans KR, sans-serif
+- plex_family: IBM Plex Sans KR, sans-serif
 - body: 18.67
 - title: 29
 - lead: 22

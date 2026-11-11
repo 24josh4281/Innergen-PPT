@@ -119,7 +119,7 @@ The saved JSON is a style profile, not a project `spec_lock.md`: materialize its
 decisions into the project's own spec and lock. Never reuse reference client
 content, logos, dates, or numerical values as new-project facts.
 For new SVG pages in this named style only, the user-authorized source-style font
-preference is Malgun Gothic / IBM Plex Sans KR as defined in the profile; this takes precedence
+preference is IBM Plex Sans KR as defined in the profile; this takes precedence
 over the generic SVG Pretendard default. Check installed fonts and record any
 fallback. Other styles retain the standing font policy.
 

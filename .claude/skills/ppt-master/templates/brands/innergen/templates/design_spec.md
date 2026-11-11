@@ -40,8 +40,8 @@ primary. Use accent for meaning; preserve the original logo pixels.
 
 | Role | Family | Weight | Provenance |
 |---|---|---|---|
-| title | Malgun Gothic | 700 | fact — source 맑은 고딕, default synthesis |
-| body | Malgun Gothic | 400 | fact — predominant CDP/inventory source family |
+| title | IBM Plex Sans KR | 700 | user decision 2026-11-08 (older sources used 맑은 고딕) |
+| body | IBM Plex Sans KR | 400 | user decision 2026-11-08 (older sources used 맑은 고딕) |
 | alternate source plan | IBM Plex Sans KR | 400 / 700 | fact — reduction/regulation and inventory V2 sources |
 
 Select one family plan for the project. A specifically requested source file's

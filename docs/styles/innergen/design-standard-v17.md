@@ -18,8 +18,8 @@
 
 | 항목 | 이너젠 오리지널 (`innergen_basic`) | 이너젠 뉴 · 사업/회사 소개 (`innergen_business`) | 이너젠 뉴 · 교육/강의 (`innergen_lecture`) | 이너캐리 |
 |---|---|---|---|---|
-| 글꼴 | Malgun Gothic | IBM Plex Sans KR | Pretendard | IBM Plex Sans KR |
-| 대체 글꼴 | IBM Plex Sans KR | Malgun Gothic | Malgun Gothic | Malgun Gothic |
+| 글꼴 | IBM Plex Sans KR | IBM Plex Sans KR | Pretendard | IBM Plex Sans KR |
+| 대체 글꼴 | sans-serif (맑은 고딕 제외) | Malgun Gothic | Malgun Gothic | Malgun Gothic |
 | 실행 캔버스 pt | [780, 540] | [960, 540] | [780, 540] | [768, 576] |
 | 실행 캔버스 px | [1040, 720] | [1280, 720] | [1040, 720] | [1024, 768] |
 | 바깥 여백 pt | 25 | 36 | 36 | 42 |
@@ -224,7 +224,7 @@ CDP는 요구사항·근거 매핑, 규제는 적용 대상·기한·책임, 인
 | `nanum_square_neo` | NanumSquare Neo (+Light·Bold·ExtraBold·Heavy) | 선택 | `assets/fonts/NanumSquareNeo/` (Regular·Bold·ExtraBold) | 설치됨 |
 | `nanum_square`, `nanum_square_round` | NanumSquare / NanumSquareRound | 선택 | 번들 없음(네이버 배포) | 설치됨 |
 | `noto_sans_cjk_kr` | Noto Sans CJK KR (7종) | 선택 | 번들 없음(용량) | 설치됨 |
-| `malgun_gothic` | Malgun Gothic | `innergen_basic` | 시스템 | — |
+| `malgun_gothic` | Malgun Gothic | — | 시스템 | — |
 
 - 설치: `python3 .claude/skills/ppt-master/scripts/install_fonts.py`(번들 전체) · `--family IBMPlexSansKR` · `--dir <zip 또는 폴더>`. 사용자 권한으로 설치하며 관리자 권한이 필요 없다. PPTX는 글꼴을 포함하지 않으므로 받는 PC에도 설치가 필요하다.
 - 내보내기: 위 가족은 `svg_to_pptx` `DUAL_SCRIPT_FONTS`에 등록되어 Latin·EA 두 슬롯에 같은 글꼴이 들어간다.
@@ -293,7 +293,7 @@ Confirm UI(`innergen_studio.js`)의 **결과물 조정** 묶음에서 고르고 
 | 표 | 머리 남색 + 흰 Bold, 본문 9–10pt, 테두리 #BFBFBF 0.75pt, 첫 열 왼쪽 정렬 Bold |
 | 푸터 | 흰 바탕. 왼쪽 로고 + `Innovative Ideas │ Better Solution` 8pt Bold, 가운데 쪽번호 9pt, 오른쪽 저작권 8pt #7F7F7F |
 | 장 구분 | CONTENTS 장 반복(왼쪽 일러스트, 현재 장만 남색 Bold) |
-| 글꼴 | 최종본은 IBM Plex Sans KR. 오리지널 기본(맑은 고딕)은 유지하고 제안서에서 `font_family`로 고른다 |
+| 글꼴 | IBM Plex Sans KR (2026-11-08부터 오리지널 전 프레임 공통) |
 
 ### 거버닝 크기 선택지 (`governing_size`)
 

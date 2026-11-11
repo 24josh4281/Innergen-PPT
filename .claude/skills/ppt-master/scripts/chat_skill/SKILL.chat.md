@@ -34,7 +34,7 @@ and ask once for the rest:
 
 | Item | Options |
 |---|---|
-| Family | `innergen_basic` = 이너젠 오리지널 (컨설팅 보고서·제안서, 13:9, Malgun Gothic / 제안서 프레임은 IBM Plex Sans KR) · `innergen_lecture` = 이너젠 뉴 · 교육/강의 유형 (13:9, Pretendard) · `innergen_business` = 이너젠 뉴 · 사업/회사 소개 유형 (컨설팅 보고 포함, 16:9, IBM Plex Sans KR) · `innercarry` = 이너캐리 (제품, 4:3, IBM Plex Sans KR). Show users these display names; keep the ids internal. |
+| Family | `innergen_basic` = 이너젠 오리지널 (컨설팅 보고서·제안서, 13:9, IBM Plex Sans KR) · `innergen_lecture` = 이너젠 뉴 · 교육/강의 유형 (13:9, Pretendard) · `innergen_business` = 이너젠 뉴 · 사업/회사 소개 유형 (컨설팅 보고 포함, 16:9, IBM Plex Sans KR) · `innercarry` = 이너캐리 (제품, 4:3, IBM Plex Sans KR). Show users these display names; keep the ids internal. |
 | Deck type | lecture · handout · seminar · proposal · kickoff · weekly · biweekly · monthly · diagnosis · interim · final · briefing · benchmark · insight |
 | Business type | `cdp_disclosure` CDP·기후공시 · `regulatory` 규제 대응 · `reduction` 감축사업·상쇄 · `inventory` 온실가스 인벤토리 · `lca_product` LCA·제품 탄소 · `climate_risk` 기후리스크·시나리오 · `esg_rating` ESG 평가 대응 · `climate_education` 기후·ESG 교육 · `climate_tech` 기후테크·소셜벤처 |
 | Size | page count or talk length |
@@ -120,7 +120,7 @@ four frames; pick ONE frame per deck and never mix them:
 
 | Frame | Cover | TOC (3/4/5 chapters) | Chapter | Content | Ending |
 |---|---|---|---|---|---|
-| a 격자 (classic grid, Malgun Gothic) | `01a_cover_classic` | `02a_toc_classic`, `_4`, `_5` | `03a_chapter_classic` | `04a_content_classic` | `05a_ending_classic` |
+| a 격자 (classic grid) | `01a_cover_classic` | `02a_toc_classic`, `_4`, `_5` | `03a_chapter_classic` | `04a_content_classic` | `05a_ending_classic` |
 | b 단색 남색 (solid navy) | `01b_cover_solid_navy` | `02b_toc_solid_navy`, `_4`, `_5` | `03b_chapter_solid_navy` | `04b_content_solid_navy` | `05b_ending_solid_navy` |
 | c 슬림라인 (slim line) | `01c_cover_slim_line` | `02c_toc_slim_line`, `_4`, `_5` | `03c_chapter_slim_line` | `04c_content_slim_line` | `05c_ending_slim_line` |
 | d 제안서 (v35 proposal) | `01d_cover_proposal` | `02d_toc_proposal` | `03d_chapter_proposal` | `04d_content_proposal` | `05d_ending_proposal` |
@@ -324,6 +324,8 @@ deck type × business type).
 
 ```bash
 python3 ${SKILL_DIR}/scripts/svg_to_pptx.py /tmp/<deck> --native-objects -o /mnt/user-data/outputs/<제목>.pptx
+# 이너젠 오리지널만: 테마 글꼴까지 IBM Plex Sans KR로 교체
+python3 ${SKILL_DIR}/scripts/patch_theme_fonts.py /mnt/user-data/outputs/<제목>.pptx
 ```
 
 `--native-objects` is required: it turns every `data-pptx-native="table"` marker

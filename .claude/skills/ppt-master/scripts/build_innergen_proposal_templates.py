@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parent.parent / 'templates' / 'decks' / 'innergen' / 'templates'
-FONT = 'IBM Plex Sans KR, Malgun Gothic, sans-serif'
+FONT = 'IBM Plex Sans KR, sans-serif'
 NAVY, GRID, FAINT, BLUE, GREY, MUTED = '#0F243F', '#2E4059', '#F2F2F2', '#2F6DB5', '#7F7F7F', '#A6A6A6'
 HEAD = ('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1040 720" '
         'data-pptx-master="innergen-master-13x9" data-pptx-master-name="이너젠 오리지널 13:9" '

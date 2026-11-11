@@ -45,7 +45,7 @@ SKILL_NAME = "innergen-deck"
 DEFAULT_OUT = REPO_ROOT / "OUTPUTS" / "claude-chat-skill"
 
 ENTRY_SCRIPTS = ("svg_to_pptx.py", "svg_quality_checker.py", "innergen_qaqc.py", "innergen_story_check.py",
-                 "content_balance_check.py", "toc_builder.py", "content_diagrams.py")
+                 "content_balance_check.py", "toc_builder.py", "content_diagrams.py", "patch_theme_fonts.py")
 FAMILIES = ("innergen_basic", "innergen_lecture", "innergen_business", "innercarry")
 # innergen_basic (이너젠 오리지널) keeps its original template folder name.
 DECK_DIRS = {"innergen_basic": "innergen"}

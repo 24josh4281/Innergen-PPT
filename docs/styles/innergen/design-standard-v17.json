@@ -29,8 +29,8 @@
    "aliases": [
     "이너젠 기본"
    ],
-   "font": "Malgun Gothic",
-   "fallback": "IBM Plex Sans KR",
+   "font": "IBM Plex Sans KR",
+   "fallback": "sans-serif",
    "canvas": "ppt139",
    "canvas_pt": [
     780,
@@ -166,7 +166,7 @@
    "proposal_frame_v35": {
     "source": "(제안자료) OCI 탄소중립 로드맵 재수립 및 기후공시 연계 컨설팅_v3.0_261030.pdf (39쪽, 780×540pt) — 2026-10-30 사용자 지정 최종본",
     "use": "이너젠 오리지널 제안서(proposal_explain). 보고서·읽기용은 classic_grid 유지",
-    "font": "IBM Plex Sans KR (최종본 실측; 기본 Malgun Gothic 대신 제안서에서 선택 가능)",
+    "font": "IBM Plex Sans KR (최종본 실측, 2026-11-08부터 오리지널 전 프레임 공통)",
     "header": {
      "title_pt": 20,
      "title_weight": 700,
@@ -3483,8 +3483,8 @@
  "audit_manifest": "OUTPUTS/design-audit-v17/manifest.json",
  "structured_slides": "docs/styles/innergen/structured-slides-v18.json",
  "content_architecture": "docs/styles/innergen/content-architecture-v20.json",
- "revision": 35,
- "revision_note": "2026-10-30 v35: 이너젠 오리지널 최종 제안서(OCI 261030) 실측 프레임 proposal_frame_v35, 거버닝 크기 선택지(governing_size: 크게·표준·작게). 2026-10-14 v22: 글꼴 목록, 밀도 프리셋(compact 기본), 거버닝 1줄, 피드백 선택지, 계열별 템플릿(innergen_lecture·innergen_business·innercarry)",
+ "revision": 36,
+ "revision_note": "2026-11-08 rev.36: 이너젠 오리지널 전 프레임 글꼴을 IBM Plex Sans KR로 변경(맑은 고딕은 대체 글꼴로도 쓰지 않음). 2026-10-30 v35: 이너젠 오리지널 최종 제안서(OCI 261030) 실측 프레임 proposal_frame_v35, 거버닝 크기 선택지(governing_size: 크게·표준·작게). 2026-10-14 v22: 글꼴 목록, 밀도 프리셋(compact 기본), 거버닝 1줄, 피드백 선택지, 계열별 템플릿(innergen_lecture·innergen_business·innercarry)",
  "fonts": {
   "pretendard": {
    "family": "Pretendard",
@@ -3519,6 +3519,7 @@
    "bundled": ".claude/skills/ppt-master/assets/fonts/IBMPlexSansKR/ (Regular·Medium·SemiBold·Bold)",
    "license": "SIL OFL 1.1",
    "default_for": [
+    "innergen_basic",
     "innergen_business",
     "innercarry"
    ],
@@ -3600,9 +3601,7 @@
    },
    "bundled": null,
    "license": "Windows 시스템 글꼴",
-   "default_for": [
-    "innergen_basic"
-   ],
+   "default_for": [],
    "source": "Windows"
   }
  },

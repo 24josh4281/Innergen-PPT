@@ -63,14 +63,14 @@
     "client_logo_colors_are_not_brand_primary": true
   },
   "typography": {
-    "default_family": "Malgun Gothic",
-    "default_family_source_name": "맑은 고딕",
+    "default_family": "IBM Plex Sans KR",
+    "default_family_source_name": "IBM Plex Sans KR",
     "domain_family_overrides": {"감축사업": "IBM Plex Sans KR", "규제대응사업": "IBM Plex Sans KR"},
     "reference_family_overrides": {"D16": "IBM Plex Sans KR"},
     "explicit_reference_wins": true,
     "same_family_for_korean_latin_numbers": true,
     "native_template_route": "preserve-original-fonts",
-    "fallback_order": ["Malgun Gothic", "IBM Plex Sans KR", "Pretendard"],
+    "fallback_order": ["IBM Plex Sans KR", "Pretendard"],
     "missing_font_action": "select installed fallback, record it in project spec, recheck line-wrap and fit; do not change system configuration",
     "named_style_overrides_generic_pretendard_default": true,
     "role_sizes_pt": {

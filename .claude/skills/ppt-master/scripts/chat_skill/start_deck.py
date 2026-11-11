@@ -47,7 +47,7 @@ PAGE_ROLES = (("_cover", "cover"), ("_toc", "toc"), ("_section", "section"),
               ("_chapter", "section"), ("_ending", "ending"))
 
 FAMILIES = {
-    "innergen_basic": "이너젠 오리지널 (13:9) · Malgun Gothic (제안서 d 계열은 IBM Plex Sans KR)",
+    "innergen_basic": "이너젠 오리지널 (13:9) · IBM Plex Sans KR",
     "innergen_lecture": "이너젠 뉴 · 교육/강의 (13:9) · Pretendard",
     "innergen_business": "이너젠 뉴 · 사업/회사 소개 (16:9) · IBM Plex Sans KR",
     "innercarry": "이너캐리 제품 소개 4:3 · IBM Plex Sans KR",

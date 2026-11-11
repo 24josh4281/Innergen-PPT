@@ -34,8 +34,8 @@ template `.claude/skills/ppt-master/templates/decks/innergen_lecture/`), and
 이너젠 뉴 · 사업/회사 소개 = `innergen_business`. The separate 2026-10-07 13:9 education template keeps
 its own explicit project values. Current user choices and confirmed
 project values win. Source-backed named fonts override the generic Pretendard
-lock as authorized in AGENTS.md: Malgun Gothic for basic, IBM Plex Sans KR for
-business/Carry. Native PPTX preservation retains source fonts.
+lock as authorized in AGENTS.md: IBM Plex Sans KR for basic (since 2026-11-08),
+business and Carry. Native PPTX preservation retains source fonts.
 
 Keep v16 business/report semantics and evidence/citation guidance, but v17 owns
 new default visual metrics and family mapping. Source observations for all
@@ -286,7 +286,7 @@ Master/Layout maps. Structured output requires actual valid structured template
 input or a separately authorized structure plan.
 
 The explicit persistent INNerGEN preference uses the JSON's installed font plan
-(Malgun Gothic by default; IBM Plex Sans KR for the source/domain plans). It overrides only the
+(IBM Plex Sans KR since 2026-11-08; Malgun Gothic is not used). It overrides only the
 generic SVG font default for this named style. Preserve original fonts in a
 direct-PPTX route unless the current user asks to change them. Check installation;
 record a named fallback and verify text fit before exporting.

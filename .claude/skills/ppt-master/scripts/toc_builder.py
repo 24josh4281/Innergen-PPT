@@ -189,6 +189,8 @@ BASELINE = 0.92        # first baseline below the line top, as a multiple of the
 
 def _font_stack(family: str) -> str:
     name = f'"{family}"' if " " in family else family
+    if family == "IBM Plex Sans KR":  # INNerGEN decks carry no Malgun Gothic fallback
+        return f'{name}, sans-serif'
     return f'{name}, "Malgun Gothic", sans-serif'
 
 
