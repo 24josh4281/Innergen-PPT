@@ -345,6 +345,12 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
     fam = rules["families"][family]
     for p in pages:
         p.bind(fam)
+    # 사용자 고정 규칙(2026-11-19): 장 간지는 장 하나만 크게 보여 주는 chapter 장표를 쓰지 않는다.
+    # 전체 목차를 다시 넣고 현재 장만 강조한다(content-principles-v32 §3.3).
+    for p in pages:
+        if "chapter" in (p.layout or "") or "_chapter" in p.path.stem:
+            rep.add("ERROR", "N30", p.index,
+                    "장 간지에 chapter 장표(한 장만 표시)를 썼습니다 — 전체 목차를 다시 넣고 현재 장만 강조하세요")
     spec = project / "design_spec.md"
     spec_text = spec.read_text(encoding="utf-8") if spec.exists() else ""
     if deck_type is None and spec_text:

@@ -110,6 +110,9 @@ to "가상환경 설정해줘". The user guide is [`설치안내.md`](설치안�
 - **Repo-wide style rules** — when editing prompt files under [`.claude/skills/ppt-master/references/`](.claude/skills/ppt-master/references/), Python under [`.claude/skills/ppt-master/scripts/`](.claude/skills/ppt-master/scripts/), or any other code/prose in the repo, follow the matching style rule in [`docs/rules/`](docs/rules/).
 - **Markdown language consistency** — Markdown files under `.claude/skills/ppt-master/workflows/`, `.claude/skills/ppt-master/references/`, and `docs/` are currently single-language per directory. New files mirror the language of their siblings; do not mix English scaffolding with Chinese paragraphs (or vice versa) inside one file. Chat replies are unaffected.
 
+- **장 간지 = 전체 목차 + 현재 장 강조 (user standing rule, 2026-11-19)** — every deck's chapter divider re-inserts the full TOC page (same chapter/section wording and page ranges as the TOC) with only the current chapter highlighted and the others greyed. Never use the single-chapter divider templates (`03*_chapter_*`) or a big-number + section-list divider. Keep TOC wording merged so chapter and section titles do not repeat each other. `innergen_qaqc.py` reports chapter-template pages as ERROR N30. Details: [`docs/styles/innergen/content-principles-v32.md`](docs/styles/innergen/content-principles-v32.md) §3.3.
+- **벤치마킹은 CDP 문항 번호 기준 (user standing rule, 2026-11-19)** — CDP benchmarking pages are organised and labelled by the official CDP question numbers (e.g. 2.2.2, 4.1.2, 7.53.1). Do not invent our own item numbering (K1, S4, M1…) as the benchmark axis; KSSB paragraphs may appear as a mapping column.
+
 ## Compatibility Boundary
 
 - This repository is a workflow/skill package, not an app or service scaffold.
