@@ -302,7 +302,7 @@ def _fill_table(group: ET.Element, n: int, current: Optional[int]) -> None:
                 for key in ("fill", "color"):
                     if key in src[c]:
                         cell[key] = src[c][key]
-                if i != current and muted and roles[c] in ("title", "pages"):
+                if i != current and muted and roles[c] in ("no", "title", "pages"):
                     if "paragraphs" in cell:
                         cell["paragraphs"][0]["runs"][0]["color"] = muted
                     else:
