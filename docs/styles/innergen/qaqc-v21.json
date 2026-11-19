@@ -366,7 +366,8 @@
         "inner_width": 945,
         "tolerance": 3,
         "alt_baselines": [
-          118
+          118,
+          126
         ]
       },
       "source": {
@@ -426,7 +427,7 @@
         "title_baseline": 41,
         "title_size": 29
       },
-      "alt_baselines_note": "45/118/652 = 2026-11-03 OCI KSSB 교육 덱(사용자 확정 오리지널 a 프레임) 실측. 템플릿 기준은 41/135/624."
+      "alt_baselines_note": "45/118/652 = 2026-11-03 OCI KSSB 교육 덱(사용자 확정 오리지널 a 프레임) 실측. 템플릿 기준은 41/135/624. 거버닝 126 = 2026-11-19 사용자 결정(제목 띠 y72와 본문 y166 사이 위·아래 여백 동일)."
     },
     "innergen_basic_slim": {
       "label": "이너젠 오리지널 (13:9) — 슬림라인(c) 프레임",
@@ -519,14 +520,16 @@
       },
       "governing": {
         "box": null,
-        "text_x": 64,
+        "text_x": 45,
         "baseline": 94,
         "size": 17.33,
         "fill": "#000000",
         "weight_bold": true,
-        "max_lines": 1,
+        "max_lines": 2,
         "inner_width": 946,
-        "tolerance": 3
+        "tolerance": 3,
+        "alt_baselines": [109],
+        "note": "2026-11-11 user decision: kickoff-report form (14pt bold, up to two lines at x45, no marker); x64 one-line decks still pass"
       },
       "source": {
         "baseline": 653,
