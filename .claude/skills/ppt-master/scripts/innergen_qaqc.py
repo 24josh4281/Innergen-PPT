@@ -100,18 +100,22 @@ _PATH_TOKEN = re.compile(r"[MmLlHhVvCcSsQqTtAaZz]|-?(?:\d+\.?\d*|\.\d+)(?:[eE][-
 _PATH_ARGS = {"M": 2, "L": 2, "T": 2, "H": 1, "V": 1, "C": 6, "S": 4, "Q": 4, "A": 7, "Z": 0}
 
 
-def _shape_top(el: ET.Element, tag: str) -> float | None:
-    """Top edge (smallest y) of a path / polygon / circle / ellipse; control points
-    count as ink, which is close enough for a margin check. None when unreadable."""
+def _shape_box(el: ET.Element, tag: str) -> tuple[float, float, float, float] | None:
+    """(x0, y0, x1, y1) of a path / polygon / circle / ellipse; control points count
+    as ink, which is close enough for a margin check. None when unreadable."""
     if tag == "circle":
-        return _num(el.get("cy"), 0.0) - _num(el.get("r"), 0.0)
+        cx, cy, r = _num(el.get("cx"), 0.0), _num(el.get("cy"), 0.0), _num(el.get("r"), 0.0)
+        return cx - r, cy - r, cx + r, cy + r
     if tag == "ellipse":
-        return _num(el.get("cy"), 0.0) - _num(el.get("ry"), 0.0)
+        cx, cy = _num(el.get("cx"), 0.0), _num(el.get("cy"), 0.0)
+        rx, ry = _num(el.get("rx"), 0.0), _num(el.get("ry"), 0.0)
+        return cx - rx, cy - ry, cx + rx, cy + ry
     if tag in ("polygon", "polyline"):
         nums = [float(v) for v in re.findall(r"-?(?:\d+\.?\d*|\.\d+)", el.get("points") or "")]
-        ys = nums[1::2]
-        return min(ys) if ys else None
+        xs, ys = nums[0::2], nums[1::2]
+        return (min(xs), min(ys), max(xs), max(ys)) if xs and ys else None
     toks = _PATH_TOKEN.findall(el.get("d") or "")
+    xs: list[float] = []
     ys: list[float] = []
     cx = cy = 0.0
     cmd, i = "", 0
@@ -138,36 +142,93 @@ def _shape_top(el: ET.Element, tag: str) -> float | None:
             cx, cy = args[5] + (cx if rel else 0), args[6] + (cy if rel else 0)
         else:
             pts = [(args[k] + (cx if rel else 0), args[k + 1] + (cy if rel else 0)) for k in range(0, n, 2)]
+            xs.extend(x for x, _ in pts[:-1])
             ys.extend(y for _, y in pts[:-1])
             cx, cy = pts[-1]
+        xs.append(cx)
         ys.append(cy)
         if cmd in "Mm":
             cmd = "l" if rel else "L"
-    return min(ys) if ys else None
+    return (min(xs), min(ys), max(xs), max(ys)) if xs and ys else None
 
 
-def _governing_gaps(p: "Page", g: dict, mb: dict, floor: float) -> tuple[float, float, float] | None:
-    """(top gap, bottom gap, body top) around the governing line: glyph ink to the
-    header band above and to the first body element below. Ink extents are em
-    ratios measured on IBM Plex Sans KR Bold Hangul (top 0.78em, bottom 0.16em).
-    Body elements are those starting below the ink and above `floor` (source line)."""
-    size = g["size"]
-    last = g["y"]
-    for ch in g["el"]:
-        if _local(ch.tag) == "tspan" and _num(ch.get("dy"), 0) > 0:
+def _ink(t: dict, mb: dict) -> tuple[float, float]:
+    """Glyph ink top/bottom of a text: em ratios measured on IBM Plex Sans KR Bold
+    Hangul (top 0.78em above the first baseline, bottom 0.16em below the last)."""
+    last = t["y"]
+    for ch in t["el"]:
+        if _local(ch.tag) != "tspan":
+            continue
+        if ch.get("y") is not None:
+            last = max(last, _num(ch.get("y"), last))
+        elif _num(ch.get("dy"), 0) > 0:
             last += _num(ch.get("dy"), 0)
-    ink_top = g["y"] - mb.get("ink_top_em", 0.78) * size
-    ink_bottom = last + mb.get("ink_bottom_em", 0.16) * size
-    tops = [r["y"] for r in p.rects if r["h"] > 0 and r["w"] > 0]
-    tops += [i["y"] for i in p.images]
-    tops += [min(l["y1"], l["y2"]) for l in p.lines]
-    tops += p.shape_tops
-    tops += [t["y"] - mb.get("ink_top_em", 0.78) * t["size"] for t in p.texts if t["text"] and t is not g]
-    below = [v for v in tops if ink_bottom - 1 <= v < floor]
+    return t["y"] - mb.get("ink_top_em", 0.78) * t["size"], last + mb.get("ink_bottom_em", 0.16) * t["size"]
+
+
+def _boxes(p: "Page", mb: dict, skip: tuple = ()) -> list[dict]:
+    """Vertical extents of every drawn element; x edges only where they are exact
+    (shapes, start/end-anchored text). Text in {{TOKEN}} form has no x edge."""
+    out = [{"y0": r["y"], "y1": r["y"] + r["h"], "x0": r["x"], "x1": r["x"] + r["w"], "id": r["id"]}
+           for r in p.rects if r["h"] > 0 and r["w"] > 0]
+    out += [{"y0": i["y"], "y1": i["y"] + i["h"], "x0": i["x"], "x1": i["x"] + i["w"], "id": ""} for i in p.images]
+    out += [{"y0": min(l["y1"], l["y2"]), "y1": max(l["y1"], l["y2"]), "x0": min(l["x1"], l["x2"]),
+             "x1": max(l["x1"], l["x2"]), "id": l.get("id", "")} for l in p.lines]
+    out += [{"y0": b[1], "y1": b[3], "x0": b[0], "x1": b[2], "id": ""} for b in p.shape_boxes]
+    for t in p.texts:
+        if not t["text"] or t["id"] in skip:
+            continue
+        top, bottom = _ink(t, mb)
+        token = "{{" in t["text"]
+        x0 = t["x"] if t["anchor"] == "start" and not token else None
+        x1 = t["x"] if t["anchor"] == "end" and not token else None
+        out.append({"y0": top, "y1": bottom, "x0": x0, "x1": x1, "id": t["id"], "text": t})
+    return out
+
+
+def _governing_gaps(p: "Page", g: dict, mb: dict, floor: float, box: list | None = None) -> list[tuple[str, float, float, float]]:
+    """Gap pairs (label, above, below, below-edge y) that must match: governing ink
+    between the header and the first body element, or - for a governing box - the box
+    between the header and the body plus the ink inside the box."""
+    ink_top, ink_bottom = _ink(g, mb)
+    items = [b for b in _boxes(p, mb) if b.get("text") is not g]
+    if box:
+        bx, by, bw, bh = box
+        below = [b["y0"] for b in items if by + bh - 1 <= b["y0"] < floor]
+        out = [("상자 안 ", ink_top - by, by + bh - ink_bottom, by + bh)]
+        if below:
+            out.append(("상자 ", by - mb["header_bottom"], min(below) - (by + bh), min(below)))
+        return out
+    below = [b["y0"] for b in items if ink_bottom - 1 <= b["y0"] < floor]
     if not below:
+        return []
+    return [("", ink_top - mb["header_bottom"], min(below) - ink_bottom, min(below))]
+
+
+def _body_balance(p: "Page", g: dict, fam: dict, mb: dict) -> tuple[float, float, float, float] | None:
+    """(gap above body, gap below body, left margin, right margin). Above = to the
+    governing block (ink, box, or the rule right under it); below = to the source-line
+    ink (or where the family's source line sits when the page has none)."""
+    gv = fam["governing"]
+    ink_bottom = _ink(g, mb)[1]
+    block = ink_bottom
+    if gv.get("box"):
+        block = max(block, gv["box"][1] + gv["box"][3])
+    src = p.source
+    floor = _ink(src, mb)[0] if src else fam["source"]["baseline"] - 0.78 * fam["source"]["size"]
+    skip = (src["id"],) if src else ()
+    items = [b for b in _boxes(p, mb, skip) if b.get("text") is not g and b["y0"] >= ink_bottom - 1 and b["y1"] <= floor + 1]
+    rules = [b for b in items if b["id"].startswith("governing")]
+    if rules:
+        block = max(block, max(b["y1"] for b in rules))
+    body = [b for b in items if not b["id"].startswith("governing") and b["y0"] >= block - 1]
+    if not body:
         return None
-    body = min(below)
-    return ink_top - mb["header_bottom"], body - ink_bottom, body
+    left = [b["x0"] for b in body if b["x0"] is not None]
+    right = [b["x1"] for b in body if b["x1"] is not None]
+    W = fam["canvas"][0]
+    return (min(b["y0"] for b in body) - block, floor - max(b["y1"] for b in body),
+            min(left) if left else float("nan"), W - max(right) if right else float("nan"))
 
 
 def _norm(s: str) -> str:
@@ -215,7 +276,7 @@ class Page:
         self.rects: list[dict] = []
         self.images: list[dict] = []
         self.lines: list[dict] = []
-        self.shape_tops: list[float] = []  # path / polygon / circle / ellipse top edges
+        self.shape_boxes: list[tuple[float, float, float, float]] = []  # path / polygon / circle / ellipse
         self._parent_map = None
         self._walk(self.root, {})
         self.title = self.governing = self.source = self.footer_label = self.page_number = None
@@ -256,11 +317,12 @@ class Page:
         elif tag == "image":
             self.images.append({"x": _num(el.get("x"), 0.0), "y": _num(el.get("y"), 0.0), "w": _num(el.get("width"), 0.0), "h": _num(el.get("height"), 0.0)})
         elif tag == "line":
-            self.lines.append({"y1": _num(el.get("y1"), 0.0), "y2": _num(el.get("y2"), 0.0), "x1": _num(el.get("x1"), 0.0), "x2": _num(el.get("x2"), 0.0)})
+            self.lines.append({"y1": _num(el.get("y1"), 0.0), "y2": _num(el.get("y2"), 0.0), "x1": _num(el.get("x1"), 0.0), "x2": _num(el.get("x2"), 0.0), "id": el.get("id") or ""})
         elif tag in ("path", "polygon", "polyline", "circle", "ellipse"):
-            top = _shape_top(el, tag)
-            if top is not None:
-                self.shape_tops.append(top)
+            if not el.get("transform"):
+                box = _shape_box(el, tag)
+                if box is not None:
+                    self.shape_boxes.append(box)
         for ch in el:
             if _local(ch.tag) in ("metadata", "defs", "style"):
                 continue
@@ -476,13 +538,23 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
             mb = gv.get("margin_balance")
             if mb:
                 floor = fam["source"]["baseline"] - fam["source"]["size"] - 4
-                gaps = _governing_gaps(p, g, mb, floor)
-                if gaps and abs(gaps[0] - gaps[1]) > mb.get("tolerance", 4):
-                    top, bottom, body = gaps
-                    rep.add("ERROR", "C09", p.index,
-                            f"거버닝 위·아래 여백이 다릅니다: 제목 띠(y{mb['header_bottom']:g})까지 {top:.0f}px, "
-                            f"본문(y{body:g})까지 {bottom:.0f}px — 거버닝 기준선을 y{g['y'] + (bottom - top) / 2:.0f}로 옮기거나 "
-                            f"본문 시작을 y{body - (bottom - top):.0f}로 맞추세요")
+                for label, top, bottom, edge in _governing_gaps(p, g, mb, floor, gv.get("box") if mb.get("box") else None):
+                    if abs(top - bottom) > mb.get("tolerance", 4):
+                        hint = (f"거버닝 기준선을 y{g['y'] + (bottom - top) / 2:.1f}로" if label != "상자 " else
+                                f"상자를 y{gv['box'][1] + (bottom - top) / 2:.1f}로")
+                        rep.add("ERROR", "C09", p.index,
+                                f"거버닝 {label}위·아래 여백이 다릅니다: 위 {top:.1f}px, 아래(y{edge:g}까지) {bottom:.1f}px — "
+                                f"{hint} 옮기거나 본문 시작을 y{edge - (bottom - top):.1f}로 맞추세요")
+                bb = fam.get("body_balance")
+                bal = _body_balance(p, g, fam, mb) if bb else None
+                if bal:
+                    above, below, left, right = bal
+                    if abs(above - below) > bb.get("tolerance", 6):
+                        rep.add("WARN", "C10", p.index,
+                                f"본문 위·아래 여백이 다릅니다: 거버닝까지 {above:.1f}px, 출처 줄까지 {below:.1f}px — "
+                                f"본문을 {'늘려' if below > above else '줄여'} 아래 여백을 {above:.1f}px로 맞추세요")
+                    if left == left and right == right and abs(left - right) > bb.get("lr_tolerance", 2):
+                        rep.add("WARN", "C10", p.index, f"본문 좌우 여백이 다릅니다: 왼쪽 {left:.1f}px, 오른쪽 {right:.1f}px")
         if p.source is None:
             key = p.layout.lower()
             if any(k in key for k in rules["source_line"]["required_on_layouts_with"]):

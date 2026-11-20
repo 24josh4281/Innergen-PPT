@@ -20,18 +20,29 @@
       "governing": {
         "box": [
           48,
-          60,
+          61.9,
           944,
           44
         ],
         "text_x": 68,
-        "baseline": 90,
+        "baseline": 90.7,
         "size": 22,
         "fill": "#2F62F0",
         "weight_bold": true,
         "max_lines": 1,
         "inner_width": 916,
-        "tolerance": 3
+        "tolerance": 3,
+        "alt_baselines": [
+          90
+        ],
+        "margin_balance": {
+          "header_bottom": 47.84,
+          "box": true,
+          "ink_top_em": 0.78,
+          "ink_bottom_em": 0.16,
+          "tolerance": 4,
+          "note": "2026-11-20: 거버닝 상자는 제목(아랫선 y47.84)과 본문(y120) 사이 가운데(위·아래 14px), 글자는 상자 가운데(위·아래 11.7px)."
+        }
       },
       "source": {
         "baseline": 630,
@@ -76,7 +87,7 @@
         48,
         120,
         944,
-        484
+        486.56
       ],
       "min_px": {
         "content": 12,
@@ -91,6 +102,11 @@
       "detect": {
         "title_baseline": 44,
         "title_size": 24
+      },
+      "body_balance": {
+        "tolerance": 6,
+        "lr_tolerance": 2,
+        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10, 경고)."
       }
     },
     "innergen_lecture_v20": {
@@ -199,13 +215,23 @@
       "governing": {
         "box": null,
         "text_x": 24,
-        "baseline": 71,
+        "baseline": 66.9,
         "size": 21.33,
         "fill": "#000000",
         "weight_bold": true,
         "max_lines": 1,
         "inner_width": 888,
-        "tolerance": 3
+        "tolerance": 3,
+        "alt_baselines": [
+          71
+        ],
+        "margin_balance": {
+          "header_bottom": 38.56,
+          "ink_top_em": 0.78,
+          "ink_bottom_em": 0.16,
+          "tolerance": 4,
+          "note": "2026-11-20: 거버닝은 제목 아랫선(y38.56)과 거버닝 밑선(y82) 사이 가운데(위·아래 11.7px)."
+        }
       },
       "source": {
         "baseline": 504,
@@ -244,7 +270,7 @@
         24,
         94,
         912,
-        392
+        389.68
       ],
       "min_px": {
         "content": 10.67,
@@ -259,6 +285,11 @@
       "detect": {
         "title_baseline": 36,
         "title_size": 16
+      },
+      "body_balance": {
+        "tolerance": 6,
+        "lr_tolerance": 2,
+        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10, 경고)."
       }
     },
     "innercarry": {
@@ -283,7 +314,17 @@
         "weight_bold": false,
         "max_lines": 1,
         "inner_width": 896,
-        "tolerance": 3
+        "tolerance": 3,
+        "alt_baselines": [
+          137.78
+        ],
+        "margin_balance": {
+          "header_bottom": 100.46,
+          "ink_top_em": 0.78,
+          "ink_bottom_em": 0.16,
+          "tolerance": 4,
+          "note": "2026-11-20: 거버닝은 제목 아랫선(y100.46)과 본문(y161.85) 사이 가운데(위·아래 20.7px); 템플릿 기준선 137.78."
+        }
       },
       "source": {
         "baseline": 712,
@@ -320,9 +361,9 @@
       ],
       "content_zone": [
         56,
-        156,
+        161.85,
         912,
-        540
+        521.17
       ],
       "min_px": {
         "content": 10.67,
@@ -337,6 +378,11 @@
       "detect": {
         "title_baseline": 96,
         "title_size": 26.67
+      },
+      "body_balance": {
+        "tolerance": 6,
+        "lr_tolerance": 2,
+        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10, 경고)."
       }
     },
     "innergen_basic": {
@@ -416,9 +462,9 @@
       ],
       "content_zone": [
         45,
-        150,
-        945,
-        460
+        166,
+        950,
+        411.38
       ],
       "min_px": {
         "content": 12,
@@ -434,7 +480,12 @@
         "title_baseline": 41,
         "title_size": 29
       },
-      "alt_baselines_note": "45/118/652 = 2026-11-03 OCI KSSB 교육 덱(사용자 확정 오리지널 a 프레임) 실측. 템플릿 기준은 41/126/624(2026-11-20부터, 이전 135). 거버닝 126 = 2026-11-19 사용자 결정(제목 띠 y72와 본문 y166 사이 위·아래 여백 동일). 135는 옛 덱을 찾기 위한 허용값이며 본문이 y166이면 C09로 걸린다."
+      "alt_baselines_note": "45/118/652 = 2026-11-03 OCI KSSB 교육 덱(사용자 확정 오리지널 a 프레임) 실측. 템플릿 기준은 41/126/624(2026-11-20부터, 이전 135). 거버닝 126 = 2026-11-19 사용자 결정(제목 띠 y72와 본문 y166 사이 위·아래 여백 동일). 135는 옛 덱을 찾기 위한 허용값이며 본문이 y166이면 C09로 걸린다.",
+      "body_balance": {
+        "tolerance": 6,
+        "lr_tolerance": 2,
+        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10, 경고)."
+      }
     },
     "innergen_basic_slim": {
       "label": "이너젠 오리지널 (13:9) — 슬림라인(c) 프레임",
@@ -503,9 +554,9 @@
       ],
       "content_zone": [
         45,
-        150,
-        945,
-        460
+        166,
+        950,
+        414.38
       ],
       "min_px": {
         "content": 12,
@@ -520,6 +571,11 @@
       "detect": {
         "title_baseline": 52,
         "title_size": 29
+      },
+      "body_balance": {
+        "tolerance": 6,
+        "lr_tolerance": 2,
+        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10, 경고)."
       }
     },
     "innergen_basic_proposal": {
@@ -538,15 +594,24 @@
       "governing": {
         "box": null,
         "text_x": 45,
-        "baseline": 94,
+        "baseline": 94.7,
         "size": 17.33,
         "fill": "#000000",
         "weight_bold": true,
         "max_lines": 2,
         "inner_width": 946,
         "tolerance": 3,
-        "alt_baselines": [109],
-        "note": "2026-11-11 user decision: kickoff-report form (14pt bold, up to two lines at x45, no marker); x64 one-line decks still pass"
+        "alt_baselines": [
+          109
+        ],
+        "note": "2026-11-11 user decision: kickoff-report form (14pt bold, up to two lines at x45, no marker); x64 one-line decks still pass",
+        "margin_balance": {
+          "header_bottom": 66.7,
+          "ink_top_em": 0.78,
+          "ink_bottom_em": 0.16,
+          "tolerance": 4,
+          "note": "2026-11-20: 한 줄 거버닝은 제목 띠(y66.7)와 본문(y112) 사이 가운데(위·아래 14.5px). 두 줄(기준선 109)은 본문이 그만큼 내려간다."
+        }
       },
       "source": {
         "baseline": 653,
@@ -577,8 +642,8 @@
       "content_zone": [
         44,
         112,
-        966,
-        530
+        952,
+        518.2
       ],
       "min_px": {
         "content": 10.67,
@@ -596,7 +661,12 @@
       },
       "toc_native_table": false,
       "toc_item_regex": "toc-item-\\d+-carrier",
-      "toc_note": "v35 제안서 목차는 최종본 실측 목록형(CONTENTS·Ⅰ–Ⅳ)이라 표 의무(O03)를 적용하지 않는다."
+      "toc_note": "v35 제안서 목차는 최종본 실측 목록형(CONTENTS·Ⅰ–Ⅳ)이라 표 의무(O03)를 적용하지 않는다.",
+      "body_balance": {
+        "tolerance": 6,
+        "lr_tolerance": 2,
+        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10, 경고)."
+      }
     }
   },
   "font": {
