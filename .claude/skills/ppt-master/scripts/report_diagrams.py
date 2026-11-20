@@ -1225,8 +1225,9 @@ def detect_mode(output: Path) -> str:
 # Content zone per family; flat-ready scaffolds (chat bundle start_deck.py) drop the placeholder bounds.
 CONTENT_AREA = {"innergen_lecture": (48, 120, 944, 484), "innergen_business": (24, 94, 912, 392),
                 "innercarry": (56, 161.85, 912, 503.42),
-                # 오리지널 a–c: key message (y135) to source line (y624), grey material band removed.
-                "innergen_basic": (45, 160, 945, 450)}
+                # 오리지널 a–c: body from y166 (equal gaps above/below the key message at y126,
+                # QA C09) to the source line (y624), grey material band removed.
+                "innergen_basic": (45, 166, 945, 444)}
 BASIC_PROPOSAL_AREA = (44, 112, 952, 528)
 
 

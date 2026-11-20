@@ -46,13 +46,14 @@ python3 .claude/skills/ppt-master/scripts/innergen_qaqc.py projects/<project> \
 | C06 | 계열 `min_px` 미만 글자(컴팩트: 본문 12px·회사소개/이너캐리 10.67px, 푸터 별도) | WARN |
 | C07 | `spec_lock.md`에 없는 색 사용 | WARN |
 | C08 | 허용 가족(Pretendard·IBM Plex Sans KR·NanumSquare·Noto Sans·Malgun Gothic) 밖의 글꼴 | ERROR |
+| C09 | 거버닝 위·아래 여백 불균형: 글자 윗선~제목 띠 아래 끝, 글자 아랫선~본문 첫 요소 거리 차이가 4px 초과(`governing.margin_balance`가 있는 계열: 오리지널 a·b·c) | ERROR |
 
 이너젠 오리지널(2026-11-03)은 프레임마다 화면 고정 요소가 달라 세 변형으로 둔다. `--family innergen_basic`(또는 계열 미지정)이면 본문 장의 제목 기준선·크기로 변형을 고른다(`family_variants`).
 
 | 변형 | 프레임 | 제목 | 거버닝 | 출처 | 쪽 번호 |
 |---|---|---|---|---|---|
-| `innergen_basic` | a 격자 · b 단색 남색 | 흰 29px, x40 기준선 41(확정 덱 45도 허용) | 검정 22px Bold, 기준선 135(118 허용) | 13px, 624(652 허용) | 오른쪽 1005, 698 |
-| `innergen_basic_slim` | c 슬림라인 | 검정 29px, 기준선 52 | 22px Bold, 135 | 13px, 624 | 가운데 520, 696 |
+| `innergen_basic` | a 격자 · b 단색 남색 | 흰 29px, x40 기준선 41(확정 덱 45도 허용) | 검정 22px Bold, 기준선 126(118·135 허용, 위·아래 여백 동일 C09) | 13px, 624(652 허용) | 오른쪽 1005, 698 |
+| `innergen_basic_slim` | c 슬림라인 | 검정 29px, 기준선 52 | 22px Bold, 129(135 허용, C09) | 13px, 624 | 가운데 520, 696 |
 | `innergen_basic_proposal` | d 제안서(v35) | 검정 26.67px, x23 기준선 39 | 17.33px Bold, x64 기준선 94 | 10.67px, 653 | 가운데 520, 693 |
 
 `alt_baselines`는 사용자가 확정한 오리지널 덱(2026-11-03 OCI KSSB 교육)의 실측 위치다. 오리지널 장 구분(`03x_chapter_*`)은 표지·목차·마무리처럼 본문 검사에서 뺀다. d 제안서 목차는 최종본을 실측한 목록형이라 목차 표 의무(O03)를 적용하지 않는다(`toc_native_table: false`). 프레임 본문 장에 그린 구조는 파일명 꼬리로 적는다(`07_04a_content_classic__s08_phase_roadmap.svg` → 레이아웃 `s08-phase-roadmap`).

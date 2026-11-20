@@ -96,6 +96,80 @@ def _glyph_width(s: str, size: float) -> float:
     return w
 
 
+_PATH_TOKEN = re.compile(r"[MmLlHhVvCcSsQqTtAaZz]|-?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?")
+_PATH_ARGS = {"M": 2, "L": 2, "T": 2, "H": 1, "V": 1, "C": 6, "S": 4, "Q": 4, "A": 7, "Z": 0}
+
+
+def _shape_top(el: ET.Element, tag: str) -> float | None:
+    """Top edge (smallest y) of a path / polygon / circle / ellipse; control points
+    count as ink, which is close enough for a margin check. None when unreadable."""
+    if tag == "circle":
+        return _num(el.get("cy"), 0.0) - _num(el.get("r"), 0.0)
+    if tag == "ellipse":
+        return _num(el.get("cy"), 0.0) - _num(el.get("ry"), 0.0)
+    if tag in ("polygon", "polyline"):
+        nums = [float(v) for v in re.findall(r"-?(?:\d+\.?\d*|\.\d+)", el.get("points") or "")]
+        ys = nums[1::2]
+        return min(ys) if ys else None
+    toks = _PATH_TOKEN.findall(el.get("d") or "")
+    ys: list[float] = []
+    cx = cy = 0.0
+    cmd, i = "", 0
+    while i < len(toks):
+        if toks[i].isalpha():
+            cmd = toks[i]
+            i += 1
+            if cmd in "Zz":
+                continue
+        if not cmd:
+            return None
+        n = _PATH_ARGS[cmd.upper()]
+        args = [float(v) for v in toks[i:i + n]]
+        if len(args) < n:
+            break
+        i += n
+        rel = cmd.islower()
+        up = cmd.upper()
+        if up == "H":
+            cx = args[0] + (cx if rel else 0)
+        elif up == "V":
+            cy = args[0] + (cy if rel else 0)
+        elif up == "A":
+            cx, cy = args[5] + (cx if rel else 0), args[6] + (cy if rel else 0)
+        else:
+            pts = [(args[k] + (cx if rel else 0), args[k + 1] + (cy if rel else 0)) for k in range(0, n, 2)]
+            ys.extend(y for _, y in pts[:-1])
+            cx, cy = pts[-1]
+        ys.append(cy)
+        if cmd in "Mm":
+            cmd = "l" if rel else "L"
+    return min(ys) if ys else None
+
+
+def _governing_gaps(p: "Page", g: dict, mb: dict, floor: float) -> tuple[float, float, float] | None:
+    """(top gap, bottom gap, body top) around the governing line: glyph ink to the
+    header band above and to the first body element below. Ink extents are em
+    ratios measured on IBM Plex Sans KR Bold Hangul (top 0.78em, bottom 0.16em).
+    Body elements are those starting below the ink and above `floor` (source line)."""
+    size = g["size"]
+    last = g["y"]
+    for ch in g["el"]:
+        if _local(ch.tag) == "tspan" and _num(ch.get("dy"), 0) > 0:
+            last += _num(ch.get("dy"), 0)
+    ink_top = g["y"] - mb.get("ink_top_em", 0.78) * size
+    ink_bottom = last + mb.get("ink_bottom_em", 0.16) * size
+    tops = [r["y"] for r in p.rects if r["h"] > 0 and r["w"] > 0]
+    tops += [i["y"] for i in p.images]
+    tops += [min(l["y1"], l["y2"]) for l in p.lines]
+    tops += p.shape_tops
+    tops += [t["y"] - mb.get("ink_top_em", 0.78) * t["size"] for t in p.texts if t["text"] and t is not g]
+    below = [v for v in tops if ink_bottom - 1 <= v < floor]
+    if not below:
+        return None
+    body = min(below)
+    return ink_top - mb["header_bottom"], body - ink_bottom, body
+
+
 def _norm(s: str) -> str:
     return re.sub(r"[\s·,.:;!?()\[\]{}「」『』“”‘’\"'/\-–—]", "", s).lower()
 
@@ -141,6 +215,7 @@ class Page:
         self.rects: list[dict] = []
         self.images: list[dict] = []
         self.lines: list[dict] = []
+        self.shape_tops: list[float] = []  # path / polygon / circle / ellipse top edges
         self._parent_map = None
         self._walk(self.root, {})
         self.title = self.governing = self.source = self.footer_label = self.page_number = None
@@ -182,6 +257,10 @@ class Page:
             self.images.append({"x": _num(el.get("x"), 0.0), "y": _num(el.get("y"), 0.0), "w": _num(el.get("width"), 0.0), "h": _num(el.get("height"), 0.0)})
         elif tag == "line":
             self.lines.append({"y1": _num(el.get("y1"), 0.0), "y2": _num(el.get("y2"), 0.0), "x1": _num(el.get("x1"), 0.0), "x2": _num(el.get("x2"), 0.0)})
+        elif tag in ("path", "polygon", "polyline", "circle", "ellipse"):
+            top = _shape_top(el, tag)
+            if top is not None:
+                self.shape_tops.append(top)
         for ch in el:
             if _local(ch.tag) in ("metadata", "defs", "style"):
                 continue
@@ -394,6 +473,16 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
                 rep.add("WARN", "C03", p.index, f"거버닝 색이 기준({gv['fill']})과 다릅니다: {g['fill']}")
             if gv.get("weight_bold") and g["weight"] not in ("700", "bold"):
                 rep.add("WARN", "C03", p.index, "거버닝은 볼드여야 합니다")
+            mb = gv.get("margin_balance")
+            if mb:
+                floor = fam["source"]["baseline"] - fam["source"]["size"] - 4
+                gaps = _governing_gaps(p, g, mb, floor)
+                if gaps and abs(gaps[0] - gaps[1]) > mb.get("tolerance", 4):
+                    top, bottom, body = gaps
+                    rep.add("ERROR", "C09", p.index,
+                            f"거버닝 위·아래 여백이 다릅니다: 제목 띠(y{mb['header_bottom']:g})까지 {top:.0f}px, "
+                            f"본문(y{body:g})까지 {bottom:.0f}px — 거버닝 기준선을 y{g['y'] + (bottom - top) / 2:.0f}로 옮기거나 "
+                            f"본문 시작을 y{body - (bottom - top):.0f}로 맞추세요")
         if p.source is None:
             key = p.layout.lower()
             if any(k in key for k in rules["source_line"]["required_on_layouts_with"]):

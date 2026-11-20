@@ -358,7 +358,7 @@
       "governing": {
         "box": null,
         "text_x": 45,
-        "baseline": 135,
+        "baseline": 126,
         "size": 22,
         "fill": "#000000",
         "weight_bold": true,
@@ -367,8 +367,15 @@
         "tolerance": 3,
         "alt_baselines": [
           118,
-          126
-        ]
+          135
+        ],
+        "margin_balance": {
+          "header_bottom": 72,
+          "ink_top_em": 0.78,
+          "ink_bottom_em": 0.16,
+          "tolerance": 4,
+          "note": "2026-11-20 사용자 기준: 거버닝 글자 위 여백(제목 띠 아래 끝까지)과 아래 여백(본문 첫 요소까지)이 같아야 한다(C09). 본문 y166이면 기준선 126."
+        }
       },
       "source": {
         "baseline": 624,
@@ -427,7 +434,7 @@
         "title_baseline": 41,
         "title_size": 29
       },
-      "alt_baselines_note": "45/118/652 = 2026-11-03 OCI KSSB 교육 덱(사용자 확정 오리지널 a 프레임) 실측. 템플릿 기준은 41/135/624. 거버닝 126 = 2026-11-19 사용자 결정(제목 띠 y72와 본문 y166 사이 위·아래 여백 동일)."
+      "alt_baselines_note": "45/118/652 = 2026-11-03 OCI KSSB 교육 덱(사용자 확정 오리지널 a 프레임) 실측. 템플릿 기준은 41/126/624(2026-11-20부터, 이전 135). 거버닝 126 = 2026-11-19 사용자 결정(제목 띠 y72와 본문 y166 사이 위·아래 여백 동일). 135는 옛 덱을 찾기 위한 허용값이며 본문이 y166이면 C09로 걸린다."
     },
     "innergen_basic_slim": {
       "label": "이너젠 오리지널 (13:9) — 슬림라인(c) 프레임",
@@ -445,13 +452,23 @@
       "governing": {
         "box": null,
         "text_x": 45,
-        "baseline": 135,
+        "baseline": 129,
         "size": 22,
         "fill": "#000000",
         "weight_bold": true,
         "max_lines": 1,
         "inner_width": 945,
-        "tolerance": 3
+        "tolerance": 3,
+        "alt_baselines": [
+          135
+        ],
+        "margin_balance": {
+          "header_bottom": 78,
+          "ink_top_em": 0.78,
+          "ink_bottom_em": 0.16,
+          "tolerance": 4,
+          "note": "슬림 띠 아래 끝 y78과 본문 y166 사이 위·아래 여백 동일 → 기준선 129."
+        }
       },
       "source": {
         "baseline": 624,
