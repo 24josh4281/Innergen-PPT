@@ -35,7 +35,8 @@ DEFAULT_PROJECTS = REPO_ROOT / "projects"
 DEFAULT_OUT_DIR = DEFAULT_PROJECTS / "_dashboard"
 
 ACTIVE_DAYS = 3          # 내보내기 전이라도 이 기간 안에 손댔으면 '작성 중'
-EXPORT_SLACK = 120       # 내보내기 직후 정리(노트·로그) 정도는 재내보내기로 보지 않는다(초)
+PREVIEW_MAX_PAGES = 120  # 미리보기 쪽 목록 상한
+EXPORT_SLACK = 120      # 내보내기 직후 정리(노트·로그) 정도는 재내보내기로 보지 않는다(초)
 STAGES = ["자료", "기획", "확인", "작성", "검사", "내보내기"]
 STATUS_LABEL = {
     "active": "작성 중",
@@ -214,6 +215,16 @@ def project_status(proj: Path, now: float) -> dict | None:
     confirmed = session.get("status") == "done" or bool(confirm) or bool(spec_pass) or has("spec_lock.md")
     route = "svg" if svgs or finals else ("direct" if build or pptx else "svg")
 
+    # 미리보기: svg_final이 svg_output보다 새롭거나 같으면 마감본, 아니면 지금 쓰고 있는 svg_output
+    out_new = max((f[2] for f in svgs), default=0.0)
+    fin_new = max((f[2] for f in finals), default=0.0)
+    pv_dir, pv = ("svg_final", finals) if finals and fin_new >= out_new else ("svg_output", svgs)
+    preview = None
+    if pv:
+        newest = max(pv, key=lambda f: f[2])
+        preview = {"dir": pv_dir, "pages": sorted(f[0] for f in pv)[:PREVIEW_MAX_PAGES],
+                   "latest": newest[0], "latest_mtime": newest[2], "cover": min(f[0] for f in pv)}
+
     stages = {
         "자료": bool(sources) or has("images"),
         "기획": bool(plan_names),
@@ -265,6 +276,7 @@ def project_status(proj: Path, now: float) -> dict | None:
         "exports": [{"name": n, "path": p, "mtime": m, "size": z} for n, p, m, z in pptx[:6]],
         "export_count": len(pptx),
         "pdf_count": len(pdfs),
+        "preview": preview,
     }
 
 
