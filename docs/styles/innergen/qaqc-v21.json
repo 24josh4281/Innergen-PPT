@@ -1,6 +1,6 @@
 {
-  "version": "23",
-  "date": "2026-10-14",
+  "version": "24",
+  "date": "2026-11-22",
   "purpose": "Rule table for innergen_qaqc.py — uniformity gate for INNerGEN decks (v4/v5 hierarchy, v11/v20 governing, v16 citation, v17 geometry, v18 density, v20 TOC/closing, v22 compact density · one-line governing · family templates incl. INNerGEN Original frames a–d).",
   "doc": "docs/styles/innergen/qaqc-v21.md",
   "families": {
@@ -106,7 +106,9 @@
       "body_balance": {
         "tolerance": 6,
         "lr_tolerance": 2,
-        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10, 경고)."
+        "error_tolerance": 24,
+        "lr_error_tolerance": 12,
+        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10: 6px·2px 초과 경고. 아래가 위보다 24px 넘게 비거나 좌우가 12px 넘게 다르면 오류, data-balance-exempt 사유가 있으면 경고)."
       }
     },
     "innergen_lecture_v20": {
@@ -289,7 +291,9 @@
       "body_balance": {
         "tolerance": 6,
         "lr_tolerance": 2,
-        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10, 경고)."
+        "error_tolerance": 24,
+        "lr_error_tolerance": 12,
+        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10: 6px·2px 초과 경고. 아래가 위보다 24px 넘게 비거나 좌우가 12px 넘게 다르면 오류, data-balance-exempt 사유가 있으면 경고)."
       }
     },
     "innercarry": {
@@ -382,7 +386,9 @@
       "body_balance": {
         "tolerance": 6,
         "lr_tolerance": 2,
-        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10, 경고)."
+        "error_tolerance": 24,
+        "lr_error_tolerance": 12,
+        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10: 6px·2px 초과 경고. 아래가 위보다 24px 넘게 비거나 좌우가 12px 넘게 다르면 오류, data-balance-exempt 사유가 있으면 경고)."
       }
     },
     "innergen_basic": {
@@ -484,7 +490,9 @@
       "body_balance": {
         "tolerance": 6,
         "lr_tolerance": 2,
-        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10, 경고)."
+        "error_tolerance": 24,
+        "lr_error_tolerance": 12,
+        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10: 6px·2px 초과 경고. 아래가 위보다 24px 넘게 비거나 좌우가 12px 넘게 다르면 오류, data-balance-exempt 사유가 있으면 경고)."
       }
     },
     "innergen_basic_slim": {
@@ -575,7 +583,9 @@
       "body_balance": {
         "tolerance": 6,
         "lr_tolerance": 2,
-        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10, 경고)."
+        "error_tolerance": 24,
+        "lr_error_tolerance": 12,
+        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10: 6px·2px 초과 경고. 아래가 위보다 24px 넘게 비거나 좌우가 12px 넘게 다르면 오류, data-balance-exempt 사유가 있으면 경고)."
       }
     },
     "innergen_basic_proposal": {
@@ -665,7 +675,9 @@
       "body_balance": {
         "tolerance": 6,
         "lr_tolerance": 2,
-        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10, 경고)."
+        "error_tolerance": 24,
+        "lr_error_tolerance": 12,
+        "note": "2026-11-20 사용자 기준: 본문 덩어리는 위 여백(거버닝·상자·밑선까지)과 아래 여백(출처 줄 글자까지)이 같고, 좌우 여백이 같다(C10: 6px·2px 초과 경고. 아래가 위보다 24px 넘게 비거나 좌우가 12px 넘게 다르면 오류, data-balance-exempt 사유가 있으면 경고)."
       }
     }
   },
@@ -743,7 +755,14 @@
     "question_mark_warn": true,
     "number_pattern": "[0-9０-９]|％|%",
     "duplicate_similarity": 0.9,
-    "line_fill_ratio": 0.97
+    "line_fill_ratio": 0.97,
+    "simple": {
+      "enabled": true,
+      "min_chars": 18,
+      "max_share": 0.3,
+      "min_pages": 4,
+      "note": "2026-11-22 사용자 반복 지적: 거버닝이 너무 단순함. 공백 제외 18자 미만이면서 수치가 없거나 명사로 끝나는 거버닝은 단순 거버닝(G09 WARN)이고, 덱의 30%를 넘으면 ERROR다. 거버닝은 대상 + 판단 + 근거(수치·기준·기한)를 한 줄에 담는다."
+    }
   },
   "title": {
     "min_chars": 4,
@@ -793,10 +812,16 @@
       "note": "목차는 표(data-pptx-native=\"table\", 셀 valign ctr, 행이 목차 영역을 바닥선까지 나눠 가짐)로 만든다. 2026-10-22 사용자 지적(목차 하단 공백·가운데 정렬 안 됨)"
     }
   },
+  "layout_balance": {
+    "enabled": true,
+    "levels": {"CB01": "WARN", "CB02": "ERROR", "CB03": "ERROR", "CB05": "WARN", "CB06": "ERROR", "CB07": "WARN"},
+    "max_items_per_page": 3,
+    "note": "2026-11-22 사용자 반복 지적: 목차 하단 공백(CB02), 본문 하단 공백(CB03), 줄마다 개별 개체(CB06)가 경고로만 지나가 다시 나왔다. innergen_qaqc가 content_balance_check를 같은 게이트에서 돌리고 이 세 가지는 ERROR로 막는다. 자유 배치 장표는 루트 <svg>의 data-balance-exempt에 사유를 적어 CB03을 뺀다."
+  },
   "native_objects": {
     "shape_table": {
       "enabled": true,
-      "level": "WARN",
+      "level": "ERROR",
       "id_regex": "(^|[-_])(table|tbl)([-_\\d]|$)",
       "min_rows": 3,
       "min_cols": 3,

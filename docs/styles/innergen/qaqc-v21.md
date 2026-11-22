@@ -2,6 +2,8 @@
 
 작성일 2026-10-14, 규칙표 rev.22(계열 4종·거버닝 한 줄·컴팩트 글자 하한) → rev.23(v23 구조 19종을 덱 유형별 필수·마무리 세트에 반영: 착수 = 과업 개요·간트·자료 요청, 주간·격주 = 진행현황·결정 요청, 진단 = 진단표·우선순위, 최종·브리핑 = 경영진 요약 1장). 규칙표는 [qaqc-v21.json](qaqc-v21.json), 실행 스크립트는 `.claude/skills/ppt-master/scripts/innergen_qaqc.py`.
 
+rev.24(2026-11-22): 반복 지적 사항을 ERROR로 올렸다. `content_balance_check`를 같은 게이트에서 실행(CB02·CB03·CB06 ERROR), O04 ERROR, C10 큰 차이 ERROR, G09 단순 거버닝 신설. 배경은 [recurring-feedback-v37.md](recurring-feedback-v37.md).
+
 ## 1. 목적과 위치
 
 `svg_quality_checker.py`는 SVG·PPTX 변환 계약(좌표 초과, 플레이스홀더 구조, 글자 폭 추정)을 검사한다. 이 체계는 그 위에 **이너젠 디자인 규칙의 내용·균일성 층**을 더한다. 같은 규칙으로 만든 덱이 사용자마다 달라지는 원인(거버닝 길이·문체, 제목 형식, 목차와 본문 불일치, 고정 요소 위치, 글자 크기, 출처 표기, 마무리 세트)을 자동으로 잡아낸다.
@@ -47,7 +49,7 @@ python3 .claude/skills/ppt-master/scripts/innergen_qaqc.py projects/<project> \
 | C07 | `spec_lock.md`에 없는 색 사용 | WARN |
 | C08 | 허용 가족(Pretendard·IBM Plex Sans KR·NanumSquare·Noto Sans·Malgun Gothic) 밖의 글꼴 | ERROR |
 | C09 | 거버닝 위·아래 여백 불균형: 글자 윗선~제목 띠 아래 끝, 글자 아랫선~본문 첫 요소 거리 차이가 4px 초과. 거버닝 상자가 있는 계열(교육·제안서)은 상자 안 글자 위·아래와 상자 위(제목)·아래(본문) 간격도 각각 같아야 한다(`governing.margin_balance`: 오리지널 a·b·c·d, 교육, 사업소개, 이너캐리) | ERROR |
-| C10 | 본문 여백 불균형: 본문 첫 요소~거버닝 블록 간격과 본문 마지막 요소~출처 줄 간격 차이가 6px 초과, 또는 본문 왼쪽·오른쪽 여백 차이가 2px 초과(`body_balance`). 글자 폭을 모르는 `{{토큰}}`·가운데 정렬 글자는 좌우 판단에서 뺀다. 레이더·매트릭스·히트맵처럼 축 이름 칸이 한쪽에 있는 구성은 사유를 적고 넘긴다 | WARN |
+| C10 | 본문 여백 불균형: 본문 첫 요소~거버닝 블록 간격과 본문 마지막 요소~출처 줄 간격 차이가 6px 초과, 또는 본문 왼쪽·오른쪽 여백 차이가 2px 초과(`body_balance`). 글자 폭을 모르는 `{{토큰}}`·가운데 정렬 글자는 좌우 판단에서 뺀다. 레이더·매트릭스·히트맵처럼 축 이름 칸이 한쪽에 있는 구성은 사유를 적고 넘긴다. 아래 여백이 위보다 24px 넘게 크거나 좌우가 12px 넘게 다르면 ERROR(2026-11-22). 일부러 자유 배치한 장표는 루트 `<svg>`에 `data-balance-exempt="사유"`를 적으면 WARN으로 남는다 | WARN / ERROR |
 
 이너젠 오리지널(2026-11-03)은 프레임마다 화면 고정 요소가 달라 세 변형으로 둔다. `--family innergen_basic`(또는 계열 미지정)이면 본문 장의 제목 기준선·크기로 변형을 고른다(`family_variants`).
 
@@ -73,6 +75,7 @@ python3 .claude/skills/ppt-master/scripts/innergen_qaqc.py projects/<project> \
 | G06 | 지시어 시작(이는·이를 통해·또한…), 행동 없는 구호, 질문형 | WARN |
 | G07 | 수치 없음 | INFO |
 | G08 | 12자 미만(명사구) | WARN |
+| G09 | 단순 거버닝(2026-11-22): 공백 제외 18자 미만이면서 수치가 없으면 WARN. 이런 장표와 명사로 끝나는 거버닝, 12자 미만 거버닝을 합쳐 거버닝 있는 본문의 30%를 넘으면 덱 단위 ERROR(`governing.simple`) | WARN / ERROR |
 
 ### T. 제목 (v4·v5·v20)
 
@@ -90,13 +93,28 @@ python3 .claude/skills/ppt-master/scripts/innergen_qaqc.py projects/<project> \
 | O01 | 목차 항목에 대응하는 본문 제목·장 구분 없음, 목차 자체가 없음(교육·착수·최종·세미나·리포트) | WARN |
 | O02 | 목차 쪽 범위가 순서·총 장수와 맞지 않음 | WARN |
 | O03 | 목차 장표에 표(`data-pptx-native="table"`)가 없음 — 글상자를 행 간격으로 늘어놓은 목차 | ERROR |
-| O04 | 본문 표가 표 페이로드 없이 도형·글상자·선으로 그려짐 — PPTX에서 표가 아닌 개체로 나옴 | WARN |
+| O04 | 본문 표가 표 페이로드 없이 도형·글상자·선으로 그려짐 — PPTX에서 표가 아닌 개체로 나옴 | ERROR |
 
 목차 레이아웃은 `toc.layouts` 접두로 찾으므로 장 수 변형(`…-toc-pages-4`, `innergen-classic-toc-5` 등)도 목차로 본다. 레이아웃 표지가 없는 손그림 장표는 `data-pptx-page-role="toc"`나 파일 이름(`toc.file_keywords`: `toc`, `목차`)으로 찾는다.
 
 O03(2026-10-22): 목차는 표 하나로 만든다. 셀은 세로 가운데 정렬(`valign: ctr`)이고 행 높이가 목차 영역을 바닥선(이너캐리 y696, 교육 y632, 사업 y500)까지 나눠 가진다. 모든 목차 템플릿(`02b_toc_pages*`, `02a/02b/02c_toc_*`, 교육 `02_toc`)이 이 표를 들고 있으므로 템플릿을 쓰거나 `toc_builder.py`로 채우면 통과한다. 내보낼 때 `--native-objects`를 붙여야 PowerPoint 표(`a:tbl`)가 된다. 수준과 사용 여부는 `toc.native_table`(`required`, `level`)에서 바꾼다. 목차 아래 빈 띠(CB02)와 카드 안 상단 쏠림(CB01)은 `content_balance_check.py`가 검사한다([구조화 장표 v18 §7](structured-slides-v18.md)).
 
-O04(2026-10-27): 목차가 아닌 장표에서 `data-pptx-native`가 없는 그룹 중 표로 보이는 가장 안쪽 그룹을 찾는다. 그룹 id가 `table`·`tbl`이면 바로 표로 보고, 아니면 같은 폭의 가로 구분선이 `min_rows - 1`개 이상이고 글자가 `min_cols`열 × `min_rows`행 이상 정렬된 그룹을 표로 본다. 이런 표는 `<g data-pptx-native="table"><metadata data-pptx-native="table">{JSON}</metadata>…미리보기 도형…</g>`으로 감싸고 `--native-objects`로 내보내야 PowerPoint 표(`a:tbl`)가 된다. 간트 막대가 얹힌 WBS 격자나 엑셀 화면 모형처럼 일부러 도형으로 둔 경우는 WARN 사유로 기록한다. 기준은 `native_objects.shape_table`(`enabled`, `level`, `id_regex`, `min_rows`, `min_cols`)에서 바꾼다.
+O04(2026-10-27): 목차가 아닌 장표에서 `data-pptx-native`가 없는 그룹 중 표로 보이는 가장 안쪽 그룹을 찾는다. 그룹 id가 `table`·`tbl`이면 바로 표로 보고, 아니면 같은 폭의 가로 구분선이 `min_rows - 1`개 이상이고 글자가 `min_cols`열 × `min_rows`행 이상 정렬된 그룹을 표로 본다. 이런 표는 `<g data-pptx-native="table"><metadata data-pptx-native="table">{JSON}</metadata>…미리보기 도형…</g>`으로 감싸고 `--native-objects`로 내보내야 PowerPoint 표(`a:tbl`)가 된다. 간트 막대가 얹힌 WBS 격자나 엑셀 화면 모형처럼 일부러 도형으로 둔 경우는 그룹 id에서 `table`·`tbl`을 빼고(예: `gantt-grid`) 열·행 정렬 조건에 걸리면 `native_objects.shape_table.level`을 그 덱에서만 WARN으로 낮춰 사유를 기록한다. 2026-11-22부터 기본 수준은 ERROR다(같은 지적이 세 번 반복됨). 기준은 `native_objects.shape_table`(`enabled`, `level`, `id_regex`, `min_rows`, `min_cols`)에서 바꾼다.
+
+### L. 여백·개체 구성 (content_balance_check, 2026-11-22)
+
+`innergen_qaqc.py`가 `content_balance_check.py`를 같은 게이트 안에서 돌린다. 예전에는 따로 돌려 경고만 냈기 때문에 같은 지적이 되풀이됐다. 수준은 `layout_balance.levels`에서 바꾼다.
+
+| 코드 | 검사 | 수준 |
+|---|---|---|
+| CB01 | 카드·상자 안 내용 묶음이 위로 쏠림(위·아래 여백 불균형). `content_balance_check.py --fix`가 가운데로 옮긴다 | WARN |
+| CB02 | 목차 하단 공백: 목차 표가 바닥선까지 닿지 않고 화면 높이의 10% 넘게 빔 | ERROR |
+| CB03 | 본문 하단 공백: 본문 마지막 요소에서 출처 줄(없으면 바닥선)까지 화면 높이의 6% 넘게 빔. 본문 글자·행·카드·표 높이를 키워 채운다. 맺음 메시지 띠로 채우지 않는다 | ERROR |
+| CB05 | 카드 안 글이 영역의 60% 미만만 채움 | WARN |
+| CB06 | 한 카드의 줄·문단이 줄마다 다른 텍스트 개체. PPT에서 줄 간격을 못 고친다. 한 `<text>` + `tspan`으로 합친다(`--fix`) | ERROR |
+| CB07 | 폭이 남는데 줄바꿈(한 어절만 다음 줄로 넘어간 경우 포함). `--fix`가 한 줄로 합친다 | WARN |
+
+자유 배치 장표(큰 도식 하나, 화면 캡처)는 루트 `<svg>`에 `data-balance-exempt="사유"`를 적어 CB03을 뺀다. 사유 없는 제외는 하지 않는다.
 
 ### S. 구조 (v18·v20)
 
@@ -132,6 +150,11 @@ O04(2026-10-27): 목차가 아닌 장표에서 `data-pptx-native`가 없는 그�
 
 | 결과 | 처리 |
 |---|---|
+| G09 단순 거버닝 | 주제 라벨·짧은 명사구를 `대상 + 판단 + 근거(수치·기준·기한)` 한 줄로 다시 쓴다. 본문에 없는 수치는 쓰지 않는다 |
+| CB03 본문 하단 공백 | 내용을 더 넣을 수 있으면 행·카드를 추가하고, 아니면 본문 글자(13→14.67px)와 행·카드 높이를 키워 출처 줄 위까지 채운다. 맺음 띠·빈 장식으로 채우지 않는다 |
+| CB02 목차 하단 공백 | `toc_builder.py`로 다시 만들거나 표 행 높이를 바닥선까지 나눈다. 몇 행만 늘리지 않고 모든 행을 같은 높이로 |
+| CB06 줄마다 개별 개체 | `content_balance_check.py <project> --fix`로 합친다. 카드 글은 도형 안 텍스트(`data-pptx-text-shape`)로 |
+| O04 표가 개체로 나옴 | 표 페이로드(`data-pptx-native="table"`)로 바꾸고 `--native-objects`로 내보낸다 |
 | G04 한 줄 초과 | 수식어·괄호를 빼고 주어+판단+수치만 남긴다. 한 줄이 안 되면 범위를 제목으로 옮긴다(v22: 두 줄 금지) |
 | G05 문체 혼재 | 외부 덱은 전부 `~합니다`, 내부 진행 덱은 전부 개조식. 약속 문장만 `~할 예정입니다` 허용 |
 | G02 제목 반복 | 거버닝을 "그래서 무엇"으로 바꾼다. 제목은 주제, 거버닝은 판단 |

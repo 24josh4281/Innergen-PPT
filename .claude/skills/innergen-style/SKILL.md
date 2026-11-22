@@ -87,6 +87,16 @@ and writes `analysis/innergen_qaqc_report.md`. ERROR must be fixed; WARN needs a
 recorded reason; the six render-review items in that document stay a human
 check on the exported PPTX. It does not replace `verify_deck.py`.
 
+v37 (2026-11-22) recurring feedback: read
+`docs/styles/innergen/recurring-feedback-v37.md` before authoring. It lists the
+defects the user reported more than once and the gate for each. `innergen_qaqc.py`
+now runs `content_balance_check.py` itself and fails on a page bottom void (CB03),
+a TOC bottom void (CB02), per-line text objects (CB06), a table drawn as shapes
+(O04), a body whose bottom margin is far larger than its top margin (C10) and a
+deck where over 30% of governing lines are bare labels (G09). Run
+`content_balance_check.py <project> --fix` first, then the gate; mark a
+deliberately free-layout page with `data-balance-exempt="reason"` on the root.
+
 v32 (2026-10-21) content quality: `docs/styles/innergen/content-principles-v32.md`
 sets the consulting-grade content rules for the TOC, governing messages, body,
 diagrams and ending, drawn from the reference decks in `INPUTS/`. Before writing

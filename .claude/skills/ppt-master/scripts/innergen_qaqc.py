@@ -550,11 +550,16 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
                 if bal:
                     above, below, left, right = bal
                     if abs(above - below) > bb.get("tolerance", 6):
-                        rep.add("WARN", "C10", p.index,
+                        # 아래가 크게 비는 쪽만 오류다(하단 공백). 사유를 적은 자유 배치 장표는 경고로 둔다.
+                        free = bool(p.root.get("data-balance-exempt"))
+                        level = "ERROR" if below - above > bb.get("error_tolerance", 24) and not free else "WARN"
+                        rep.add(level, "C10", p.index,
                                 f"본문 위·아래 여백이 다릅니다: 거버닝까지 {above:.1f}px, 출처 줄까지 {below:.1f}px — "
                                 f"본문을 {'늘려' if below > above else '줄여'} 아래 여백을 {above:.1f}px로 맞추세요")
                     if left == left and right == right and abs(left - right) > bb.get("lr_tolerance", 2):
-                        rep.add("WARN", "C10", p.index, f"본문 좌우 여백이 다릅니다: 왼쪽 {left:.1f}px, 오른쪽 {right:.1f}px")
+                        free = bool(p.root.get("data-balance-exempt"))
+                        level = "ERROR" if abs(left - right) > bb.get("lr_error_tolerance", 12) and not free else "WARN"
+                        rep.add(level, "C10", p.index, f"본문 좌우 여백이 다릅니다: 왼쪽 {left:.1f}px, 오른쪽 {right:.1f}px")
         if p.source is None:
             key = p.layout.lower()
             if any(k in key for k in rules["source_line"]["required_on_layouts_with"]):
@@ -596,6 +601,7 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
     gr = rules["governing"]
     regs = Counter()
     seen: list[tuple[int, str]] = []
+    weak: list[int] = []
     max_lines = int(gv.get("max_lines", 1))
     one_line_chars = int(gv["inner_width"] / gv["size"] * gr.get("line_fill_ratio", 0.97))
     for p in content:
@@ -629,7 +635,26 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
             rep.add("WARN", "G06", p.index, "거버닝이 질문형입니다 — 질문은 자가진단 장표(s20)로")
         if not re.search(gr["number_pattern"], text):
             rep.add("INFO", "G07", p.index, "거버닝에 수치가 없습니다(현황·판단 장표면 핵심 수치 1개 권장)")
-        regs[(p.index, detect_register(text.rstrip(" ."), gr))] = 1
+        reg = detect_register(text.rstrip(" ."), gr)
+        regs[(p.index, reg)] = 1
+        # 사용자 반복 지적(2026-11-22): 거버닝이 너무 단순함 — 주제 라벨이나 짧은 한마디는 거버닝이 아니다.
+        simple = gr.get("simple", {})
+        if simple.get("enabled", True) and cnt >= gr["min_chars"]:
+            short = cnt < simple.get("min_chars", 18) and not re.search(gr["number_pattern"], text)
+            if short or reg == "noun":
+                weak.append(p.index)
+                if short:
+                    rep.add("WARN", "G09", p.index,
+                            f"거버닝이 단순합니다({cnt}자, 수치 없음) — 대상 + 판단 + 근거(수치·기준·기한)를 한 줄에 담으세요")
+        elif cnt < gr["min_chars"]:
+            weak.append(p.index)
+    simple = gr.get("simple", {})
+    governed = sum(1 for p in content if p.governing is not None)
+    if simple.get("enabled", True) and governed >= simple.get("min_pages", 4) and \
+            len(weak) / governed > simple.get("max_share", 0.3):
+        rep.add("ERROR", "G09", 0,
+                f"단순한 거버닝이 {len(weak)}/{governed}장입니다(허용 {simple.get('max_share', 0.3):.0%}) — "
+                f"P{', P'.join(str(i) for i in weak[:12])}: 주제 라벨·짧은 명사구를 '대상 + 판단 + 근거' 문장으로 다시 쓰세요")
     reg_counts = Counter(r for (_, r) in regs)
     main_reg = register
     if register == "auto":
@@ -751,6 +776,37 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
         fm = p.slot_text("final-message") or p.slot_text("synthesis") or p.slot_text("conclusion") or p.slot_text("next-action")
         if fm and p.governing and _similar(fm["text"], p.governing["text"]) >= 0.6:
             rep.add("WARN", "S04", p.index, "결론 박스가 거버닝과 거의 같습니다 — '그래서 무엇을 할지'만")
+
+    # ---- L: layout balance (content_balance_check CB01–CB07) in the same gate.
+    # 사용자 반복 지적(2026-11-22): 하단 공백·목차 하단 공백·줄마다 개별 개체가 경고로만 지나가
+    # 다시 나왔다. 수준은 qaqc-v21.json `layout_balance.levels`가 정한다.
+    lb = rules.get("layout_balance", {})
+    if lb.get("enabled", True):
+        levels = {"CB01": "WARN", "CB02": "ERROR", "CB03": "ERROR", "CB05": "WARN", "CB06": "ERROR", "CB07": "WARN",
+                  **lb.get("levels", {})}
+        try:
+            import content_balance_check as cb
+        except Exception as exc:  # noqa: BLE001 - a bundle without the checker still runs the other gates
+            cb = None
+            rep.add("WARN", "CB00", 0, f"content_balance_check를 불러오지 못해 여백 검사를 건너뜁니다: {exc}")
+        for p in (pages if cb else []):
+            if p not in toc_pages and p not in content:
+                continue
+            try:
+                found = cb.check_file(p.path, False)
+            except Exception as exc:  # noqa: BLE001
+                rep.add("WARN", "CB00", p.index, f"여백 검사 실패: {exc}")
+                continue
+            per_code = Counter()
+            for f in found:
+                level = levels.get(f.code)
+                if level is None or f.code == "CB04":       # CB04 = O03
+                    continue
+                per_code[f.code] += 1
+                if per_code[f.code] > lb.get("max_items_per_page", 3):
+                    continue
+                msg = f.note or f"상자 {f.box}: 위 여백 {f.gap_top:g}px · 아래 여백 {f.gap_bottom:g}px — 내용 묶음을 상자 세로 가운데로"
+                rep.add(level, f.code, p.index, msg)
 
     # ---- M: editable equations (v30). Formulas must be data-pptx-equation
     # carriers so they export as native OMML; reduction decks are strict.

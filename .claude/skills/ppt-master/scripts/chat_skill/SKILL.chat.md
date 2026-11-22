@@ -308,7 +308,10 @@ a structure `NN_04a_content_classic__s08_phase_roadmap.svg`: qaqc then counts it
 as that structure for the TOC skeleton and closing set. The d frame's TOC is a
 list by design, so the TOC-as-table rule (O03) does not apply to it.
 
-Fix every ERROR in the first two. `content_balance_check --fix` merges
+Fix every ERROR in the first two. Since 2026-11-22 `innergen_qaqc` runs the
+balance check itself and reports CB02, CB03, CB06, O04 (table drawn as shapes)
+and G09 (over 30% of governing lines are bare labels) as ERROR, so run
+`content_balance_check --fix` before it. `content_balance_check --fix` merges
 per-line text objects and drawn bullet squares into one text (CB06), pulls
 back lines wrapped with width to spare (CB07), widens line and paragraph
 spacing in sparse cards (CB05), then re-centres top-heavy boxes (CB01); a TOC bottom void (CB02) is fixed by re-spacing the
