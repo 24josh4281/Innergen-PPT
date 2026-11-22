@@ -332,19 +332,23 @@
         var catalog = data.consulting_structure;
         if (catalog) {
             var modeContract = catalog.mode_contracts[contentMode(state)];
+            if (modeContract) {
             var modeInfo = node("div", "ig-mode-contract");
             modeInfo.appendChild(node("strong", "", modeContract.label + " · " + modeContract.question));
             modeInfo.appendChild(node("p", "", modeContract.modules.join(" → ")));
             modeInfo.appendChild(node("small", "", "자료 구성의 읽기 순서입니다. 실제 업무 절차를 뜻하지 않습니다.")); root.appendChild(modeInfo);
-            if (catalog.experience) {
-                var story = catalog.experience.deck_stories[state.style_delivery_mode + "|" + state.innergen_report_type];
+            }
+            // A combination without a deck story skips this block; it must not stop the page.
+            var story = catalog.experience && catalog.experience.deck_stories[state.style_delivery_mode + "|" + state.innergen_report_type];
+            if (story) {
                 var deck = node("details", "ig-deck-story"); deck.open = !!state.studio_story_open;
                 deck.appendChild(node("summary", "", "도입부터 마무리까지 · " + story.label));
                 var flow = node("div", "ig-story-flow");
                 story.flow.forEach(function (text, i) { flow.appendChild(panel(["도입", "본문", "마무리"][i], text)); });
                 deck.appendChild(flow);
                 deck.appendChild(node("p", "", "빠뜨리지 않을 내용: " + story.must_have.join(" · ")));
-                deck.appendChild(node("p", "ig-business-needs", data.business_types[state.innergen_business_type].label_ko + "에서 확인할 항목: " + data.business_types[state.innergen_business_type].required.join(" · ")));
+                var bizNeeds = data.business_types[state.innergen_business_type];
+                if (bizNeeds) deck.appendChild(node("p", "ig-business-needs", bizNeeds.label_ko + "에서 확인할 항목: " + bizNeeds.required.join(" · ")));
                 deck.appendChild(node("small", "", story.note));
                 deck.addEventListener("toggle", function () { state.studio_story_open = deck.open; }); root.appendChild(deck);
             }

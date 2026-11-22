@@ -25,6 +25,8 @@
             already_confirmed: "Already confirmed once. Re-submitting overwrites the previous choices.",
             confirmed_title: "✓ Confirmed",
             confirmed_hint: "Your choices are saved. You can close this page and return to the chat.",
+            auto_confirmed_title: "⏱ No decision — proceeding with the outline",
+            auto_confirmed_hint: "There was no input for 3 minutes, so the deck is being built with the outline shown. You can close this window; ask for changes in the chat.",
             lang_toggle_title: "Switch language",
             sec_canvas: "Canvas format",
             sec_pages: "Page count",
@@ -150,6 +152,8 @@
             already_confirmed: "すでに一度確定済みです。再送信すると前回の選択を上書きします。",
             confirmed_title: "✓ 確定しました",
             confirmed_hint: "選択内容を保存しました。このページを閉じてチャットに戻ってください。",
+            auto_confirmed_title: "⏱ 決定がないため、目次どおりに進めています",
+            auto_confirmed_hint: "3分間入力がなかったため、表示中の目次で作成を進めています。この画面は閉じてかまいません。修正はチャットでお知らせください。",
             lang_toggle_title: "言語を切り替え",
             sec_canvas: "キャンバス形式",
             sec_pages: "ページ数",
@@ -275,6 +279,8 @@
             already_confirmed: "이미 한 번 확정했습니다. 다시 제출하면 이전 선택을 덮어씁니다.",
             confirmed_title: "✓ 확정됨",
             confirmed_hint: "선택이 저장됐습니다. 이 페이지를 닫고 채팅으로 돌아가세요.",
+            auto_confirmed_title: "⏱ 결정이 없어서 목차대로 진행 중입니다",
+            auto_confirmed_hint: "3분 동안 입력이 없어 화면의 목차·추천값으로 장표를 만들고 있습니다. 이 창은 닫아도 됩니다. 수정할 점은 채팅으로 알려주세요.",
             lang_toggle_title: "언어 전환",
             sec_canvas: "캔버스 형식",
             sec_pages: "페이지 수",
@@ -400,6 +406,8 @@
             already_confirmed: "已确认过一次，重新提交会覆盖之前的选择。",
             confirmed_title: "✓ 已确认",
             confirmed_hint: "选择已保存，可关闭此页并回到聊天窗口。",
+            auto_confirmed_title: "⏱ 无操作，按大纲继续进行",
+            auto_confirmed_hint: "3 分钟内无输入，正按当前大纲制作。可关闭此窗口，如需修改请在聊天中告知。",
             lang_toggle_title: "切换语言",
             sec_canvas: "画布格式",
             sec_pages: "页数",
@@ -1265,7 +1273,19 @@
         if (data.consulting_structure && !data.consulting_structure.goals[STATE.structure_goal]) STATE.structure_goal = "auto";
         STATE.layout_choice = recId("layout_choice") || window.InnergenStudio.recommended(data, STATE)[0];
         STATE.design_standard_version = data.version;
+        // Agent-written recommendations sometimes use loose names ("education",
+        // "lecture"). Map the common ones, then fall back to a catalog value so
+        // one off-catalog id cannot stop the whole page from rendering.
+        var modeAlias = { education: "education_lecture", lecture: "education_lecture", handout: "education_handout", report: "report_reading" };
+        var reportAlias = { lecture: "education", training: "education", 교육: "education" };
+        if (!data.modes[STATE.style_delivery_mode] && data.modes[modeAlias[STATE.style_delivery_mode]]) STATE.style_delivery_mode = modeAlias[STATE.style_delivery_mode];
         if (!data.modes[STATE.style_delivery_mode]) STATE.style_delivery_mode = "report_reading";
+        if (data.report_types && !data.report_types[STATE.innergen_report_type]) {
+            var reportFix = reportAlias[STATE.innergen_report_type];
+            STATE.innergen_report_type = data.report_types[reportFix] ? reportFix
+                : (STATE.style_delivery_mode.indexOf("education_") === 0 && data.report_types.education ? "education" : "kickoff");
+        }
+        if (data.business_types && !data.business_types[STATE.innergen_business_type]) STATE.innergen_business_type = "cdp_disclosure";
         if (!data.media_modes[STATE.media_mode]) STATE.media_mode = "diagram";
         if (!data.layouts[STATE.layout_choice]) STATE.layout_choice = "evidence";
         if (templateFieldState().mode !== "locked" && !REC._already_confirmed && (STAGE === 1 || STAGE === "all")) {
@@ -2709,7 +2729,7 @@
         window.PPTContentIntake.submitMaterials(REC.content_intake, LANG, function (data) {
             REC = data; STAGE = stageNumber(REC); initState(); renderAll();
             document.getElementById("confirm-status").textContent = "";
-        }, function () { closeSubmittedWindow("materials_submitted"); });
+        }, function () { closeSubmittedWindow("materials_auto"); });
     }
 
     function closeSubmittedWindow(reason) {
@@ -2727,13 +2747,18 @@
         // cover the page with the submitted notice when the tab stays open.
         setTimeout(function () {
             if (window.closed) return;
-            if (reason === "materials_submitted") {
+            if (reason === "materials_auto") {
+                var ova = document.getElementById("confirmed-overlay");
+                ova.querySelector(".cf-title").textContent = ({ko: "⏱ 입력이 없어서 기존 정보로 진행 중입니다", en: "⏱ No input — proceeding with existing information", zh: "⏱ 无输入，按现有信息继续", ja: "⏱ 入力がないため、既存情報で進めています"})[LANG] || "⏱ No input — proceeding";
+                ova.querySelector(".cf-hint").textContent = ({ko: "3분 동안 입력이 없어 기존 정보로 개요를 만들고 있습니다. 개요는 새 창으로 열립니다. 이 창은 닫아도 됩니다.", en: "No input for 3 minutes, so the outline is being drafted from existing information. It opens in a new window; you can close this one.", zh: "3 分钟内无输入，正用现有信息生成大纲，大纲将在新窗口打开，可关闭此窗口。", ja: "3分間入力がなかったため、既存情報で概要を作成しています。概要は新しいウィンドウで開きます。この画面は閉じてかまいません。"})[LANG] || "";
+                ova.style.display = "flex";
+            } else if (reason === "materials_submitted") {
                 var ov = document.getElementById("confirmed-overlay");
                 ov.querySelector(".cf-title").textContent = ({ko: "✓ 제출됨", en: "✓ Submitted", zh: "✓ 已提交", ja: "✓ 送信しました"})[LANG] || "✓ Submitted";
                 ov.querySelector(".cf-hint").textContent = ({ko: "입력이 저장됐습니다. 개요는 새 창으로 열립니다. 이 창은 닫아도 됩니다.", en: "Your input is saved. The outline opens in a new window; you can close this one.", zh: "输入已保存，大纲将在新窗口打开，可关闭此窗口。", ja: "入力を保存しました。概要は新しいウィンドウで開きます。この画面は閉じてかまいません。"})[LANG] || "Saved. You can close this window.";
                 ov.style.display = "flex";
             } else {
-                showConfirmedOverlay();
+                showConfirmedOverlay(reason === "auto_confirmed");
             }
             document.body.classList.add("is-submitted");
         }, 1200);
@@ -2967,10 +2992,10 @@
     }
 
     // ---- confirm + close -------------------------------------------------
-    function showConfirmedOverlay() {
+    function showConfirmedOverlay(auto) {
         var ov = document.getElementById("confirmed-overlay");
-        ov.querySelector(".cf-title").textContent = t("confirmed_title");
-        ov.querySelector(".cf-hint").textContent = t("confirmed_hint");
+        ov.querySelector(".cf-title").textContent = t(auto ? "auto_confirmed_title" : "confirmed_title");
+        ov.querySelector(".cf-hint").textContent = t(auto ? "auto_confirmed_hint" : "confirmed_hint");
         ov.style.display = "flex";
     }
 
@@ -3137,8 +3162,10 @@
         document.getElementById("confirm-status").classList.remove("is-error");
         postConfirm(payload, 1).then(function (r) {
             if (!r.ok) return r.json().then(function (data) { throw new Error(data.error || "confirm failed"); });
-            showConfirmedOverlay();
-            closeSubmittedWindow("confirmed");
+            var auto = payload.confirm_trigger === "auto_timeout";
+            showConfirmedOverlay(auto);
+            document.body.classList.add("is-submitted");
+            closeSubmittedWindow(auto ? "auto_confirmed" : "confirmed");
         }).catch(function (error) {
             btn.disabled = false;
             // A rejected confirm must be impossible to miss: the user may have

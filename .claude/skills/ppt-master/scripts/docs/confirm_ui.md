@@ -77,7 +77,11 @@ After 3 minutes with NO input, submit the current recommendations once and close
 only after successful saving. Any note, upload or design change cancels the timer;
 the user then submits manually. Uploading disables submit. Failed save keeps the
 page open with the error and permits retry. Manual submit follows the same close
-path. The completed deck's preview remains a later production output.
+path. Browsers usually refuse `window.close()` for a tab the script did not open,
+so a timed-out submit covers the page with its own notice instead of the plain
+"확정됨": "결정이 없어서 목차대로 진행 중입니다" (outline view) or "입력이 없어서
+기존 정보로 진행 중입니다" (materials view). The completed deck's preview remains
+a later production output.
 
 ## Work mode decision (2026-10-25)
 
