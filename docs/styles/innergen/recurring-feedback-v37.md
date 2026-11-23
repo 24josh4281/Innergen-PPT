@@ -12,7 +12,7 @@
 | 4 | 내용이 끊겨 하단 여백이 김 (10-19, 10-21, 10-28, 10-29, 11-06) | 본문은 출처 줄 바로 위까지 채운다. 순서: 내용 보강 → 본문 글자 키움 → 행·카드·표 높이 키움. 맺음 메시지 띠로 채우지 않는다 | CB03, C10 | ERROR |
 | 5 | 목차 아래가 빔, 목차 여백이 비정상 (10-21, 11-09) | 목차는 표 하나. 행이 바닥선까지 같은 높이로 나눠 가진다. 몇 행만 늘려 채우지 않는다 | O03, CB02 | ERROR |
 | 6 | 표가 표가 아니고 개체로 나옴 (10-27, 10-28, 11-06 세 번) | 표는 PowerPoint 표, 글은 셀 안 텍스트. `data-pptx-native="table"` + `svg_to_pptx --native-objects`. 간트 막대만 도형으로 둔다 | O04 | ERROR(기존 WARN) |
-| 7 | 카드 글이 도형 밖 별도 글상자, 줄마다 다른 개체 (11-06 세 번) | 카드·도형의 글은 도형 안 텍스트(`data-pptx-text-shape`). 한 카드의 여러 줄은 한 텍스트 개체 | CB06 | ERROR(기존 WARN) |
+| 7 | 카드 글이 도형 밖 별도 글상자, 줄마다 다른 개체 (11-06 세 번) | 카드·도형의 글은 도형 안 텍스트(`data-pptx-text-shape`). 한 카드의 여러 줄은 한 텍스트 개체 | CB06, 렌더 확인 | WARN(오탐 있음) |
 | 8 | 장 간지가 1번 하나만 크게 나옴 (11-09, 11-17, 11-19) | 간지는 전체 목차를 다시 넣고 현재 장만 강조, 나머지는 회색. chapter 장표·큰 번호 간지 금지 | N30 | ERROR |
 | 9 | 공간이 남는데 줄바꿈, 한 어절만 다음 줄 (10-28, 11-06 두 번) | 폭이 남으면 한 줄로. 줄을 나눌 때는 마지막 줄에 한 어절만 남기지 않는다 | CB07 | WARN |
 | 10 | 엔딩 메시지 띠 (11-06) | 장표 아래 맺음 띠를 넣지 않는다. 중요한 내용은 본문 도식·표 안으로 옮긴다 | CB03 안내, 렌더 확인 | 사람 확인 |
@@ -39,12 +39,12 @@
 2. 표는 처음부터 표 페이로드로, 카드 글은 도형 안 텍스트로 그린다. 나중에 고치지 않는다.
 3. 본문은 출처 줄 위까지 채운 상태로 그린다. 비면 내용을 보강하고, 보강할 내용이 없으면 글자와 행 높이를 키운다.
 4. 목차와 간지는 `toc_builder.py`로 만든다(`--dividers`).
-5. `content_balance_check.py <project> --fix` → `innergen_qaqc.py <project> --family <계열>` ERROR 0 → `svg_to_pptx --native-objects`.
+5. `innergen_qaqc.py <project> --family <계열>` ERROR 0 → `svg_to_pptx --native-objects` → 렌더 확인. `content_balance_check.py --fix`는 촘촘한 표·도식 장표를 깨뜨릴 수 있어 `svg_output`을 복사해 둔 뒤 필요한 쪽에만 쓰고 렌더로 확인한다.
 6. 다른 폴더의 자체 빌더(python-pptx 등)로 만든 덱은 이 검사를 지나가지 않는다. 이너젠 장표는 Slide Master 경로로 만든다.
 
 ## 4. 이번에 바뀐 검사 (qaqc rev.24)
 
-- `innergen_qaqc.py`가 `content_balance_check.py`를 같은 게이트에서 실행한다. CB02·CB03·CB06은 ERROR.
+- `innergen_qaqc.py`가 `content_balance_check.py`를 같은 게이트에서 실행한다. CB02·CB03은 ERROR, CB06은 오탐이 있어 WARN(2026-11-23 정정).
 - O04(표가 도형으로 나옴) WARN → ERROR.
 - C10: 아래 여백이 위보다 24px 넘게 크거나 좌우가 12px 넘게 다르면 ERROR.
 - G09 신설: 단순 거버닝이 덱의 30%를 넘으면 ERROR.

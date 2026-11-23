@@ -91,10 +91,12 @@ v37 (2026-11-22) recurring feedback: read
 `docs/styles/innergen/recurring-feedback-v37.md` before authoring. It lists the
 defects the user reported more than once and the gate for each. `innergen_qaqc.py`
 now runs `content_balance_check.py` itself and fails on a page bottom void (CB03),
-a TOC bottom void (CB02), per-line text objects (CB06), a table drawn as shapes
+a TOC bottom void (CB02), a table drawn as shapes
 (O04), a body whose bottom margin is far larger than its top margin (C10) and a
 deck where over 30% of governing lines are bare labels (G09). Run
-`content_balance_check.py <project> --fix` first, then the gate; mark a
+the gate before export. `content_balance_check.py --fix` can break dense
+table or diagram pages (it merged row labels on two finished decks), so copy
+`svg_output` first, use it only where needed and render-check; mark a
 deliberately free-layout page with `data-balance-exempt="reason"` on the root.
 
 v32 (2026-10-21) content quality: `docs/styles/innergen/content-principles-v32.md`

@@ -778,11 +778,11 @@ def run(project: Path, deck_type: str | None, register: str, family: str | None,
             rep.add("WARN", "S04", p.index, "결론 박스가 거버닝과 거의 같습니다 — '그래서 무엇을 할지'만")
 
     # ---- L: layout balance (content_balance_check CB01–CB07) in the same gate.
-    # 사용자 반복 지적(2026-11-22): 하단 공백·목차 하단 공백·줄마다 개별 개체가 경고로만 지나가
+    # 사용자 반복 지적(2026-11-22): 하단 공백·목차 하단 공백이 경고로만 지나가
     # 다시 나왔다. 수준은 qaqc-v21.json `layout_balance.levels`가 정한다.
     lb = rules.get("layout_balance", {})
     if lb.get("enabled", True):
-        levels = {"CB01": "WARN", "CB02": "ERROR", "CB03": "ERROR", "CB05": "WARN", "CB06": "ERROR", "CB07": "WARN",
+        levels = {"CB01": "WARN", "CB02": "ERROR", "CB03": "ERROR", "CB05": "WARN", "CB06": "WARN", "CB07": "WARN",
                   **lb.get("levels", {})}
         try:
             import content_balance_check as cb

@@ -814,9 +814,9 @@
   },
   "layout_balance": {
     "enabled": true,
-    "levels": {"CB01": "WARN", "CB02": "ERROR", "CB03": "ERROR", "CB05": "WARN", "CB06": "ERROR", "CB07": "WARN"},
+    "levels": {"CB01": "WARN", "CB02": "ERROR", "CB03": "ERROR", "CB05": "WARN", "CB06": "WARN", "CB07": "WARN"},
     "max_items_per_page": 3,
-    "note": "2026-11-22 사용자 반복 지적: 목차 하단 공백(CB02), 본문 하단 공백(CB03), 줄마다 개별 개체(CB06)가 경고로만 지나가 다시 나왔다. innergen_qaqc가 content_balance_check를 같은 게이트에서 돌리고 이 세 가지는 ERROR로 막는다. 자유 배치 장표는 루트 <svg>의 data-balance-exempt에 사유를 적어 CB03을 뺀다."
+    "note": "2026-11-22 사용자 반복 지적: 목차 하단 공백(CB02)과 본문 하단 공백(CB03)이 경고로만 지나가 다시 나왔다. innergen_qaqc가 content_balance_check를 같은 게이트에서 돌리고 이 둘은 ERROR로 막는다. 줄마다 개별 개체(CB06)는 표 행 라벨을 한 카드의 줄로 잘못 보는 경우가 있어 WARN이다(2026-11-23 실제 덱에서 확인). 자유 배치 장표는 루트 <svg>의 data-balance-exempt에 사유를 적어 CB03을 뺀다."
   },
   "native_objects": {
     "shape_table": {
